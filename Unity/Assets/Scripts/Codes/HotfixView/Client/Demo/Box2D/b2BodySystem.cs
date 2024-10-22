@@ -14,7 +14,6 @@ namespace ET.Client
             protected override void Destroy(b2Body self)
             {
                 self.unitId = 0;
-                self.hitboxFixtures.Clear();
                 self.fixtures.Clear();
                 self.body = null;
                 self.Flip = FlipState.Left;
@@ -76,12 +75,6 @@ namespace ET.Client
         public static void RemoveUpdateFlag(this b2Body self)
         {
             self.UpdateFlag = false;
-        }
-
-        public static void CreateFixture(this b2Body self, FixtureDef fixtureDef)
-        {
-            Fixture fixture = self.body.CreateFixture(fixtureDef);
-            self.fixtures.Add(fixture);
         }
 
         public static System.Numerics.Vector2 GetPosition(this b2Body self)

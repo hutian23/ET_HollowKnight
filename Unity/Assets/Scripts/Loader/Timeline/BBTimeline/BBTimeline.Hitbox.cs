@@ -84,6 +84,21 @@ namespace Timeline
         [LabelText("大小: ")]
         public Vector2 size = Vector2.one;
     }
+    
+    //有点套娃 --- > Fixture.UserData ---> FixtureData ---> UserData
+    public struct FixtureData
+    {
+        public long instanceId;
+        public long LayerMask;
+        public object UserData; 
+    }
+
+    public static class LayerType
+    {
+        public const int None = 0;
+        public const int Ground = 2 << 0;
+        public const int Unit = 2 << 1;
+    }
 
 #if UNITY_EDITOR
     [Serializable]

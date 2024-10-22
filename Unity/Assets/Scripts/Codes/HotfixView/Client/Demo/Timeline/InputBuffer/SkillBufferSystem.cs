@@ -144,18 +144,31 @@
             return self.paramDict.ContainsKey(paramName);
         }
 
-        public static void RemoveParam(this SkillBuffer self, string paramName)
+        public static bool RemoveParam(this SkillBuffer self, string paramName)
         {
             if (!self.paramDict.ContainsKey(paramName))
             {
                 Log.Error($"does not exist param:{paramName}!");
-                return;
+                return false;
             }
 
             self.paramDict[paramName].Recycle();
             self.paramDict.Remove(paramName);
+            return true;
         }
 
+        public static bool TryRemoveParam(this SkillBuffer self, string paramName)
+        {
+            if (!self.paramDict.ContainsKey(paramName))
+            {
+                return false;
+            }
+            
+            self.paramDict[paramName].Recycle();
+            self.paramDict.Remove(paramName);
+            return true;
+        }
+        
         public static void ClearParam(this SkillBuffer self)
         {
             foreach (var kv in self.paramDict)
@@ -165,7 +178,7 @@
 
             self.paramDict.Clear();
         }
-
+        
         #endregion
 
         #region GCOption

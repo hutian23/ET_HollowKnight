@@ -284,22 +284,22 @@ namespace ET
 
         private void DrawShape(Fixture fixture, in Transform xf)
         {
-            var defaultColor = Color.White;
+            Color defaultColor = Color.White;
             switch (fixture.Shape)
             {
                 case CircleShape circle:
                 {
-                    var center = MathUtils.Mul(xf, circle.Position);
-                    var radius = circle.Radius;
+                    Vector2 center = MathUtils.Mul(xf, circle.Position);
+                    float radius = circle.Radius;
                     //Calculate rotation
-                    var axis = MathUtils.Mul(xf.Rotation, new Vector2(1.0f, 0.0f));
+                    Vector2 axis = MathUtils.Mul(xf.Rotation, new Vector2(1.0f, 0.0f));
                     World.Draw.DrawSolidCircle(center, radius, axis, defaultColor);
                     break;
                 }
                 case EdgeShape edge:
                 {
-                    var v1 = MathUtils.Mul(xf, edge.Vertex1);
-                    var v2 = MathUtils.Mul(xf, edge.Vertex2);
+                    Vector2 v1 = MathUtils.Mul(xf, edge.Vertex1);
+                    Vector2 v2 = MathUtils.Mul(xf, edge.Vertex2);
                     World.Draw.DrawSegment(v1, v2, defaultColor);
 
                     if (!edge.OneSided)
@@ -312,13 +312,13 @@ namespace ET
                 }
                 case ChainShape chain:
                 {
-                    var count = chain.Count;
-                    var vertices = chain.Vertices;
+                    int count = chain.Count;
+                    Vector2[] vertices = chain.Vertices;
 
-                    var v1 = MathUtils.Mul(xf, vertices[0]);
+                    Vector2 v1 = MathUtils.Mul(xf, vertices[0]);
                     for (int i = 0; i < count; i++)
                     {
-                        var v2 = MathUtils.Mul(xf, vertices[i]);
+                        Vector2 v2 = MathUtils.Mul(xf, vertices[i]);
                         World.Draw.DrawSegment(v1, v2, defaultColor);
                         v1 = v2;
                     }
@@ -327,40 +327,28 @@ namespace ET
                 }
                 case PolygonShape poly:
                 {
-                    var vertexCount = poly.Count;
+                    int vertexCount = poly.Count;
                     Debug.Assert(vertexCount <= Settings.MaxPolygonVertices);
                     Span<Vector2> vertices = stackalloc Vector2[vertexCount];
 
-                    for (var i = 0; i < vertexCount; i++)
+                    for (int i = 0; i < vertexCount; i++)
                     {
                         vertices[i] = MathUtils.Mul(xf, poly.Vertices[i]);
                     }
 
-                    var color = defaultColor;
-                    BoxInfo info = fixture.UserData as BoxInfo;
-                    switch (info?.hitboxType)
+                    Color color = defaultColor;
+                    if (fixture.UserData is FixtureData { UserData: BoxInfo info })
                     {
-                        case HitboxType.Hit:
-                            color = Global.Settings.ShowHitbox? Color.Red : Color.Transparent;
-                            break;
-                        case HitboxType.Hurt:
-                            color = Global.Settings.ShowHurtBox? Color.Green : Color.Transparent;
-                            break;
-                        case HitboxType.Squash:
-                            color = Global.Settings.ShowSquashBox? Color.Yellow : Color.Transparent;
-                            break;
-                        case HitboxType.Throw:
-                            color = Global.Settings.ShowThrowBox? Color.Blue : Color.Transparent;
-                            break;
-                        case HitboxType.Proximity:
-                            color = Global.Settings.ShowProximityBox? Color.Magenta : Color.Transparent;
-                            break;
-                        case HitboxType.Other:
-                            color = Global.Settings.ShowOtherBox? Color.Black : Color.Transparent;
-                            break;
-                        default:
-                            color = defaultColor;
-                            break;
+                        color = info.hitboxType switch
+                        {
+                            HitboxType.Hit => Global.Settings.ShowHitbox? Color.Red : Color.Transparent,
+                            HitboxType.Hurt => Global.Settings.ShowHurtBox? Color.Green : Color.Transparent,
+                            HitboxType.Squash => Global.Settings.ShowSquashBox? Color.Yellow : Color.Transparent,
+                            HitboxType.Throw => Global.Settings.ShowThrowBox? Color.Blue : Color.Transparent,
+                            HitboxType.Proximity => Global.Settings.ShowProximityBox? Color.Magenta : Color.Transparent,
+                            HitboxType.Other => Global.Settings.ShowOtherBox? Color.Black : Color.Transparent,
+                            _ => defaultColor
+                        };
                     }
 
                     World.Draw.DrawSolidPolygon(vertices, vertexCount, color);

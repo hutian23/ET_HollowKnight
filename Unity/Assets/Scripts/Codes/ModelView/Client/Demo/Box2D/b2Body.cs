@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Box2DSharp.Dynamics;
-using NUnit.Framework;
 using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
@@ -21,9 +20,7 @@ namespace ET.Client
         //当前步长，b2World中刚体的位置转换信息
         public Transform trans;
 
-        //当前帧建立的hitbox
-        public List<Fixture> hitboxFixtures = new();
-
+        //当前帧建立的hitBox
         public List<Fixture> fixtures = new();
     }
 

@@ -465,22 +465,25 @@ MonoBehaviour:
 
     @Trigger:
 
-    InputType:
-    JumpPressed;
+    InAir:
+    true;
+
+    InputType: JumpPressed;
 
     return;
 
 
     @Main:
 
-    LogWarning: ''Jump'';
+    LogWarning:
+    ''Jump'';
 
-    BBSprite:
-    ''PreJump_1'', 4;
+    BBSprite: ''PreJump_1'', 4;
 
     BBSprite: ''PreJump_2'', 4;
 
-    WaitFrame: 300;
+    WaitFrame:
+    300;
 
     return;
 

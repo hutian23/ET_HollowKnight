@@ -8,8 +8,8 @@ namespace ET.Client
     [FriendOf(typeof(TimelineManager))]
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(b2GameManager))]    
-    //这个事件用于建立Unit和b2Wolrd中刚体的映射
-    public class AfterB2WorldCreated_CreateHitbox : AEvent<AfterB2WorldCreated>
+    //这个事件用于建立Unit和b2world中刚体的映射
+    public class AfterB2WorldCreated_CreateB2body : AEvent<AfterB2WorldCreated>
     {
         protected override async ETTask Run(Scene scene, AfterB2WorldCreated args)
         {
@@ -19,7 +19,7 @@ namespace ET.Client
                 World world = args.B2World.World;
 
                 //创建刚体
-                var bodyDef = new BodyDef()
+                BodyDef bodyDef = new()
                 {
                     BodyType = BodyType.DynamicBody,
                     Position = new Vector2(0, 4),
@@ -29,7 +29,7 @@ namespace ET.Client
                     AllowSleep = true,
                     FixedRotation = true
                 };
-                var body = world.CreateBody(bodyDef);
+                Body body = world.CreateBody(bodyDef);
 
                 b2Body b2Body = b2GameManager.Instance.AddChild<b2Body>();
                 b2Body.body = body;

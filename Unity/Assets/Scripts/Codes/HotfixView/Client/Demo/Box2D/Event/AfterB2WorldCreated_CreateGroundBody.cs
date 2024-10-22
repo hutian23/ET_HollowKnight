@@ -2,6 +2,7 @@
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using ET.Event;
+using Timeline;
 
 namespace ET.Client
 {
@@ -14,7 +15,12 @@ namespace ET.Client
             World World = args.B2World.World;
 
             //ground
-            BodyDef groundBodyDef = new() { BodyType = BodyType.StaticBody, Position = Vector2.Zero, UserData = "Ground" };
+            BodyDef groundBodyDef = new()
+            {
+                BodyType = BodyType.StaticBody, 
+                Position = Vector2.Zero, 
+                UserData = new FixtureData(){instanceId =  0,LayerMask = LayerType.Ground}
+            };
             Body groundBody = World.CreateBody(groundBodyDef);
             PolygonShape groundBox = new();
             groundBox.SetAsBox(50f, 2.0f);
