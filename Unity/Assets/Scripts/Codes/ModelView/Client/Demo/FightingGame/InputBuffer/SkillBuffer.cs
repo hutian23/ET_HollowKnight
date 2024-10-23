@@ -23,9 +23,4 @@ namespace ET.Client
         public Dictionary<string, SharedVariable> paramDict = new();
         public HashSet<int> GCOptions = new();
     }
-
-    public struct ReloadSkillBufferCallback
-    {
-        public long instanceId;
-    }
 }

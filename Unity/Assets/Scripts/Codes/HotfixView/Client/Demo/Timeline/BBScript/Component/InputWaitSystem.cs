@@ -48,10 +48,8 @@ namespace ET.Client
             }
         }
 
-        public static void Reload(this InputWait self)
+        public static void Init(this InputWait self)
         {
-            #region Init
-
             self.GetComponent<BBTimerComponent>().Remove(ref self.inputHandleTimer);
             self.GetComponent<BBTimerComponent>().Remove(ref self.inputNotifyTimer);
             self.GetComponent<BBTimerComponent>().ReLoad();
@@ -70,13 +68,7 @@ namespace ET.Client
             self.bufferQueue.Clear();
 
             self.PressedDict.Clear();
-
-            #endregion
-
             self.RegistKeyHistory();
-
-            //启动定时器
-            self.inputHandleTimer = self.GetComponent<BBTimerComponent>().NewFrameTimer(BBTimerInvokeType.BBInputHandleTimer, self);
         }
 
         #region KeyHistory

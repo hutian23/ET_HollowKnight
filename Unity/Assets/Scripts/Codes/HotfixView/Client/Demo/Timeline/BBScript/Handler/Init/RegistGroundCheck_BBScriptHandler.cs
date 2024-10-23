@@ -17,11 +17,13 @@ namespace ET.Client
             
             //RayCast callback
             GroundCheckRayCastCallback callback = GroundCheckRayCastCallback.Create();
-            world.RayCast(callback, body.GetPosition(), body.GetPosition() + new Vector2(0, -6f));
+            world.RayCast(callback, body.GetPosition(), body.GetPosition() + new Vector2(0, -2.6f));
             
             //变量注册到SkillBuffer中，注意切换行为时，变量会全部销毁
             bool OnGround = callback.Hit;
             buffer.RegistParam("OnGround", OnGround);
+            
+            Log.Warning(OnGround.ToString());
             
             //回收callback
             callback.Recycle();            

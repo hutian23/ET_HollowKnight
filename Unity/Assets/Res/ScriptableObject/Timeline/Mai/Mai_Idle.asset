@@ -375,6 +375,9 @@ MonoBehaviour:
 
     OpenCancelWindow;
 
+    SetVelocityY:
+    3;
+
     LoopTimeline;
 
     return;
@@ -382,9 +385,9 @@ MonoBehaviour:
 
     @Exit:
 
-    #
-    Idle --> Squit
+    # Idle --> Squit
 
-    SetTransition: ''TransitionToSquit'';
+    SetTransition:
+    ''TransitionToSquit'';
 
     return;'

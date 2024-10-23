@@ -18,8 +18,8 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return false;
             }
-            
-            Log.Warning(match.Groups["InAir"].Value);
+
+            SkillBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
             return true;
         }
     }

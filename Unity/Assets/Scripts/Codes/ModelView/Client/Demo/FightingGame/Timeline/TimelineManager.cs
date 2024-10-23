@@ -15,5 +15,10 @@ namespace ET.Client
     {
         public long instanceId;
     }
+
+    public struct ReloadTimelineComponent
+    {
+        public long instanceId;
+    }
     
 }

@@ -447,47 +447,7 @@ MonoBehaviour:
       Data: 
   timelineName: Mai_Jump
   order: 203
-  Script: '@Init:
-
-    RegistGroundCheck;
-
-    RegistInput: JumpPressed;
-
-    MoveType:
-    Move;
-
-    Order: 203;
-
-    Name: ''Mai_Jump'';
-
-    return;
-
-
-    @Trigger:
-
-    InAir:
-    true;
-
-    InputType: JumpPressed;
-
-    return;
-
-
-    @Main:
-
-    LogWarning:
-    ''Jump'';
-
-    BBSprite: ''PreJump_1'', 4;
-
-    BBSprite: ''PreJump_2'', 4;
-
-    WaitFrame:
-    300;
-
-    return;
-
-
-    @Exit:
-
-    return;'
+  Script: "@Init:\nRegistGroundCheck;            # \u68C0\u6D4B\u5730\u9762\u5B50\u534F\u7A0B\nRegistGravityCheck:
+    4.5;    # \u91CD\u529B\u5F71\u54CD\nRegistInput: JumpPressed;\nMoveType: Move;\nOrder:
+    203;\nName: 'Mai_Jump';\nreturn;\n\n@Trigger:\nInAir: true;\nInputType: JumpPressed;\nreturn;\n\n@Main:\nBBSprite:
+    'PreJump_1', 4;\nBBSprite: 'PreJump_2', 4;\nSetVelocityY: 10;\nWaitFrame: 100;\nreturn;\n\n@Exit:\nreturn;"

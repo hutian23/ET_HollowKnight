@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Box2DSharp.Dynamics;
 using Transform = Box2DSharp.Common.Transform;
 
@@ -12,8 +13,6 @@ namespace ET.Client
         public long unitId;
         public Body body;
 
-        public FlipState Flip = FlipState.Left;
-
         //当刚体的位置信息没有发生更新，但是刚体的其他属性更新时，可以调用这个成员通知更新显示层
         public bool UpdateFlag;
 
@@ -22,6 +21,9 @@ namespace ET.Client
 
         //当前帧建立的hitBox
         public List<Fixture> fixtures = new();
+        
+        public FlipState Flip = FlipState.Left;
+        public int Gravity;
     }
 
     [Flags]

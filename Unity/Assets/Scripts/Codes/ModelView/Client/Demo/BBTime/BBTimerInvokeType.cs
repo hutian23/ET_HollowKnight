@@ -20,5 +20,6 @@
         public const int InputCheckTimer = 102;
         public const int GatlingCancelCheckTimer = 103;
         public const int GroundCheckTimer = 104;
+        public const int GravityCheckTimer = 105;
     }
 }

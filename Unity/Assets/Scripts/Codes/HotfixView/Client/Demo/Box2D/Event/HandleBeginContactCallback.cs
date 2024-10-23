@@ -5,7 +5,7 @@
     {
         public override void Handle(BeginContact args)
         {
-            Log.Warning("BeginContact");
+            // Log.Warning("BeginContact");
         }
     }
 }

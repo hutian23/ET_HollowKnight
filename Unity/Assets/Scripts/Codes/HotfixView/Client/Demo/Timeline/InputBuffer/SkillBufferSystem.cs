@@ -75,9 +75,18 @@
             }
         }
 
-        public static void Reload(this SkillBuffer self)
+        public static void Init(this SkillBuffer self)
         {
-            EventSystem.Instance.Invoke(new ReloadSkillBufferCallback() { instanceId = self.InstanceId });
+            foreach (var kv in self.infoDict)
+            {
+                self.RemoveChild(kv.Value);
+            }
+            self.infoDict.Clear();
+            self.GCOptions.Clear();
+            self.ClearParam();
+            self.behaviorMap.Clear();
+            self.currentOrder = -1;
+            self.CheckTimer = 0;
         }
 
         public static void SetCurrentOrder(this SkillBuffer self, int order)

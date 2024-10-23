@@ -53,6 +53,8 @@ namespace ET
             PreStep();
             World.Step(TimeStep, TestSettings.VelocityIterations, TestSettings.PositionIterations);
             PostStep();
+            
+            //TODO Update StepCount
         }
 
         public void SingleStep()

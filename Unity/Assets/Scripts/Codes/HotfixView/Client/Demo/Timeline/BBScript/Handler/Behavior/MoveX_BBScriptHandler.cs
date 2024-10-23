@@ -13,7 +13,7 @@ namespace ET.Client
         }
     }
 
-    //对于 run airbrone这些行为，需要在行为中实时转向并改变速度
+    //对于 run AirBone这些行为，需要在行为中实时转向并改变速度
     public class MoveX_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()

@@ -5,7 +5,7 @@
     {
         public override void Handle(EndContact args)
         {
-            Log.Warning("EndContact");
+            // Log.Warning("EndContact");
         }
     }
 }

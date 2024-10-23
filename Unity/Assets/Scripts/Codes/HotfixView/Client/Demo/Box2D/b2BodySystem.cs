@@ -1,5 +1,4 @@
-﻿using Box2DSharp.Dynamics;
-using Box2DSharp.Testbed.Unity.Inspection;
+﻿using Box2DSharp.Testbed.Unity.Inspection;
 using UnityEngine;
 using Transform = Box2DSharp.Common.Transform;
 
@@ -18,6 +17,7 @@ namespace ET.Client
                 self.body = null;
                 self.Flip = FlipState.Left;
                 self.UpdateFlag = false;
+                self.Gravity = 0;
             }
         }
 
@@ -54,6 +54,13 @@ namespace ET.Client
         {
             var oldVel = self.body.LinearVelocity;
             var newVel = new System.Numerics.Vector2(-velocityX * self.GetFlip(), oldVel.Y);
+            self.body.SetLinearVelocity(newVel);
+        }
+
+        public static void SetVelocityY(this b2Body self, float velocityY)
+        {
+            var oldVel = self.body.LinearVelocity;
+            var newVel = new System.Numerics.Vector2(oldVel.X, velocityY);
             self.body.SetLinearVelocity(newVel);
         }
 
