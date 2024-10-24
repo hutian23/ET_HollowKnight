@@ -24,7 +24,7 @@ namespace ET.Client
 
             //parse script
             ScriptParser parser = component.GetComponent<ScriptParser>();
-            parser.InitScript(BBPlayable.root.MainScript);
+            //parser.InitScript(BBPlayable.root.MainScript);
             
             parser.Invoke("Init").Coroutine();
         }

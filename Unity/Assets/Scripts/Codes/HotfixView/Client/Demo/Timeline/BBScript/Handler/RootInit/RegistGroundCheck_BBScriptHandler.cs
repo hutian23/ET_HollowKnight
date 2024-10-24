@@ -22,11 +22,8 @@ namespace ET.Client
             //变量注册到SkillBuffer中，注意切换行为时，变量会全部销毁
             bool OnGround = callback.Hit;
             buffer.RegistParam("OnGround", OnGround);
-            
-            Log.Warning(OnGround.ToString());
-            
             //回收callback
-            callback.Recycle();            
+            callback.Recycle();         
         }
     }
 

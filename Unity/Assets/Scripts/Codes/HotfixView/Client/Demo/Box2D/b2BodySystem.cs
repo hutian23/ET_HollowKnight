@@ -50,6 +50,16 @@ namespace ET.Client
             self.UpdateFlag = false;
         }
 
+        public static System.Numerics.Vector2 GetVelocity(this b2Body self)
+        {
+            return self.body.LinearVelocity;
+        }
+
+        public static void SetVelocity(this b2Body self, System.Numerics.Vector2 value)
+        {
+            self.body.SetLinearVelocity(value);
+        }
+        
         public static void SetVelocityX(this b2Body self, float velocityX)
         {
             var oldVel = self.body.LinearVelocity;

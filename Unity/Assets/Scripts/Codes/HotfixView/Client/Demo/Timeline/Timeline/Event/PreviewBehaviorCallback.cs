@@ -28,7 +28,7 @@ namespace ET.Client
 
             //init root
             ScriptParser parser = timelineComponent.GetComponent<ScriptParser>();
-            parser.InitScript(BBPlayable.root.MainScript);
+            //parser.InitScript(BBPlayable.root.MainScript);
             await parser.Invoke("Init");
 
             //preview 

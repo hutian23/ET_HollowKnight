@@ -13,14 +13,15 @@ namespace ET.Client
         {
             //解决热重载时，组件调用顺序的问题
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-
+            timelineComponent.Init();
+            
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.ReLoad();
 
             //获得输入，更新输入缓冲区定时器
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             inputWait.Init();
-            inputWait.inputHandleTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BBInputHandleTimer, inputWait);
+            inputWait.StartInputHandleTimer();
 
             //重载行为机
             #region SkillBuffer
@@ -34,6 +35,13 @@ namespace ET.Client
             var timelines = buffer.GetParent<TimelineComponent>()
                     .GetTimelinePlayer().BBPlayable
                     .GetTimelines();
+            
+            //1-1 RootInit
+            string RootScript = buffer.GetParent<TimelineComponent>().GetTimelinePlayer().BBPlayable.rootScript;
+            parser.InitScript(RootScript);
+            await parser.Invoke("RootInit", parser.cancellationToken);
+            if(parser.cancellationToken.IsCancel()) return;
+            
             foreach (BBTimeline timeline in timelines)
             {
                 SkillInfo info = buffer.AddChild<SkillInfo>();
@@ -45,6 +53,7 @@ namespace ET.Client
                 parser.InitScript(timeline.Script);
                 parser.RegistParam("InfoId", info.Id);
                 await parser.Invoke("Init", parser.cancellationToken);
+                if (parser.cancellationToken.IsCancel()) return;
             }
 
             //3. 按照优先级注册行为到InfoDict中,权值越高的行为越前检查

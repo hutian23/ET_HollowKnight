@@ -1,8 +1,11 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     [ComponentOf(typeof (Unit))]
     public class TimelineComponent: Entity, IAwake, IDestroy
     {
+        public Dictionary<string, SharedVariable> paramDict = new();
     }
 
     //回调，调用后退出事件

@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public class Dash_InputHandler: BBInputHandler
+    public class Dash_InputHandler : BBInputHandler
     {
         public override string GetInputType()
         {

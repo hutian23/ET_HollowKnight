@@ -273,10 +273,46 @@ MonoBehaviour:
       Data: 15|ET.ListComponent`1[[Timeline.BoxInfo, Unity.Loader]], Unity.Core
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 16|Timeline.BoxInfo, Unity.Loader
+    - Name: boxName
+      Entry: 1
+      Data: Hurt_Head
+    - Name: hitboxType
+      Entry: 3
+      Data: 2
+    - Name: center
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.00349384546
+    - Name: 
+      Entry: 4
+      Data: 0.7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: size
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1.19301283
+    - Name: 
+      Entry: 4
+      Data: 0.6999999
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|Timeline.BoxInfo, Unity.Loader
     - Name: boxName
       Entry: 1
       Data: Hurt_Body
@@ -291,7 +327,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -1.06283522
+      Data: -1.05
     - Name: 
       Entry: 8
       Data: 
@@ -303,7 +339,7 @@ MonoBehaviour:
       Data: 1.8
     - Name: 
       Entry: 4
-      Data: 2.77
+      Data: 2.8
     - Name: 
       Entry: 8
       Data: 
@@ -312,7 +348,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|Timeline.BoxInfo, Unity.Loader
+      Data: 18|Timeline.BoxInfo, Unity.Loader
     - Name: boxName
       Entry: 1
       Data: PushBox
@@ -327,7 +363,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -1.4
+      Data: -1.2
     - Name: 
       Entry: 8
       Data: 
@@ -339,7 +375,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 4
-      Data: 2.1
+      Data: 2.5
     - Name: 
       Entry: 8
       Data: 
@@ -366,7 +402,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|Timeline.BBEventTrack, Unity.Loader
+      Data: 19|Timeline.BBEventTrack, Unity.Loader
     - Name: Name
       Entry: 1
       Data: Marker
@@ -375,7 +411,7 @@ MonoBehaviour:
       Data: true
     - Name: Clips
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+      Data: 20|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
@@ -388,14 +424,14 @@ MonoBehaviour:
       Data: 
     - Name: EventInfos
       Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
+      Data: 21|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 21|Timeline.EventInfo, Unity.Loader
+      Data: 22|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 0
@@ -407,7 +443,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Timeline.EventInfo, Unity.Loader
+      Data: 23|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 4
@@ -434,7 +470,7 @@ MonoBehaviour:
       Data: 
     - Name: Marks
       Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
+      Data: 24|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
@@ -446,8 +482,51 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_Jump
-  order: 203
-  Script: "@Init:\nRegistGroundCheck;            # \u68C0\u6D4B\u5730\u9762\u5B50\u534F\u7A0B\nRegistGravityCheck:
-    4.5;    # \u91CD\u529B\u5F71\u54CD\nRegistInput: JumpPressed;\nMoveType: Move;\nOrder:
-    203;\nName: 'Mai_Jump';\nreturn;\n\n@Trigger:\nInAir: true;\nInputType: JumpPressed;\nreturn;\n\n@Main:\nBBSprite:
-    'PreJump_1', 4;\nBBSprite: 'PreJump_2', 4;\nSetVelocityY: 10;\nWaitFrame: 100;\nreturn;\n\n@Exit:\nreturn;"
+  order: 204
+  Script: '@Init:
+
+    RegistInput: JumpPressed;
+
+    MoveType: Move;
+
+    Order:
+    204;
+
+    Name: ''Mai_Jump'';
+
+    return;
+
+
+    @Trigger:
+
+    InputType: JumpPressed;
+
+    return;
+
+
+    @Main:
+
+    BBSprite:
+    ''PreJump_1'', 4;
+
+    BBSprite: ''PreJump_2'', 4;
+
+    UpdateFlip;
+
+    SetVelocityY:
+    30;
+
+    Gravity: 0;
+
+    WaitFrame: 100;
+
+
+    return;
+
+
+    @Exit:
+
+    Gravity:
+    45000;
+
+    return;'

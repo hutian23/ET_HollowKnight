@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
@@ -18,9 +19,18 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return false;
             }
-
+            
             SkillBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
-            return true;
+            switch (match.Groups["InAir"].Value)
+            {
+                case "true":
+                    return !buffer.GetParam<bool>("OnGround");
+                case "false":
+                    return buffer.GetParam<bool>("OnGround");
+                default:
+                    DialogueHelper.ScripMatchError(data.opLine);
+                    throw new Exception();
+            }
         }
     }
 }

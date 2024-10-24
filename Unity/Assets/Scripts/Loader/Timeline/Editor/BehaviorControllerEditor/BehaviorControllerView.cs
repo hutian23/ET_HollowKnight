@@ -274,7 +274,7 @@ namespace Timeline.Editor
             root.viewDataKey = "0";
             root.titleContainer.style.backgroundColor = new Color(0.207f, 0.528f, 0.258f, 0.627f);
             root.inputContainer.Clear();
-            root.RegisterCallback<PointerDownEvent>(_ => { BBTimelineSettings.GetSettings().SetActiveObject(Editor.PlayableGraph.root); });
+            //root.RegisterCallback<PointerDownEvent>(_ => { BBTimelineSettings.GetSettings().SetActiveObject(Editor.PlayableGraph.root); });
             AddElement(root);
 
             BehaviorLayer behaviorLayer = Editor.PlayableGraph.Layers[Editor.layerIndex];

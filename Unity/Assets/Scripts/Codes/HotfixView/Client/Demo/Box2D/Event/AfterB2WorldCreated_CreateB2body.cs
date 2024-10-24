@@ -23,7 +23,7 @@ namespace ET.Client
                 {
                     BodyType = BodyType.DynamicBody,
                     Position = new Vector2(0, 10f),
-                    GravityScale = 4.5f,
+                    GravityScale = 0f,
                     LinearDamping = 0f,
                     AngularDamping = 0f,
                     AllowSleep = true,

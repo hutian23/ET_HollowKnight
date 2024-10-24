@@ -12,7 +12,8 @@ namespace Timeline
     [CreateAssetMenu(menuName = "ScriptableObject/BBTimeline/PlayableGraph", fileName = "BBPlayableGraph")]
     public class BBPlayableGraph: SerializedScriptableObject
     {
-        public RootClip root;
+        [TextArea(15,30)]
+        public string rootScript;
 
         [HideReferenceObjectPicker]
         [OdinSerialize, NonSerialized]

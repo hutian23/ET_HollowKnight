@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (SkillBuffer))]
+    [FriendOf(typeof(SkillBuffer))]
+    [FriendOf(typeof(TimelineComponent))]
     public static class TimelineComponentSystem
     {
-        [FriendOf(typeof (TimelineManager))]
-        public class TimelineComponentAwakeSystem: AwakeSystem<TimelineComponent>
+        [FriendOf(typeof(TimelineManager))]
+        public class TimelineComponentAwakeSystem : AwakeSystem<TimelineComponent>
         {
             protected override void Awake(TimelineComponent self)
             {
@@ -21,15 +22,21 @@ namespace ET.Client
             }
         }
 
-        [FriendOf(typeof (TimelineManager))]
-        public class TimelineComponentDestroySystem: DestroySystem<TimelineComponent>
+        [FriendOf(typeof(TimelineManager))]
+        public class TimelineComponentDestroySystem : DestroySystem<TimelineComponent>
         {
             protected override void Destroy(TimelineComponent self)
             {
+                self.Init();
                 TimelineManager.Instance.instanceIds.Remove(self.InstanceId);
             }
         }
 
+        public static void Init(this TimelineComponent self)
+        {
+            self.ClearParam();
+        }
+        
         #region TimelinePlayer
 
         public static T GetParameter<T>(this TimelineComponent timelineComponent, string parameterName)
@@ -44,7 +51,7 @@ namespace ET.Client
                 {
                     if (param.value is not T value)
                     {
-                        Log.Error($"cannot format {param.name} to {typeof (T)}");
+                        Log.Error($"cannot format {param.name} to {typeof(T)}");
                         return default;
                     }
 
@@ -98,18 +105,97 @@ namespace ET.Client
         public static void Reload(this TimelineComponent self, int behaviorOrder)
         {
             BBParser parser = self.GetComponent<BBParser>();
-            
+
             //显示层reload playableGraph
             self.GetTimelinePlayer().Init(behaviorOrder);
             BBTimeline timeline = self.GetCurrentTimeline();
 
             parser.InitScript(timeline.Script);
-            
+
             //3. 切换行为前，初始化组件
-            EventSystem.Instance.PublishAsync(self.DomainScene(),new BeforeBehaviorReload(){behaviorOrder = behaviorOrder,instanceId = self.GetParent<Unit>().InstanceId}).Coroutine();
+            EventSystem.Instance.PublishAsync(self.DomainScene(), new BeforeBehaviorReload() { behaviorOrder = behaviorOrder, instanceId = self.GetParent<Unit>().InstanceId }).Coroutine();
             parser.Main().Coroutine();
             //4. 切换行为后，抛出事件更新组件
             EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterBehaviorReload() { behaviorOrder = behaviorOrder, instanceId = self.GetParent<Unit>().InstanceId }).Coroutine();
         }
+
+        #region Param
+        public static T RegistParam<T>(this TimelineComponent self, string paramName, T value)
+        {
+            if (self.paramDict.ContainsKey(paramName))
+            {
+                Log.Error($"already contain params:{paramName}");
+                return default;
+            }
+
+            SharedVariable variable = SharedVariable.Create(paramName, value);
+            self.paramDict.Add(paramName, variable);
+            return value;
+        }
+
+        public static T GetParam<T>(this TimelineComponent self, string paramName)
+        {
+            if (!self.paramDict.ContainsKey(paramName))
+            {
+                Log.Error($"does not exist param:{paramName}!");
+                return default;
+            }
+
+            SharedVariable variable = self.paramDict[paramName];
+            if (variable.value is not T value)
+            {
+                Log.Error($"cannot format {variable.name} to {typeof(T)}");
+                return default;
+            }
+
+            return value;
+        }
+
+        public static bool ContainParam(this TimelineComponent self, string paramName)
+        {
+            return self.paramDict.ContainsKey(paramName);
+        }
+
+        public static void RemoveParam(this TimelineComponent self, string paramName)
+        {
+            if (!self.paramDict.ContainsKey(paramName))
+            {
+                Log.Error($"does not exist param:{paramName}!");
+                return;
+            }
+
+            self.paramDict[paramName].Recycle();
+            self.paramDict.Remove(paramName);
+        }
+
+        public static bool TryRemoveParam(this TimelineComponent self, string paramName)
+        {
+            if (!self.paramDict.ContainsKey(paramName))
+            {
+                return false;
+            }
+            
+            self.paramDict[paramName].Recycle();
+            self.paramDict.Remove(paramName);
+            return true;
+        }
+        
+        public static void ClearParam(this TimelineComponent self)
+        {
+            foreach (var kv in self.paramDict)
+            {
+                self.paramDict[kv.Key].Recycle();
+            }
+
+            self.paramDict.Clear();
+        }
+
+        public static void UpdateParam<T>(this TimelineComponent self, string paramName, T value)
+        {
+            self.TryRemoveParam(paramName);
+            self.RegistParam(paramName, value);
+        }
+
+        #endregion
     }
 }

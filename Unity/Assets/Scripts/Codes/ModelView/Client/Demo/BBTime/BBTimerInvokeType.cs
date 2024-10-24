@@ -21,5 +21,6 @@
         public const int GatlingCancelCheckTimer = 103;
         public const int GroundCheckTimer = 104;
         public const int GravityCheckTimer = 105;
+        public const int AirCheckTimer = 106;
     }
 }

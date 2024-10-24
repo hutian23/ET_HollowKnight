@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using Timeline;
 
 namespace ET.Client
 {
@@ -124,19 +123,7 @@ namespace ET.Client
             EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = self.InstanceId });
             return ret;
         }
-
-        public static void Init(this BBParser self)
-        {
-            BBPlayableGraph bbPlayable = self.GetParent<TimelineComponent>().GetTimelinePlayer().BBPlayable;
-            foreach (BBTimeline timeline in bbPlayable.GetTimelines())
-            {
-                //运行初始化协程
-                self.InitScript(timeline.Script);
-                self.RegistParam("BehaviorOrder", timeline.order);
-                self.Invoke("Init", self.cancellationToken).Coroutine();
-            }
-        }
-
+        
         /// <summary>
         /// 退出当前行为
         /// </summary>

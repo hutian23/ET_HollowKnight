@@ -4,7 +4,6 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Client)]
-    [FriendOf(typeof (ScriptParser))]
     public class AfterSceneChange_CreatePlayerView: AEvent<CreatePlayerView>
     {
         protected override async ETTask Run(Scene scene, CreatePlayerView args)

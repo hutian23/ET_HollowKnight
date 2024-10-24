@@ -15,7 +15,7 @@ namespace ET.Client
             {
                 self.Ops = BBInputComponent.Instance.Ops;
                 //1. 更新按键历史
-                self.UpdatekeyHistory(self.Ops);
+                self.UpdateKeyHistory(self.Ops);
                 //2. 更新缓冲区
                 self.UpdateBuffer();
             }
@@ -50,9 +50,9 @@ namespace ET.Client
 
         public static void Init(this InputWait self)
         {
-            self.GetComponent<BBTimerComponent>().Remove(ref self.inputHandleTimer);
-            self.GetComponent<BBTimerComponent>().Remove(ref self.inputNotifyTimer);
             self.GetComponent<BBTimerComponent>().ReLoad();
+            self.inputHandleTimer = 0;
+            self.inputNotifyTimer = 0;
             self.Ops = 0;
 
             self.handlers.Clear();
@@ -82,7 +82,7 @@ namespace ET.Client
             self.PressedDict.Add(BBOperaType.HEAVYPUNCH, long.MaxValue);
         }
 
-        private static void UpdatekeyHistory(this InputWait self, long ops)
+        private static void UpdateKeyHistory(this InputWait self, long ops)
         {
             self.HandleKeyInput(ops, BBOperaType.LIGHTPUNCH);
             self.HandleKeyInput(ops, BBOperaType.LIGHTKICK);
@@ -248,6 +248,19 @@ namespace ET.Client
         {
             BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
             bbTimer.Remove(ref self.inputNotifyTimer);
+        }
+
+        public static void StartInputHandleTimer(this InputWait self)
+        {
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
+            bbTimer.Remove(ref self.inputHandleTimer);
+            self.inputHandleTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BBInputHandleTimer, self);
+        }
+
+        public static void CancelInputHandlerTimer(this InputWait self)
+        {
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
+            bbTimer.Remove(ref self.inputHandleTimer);
         }
     }
 }
