@@ -12,6 +12,12 @@ namespace ET.Client
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             
+            //根运动，不需要模拟重力
+            if (body.GetComponent<RootMotionComponent>() != null)
+            {
+                return;
+            }
+            
             //将时间戳转成秒单位
             float tick = bbTimer.GetFrameLength() / 10000000f;
             
@@ -20,10 +26,11 @@ namespace ET.Client
             float dv = tick * g;
 
             Vector2 curV = body.GetVelocity() + new Vector2(0, dv);
+            float maxFall = - timelineComponent.GetParam<long>("MaxFall") / 1000f;
             //约束最大下落速度
-            if (curV.Y < -timelineComponent.GetParam<int>("MaxFall"))
+            if (curV.Y < maxFall)
             {
-                curV = new Vector2(curV.X,-timelineComponent.GetParam<int>("MaxFall"));
+                curV = new Vector2(curV.X, maxFall);
             }
             
             body.SetVelocity(curV);

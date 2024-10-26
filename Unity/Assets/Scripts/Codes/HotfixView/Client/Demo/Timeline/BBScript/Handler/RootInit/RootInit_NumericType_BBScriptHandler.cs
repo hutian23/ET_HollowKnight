@@ -26,7 +26,7 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            int.TryParse(match.Groups["Value"].Value, out int value);
+            long.TryParse(match.Groups["Value"].Value, out long value);
             timelineComponent.RegistParam(match.Groups["NumericType"].Value, value);
             
             await ETTask.CompletedTask;

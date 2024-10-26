@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 28
+      Data: 32
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
       Data: 9|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 4
+      Data: 14
     - Name: keyframeName
       Entry: 1
       Data: Idle_Hitbox
@@ -302,7 +302,7 @@ MonoBehaviour:
       Data: 17|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 4
+      Data: 14
     - Name: keyframeName
       Entry: 1
       Data: Mai_Land_1
@@ -314,7 +314,7 @@ MonoBehaviour:
       Data: 18|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 8
+      Data: 18
     - Name: keyframeName
       Entry: 1
       Data: Mai_Land_2
@@ -326,7 +326,7 @@ MonoBehaviour:
       Data: 19|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 11
+      Data: 21
     - Name: keyframeName
       Entry: 1
       Data: Mai_Land_3
@@ -338,7 +338,7 @@ MonoBehaviour:
       Data: 20|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 15
+      Data: 25
     - Name: keyframeName
       Entry: 1
       Data: Mai_Land_4
@@ -350,7 +350,7 @@ MonoBehaviour:
       Data: 21|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 19
+      Data: 29
     - Name: keyframeName
       Entry: 1
       Data: Mai_Land_5
@@ -408,17 +408,17 @@ MonoBehaviour:
 
     @Main:
 
-    BBSprite: ''Mai_Land_1'', 4;
+    BBSprite: ''Mai_Land_1'', 3;
 
     BBSprite:
-    ''Mai_Land_2'', 3;
+    ''Mai_Land_2'', 2;
 
-    BBSprite: ''Mai_Land_3'', 4;
+    BBSprite: ''Mai_Land_3'', 3;
 
     BBSprite: ''Mai_Land_4'',
-    4;
+    5;
 
-    BBSprite: ''Mai_Land_5'', 3;
+    BBSprite: ''Mai_Land_5'', 2;
 
     return;
 
