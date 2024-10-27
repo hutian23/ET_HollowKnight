@@ -436,9 +436,13 @@ MonoBehaviour:
 
     OpenCancelWindow;
 
+    AirMoveX:
+    15000;
 
-    #
-    Transition
+    UpdateFlip;
+
+
+    # Transition
 
     BeginIf: (TransitionCached: ''TransitionToFall'')
 

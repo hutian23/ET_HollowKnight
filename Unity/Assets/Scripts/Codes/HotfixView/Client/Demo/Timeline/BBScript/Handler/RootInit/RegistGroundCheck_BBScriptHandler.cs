@@ -9,9 +9,6 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            SkillBuffer buffer = self.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
-            buffer.TryRemoveParam("OnGround");
-            
             b2Body body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             World world = b2GameManager.Instance.B2World.World;
             
@@ -19,11 +16,18 @@ namespace ET.Client
             GroundCheckRayCastCallback callback = GroundCheckRayCastCallback.Create();
             world.RayCast(callback, body.GetPosition(), body.GetPosition() + new Vector2(0, -2.6f));
             
-            //变量注册到SkillBuffer中，注意切换行为时，变量会全部销毁
+            //变量注册到timelineComponent中，注意切换行为时，变量会全部销毁
+            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
+            bool preOnGround = timelineComponent.GetParam<bool>("OnGround");
             bool OnGround = callback.Hit;
-            buffer.RegistParam("OnGround", OnGround);
+            timelineComponent.UpdateParam("OnGround",OnGround);
             //回收callback
-            callback.Recycle();         
+            callback.Recycle();
+
+            if (preOnGround != OnGround)
+            {
+                EventSystem.Instance.PublishAsync(self.ClientScene(), new OnGroundChanged() { instanceId = timelineComponent.InstanceId, OnGround = OnGround }).Coroutine();
+            }
         }
     }
 
@@ -38,7 +42,8 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-
+            
+            timelineComponent.RegistParam("OnGround", false);
             bbTimer.NewFrameTimer(BBTimerInvokeType.GroundCheckTimer, parser);
 
             await ETTask.CompletedTask;

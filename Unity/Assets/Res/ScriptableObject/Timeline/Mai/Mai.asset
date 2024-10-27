@@ -513,19 +513,21 @@ MonoBehaviour:
       Data: 
   rootScript: '@RootInit:
 
-    Gravity: 98000;
+    Gravity: 150000;
 
     NumericType: MaxGravity, 98000;
 
     NumericType:
-    MaxFall, 29;
-
-    NumericType: HP, 10000;
+    MaxFall, 50000;
 
     NumericType: MaxDash, 1;
 
+    NumericType: DashCount, 1;
+
     NumericType:
     MaxJump, 2;
+
+    NumericType: JumpCount, 2;
 
     RegistGroundCheck;
 

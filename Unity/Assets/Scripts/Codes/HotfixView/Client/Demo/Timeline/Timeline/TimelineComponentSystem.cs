@@ -135,13 +135,12 @@ namespace ET.Client
 
         public static T GetParam<T>(this TimelineComponent self, string paramName)
         {
-            if (!self.paramDict.ContainsKey(paramName))
+            if (!self.paramDict.TryGetValue(paramName, out SharedVariable variable))
             {
                 Log.Error($"does not exist param:{paramName}!");
                 return default;
             }
 
-            SharedVariable variable = self.paramDict[paramName];
             if (variable.value is not T value)
             {
                 Log.Error($"cannot format {variable.name} to {typeof(T)}");
@@ -179,8 +178,8 @@ namespace ET.Client
             self.paramDict.Remove(paramName);
             return true;
         }
-        
-        public static void ClearParam(this TimelineComponent self)
+
+        private static void ClearParam(this TimelineComponent self)
         {
             foreach (var kv in self.paramDict)
             {
@@ -192,8 +191,18 @@ namespace ET.Client
 
         public static void UpdateParam<T>(this TimelineComponent self, string paramName, T value)
         {
-            self.TryRemoveParam(paramName);
-            self.RegistParam(paramName, value);
+            foreach ((string key, SharedVariable variable) in self.paramDict)
+            {
+                if (!key.Equals(paramName))
+                {
+                    continue;
+                }
+
+                variable.value = value;
+                return;
+            }
+            
+            Log.Error($"does not exist param:{paramName}!");
         }
 
         #endregion

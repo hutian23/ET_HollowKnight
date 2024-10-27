@@ -57,7 +57,8 @@ namespace ET.Client
             //注册重力变量
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             long.TryParse(match.Groups["gravity"].Value,out long gravity);
-            timelineComponent.UpdateParam("Gravity", gravity);
+            timelineComponent.TryRemoveParam("Gravity");
+            timelineComponent.RegistParam("Gravity", gravity);
             
             //启动定时器
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();

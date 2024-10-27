@@ -31,4 +31,10 @@ namespace ET.Client
         public long instanceId;
         public int targetFrame;
     }
+
+    public struct OnGroundChanged
+    {
+        public long instanceId;
+        public bool OnGround;
+    }
 }

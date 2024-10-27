@@ -525,41 +525,51 @@ MonoBehaviour:
 
     InputType: JumpPressed;
 
+    InAir:
+    false;
+
     return;
 
 
     @Main:
 
+    Gravity: 0;
+
+    BBSprite: ''PreJump_1'',
+    4;
+
+    BBSprite: ''PreJump_2'', 1;
+
+    SetVelocityY: 32000;
+
+    AirMoveX:
+    15000;
+
+    UpdateFlip;
+
+    BBSprite: ''PreJump_2'', 1;
+
+
+    BBSprite: ''Mai_Jump_1'',
+    3;
+
+    BBSprite: ''Mai_Jump_2'', 3;
+
+    BBSprite: ''Mai_Jump_1'', 3;
+
     Gravity:
-    0;
+    150000;
 
-    BBSprite: ''PreJump_1'', 4;
+    BBSprite: ''Mai_Jump_2'', 2;
 
-    BBSprite: ''PreJump_2'', 1;
-
-    SetVelocityY:
-    27000;
-
-    BBSprite: ''PreJump_2'', 1;
-
-
-    BBSprite: ''Mai_Jump_1'', 5;
-
-    BBSprite:
-    ''Mai_Jump_2'', 5;
-
-    Gravity: 98000;
-
-    BBSprite: ''Mai_Jump_1'', 4;
-
-    BBSprite:
-    ''Mai_Jump_2'', 4;
+    BBSprite: ''Mai_Jump_1'', 2;
 
     return;
 
 
     @Exit:
 
-    SetTransition: ''TransitionToFall'';
+    SetTransition:
+    ''TransitionToFall'';
 
     return;'

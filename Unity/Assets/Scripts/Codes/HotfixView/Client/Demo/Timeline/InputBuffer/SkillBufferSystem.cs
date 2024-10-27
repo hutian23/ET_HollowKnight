@@ -99,7 +99,7 @@
             return self.currentOrder;
         }
 
-        public static SkillInfo GetInfo(this SkillBuffer self, int order)
+        private static SkillInfo GetInfo(this SkillBuffer self, int order)
         {
             if (!self.infoDict.TryGetValue(order, out long id))
             {
@@ -132,13 +132,12 @@
 
         public static T GetParam<T>(this SkillBuffer self, string paramName)
         {
-            if (!self.paramDict.ContainsKey(paramName))
+            if (!self.paramDict.TryGetValue(paramName, out SharedVariable variable))
             {
                 Log.Error($"does not exist param:{paramName}!");
                 return default;
             }
 
-            SharedVariable variable = self.paramDict[paramName];
             if (variable.value is not T value)
             {
                 Log.Error($"cannot format {variable.name} to {typeof (T)}");

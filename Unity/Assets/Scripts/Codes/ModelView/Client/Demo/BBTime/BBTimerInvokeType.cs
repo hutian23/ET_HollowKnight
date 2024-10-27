@@ -22,5 +22,6 @@
         public const int GroundCheckTimer = 104;
         public const int GravityCheckTimer = 105;
         public const int AirCheckTimer = 106;
+        public const int AirMoveTimer = 107;
     }
 }

@@ -115,6 +115,11 @@ namespace ET.Client
             return self.PressedDict[operaType] == self.GetComponent<BBTimerComponent>().GetNow();
         }
 
+        public static bool IsPressed(this InputWait self, int operaType)
+        {
+            return (self.Ops & operaType) != 0;
+        }
+
         #endregion
 
         //https://www.zhihu.com/question/36951135/answer/69880133

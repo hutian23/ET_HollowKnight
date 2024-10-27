@@ -9,32 +9,29 @@
         {
             //更新刚体朝向
             b2Body b2Body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
-            var preFlip = b2Body.Flip;
-            var curFlip = preFlip;
-
-            if ((self.Ops & BBOperaType.LEFT) != 0)
+            
+            FlipState preFlip = b2Body.Flip;
+            FlipState curFlip = preFlip;
+            
+            bool left = self.IsPressed(BBOperaType.LEFT) || self.IsPressed(BBOperaType.DOWNLEFT) || self.IsPressed(BBOperaType.UPLEFT);
+            bool right = self.IsPressed(BBOperaType.RIGHT) || self.IsPressed(BBOperaType.DOWNRIGHT) || self.IsPressed(BBOperaType.UPRIGHT);
+            if (left)
             {
                 curFlip = FlipState.Left;
             }
-            else if ((self.Ops & BBOperaType.RIGHT) != 0)
+            else if(right)
             {
                 curFlip = FlipState.Right;
             }
-            else if ((self.Ops & BBOperaType.DOWNLEFT) != 0)
-            {
-                curFlip = FlipState.Left;
-            }
-            else if ((self.Ops & BBOperaType.DOWNRIGHT) != 0)
-            {
-                curFlip = FlipState.Right;
-            }
-
+            
             //转向发生更新
-            if (curFlip != preFlip)
+            if (curFlip == preFlip)
             {
-                b2Body.SetFlip(curFlip);
-                b2Body.SetUpdateFlag();
+                return;
             }
+
+            b2Body.SetFlip(curFlip);
+            b2Body.SetUpdateFlag();
         }
     }
 

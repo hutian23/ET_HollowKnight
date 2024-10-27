@@ -5,8 +5,7 @@
     {
         protected override void Run(BBParser self)
         {
-            SkillBuffer buffer = self.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
-            bool ret = buffer.GetParam<bool>("OnGround");
+            bool ret = self.GetParent<TimelineComponent>().GetParam<bool>("OnGround");
             if (ret)
             {
                 EventSystem.Instance.Invoke(new CancelBehaviorCallback(){instanceId = self.InstanceId});
