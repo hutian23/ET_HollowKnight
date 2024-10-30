@@ -4,9 +4,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (BBParser))]
     [FriendOf(typeof (DialogueDispatcherComponent))]
-    [FriendOf(typeof (BehaviorBufferComponent))]
     [FriendOf(typeof (DialogueComponent))]
-    [FriendOf(typeof (BehaviorInfo))]
     public static class BBParserSystem
     {
         public class BBParserDestroySystem: DestroySystem<BBParser>

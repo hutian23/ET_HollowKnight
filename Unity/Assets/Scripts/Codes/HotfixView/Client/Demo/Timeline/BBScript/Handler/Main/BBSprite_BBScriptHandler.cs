@@ -26,7 +26,7 @@ namespace ET.Client
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimeimePlayable;
+            RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
             
             foreach (RuntimeTrack runtimeTrack in runtimePlayable.RuntimeTracks)
             {

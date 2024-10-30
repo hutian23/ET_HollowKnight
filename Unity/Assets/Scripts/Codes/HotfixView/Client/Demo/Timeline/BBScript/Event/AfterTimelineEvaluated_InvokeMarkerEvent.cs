@@ -9,7 +9,7 @@ namespace ET.Client
         {
             //1. Find MarkerTrack
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimeimePlayable;
+            RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
 
             BBEventTrack markerTrack = null;
             foreach (RuntimeTrack runtimeTrack in runtimePlayable.RuntimeTracks)

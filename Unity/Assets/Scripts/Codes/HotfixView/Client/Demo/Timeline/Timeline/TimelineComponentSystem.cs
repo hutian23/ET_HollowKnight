@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(SkillBuffer))]
+    [FriendOf(typeof(BehaviorBuffer))]
     [FriendOf(typeof(TimelineComponent))]
     public static class TimelineComponentSystem
     {
@@ -85,18 +85,13 @@ namespace ET.Client
                     .GetComponent<TimelinePlayer>();
         }
 
-        private static BBTimeline GetCurrentTimeline(this TimelineComponent self)
-        {
-            return self.GetTimelinePlayer().CurrentTimeline;
-        }
-
         public static void Evaluate(this TimelineComponent self, int targetFrame)
         {
             //抛出事件
             EventSystem.Instance.PublishAsync(self.ClientScene().CurrentScene(),
                 new AfterTimelineEvaluated() { instanceId = self.InstanceId, targetFrame = targetFrame }).Coroutine();
 
-            RuntimePlayable playable = self.GetTimelinePlayer().RuntimeimePlayable;
+            RuntimePlayable playable = self.GetTimelinePlayer().RuntimePlayable;
             playable.Evaluate(targetFrame);
         }
 
@@ -107,9 +102,8 @@ namespace ET.Client
             BBParser parser = self.GetComponent<BBParser>();
 
             //显示层reload playableGraph
-            self.GetTimelinePlayer().Init(behaviorOrder);
-            BBTimeline timeline = self.GetCurrentTimeline();
-
+            //self.GetTimelinePlayer().Init(behaviorOrder);
+            BBTimeline timeline = self.GetTimelinePlayer().CurrentTimeline;
             parser.InitScript(timeline.Script);
 
             //3. 切换行为前，初始化组件

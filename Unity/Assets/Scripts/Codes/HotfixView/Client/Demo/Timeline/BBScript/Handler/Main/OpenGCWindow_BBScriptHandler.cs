@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof(SkillBuffer))]
+    [FriendOf(typeof(BehaviorBuffer))]
     public class OpenGCWindow_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -18,7 +18,7 @@
             inputWait.StartNotifyTimer();
 
             //2. 启动加特林窗口
-            SkillBuffer buffer = timelineComponent.GetComponent<SkillBuffer>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.Remove(ref buffer.CheckTimer);
             buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.GatlingCancelCheckTimer, buffer);

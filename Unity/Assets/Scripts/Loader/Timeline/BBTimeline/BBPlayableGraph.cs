@@ -11,7 +11,7 @@ namespace Timeline
     [CreateAssetMenu(menuName = "ScriptableObject/BBTimeline/PlayableGraph", fileName = "BBPlayableGraph")]
     public class BBPlayableGraph: SerializedScriptableObject
     {
-        [TextArea(15,30)]
+        [TextArea(15,60)]
         public string rootScript;
 
         [HideReferenceObjectPicker]
@@ -22,6 +22,9 @@ namespace Timeline
         [OdinSerialize, NonSerialized]
         public List<SharedVariable> Parameters = new();
 
+        [OdinSerialize]
+        public Dictionary<string, BBTimeline> timelineDict = new();
+        
 #if UNITY_EDITOR
         private SerializedObject SerializedController;
 
@@ -30,32 +33,15 @@ namespace Timeline
             SerializedController = new SerializedObject(this);
             SerializedController.Update();
         }
-
-        public HashSet<BBTimeline> GetTimelines()
-        {
-            HashSet<BBTimeline> timelineSet = new();
-            foreach (var layer in Layers)
-            {
-                foreach (var behaviorClip in layer.BehaviorClips)
-                {
-                    if (behaviorClip.Timeline == null)
-                    {
-                        continue;
-                    }
-
-                    timelineSet.Add(behaviorClip.Timeline);
-                }
-            }
-
-            return timelineSet;
-        }
 #endif
-    }
 
-    [Serializable]
-    public class RootClip
-    {
-        [TextArea(10, 30)]
-        public string MainScript;
+        public BBTimeline GetTimeline(string timelineName)
+        {
+            if (!timelineDict.TryGetValue(timelineName, out BBTimeline timeline))
+            {
+                Debug.LogError($"does not exist timeline: {timelineName}");
+            }
+            return timeline;
+        }
     }
 }

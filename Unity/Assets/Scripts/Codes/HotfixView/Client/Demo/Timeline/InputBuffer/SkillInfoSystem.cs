@@ -4,12 +4,12 @@ using Timeline;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (SkillInfo))]
+    [FriendOf(typeof (BehaviorInfo))]
     public static class SkillInfoSystem
     {
-        public class SkillInfoDestorySystem: DestroySystem<SkillInfo>
+        public class SkillInfoDestroySystem: DestroySystem<BehaviorInfo>
         {
-            protected override void Destroy(SkillInfo self)
+            protected override void Destroy(BehaviorInfo self)
             {
                 self.opLines.Clear();
                 self.moveType = MoveType.None;
@@ -18,7 +18,7 @@ namespace ET.Client
             }
         }
 
-        public static void LoadSkillInfo(this SkillInfo self, BBTimeline timeline)
+        public static void LoadSkillInfo(this BehaviorInfo self, BBTimeline timeline)
         {
             string[] ops = timeline.Script.Split("\n");
             List<string> trims = new();
@@ -52,7 +52,7 @@ namespace ET.Client
             }
         }
 
-        public static bool SkillCheck(this SkillInfo self)
+        public static bool SkillCheck(this BehaviorInfo self)
         {
             bool res = true;
             foreach (string opline in self.opLines)
@@ -66,7 +66,7 @@ namespace ET.Client
 
                 BBTriggerHandler handler = DialogueDispatcherComponent.Instance.GetTrigger(match.Value);
                 BBScriptData data = BBScriptData.Create(opline, 0, 0);
-                BBParser parser = self.GetParent<SkillBuffer>().GetParent<TimelineComponent>().GetComponent<BBParser>();
+                BBParser parser = self.GetParent<BehaviorBuffer>().GetParent<TimelineComponent>().GetComponent<BBParser>();
 
                 bool ret = handler.Check(parser, data);
                 if (ret is false)

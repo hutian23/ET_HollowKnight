@@ -2,15 +2,24 @@
 
 namespace ET.Client
 {
-    [ChildOf(typeof (BehaviorBufferComponent))]
+    [ChildOf(typeof (BehaviorBuffer))]
     public class BehaviorInfo: Entity, IAwake, IDestroy
     {
-        public uint targetID;
-        public uint skillType;
-        public uint order;
-        public string tag;
-        public string behaviorName;    
+        public string behaviorName;
+        public int behaviorOrder;
+        public MoveType moveType;
         
-        public List<string> triggers = new();
+        //Trigger
+        public List<string> opLines = new();
+    }
+
+    public enum MoveType
+    {
+        None = 0,
+        Transition = 1,
+        Move = 2,
+        Normal = 3,
+        Special = 4,
+        Super = 5
     }
 }

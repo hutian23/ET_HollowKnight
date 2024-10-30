@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Client)]
-    [FriendOf(typeof (SkillBuffer))]
+    [FriendOf(typeof (BehaviorBuffer))]
     public class BeforeBehaviorReload_BuffParam: AEvent<BeforeBehaviorReload>
     {
         protected override async ETTask Run(Scene scene, BeforeBehaviorReload args)
@@ -12,7 +12,7 @@ namespace ET.Client
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            SkillBuffer buffer = timelineComponent.GetComponent<SkillBuffer>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
 
             //1. 记录CurrentOrder
             bbParser.RegistParam("CurrentOrder", args.behaviorOrder);

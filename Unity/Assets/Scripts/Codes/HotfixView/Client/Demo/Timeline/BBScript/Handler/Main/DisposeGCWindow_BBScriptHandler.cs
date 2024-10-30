@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof(SkillBuffer))]
+    [FriendOf(typeof(BehaviorBuffer))]
     public class DisposeGCWindow_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -17,7 +17,7 @@
             inputWait.CancelNotifyTimer();
 
             //2. 退出加特林取消的行为控制器
-            SkillBuffer buffer = timelineComponent.GetComponent<SkillBuffer>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.Remove(ref buffer.CheckTimer);
 

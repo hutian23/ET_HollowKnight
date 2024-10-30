@@ -47,7 +47,7 @@ namespace Timeline
         public BBTimeline CurrentTimeline;
 
         [HideInInspector]
-        public RuntimePlayable RuntimeimePlayable;
+        public RuntimePlayable RuntimePlayable;
 
         public void OnDisable()
         {
@@ -79,14 +79,7 @@ namespace Timeline
         [Button("技能编辑器"), ShowIf("HasNotBindUnit")]
         public void OpenWindow()
         {
-            var timelineSet = BBPlayable.GetTimelines();
-            if (timelineSet.Count <= 0)
-            {
-                Debug.LogWarning("PlayableGraph need at least one timeline");
-                return;
-            }
-
-            foreach (var timeline in timelineSet)
+            foreach (BBTimeline timeline in BBPlayable.timelineDict.Values)
             {
                 OpenWindow(timeline);
                 return;
@@ -123,11 +116,11 @@ namespace Timeline
         }
 #endif
 
-        public void Init(int order)
+        public BBTimeline GetTimeline(string timelineName)
         {
-            //Init(BBPlayable.GetByOrder(order));
+            return BBPlayable.GetTimeline(timelineName);
         }
-
+        
         public void Init(BBTimeline _timeline)
         {
             #region PlayableGraph
@@ -151,7 +144,7 @@ namespace Timeline
             #region RuntimeTimeline
 
             CurrentTimeline = _timeline;
-            RuntimeimePlayable = RuntimePlayable.Create(CurrentTimeline, this);
+            RuntimePlayable = RuntimePlayable.Create(CurrentTimeline, this);
 
             #endregion
         }
@@ -161,14 +154,8 @@ namespace Timeline
             if (PlayableGraph.IsValid()) PlayableGraph.Destroy();
         }
 
-        public BBTimeline GetByOrder(int order)
-        {
-            return CurrentTimeline;
-        }
-
         /// <summary>
         /// 运行时 逻辑层传回组件instanceId给loader层回调事件
-        /// 
         /// </summary>
         /// <returns></returns>
         public bool HasBindUnit

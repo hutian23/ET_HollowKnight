@@ -26,9 +26,9 @@ namespace Timeline.Editor
         private TimelineFieldView m_TimelineField;
         public TimelinePlayer TimelinePlayer { get; private set; }
 
-        public BBTimeline BBTimeline => TimelinePlayer.RuntimeimePlayable.Timeline;
-        public RuntimePlayable RuntimePlayable => TimelinePlayer.RuntimeimePlayable;
-        private SerializedObject SerializedTimeline => TimelinePlayer.RuntimeimePlayable.Timeline.SerializedTimeline;
+        public BBTimeline BBTimeline => TimelinePlayer.RuntimePlayable.Timeline;
+        public RuntimePlayable RuntimePlayable => TimelinePlayer.RuntimePlayable;
+        private SerializedObject SerializedTimeline => TimelinePlayer.RuntimePlayable.Timeline.SerializedTimeline;
 
         public void CreateGUI()
         {
@@ -96,10 +96,10 @@ namespace Timeline.Editor
             
             DropdownMenuHandler selectMenuHandler = new(menu =>
             {
-                foreach (BBTimeline _timeline in TimelinePlayer.BBPlayable.GetTimelines())
+                foreach (BBTimeline _timeline in TimelinePlayer.BBPlayable.timelineDict.Values)
                 {
                     string actionName = $"{_timeline.timelineName}";
-                    menu.AppendAction(actionName, _ => { TimelinePlayer.OpenWindow(_timeline); },
+                    menu.AppendAction(actionName, _ => { TimelinePlayer.OpenWindow(_timeline); }, 
                         TimelinePlayer.CurrentTimeline == _timeline? DropdownMenuAction.Status.Checked : DropdownMenuAction.Status.Normal);
                 }
             });

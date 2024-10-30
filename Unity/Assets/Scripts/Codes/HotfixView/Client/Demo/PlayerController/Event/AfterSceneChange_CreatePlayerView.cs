@@ -25,7 +25,7 @@ namespace ET.Client
             timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<TimelineEventManager>();
             timelineComponent.AddComponent<HitboxComponent>();
-            timelineComponent.AddComponent<SkillBuffer>();
+            timelineComponent.AddComponent<BehaviorBuffer>();
             timelineComponent.AddComponent<InputWait>();
         }
     }

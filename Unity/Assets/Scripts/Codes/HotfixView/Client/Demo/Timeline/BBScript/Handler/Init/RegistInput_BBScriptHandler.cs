@@ -1,10 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using MongoDB.Bson;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (BehaviorBufferComponent))]
-    [FriendOf(typeof (InputCheck))]
     [FriendOf(typeof (InputWait))]
     public class RegistInput_BBScriptHandler: BBScriptHandler
     {

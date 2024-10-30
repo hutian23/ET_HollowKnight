@@ -6,16 +6,9 @@ namespace ET.Client
     /// 该组件用于管理行为切换
     /// </summary>
     [ComponentOf(typeof (TimelineComponent))]
-    public class SkillBuffer: Entity, IAwake, IDestroy
+    public class BehaviorBuffer: Entity, IAwake, IDestroy
     {
         public long CheckTimer;
-
-        //BehaviorOrder ---> EntityId
-        public SortedDictionary<int, long> infoDict = new(Comparer<int>.Create(((x, y) => y.CompareTo(x))));
-
-        //快速通过behaviorName查询到behaviorOrder
-        public Dictionary<string, int> behaviorMap = new();
-        
         //当前行为
         public int currentOrder;
 

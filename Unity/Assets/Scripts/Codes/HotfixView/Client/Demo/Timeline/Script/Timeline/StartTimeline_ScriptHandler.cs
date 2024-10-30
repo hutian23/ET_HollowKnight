@@ -16,7 +16,7 @@ namespace ET.Client
 
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BBTimerComponent timerComponent = timelineComponent.GetComponent<BBTimerComponent>();
-            RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimeimePlayable;
+            RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
 
             for (int i = 0; i < runtimePlayable.ClipMaxFrame(); i++)
             {

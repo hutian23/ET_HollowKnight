@@ -14,7 +14,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent timer = timelineComponent.GetComponent<BBTimerComponent>();
-            RuntimePlayable playable = timelineComponent.GetTimelinePlayer().RuntimeimePlayable;
+            RuntimePlayable playable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
 
             for (int i = 0; i < playable.ClipMaxFrame(); i++)
             {

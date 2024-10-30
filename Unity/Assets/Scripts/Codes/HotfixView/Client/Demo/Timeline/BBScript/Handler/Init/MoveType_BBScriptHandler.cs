@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (SkillInfo))]
+    [FriendOf(typeof (BehaviorInfo))]
     public class MoveType_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()
@@ -27,8 +27,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            SkillBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
-            SkillInfo info = buffer.GetChild<SkillInfo>(parser.GetParam<long>("InfoId"));
+            BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
+            BehaviorInfo info = buffer.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
             info.moveType = moveType;
 
             await ETTask.CompletedTask;

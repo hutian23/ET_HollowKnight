@@ -78,7 +78,7 @@ namespace ET.Client
                     //没有条件判断(语法错误)
                     if (matches.Count == 0)
                     {
-                        Log.Error($"Ifhandler must have at least one triggerHandler!");
+                        Log.Error($"If_Handler must have at least one triggerHandler!");
                         return Status.Failed;
                     }
 
@@ -92,7 +92,7 @@ namespace ET.Client
                             return Status.Failed;
                         }
 
-                        BBScriptData _data = BBScriptData.Create(op, data.functionID, data.targetID);
+                        BBScriptData _data = BBScriptData.Create(op, data.functionID, null);
                         //判定失败, 跳过整个if块中的代码
                         bool ret = DialogueDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(parser, _data);
                         if (!ret)
@@ -120,7 +120,7 @@ namespace ET.Client
                         return Status.Failed;
                     }
 
-                    BBScriptData _data = BBScriptData.Create(opLine, data.functionID, data.targetID);
+                    BBScriptData _data = BBScriptData.Create(opLine, data.functionID, null);
                     Status ret = await handler.Handle(parser, _data, token);
 
                     if (token.IsCancel()) return Status.Failed;

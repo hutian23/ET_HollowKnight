@@ -19,7 +19,7 @@ namespace ET.Client
                 return false;
             }
 
-            SkillBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
+            BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
             
             return buffer.ContainGCOption(match.Groups["GCOption"].Value);
         }

@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [Invoke]
-    [FriendOf(typeof(SkillBuffer))]
+    [FriendOf(typeof(BehaviorBuffer))]
     public class HandleCancelBehaviorCallback : AInvokeHandler<CancelBehaviorCallback>
     {
         public override void Handle(CancelBehaviorCallback args)
@@ -12,7 +12,7 @@
             
             //2. 行为机控制器重新遍历可进入行为
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            SkillBuffer buffer = timelineComponent.GetComponent<SkillBuffer>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             buffer.SetCurrentOrder(-1);
             
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();

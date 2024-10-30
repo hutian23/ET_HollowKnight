@@ -21,7 +21,7 @@ namespace ET.Client
             }
 
             parser.GetParent<TimelineComponent>()
-                    .GetComponent<SkillBuffer>()
+                    .GetComponent<BehaviorBuffer>()
                     .RegistParam($"Drive_{match.Groups["drive"].Value}", true);
 
             await ETTask.CompletedTask;

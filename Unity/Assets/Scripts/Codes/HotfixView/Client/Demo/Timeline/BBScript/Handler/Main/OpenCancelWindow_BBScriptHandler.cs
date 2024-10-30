@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (SkillInfo))]
+    [FriendOf(typeof (BehaviorInfo))]
     public class OpenCancelWindow_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()

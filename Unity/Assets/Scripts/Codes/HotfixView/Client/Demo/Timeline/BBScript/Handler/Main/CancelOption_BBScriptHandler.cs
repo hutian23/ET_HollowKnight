@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (SkillBuffer))]
-    [FriendOf(typeof (SkillInfo))]
+    [FriendOf(typeof (BehaviorBuffer))]
+    [FriendOf(typeof (BehaviorInfo))]
     public class AddCancelOption_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()
@@ -22,7 +22,7 @@ namespace ET.Client
             }
 
             //string behaviorName ---> BehaviorOrder
-            SkillBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<SkillBuffer>();
+            BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
             buffer.AddGCOption(match.Groups["Option"].Value);
 
             await ETTask.CompletedTask;

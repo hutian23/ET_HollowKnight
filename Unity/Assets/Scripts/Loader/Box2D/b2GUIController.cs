@@ -169,9 +169,9 @@ namespace ET
                         {
                             TimelinePlayer timelinePlayer = root.GetComponentsInChildren<TimelinePlayer>()[i];
 
-                            var nodeSelectedFlag = timelinePlayer.instanceId == Global.Settings.instanceId? ImGuiTreeNodeFlags.Selected : 0;
-                            var nodeOpen = ImGui.TreeNodeEx((IntPtr)i, parentNodeFlags | nodeSelectedFlag, $"{timelinePlayer.name}");
-                            var instanceId = timelinePlayer.instanceId;
+                            ImGuiTreeNodeFlags nodeSelectedFlag = timelinePlayer.instanceId == Global.Settings.instanceId? ImGuiTreeNodeFlags.Selected : 0;
+                            bool nodeOpen = ImGui.TreeNodeEx((IntPtr)i, parentNodeFlags | nodeSelectedFlag, $"{timelinePlayer.name}");
+                            long instanceId = timelinePlayer.instanceId;
                             if (ImGui.IsItemClicked())
                             {
                                 Global.Settings.instanceId = instanceId;
@@ -179,12 +179,11 @@ namespace ET
 
                             if (nodeOpen)
                             {
-                                var behaviorOpens = ImGui.TreeNodeEx("Behaviors", parentNodeFlags);
+                                bool behaviorOpens = ImGui.TreeNodeEx("Behaviors", parentNodeFlags);
                                 if (behaviorOpens)
                                 {
-                                    var timelines = timelinePlayer.BBPlayable.GetTimelines();
-                                    var j = 0;
-                                    foreach (BBTimeline timeline in timelines)
+                                    int j = 0;
+                                    foreach (BBTimeline timeline in timelinePlayer.BBPlayable.timelineDict.Values)
                                     {
                                         ImGui.TreeNodeEx((IntPtr)j, leafNodeFlags, $"{timeline.timelineName}");
                                         if (ImGui.IsItemClicked())

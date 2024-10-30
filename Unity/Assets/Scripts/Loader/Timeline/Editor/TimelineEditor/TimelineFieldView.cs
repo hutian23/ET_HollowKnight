@@ -81,7 +81,7 @@ namespace Timeline.Editor
             get
             {
                 if (EditorWindow == null || EditorWindow.TimelinePlayer == null) return null;
-                return EditorWindow.TimelinePlayer.RuntimeimePlayable;
+                return EditorWindow.TimelinePlayer.RuntimePlayable;
             }
         }
 
