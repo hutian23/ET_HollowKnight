@@ -25,8 +25,12 @@ namespace ET.Client
                 Log.Error($"already exist NumericType:{match.Groups["NumericType"].Value}");
                 return Status.Failed;
             }
+
+            if (!long.TryParse(match.Groups["Value"].Value, out long value))
+            {
+                Log.Error($"cannot format {match.Groups["Value"].Value} to long");
+            }
             
-            long.TryParse(match.Groups["Value"].Value, out long value);
             timelineComponent.RegistParam(match.Groups["NumericType"].Value, value);
             
             await ETTask.CompletedTask;

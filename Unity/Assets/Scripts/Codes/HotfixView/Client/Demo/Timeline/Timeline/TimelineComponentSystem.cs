@@ -141,13 +141,30 @@ namespace ET.Client
                 return default;
             }
 
-            if (variable.value is not T value)
+            //类型匹配
+            if (variable.value is T value)
             {
-                Log.Error($"cannot format {variable.name} to {typeof(T)}");
-                return default;
+                return value;
+            }
+            
+            // 手动支持特定类型的转换
+            object rawValue = variable.value;
+
+            if (typeof(T) == typeof(long) && rawValue is int intValue)
+            {
+                return (T)(object)(long)intValue;
+            }
+            if (typeof(T) == typeof(double) && rawValue is float floatValue)
+            {
+                return (T)(object)(double)floatValue;
+            }
+            if (typeof(T) == typeof(decimal) && rawValue is double doubleValue)
+            {
+                return (T)(object)(decimal)doubleValue;
             }
 
-            return value;
+            Log.Error($"Cannot cast {variable.name} to {typeof(T)}.");
+            return default;
         }
 
         public static bool ContainParam(this TimelineComponent self, string paramName)

@@ -523,44 +523,49 @@ MonoBehaviour:
 
     @Trigger:
 
+    NumericCheck:
+    JumpCount < 2;
+
     InputType: JumpPressed;
 
-    InAir:
-    false;
+    InAir: false;
 
     return;
 
 
     @Main:
 
-    Gravity: 0;
+    Gravity:
+    0;
 
-    BBSprite: ''PreJump_1'',
-    4;
+    NumericAdd: DashCount, -1;
 
-    BBSprite: ''PreJump_2'', 1;
+    BBSprite: ''PreJump_1'', 4;
+
+    BBSprite:
+    ''PreJump_2'', 1;
 
     SetVelocityY: 32000;
 
-    AirMoveX:
-    15000;
+    AirMoveX: 15000;
 
     UpdateFlip;
 
-    BBSprite: ''PreJump_2'', 1;
+    BBSprite:
+    ''PreJump_2'', 1;
 
-
-    BBSprite: ''Mai_Jump_1'',
-    3;
-
-    BBSprite: ''Mai_Jump_2'', 3;
 
     BBSprite: ''Mai_Jump_1'', 3;
 
-    Gravity:
-    150000;
+    BBSprite: ''Mai_Jump_2'',
+    3;
 
-    BBSprite: ''Mai_Jump_2'', 2;
+    BBSprite: ''Mai_Jump_1'', 3;
+
+    Gravity: 150000;
+
+    BBSprite: ''Mai_Jump_2'',
+    2;
 
     BBSprite: ''Mai_Jump_1'', 2;
 
