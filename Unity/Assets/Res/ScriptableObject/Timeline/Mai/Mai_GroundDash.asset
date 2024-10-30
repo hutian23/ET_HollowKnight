@@ -543,58 +543,8 @@ MonoBehaviour:
       Data: 
   timelineName: Mai_GroundDash
   order: 801
-  Script: '@Init:
-
-    RegistInput: Dash;
-
-    MoveType: Special;
-
-    Order: 801;
-
-    Name:
-    ''Mai_GroundDash'';
-
-    return;
-
-
-    @Trigger:
-
-    InputType: Dash;
-
-    return;
-
-
-    @Main:
-
-
-    MarkerEvent:
-    (Mai_GC)
-
-    OpenGCWindow;
-
-    AddCancelOption: ''Mai_GroundDash_Attack'';
-
-    EndMarkerEvent:
-
-
-    MarkerEvent:
-    (Mai_GC_Close)
-
-    DisposeGCWindow;
-
-    EndMarkerEvent:
-
-
-    StartTimeline;
-
-    return;
-
-
-    @Exit:
-
-    SetTransition:
-    ''SquitToIdle'';
-
-    SetDrive: ''DashDrive'';
-
-    return;'
+  Script: "@Init:\nRegistInput: Dash;\nMoveType: Special;\nOrder: 801;\nName: 'Mai_GroundDash';\nreturn;\n\n@Trigger:\nInputType:
+    Dash;\nInAir: false;\nreturn;\n\n@Main:\nMarkerEvent: (Mai_GC)\n    OpenGCWindow;\n   
+    AddCancelOption: 'Mai_GroundDash_Attack';\nEndMarkerEvent:\n\nMarkerEvent: (Mai_GC_Close)\n   
+    DisposeGCWindow;\nEndMarkerEvent:\n\nStartTimeline;\nreturn;\n\n@Exit:\nSetTransition:
+    'SquitToIdle';\nSetDrive: 'DashDrive';\nreturn;"

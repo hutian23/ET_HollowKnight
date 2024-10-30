@@ -12,31 +12,13 @@ namespace Timeline
     public class BBTimeline: SerializedScriptableObject
     {
         public string timelineName = "New BBTimeline";
-
-        public int order;
         
         [TextArea(10, 30)]
         public string Script;
         
         [NonSerialized, OdinSerialize]
         public List<BBTrack> Tracks = new();
-
-        [NonSerialized, OdinSerialize]
-        public List<EventInfo> Marks = new();
-
-        public EventInfo GetMarker(int frame)
-        {
-            foreach (EventInfo mark in Marks)
-            {
-                if (mark.frame == frame)
-                {
-                    return mark;
-                }
-            }
-
-            return null;
-        }
-
+        
 #if UNITY_EDITOR
         [HideInInspector]
         public SerializedObject SerializedTimeline;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ET.Client;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -51,11 +50,6 @@ namespace Timeline
             return timelineSet;
         }
 #endif
-
-        public BBTimeline GetByOrder(int order)
-        {
-            return GetTimelines().FirstOrDefault(timeline => timeline.order == order);
-        }
     }
 
     [Serializable]

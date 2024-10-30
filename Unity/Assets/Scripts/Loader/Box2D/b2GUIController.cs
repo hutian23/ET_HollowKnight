@@ -129,13 +129,13 @@ namespace ET
                             ImGui.TreePop();
                         }
 
-                        //Hitbox[1]
-                        nodeOpen = ImGui.TreeNodeEx("Hitbox");
+                        //HitBox[1]
+                        nodeOpen = ImGui.TreeNodeEx("HitBox");
                         if (nodeOpen)
                         {
-                            ImGui.Checkbox("Hitbox", ref Global.Settings.ShowHitbox);
-                            ImGui.Checkbox("Hurtbox", ref Global.Settings.ShowHurtBox);
-                            ImGui.Checkbox("Throwbox", ref Global.Settings.ShowThrowBox);
+                            ImGui.Checkbox("HitBox", ref Global.Settings.ShowHitbox);
+                            ImGui.Checkbox("HurtBox", ref Global.Settings.ShowHurtBox);
+                            ImGui.Checkbox("ThrowBox", ref Global.Settings.ShowThrowBox);
                             ImGui.Checkbox("SquashBox", ref Global.Settings.ShowSquashBox);
                             ImGui.Checkbox("ProximityBox", ref Global.Settings.ShowProximityBox);
                             ImGui.Checkbox("OtherBox", ref Global.Settings.ShowOtherBox);
@@ -162,8 +162,8 @@ namespace ET
                     {
                         Transform root = GameObject.Find("Global/UnitRoot").transform;
 
-                        var leafNodeflags = ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen;
-                        var parentNodeFlags = ImGuiTreeNodeFlags.OpenOnArrow | ImGuiTreeNodeFlags.OpenOnDoubleClick;
+                        ImGuiTreeNodeFlags leafNodeFlags = ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen;
+                        ImGuiTreeNodeFlags parentNodeFlags = ImGuiTreeNodeFlags.OpenOnArrow | ImGuiTreeNodeFlags.OpenOnDoubleClick;
 
                         for (int i = 0; i < root.GetComponentsInChildren<TimelinePlayer>().Length; i++)
                         {
@@ -184,15 +184,12 @@ namespace ET
                                 {
                                     var timelines = timelinePlayer.BBPlayable.GetTimelines();
                                     var j = 0;
-                                    foreach (var timeline in timelines)
+                                    foreach (BBTimeline timeline in timelines)
                                     {
-                                        ImGui.TreeNodeEx((IntPtr)j, leafNodeflags, $"{timeline.order} - {timeline.timelineName}");
+                                        ImGui.TreeNodeEx((IntPtr)j, leafNodeFlags, $"{timeline.timelineName}");
                                         if (ImGui.IsItemClicked())
                                         {
-                                            EventSystem.Instance?.Invoke(new UpdateBehaviorCallback()
-                                            {
-                                                instanceId = instanceId, behaviorOrder = timeline.order
-                                            });
+                                            EventSystem.Instance?.Invoke(new UpdateBehaviorCallback() { instanceId = instanceId });
                                         }
 
                                         j++;
