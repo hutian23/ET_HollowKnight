@@ -515,10 +515,10 @@ MonoBehaviour:
 
     BeginIf: (InAir: false)
 
-    BBSprite: ''PreJump_1'', 4;
+    BBSprite: ''PreJump_1'', 3;
 
     BBSprite:
-    ''PreJump_2'', 1;
+    ''PreJump_2'', 2;
 
     EndIf:
 
@@ -531,27 +531,23 @@ MonoBehaviour:
 
 
     BBSprite:
-    ''Mai_Jump_1'', 3;
-
-    BBSprite: ''Mai_Jump_2'', 3;
-
-    BBSprite: ''Mai_Jump_1'',
-    3;
-
-    Gravity: 150000;
+    ''Mai_Jump_1'', 2;
 
     BBSprite: ''Mai_Jump_2'', 2;
 
-    BBSprite: ''Mai_Jump_1'',
-    2;
+    Gravity: 150000;
 
-    LogWarning: ''Exec'';
+    BBSprite:
+    ''Mai_Jump_2'', 2;
+
+    BBSprite: ''Mai_Jump_1'', 2;
 
     return;
 
 
     @Exit:
 
-    SetTransition: ''TransitionToFall'';
+    SetTransition:
+    ''TransitionToFall'';
 
     return;'

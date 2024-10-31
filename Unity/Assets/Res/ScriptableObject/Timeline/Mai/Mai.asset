@@ -640,5 +640,6 @@ MonoBehaviour:
     MoveType: Move;\n    EndMove:\nRegistMove: (Mai_AirBrone)\n    MoveType: Move;\n   
     EndMove:\nRegistMove: (Mai_Jump)\n    RegistInput: JumpPressed;\n    MoveType:
     Move;\n    EndMove:\n# Special\nRegistMove: (Mai_GroundDash)\n    RegistInput:
-    Dash;\n    MoveType: Special;\n    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n   
-    RegistInput: LightPunchPressed;\n    MoveType: Special;\n    EndMove:\nreturn;"
+    Dash;\n    MoveType: Special;\n    EndMove:\nRegistMove: (Mai_AirDash)\n    MoveType:
+    Special;\n    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput:
+    LightPunchPressed;\n    MoveType: Special;\n    EndMove:\nreturn;"
