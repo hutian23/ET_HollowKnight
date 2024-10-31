@@ -5,16 +5,17 @@ using Timeline;
 namespace ET.Client
 {
     [FriendOf(typeof (BehaviorInfo))]
-    public static class SkillInfoSystem
+    public static class BehaviorInfoSystem
     {
         public class SkillInfoDestroySystem: DestroySystem<BehaviorInfo>
         {
             protected override void Destroy(BehaviorInfo self)
             {
-                self.opLines.Clear();
-                self.moveType = MoveType.None;
-                self.behaviorOrder = 0;
                 self.behaviorName = string.Empty;
+                self.behaviorOrder = 0;
+                self.moveType = MoveType.None;
+                self.Timeline = null;
+                self.opLines.Clear();
             }
         }
 

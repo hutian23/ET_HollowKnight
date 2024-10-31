@@ -407,21 +407,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_SquitToIdle
-  Script: '@Init:
+  Script: '@Trigger:
 
-    MoveType: Transition;
-
-    Order: 2;
-
-    Name: ''Mai_SquitToIdle'';
-
-    return;
-
-
-    @Trigger:
-
-    Transition:
-    ''SquitToIdle'';
+    Transition: ''SquitToIdle'';
 
     return;
 

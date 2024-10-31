@@ -14,10 +14,10 @@ namespace ET.Client
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
 
             b2Body b2Body = b2GameManager.Instance.GetBody(args.instanceId);
-            //1. Dispose old hitboxFixtures
+            //1. Dispose old hitBoxFixtures
             for (int i = 0; i < b2Body.fixtures.Count; i++)
             {
                 Fixture fixture = b2Body.fixtures[i];
@@ -26,8 +26,8 @@ namespace ET.Client
 
             b2Body.fixtures.Clear();
 
-            //2. Update hitboxFixtures
-            foreach (BoxInfo info in hitboxComponent.keyFrame.boxInfos)
+            //2. Update hitBoxFixtures
+            foreach (BoxInfo info in hitBoxComponent.keyFrame.boxInfos)
             {
                 PolygonShape shape = new();
                 shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);

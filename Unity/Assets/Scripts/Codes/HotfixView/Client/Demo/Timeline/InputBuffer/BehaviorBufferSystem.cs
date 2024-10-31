@@ -3,7 +3,7 @@
     [FriendOf(typeof (BehaviorInfo))]
     [FriendOf(typeof (BehaviorBuffer))]
     [FriendOf(typeof (BBTimerComponent))]
-    public static class SkillBufferSystem
+    public static class BehaviorBufferSystem
     {
         [Invoke(BBTimerInvokeType.BehaviorCheckTimer)]
         [FriendOf(typeof (BehaviorBuffer))]
@@ -12,27 +12,27 @@
         {
             protected override void Run(BehaviorBuffer self)
             {
-                // foreach (var kv in self.infoDict)
-                // {
-                //     SkillInfo info = self.GetChild<SkillInfo>(kv.Value);
-                //     //已经进入当前行为，不会重复检查进入条件
-                //     //比当前行为权值小的行为也不会进行检查
-                //     if (info.behaviorOrder == self.currentOrder)
-                //     {
-                //         break;
-                //     }
-                //
-                //     bool ret = info.SkillCheck();
-                //     if (ret)
-                //     {
-                //         if (self.currentOrder != info.behaviorOrder)
-                //         {
-                //             self.GetParent<TimelineComponent>().Reload(info.behaviorOrder);
-                //         }
-                //
-                //         break;
-                //     }
-                // }
+                foreach (long infoId in self.infoIds)
+                {
+                    BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
+                    //已经进入当前行为，不会重复检查进入条件
+                    //比当前行为权值小的行为也不会进行检查
+                    if (info.behaviorOrder == self.currentOrder)
+                    {
+                        break;
+                    }
+                    
+                    bool ret = info.SkillCheck();
+                    if (ret)
+                    {
+                        if (self.currentOrder != info.behaviorOrder)
+                        {
+                            self.GetParent<TimelineComponent>().Reload(info.Timeline, info.behaviorOrder);
+                        }
+                    
+                        break;
+                    }
+                }
             }
         }
 
@@ -43,40 +43,47 @@
         {
             protected override void Run(BehaviorBuffer self)
             {
-                // SkillInfo curInfo = self.GetInfo(self.currentOrder);
-                //
-                // foreach (var kv in self.infoDict)
-                // {
-                //     SkillInfo info = self.GetChild<SkillInfo>(kv.Value);
-                //     if (info.behaviorOrder == curInfo.behaviorOrder)
-                //     {
-                //         continue;
-                //     }
-                //
-                //     //1. 加特林取消不能取消到该行为
-                //     bool ret = (info.moveType > curInfo.moveType) || self.ContainGCOption(info.behaviorOrder);
-                //     if (!ret)
-                //     {
-                //         continue;
-                //     }
-                //
-                //     //2. 检查先置条件
-                //     ret = info.SkillCheck();
-                //     if (ret)
-                //     {
-                //         if (self.currentOrder != info.behaviorOrder)
-                //         {
-                //             self.GetParent<TimelineComponent>().Reload(info.behaviorOrder);
-                //         }
-                //
-                //         break;
-                //     }
-                // }
+                BehaviorInfo curInfo = self.GetInfoByOrder(self.currentOrder);
+                foreach (long infoId in self.infoIds)
+                {
+                    BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
+                    if (info.behaviorOrder == curInfo.behaviorOrder)
+                    {
+                        continue;
+                    }
+                    
+                    //1. 加特林取消不能取消到该行为
+                    bool ret = (info.moveType > curInfo.moveType) || self.ContainGCOption(info.behaviorOrder);
+                    if (!ret)
+                    {
+                        continue;
+                    }
+                    
+                    //2. 检查先置条件
+                    ret = info.SkillCheck();
+                    if (ret)
+                    {
+                        if (self.currentOrder != info.behaviorOrder)
+                        {
+                            self.GetParent<TimelineComponent>().Reload(info.Timeline,info.behaviorOrder);
+                        }
+                    
+                        break;
+                    }
+                }
             }
         }
 
         public static void Init(this BehaviorBuffer self)
         {
+            //销毁组件
+            self.behaviorNameMap.Clear();
+            self.behaviorOrderMap.Clear();
+            foreach (long id in self.infoIds)
+            {
+                self.RemoveChild(id);
+            }
+            self.infoIds.Clear();
             self.GCOptions.Clear();
             self.ClearParam();
             self.currentOrder = -1;
@@ -92,12 +99,27 @@
         {
             return self.currentOrder;
         }
-        
-        public static BehaviorInfo GetInfo(this BehaviorBuffer self, long infoId)
+
+        public static BehaviorInfo GetInfoByOrder(this BehaviorBuffer self, int behaviorOrder)
         {
+            if (!self.behaviorOrderMap.TryGetValue(behaviorOrder, out long infoId))
+            {
+                Log.Error($"does not exist behavior, Order: {behaviorOrder}");
+                return null;
+            }
             return self.GetChild<BehaviorInfo>(infoId);
         }
 
+        public static BehaviorInfo GetInfoByName(this BehaviorBuffer self, string behaviorName)
+        {
+            if (!self.behaviorNameMap.TryGetValue(behaviorName, out long infoId))
+            {
+                Log.Error($"does not exist behavior, Name: {behaviorName}");
+                return null;
+            }
+            return self.GetChild<BehaviorInfo>(infoId);
+        }
+        
         #region Param
 
         public static T RegistParam<T>(this BehaviorBuffer self, string paramName, T value)
@@ -176,17 +198,14 @@
 
         public static void AddGCOption(this BehaviorBuffer self, string behaviorName)
         {
-            // foreach (var kv in self.infoDict)
-            // {
-            //     SkillInfo info = self.GetChild<SkillInfo>(kv.Value);
-            //     if (info.behaviorName.Equals(behaviorName))
-            //     {
-            //         self.GCOptions.Add(info.behaviorOrder);
-            //         return;
-            //     }
-            // }
-            //
-            // Log.Error($"does not exist behavior: {behaviorName}");
+            if (!self.behaviorNameMap.TryGetValue(behaviorName, out long infoId))
+            {
+                Log.Error($"does not exist behavior, Name:{behaviorName}");
+                return;
+            }
+
+            BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
+            self.GCOptions.Add(info.behaviorOrder);
         }
 
         private static bool ContainGCOption(this BehaviorBuffer self, int behaviorOrder)
@@ -196,8 +215,14 @@
 
         public static bool ContainGCOption(this BehaviorBuffer self, string behaviorName)
         {
-            // return self.ContainGCOption(self.behaviorMap[behaviorName]);
-            return false;
+            if (!self.behaviorNameMap.TryGetValue(behaviorName, out long infoId))
+            {
+                Log.Error($"does not exist behavior, Name:{behaviorName}");
+                return false;
+            }
+
+            BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
+            return self.ContainGCOption(info.behaviorOrder);
         }
 
         #endregion

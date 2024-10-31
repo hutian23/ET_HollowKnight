@@ -372,51 +372,25 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Marks
-      Entry: 7
-      Data: 22|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   timelineName: Mai_Land
-  order: 3
-  Script: '@Init:
+  Script: '@Trigger:
 
-    MoveType: Transition;
-
-    Order: 3;
-
-    Name: ''Mai_Land'';
-
-    return;
-
-
-    @Trigger:
-
-    Transition:
-    ''AirToIdle'';
+    Transition: ''AirToIdle'';
 
     return;
 
 
     @Main:
 
-    BBSprite: ''Mai_Land_1'', 3;
-
     BBSprite:
-    ''Mai_Land_2'', 2;
+    ''Mai_Land_1'', 3;
 
-    BBSprite: ''Mai_Land_3'', 3;
+    BBSprite: ''Mai_Land_2'', 2;
 
-    BBSprite: ''Mai_Land_4'',
-    5;
+    BBSprite: ''Mai_Land_3'',
+    3;
+
+    BBSprite: ''Mai_Land_4'', 5;
 
     BBSprite: ''Mai_Land_5'', 2;
 

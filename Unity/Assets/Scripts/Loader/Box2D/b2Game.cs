@@ -15,8 +15,8 @@ namespace ET
         public System.Numerics.Vector2 LinearVelocity;
         public float AngularVelocity;
         public System.Numerics.Vector2 Position;
-        public int BehaviorOrder;
         public string BehaviorName;
+        public string MoveType;
     }
 
     public struct UpdateUnitProfileCallback
@@ -138,7 +138,8 @@ namespace ET
             DebugDraw.DrawString(5, 65, $"LinearVelocity:{Profile.LinearVelocity}");
             DebugDraw.DrawString(5, 80, $"AngularVelocity:{Profile.AngularVelocity}");
             DebugDraw.DrawString(5, 95, $"Position:{Profile.Position}");
-            DebugDraw.DrawString(5, 110, $"Order:{Profile.BehaviorOrder}, Behavior: ({Profile.BehaviorName})");
+            DebugDraw.DrawString(5, 110, $"Behavior: ({Profile.BehaviorName})");
+            DebugDraw.DrawString(5,125,$"MoveType: {Profile.MoveType}");
         }
 
         public UnitProfile Profile;

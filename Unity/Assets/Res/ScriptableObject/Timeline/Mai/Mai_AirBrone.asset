@@ -396,36 +396,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Marks
-      Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   timelineName: Mai_AirBrone
-  order: 203
-  Script: '@Init:
+  Script: '@Trigger:
 
-    MoveType: Move;
-
-    Order: 203;
-
-    Name: ''Mai_AirBrone'';
-
-    return;
-
-
-    @Trigger:
-
-    InAir:
-    true;
+    InAir: true;
 
     return;
 
@@ -439,46 +413,48 @@ MonoBehaviour:
     AirMoveX:
     15000;
 
+    Gravity: 150000;
+
     UpdateFlip;
 
 
     # Transition
 
-    BeginIf: (TransitionCached: ''TransitionToFall'')
+    BeginIf:
+    (TransitionCached: ''TransitionToFall'')
+
+    BBSprite: ''Mai_PreFall_1'', 4;
 
     BBSprite:
-    ''Mai_PreFall_1'', 4;
+    ''Mai_PreFall_2'', 4;
 
-    BBSprite: ''Mai_PreFall_2'', 4;
+    BBSprite: ''Mai_PreFall_3'', 4;
 
-    BBSprite: ''Mai_PreFall_3'',
+    BBSprite: ''Mai_PreFall_4'',
     4;
-
-    BBSprite: ''Mai_PreFall_4'', 4;
 
     BBSprite: ''Mai_PreFall_5'', 6;
 
     EndIf:
 
 
-    SetMarker:
-    ''Loop'';
+    SetMarker: ''Loop'';
 
-    BBSprite: ''Mai_Fall_1'', 5;
+    BBSprite:
+    ''Mai_Fall_1'', 5;
 
     BBSprite: ''Mai_Fall_2'', 5;
 
-    GotoMarker:
-    ''Loop'';
+    GotoMarker: ''Loop'';
 
     return;
 
 
     @Exit:
 
-    SetTransition: ''AirToIdle'';
-
     SetTransition:
-    ''TransitionToSquit'';
+    ''AirToIdle'';
+
+    SetTransition: ''TransitionToSquit'';
 
     return;'

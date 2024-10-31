@@ -492,93 +492,66 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Marks
-      Entry: 7
-      Data: 26|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   timelineName: Mai_Jump
-  order: 204
-  Script: '@Init:
+  Script: '@Trigger:
 
-    RegistInput: JumpPressed;
-
-    MoveType: Move;
-
-    Order:
-    204;
-
-    Name: ''Mai_Jump'';
-
-    return;
-
-
-    @Trigger:
-
-    NumericCheck:
-    JumpCount > 1;
+    NumericCheck: JumpCount > 1;
 
     InputType: JumpPressed;
 
-    # InAir: false;
+    #
+    InAir: false;
 
     return;
 
 
     @Main:
 
-    Gravity:
-    0;
+    Gravity: 0;
 
-    NumericAdd: JumpCount, -1;
+    NumericAdd: JumpCount,
+    -1;
 
 
     BeginIf: (InAir: false)
 
-    BBSprite:
-    ''PreJump_1'', 4;
+    BBSprite: ''PreJump_1'', 4;
 
-    BBSprite: ''PreJump_2'', 1;
+    BBSprite:
+    ''PreJump_2'', 1;
 
     EndIf:
 
 
-    SetVelocityY:
-    32000;
+    SetVelocityY: 32000;
 
     AirMoveX: 15000;
 
     UpdateFlip;
 
 
-    BBSprite: ''Mai_Jump_1'',
-    3;
+    BBSprite:
+    ''Mai_Jump_1'', 3;
 
     BBSprite: ''Mai_Jump_2'', 3;
 
-    BBSprite: ''Mai_Jump_1'', 3;
+    BBSprite: ''Mai_Jump_1'',
+    3;
 
-    Gravity:
-    150000;
+    Gravity: 150000;
 
     BBSprite: ''Mai_Jump_2'', 2;
 
-    BBSprite: ''Mai_Jump_1'', 2;
+    BBSprite: ''Mai_Jump_1'',
+    2;
+
+    LogWarning: ''Exec'';
 
     return;
 
 
     @Exit:
 
-    SetTransition:
-    ''TransitionToFall'';
+    SetTransition: ''TransitionToFall'';
 
     return;'

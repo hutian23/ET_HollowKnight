@@ -78,7 +78,6 @@ namespace ET.Client
         {
             self.Cancel();
             self.opLines = node.BBScript;
-            self.currentID = node.TargetID;
 
             //热重载取消所有BBParser子协程
             self.cancellationToken = new ETCancellationToken();
@@ -190,7 +189,7 @@ namespace ET.Client
                 }
 
                 //5. 执行一条语句相当于一个子协程
-                BBScriptData data = BBScriptData.Create(opLine, funcId, self.currentID); //池化，不然GC很高
+                BBScriptData data = BBScriptData.Create(opLine, funcId, null); //池化，不然GC很高
                 Status ret = await handler.Handle(self, data, token);
                 data.Recycle();
 
@@ -246,13 +245,12 @@ namespace ET.Client
 
         public static T GetParam<T>(this BBParser self, string paramName)
         {
-            if (!self.paramDict.ContainsKey(paramName))
+            if (!self.paramDict.TryGetValue(paramName, out SharedVariable variable))
             {
                 Log.Error($"does not exist param:{paramName}!");
                 return default;
             }
 
-            SharedVariable variable = self.paramDict[paramName];
             if (variable.value is not T value)
             {
                 Log.Error($"cannot format {variable.name} to {typeof (T)}");

@@ -40,8 +40,9 @@
             buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BehaviorCheckTimer, buffer);
             #endregion
 
-            //重载Parser
-            timelineComponent.Reload(0);
+            //重载Parser,进入默认行为
+            BehaviorInfo info = buffer.GetInfoByOrder(0);
+            timelineComponent.Reload(info.Timeline,info.behaviorOrder);
             
             await ETTask.CompletedTask;
         }

@@ -705,36 +705,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Marks
-      Entry: 7
-      Data: 41|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   timelineName: Mai_Squitting
-  order: 202
-  Script: '@Init:
-
-    RegistInput: SquitHold;
-
-    MoveType: Move;
-
-    Order: 202;
-
-    Name:
-    ''Mai_Squitting'';
-
-    return;
-
-
-    @Trigger:
+  Script: '@Trigger:
 
     InputType: SquitHold;
 

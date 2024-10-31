@@ -15,5 +15,10 @@ namespace ET.Client
         //共享变量，当前行为中缓存的一些变量，重载行为时会把缓存的共享变量添加到BBParser组件中
         public Dictionary<string, SharedVariable> paramDict = new();
         public HashSet<int> GCOptions = new();
+
+        //方便通过behaviorName找到behaviorInfo
+        public Dictionary<string, long> behaviorNameMap = new();
+        public Dictionary<int, long> behaviorOrderMap = new();
+        public SortedSet<long> infoIds = new(Comparer<long>.Create((x, y) => y.CompareTo(x)));
     }
 }

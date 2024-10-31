@@ -532,39 +532,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Marks
-      Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   timelineName: Mai_GroundDash_Attack
-  order: 802
-  Script: '@Init:
+  Script: '@Trigger:
 
-    RegistInput: LightPunchPressed;
-
-    MoveType: Special;
-
-    Order:
-    802;
-
-    Name: ''Mai_GroundDash_Attack'';
-
-    return;
-
-
-    @Trigger:
-
-    InputType:
-    LightPunchPressed;
+    InputType: LightPunchPressed;
 
     GCOption: ''Mai_GroundDash_Attack'';
 

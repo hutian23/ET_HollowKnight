@@ -1,11 +1,11 @@
-﻿using Timeline;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ET.Client
 {
     [Invoke]
-    [FriendOf(typeof (b2Body))]
-    public class HandleUpdateProfileCallback: AInvokeHandler<UpdateUnitProfileCallback>
+    [FriendOf(typeof(b2Body))]
+    [FriendOf(typeof(BehaviorInfo))]
+    public class HandleUpdateProfileCallback : AInvokeHandler<UpdateUnitProfileCallback>
     {
         public override void Handle(UpdateUnitProfileCallback args)
         {
@@ -22,18 +22,18 @@ namespace ET.Client
             //Find Component
             Unit unit = timelineComponent.GetParent<Unit>();
             b2Body b2body = b2GameManager.Instance.GetBody(unit.InstanceId);
-            BehaviorBuffer behaviorBuffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            // BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetByOrder(skillBuffer.GetCurrentOrder());
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorInfo info = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
 
-            // b2Game.Profile = new UnitProfile()
-            // {
-            //     UnitName = unit.GetComponent<GameObjectComponent>().GameObject.name,
-            //     AngularVelocity = b2body.body.AngularVelocity,
-            //     LinearVelocity = b2body.body.LinearVelocity,
-            //     Position = b2body.body.GetPosition(),
-            //     BehaviorOrder = skillBuffer.GetCurrentOrder(),
-            //     BehaviorName = timeline.timelineName
-            // };
+            b2Game.Profile = new UnitProfile()
+            {
+                UnitName = unit.GetComponent<GameObjectComponent>().GameObject.name,
+                AngularVelocity = b2body.body.AngularVelocity,
+                LinearVelocity = b2body.body.LinearVelocity,
+                Position = b2body.body.GetPosition(),
+                BehaviorName = info.behaviorName,
+                MoveType = info.moveType.ToString()
+            };
         }
     }
 }

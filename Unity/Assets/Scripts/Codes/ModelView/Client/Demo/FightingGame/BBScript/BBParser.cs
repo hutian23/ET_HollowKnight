@@ -12,9 +12,7 @@ namespace ET.Client
         public string opLines; // 脚本
         public Dictionary<int, string> opDict = new();
         public ETCancellationToken cancellationToken; //取消当前执行的所有子协程
-
-        public uint currentID; // 当前执行的节点ID
-
+        
         //协程ID --> 协程指针
         public Dictionary<long, int> function_Pointers = new();
         public Dictionary<string, ETCancellationToken> subCoroutineDict = new();

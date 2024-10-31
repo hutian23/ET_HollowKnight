@@ -17,13 +17,10 @@ namespace ET.Client
 
         public static void RegistMarker(this MarkerEventParser self, string markerName, int pointer)
         {
-            if (self.marker_pointers.ContainsKey(markerName))
+            if (!self.marker_pointers.TryAdd(markerName, pointer))
             {
                 Log.Error($"Already exist MarkerEvent: {markerName}");
-                return;
             }
-
-            self.marker_pointers.Add(markerName, pointer);
         }
 
         public static bool ContainMarker(this MarkerEventParser self, string markerName)
@@ -88,7 +85,7 @@ namespace ET.Client
                     break;
                 }
 
-                BBScriptData data = BBScriptData.Create(opLine, funcId, parser.currentID);
+                BBScriptData data = BBScriptData.Create(opLine, funcId, null);
                 Status ret = await handler.Handle(parser, data, self.Token);
                 data.Recycle();
 
