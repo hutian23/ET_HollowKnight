@@ -278,7 +278,7 @@ MonoBehaviour:
       Data: EventTrack_1
     - Name: Enable
       Entry: 5
-      Data: false
+      Data: true
     - Name: Clips
       Entry: 7
       Data: 15|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],

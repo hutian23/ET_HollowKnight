@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
@@ -18,9 +19,10 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
+            
             int.TryParse(match.Groups["WaitFrame"].Value, out int frame);
             await parser.GetParent<TimelineComponent>().GetComponent<BBTimerComponent>().WaitAsync(frame, token);
+            
             return token.IsCancel()? Status.Failed : Status.Success;
         }
     }

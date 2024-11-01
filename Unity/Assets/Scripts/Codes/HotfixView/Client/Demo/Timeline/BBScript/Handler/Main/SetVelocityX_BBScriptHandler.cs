@@ -22,8 +22,8 @@ namespace ET.Client
             Unit unit = parser.GetParent<TimelineComponent>().GetParent<Unit>();
             b2Body b2Body = b2GameManager.Instance.GetBody(unit.InstanceId);
 
-            float.TryParse(match.Groups[1].Value, out float velX);
-            b2Body.SetVelocityX(velX);
+            long.TryParse(match.Groups[1].Value, out long velX);
+            b2Body.SetVelocityX(velX / 1000f);
             await ETTask.CompletedTask;
             return Status.Success;
         }
