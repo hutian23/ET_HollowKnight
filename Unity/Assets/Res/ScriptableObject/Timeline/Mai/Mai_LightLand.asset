@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dad01b398c6f634c9e134265baa14a1, type: 3}
-  m_Name: Mai_AirBrone
+  m_Name: Mai_LightLand
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 7400000, guid: 4d67a509b4416ad438d4a8988eafaa38, type: 2}
+    - {fileID: 7400000, guid: 302e4393df16e65429862b8fea92514f, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -53,13 +53,13 @@ MonoBehaviour:
       Data: false
     - Name: Name
       Entry: 1
-      Data: Mai_Fall
+      Data: Mai_LightLand
     - Name: StartFrame
       Entry: 3
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 30
+      Data: 13
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
       Data: 9|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 0
+      Data: 9
     - Name: keyframeName
       Entry: 1
       Data: Idle_Hitbox
@@ -296,16 +296,16 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 2
     - Name: 
       Entry: 7
       Data: 17|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 11
+      Data: 9
     - Name: keyframeName
       Entry: 1
-      Data: Mai_Fall_1
+      Data: Mai_LightLand_1
     - Name: 
       Entry: 8
       Data: 
@@ -314,70 +314,10 @@ MonoBehaviour:
       Data: 18|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 13
-    - Name: keyframeName
-      Entry: 1
-      Data: Mai_Fall_2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 19|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 0
-    - Name: keyframeName
-      Entry: 1
-      Data: Mai_PreFall_1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 2
-    - Name: keyframeName
-      Entry: 1
-      Data: Mai_PreFall_2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 21|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
       Data: 4
     - Name: keyframeName
       Entry: 1
-      Data: Mai_PreFall_3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 22|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 6
-    - Name: keyframeName
-      Entry: 1
-      Data: Mai_PreFall_4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 23|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 8
-    - Name: keyframeName
-      Entry: 1
-      Data: Mai_PreFall_5
+      Data: Mai_LightLand_2
     - Name: 
       Entry: 8
       Data: 
@@ -396,14 +336,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  timelineName: Mai_AirBrone
-  Script: "@Trigger:\nInAir: true;\nreturn;\n\n@Main:\nRegistAirCheck;\nOpenCancelWindow;\nAirMoveX:
-    15000;\nGravity: 150000;\nUpdateFlip;\n\n# Transition\nBeginIf: (TransitionCached:
-    'TransitionToFall')\nBBSprite: 'Mai_PreFall_1', 4;\nBBSprite: 'Mai_PreFall_2',
-    4;\nBBSprite: 'Mai_PreFall_3', 4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5',
-    6;\nEndIf:\n\n#AirDash -> AirBrone,\u4E3A\u4E86\u52A8\u753B\u8FDE\u8D2F\u6027\uFF0C\u9700\u8981\u60EF\u6027\nBeginIf:
-    (TransitionCached: 'AirDashToFall')\n#SetInertia: 18000;\nBBSprite: 'Mai_PreFall_3',
-    4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5', 6;\nEndIf:\n\nSetMarker:
-    'Loop';\nBBSprite: 'Mai_Fall_1', 5;\nBBSprite: 'Mai_Fall_2', 5;\nGotoMarker:
-    'Loop';\nreturn;\n\n@Exit:\nSetTransition: 'AirToIdle_Light';\nSetTransition:
-    'TransitionToSquit';\nreturn;"
+  timelineName: Mai_LightLand
+  Script: '@Trigger:
+
+    Transition: ''AirToIdle_Light'';
+
+    return;
+
+
+    @Main:
+
+    BBSprite:
+    ''Mai_LightLand_1'', 3;
+
+    BBSprite: ''Mai_LightLand_2'', 3;
+
+    return;
+
+
+    @Exit:
+
+    return;'

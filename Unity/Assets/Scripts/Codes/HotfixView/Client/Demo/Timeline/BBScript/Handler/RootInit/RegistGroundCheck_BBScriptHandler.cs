@@ -14,7 +14,7 @@ namespace ET.Client
 
             //RayCast callback
             GroundCheckRayCastCallback callback = GroundCheckRayCastCallback.Create();
-            world.RayCast(callback, body.GetPosition(), body.GetPosition() + new Vector2(0, -2.6f));
+            world.RayCast(callback, body.GetPosition(), body.GetPosition() + new Vector2(0, -2.8f));
 
             //变量注册到timelineComponent中，注意切换行为时，变量会全部销毁
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();

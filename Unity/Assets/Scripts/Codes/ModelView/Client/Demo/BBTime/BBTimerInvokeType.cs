@@ -24,5 +24,6 @@
         public const int AirCheckTimer = 106;
         public const int AirMoveTimer = 107;
         public const int InertiaTimer = 108;
+        public const int LinearDampingTimer = 109;
     }
 }

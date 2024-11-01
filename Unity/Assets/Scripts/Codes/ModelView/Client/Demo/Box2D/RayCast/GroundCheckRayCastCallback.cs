@@ -10,8 +10,7 @@ namespace ET.Client
         
         public float RayCastCallback(Fixture fixture, in Vector2 point, in Vector2 normal, float fraction)
         {
-            var body = fixture.Body;
-            if (body.UserData is not FixtureData data) return -1.0f;
+            if (fixture.UserData is not FixtureData data) return -1.0f;
             if ((data.LayerMask & LayerType.Ground) != 0)
             {
                 Hit = true;

@@ -23,7 +23,7 @@ namespace ET.Client
             Unit unit = timelineComponent.GetParent<Unit>();
             b2Body b2body = b2GameManager.Instance.GetBody(unit.InstanceId);
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
+            BehaviorInfo info = buffer.GetCurrentOrder() == -1? null : buffer.GetInfoByOrder(buffer.GetCurrentOrder());
 
             b2Game.Profile = new UnitProfile()
             {
@@ -31,8 +31,8 @@ namespace ET.Client
                 AngularVelocity = b2body.body.AngularVelocity,
                 LinearVelocity = b2body.body.LinearVelocity,
                 Position = b2body.body.GetPosition(),
-                BehaviorName = info.behaviorName,
-                MoveType = info.moveType.ToString()
+                BehaviorName = info is null? string.Empty : info.behaviorName,
+                MoveType = info is null? string.Empty : info.moveType.ToString()
             };
         }
     }

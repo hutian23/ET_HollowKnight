@@ -18,14 +18,14 @@ namespace ET.Client
             BodyDef groundBodyDef = new()
             {
                 BodyType = BodyType.StaticBody, 
-                Position = Vector2.Zero, 
-                UserData = new FixtureData(){instanceId =  0,LayerMask = LayerType.Ground}
+                Position = Vector2.Zero
             };
             Body groundBody = World.CreateBody(groundBodyDef);
             PolygonShape groundBox = new();
             groundBox.SetAsBox(50f, 2.0f);
-            groundBody.CreateFixture(groundBox, 0.0f);
-
+            Fixture fixture =  groundBody.CreateFixture(groundBox, 0.0f);
+            fixture.UserData = new FixtureData() { instanceId = 0, LayerMask = LayerType.Ground };
+            
             //obstacle
             // var obstacleDef = new BodyDef() { BodyType = BodyType.StaticBody, Position = new Vector2(-5, 4f) };
             // var obstacleBody = World.CreateBody(obstacleDef);
