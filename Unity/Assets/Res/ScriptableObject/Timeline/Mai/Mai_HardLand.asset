@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dad01b398c6f634c9e134265baa14a1, type: 3}
-  m_Name: Mai_Land
+  m_Name: Mai_HardLand
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -372,7 +372,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  timelineName: Mai_Land
+  timelineName: Mai_HardLand
   Script: '@Trigger:
 
     Transition: ''AirToIdle'';
@@ -381,6 +381,8 @@ MonoBehaviour:
 
 
     @Main:
+
+    OpenCancelWindow;
 
     BBSprite:
     ''Mai_Land_1'', 3;

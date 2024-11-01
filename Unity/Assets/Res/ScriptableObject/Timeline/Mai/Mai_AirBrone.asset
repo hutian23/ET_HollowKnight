@@ -397,64 +397,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_AirBrone
-  Script: '@Trigger:
-
-    InAir: true;
-
-    return;
-
-
-    @Main:
-
-    RegistAirCheck;
-
-    OpenCancelWindow;
-
-    AirMoveX:
-    15000;
-
-    Gravity: 150000;
-
-    UpdateFlip;
-
-
-    # Transition
-
-    BeginIf:
-    (TransitionCached: ''TransitionToFall'')
-
-    BBSprite: ''Mai_PreFall_1'', 4;
-
-    BBSprite:
-    ''Mai_PreFall_2'', 4;
-
-    BBSprite: ''Mai_PreFall_3'', 4;
-
-    BBSprite: ''Mai_PreFall_4'',
-    4;
-
-    BBSprite: ''Mai_PreFall_5'', 6;
-
-    EndIf:
-
-
-    SetMarker: ''Loop'';
-
-    BBSprite:
-    ''Mai_Fall_1'', 5;
-
-    BBSprite: ''Mai_Fall_2'', 5;
-
-    GotoMarker: ''Loop'';
-
-    return;
-
-
-    @Exit:
-
-    SetTransition:
-    ''AirToIdle'';
-
-    SetTransition: ''TransitionToSquit'';
-
-    return;'
+  Script: "@Trigger:\nInAir: true;\nreturn;\n\n@Main:\nRegistAirCheck;\nOpenCancelWindow;\nAirMoveX:
+    15000;\nGravity: 150000;\nUpdateFlip;\n\n# Transition\nBeginIf: (TransitionCached:
+    'TransitionToFall')\nBBSprite: 'Mai_PreFall_1', 4;\nBBSprite: 'Mai_PreFall_2',
+    4;\nBBSprite: 'Mai_PreFall_3', 4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5',
+    6;\nEndIf:\n\n#AirDash -> AirBrone,\u4E3A\u4E86\u52A8\u753B\u8FDE\u8D2F\u6027\uFF0C\u9700\u8981\u60EF\u6027\nBeginIf:
+    (TransitionCached: 'AirDashToFall')\nSetInertia: 18000;\nBBSprite: 'Mai_PreFall_3',
+    4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5', 6;\nEndIf:\n\nSetMarker:
+    'Loop';\nBBSprite: 'Mai_Fall_1', 5;\nBBSprite: 'Mai_Fall_2', 5;\nGotoMarker:
+    'Loop';\nreturn;\n\n@Exit:\nSetTransition: 'AirToIdle';\nSetTransition: 'TransitionToSquit';\nreturn;"

@@ -532,7 +532,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Mai_Land
+      Data: Mai_HardLand
     - Name: $v
       Entry: 10
       Data: 3
@@ -634,12 +634,12 @@ MonoBehaviour:
     MaxJump, 2;\nNumericType: JumpCount, 2;\nRegistGroundCheck;\n\n# Base\nRegistMove:
     (Mai_Idle)\n    MoveType: None;\n    EndMove:\n# Transition\nRegistMove: (Mai_RunToIdle)\n   
     MoveType: Transition;\n    EndMove:\nRegistMove: (Mai_SquitToIdle)\n    MoveType:
-    Transition;\n    EndMove:\nRegistMove: (Mai_Land)\n    MoveType: Transition;\n   
-    EndMove:\n# Move\nRegistMove: (Mai_Run)\n    RegistInput: RunHold;\n    MoveType:
-    Move;\n    EndMove:\nRegistMove: (Mai_Squitting)\n    RegistInput: SquitHold;\n   
-    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_AirBrone)\n    MoveType: Move;\n   
-    EndMove:\nRegistMove: (Mai_Jump)\n    RegistInput: JumpPressed;\n    MoveType:
-    Move;\n    EndMove:\n# Special\nRegistMove: (Mai_GroundDash)\n    RegistInput:
-    Dash;\n    MoveType: Special;\n    EndMove:\nRegistMove: (Mai_AirDash)\n    MoveType:
-    Special;\n    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput:
-    LightPunchPressed;\n    MoveType: Special;\n    EndMove:\nreturn;"
+    Transition;\n    EndMove:\n# Move\nRegistMove: (Mai_Run)\n    RegistInput: RunHold;\n   
+    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_HardLand)\n    MoveType: Move;\n   
+    EndMove:\nRegistMove: (Mai_Squitting)\n    RegistInput: SquitHold;\n    MoveType:
+    Move;\n    EndMove:\nRegistMove: (Mai_AirBrone)\n    MoveType: Move;\n    EndMove:\nRegistMove:
+    (Mai_Jump)\n    RegistInput: JumpPressed;\n    MoveType: Move;\n    EndMove:\n#
+    Special\nRegistMove: (Mai_GroundDash)\n    RegistInput: Dash;\n    MoveType:
+    Special;\n    EndMove:\nRegistMove: (Mai_AirDash)\n    MoveType: Special;\n   
+    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput: LightPunchPressed;\n   
+    MoveType: Special;\n    EndMove:\nreturn;"

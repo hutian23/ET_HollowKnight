@@ -8,6 +8,12 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
+            //惯性
+            if (self.ContainParam("Inertia"))
+            {
+                return;
+            }
+                
             InputWait inputWait = self.GetParent<TimelineComponent>().GetComponent<InputWait>();
 
             // -1 -- left 1 -- right 0 -- middle

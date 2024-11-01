@@ -276,5 +276,18 @@ namespace ET.Client
             self.paramDict[paramName].Recycle();
             self.paramDict.Remove(paramName);
         }
+        
+        public static bool TryRemoveParam(this BBParser self, string paramName)
+        {
+            if (!self.paramDict.ContainsKey(paramName))
+            {
+                return false;
+            }
+            
+            self.paramDict[paramName].Recycle();
+            self.paramDict.Remove(paramName);
+            return true;
+        }
+
     }
 }
