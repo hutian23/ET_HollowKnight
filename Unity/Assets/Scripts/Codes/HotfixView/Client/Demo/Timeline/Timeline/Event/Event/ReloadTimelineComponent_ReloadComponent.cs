@@ -44,6 +44,9 @@
             BehaviorInfo info = buffer.GetInfoByOrder(0);
             timelineComponent.Reload(info.Timeline,info.behaviorOrder);
             
+            //注册变量
+            timelineComponent.RegistParam("OnGround", false);
+            
             await ETTask.CompletedTask;
         }
     }

@@ -24,7 +24,7 @@ namespace ET.Client
             PolygonShape groundBox = new();
             groundBox.SetAsBox(50f, 2.0f);
             Fixture fixture =  groundBody.CreateFixture(groundBox, 0.0f);
-            fixture.UserData = new FixtureData() { instanceId = 0, LayerMask = LayerType.Ground };
+            fixture.UserData = new FixtureData() { InstanceId = 0, LayerMask = LayerType.Ground };
             
             //obstacle
             // var obstacleDef = new BodyDef() { BodyType = BodyType.StaticBody, Position = new Vector2(-5, 4f) };

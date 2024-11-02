@@ -66,7 +66,8 @@ namespace Timeline
         Throw,
         Squash,
         Proximity,
-        Other
+        Other,
+        Gizmos
     }
 
     [Serializable]
@@ -88,7 +89,10 @@ namespace Timeline
     //有点套娃 --- > Fixture.UserData ---> FixtureData ---> UserData
     public struct FixtureData
     {
-        public long instanceId;
+        public long InstanceId;
+        public int TriggerEnterId;
+        public int TriggerExitId;
+        
         public long LayerMask;
         public object UserData; 
     }

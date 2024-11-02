@@ -1,5 +1,6 @@
 ﻿using Box2DSharp.Dynamics;
-using MongoDB.Bson;
+using ET.Event;
+using Timeline;
 
 namespace ET.Client
 {
@@ -10,7 +11,21 @@ namespace ET.Client
         {
             Fixture fixtureA = args.contact.FixtureA;
             Fixture fixtureB = args.contact.FixtureB;
-            Log.Warning(fixtureA.UserData.ToJson()+"  "+ fixtureB.UserData.ToJson());
+
+            if (fixtureA.UserData is not FixtureData dataA || fixtureB.UserData is not FixtureData dataB)
+            {
+                return;
+            }
+
+            if (dataA.TriggerEnterId != 0)
+            {
+                EventSystem.Instance.Invoke(dataA.TriggerEnterId, new TriggerEnterCallback() { fixtureA = fixtureA,dataA = dataA, fixtureB = fixtureB, dataB = dataB});
+            }
+
+            if (dataB.TriggerEnterId != 0)
+            {
+                EventSystem.Instance.Invoke(dataB.TriggerEnterId,new TriggerEnterCallback(){fixtureA = fixtureB, dataA = dataB, fixtureB = fixtureA, dataB =  dataA});
+            }
         }
     }
 }

@@ -20,6 +20,8 @@ namespace ET.Client
         public Transform trans;
 
         //当前帧建立的hitBox
+        public List<Fixture> hitBoxFixtures = new();
+
         public List<Fixture> fixtures = new();
         
         public FlipState Flip = FlipState.Left;

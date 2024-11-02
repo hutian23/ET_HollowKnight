@@ -339,17 +339,24 @@ MonoBehaviour:
   timelineName: Mai_LightLand
   Script: '@Trigger:
 
-    Transition: ''AirToIdle_Light'';
+    Transition: ''LightLand'';
 
     return;
 
 
     @Main:
 
-    BBSprite:
-    ''Mai_LightLand_1'', 3;
+    MoveX:
+    8000;
 
-    BBSprite: ''Mai_LightLand_2'', 3;
+    OpenCancelWindow;
+
+    BBSprite: ''Mai_LightLand_1'', 3;
+
+    BBSprite:
+    ''Mai_LightLand_2'', 4;
+
+    SetVelocityX: 0;
 
     return;
 

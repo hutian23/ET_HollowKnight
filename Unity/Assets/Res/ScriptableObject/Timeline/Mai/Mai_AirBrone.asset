@@ -398,12 +398,11 @@ MonoBehaviour:
       Data: 
   timelineName: Mai_AirBrone
   Script: "@Trigger:\nInAir: true;\nreturn;\n\n@Main:\nRegistAirCheck;\nOpenCancelWindow;\nAirMoveX:
-    15000;\nGravity: 150000;\nUpdateFlip;\n\n# Transition\nBeginIf: (TransitionCached:
+    15000;\nGravity: 130000;\nUpdateFlip;\n\n# Transition\nBeginIf: (TransitionCached:
     'TransitionToFall')\nBBSprite: 'Mai_PreFall_1', 4;\nBBSprite: 'Mai_PreFall_2',
     4;\nBBSprite: 'Mai_PreFall_3', 4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5',
     6;\nEndIf:\n\n#AirDash -> AirBrone,\u4E3A\u4E86\u52A8\u753B\u8FDE\u8D2F\u6027\uFF0C\u9700\u8981\u60EF\u6027\nBeginIf:
-    (TransitionCached: 'AirDashToFall')\n#SetInertia: 18000;\nBBSprite: 'Mai_PreFall_3',
-    4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5', 6;\nEndIf:\n\nSetMarker:
-    'Loop';\nBBSprite: 'Mai_Fall_1', 5;\nBBSprite: 'Mai_Fall_2', 5;\nGotoMarker:
-    'Loop';\nreturn;\n\n@Exit:\nSetTransition: 'AirToIdle_Light';\nSetTransition:
-    'TransitionToSquit';\nreturn;"
+    (TransitionCached: 'AirDashToFall')\nSetInertia: 18000;\nGravity: 0;\nBBSprite:
+    'Mai_PreFall_3', 3;\nGravity: 130000;\nBBSprite: 'Mai_PreFall_4', 3;\nBBSprite:
+    'Mai_PreFall_5', 5;\nEndIf:\n\nSetMarker: 'Loop';\nBBSprite: 'Mai_Fall_1', 5;\nBBSprite:
+    'Mai_Fall_2', 5;\nGotoMarker: 'Loop';\nreturn;\n\n@Exit:\nSetTransition: 'TransitionToSquit';\nreturn;"

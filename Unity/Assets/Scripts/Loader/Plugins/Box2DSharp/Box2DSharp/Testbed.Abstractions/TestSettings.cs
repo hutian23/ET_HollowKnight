@@ -45,7 +45,7 @@ namespace Testbed.Abstractions
         public int ETItemIndex;
 
         [DataMember]
-        public bool ShowHitbox;
+        public bool ShowHitBox;
 
         [DataMember]
         public bool ShowHurtBox;
@@ -61,6 +61,9 @@ namespace Testbed.Abstractions
 
         [DataMember]
         public bool ShowOtherBox;
+
+        [DataMember]
+        public bool ShowGizmos;
         
         [DataMember]
         public int WindowWidth;

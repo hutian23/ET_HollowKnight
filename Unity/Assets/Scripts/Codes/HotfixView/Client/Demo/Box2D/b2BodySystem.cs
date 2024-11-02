@@ -13,6 +13,7 @@ namespace ET.Client
             protected override void Destroy(b2Body self)
             {
                 self.unitId = 0;
+                self.hitBoxFixtures.Clear();
                 self.fixtures.Clear();
                 self.body = null;
                 self.Flip = FlipState.Left;

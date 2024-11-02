@@ -236,6 +236,11 @@ namespace ET.Client
             }
         }
 
+        public static bool ContainKey(this InputWait self, long op)
+        {
+            return (self.Ops & op) != 0;
+        }
+        
         public static bool CheckInput(this InputWait self, string inputType)
         {
             self.bufferDict.TryGetValue(inputType, out bool value);

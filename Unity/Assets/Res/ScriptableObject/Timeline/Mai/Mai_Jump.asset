@@ -520,8 +520,10 @@ MonoBehaviour:
     EndIf:
 
 
+    OpenCancelWindow;
+
     SetVelocityY:
-    32000;
+    25000;
 
     AirMoveX: 15000;
 
@@ -533,10 +535,12 @@ MonoBehaviour:
 
     BBSprite: ''Mai_Jump_2'', 2;
 
-    Gravity: 150000;
+    BBSprite: ''Mai_Jump_1'', 2;
 
-    BBSprite: ''Mai_Jump_2'',
-    2;
+    BBSprite:
+    ''Mai_Jump_2'', 2;
+
+    Gravity: 130000;
 
     BBSprite: ''Mai_Jump_1'', 2;
 
