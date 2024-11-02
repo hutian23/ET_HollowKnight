@@ -9,19 +9,7 @@ namespace ET.Client
         {
             b2Body b2Body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             float v = self.GetParam<float>("MoveX");
-
-            InputWait bbInput = self.GetParent<TimelineComponent>().GetComponent<InputWait>();
-            bool left = bbInput.ContainKey(BBOperaType.LEFT) | bbInput.ContainKey(BBOperaType.UPLEFT) | bbInput.ContainKey(BBOperaType.DOWNLEFT);
-            bool right = bbInput.ContainKey(BBOperaType.RIGHT) | bbInput.ContainKey(BBOperaType.UPRIGHT) | bbInput.ContainKey(BBOperaType.DOWNRIGHT);
-
-            if (!left && !right)
-            {
-                b2Body.SetVelocityX(0);
-            }
-            else
-            {
-                b2Body.SetVelocityX(v);   
-            }
+            b2Body.SetVelocityX(v);   
         }
     }
 

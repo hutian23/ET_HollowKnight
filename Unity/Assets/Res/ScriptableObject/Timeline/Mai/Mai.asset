@@ -647,9 +647,9 @@ MonoBehaviour:
     DashCount, 1;\nNumericType: MaxJump, 2;\nNumericType: JumpCount, 2;\n\n# Base\nRegistMove:
     (Mai_Idle)\n    MoveType: None;\n    EndMove:\n# Transition\nRegistMove: (Mai_RunToIdle)\n   
     MoveType: Transition;\n    EndMove:\nRegistMove: (Mai_SquitToIdle)\n    MoveType:
-    Transition;\n    EndMove:\n# Move\nRegistMove: (Mai_Run)\n    RegistInput: RunHold;\n   
-    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_LightLand)\n    MoveType: Move;\n   
-    EndMove:\nRegistMove: (Mai_MiddleLand)\n    MoveType: Move;\n    EndMove:\nRegistMove:
+    Transition;\n    EndMove:\n# Move\nRegistMove: (Mai_LightLand)\n    MoveType:
+    Move;\n    EndMove:\nRegistMove: (Mai_MiddleLand)\n    MoveType: Move;\n    EndMove:\nRegistMove:
+    (Mai_Run)\n    RegistInput: RunHold;\n    MoveType: Move;\n    EndMove:\nRegistMove:
     (Mai_Squitting)\n    RegistInput: SquitHold;\n    MoveType: Move;\n    EndMove:\nRegistMove:
     (Mai_AirBrone)\n    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_Jump)\n   
     RegistInput: JumpPressed;\n    MoveType: Move;\n    EndMove:\n# Special\nRegistMove:

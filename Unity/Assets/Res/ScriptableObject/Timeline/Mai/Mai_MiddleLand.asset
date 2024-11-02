@@ -387,15 +387,15 @@ MonoBehaviour:
 
     OpenCancelWindow;
 
-    BBSprite: ''Mai_Land_1'', 2;
+    BBSprite: ''Mai_Land_1'', 3;
 
     BBSprite:
-    ''Mai_Land_2'', 2;
+    ''Mai_Land_2'', 3;
 
-    BBSprite: ''Mai_Land_3'', 3;
+    BBSprite: ''Mai_Land_3'', 4;
 
     BBSprite: ''Mai_Land_4'',
-    4;
+    5;
 
     BBSprite: ''Mai_Land_5'', 3;
 
