@@ -28,6 +28,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 70b5ee7584c189a4ca8accadde86e8ae, type: 2}
     - {fileID: 11400000, guid: 20cb36e50b4da3b4f9e003f0ad862b9b, type: 2}
     - {fileID: 11400000, guid: 8c8b7e0e25a84d9408b0a7dd7bc160e3, type: 2}
+    - {fileID: 11400000, guid: 3889beb25d36a004d8a250e9daf602cf, type: 2}
+    - {fileID: 11400000, guid: a879653b4f2d5ab4ea99c188f7890fbe, type: 2}
+    - {fileID: 11400000, guid: 22773ecbb8e723b4fae46d5204954e0b, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -491,7 +494,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 12
+      Data: 15
     - Name: 
       Entry: 7
       Data: 
@@ -637,6 +640,42 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Mai_HeavySlash1
+    - Name: $v
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Mai_HeavySlash2
+    - Name: $v
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Mai_HeavySlash3
+    - Name: $v
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -652,7 +691,10 @@ MonoBehaviour:
     (Mai_Run)\n    RegistInput: RunHold;\n    MoveType: Move;\n    EndMove:\nRegistMove:
     (Mai_Squitting)\n    RegistInput: SquitHold;\n    MoveType: Move;\n    EndMove:\nRegistMove:
     (Mai_AirBrone)\n    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_Jump)\n   
-    RegistInput: JumpPressed;\n    MoveType: Move;\n    EndMove:\n# Special\nRegistMove:
-    (Mai_GroundDash)\n    RegistInput: Dash;\n    MoveType: Special;\n    EndMove:\nRegistMove:
-    (Mai_AirDash)\n    MoveType: Special;\n    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n   
-    RegistInput: LightPunchPressed;\n    MoveType: Special;\n    EndMove:\nreturn;"
+    RegistInput: JumpPressed;\n    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_HeavySlash1)\n   
+    MoveType: Move;\n    EndMove:\nRegistMove: (Mai_HeavySlash2)\n    MoveType: Move;\n   
+    EndMove:\nRegistMove: (Mai_HeavySlash3)\n    MoveType: Move;\n    EndMove:\n#
+    Special\nRegistMove: (Mai_GroundDash)\n    RegistInput: Dash;\n    MoveType:
+    Special;\n    EndMove:\nRegistMove: (Mai_AirDash)\n    MoveType: Special;\n   
+    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput: LightPunchPressed;\n   
+    MoveType: Special;\n    EndMove:\nreturn;"

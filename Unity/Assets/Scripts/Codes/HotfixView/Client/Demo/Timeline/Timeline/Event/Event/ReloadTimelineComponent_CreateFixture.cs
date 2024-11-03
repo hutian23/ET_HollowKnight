@@ -23,7 +23,7 @@ namespace ET.Client
             
             //1. 地面检测
             PolygonShape shape = new();
-            shape.SetAsBox(1f, 0.8f, new Vector2(0, -2.3f), 0f);
+            shape.SetAsBox(1f, 0.6f, new Vector2(0, -2.0f), 0f);
             FixtureDef fixtureDef = new()
             {
                 Shape = shape,
