@@ -1391,13 +1391,25 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 40|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 15
+    - Name: keyframeName
+      Entry: 1
+      Data: Open_GCWindow
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 41|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 6
     - Name: keyframeName
       Entry: 1
       Data: Open_WhiffWindow
@@ -1434,6 +1446,16 @@ MonoBehaviour:
 
     MarkerEvent:
     (Open_WhiffWindow)
+
+    OpenWhiffWindow;
+
+    AddWhiffOption: ''Mai_GroundDash'';
+
+    EndMarkerEvent:
+
+
+    MarkerEvent:
+    (Open_GCWindow)
 
     OpenGCWindow;
 

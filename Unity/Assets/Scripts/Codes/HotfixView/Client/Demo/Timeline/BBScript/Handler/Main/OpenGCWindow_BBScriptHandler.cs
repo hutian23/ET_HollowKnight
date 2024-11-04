@@ -36,9 +36,8 @@
                 if (ret)
                 {
                     timelineComponent.Reload(info.Timeline, info.behaviorOrder);
+                    break;
                 }
-
-                break;
             }
         }
     }
@@ -57,10 +56,12 @@
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
+            bbTimer.Remove(ref buffer.CheckTimer);
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.GCWindowTimer, parser);
-            parser.RegistParam("GCWindowTimer", timer);
+            buffer.CheckTimer = timer;
             parser.cancellationToken.Add(() =>
             {
                 bbTimer.Remove(ref timer);

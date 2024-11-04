@@ -38,6 +38,7 @@
         
         public static void Init(this BehaviorBuffer self)
         {
+            self.CheckTimer = 0;
             //销毁组件
             self.behaviorNameMap.Clear();
             self.behaviorOrderMap.Clear();
@@ -49,7 +50,6 @@
             self.GCOptions.Clear();
             self.ClearParam();
             self.currentOrder = -1;
-            self.CheckTimer = 0;
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)

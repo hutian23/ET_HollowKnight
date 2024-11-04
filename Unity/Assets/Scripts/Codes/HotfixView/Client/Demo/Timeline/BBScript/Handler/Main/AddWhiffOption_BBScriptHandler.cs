@@ -23,6 +23,12 @@ namespace ET.Client
 
             BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
             BehaviorInfo info = buffer.GetInfoByName(match.Groups["Option"].Value);
+            if (info.behaviorOrder == buffer.currentOrder)
+            {
+                Log.Error($"can not add same behavior into whiffCancel!");
+                return Status.Failed;
+            }
+            
             buffer.WhiffOptions.Add(info.behaviorOrder);
             
             await ETTask.CompletedTask;

@@ -12,11 +12,9 @@
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            
-            long timer = parser.GetParam<long>("GCWindowTimer");
-            bbTimer.Remove(ref timer);
-            parser.TryRemoveParam("GCWindowTimer");
-            
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+
+            bbTimer.Remove(ref buffer.CheckTimer);
             await ETTask.CompletedTask;
             return Status.Success;
         }

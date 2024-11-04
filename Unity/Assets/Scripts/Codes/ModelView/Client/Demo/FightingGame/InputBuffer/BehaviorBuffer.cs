@@ -9,6 +9,7 @@ namespace ET.Client
     public class BehaviorBuffer: Entity, IAwake, IDestroy
     {
         public long CheckTimer;
+        
         //当前行为
         public int currentOrder;
 

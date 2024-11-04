@@ -998,7 +998,7 @@ MonoBehaviour:
       Data: 34|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 11
+      Data: 13
     - Name: keyframeName
       Entry: 1
       Data: Open_GCWindow

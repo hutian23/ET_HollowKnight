@@ -35,9 +35,6 @@
             parser.InitScript(RootScript);
             await parser.Invoke("RootInit", parser.cancellationToken);
             if(parser.cancellationToken.IsCancel()) return;
-            
-            //4. 启动检测定时器
-            buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BehaviorCheckTimer, buffer);
             #endregion
 
             //重载Parser,进入默认行为
