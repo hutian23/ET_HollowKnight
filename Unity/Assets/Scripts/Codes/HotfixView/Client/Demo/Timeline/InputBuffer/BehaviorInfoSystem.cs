@@ -53,7 +53,7 @@ namespace ET.Client
             }
         }
 
-        public static bool SkillCheck(this BehaviorInfo self)
+        public static bool BehaviorCheck(this BehaviorInfo self)
         {
             bool res = true;
             foreach (string opline in self.opLines)

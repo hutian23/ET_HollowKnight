@@ -8,7 +8,7 @@
         [Invoke(BBTimerInvokeType.BehaviorCheckTimer)]
         [FriendOf(typeof (BehaviorBuffer))]
         [FriendOf(typeof (BehaviorInfo))]
-        public class SkillCheckTimer: BBTimer<BehaviorBuffer>
+        public class BehaviorCheckTimer: BBTimer<BehaviorBuffer>
         {
             protected override void Run(BehaviorBuffer self)
             {
@@ -22,7 +22,7 @@
                         break;
                     }
                     
-                    bool ret = info.SkillCheck();
+                    bool ret = info.BehaviorCheck();
                     if (ret)
                     {
                         if (self.currentOrder != info.behaviorOrder)
@@ -35,45 +35,7 @@
                 }
             }
         }
-
-        [Invoke(BBTimerInvokeType.GatlingCancelCheckTimer)]
-        [FriendOf(typeof (BehaviorBuffer))]
-        [FriendOf(typeof (BehaviorInfo))]
-        public class GatlingCancelCheckTimer: BBTimer<BehaviorBuffer>
-        {
-            protected override void Run(BehaviorBuffer self)
-            {
-                BehaviorInfo curInfo = self.GetInfoByOrder(self.currentOrder);
-                foreach (long infoId in self.infoIds)
-                {
-                    BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
-                    if (info.behaviorOrder == curInfo.behaviorOrder)
-                    {
-                        continue;
-                    }
-                    
-                    //1. 加特林取消不能取消到该行为
-                    bool ret = (info.moveType > curInfo.moveType) || self.ContainGCOption(info.behaviorOrder);
-                    if (!ret)
-                    {
-                        continue;
-                    }
-                    
-                    //2. 检查先置条件
-                    ret = info.SkillCheck();
-                    if (ret)
-                    {
-                        if (self.currentOrder != info.behaviorOrder)
-                        {
-                            self.GetParent<TimelineComponent>().Reload(info.Timeline,info.behaviorOrder);
-                        }
-                    
-                        break;
-                    }
-                }
-            }
-        }
-
+        
         public static void Init(this BehaviorBuffer self)
         {
             //销毁组件
@@ -208,7 +170,7 @@
             self.GCOptions.Add(info.behaviorOrder);
         }
 
-        private static bool ContainGCOption(this BehaviorBuffer self, int behaviorOrder)
+        public static bool ContainGCOption(this BehaviorBuffer self, int behaviorOrder)
         {
             return self.GCOptions.Contains(behaviorOrder);
         }

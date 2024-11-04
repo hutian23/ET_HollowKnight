@@ -1435,9 +1435,9 @@ MonoBehaviour:
     MarkerEvent:
     (Open_WhiffWindow)
 
-    OpenCancelWindow;
+    OpenGCWindow;
 
-    AddCancelOption: ''Mai_HeavySlash3'';
+    AddGCOption: ''Mai_HeavySlash3'';
 
     EndMarkerEvent:
 

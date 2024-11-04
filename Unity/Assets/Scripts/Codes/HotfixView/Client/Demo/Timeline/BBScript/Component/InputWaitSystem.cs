@@ -21,25 +21,6 @@ namespace ET.Client
             }
         }
 
-        [Invoke(BBTimerInvokeType.BBInputNotifyTimer)]
-        [FriendOf(typeof (InputWait))]
-        public class BBInputNotifyTimer: BBTimer<InputWait>
-        {
-            protected override void Run(InputWait self)
-            {
-                //输入窗口打开,处理预输入逻辑
-                self.Notify(self.Ops);
-                //检测执行完的输入协程，重新执行
-                foreach (BBInputHandler handler in self.handlers)
-                {
-                    if (!self.runningHandlers.Contains(handler.GetInputType()))
-                    {
-                        self.InputCheckCor(handler, self.Token).Coroutine();
-                    }
-                }
-            }
-        }
-
         public class InputWaitAwakeSystem: AwakeSystem<InputWait>
         {
             protected override void Awake(InputWait self)
@@ -51,8 +32,7 @@ namespace ET.Client
         public static void Init(this InputWait self)
         {
             self.GetComponent<BBTimerComponent>().ReLoad();
-            self.inputHandleTimer = 0;
-            self.inputNotifyTimer = 0;
+            self.timer = 0;
             self.Ops = 0;
 
             self.handlers.Clear();
@@ -138,10 +118,6 @@ namespace ET.Client
                     case FuzzyInputType.AND:
                         if ((op & callback.OP) != callback.OP) continue;
                         break;
-                    case FuzzyInputType.Hold:
-                        //蓄力中，一直拉后，不包含拉后指令了，判断退出蓄力协程
-                        if ((op & callback.OP) != 0) continue;
-                        break;
                 }
 
                 if (callback.checkFunc != null && !callback.checkFunc.Invoke()) continue;
@@ -149,6 +125,20 @@ namespace ET.Client
                 //2. 不同技能可能有不同的判定逻辑
                 callback.SetResult(new WaitInput() { frame = bbTimer.GetNow(), Error = WaitTypeError.Success, OP = op });
                 self.tcss.Remove(callback);
+            }
+        }
+
+        public static void InputNotify(this InputWait self)
+        {
+            //输入窗口打开,处理预输入逻辑
+            self.Notify(self.Ops);
+            //检测执行完的输入协程，重新执行
+            foreach (BBInputHandler handler in self.handlers)
+            {
+                if (!self.runningHandlers.Contains(handler.GetInputType()))
+                {
+                    self.InputCheckCor(handler, self.Token).Coroutine();
+                }
             }
         }
 
@@ -246,31 +236,18 @@ namespace ET.Client
             self.bufferDict.TryGetValue(inputType, out bool value);
             return value;
         }
-
-        public static void StartNotifyTimer(this InputWait self)
-        {
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            bbTimer.Remove(ref self.inputNotifyTimer);
-            self.inputNotifyTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BBInputNotifyTimer, self);
-        }
-
-        public static void CancelNotifyTimer(this InputWait self)
-        {
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            bbTimer.Remove(ref self.inputNotifyTimer);
-        }
-
+        
         public static void StartInputHandleTimer(this InputWait self)
         {
             BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            bbTimer.Remove(ref self.inputHandleTimer);
-            self.inputHandleTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BBInputHandleTimer, self);
+            bbTimer.Remove(ref self.timer);
+            self.timer = bbTimer.NewFrameTimer(BBTimerInvokeType.BBInputHandleTimer, self);
         }
 
         public static void CancelInputHandlerTimer(this InputWait self)
         {
             BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            bbTimer.Remove(ref self.inputHandleTimer);
+            bbTimer.Remove(ref self.timer);
         }
     }
 }

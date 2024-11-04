@@ -2,29 +2,29 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (BehaviorBuffer))]
-    [FriendOf(typeof (BehaviorInfo))]
-    public class AddCancelOption_BBScriptHandler: BBScriptHandler
+    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorInfo))]
+    public class AddWhiffOption_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "AddCancelOption";
+            return "AddWhiffOption";
         }
 
-        //AddCancelOption: '';
+        //AddWhiffOption: 'Mai_Run';
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"AddCancelOption: '(?<Option>\w+)';");
+            Match match = Regex.Match(data.opLine, @"AddWhiffOption: '(?<Option>\w+)';");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
-            //string behaviorName ---> BehaviorOrder
             BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
-            buffer.AddGCOption(match.Groups["Option"].Value);
-
+            BehaviorInfo info = buffer.GetInfoByName(match.Groups["Option"].Value);
+            buffer.WhiffOptions.Add(info.behaviorOrder);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

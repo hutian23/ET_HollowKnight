@@ -998,10 +998,10 @@ MonoBehaviour:
       Data: 34|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 9
+      Data: 11
     - Name: keyframeName
       Entry: 1
-      Data: Open_WhiffWindow
+      Data: Open_GCWindow
     - Name: 
       Entry: 8
       Data: 
@@ -1010,10 +1010,10 @@ MonoBehaviour:
       Data: 35|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 21
+      Data: 5
     - Name: keyframeName
       Entry: 1
-      Data: Dispose_WhiffWindow
+      Data: Open_WhiffWindow
     - Name: 
       Entry: 8
       Data: 
@@ -1048,9 +1048,19 @@ MonoBehaviour:
     MarkerEvent:
     (Open_WhiffWindow)
 
-    OpenCancelWindow;
+    OpenWhiffWindow;
 
-    AddCancelOption: ''Mai_HeavySlash2'';
+    AddWhiffOption: ''Mai_GroundDash'';
+
+    EndMarkerEvent:
+
+
+    MarkerEvent:
+    (Open_GCWindow)
+
+    OpenGCWindow;
+
+    AddGCOption: ''Mai_HeavySlash2'';
 
     EndMarkerEvent:
 

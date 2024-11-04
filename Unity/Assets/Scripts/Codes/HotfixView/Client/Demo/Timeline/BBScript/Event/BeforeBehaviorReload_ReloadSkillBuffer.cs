@@ -12,13 +12,10 @@
 
             buffer.SetCurrentOrder(args.behaviorOrder);
             
-            //1. 重新启动行为机定时器(在加特林取消中，需要更改进入行为的条件)
+            //1. 重新启动行为机定时器
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.Remove(ref buffer.CheckTimer);
             buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BehaviorCheckTimer, buffer);
-
-            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            inputWait.CancelNotifyTimer();
             
             await ETTask.CompletedTask;
         }

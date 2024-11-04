@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Client)]
     [FriendOf(typeof (BehaviorBuffer))]
@@ -25,6 +23,7 @@ namespace ET.Client
             }
             buffer.ClearParam();
             buffer.GCOptions.Clear();
+            buffer.WhiffOptions.Clear();
             
             await ETTask.CompletedTask;
         }

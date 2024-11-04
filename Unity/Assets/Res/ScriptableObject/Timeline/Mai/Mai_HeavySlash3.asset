@@ -1267,7 +1267,7 @@ MonoBehaviour:
     MarkerEvent:
     (Open_WhiffWindow)
 
-    OpenCancelWindow;
+    OpenGCWindow;
 
     EndMarkerEvent:
 
