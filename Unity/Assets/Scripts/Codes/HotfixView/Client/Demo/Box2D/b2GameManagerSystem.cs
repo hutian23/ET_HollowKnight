@@ -39,6 +39,7 @@ namespace ET.Client
         {
             protected override void FixedUpdate(b2GameManager self)
             {
+                if(Global.Settings.Pause) return;
                 self.B2World.Step();
                 self.SyncTrans();
             }
@@ -61,6 +62,7 @@ namespace ET.Client
             if (Global.Settings.Pause && Global.Settings.SingleStep)
             {
                 self.B2World.SingleStep();
+                self.SyncTrans();
             }
         }
         
@@ -70,6 +72,7 @@ namespace ET.Client
             {
                 b2Body body = child as b2Body;
                 body.SyncUnitTransform();
+                EventSystem.Instance.PublishAsync(self.ClientScene(), new AfterSyncTransform() { instanceId = body.unitId }).Coroutine();
             }
         }
 

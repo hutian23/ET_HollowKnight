@@ -992,7 +992,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 34|Timeline.EventInfo, Unity.Loader
@@ -1014,6 +1014,18 @@ MonoBehaviour:
     - Name: keyframeName
       Entry: 1
       Data: Open_WhiffWindow
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 36|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 28
+    - Name: keyframeName
+      Entry: 1
+      Data: TransitionCancel
     - Name: 
       Entry: 8
       Data: 
@@ -1058,9 +1070,26 @@ MonoBehaviour:
     MarkerEvent:
     (Open_GCWindow)
 
+    DisposeWhiffWindow;
+
     OpenGCWindow;
 
-    AddGCOption: ''Mai_HeavySlash2'';
+    AddGCOption:
+    ''Mai_HeavySlash2'';
+
+    EndMarkerEvent:
+
+
+    MarkerEvent: (TransitionCancel)
+
+    DisposeGCWindow;
+
+    OpenTransitionWindow;
+
+    AddGCOption:
+    ''Mai_Run'';
+
+    AddGCOption: ''Mai_GroundDash'';
 
     EndMarkerEvent:
 

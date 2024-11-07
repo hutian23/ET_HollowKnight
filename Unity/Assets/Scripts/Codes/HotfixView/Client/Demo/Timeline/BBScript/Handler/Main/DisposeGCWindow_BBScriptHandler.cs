@@ -15,6 +15,8 @@
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
 
             bbTimer.Remove(ref buffer.CheckTimer);
+            buffer.GCOptions.Clear();
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

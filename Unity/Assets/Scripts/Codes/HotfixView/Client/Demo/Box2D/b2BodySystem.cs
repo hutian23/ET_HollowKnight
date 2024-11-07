@@ -31,7 +31,7 @@ namespace ET.Client
             {
                 return;
             }
-
+            
             //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
             self.trans = curTrans;
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
@@ -41,7 +41,7 @@ namespace ET.Client
             go.transform.position = position;
             go.transform.eulerAngles = axis;
             go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
-
+            
             //更新转向信息后，夹具也需要更新(质心镜像翻转了)
             if (self.UpdateFlag)
             {

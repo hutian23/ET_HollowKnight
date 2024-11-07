@@ -40,4 +40,9 @@ namespace ET.Client
     {
         public long instanceId;
     }
+
+    public struct AfterSyncTransform
+    {
+        public long instanceId;
+    }
 }

@@ -22,6 +22,7 @@ namespace ET.Client
         Move = 2,
         Normal = 3,
         Special = 4,
-        Super = 5
+        Super = 5,
+        HitStun = 6
     }
 }

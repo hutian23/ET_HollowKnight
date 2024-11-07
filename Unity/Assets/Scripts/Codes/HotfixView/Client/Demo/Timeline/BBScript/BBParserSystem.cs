@@ -243,6 +243,22 @@ namespace ET.Client
             return value;
         }
 
+        public static void UpdateParam<T>(this BBParser self, string paramName, T value)
+        {
+            foreach ((string key, SharedVariable variable) in self.paramDict)
+            {
+                if (!key.Equals(paramName))
+                {
+                    continue;
+                }
+
+                variable.value = value;
+                return;
+            }
+            
+            Log.Error($"does not exist param:{paramName}!");
+        }
+        
         public static T GetParam<T>(this BBParser self, string paramName)
         {
             if (!self.paramDict.TryGetValue(paramName, out SharedVariable variable))

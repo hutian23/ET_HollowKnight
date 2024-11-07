@@ -706,76 +706,13 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_Squitting
-  Script: '@Trigger:
-
-    InputType: SquitHold;
-
-    return;
-
-
-    @Main:
-
-    SetVelocityX:
-    0;
-
-    InputCheck: ''SquitHold'';
-
-    OpenCancelWindow;
-
-    #Transition: Idle
-    ---> Squit
-
-    BeginIf: (TransitionCached: ''TransitionToSquit'')
-
-    BBSprite:
-    ''Mai_Squit_0'', 2;
-
-    BBSprite: ''Mai_Squit_1'', 2;
-
-    BBSprite: ''Mai_Squit_2'',
-    3;
-
-    EndIf:
-
-
-    # loop Squit behavior
-
-    UpdateFlip;
-
-    SetMarker: ''Loop'';
-
-    BBSprite:
-    ''Mai_Squit_3'', 4;
-
-    BBSprite: ''Mai_Squit_4'', 4;
-
-    BBSprite: ''Mai_Squit_5'',
-    4;
-
-    BBSprite: ''Mai_Squit_6'', 4;
-
-    BBSprite: ''Mai_Squit_7'', 4;
-
-    BBSprite:
-    ''Mai_Squit_8'', 4;
-
-    BBSprite: ''Mai_Squit_9'', 4;
-
-    BBSprite: ''Mai_Squit_10'',
-    4;
-
-    BBSprite: ''Mai_Squit_11'', 4;
-
-    BBSprite: ''Mai_Squit_12'', 3;
-
-    GotoMarker:
-    ''Loop'';
-
-    return;
-
-
-    @Exit:
-
-    SetTransition: ''SquitToIdle'';
-
-    return;'
+  Script: "@Trigger:\nInputType: SquitHold;\nreturn;\n\n@Main:\nSetVelocityX: 0;\nInputCheck:
+    'SquitHold';\nOpenCancelWindow;\n\n#Transition: Idle ---> Squit\nBeginIf: (TransitionCached:
+    'TransitionToSquit')\nBBSprite: 'Mai_Squit_0', 2;\nBBSprite: 'Mai_Squit_1', 2;\nBBSprite:
+    'Mai_Squit_2', 3;\nEndIf:\n\n#Transition: DashCancel ---> Squit\nBeginIf: (TransitionCached:
+    'DashCancelToSquit')\n\n\nEndIf: \n\n# loop Squit behavior\nUpdateFlip;\nSetMarker:
+    'Loop';\nBBSprite: 'Mai_Squit_3', 4;\nBBSprite: 'Mai_Squit_4', 4;\nBBSprite:
+    'Mai_Squit_5', 4;\nBBSprite: 'Mai_Squit_6', 4;\nBBSprite: 'Mai_Squit_7', 4;\nBBSprite:
+    'Mai_Squit_8', 4;\nBBSprite: 'Mai_Squit_9', 4;\nBBSprite: 'Mai_Squit_10', 4;\nBBSprite:
+    'Mai_Squit_11', 4;\nBBSprite: 'Mai_Squit_12', 3;\nGotoMarker: 'Loop';\nreturn;\n\n@Exit:\nSetTransition:
+    'SquitToIdle';\nreturn;"

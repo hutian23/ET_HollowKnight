@@ -504,8 +504,10 @@ MonoBehaviour:
 
     @Main:
 
-    Gravity:
+    SetVelocityX:
     0;
+
+    Gravity: 0;
 
     NumericAdd: JumpCount, -1;
 
@@ -520,8 +522,6 @@ MonoBehaviour:
     EndIf:
 
 
-    OpenCancelWindow;
-
     SetVelocityY:
     25000;
 
@@ -533,14 +533,14 @@ MonoBehaviour:
     BBSprite: ''Mai_Jump_1'',
     2;
 
+    BBSprite: ''Mai_Jump_2'', 3;
+
+    BBSprite: ''Mai_Jump_1'', 3;
+
+    Gravity:
+    150000;
+
     BBSprite: ''Mai_Jump_2'', 2;
-
-    BBSprite: ''Mai_Jump_1'', 2;
-
-    BBSprite:
-    ''Mai_Jump_2'', 2;
-
-    Gravity: 130000;
 
     BBSprite: ''Mai_Jump_1'', 2;
 

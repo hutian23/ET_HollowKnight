@@ -28,5 +28,7 @@
         public const int WhiffWindowTimer = 110;
         public const int GCWindowTimer = 111;
         public const int CancelWindowTimer = 112;
+        public const int TransitionWindowTimer = 113;
+        public const int ShakeTimer = 114;
     }
 }
