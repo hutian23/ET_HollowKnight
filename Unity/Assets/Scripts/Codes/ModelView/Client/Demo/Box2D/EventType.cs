@@ -26,4 +26,13 @@ namespace ET.Event
         public Fixture fixtureB;
         public FixtureData dataB;
     }
+
+    public struct TriggerStayCallback
+    {
+        public Fixture fixtureA;
+        public FixtureData dataA;
+
+        public Fixture fixtureB;
+        public FixtureData dataB;
+    }
 }

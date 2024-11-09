@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
-    public static class TriggerExitType
+    public static class TriggerStayType
     {
         public const int None = 0;
-        public const int GroundCollision = 1;
+        public const int HitCollision = 1;
         public const int CollisionEvent = 2;
     }
 }

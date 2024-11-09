@@ -383,18 +383,21 @@ MonoBehaviour:
     @Main:
 
     Shake:
-    1200, 15;
+    1200, 16;
 
-    BBSprite: ''Hurt_1'', 3;
+    BBSprite: ''Hurt_1'', 2;
 
-    BBSprite: ''Hurt_2'', 3;
+    BBSprite: ''Hurt_2'', 2;
 
     BBSprite:
-    ''Hurt_3'', 10;
+    ''Hurt_3'', 2;
 
-    BBSprite: ''Hurt_2'', 3;
+    WaitFrame: 10;
 
-    BBSprite: ''Hurt_1'', 3;
+    BBSprite: ''Hurt_2'', 2;
+
+    BBSprite:
+    ''Hurt_1'', 2;
 
     return;
 

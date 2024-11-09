@@ -91,9 +91,12 @@ namespace Timeline
     {
         public long InstanceId;
         public int TriggerEnterId;
+        public int TriggerStayId;
         public int TriggerExitId;
         
         public long LayerMask;
+        public bool IsTrigger;
+        
         public object UserData; 
     }
 

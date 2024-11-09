@@ -24,15 +24,28 @@ namespace ET.Client
             PolygonShape groundBox = new();
             groundBox.SetAsBox(50f, 2.0f);
             Fixture fixture =  groundBody.CreateFixture(groundBox, 0.0f);
-            fixture.UserData = new FixtureData() { InstanceId = 0, LayerMask = LayerType.Ground };
+            fixture.UserData = new FixtureData() { InstanceId = 0, LayerMask = LayerType.Ground ,UserData = "GroundBox"};
             
             //obstacle
-            // var obstacleDef = new BodyDef() { BodyType = BodyType.StaticBody, Position = new Vector2(-5, 4f) };
-            // var obstacleBody = World.CreateBody(obstacleDef);
-            // var box = new PolygonShape();
-            // box.SetAsBox(1f, 1f);
-            // obstacleBody.CreateFixture(box, 0.0f);
-
+            BodyDef obstacleDef = new() { BodyType = BodyType.StaticBody, Position = new Vector2(-5, 4f) };
+            Body obstacleBody = World.CreateBody(obstacleDef);
+            PolygonShape box = new();
+            box.SetAsBox(1f, 1f);
+            Fixture obstacleFixture = obstacleBody.CreateFixture(box, 0.0f);
+            obstacleFixture.Friction = 0f;
+            obstacleFixture.UserData = new FixtureData()
+            {
+                InstanceId = 0, 
+                LayerMask = LayerType.Ground,
+                UserData = new BoxInfo()
+                {
+                    boxName = "ObstacleHitBox",
+                    center = UnityEngine.Vector2.zero,
+                    hitboxType = HitboxType.Hit,
+                    size = UnityEngine.Vector2.zero
+                }
+            };
+            
             await ETTask.CompletedTask;
         }
     }

@@ -36,9 +36,17 @@ namespace ET.Client
                 {
                     Shape = shape,
                     Density = 1.0f,
-                    Friction = 0.3f,
-                    UserData = new FixtureData(){ InstanceId = b2Body.InstanceId, LayerMask = LayerType.Unit, UserData = info},
-                    IsSensor = info.hitboxType is not HitboxType.Squash
+                    Friction = 0f,
+                    UserData = new FixtureData()
+                    {
+                        InstanceId = b2Body.InstanceId, 
+                        LayerMask = LayerType.Unit, 
+                        IsTrigger = info.hitboxType is not HitboxType.Squash,
+                        UserData = info,
+                        TriggerEnterId = TriggerEnterType.CollisionEvent,
+                        TriggerStayId = TriggerStayType.CollisionEvent,
+                        TriggerExitId = TriggerExitType.CollisionEvent
+                    }
                 };
                 Fixture fixture = b2Body.body.CreateFixture(fixtureDef);
                 b2Body.hitBoxFixtures.Add(fixture);

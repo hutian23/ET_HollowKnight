@@ -11,7 +11,7 @@ namespace ET.Client
         {
             Fixture fixtureA = args.contact.FixtureA;
             Fixture fixtureB = args.contact.FixtureB;
-
+            
             if (fixtureA.UserData is not FixtureData dataA || fixtureB.UserData is not FixtureData dataB)
             {
                 return;

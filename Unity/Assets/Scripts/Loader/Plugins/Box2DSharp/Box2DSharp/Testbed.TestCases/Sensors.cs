@@ -1,9 +1,10 @@
-using System.Numerics;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
 using Testbed.Abstractions;
+using UnityEngine;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Testbed.TestCases
 {
@@ -107,6 +108,7 @@ namespace Testbed.TestCases
                 {
                     _touching[index.Value] = true;
                 }
+                Debug.LogWarning("BeginContact");
             }
 
             if (fixtureB == _sensor)
@@ -116,6 +118,7 @@ namespace Testbed.TestCases
                 {
                     _touching[index.Value] = true;
                 }
+                Debug.LogWarning("BeginContact");
             }
         }
 
@@ -132,6 +135,7 @@ namespace Testbed.TestCases
                 {
                     _touching[index.Value] = false;
                 }
+                Debug.LogWarning("EndContact");
             }
 
             if (fixtureB == _sensor)
@@ -141,6 +145,7 @@ namespace Testbed.TestCases
                 {
                     _touching[index.Value] = false;
                 }
+                Debug.LogWarning("EndContact");
             }
         }
     }

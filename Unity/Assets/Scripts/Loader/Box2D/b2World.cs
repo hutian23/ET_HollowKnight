@@ -82,6 +82,22 @@ namespace ET
             EventSystem.Instance.Invoke(new EndContact() { contact = contact });
         }
 
+        public override void PreSolve(Contact contact, in Manifold oldManifold)
+        {
+            base.PreSolve(contact, in oldManifold);
+            if (contact.FixtureA.UserData is not FixtureData dataA || contact.FixtureB.UserData is not FixtureData dataB)
+            {
+                return;
+            }
+
+            if (dataA.IsTrigger || dataB.IsTrigger)
+            {
+                //TriggerStay事件
+                EventSystem.Instance.Invoke(new PreSolveContact(){contact = contact});
+                contact.SetEnabled(false);
+            }
+        }
+
         #region Render
 
         private void DrawB2World()
@@ -369,6 +385,11 @@ namespace ET
     }
 
     public struct EndContact
+    {
+        public Contact contact;
+    }
+
+    public struct PreSolveContact
     {
         public Contact contact;
     }
