@@ -8,7 +8,6 @@ namespace ET.Client
     {
         public override void Handle(TriggerEnterCallback args)
         {
-            Log.Warning(args.dataA.ToJson()+ "  "+args.dataB.ToJson());
         }
     }
 }

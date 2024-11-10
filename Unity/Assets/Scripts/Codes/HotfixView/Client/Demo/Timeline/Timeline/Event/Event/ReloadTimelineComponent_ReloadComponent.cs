@@ -21,6 +21,10 @@
             inputWait.Init();
             inputWait.StartInputHandleTimer();
 
+            //清空碰撞事件组件
+            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            hitboxComponent.ClearEvent();
+            
             //重载行为机
             #region SkillBuffer
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Box2DSharp.Dynamics;
 using Timeline;
 
 namespace ET.Client
@@ -8,5 +7,10 @@ namespace ET.Client
     public class HitboxComponent: Entity, IAwake, IDestroy
     {
         public HitboxKeyframe keyFrame;
+
+        public List<long> triggerEventIds = new();
+
+        //Hitbox Name ---> Trigger Event
+        public Dictionary<string, long> HitboxDict = new();
     }
 }

@@ -339,27 +339,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_Idle
-  Script: '@Trigger:
-
-    return;
-
-
-    @Main:
-
-    UpdateFlip;
-
-    OpenCancelWindow;
-
-    LoopTimeline;
-
-    return;
-
-
-    @Exit:
-
-    #
-    Idle --> Squit
-
-    SetTransition: ''TransitionToSquit'';
-
-    return;'
+  Script: "@Trigger:\nreturn;\n\n@Main:\nUpdateFlip;\nOpenCancelWindow;\n\n# \u78B0\u649E\u4E8B\u4EF6\nTriggerEvent:
+    (TriggerStay), (Hurt_Body)\n  LogWarning: 'Hello_World';\n  EndTriggerEvent:\n\nLoopTimeline;\nreturn;\n\n@Exit:\n#
+    Idle --> Squit\nSetTransition: 'TransitionToSquit';\nreturn;"
