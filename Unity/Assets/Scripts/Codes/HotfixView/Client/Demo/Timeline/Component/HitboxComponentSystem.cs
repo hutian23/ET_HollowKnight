@@ -10,6 +10,11 @@
                 self.RemoveChild(triggerEvent);
             }
             self.triggerEventIds.Clear();
+            foreach (long parserId in self.parserIds)
+            {
+                self.RemoveChild(parserId);
+            }
+            self.parserIds.Clear();
             self.HitboxDict.Clear();
         }
 

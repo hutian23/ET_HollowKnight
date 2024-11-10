@@ -9,7 +9,8 @@ namespace ET.Client
         public HitboxKeyframe keyFrame;
 
         public List<long> triggerEventIds = new();
-
+        public List<long> parserIds = new();
+        
         //Hitbox Name ---> Trigger Event
         public Dictionary<string, long> HitboxDict = new();
     }
