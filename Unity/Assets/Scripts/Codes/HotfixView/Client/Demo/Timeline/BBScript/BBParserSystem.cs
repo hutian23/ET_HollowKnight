@@ -170,13 +170,12 @@ namespace ET.Client
             long funcId = IdGenerater.Instance.GenerateInstanceId();
             self.function_Pointers.Add(funcId, 0);
 
-            while (self.function_Pointers[funcId] < self.opDict.Count)
+            while (++self.function_Pointers[funcId] < self.opDict.Count)
             {
                 if (token.IsCancel()) return Status.Failed;
 
                 //2. 根据 OpType 匹配handler
                 string opLine = self.opDict[self.function_Pointers[funcId]];
-                self.function_Pointers[funcId]++;
                 
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)

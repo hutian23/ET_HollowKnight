@@ -36,12 +36,12 @@ namespace ET.Client
                 script.AppendLine(opLine);
             }
             string str = script.ToString();
-
+            
             //2. BBParser处理碰撞事件
             HitboxComponent hitboxComponent = triggerEvent.GetParent<HitboxComponent>();
             BBParser parser = hitboxComponent.AddChild<BBParser>();
             hitboxComponent.parserIds.Add(parser.Id);
-
+            
             //3. 执行碰撞事件
             parser.InitScript(str);
             await parser.EventInvoke(parser.cancellationToken);

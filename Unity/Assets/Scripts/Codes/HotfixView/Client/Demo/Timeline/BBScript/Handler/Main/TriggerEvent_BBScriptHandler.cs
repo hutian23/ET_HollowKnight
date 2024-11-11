@@ -55,7 +55,7 @@ namespace ET.Client
                 }
             }
 
-            int index = ++parser.function_Pointers[data.functionID];
+            int index = parser.function_Pointers[data.functionID];
             for (int i = index; i < parser.opDict.Count; i++)
             {
                 if (parser.opDict[i].Equals("EndTriggerEvent:"))
