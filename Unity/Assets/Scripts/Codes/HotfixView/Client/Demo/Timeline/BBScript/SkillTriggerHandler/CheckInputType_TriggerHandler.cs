@@ -19,7 +19,8 @@ namespace ET.Client
                 return false;
             }
 
-            InputWait wait = parser.GetParent<TimelineComponent>().GetComponent<InputWait>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            InputWait wait = timelineComponent.GetComponent<InputWait>();
             return wait.CheckInput(match.Groups["InputType"].Value);
         }
     }

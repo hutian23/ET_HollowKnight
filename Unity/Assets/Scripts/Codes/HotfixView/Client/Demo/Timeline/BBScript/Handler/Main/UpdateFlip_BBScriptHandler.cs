@@ -44,7 +44,8 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            InputWait inputWait = parser.GetParent<TimelineComponent>().GetComponent<InputWait>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             BBTimerComponent bbTimer = inputWait.GetComponent<BBTimerComponent>();    
             
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.UpdateFlipTimer, inputWait);

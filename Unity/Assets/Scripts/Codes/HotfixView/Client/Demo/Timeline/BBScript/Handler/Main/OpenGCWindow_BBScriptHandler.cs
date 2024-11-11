@@ -55,14 +55,15 @@
         //OpenGCWindow;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            
             bbTimer.Remove(ref buffer.CheckTimer);
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.GCWindowTimer, parser);
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.GCWindowTimer, bbParser);
             buffer.CheckTimer = timer;
-            parser.cancellationToken.Add(() =>
+            bbParser.cancellationToken.Add(() =>
             {
                 bbTimer.Remove(ref timer);
             });

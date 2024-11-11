@@ -21,8 +21,9 @@ namespace ET.Client
                 return Status.Failed;
             }
 
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             //string behaviorName ---> BehaviorOrder
-            BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             buffer.AddGCOption(match.Groups["Option"].Value);
 
             await ETTask.CompletedTask;

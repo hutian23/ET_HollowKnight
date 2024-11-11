@@ -18,9 +18,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            parser.GetParent<TimelineComponent>()
-                    .GetComponent<BehaviorBuffer>()
-                    .RegistParam($"Transition_{match.Groups["transition"].Value}", true);
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            timelineComponent.GetComponent<BehaviorBuffer>().RegistParam($"Transition_{match.Groups["transition"].Value}", true);
 
             await ETTask.CompletedTask;
             return Status.Success;

@@ -27,7 +27,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetTimeline(match.Groups["behaviorName"].Value);
 
@@ -47,12 +48,12 @@ namespace ET.Client
             info.LoadSkillInfo(timeline);
 
             //2-3 调用行为初始化协程
-            parser.RegistParam("InfoId", info.Id);
-            int index = parser.function_Pointers[data.functionID];
+            bbParser.RegistParam("InfoId", info.Id);
+            int index = bbParser.function_Pointers[data.functionID];
   
-            while (++index < parser.opDict.Count)
+            while (++index < bbParser.opDict.Count)
             {
-                string opLine = parser.opDict[index];
+                string opLine = bbParser.opDict[index];
                 Match match2 = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match2.Success)
                 {
@@ -74,15 +75,15 @@ namespace ET.Client
                 }
 
                 BBScriptData _data = BBScriptData.Create(opLine, data.functionID, null);
-                Status ret = await handler.Handle(parser, _data, token);
-                parser.function_Pointers[data.functionID] = index;
+                Status ret = await handler.Handle(bbParser, _data, token);
+                bbParser.function_Pointers[data.functionID] = index;
                 
                 if (token.IsCancel()) return Status.Failed;
                 if (ret != Status.Success) return ret;
             }
             //跳转到EndMove外
-            parser.function_Pointers[data.functionID] = index;
-            parser.RemoveParam("InfoId");
+            bbParser.function_Pointers[data.functionID] = index;
+            bbParser.RemoveParam("InfoId");
 
             await ETTask.CompletedTask;
             return Status.Success;

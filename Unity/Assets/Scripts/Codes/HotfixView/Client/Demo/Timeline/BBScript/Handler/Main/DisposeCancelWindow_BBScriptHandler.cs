@@ -9,12 +9,13 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
-            long timer = parser.GetParam<long>("CancelWindowTimer");
+            long timer = bbParser.GetParam<long>("CancelWindowTimer");
             bbTimer.Remove(ref timer);
-            parser.TryRemoveParam("CancelWindowTimer");
+            bbParser.TryRemoveParam("CancelWindowTimer");
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -66,11 +66,11 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            
-            
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.ShakeTimer, parser);
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.ShakeTimer, bbParser);
             timelineComponent.RegistParam("Shake", Vector2.zero);
             timelineComponent.RegistParam("ShakeCnt", shakeTimer);
             timelineComponent.RegistParam("ShakeTimer", timer);

@@ -25,7 +25,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             long numeric = timelineComponent.GetParam<long>(match.Groups["NumericType"].Value) + op;
             timelineComponent.UpdateParam(match.Groups["NumericType"].Value,numeric);
             

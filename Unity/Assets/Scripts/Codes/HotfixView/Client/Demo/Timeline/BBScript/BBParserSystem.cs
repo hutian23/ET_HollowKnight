@@ -12,6 +12,7 @@ namespace ET.Client
             protected override void Destroy(BBParser self)
             {
                 self.Cancel();
+                self.EntityId = 0;
             }
         }
 
@@ -307,6 +308,16 @@ namespace ET.Client
             self.paramDict[paramName].Recycle();
             self.paramDict.Remove(paramName);
             return true;
+        }
+
+        public static void SetEntityId(this BBParser self, long instanceId)
+        {
+            self.EntityId = instanceId;
+        }
+
+        public static long GetEntityId(this BBParser self)
+        {
+            return self.EntityId;
         }
     }
 }

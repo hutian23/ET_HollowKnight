@@ -23,7 +23,9 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            HitboxComponent hitboxComponent = parser.GetParent<TimelineComponent>().GetComponent<HitboxComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
             TriggerEvent triggerEvent = hitboxComponent.AddChild<TriggerEvent>();
             hitboxComponent.triggerEventIds.Add(triggerEvent.Id);
 
@@ -55,15 +57,15 @@ namespace ET.Client
                 }
             }
 
-            int index = parser.function_Pointers[data.functionID];
-            for (int i = index; i < parser.opDict.Count; i++)
+            int index = bbParser.function_Pointers[data.functionID];
+            for (int i = index; i < bbParser.opDict.Count; i++)
             {
-                if (parser.opDict[i].Equals("EndTriggerEvent:"))
+                if (bbParser.opDict[i].Equals("EndTriggerEvent:"))
                 {
                     break;
                 }
-                triggerEvent.opLines.Add(parser.opDict[i]);
-                parser.function_Pointers[data.functionID]++;
+                triggerEvent.opLines.Add(bbParser.opDict[i]);
+                bbParser.function_Pointers[data.functionID]++;
             }
 
             await ETTask.CompletedTask;

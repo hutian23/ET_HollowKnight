@@ -8,6 +8,7 @@ namespace ET.Client
     [ChildOf]
     public class BBParser: Entity, IAwake, IDestroy, ILoad
     {
+        public long EntityId;
         public Dictionary<string, int> funcMap = new(); // 记录状态块的索引
         public Dictionary<string, int> markers = new(); //标记位置
         public string opLines; // 脚本
@@ -21,8 +22,6 @@ namespace ET.Client
         //在携程内注册变量，携程执行完毕dispose
         //TODO这部分需要优化，对象池管理
         public Dictionary<string, SharedVariable> paramDict = new();
-
-        public long EntityId;
     }
 
     [Serializable]

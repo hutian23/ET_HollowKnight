@@ -53,14 +53,15 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = parser.GetParent<TimelineComponent>().GetComponent<BBTimerComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.InertiaTimer, parser);
-            parser.RegistParam("Inertia_Timer", timer);
-            parser.RegistParam("Inertia",inertia);
-            parser.RegistParam("Inertia_PreFlip", b2Body.GetFlip());
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.InertiaTimer, bbParser);
+            bbParser.RegistParam("Inertia_Timer", timer);
+            bbParser.RegistParam("Inertia",inertia);
+            bbParser.RegistParam("Inertia_PreFlip", b2Body.GetFlip());
             
             token.Add(() =>
             {

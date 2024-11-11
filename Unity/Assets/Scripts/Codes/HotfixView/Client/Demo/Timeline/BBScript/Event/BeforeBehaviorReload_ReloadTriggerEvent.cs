@@ -8,7 +8,7 @@
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            hitboxComponent.ClearEvent();
+            hitboxComponent.ClearTriggerEvent();
             
             await ETTask.CompletedTask;
         }

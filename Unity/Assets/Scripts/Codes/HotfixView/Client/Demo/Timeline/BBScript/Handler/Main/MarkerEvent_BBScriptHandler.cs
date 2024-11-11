@@ -20,26 +20,29 @@ namespace ET.Client
                 return Status.Failed;
             }
 
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            
             //即用即插
-            if (parser.GetComponent<MarkerEventParser>() == null)
+            if (bbParser.GetComponent<MarkerEventParser>() == null)
             {
-                parser.AddComponent<MarkerEventParser>();
-                token.Add(parser.RemoveComponent<MarkerEventParser>);
+                bbParser.AddComponent<MarkerEventParser>();
+                token.Add(bbParser.RemoveComponent<MarkerEventParser>);
             }
 
             //缓存动画帧事件的起始指针
             int index = parser.function_Pointers[data.functionID];
-            parser.GetComponent<MarkerEventParser>().RegistMarker(match.Groups[1].Value, index);
+            bbParser.GetComponent<MarkerEventParser>().RegistMarker(match.Groups[1].Value, index);
 
             //跳过动画帧事件的代码块
-            for (int i = index; i < parser.opDict.Count; i++)
+            for (int i = index; i < bbParser.opDict.Count; i++)
             {
-                if (parser.opDict[i].Equals("EndMarkerEvent:"))
+                if (bbParser.opDict[i].Equals("EndMarkerEvent:"))
                 {
                     break;
                 }
 
-                parser.function_Pointers[data.functionID]++;
+                bbParser.function_Pointers[data.functionID]++;
             }
 
             await ETTask.CompletedTask;

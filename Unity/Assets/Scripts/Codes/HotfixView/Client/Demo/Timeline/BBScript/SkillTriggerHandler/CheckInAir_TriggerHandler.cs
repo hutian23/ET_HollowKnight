@@ -20,7 +20,7 @@ namespace ET.Client
                 return false;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             switch (match.Groups["InAir"].Value)
             {
                 case "true":

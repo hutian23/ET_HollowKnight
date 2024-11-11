@@ -20,7 +20,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            InputWait inputWait = parser.GetParent<TimelineComponent>().GetComponent<InputWait>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             BBInputHandler handler = DialogueDispatcherComponent.Instance.GetInputHandler(match.Groups["InputType"].Value);
             inputWait.handlers.Add(handler);
 

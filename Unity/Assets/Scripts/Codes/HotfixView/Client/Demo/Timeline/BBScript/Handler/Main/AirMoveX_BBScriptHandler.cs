@@ -57,13 +57,15 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["MoveX"].Value} to long");
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.AirMoveTimer, parser);
+            
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.AirMoveTimer, bbParser);
             token.Add(() => { bbTimer.Remove(ref timer);});
 
-            parser.RegistParam("AirMoveX", moveX);
+            bbParser.RegistParam("AirMoveX", moveX);
             
             await ETTask.CompletedTask;
             return Status.Success;

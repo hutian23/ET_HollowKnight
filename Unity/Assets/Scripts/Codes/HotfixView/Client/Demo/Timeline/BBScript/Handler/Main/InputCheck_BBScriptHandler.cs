@@ -32,10 +32,12 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            InputWait inputWait = parser.GetParent<TimelineComponent>().GetComponent<InputWait>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             BBTimerComponent bbTimer = inputWait.GetComponent<BBTimerComponent>();
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
-            parser.RegistParam("InputCheck", match.Groups["InputType"].Value);
+            bbParser.RegistParam("InputCheck", match.Groups["InputType"].Value);
 
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.InputCheckTimer, inputWait);
             token.Add(() => { bbTimer.Remove(ref timer); });

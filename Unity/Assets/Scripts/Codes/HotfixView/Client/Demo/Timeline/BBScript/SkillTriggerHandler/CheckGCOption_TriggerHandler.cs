@@ -19,7 +19,8 @@ namespace ET.Client
                 return false;
             }
 
-            BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             
             return buffer.ContainGCOption(match.Groups["GCOption"].Value);
         }

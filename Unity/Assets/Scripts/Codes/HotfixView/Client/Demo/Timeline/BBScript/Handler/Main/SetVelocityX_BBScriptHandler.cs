@@ -19,7 +19,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            Unit unit = parser.GetParent<TimelineComponent>().GetParent<Unit>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            Unit unit = timelineComponent.GetParent<Unit>();
             b2Body b2Body = b2GameManager.Instance.GetBody(unit.InstanceId);
 
             long.TryParse(match.Groups[1].Value, out long velX);

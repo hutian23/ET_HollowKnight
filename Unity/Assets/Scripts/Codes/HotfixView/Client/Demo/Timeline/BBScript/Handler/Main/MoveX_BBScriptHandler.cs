@@ -34,6 +34,7 @@ namespace ET.Client
 
             //注册变量
             long.TryParse(match.Groups[1].Value, out long moveX);
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             parser.RegistParam("MoveX", moveX / 1000f);
 
             //启动定时器

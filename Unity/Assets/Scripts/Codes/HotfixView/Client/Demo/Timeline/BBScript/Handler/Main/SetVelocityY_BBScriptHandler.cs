@@ -25,7 +25,8 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            b2Body body = b2GameManager.Instance.GetBody(parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             body.SetVelocityY(velocity/1000f);
             
             await ETTask.CompletedTask;

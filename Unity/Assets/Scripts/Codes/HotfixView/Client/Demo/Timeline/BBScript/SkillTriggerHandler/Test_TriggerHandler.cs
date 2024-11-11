@@ -7,9 +7,10 @@
             return "Test";
         }
 
+        //Test: xxx
         public override bool Check(BBParser parser, BBScriptData data)
         {
-            return true;
+            return false;
         }
     }
 }

@@ -18,7 +18,8 @@ namespace ET.Client
                 return false;
             }
 
-            long value = parser.GetParent<TimelineComponent>().GetParam<long>(match.Groups["NumericType"].Value);
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            long value = timelineComponent.GetParam<long>(match.Groups["NumericType"].Value);
             if (!long.TryParse(match.Groups["CheckValue"].Value, out long checkValue))
             {
                 Log.Error($"cannot convert {match.Groups["CheckValue"].Value} to long");

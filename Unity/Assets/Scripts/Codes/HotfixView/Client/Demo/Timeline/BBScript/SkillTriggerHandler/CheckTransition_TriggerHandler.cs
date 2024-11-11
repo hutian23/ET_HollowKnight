@@ -20,7 +20,9 @@ namespace ET.Client
             }
             
             string transitionFlag = $"Transition_{match.Groups["transition"].Value}";
-            BehaviorBuffer buffer = parser.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
+            
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             if (!buffer.ContainParam(transitionFlag))
             {
                 return false;

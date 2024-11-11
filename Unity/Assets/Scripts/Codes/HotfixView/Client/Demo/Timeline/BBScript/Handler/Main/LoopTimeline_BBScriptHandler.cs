@@ -12,7 +12,7 @@ namespace ET.Client
         //LoopTimeline
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BBTimerComponent timer = timelineComponent.GetComponent<BBTimerComponent>();
             RuntimePlayable playable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
 
