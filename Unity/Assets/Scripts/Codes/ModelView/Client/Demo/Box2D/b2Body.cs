@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Box2DSharp.Dynamics;
 using Transform = Box2DSharp.Common.Transform;
 

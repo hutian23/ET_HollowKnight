@@ -7,7 +7,7 @@ namespace ET.Client
     [FriendOf(typeof(BBParser))]
     public static class TriggerHelper
     {
-        public static async ETTask HandleTriggerEventAsync(TriggerEvent triggerEvent)
+        public static async ETTask HandleTriggerEventAsync<T>(TriggerEvent triggerEvent, T TriggerCallback) where T : struct
         {
             //拼接字符串
             StringBuilder script = new();
@@ -26,6 +26,7 @@ namespace ET.Client
 
             //3. 执行碰撞事件
             parser.InitScript(str);
+            parser.RegistParam("TriggerCallback", TriggerCallback);
             await parser.EventInvoke(parser.cancellationToken);
             if (parser.cancellationToken.IsCancel()) return;
 

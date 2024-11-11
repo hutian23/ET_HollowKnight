@@ -1,4 +1,5 @@
 ﻿using ET.Event;
+using MongoDB.Bson;
 
 namespace ET.Client
 {

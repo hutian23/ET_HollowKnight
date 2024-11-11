@@ -36,16 +36,18 @@ namespace ET.Client
             obstacleFixture.UserData = new FixtureData()
             {
                 InstanceId = 0, 
-                LayerMask = LayerType.Ground,
+                LayerMask = LayerType.Unit,
                 UserData = new BoxInfo()
                 {
                     boxName = "ObstacleHitBox",
                     center = UnityEngine.Vector2.zero,
                     hitboxType = HitboxType.Hit,
                     size = UnityEngine.Vector2.zero
-                }
+                },
+                TriggerStayId = TriggerStayType.HitCollision,
+                TriggerEnterId = TriggerEnterType.HitBoxCollision,
+                IsTrigger = true
             };
-            
             await ETTask.CompletedTask;
         }
     }

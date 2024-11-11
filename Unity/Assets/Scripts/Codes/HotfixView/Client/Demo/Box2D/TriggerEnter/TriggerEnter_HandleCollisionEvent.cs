@@ -16,10 +16,10 @@ namespace ET.Client
 
             //1. find trigger event
             BoxInfo info = args.dataA.UserData as BoxInfo;
-            if (!hitboxComponent.ContainTriggerEvent(info.boxName,TriggerType.TriggerEnter)) return;
+            if (!hitboxComponent.ContainTriggerEvent(info.boxName, TriggerType.TriggerEnter)) return;
 
             TriggerEvent triggerEvent = hitboxComponent.GetTriggerEvent(info.boxName);
-            TriggerHelper.HandleTriggerEventAsync(triggerEvent).Coroutine();
+            TriggerHelper.HandleTriggerEventAsync(triggerEvent,args).Coroutine();
         }
     }
 }

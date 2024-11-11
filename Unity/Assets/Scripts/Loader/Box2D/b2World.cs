@@ -71,7 +71,7 @@ namespace ET
             World.Step(TimeStep, TestSettings.VelocityIterations, TestSettings.PositionIterations);
             PostStep();
         }
-
+        
         public override void BeginContact(Contact contact)
         {
             EventSystem.Instance.Invoke(new BeginContact() { contact = contact });

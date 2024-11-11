@@ -22,7 +22,7 @@ namespace ET.Client
             if (!hitboxComponent.ContainTriggerEvent(info.boxName,TriggerType.TriggerStay)) return;
 
             TriggerEvent triggerEvent = hitboxComponent.GetTriggerEvent(info.boxName);
-            TriggerHelper.HandleTriggerEventAsync(triggerEvent).Coroutine();
+            TriggerHelper.HandleTriggerEventAsync(triggerEvent,args).Coroutine();
         }
     }
 }

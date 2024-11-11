@@ -1,4 +1,5 @@
 ﻿using Box2DSharp.Dynamics;
+using Box2DSharp.Dynamics.Contacts;
 using Timeline;
 
 namespace ET.Event
@@ -16,6 +17,8 @@ namespace ET.Event
         
         public Fixture fixtureB;
         public FixtureData dataB;
+
+        public Contact Contact;
     }
 
     public struct TriggerExitCallback
@@ -25,6 +28,8 @@ namespace ET.Event
 
         public Fixture fixtureB;
         public FixtureData dataB;
+
+        public Contact Contact;
     }
 
     public struct TriggerStayCallback
@@ -34,5 +39,7 @@ namespace ET.Event
 
         public Fixture fixtureB;
         public FixtureData dataB;
+
+        public Contact Contact;
     }
 }

@@ -373,9 +373,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_MiddleLand
-  Script: "@Trigger:\nTransition: 'MiddleLand';\nreturn;\n\n@Main:\n\n# \u78B0\u649E\u4E8B\u4EF6\nTriggerEvent:
-    (TriggerEnter), (Hurt_Body)\n  LogWarning: 'Start_WaitFrame';\n  WaitFrame: 30;\n 
-    LogWarning: 'End_WaitFrame';\n  BeginIf: (Test: aaa)\n    LogWarning: 'If_Test';\n   
-    EndIf:\n  LogWarning: 'EndTriggerEvent';\n  EndTriggerEvent:\n\nOpenCancelWindow;\nBBSprite:
-    'Mai_Land_1', 2;\nBBSprite: 'Mai_Land_2', 3;\nBBSprite: 'Mai_Land_3', 4;\nBBSprite:
-    'Mai_Land_4', 3;\nBBSprite: 'Mai_Land_5', 2;\nSetVelocityX: 0;\nreturn;\n\n@Exit:\nreturn;"
+  Script: "@Trigger:\nTransition: 'MiddleLand';\nreturn;\n\n@Main:\n# \u78B0\u649E\u4E8B\u4EF6\nTriggerEvent:
+    (TriggerStay),(Hurt_Body)\nLogWarning: 'TriggerEnter';\nWaitFrame: 40;\nLogWarning:
+    'EndTrigger';\n# \u6761\u4EF6\u8BED\u53E5\nBeginIf: (Test: xxx)\nLogWarning:
+    'If';\nEndIf:\nEndTriggerEvent:\n\nOpenCancelWindow;\nBBSprite: 'Mai_Land_1',
+    2;\nBBSprite: 'Mai_Land_2', 3;\nBBSprite: 'Mai_Land_3', 4;\nBBSprite: 'Mai_Land_4',
+    3;\nBBSprite: 'Mai_Land_5', 2;\nSetVelocityX: 0;\nreturn;\n\n@Exit:\nreturn;"

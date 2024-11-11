@@ -19,12 +19,12 @@ namespace ET.Client
 
             if (dataA.TriggerExitId != 0)
             {
-                EventSystem.Instance.Invoke(dataA.TriggerExitId, new TriggerExitCallback() { fixtureA = fixtureA,dataA = dataA, fixtureB = fixtureB, dataB = dataB});
+                EventSystem.Instance.Invoke(dataA.TriggerExitId, new TriggerExitCallback() { fixtureA = fixtureA,dataA = dataA, fixtureB = fixtureB, dataB = dataB,Contact = args.contact});
             }
 
             if (dataB.TriggerExitId != 0)
             {
-                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback(){fixtureA = fixtureB, dataA = dataB, fixtureB = fixtureA, dataB =  dataA});
+                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback(){fixtureA = fixtureB, dataA = dataB, fixtureB = fixtureA, dataB =  dataA,Contact = args.contact});
             }
         }
     }
