@@ -22,5 +22,8 @@ namespace ET.Client
         public Dictionary<string, long> behaviorNameMap = new();
         public Dictionary<int, long> behaviorOrderMap = new();
         public SortedSet<long> infoIds = new(Comparer<long>.Create((x, y) => y.CompareTo(x)));
+        
+        //受击模块
+        public Dictionary<string, long> hitStunFlagMap = new();
     }
 }

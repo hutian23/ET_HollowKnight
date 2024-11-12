@@ -375,29 +375,26 @@ MonoBehaviour:
   timelineName: Mai_Hurt1
   Script: '@Trigger:
 
-    InputType: MiddlePunchPressed;
-
     return;
 
 
     @Main:
 
-    Shake:
-    1200, 16;
-
-    BBSprite: ''Hurt_1'', 2;
-
-    BBSprite: ''Hurt_2'', 2;
-
-    BBSprite:
-    ''Hurt_3'', 2;
-
-    WaitFrame: 10;
-
-    BBSprite: ''Hurt_2'', 2;
+    Shake: 1200, 16;
 
     BBSprite:
     ''Hurt_1'', 2;
+
+    BBSprite: ''Hurt_2'', 2;
+
+    BBSprite: ''Hurt_3'', 2;
+
+    WaitFrame:
+    10;
+
+    BBSprite: ''Hurt_2'', 2;
+
+    BBSprite: ''Hurt_1'', 2;
 
     return;
 

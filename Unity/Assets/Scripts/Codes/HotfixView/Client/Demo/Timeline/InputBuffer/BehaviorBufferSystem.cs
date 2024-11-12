@@ -39,17 +39,19 @@
         public static void Init(this BehaviorBuffer self)
         {
             self.CheckTimer = 0;
-            //销毁组件
-            self.behaviorNameMap.Clear();
-            self.behaviorOrderMap.Clear();
-            foreach (long id in self.infoIds)
-            {
-                self.RemoveChild(id);
-            }
-            self.infoIds.Clear();
             self.GCOptions.Clear();
+            self.WhiffOptions.Clear();
             self.ClearParam();
             self.currentOrder = -1;
+            //销毁组件
+            self.behaviorNameMap.Clear();
+            foreach (var kv in self.behaviorOrderMap)
+            {
+                self.RemoveChild(kv.Value);
+            }
+            self.behaviorOrderMap.Clear();
+            self.infoIds.Clear();
+            self.hitStunFlagMap.Clear();
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)
@@ -77,6 +79,16 @@
             if (!self.behaviorNameMap.TryGetValue(behaviorName, out long infoId))
             {
                 Log.Error($"does not exist behavior, Name: {behaviorName}");
+                return null;
+            }
+            return self.GetChild<BehaviorInfo>(infoId);
+        }
+
+        public static BehaviorInfo GetHitStun(this BehaviorBuffer self, string hitStunFlag)
+        {
+            if (!self.hitStunFlagMap.TryGetValue(hitStunFlag, out long infoId))
+            {
+                Log.Error($"does not exist hitStun behavior, hitStunFlag: {hitStunFlag}");
                 return null;
             }
             return self.GetChild<BehaviorInfo>(infoId);

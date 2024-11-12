@@ -941,5 +941,4 @@ MonoBehaviour:
     Special\nRegistMove: (Mai_GroundDash)\n    RegistInput: Dash;\n    MoveType:
     Special;\n    EndMove:\n#RegistMove: (Mai_AirDash)\n#    MoveType: Special;\n#   
     EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput: LightPunchPressed;\n   
-    MoveType: Special;\n    EndMove:\n#HitStun\nRegistMove: (Mai_Hurt1)\n    RegistInput:
-    MiddlePunchPressed;\n    MoveType: HitStun;\n    EndMove:\nreturn;"
+    MoveType: Special;\n    EndMove:\n#HitStun\nRegistHitStun: Mai_Hurt1, GroundHitStun;\nreturn;"
