@@ -434,10 +434,78 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_KnockBack
-  Script: "@Main:\nShake: 1800, 20;\nGravity: 0;\nSetVelocityX: 0;\nSetVelocityY:
-    0;\nBBSprite: 'KnockBack_1', 1;\nWaitFrame: 8;\nSetVelocityX: -10000;\nSetVelocityY:
-    20000;\nBBSprite: 'KnockBack_1', 3;\nBBSprite: 'KnockBack_2', 3;\nBBSprite: 'KnockBack_3',
-    3;\nBBSprite: 'KnockBack_4', 3;\nBBSprite: 'KnockBack_5', 3;\nGravity: 150000;\nBBSprite:
-    'KnockBack_6', 3;\nBBSprite: 'KnockBack_7', 3;\n\nSetMarker: 'Fall';\nBBSprite:
-    'KnockBack_8', 2;\nBBSprite: 'KnockBack_9', 2;\nBeginIf: (InAir: true)\nGotoMarker:
-    'Fall';\nEndIf: \nBBSprite: 'KnockBack_10', 3;\nreturn;\n\n@Exit:\nreturn;"
+  Script: '@Main:
+
+    # HitStop
+
+    Shake: 2300, 9;
+
+    Gravity: 0;
+
+    SetVelocityX:
+    0;
+
+    SetVelocityY: 0;
+
+    BBSprite: ''KnockBack_1'', 1;
+
+    WaitFrame: 8;
+
+
+    SetVelocityX:
+    -10000;
+
+    SetVelocityY: 24000;
+
+    BBSprite: ''KnockBack_1'', 3;
+
+    BBSprite:
+    ''KnockBack_2'', 3;
+
+    BBSprite: ''KnockBack_3'', 3;
+
+    BBSprite: ''KnockBack_4'',
+    3;
+
+    BBSprite: ''KnockBack_5'', 3;
+
+    Gravity: 150000;
+
+    BBSprite: ''KnockBack_6'',
+    3;
+
+    BBSprite: ''KnockBack_7'', 3;
+
+
+    #LandCallback
+
+    RegistAirCheck:
+    true
+
+    SetVelocityX: 0;
+
+    SetVelocityY: 0;
+
+    GotoBehavior: ''Mai_LandBounce'';
+
+    Exit;
+
+    EndAirCheck:
+
+
+    SetMarker:
+    ''Fall'';
+
+    BBSprite: ''KnockBack_8'', 4;
+
+    BBSprite: ''KnockBack_9'',
+    4;
+
+    GotoMarker: ''Fall'';
+
+    return;
+
+
+    @Exit:
+
+    return;'

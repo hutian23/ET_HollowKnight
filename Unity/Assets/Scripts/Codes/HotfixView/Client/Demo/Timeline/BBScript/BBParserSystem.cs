@@ -224,6 +224,47 @@ namespace ET.Client
             return subToken;
         }
 
+        public static async ETTask<Status> RegistSubCoroutine(this BBParser self, int startIndex, int endIndex, string funcName)
+        {
+            long funcId = IdGenerater.Instance.GenerateInstanceId();
+            self.function_Pointers.Add(funcId, startIndex);
+
+            while (self.function_Pointers[funcId] < endIndex)
+            {
+                if (self.cancellationToken.IsCancel()) return Status.Failed;
+                
+                //1. 根据 opType 匹配 handler
+                string opLine = self.opDict[self.function_Pointers[funcId]];
+                self.function_Pointers[funcId]++;
+                
+                Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
+                if (!match.Success)
+                {
+                    Log.Error($"{opLine}匹配失败! 请检查格式");
+                    return Status.Failed;
+                }
+                
+                string opType = match.Value;
+                if (opType == "SetMarker") continue;
+                
+                if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
+                {
+                    Log.Error($"not found script handler: {opType}");
+                    return Status.Failed;
+                }
+                
+                //2. 执行语句
+                BBScriptData data = BBScriptData.Create(opLine, funcId, null);
+                Status ret = await handler.Handle(self, data, self.cancellationToken);
+                data.Recycle();
+                
+                if (self.cancellationToken.IsCancel() || ret == Status.Failed) return Status.Failed;
+                if (ret != Status.Success) return ret;
+            }
+            await ETTask.CompletedTask;
+            return Status.Success;
+        }
+
         public static void CancelSubCoroutine(this BBParser self, string funcName)
         {
             if (!self.subCoroutineDict.TryGetValue(funcName, out ETCancellationToken subToken))

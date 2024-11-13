@@ -35,8 +35,6 @@ namespace ET.Client
                     DialogueHelper.ScripMatchError(data.opLine);
                     throw new Exception();
             }
-            Log.Warning(ret.ToString());
-            
             return ret;
         }
     }

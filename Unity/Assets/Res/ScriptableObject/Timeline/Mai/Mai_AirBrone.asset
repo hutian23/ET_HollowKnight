@@ -529,11 +529,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_AirBrone
-  Script: "@Trigger:\nInAir: true;\nreturn;\n\n@Main:\nRegistAirCheck;\nOpenCancelWindow;\nAirMoveX:
-    15000;\nGravity: 150000;\nUpdateFlip;\n\n# Transition\nBeginIf: (TransitionCached:
-    'TransitionToFall')\nBBSprite: 'Mai_PreFall_1', 4;\nBBSprite: 'Mai_PreFall_2',
-    4;\nBBSprite: 'Mai_PreFall_3', 4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5',
-    6;\nEndIf:\n\n#AirDash -> AirBrone,\u4E3A\u4E86\u52A8\u753B\u8FDE\u8D2F\u6027\uFF0C\u9700\u8981\u60EF\u6027\nBeginIf:
+  Script: "@Trigger:\nInAir: true;\nreturn;\n\n@Main:\nOpenCancelWindow;\nAirMoveX:
+    15000;\nGravity: 150000;\nUpdateFlip;\n\n# \u6CE8\u518C\u843D\u5730\u56DE\u8C03\nRegistAirCheck:
+    true\nExit;\nEndAirCheck:\n\n# Transition\nBeginIf: (TransitionCached: 'TransitionToFall')\nBBSprite:
+    'Mai_PreFall_1', 4;\nBBSprite: 'Mai_PreFall_2', 4;\nBBSprite: 'Mai_PreFall_3',
+    4;\nBBSprite: 'Mai_PreFall_4', 4;\nBBSprite: 'Mai_PreFall_5', 6;\nEndIf:\n\n#AirDash
+    -> AirBrone,\u4E3A\u4E86\u52A8\u753B\u8FDE\u8D2F\u6027\uFF0C\u9700\u8981\u60EF\u6027\nBeginIf:
     (TransitionCached: 'AirDashToFall')\nSetInertia: 23000;\nGravity: 0;\nBBSprite:
     'Mai_PreFall_3', 3;\nGravity: 150000;\nBBSprite: 'Mai_PreFall_4', 3;\nBBSprite:
     'Mai_PreFall_5', 5;\nEndIf:\n\nSetMarker: 'Loop';\nBBSprite: 'Mai_Fall_1', 5;\nBBSprite:
