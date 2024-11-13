@@ -23,9 +23,8 @@ namespace ET.Client
                 Fixture fixture = b2Body.hitBoxFixtures[i];
                 b2Body.body.DestroyFixture(fixture);
             }
-
             b2Body.hitBoxFixtures.Clear();
-
+            
             //2. Update hitBoxFixtures
             foreach (BoxInfo info in hitBoxComponent.keyFrame.boxInfos)
             {

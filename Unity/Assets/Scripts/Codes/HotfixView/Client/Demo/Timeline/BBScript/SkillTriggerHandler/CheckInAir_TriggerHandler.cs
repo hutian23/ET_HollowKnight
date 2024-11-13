@@ -21,16 +21,23 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+           
+            bool ret = false;
             switch (match.Groups["InAir"].Value)
             {
                 case "true":
-                    return !timelineComponent.GetParam<bool>("OnGround");
+                    ret = !timelineComponent.GetParam<bool>("OnGround");
+                    break;
                 case "false":
-                    return timelineComponent.GetParam<bool>("OnGround");
+                    ret = timelineComponent.GetParam<bool>("OnGround");
+                    break;
                 default:
                     DialogueHelper.ScripMatchError(data.opLine);
                     throw new Exception();
             }
+            Log.Warning(ret.ToString());
+            
+            return ret;
         }
     }
 }

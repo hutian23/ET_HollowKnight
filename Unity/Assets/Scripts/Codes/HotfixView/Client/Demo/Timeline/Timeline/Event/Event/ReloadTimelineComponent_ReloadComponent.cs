@@ -25,6 +25,10 @@
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
             hitboxComponent.Init();
             
+            //清空等待事件
+            timelineComponent.RemoveComponent<ObjectWait>();
+            timelineComponent.AddComponent<ObjectWait>();
+            
             //重载行为机
             #region SkillBuffer
 
@@ -40,7 +44,8 @@
             await parser.Invoke("RootInit", parser.cancellationToken);
             if(parser.cancellationToken.IsCancel()) return;
             #endregion
-
+            buffer.WaitHitStunNotify().Coroutine();
+            
             //重载Parser,进入默认行为
             BehaviorInfo info = buffer.GetInfoByOrder(0);
             timelineComponent.Reload(info.Timeline,info.behaviorOrder);

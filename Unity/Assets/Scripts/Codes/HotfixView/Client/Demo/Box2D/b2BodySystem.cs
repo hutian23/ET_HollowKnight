@@ -41,13 +41,6 @@ namespace ET.Client
             go.transform.position = position;
             go.transform.eulerAngles = axis;
             go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
-            
-            //更新转向信息后，夹具也需要更新(质心镜像翻转了)
-            if (self.UpdateFlag)
-            {
-                EventSystem.Instance.Invoke(new UpdateFlipCallback() { instanceId = self.unitId });
-            }
-
             self.UpdateFlag = false;
         }
 

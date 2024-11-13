@@ -21,6 +21,9 @@ namespace ET.Client
             }
 
             parser.function_Pointers[data.functionID] = parser.GetMarker(match.Groups["marker"].Value);
+            
+            Log.Warning(parser.function_Pointers[data.functionID]+"  "+parser.opLines[parser.function_Pointers[data.functionID]]);
+            
             await TimerComponent.Instance.WaitFrameAsync(token);
             return token.IsCancel()? Status.Failed : Status.Success;
         }

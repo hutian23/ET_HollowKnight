@@ -31,7 +31,7 @@
             }
 
             b2Body.SetFlip(curFlip);
-            b2Body.SetUpdateFlag();
+            EventSystem.Instance.Invoke(new UpdateFlipCallback(){instanceId = b2Body.unitId});
         }
     }
 

@@ -26,4 +26,10 @@ namespace ET.Client
         //受击模块
         public Dictionary<string, long> hitStunFlagMap = new();
     }
+
+    public struct WaitHitStunBehavior : IWaitType
+    {
+        public string hitStunFlag;
+        public int Error { get; set; }
+    }
 }

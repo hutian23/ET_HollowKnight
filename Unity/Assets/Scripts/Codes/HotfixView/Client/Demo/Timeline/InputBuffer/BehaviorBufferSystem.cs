@@ -83,16 +83,6 @@
             }
             return self.GetChild<BehaviorInfo>(infoId);
         }
-
-        public static BehaviorInfo GetHitStun(this BehaviorBuffer self, string hitStunFlag)
-        {
-            if (!self.hitStunFlagMap.TryGetValue(hitStunFlag, out long infoId))
-            {
-                Log.Error($"does not exist hitStun behavior, hitStunFlag: {hitStunFlag}");
-                return null;
-            }
-            return self.GetChild<BehaviorInfo>(infoId);
-        }
         
         #region Param
 
@@ -199,6 +189,37 @@
             return self.ContainGCOption(info.behaviorOrder);
         }
 
+        #endregion
+
+        #region HitStun
+        public static BehaviorInfo GetHitStun(this BehaviorBuffer self, string hitStunFlag)
+        {
+            if (!self.hitStunFlagMap.TryGetValue(hitStunFlag, out long infoId))
+            {
+                Log.Error($"does not exist hitStun behavior, hitStunFlag: {hitStunFlag}");
+                return null;
+            }
+            return self.GetChild<BehaviorInfo>(infoId);
+        }
+
+        public static async ETTask WaitHitStunNotify(this BehaviorBuffer self)
+        {
+            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
+            ObjectWait objectWait = timelineComponent.GetComponent<ObjectWait>();
+            
+            //1. 等待事件通知，执行下面语句
+            WaitHitStunBehavior wait = await objectWait.Wait<WaitHitStunBehavior>();
+            if (wait.Error != WaitTypeError.Success) return;
+
+            //(bug: 可能是协程问题，切换行为时无法销毁hitbox的fixture)
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            await bbTimer.WaitFrameAsync();
+            
+            //2. 取消当前行为，切换到受攻击行为
+            BehaviorInfo info = self.GetHitStun(wait.hitStunFlag);
+            timelineComponent.Reload(info.Timeline,info.behaviorOrder);
+        }
+        
         #endregion
     }
 }
