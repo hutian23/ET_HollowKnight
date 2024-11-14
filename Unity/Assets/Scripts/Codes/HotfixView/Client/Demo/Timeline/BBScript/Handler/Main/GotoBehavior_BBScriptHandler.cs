@@ -2,6 +2,8 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(BehaviorInfo))]
+    [FriendOf(typeof(BehaviorBuffer))]
     public class GotoBehavior_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -18,9 +20,16 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
+
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+
+            string behavior = match.Groups["behavior"].Value;
+            BehaviorInfo info = buffer.GetInfoByName(behavior);
             
-            Log.Warning(match.Groups["behavior"].Value);
-            
+            buffer.ClearParam();
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

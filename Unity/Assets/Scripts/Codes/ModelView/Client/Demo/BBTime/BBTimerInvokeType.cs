@@ -30,5 +30,6 @@
         public const int CancelWindowTimer = 112;
         public const int TransitionWindowTimer = 113;
         public const int ShakeTimer = 114;
+        public const int LoopTimer = 115;
     }
 }

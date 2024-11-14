@@ -77,7 +77,9 @@ namespace ET.Client
 
         public static async ETTask<Status> Main(this BBParser self)
         {
+            //Main: 
             Status ret = await self.Invoke("Main", self.cancellationToken);
+            //Exit:
             self.Exit();
             EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = self.InstanceId });
             return ret;
@@ -87,7 +89,7 @@ namespace ET.Client
         /// 退出当前行为
         /// </summary>
         /// <param name="self"></param>
-        private static void Exit(this BBParser self)
+        public static void Exit(this BBParser self)
         {
             async ETTask ExitCoroutine()
             {

@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 30
+      Data: 59
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 9|Timeline.HitboxKeyframe, Unity.Loader
@@ -261,6 +261,138 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 14|Timeline.HitboxKeyframe, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 27
+    - Name: keyframeName
+      Entry: 1
+      Data: Idle_Hitbox
+    - Name: boxInfos
+      Entry: 7
+      Data: 15|ET.ListComponent`1[[Timeline.BoxInfo, Unity.Loader]], Unity.Core
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 16|Timeline.BoxInfo, Unity.Loader
+    - Name: boxName
+      Entry: 1
+      Data: Hurt_Head
+    - Name: hitboxType
+      Entry: 3
+      Data: 2
+    - Name: center
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.00349384546
+    - Name: 
+      Entry: 4
+      Data: 0.7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: size
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1.19301283
+    - Name: 
+      Entry: 4
+      Data: 0.6999999
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|Timeline.BoxInfo, Unity.Loader
+    - Name: boxName
+      Entry: 1
+      Data: Hurt_Body
+    - Name: hitboxType
+      Entry: 3
+      Data: 2
+    - Name: center
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: -1.05
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: size
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1.8
+    - Name: 
+      Entry: 4
+      Data: 2.8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|Timeline.BoxInfo, Unity.Loader
+    - Name: boxName
+      Entry: 1
+      Data: PushBox
+    - Name: hitboxType
+      Entry: 3
+      Data: 4
+    - Name: center
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: -1.2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: size
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 2.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -271,7 +403,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|Timeline.BBEventTrack, Unity.Loader
+      Data: 19|Timeline.BBEventTrack, Unity.Loader
     - Name: Name
       Entry: 1
       Data: Marker
@@ -280,7 +412,7 @@ MonoBehaviour:
       Data: true
     - Name: Clips
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+      Data: 20|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
@@ -293,14 +425,14 @@ MonoBehaviour:
       Data: 
     - Name: EventInfos
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
+      Data: 21|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 10
+      Data: 23
     - Name: 
       Entry: 7
-      Data: 17|Timeline.EventInfo, Unity.Loader
+      Data: 22|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 0
@@ -312,7 +444,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|Timeline.EventInfo, Unity.Loader
+      Data: 23|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 4
@@ -324,7 +456,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 19|Timeline.EventInfo, Unity.Loader
+      Data: 24|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 6
@@ -336,7 +468,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|Timeline.EventInfo, Unity.Loader
+      Data: 25|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 9
@@ -348,7 +480,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 21|Timeline.EventInfo, Unity.Loader
+      Data: 26|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 12
@@ -360,7 +492,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Timeline.EventInfo, Unity.Loader
+      Data: 27|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 15
@@ -372,7 +504,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 23|Timeline.EventInfo, Unity.Loader
+      Data: 28|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 18
@@ -384,7 +516,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|Timeline.EventInfo, Unity.Loader
+      Data: 29|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 21
@@ -396,7 +528,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 25|Timeline.EventInfo, Unity.Loader
+      Data: 30|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 24
@@ -408,13 +540,169 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|Timeline.EventInfo, Unity.Loader
+      Data: 31|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 27
     - Name: keyframeName
       Entry: 1
       Data: KnockBack_10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 32|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 30
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 33|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 33
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 34|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 36
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 35|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 39
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 36|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 42
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 37|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 44
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_16
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 38|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 46
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 39|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 48
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_18
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 40|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 50
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_19
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 41|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 52
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_20
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 42|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 54
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_21
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 43|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 56
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_22
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 44|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 58
+    - Name: keyframeName
+      Entry: 1
+      Data: KnockBack_23
     - Name: 
       Entry: 8
       Data: 
@@ -438,7 +726,7 @@ MonoBehaviour:
 
     # HitStop
 
-    Shake: 2300, 9;
+    Shake: 2300, 16;
 
     Gravity: 0;
 
@@ -449,13 +737,13 @@ MonoBehaviour:
 
     BBSprite: ''KnockBack_1'', 1;
 
-    WaitFrame: 8;
+    WaitFrame: 15;
 
 
     SetVelocityX:
-    -10000;
+    -3000;
 
-    SetVelocityY: 24000;
+    SetVelocityY: 19000;
 
     BBSprite: ''KnockBack_1'', 3;
 
@@ -477,35 +765,40 @@ MonoBehaviour:
     BBSprite: ''KnockBack_7'', 3;
 
 
-    #LandCallback
+    #FallLoop
 
-    RegistAirCheck:
-    true
-
-    SetVelocityX: 0;
-
-    SetVelocityY: 0;
-
-    GotoBehavior: ''Mai_LandBounce'';
-
-    Exit;
-
-    EndAirCheck:
-
-
-    SetMarker:
-    ''Fall'';
+    BeginLoop: (InAir:
+    true)
 
     BBSprite: ''KnockBack_8'', 4;
 
-    BBSprite: ''KnockBack_9'',
-    4;
+    BBSprite: ''KnockBack_9'', 4;
 
-    GotoMarker: ''Fall'';
+    EndLoop:
+
+
+    #Land
+
+    SetVelocityX:
+    0;
+
+    BBSprite: ''KnockBack_10'', 4;
+
+    BBSprite: ''KnockBack_11'', 4;
+
+    BBSprite:
+    ''KnockBack_12'', 4;
+
+    BBSprite: ''KnockBack_13'', 4;
+
+    BBSprite: ''KnockBack_14'',
+    20;
 
     return;
 
 
     @Exit:
+
+    SetTransition: ''HardDownRecovery'';
 
     return;'
