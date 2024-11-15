@@ -1048,7 +1048,7 @@ MonoBehaviour:
   Script: "@Trigger:\nInputType: LightPunchPressed;\nInAir: false;\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nMarkerEvent:
     (Open_WhiffWindow)\n    OpenWhiffWindow;\n    AddWhiffOption: 'Mai_GroundDash';\n   
     EndMarkerEvent:\nMarkerEvent: (Open_GCWindow)\n    DisposeWhiffWindow;\n    OpenGCWindow;\n   
-    AddGCOption: 'Mai_HeavySlash2';\n    EndMarkerEvent:\nMarkerEvent: (TransitionCancel)\n   
-    DisposeGCWindow;\n    OpenTransitionWindow;\n    AddGCOption: 'Mai_Run';\n   
-    AddGCOption: 'Mai_GroundDash';\n    EndMarkerEvent:\nStartTimeline;\nreturn;\n\n@Exit:\nSetVelocityX:
+    AddGCOption: 'Mai_HeavySlash2';\n    AddGCOption: 'Mai_2C';\n    EndMarkerEvent:\nMarkerEvent:
+    (TransitionCancel)\n    DisposeGCWindow;\n    OpenTransitionWindow;\n    AddGCOption:
+    'Mai_Run';\n    AddGCOption: 'Mai_GroundDash';\n    EndMarkerEvent:\nStartTimeline;\nreturn;\n\n@Exit:\nSetVelocityX:
     0;\nreturn;"

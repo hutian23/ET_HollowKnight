@@ -1,7 +1,8 @@
-﻿using System.Numerics;
-using Box2DSharp.Collision.Shapes;
+﻿using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using Timeline;
+using UnityEngine;
+using Vector2 = System.Numerics.Vector2;
 
 namespace ET.Client
 {
@@ -16,8 +17,14 @@ namespace ET.Client
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
 
+            //1. Set Flip
             b2Body b2Body = b2GameManager.Instance.GetBody(args.instanceId);
-            //1. Dispose old hitBoxFixtures
+            b2Body.Flip = args.curFlip;
+            //1-1 go sync flipState
+            GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
+            go.transform.localScale = new Vector3( b2Body.GetFlip(), 1, 1);
+            
+            //2. Dispose old hitBoxFixtures
             for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
             {
                 Fixture fixture = b2Body.hitBoxFixtures[i];
@@ -25,7 +32,7 @@ namespace ET.Client
             }
             b2Body.hitBoxFixtures.Clear();
             
-            //2. Update hitBoxFixtures
+            //3. Update hitBoxFixtures
             foreach (BoxInfo info in hitBoxComponent.keyFrame.boxInfos)
             {
                 PolygonShape shape = new();

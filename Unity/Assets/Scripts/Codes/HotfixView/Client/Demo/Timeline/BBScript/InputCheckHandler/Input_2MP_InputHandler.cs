@@ -1,24 +1,36 @@
 ﻿namespace ET.Client
 {
-    public class Input_2MP_InputHandler : BBInputHandler
+    public class Input_2MPPressed_InputHandler : BBInputHandler
     {
         public override string GetInputType()
         {
-            return "2MP";
+            return "2MPPressed";
         }
         
         public override async ETTask<Status> Handle(Unit unit, ETCancellationToken token)
         {
             InputWait inputWait = BBInputHelper.GetInputWait(unit);
             
-            //1. Wait Down
-            // WaitInput wait = await inputWait.Wait(OP: BBOperaType.DOWN | BBOperaType.DOWNLEFT | BBOperaType.DOWNRIGHT, FuzzyInputType.OR, () =>
-            // {
-            //     
-            // });
+            //1. Wait attack input
+            WaitInput wait = await inputWait.Wait(BBOperaType.MIDDLEPUNCH, FuzzyInputType.OR, () =>
+            {
+                //避免闭包
+                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.MIDDLEPUNCH);
+                return WasPressedThisFrame;
+            });
+            if (wait.Error != WaitTypeError.Success) return Status.Failed;
+            
+            //2. 按下攻击键的同一帧，判断是否包含以下输入
+            long op = wait.OP;
+            if ((op & BBOperaType.DOWN) != 0 ||
+                (op & BBOperaType.DOWNLEFT) != 0||
+                (op & BBOperaType.DOWNRIGHT) != 0)
+            {
+                return Status.Success;
+            }
             
             await ETTask.CompletedTask;
-            return Status.Success;
+            return Status.Failed;
         }
     }
 }

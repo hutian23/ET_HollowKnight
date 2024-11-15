@@ -11,6 +11,7 @@
         {
             InputWait inputWait = BBInputHelper.GetInputWait(unit);
 
+            //1. Wait 
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.MIDDLEPUNCH, FuzzyInputType.OR, () =>
             {
                 //避免闭包

@@ -38,6 +38,7 @@ namespace ET.Client
     public struct UpdateFlipCallback
     {
         public long instanceId;
+        public FlipState curFlip;
     }
 
     public struct AfterSyncTransform

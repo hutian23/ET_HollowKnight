@@ -977,7 +977,7 @@ MonoBehaviour:
     RegistInput: JumpPressed;\n    MoveType: Move;\n    EndMove:\n\n# Normal\nRegistMove:
     (Mai_HeavySlash1)\n    MoveType: Normal;\n    EndMove:\nRegistMove: (Mai_HeavySlash2)\n   
     MoveType: Normal;\n    EndMove:\nRegistMove: (Mai_HeavySlash3)\n    MoveType:
-    Normal;\n    EndMove:\nRegistMove: (Mai_2C)\n    RegistInput: MiddlePunchPressed;\n   
+    Normal;\n    EndMove:\nRegistMove: (Mai_2C)\n    RegistInput: 2MPPressed;\n   
     MoveType: Normal;\n    EndMove:\n\n# Special\nRegistMove: (Mai_GroundDash)\n   
     RegistInput: Dash;\n    MoveType: Special;\n    EndMove:\n#RegistMove: (Mai_AirDash)\n#   
     MoveType: Special;\n#    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput:

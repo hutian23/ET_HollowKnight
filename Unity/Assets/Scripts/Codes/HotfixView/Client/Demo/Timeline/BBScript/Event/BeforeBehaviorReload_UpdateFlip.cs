@@ -25,20 +25,15 @@ namespace ET.Client
             //2. 转向
             FlipState preFlag = b2Body.Flip;
             FlipState curFlag = preFlag;
-
-            if ((inputWait.Ops & BBOperaType.LEFT) != 0)
+            if (inputWait.ContainKey(BBOperaType.LEFT) || 
+                inputWait.ContainKey(BBOperaType.UPLEFT) || 
+                inputWait.ContainKey(BBOperaType.DOWNLEFT))
             {
                 curFlag = FlipState.Left;
             }
-            else if ((inputWait.Ops & BBOperaType.RIGHT) != 0)
-            {
-                curFlag = FlipState.Right;
-            }
-            else if ((inputWait.Ops & BBOperaType.DOWNLEFT) != 0)
-            {
-                curFlag = FlipState.Left;
-            }
-            else if ((inputWait.Ops & BBOperaType.DOWNRIGHT) != 0)
+            else if (inputWait.ContainKey(BBOperaType.RIGHT) ||
+                     inputWait.ContainKey(BBOperaType.DOWNRIGHT) ||
+                     inputWait.ContainKey(BBOperaType.UPRIGHT))
             {
                 curFlag = FlipState.Right;
             }
@@ -46,8 +41,7 @@ namespace ET.Client
             // update flip
             if (curFlag != preFlag)
             {
-                b2Body.SetFlip(curFlag);
-                EventSystem.Instance.Invoke(new UpdateFlipCallback() { instanceId = b2Body.unitId });
+                EventSystem.Instance.Invoke(new UpdateFlipCallback() { instanceId = b2Body.unitId,curFlip = curFlag});
             }
 
             await ETTask.CompletedTask;
