@@ -346,20 +346,18 @@ MonoBehaviour:
 
     @Main:
 
+    # Init
+
+    # Idle --> Squit
+
+    SetTransition:
+    ''TransitionToSquit'';
+
+
     UpdateFlip;
 
     OpenCancelWindow;
 
     LoopTimeline;
-
-    return;
-
-
-    @Exit:
-
-    #
-    Idle --> Squit
-
-    SetTransition: ''TransitionToSquit'';
 
     return;'

@@ -417,9 +417,4 @@ MonoBehaviour:
 
     BBSprite: ''Hurt_1'', 2;
 
-    return;
-
-
-    @Exit:
-
     return;'

@@ -454,53 +454,48 @@ MonoBehaviour:
 
     @Main:
 
-
     #
-    GCWindow
+    Init
 
-    BBSprite: ''2c_1'', 2;
+    SetTransition: ''SquitToIdle'';
+
+    # GCWindow
+
+    BBSprite: ''2c_1'',
+    2;
 
     BBSprite: ''2c_2'', 2;
 
-    BBSprite:
-    ''2c_3'', 2;
+    BBSprite: ''2c_3'', 2;
 
-    BBSprite: ''2c_4'', 2;
+    BBSprite: ''2c_4'',
+    2;
 
     BBSprite: ''2c_5'', 1;
 
     OpenGCWindow;
 
+    AddGCOption: ''Mai_GroundDash'';
+
     AddGCOption:
-    ''Mai_GroundDash'';
+    ''Mai_Jump'';
 
-    AddGCOption: ''Mai_Jump'';
-
-    BBSprite: ''2c_5'',
-    3;
+    BBSprite: ''2c_5'', 3;
 
     BBSprite: ''2c_6'', 3;
 
-    BBSprite: ''2c_6'', 2;
+    BBSprite:
+    ''2c_6'', 2;
 
-    BBSprite: ''2c_7'',
-    2;
+    BBSprite: ''2c_7'', 2;
 
     BBSprite: ''2c_8'', 2;
 
-    BBSprite: ''2c_9'', 2;
+    BBSprite:
+    ''2c_9'', 2;
 
-    BBSprite: ''2c_10'',
-    3;
+    BBSprite: ''2c_10'', 3;
 
     BBSprite: ''2c_11'', 3;
-
-    return;
-
-
-    @Exit:
-
-    SetTransition:
-    ''SquitToIdle'';
 
     return;'

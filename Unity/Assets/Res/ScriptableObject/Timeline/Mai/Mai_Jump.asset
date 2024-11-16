@@ -493,63 +493,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_Jump
-  Script: '@Trigger:
-
-    NumericCheck: JumpCount > 1;
-
-    InputType: JumpPressed;
-
-    return;
-
-
-    @Main:
-
-    SetVelocityX:
-    0;
-
-    Gravity: 0;
-
-    NumericAdd: JumpCount, -1;
-
-
-    BeginIf: (InAir: false)
-
-    BBSprite:
-    ''PreJump_1'', 3;
-
-    BBSprite: ''PreJump_2'', 2;
-
-    EndIf:
-
-
-    SetVelocityY:
-    30000;
-
-    AirMoveX: 15000;
-
-    UpdateFlip;
-
-
-    BBSprite: ''Mai_Jump_1'',
-    2;
-
-    BBSprite: ''Mai_Jump_2'', 2;
-
-    BBSprite: ''Mai_Jump_1'', 2;
-
-    Gravity:
-    150000;
-
-    BBSprite: ''Mai_Jump_2'', 2;
-
-    BBSprite: ''Mai_Jump_1'', 2;
-
-    return;
-
-
-    @Exit:
-
-    SetTransition:
-    ''TransitionToFall'';
-
-    return;'
+  Script: "@Trigger:\nNumericCheck: JumpCount > 1;\nInputType: JumpPressed;\nreturn;\n\n@Main:\nSetTransition:
+    'TransitionToFall';\nSetVelocityX: 0;\nGravity: 0;\nNumericAdd: JumpCount, -1;\nBeginIf:
+    (InAir: false)\n  BBSprite: 'PreJump_1', 3;\n  BBSprite: 'PreJump_2', 2;\n  EndIf:\nSetVelocityY:
+    30000;\nAirMoveX: 15000;\nUpdateFlip;\nBBSprite: 'Mai_Jump_1', 2;\nBBSprite:
+    'Mai_Jump_2', 2;\nBBSprite: 'Mai_Jump_1', 2;\nGravity: 150000;\nBBSprite: 'Mai_Jump_2',
+    2;\nBBSprite: 'Mai_Jump_1', 2;\nreturn;"

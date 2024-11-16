@@ -499,9 +499,4 @@ MonoBehaviour:
 
     BBSprite: ''frame_3'', 2;
 
-    return;
-
-
-    @Exit:
-
     return;'

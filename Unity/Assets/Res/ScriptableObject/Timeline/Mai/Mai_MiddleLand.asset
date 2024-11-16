@@ -396,12 +396,4 @@ MonoBehaviour:
 
     BBSprite: ''Mai_Land_5'', 2;
 
-    SetVelocityX:
-    0;
-
-    return;
-
-
-    @Exit:
-
     return;'

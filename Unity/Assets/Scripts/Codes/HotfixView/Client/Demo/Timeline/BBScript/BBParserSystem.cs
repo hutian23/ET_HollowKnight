@@ -77,29 +77,9 @@ namespace ET.Client
 
         public static async ETTask<Status> Main(this BBParser self)
         {
-            //Main:
             Status ret = await self.Invoke("Main", self.cancellationToken);
-            // if (self.cancellationToken.IsCancel()) return Status.Failed;
-            // //Exit: 
-            // self.Exit();
-            // EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = self.InstanceId });
+            EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = self.InstanceId });
             return ret;
-        }
-        
-        /// <summary>
-        /// 退出当前行为
-        /// </summary>
-        /// <param name="self"></param>
-        public static void Exit(this BBParser self)
-        {
-            async ETTask ExitCoroutine()
-            {
-                ETCancellationToken exitToken = new();
-                await self.Invoke("Exit", exitToken);
-                exitToken.Cancel();
-            }
-
-            ExitCoroutine().Coroutine();
         }
 
         public static int GetMarker(this BBParser self, string markerName)

@@ -43,7 +43,6 @@ namespace ET.Client
             {
                 EventSystem.Instance.Invoke(new UpdateFlipCallback() { instanceId = b2Body.unitId,curFlip = curFlag});
             }
-
             await ETTask.CompletedTask;
         }
     }

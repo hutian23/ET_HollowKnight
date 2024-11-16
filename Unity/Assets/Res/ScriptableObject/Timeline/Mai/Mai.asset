@@ -980,8 +980,7 @@ MonoBehaviour:
     Normal;\n    EndMove:\nRegistMove: (Mai_HeavySlash3)\n    MoveType: Normal;\n   
     EndMove:\nRegistMove: (Mai_2C)\n    RegistInput: 2MPPressed;\n    MoveType: Normal;\n   
     EndMove:\n\n# Special\nRegistMove: (Mai_GroundDash)\n    RegistInput: Dash;\n   
-    MoveType: Special;\n    EndMove:\n#RegistMove: (Mai_AirDash)\n#    MoveType:
-    Special;\n#    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput:
+    MoveType: Special;\n    EndMove:\nRegistMove: (Mai_GroundDash_Attack)\n    RegistInput:
     LightPunchPressed;\n    MoveType: Special;\n    EndMove:\n\n#Super\nRegistMove:
     (Mai_HardDownRecovery)\n    MoveType: Super;\n    EndMove:\n\n#HitStun\nRegistHitStun:
     Mai_Hurt1, GroundHitStun;\nRegistHitStun: Mai_KnockBack, KnockBack;\nreturn;"

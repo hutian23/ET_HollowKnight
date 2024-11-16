@@ -275,4 +275,4 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_RunToIdle
-  Script: "@Trigger:\nTransition: 'RunToIdle';\nreturn;\n\n@Main: \nOpenCancelWindow;\nStartTimeline;\nreturn;\n\n@Exit:\nreturn;"
+  Script: "@Trigger:\nTransition: 'RunToIdle';\nreturn;\n\n@Main: \nOpenCancelWindow;\nStartTimeline;\nreturn;"

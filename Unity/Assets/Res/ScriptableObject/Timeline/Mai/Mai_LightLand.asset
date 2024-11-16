@@ -346,21 +346,11 @@ MonoBehaviour:
 
     @Main:
 
-    MoveX:
-    8000;
-
     OpenCancelWindow;
 
-    BBSprite: ''Mai_LightLand_1'', 3;
-
     BBSprite:
-    ''Mai_LightLand_2'', 4;
+    ''Mai_LightLand_1'', 3;
 
-    SetVelocityX: 0;
-
-    return;
-
-
-    @Exit:
+    BBSprite: ''Mai_LightLand_2'', 4;
 
     return;'
