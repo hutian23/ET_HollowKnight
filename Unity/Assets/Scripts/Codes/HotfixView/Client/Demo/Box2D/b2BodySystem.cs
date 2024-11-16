@@ -88,6 +88,11 @@ namespace ET.Client
             self.UpdateFlag = false;
         }
 
+        public static void SetPosition(this b2Body self,System.Numerics.Vector2 position)
+        {
+            self.body.SetTransform(position, 0f);
+        }
+        
         public static System.Numerics.Vector2 GetPosition(this b2Body self)
         {
             return self.body.GetPosition();

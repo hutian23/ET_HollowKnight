@@ -454,29 +454,44 @@ MonoBehaviour:
 
     @Main:
 
-    BBSprite:
-    ''2c_1'', 2;
+
+    #
+    GCWindow
+
+    BBSprite: ''2c_1'', 2;
 
     BBSprite: ''2c_2'', 2;
 
-    BBSprite: ''2c_3'', 2;
-
     BBSprite:
-    ''2c_4'', 2;
+    ''2c_3'', 2;
 
-    BBSprite: ''2c_5'', 4;
+    BBSprite: ''2c_4'', 2;
 
-    BBSprite: ''2c_6'', 4;
+    BBSprite: ''2c_5'', 1;
 
-    BBSprite:
-    ''2c_7'', 3;
+    OpenGCWindow;
 
-    BBSprite: ''2c_8'', 3;
+    AddGCOption:
+    ''Mai_GroundDash'';
 
-    BBSprite: ''2c_9'', 3;
+    AddGCOption: ''Mai_Jump'';
 
-    BBSprite:
-    ''2c_10'', 3;
+    BBSprite: ''2c_5'',
+    3;
+
+    BBSprite: ''2c_6'', 3;
+
+    BBSprite: ''2c_6'', 2;
+
+    BBSprite: ''2c_7'',
+    2;
+
+    BBSprite: ''2c_8'', 2;
+
+    BBSprite: ''2c_9'', 2;
+
+    BBSprite: ''2c_10'',
+    3;
 
     BBSprite: ''2c_11'', 3;
 
