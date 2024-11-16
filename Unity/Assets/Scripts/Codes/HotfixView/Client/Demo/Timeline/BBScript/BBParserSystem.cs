@@ -77,11 +77,12 @@ namespace ET.Client
 
         public static async ETTask<Status> Main(this BBParser self)
         {
-            //Main: 
+            //Main:
             Status ret = await self.Invoke("Main", self.cancellationToken);
-            //Exit:
-            self.Exit();
-            EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = self.InstanceId });
+            // if (self.cancellationToken.IsCancel()) return Status.Failed;
+            // //Exit: 
+            // self.Exit();
+            // EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = self.InstanceId });
             return ret;
         }
         

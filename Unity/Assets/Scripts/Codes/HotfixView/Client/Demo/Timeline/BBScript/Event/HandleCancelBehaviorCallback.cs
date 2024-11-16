@@ -8,7 +8,6 @@
         {
             //1.取消当前行为协程
             BBParser parser = Root.Instance.Get(args.instanceId) as BBParser;
-            parser.Cancel();
             
             //2. 行为机控制器重新遍历可进入行为
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();

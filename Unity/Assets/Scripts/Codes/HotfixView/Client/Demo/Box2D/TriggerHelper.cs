@@ -26,6 +26,7 @@ namespace ET.Client
 
             //3. 执行碰撞事件
             parser.InitScript(str);
+            parser.RegistParam("TriggerType", triggerEvent.TriggerType);
             parser.RegistParam("TriggerCallback", TriggerCallback);
             await parser.EventInvoke(parser.cancellationToken);
             if (parser.cancellationToken.IsCancel()) return;

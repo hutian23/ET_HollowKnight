@@ -96,6 +96,15 @@ namespace ET
                 EventSystem.Instance.Invoke(new PreSolveContact(){contact = contact});
                 contact.SetEnabled(false);
             }
+            
+            //TODO 优化 这里先直接设置pushBox不会相互碰撞
+            if (dataA.UserData is BoxInfo infoA && 
+                dataB.UserData is BoxInfo infoB &&
+                infoA.hitboxType is HitboxType.Squash &&
+                infoB.hitboxType is HitboxType.Squash)
+            {
+                contact.SetEnabled(false);
+            }
         }
 
         #region Render

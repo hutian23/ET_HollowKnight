@@ -765,17 +765,19 @@ MonoBehaviour:
     BBSprite: ''KnockBack_7'', 3;
 
 
+    GotoBehavior: ''Mai_2C'';
+
     #FallLoop
 
-    SetVelocityX: 0;
+    SetVelocityX:
+    0;
 
-    BeginLoop:
-    (InAir: true)
+    BeginLoop: (InAir: true)
 
     BBSprite: ''KnockBack_8'', 4;
 
-    BBSprite: ''KnockBack_9'',
-    4;
+    BBSprite:
+    ''KnockBack_9'', 4;
 
     EndLoop:
 
@@ -784,15 +786,15 @@ MonoBehaviour:
 
     SetVelocityX: 0;
 
-    BBSprite: ''KnockBack_10'',
-    4;
+    BBSprite:
+    ''KnockBack_10'', 4;
 
     BBSprite: ''KnockBack_11'', 4;
 
-    BBSprite: ''KnockBack_12'', 4;
+    BBSprite: ''KnockBack_12'',
+    4;
 
-    BBSprite:
-    ''KnockBack_13'', 4;
+    BBSprite: ''KnockBack_13'', 4;
 
     BBSprite: ''KnockBack_14'', 20;
 
@@ -801,7 +803,9 @@ MonoBehaviour:
 
     @Exit:
 
-    SetTransition:
-    ''HardDownRecovery'';
+    LogWarning:
+    ''Hello'';
+
+    SetTransition: ''HardDownRecovery'';
 
     return;'

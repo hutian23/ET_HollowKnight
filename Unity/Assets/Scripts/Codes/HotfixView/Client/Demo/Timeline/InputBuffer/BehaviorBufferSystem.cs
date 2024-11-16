@@ -211,6 +211,7 @@
             WaitHitStunBehavior wait = await objectWait.Wait<WaitHitStunBehavior>();
             if (wait.Error != WaitTypeError.Success) return;
 
+            Log.Warning("HitNotify");
             //(bug: 可能是协程问题，切换行为时无法销毁hitbox的fixture)
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             await bbTimer.WaitFrameAsync();

@@ -12,7 +12,7 @@ namespace ET.Client
             return "TriggerEvent";
         }
 
-        //CollisionEvent: (TriggerStay), (Hurt_Body)
+        //TriggerEvent: (TriggerStay), (Hurt_Body)
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             MatchCollection matches = Regex.Matches(data.opLine, @"\((.*?)\)");

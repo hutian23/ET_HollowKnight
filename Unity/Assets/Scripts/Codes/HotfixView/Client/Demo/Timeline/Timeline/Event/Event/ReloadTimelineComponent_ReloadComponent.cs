@@ -18,8 +18,12 @@
 
             //获得输入，更新输入缓冲区定时器
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            inputWait.Init();
-            inputWait.StartInputHandleTimer();
+            //只有玩家会挂载inputWait
+            if (inputWait != null)
+            {
+                inputWait.Init();
+                inputWait.StartInputHandleTimer();   
+            }
 
             //清空碰撞事件组件
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();

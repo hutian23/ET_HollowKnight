@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1340376429761113669}
   - component: {fileID: 8844023896634408005}
   m_Layer: 0
-  m_Name: Mai
+  m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,9 +239,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2016810935
   m_SortingLayer: 1
-  m_SortingOrder: 1000
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1055419004, guid: b42d8d83a572c184f8d4a2ce68170e04, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
       Data: 
   instanceId: 0
   ApplyRootMotion: 1
-  BBPlayable: {fileID: 11400000, guid: b08df29221071a849b0e549f7223945d, type: 2}
+  BBPlayable: {fileID: 11400000, guid: 3f67fb43bb788f5478a54fd60e06dfd6, type: 2}
   CurrentTimeline: {fileID: 11400000, guid: 3db21ea503a2acf41a86a07c8518ad0d, type: 2}
   initPos: {x: 0, y: 0, z: 0}
 --- !u!114 &8844023896634408005

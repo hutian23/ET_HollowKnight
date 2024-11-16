@@ -23,8 +23,8 @@ namespace ET.Client
             TimelineComponent timelineComponent = player.AddComponent<TimelineComponent>();
             timelineComponent.AddComponent<BBTimerComponent>(); // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
             timelineComponent.AddComponent<BBParser>().SetEntityId(timelineComponent.InstanceId);
-            timelineComponent.AddComponent<TimelineEventManager>();
             timelineComponent.AddComponent<HitboxComponent>();
+            timelineComponent.AddComponent<TimelineEventManager>();
             timelineComponent.AddComponent<BehaviorBuffer>();
             timelineComponent.AddComponent<InputWait>();
         }

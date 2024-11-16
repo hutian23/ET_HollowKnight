@@ -9,20 +9,25 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, SceneChangeFinish args)
         {
             //1. load dummy go
-            Unit player = TODUnitHelper.GetPlayer(scene.ClientScene());
-            await ResourcesComponent.Instance.LoadBundleAsync($"{player.Config.ABName}.unity3d");
-            GameObject prefab = (GameObject)ResourcesComponent.Instance.GetAsset($"{player.Config.ABName}.unity3d", $"{player.Config.Name}");
+            await ResourcesComponent.Instance.LoadBundleAsync($"dummy.unity3d");
+            GameObject prefab = (GameObject)ResourcesComponent.Instance.GetAsset($"dummy.unity3d", $"Dummy");
             GameObject go = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
             go.name = "Dummy";
             
             //2. create dummy unit
             UnitComponent unitComponent = scene.CurrentScene().GetComponent<UnitComponent>();
-            Unit dummy = unitComponent.AddChild<Unit, int>(player.ConfigId);
+            Unit dummy = unitComponent.AddChild<Unit, int>(1005);
             
             //3. dummy component
+            dummy.AddComponent<ObjectWait>();
             dummy.AddComponent<GameObjectComponent>().GameObject = go;
-            go.transform.position = new Vector3(3, 5, 0);
-            await ETTask.CompletedTask;
+            
+            TimelineComponent timelineComponent = dummy.AddComponent<TimelineComponent>();
+            timelineComponent.AddComponent<BBTimerComponent>(); // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
+            timelineComponent.AddComponent<BBParser>().SetEntityId(timelineComponent.InstanceId);
+            timelineComponent.AddComponent<HitboxComponent>();
+            timelineComponent.AddComponent<TimelineEventManager>();
+            timelineComponent.AddComponent<BehaviorBuffer>();
         }
     }
 }

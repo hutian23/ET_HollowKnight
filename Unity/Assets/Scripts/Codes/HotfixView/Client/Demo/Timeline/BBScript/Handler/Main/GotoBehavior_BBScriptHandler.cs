@@ -23,12 +23,11 @@ namespace ET.Client
 
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
             string behavior = match.Groups["behavior"].Value;
             BehaviorInfo info = buffer.GetInfoByName(behavior);
-            
-            buffer.ClearParam();
+
+            timelineComponent.Reload(info.Timeline, info.behaviorOrder);
 
             await ETTask.CompletedTask;
             return Status.Success;

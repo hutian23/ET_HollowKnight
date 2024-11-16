@@ -97,10 +97,10 @@ namespace ET.Client
 
         public static void Reload(this TimelineComponent self, BBTimeline timeline,int behaviorOrder)
         {
-            BBParser parser = self.GetComponent<BBParser>();
-
             //显示层reload playableGraph
             self.GetTimelinePlayer().Init(timeline);
+         
+            BBParser parser = self.GetComponent<BBParser>();
             parser.InitScript(timeline.Script);
 
             //3. 切换行为前，初始化组件

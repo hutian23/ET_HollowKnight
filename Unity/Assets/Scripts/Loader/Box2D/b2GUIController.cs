@@ -16,7 +16,7 @@ namespace ET
     {
         public long instanceId;
 
-        public int behaviorOrder;
+        public string behaviorName;
     }
 
     public class b2GUIController
@@ -189,7 +189,7 @@ namespace ET
                                         ImGui.TreeNodeEx((IntPtr)j, leafNodeFlags, $"{timeline.timelineName}");
                                         if (ImGui.IsItemClicked())
                                         {
-                                            EventSystem.Instance?.Invoke(new UpdateBehaviorCallback() { instanceId = instanceId });
+                                            EventSystem.Instance?.Invoke(new UpdateBehaviorCallback() { instanceId = instanceId ,behaviorName = timeline.timelineName});
                                         }
 
                                         j++;
