@@ -21,6 +21,7 @@ namespace ET.Client
             //添加物理世界管理组件
             currentScene.AddComponent<b2GameManager>();
             currentScene.AddComponent<GameManager>();
+            currentScene.AddComponent<BBTimerComponent>();
         }
     }
 }

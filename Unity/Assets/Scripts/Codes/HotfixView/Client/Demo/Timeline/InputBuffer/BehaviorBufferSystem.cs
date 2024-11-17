@@ -210,7 +210,6 @@
             //1. 等待事件通知，执行下面语句
             WaitHitStunBehavior wait = await objectWait.Wait<WaitHitStunBehavior>();
             if (wait.Error != WaitTypeError.Success) return;
-            
             //(bug: 可能是协程问题，切换行为时无法销毁hitbox的fixture)
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             await bbTimer.WaitFrameAsync();

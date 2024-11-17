@@ -31,5 +31,6 @@
         public const int TransitionWindowTimer = 113;
         public const int ShakeTimer = 114;
         public const int LoopTimer = 115;
+        public const int HitStopTestTimer = 116;
     }
 }

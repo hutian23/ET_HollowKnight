@@ -4,7 +4,7 @@ namespace ET.Client
 {
     public static class GameManagerSystem
     {
-        public class GameManagerAwakesystem: AwakeSystem<GameManager>
+        public class GameManagerAwakeSystem: AwakeSystem<GameManager>
         {
             protected override void Awake(GameManager self)
             {
@@ -46,6 +46,9 @@ namespace ET.Client
             TimelineManager.Instance.Reload();
             //3. reload input
             BBInputComponent.Instance.Reload();
+            //4. reload global timer
+            BBTimerComponent bbTimer = self.DomainScene().GetComponent<BBTimerComponent>();
+            bbTimer.ReLoad();
         }
     }
 }
