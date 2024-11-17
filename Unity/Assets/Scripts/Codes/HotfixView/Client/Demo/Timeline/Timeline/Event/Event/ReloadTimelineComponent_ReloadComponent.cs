@@ -35,10 +35,9 @@
             
             //重载行为机
             #region SkillBuffer
-
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBParser parser = timelineComponent.GetComponent<BBParser>();
-
+            
             //1. 初始化
             buffer.Init();
             
@@ -53,7 +52,6 @@
             //重载Parser,进入默认行为
             BehaviorInfo info = buffer.GetInfoByOrder(0);
             timelineComponent.Reload(info.Timeline,info.behaviorOrder);
-            
             //注册变量
             timelineComponent.RegistParam("OnGround", false);
             

@@ -797,6 +797,4 @@ MonoBehaviour:
     BBSprite: ''KnockBack_14'', 20;
 
     SetTransition:
-    ''HardDownRecovery'';
-
-    return;'
+    ''HardDownRecovery'';'

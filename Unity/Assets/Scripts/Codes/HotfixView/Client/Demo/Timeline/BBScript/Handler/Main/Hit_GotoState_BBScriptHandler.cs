@@ -20,19 +20,18 @@ namespace ET.Client
                     {
                         TriggerEnterCallback callback = parser.GetParam<TriggerEnterCallback>("TriggerCallback");
                         BoxInfo boxInfo = callback.dataB.UserData as BoxInfo;
-
+            
                         if (boxInfo.hitboxType is not HitboxType.Hurt) return Status.Success;
-
+            
                         b2Body B2Body = Root.Instance.Get(callback.dataB.InstanceId) as b2Body;
                         Unit unit = Root.Instance.Get(B2Body.unitId) as Unit;
-
+                        
                         //通知unit切换行为
                         TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
                         timelineComponent.GetComponent<ObjectWait>().Notify(new WaitHitStunBehavior(){hitStunFlag = "KnockBack",Error = WaitTypeError.Success});
                         break;
                     }
             }
-
             await ETTask.CompletedTask;
             return Status.Success;
         }

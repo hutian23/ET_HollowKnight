@@ -893,5 +893,4 @@ MonoBehaviour:
     (Mai_GC)\n  OpenGCWindow;\n  AddGCOption: 'Mai_GroundDash_Attack';\n  AddGCOption:
     'Mai_Jump';\n  EndMarkerEvent:\nMarkerEvent: (Mai_GC_Close)\n  DisposeGCWindow;\n 
     OpenTransitionWindow;\n  AddGCOption: 'Mai_Run';\n  AddGCOption: 'Mai_HeavySlash1';\n 
-    EndMarkerEvent:\nStartTimeline;\nreturn;\n\n@Exit:\nSetVelocityX: 0;\nSetTransition:
-    'SquitToIdle';\nreturn;"
+    EndMarkerEvent:\nStartTimeline;\nSetTransition: 'SquitToIdle';\nreturn;"

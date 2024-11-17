@@ -353,6 +353,7 @@ MonoBehaviour:
     SetTransition:
     ''TransitionToSquit'';
 
+    SetVelocityX: 0;
 
     UpdateFlip;
 

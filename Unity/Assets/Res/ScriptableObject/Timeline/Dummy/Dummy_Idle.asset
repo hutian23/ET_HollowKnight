@@ -341,16 +341,10 @@ MonoBehaviour:
   timelineName: Mai_Idle
   Script: '@Main:
 
-    LoopTimeline;
-
-    return;
-
-
-    @Exit:
-
     # Idle --> Squit
 
-    SetTransition:
-    ''Hello_World'';
+    SetTransition: ''Hello_World'';
+
+    LoopTimeline;
 
     return;'

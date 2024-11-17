@@ -210,14 +210,14 @@
             //1. 等待事件通知，执行下面语句
             WaitHitStunBehavior wait = await objectWait.Wait<WaitHitStunBehavior>();
             if (wait.Error != WaitTypeError.Success) return;
-
-            Log.Warning("HitNotify");
+            
             //(bug: 可能是协程问题，切换行为时无法销毁hitbox的fixture)
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             await bbTimer.WaitFrameAsync();
             
             //2. 取消当前行为，切换到受攻击行为
             BehaviorInfo info = self.GetHitStun(wait.hitStunFlag);
+            self.RegistParam("CancelBehaviorTimer", true);
             timelineComponent.Reload(info.Timeline,info.behaviorOrder);
         }
         

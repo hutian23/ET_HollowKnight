@@ -1450,4 +1450,5 @@ MonoBehaviour:
     DisposeWhiffWindow;\n  OpenGCWindow;\n  AddGCOption: 'Mai_HeavySlash3';\n  EndMarkerEvent:\nMarkerEvent:
     (TransitionCancel)\n  DisposeGCWindow;\n  OpenTransitionWindow;\n  AddGCOption:
     'Mai_Run';\n  AddGCOption: 'Mai_GroundDash';\n  AddGCOption: 'Mai_HeavySlash3';\n 
-    EndMarkerEvent:\nStartTimeline;\nreturn;"
+    EndMarkerEvent:\n# \u78B0\u649E\u4E8B\u4EF6\nTriggerEvent: (TriggerEnter), (Slash)\n   
+    Hit_GotoState: 'KnockBack';\n    EndTriggerEvent:\nStartTimeline;\nreturn;"
