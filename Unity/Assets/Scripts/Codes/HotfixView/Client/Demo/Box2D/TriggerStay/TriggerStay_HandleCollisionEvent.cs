@@ -19,10 +19,11 @@ namespace ET.Client
 
             //1. find trigger event
             BoxInfo info = args.dataA.UserData as BoxInfo;
+            Log.Warning((args.fixtureA.Body == args.fixtureB.Body).ToString());
             if (!hitboxComponent.ContainTriggerEvent(info.boxName,TriggerType.TriggerStay)) return;
 
-            TriggerEvent triggerEvent = hitboxComponent.GetTriggerEvent(info.boxName);
-            TriggerHelper.HandleTriggerEventAsync(triggerEvent,args).Coroutine();
+            // TriggerEvent triggerEvent = hitboxComponent.GetTriggerEvent(info.boxName);
+            // TriggerHelper.HandleTriggerEventAsync(triggerEvent,args).Coroutine();
         }
     }
 }

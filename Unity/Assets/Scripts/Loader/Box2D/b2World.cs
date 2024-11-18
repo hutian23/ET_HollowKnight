@@ -87,22 +87,30 @@ namespace ET
             base.PreSolve(contact, in oldManifold);
             if (contact.FixtureA.UserData is not FixtureData dataA || contact.FixtureB.UserData is not FixtureData dataB)
             {
+                contact.SetEnabled(false);
                 return;
             }
-
-            if (dataA.IsTrigger || dataB.IsTrigger)
+            //同一刚体的夹具
+            if (contact.FixtureA.Body == contact.FixtureB.Body)
             {
-                //TriggerStay事件
-                EventSystem.Instance.Invoke(new PreSolveContact(){contact = contact});
                 contact.SetEnabled(false);
+                return;
             }
-            
+                
             //TODO 优化 这里先直接设置pushBox不会相互碰撞
             if (dataA.UserData is BoxInfo infoA && 
                 dataB.UserData is BoxInfo infoB &&
                 infoA.hitboxType is HitboxType.Squash &&
                 infoB.hitboxType is HitboxType.Squash)
             {
+                contact.SetEnabled(false);
+                return;
+            }
+            
+            if (dataA.IsTrigger || dataB.IsTrigger)
+            {
+                //TriggerStay事件
+                EventSystem.Instance.Invoke(new PreSolveContact(){contact = contact});
                 contact.SetEnabled(false);
             }
         }
