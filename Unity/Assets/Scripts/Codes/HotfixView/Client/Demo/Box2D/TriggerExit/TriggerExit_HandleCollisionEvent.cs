@@ -13,13 +13,6 @@ namespace ET.Client
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-
-            //1. find trigger event
-            BoxInfo info = args.dataA.UserData as BoxInfo;
-            if (!hitboxComponent.ContainTriggerEvent(info.boxName, TriggerType.TriggerExit)) return;
-
-            TriggerEvent triggerEvent = hitboxComponent.GetTriggerEvent(info.boxName);
-            TriggerHelper.HandleTriggerEventAsync(triggerEvent,args).Coroutine();
         }
     }
 }

@@ -26,8 +26,6 @@
             }
 
             //清空碰撞事件组件
-            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            hitboxComponent.Init();
             
             //清空等待事件
             timelineComponent.RemoveComponent<ObjectWait>();

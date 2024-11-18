@@ -18,9 +18,6 @@ namespace ET.Client
                 Fixture fixture = b2Body.hitBoxFixtures[i];
                 b2Body.body.DestroyFixture(fixture);
             }
-            
-            //2. 清除TriggerEvent事件
-            hitboxComponent.ClearTriggerEvent();
             b2Body.hitBoxFixtures.Clear();
 
             await ETTask.CompletedTask;
