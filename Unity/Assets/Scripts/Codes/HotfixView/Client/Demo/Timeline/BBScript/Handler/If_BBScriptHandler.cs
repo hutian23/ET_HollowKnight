@@ -95,6 +95,7 @@ namespace ET.Client
                         BBScriptData _data = BBScriptData.Create(op, data.functionID, null);
                         //判定失败, 跳过整个if块中的代码
                         bool ret = DialogueDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(parser, _data);
+                        _data.Recycle();
                         if (!ret)
                         {
                             parser.function_Pointers[data.functionID] = node.endIndex;
@@ -122,7 +123,8 @@ namespace ET.Client
 
                     BBScriptData _data = BBScriptData.Create(opLine, data.functionID, null);
                     Status ret = await handler.Handle(parser, _data, token);
-
+                    _data.Recycle();
+                    
                     if (token.IsCancel()) return Status.Failed;
                     if (ret != Status.Success) return ret;
                     break;

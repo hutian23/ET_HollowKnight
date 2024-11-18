@@ -5,11 +5,11 @@ namespace ET.Client
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(TriggerEvent))]
     [FriendOf(typeof(HitboxComponent))]
-    public class TriggerEvent_BBScriptHandler : BBScriptHandler
+    public class CollisionEvent_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "TriggerEvent";
+            return "CollisionEvent";
         }
 
         //TriggerEvent: (TriggerStay), (Hurt_Body)
@@ -60,7 +60,7 @@ namespace ET.Client
             int index = bbParser.function_Pointers[data.functionID];
             for (int i = index; i < bbParser.opDict.Count; i++)
             {
-                if (bbParser.opDict[i].Equals("EndTriggerEvent:"))
+                if (bbParser.opDict[i].Equals("EndCollisionEvent:"))
                 {
                     break;
                 }

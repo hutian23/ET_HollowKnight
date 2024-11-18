@@ -17,7 +17,6 @@ namespace ET.Client
 
         public static void Reload(this BBInputComponent self)
         {
-            //TODO Init
             self.WasPressedDict.Clear();
             self.WasPressedDict.Add(BBOperaType.LIGHTPUNCH, false);
             self.WasPressedDict.Add(BBOperaType.LIGHTKICK, false);

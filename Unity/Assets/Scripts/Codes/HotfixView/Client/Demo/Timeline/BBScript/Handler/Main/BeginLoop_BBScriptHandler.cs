@@ -56,7 +56,6 @@ namespace ET.Client
                 ETCancellationToken loopToken = self.GetParam<ETCancellationToken>("LoopToken");
                 loopToken.Cancel();
                 self.RemoveParam("LoopToken");
-                
                 self.RemoveParam("LoopStartIndex");
                 self.RemoveParam("LoopEndIndex");
             }
@@ -72,6 +71,7 @@ namespace ET.Client
             return "BeginLoop";
         }
 
+        //只能在Main携程中使用
         //BeginLoop: (None), (InAir: true), (TransitionCached)
         //EndLoop
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)

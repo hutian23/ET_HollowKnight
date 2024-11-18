@@ -817,12 +817,10 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_2C
-  Script: "@Trigger:\nInputType: 2MPPressed;\nreturn;\n\n@Main:\n# Init\nSetTransition:
-    'SquitToIdle';\n# GCWindow\n# \u78B0\u649E\u4E8B\u4EF6\nTriggerEvent: (TriggerEnter),
-    (SlashBox), (SlashBox_2), (SlashBox_3)\n    Hit_GotoState: 'KnockBack';\n   
-    NotifyHit;\n    EndTriggerEvent:\n# \u653B\u51FB\u56DE\u8C03\nWaitHit:\n    HitStop:
-    0;\n    EndHit:\nBBSprite: '2c_1', 2;\nBBSprite: '2c_2', 2;\nBBSprite: '2c_3',
-    2;\nBBSprite: '2c_4', 2;\nBBSprite: '2c_5', 1;\nOpenGCWindow;\nAddGCOption: 'Mai_GroundDash';\nAddGCOption:
-    'Mai_Jump';\nBBSprite: '2c_5', 3;\nBBSprite: '2c_6', 3;\nBBSprite: '2c_6', 2;\nBBSprite:
-    '2c_7', 2;\nBBSprite: '2c_8', 2;\nBBSprite: '2c_9', 2;\nBBSprite: '2c_10', 3;\nBBSprite:
-    '2c_11', 3;\nreturn;"
+  Script: "@Trigger:\nInputType: 2MPPressed;\nreturn;\n\n@Main:\nSetTransition: 'SquitToIdle';\n#
+    \u6CE8\u518C\u56DE\u8C03\nRegistCallback: (InAir: false), 'AirCheckCallback'\n   
+    LogWarning: 'Hello_World';\n    EndCallback:\nBBSprite: '2c_1', 2;\nBBSprite:
+    '2c_2', 2;\nBBSprite: '2c_3', 2;\nBBSprite: '2c_4', 2;\nBBSprite: '2c_5', 1;\nOpenGCWindow;\nAddGCOption:
+    'Mai_GroundDash';\nAddGCOption: 'Mai_Jump';\nBBSprite: '2c_5', 3;\nBBSprite:
+    '2c_6', 3;\nBBSprite: '2c_6', 2;\nBBSprite: '2c_7', 2;\nBBSprite: '2c_8', 2;\nBBSprite:
+    '2c_9', 2;\nBBSprite: '2c_10', 3;\nBBSprite: '2c_11', 3;\nreturn;"
