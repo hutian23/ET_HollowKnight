@@ -817,53 +817,10 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_2C
-  Script: '@Trigger:
-
-    InputType: 2MPPressed;
-
-    return;
-
-
-    @Main:
-
-    SetTransition:
-    ''SquitToIdle'';
-
-    BBSprite: ''2c_1'', 2;
-
-    BBSprite: ''2c_2'', 2;
-
-    BBSprite:
-    ''2c_3'', 2;
-
-    BBSprite: ''2c_4'', 2;
-
-    BBSprite: ''2c_5'', 1;
-
-    OpenGCWindow;
-
-    AddGCOption:
-    ''Mai_GroundDash'';
-
-    AddGCOption: ''Mai_Jump'';
-
-    BBSprite: ''2c_5'',
-    3;
-
-    BBSprite: ''2c_6'', 3;
-
-    BBSprite: ''2c_6'', 2;
-
-    BBSprite: ''2c_7'',
-    2;
-
-    BBSprite: ''2c_8'', 2;
-
-    BBSprite: ''2c_9'', 2;
-
-    BBSprite: ''2c_10'',
-    3;
-
-    BBSprite: ''2c_11'', 3;
-
-    return;'
+  Script: "@Trigger:\nInputType: 2MPPressed;\nreturn;\n\n@Main:\nSetTransition: 'SquitToIdle';\nBBSprite:
+    '2c_1', 2;\nBBSprite: '2c_2', 2;\nBBSprite: '2c_3', 2;\nBBSprite: '2c_4', 2;\nBBSprite:
+    '2c_5', 1;\n# \u6CE8\u518C\u53D7\u653B\u51FB\u56DE\u8C03\nRegistCallback: (WasHit:
+    true), 'HitCallback'\n  LogWarning: 'HelloWorld';\n  EndCallback:\nOpenGCWindow;\nAddGCOption:
+    'Mai_GroundDash';\nAddGCOption: 'Mai_Jump';\nBBSprite: '2c_5', 3;\nBBSprite:
+    '2c_6', 3;\nBBSprite: '2c_6', 2;\nBBSprite: '2c_7', 2;\nBBSprite: '2c_8', 2;\nBBSprite:
+    '2c_9', 2;\nBBSprite: '2c_10', 3;\nBBSprite: '2c_11', 3;\nreturn;"

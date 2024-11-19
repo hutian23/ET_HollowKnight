@@ -1050,5 +1050,6 @@ MonoBehaviour:
     EndMarkerEvent:\nMarkerEvent: (Open_GCWindow)\n    DisposeWhiffWindow;\n    OpenGCWindow;\n   
     AddGCOption: 'Mai_HeavySlash2';\n    AddGCOption: 'Mai_2C';\n    EndMarkerEvent:\nMarkerEvent:
     (TransitionCancel)\n    DisposeGCWindow;\n    OpenTransitionWindow;\n    AddGCOption:
-    'Mai_Run';\n    AddGCOption: 'Mai_GroundDash';\n    EndMarkerEvent:\nStartTimeline;\nSetTransition:
+    'Mai_Run';\n    AddGCOption: 'Mai_GroundDash';\n    EndMarkerEvent:\nRegistCallback:
+    (WasHit: true), 'HitCallback'\n  LogWarning: 'HelloWorld';\n  EndCallback:\nStartTimeline;\nSetTransition:
     'TransitionToSquit';\nreturn;\n\n@Exit:\nSetVelocityX: 0;\nreturn;"

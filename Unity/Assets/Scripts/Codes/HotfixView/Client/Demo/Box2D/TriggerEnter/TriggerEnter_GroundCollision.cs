@@ -1,5 +1,4 @@
 ﻿using ET.Event;
-using MongoDB.Bson;
 using Timeline;
 
 namespace ET.Client
@@ -9,9 +8,13 @@ namespace ET.Client
     {
         public override void Handle(TriggerEnterCallback args)
         {
-            if (args.dataB.LayerMask != LayerType.Ground) return;
+            CollisionInfo info = args.info;
+            if (info.dataB.LayerMask != LayerType.Ground)
+            {
+                return;
+            }
             
-            TimelineComponent timelineComponent = Root.Instance.Get(args.dataA.InstanceId) as TimelineComponent;
+            TimelineComponent timelineComponent = Root.Instance.Get(info.dataA.InstanceId) as TimelineComponent;
             b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             

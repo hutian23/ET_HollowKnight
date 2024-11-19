@@ -19,12 +19,32 @@ namespace ET.Client
 
             if (dataA.TriggerStayId != 0)
             {
-                EventSystem.Instance.Invoke(dataA.TriggerStayId,new TriggerStayCallback(){fixtureA = fixtureA,dataA = dataA,fixtureB = fixtureB,dataB = dataB,Contact = args.contact});
+                EventSystem.Instance.Invoke(dataA.TriggerStayId,new TriggerStayCallback()
+                {
+                    info = new CollisionInfo()
+                    {
+                        fixtureA = fixtureA,
+                        fixtureB =  fixtureB,
+                        dataA = dataA,
+                        dataB = dataB,
+                        Contact = args.contact
+                    }
+                });
             }
 
             if (dataB.TriggerStayId != 0)
             {
-                EventSystem.Instance.Invoke(dataB.TriggerStayId,new TriggerStayCallback() { fixtureA = fixtureB,dataA = dataB,fixtureB = fixtureA,dataB = dataA,Contact = args.contact});
+                EventSystem.Instance.Invoke(dataB.TriggerStayId,new TriggerStayCallback()
+                {
+                    info =  new CollisionInfo()
+                    {
+                        fixtureA = fixtureB,
+                        fixtureB = fixtureA,
+                        dataA = dataB,
+                        dataB = dataA,
+                        Contact = args.contact
+                    }
+                });
             }
         }
     }

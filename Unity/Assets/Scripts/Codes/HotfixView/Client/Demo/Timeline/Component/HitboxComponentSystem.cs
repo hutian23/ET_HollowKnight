@@ -1,4 +1,4 @@
-﻿using Box2DSharp.Dynamics.Contacts;
+﻿using ET.Event;
 
 namespace ET.Client
 {
@@ -8,6 +8,7 @@ namespace ET.Client
     {
         protected override void Run(HitboxComponent self)
         {
+            self.infoQueue.Clear();
         }
     }
 
@@ -18,16 +19,16 @@ namespace ET.Client
         public static void Init(this HitboxComponent self)
         {
             self.keyFrame = null;
-            self.contactQueue.Clear();
+            self.infoQueue.Clear();
         }
 
-        public static void EnqueueContact(this HitboxComponent self, Contact contact)
+        public static void EnqueueInfo(this HitboxComponent self, CollisionInfo info)
         {
-            if (self.contactQueue.Count >= HitboxComponent.MaxContactCount)
+            if (self.infoQueue.Count >= HitboxComponent.MaxContactCount)
             {
-                self.contactQueue.Dequeue();
+                self.infoQueue.Dequeue();
             }
-            self.contactQueue.Enqueue(contact);
+            self.infoQueue.Enqueue(info);
         }
     }
 }

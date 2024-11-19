@@ -9,37 +9,30 @@ namespace ET.Event
         public b2World B2World;
     }
 
+    #region 主要是区分回调
     public struct TriggerEnterCallback
     {
-        //TriggerEnter回调的调用者
-        public Fixture fixtureA;
-        public FixtureData dataA;
-        
-        public Fixture fixtureB;
-        public FixtureData dataB;
-
-        public Contact Contact;
+        public CollisionInfo info;
     }
-
     public struct TriggerExitCallback
     {
-        public Fixture fixtureA;
-        public FixtureData dataA;
-
-        public Fixture fixtureB;
-        public FixtureData dataB;
-
-        public Contact Contact;
+        public CollisionInfo info;
     }
-
     public struct TriggerStayCallback
     {
+        public CollisionInfo info;
+    }
+    #endregion
+    
+    public struct CollisionInfo
+    {
+        //碰撞事件调用者
         public Fixture fixtureA;
         public FixtureData dataA;
-
+        //和谁发生碰撞
         public Fixture fixtureB;
         public FixtureData dataB;
-
+        //接触点
         public Contact Contact;
     }
 }

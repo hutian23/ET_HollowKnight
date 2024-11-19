@@ -8,9 +8,11 @@ namespace ET.Client
     {
         public override void Handle(TriggerExitCallback args)
         {
-            if(args.dataB.LayerMask != LayerType.Ground) return;
+            CollisionInfo info = args.info;
             
-            TimelineComponent timelineComponent = Root.Instance.Get(args.dataA.InstanceId) as TimelineComponent;
+            if(info.dataB.LayerMask != LayerType.Ground) return;
+            
+            TimelineComponent timelineComponent = Root.Instance.Get(info.dataA.InstanceId) as TimelineComponent;
             timelineComponent.UpdateParam("OnGround", false);
             EventSystem.Instance.PublishAsync(timelineComponent.ClientScene(), new OnGroundChanged()
             {

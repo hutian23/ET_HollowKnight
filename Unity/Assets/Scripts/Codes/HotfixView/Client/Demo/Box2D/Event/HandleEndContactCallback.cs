@@ -19,12 +19,29 @@ namespace ET.Client
 
             if (dataA.TriggerExitId != 0)
             {
-                EventSystem.Instance.Invoke(dataA.TriggerExitId, new TriggerExitCallback() { fixtureA = fixtureA,dataA = dataA, fixtureB = fixtureB, dataB = dataB,Contact = args.contact});
+                EventSystem.Instance.Invoke(dataA.TriggerExitId, new TriggerExitCallback()
+                {
+                    info = new CollisionInfo()
+                    {
+                        fixtureA = fixtureA,
+                        fixtureB =  fixtureB,
+                        dataA = dataA,
+                        dataB = dataB,
+                        Contact = args.contact
+                    }
+                });
             }
 
             if (dataB.TriggerExitId != 0)
             {
-                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback(){fixtureA = fixtureB, dataA = dataB, fixtureB = fixtureA, dataB =  dataA,Contact = args.contact});
+                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback(){  info =  new CollisionInfo()
+                {
+                    fixtureA = fixtureB,
+                    fixtureB = fixtureA,
+                    dataA = dataB,
+                    dataB = dataA,
+                    Contact = args.contact
+                }});
             }
         }
     }

@@ -346,14 +346,12 @@ MonoBehaviour:
 
     @Main:
 
-    Test;
-
     # Init
 
-    # Idle
-    --> Squit
+    # Idle --> Squit
 
-    SetTransition: ''TransitionToSquit'';
+    SetTransition:
+    ''TransitionToSquit'';
 
     SetVelocityX: 0;
 

@@ -10,10 +10,12 @@ namespace ET.Client
     {
         public override void Handle(TriggerEnterCallback args)
         {
-            BoxInfo boxInfo = args.dataB.UserData as BoxInfo;
+            CollisionInfo info = args.info;
+            
+            BoxInfo boxInfo = info.dataB.UserData as BoxInfo;
             if (boxInfo.hitboxType is not HitboxType.Hurt) return;
             
-            b2Body B2Body = Root.Instance.Get(args.dataB.InstanceId) as b2Body;
+            b2Body B2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(B2Body.unitId) as Unit;
             
             //通知unit切换行为
