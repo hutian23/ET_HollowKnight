@@ -1,4 +1,5 @@
 ﻿using ET.Event;
+using Timeline;
 
 namespace ET.Client
 {
@@ -18,6 +19,13 @@ namespace ET.Client
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
             hitboxComponent.EnqueueInfo(info);
+            
+            BoxInfo info1 = info.dataA.UserData as BoxInfo;
+            BoxInfo info2 = info.dataB.UserData as BoxInfo;
+            if (info1.hitboxType is HitboxType.Hit && info2.hitboxType is HitboxType.Hurt)
+            {
+                Log.Warning("Hit Trigger!!!!");
+            }
         }
     }
 }

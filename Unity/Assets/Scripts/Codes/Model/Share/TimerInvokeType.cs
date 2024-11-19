@@ -22,5 +22,6 @@
         public const int SettingCheckTimer = 304;
 
         public const int BehaviorBufferTimer = 305;
+        public const int SingleTimer = 306;
     }
 }

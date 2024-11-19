@@ -5,5 +5,8 @@
     {
         [StaticField]
         public static GameManager Instance;
+        
+        //Test
+        public long SingleTimer;
     }
 }
