@@ -26,10 +26,9 @@ namespace ET.Client
             self.WasPressedDict.Add(BBOperaType.HEAVYKICK, false);
         }
 
-        public static void Update(this BBInputComponent self)
+        public static void FixedUpdate(this BBInputComponent self)
         {
             self.Ops = self.CheckInput();
-            EventSystem.Instance.PublishAsync(self.DomainScene(), new UpdateInputCallback() { Ops = self.Ops }).Coroutine();
         }
 
         public static long CheckInput(this BBInputComponent self)

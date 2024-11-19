@@ -28,7 +28,7 @@ namespace ET.Client
                 inputTimer.Restart();
             }
 
-            //Update one step
+            //FixedUpdate one step
             if (Global.Settings.SingleStep)
             {
                 inputTimer.Accumulator += inputTimer.GetFrameLength();

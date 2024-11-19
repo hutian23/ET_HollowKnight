@@ -127,5 +127,7 @@ namespace Testbed.Abstractions
         public bool SingleStep;
         
         public long instanceId;
+
+        public int StepCount;
     }
 }

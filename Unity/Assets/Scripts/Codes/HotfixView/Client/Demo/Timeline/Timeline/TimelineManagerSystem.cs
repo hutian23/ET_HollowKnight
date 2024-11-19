@@ -13,7 +13,7 @@
             }
         }
 
-        public static void Update(this TimelineManager self)
+        public static void FixedUpdate(this TimelineManager self)
         {
             foreach (long instanceId in self.instanceIds)
             {

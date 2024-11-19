@@ -16,13 +16,12 @@ namespace ET
     public class b2World: TestBase
     {
         private b2Game Game;
-
+        
         public b2World(b2Game _Game)
         {
             Game = _Game;
             //render
             Game.PreRenderCallback += DrawB2World;
-
             //Load
             Input = Global.Input;
             Draw = Global.DebugDraw;
@@ -38,27 +37,11 @@ namespace ET
 
         public new void Step()
         {
-            TimeStep = TestSettings.Hertz > 0.0f? 1.0f / TestSettings.Hertz : 0f;
-            if (Global.Settings.Pause)
-            {
-                TimeStep = 0;
-            }
-
-            World.AllowSleep = TestSettings.EnableSleep;
-            World.WarmStarting = TestSettings.EnableWarmStarting;
-            World.SubStepping = TestSettings.EnableSubStepping;
-
-            PointsCount = 0;
-
-            PreStep();
-            World.Step(TimeStep, TestSettings.VelocityIterations, TestSettings.PositionIterations);
-            PostStep();
-        }
-
-        public void SingleStep()
-        {
-            TimeStep = 1.0f / TestSettings.Hertz;
-
+            //物理世界以固定帧率进行刷新
+            TimeStep = 1 / 60f;
+            StepCount++;
+            Global.Settings.StepCount = StepCount;
+            
             World.AllowSleep = TestSettings.EnableSleep;
             World.WarmStarting = TestSettings.EnableWarmStarting;
             World.SubStepping = TestSettings.EnableSubStepping;

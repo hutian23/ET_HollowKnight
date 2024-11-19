@@ -1,4 +1,6 @@
 ﻿using ET.Event;
+using MongoDB.Bson;
+using Timeline;
 
 namespace ET.Client
 {
@@ -15,6 +17,7 @@ namespace ET.Client
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace ET
         private UnityInput UnityInput;
 
         private b2GUIController controller;
-
+        
         public void Awake()
         {
             fpsCounter = new();
@@ -124,7 +124,8 @@ namespace ET
             {
                 DebugDraw.DrawString(5, 30, "****PAUSED***");
             }
-
+            
+            this.DebugDraw.DrawString(5,Global.Camera.Height - 60,$"Step: {Settings.StepCount}");
             DebugDraw.DrawString(5, Global.Camera.Height - 40, $"{fpsCounter.Ms:0.0} ms");
             DebugDraw.DrawString(5, Global.Camera.Height - 20, $"{fpsCounter.Fps:F1} fps");
 

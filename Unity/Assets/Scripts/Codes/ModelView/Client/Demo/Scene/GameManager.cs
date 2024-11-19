@@ -1,13 +1,9 @@
-﻿using Box2DSharp.Testbed.Unity;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
-    public class GameManager: Entity, IAwake, IDestroy, ILoad, IUpdate
+    public class GameManager: Entity, IAwake, IDestroy, ILoad, IUpdate, IFixedUpdate
     {
         [StaticField]
         public static GameManager Instance;
-
-        public FixedUpdate fixedUpdate;
     }
 }

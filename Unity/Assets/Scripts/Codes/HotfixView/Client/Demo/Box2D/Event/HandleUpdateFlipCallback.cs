@@ -32,7 +32,7 @@ namespace ET.Client
             }
             b2Body.hitBoxFixtures.Clear();
             
-            //3. Update hitBoxFixtures
+            //3. FixedUpdate hitBoxFixtures
             foreach (BoxInfo info in hitBoxComponent.keyFrame.boxInfos)
             {
                 PolygonShape shape = new();
@@ -48,9 +48,7 @@ namespace ET.Client
                         LayerMask = LayerType.Unit, 
                         IsTrigger = info.hitboxType is not HitboxType.Squash,
                         UserData = info,
-                        TriggerEnterId = TriggerEnterType.CollisionEvent,
                         TriggerStayId = TriggerStayType.CollisionEvent,
-                        TriggerExitId = TriggerExitType.CollisionEvent
                     },
                 };
                 Fixture fixture = b2Body.body.CreateFixture(fixtureDef);

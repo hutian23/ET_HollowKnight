@@ -1,5 +1,4 @@
-﻿using Box2DSharp.Dynamics;
-using ET.Event;
+﻿using ET.Event;
 using Testbed.Abstractions;
 using Camera = UnityEngine.Camera;
 
@@ -36,16 +35,6 @@ namespace ET.Client
             EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterB2WorldCreated() { B2World = self.B2World }).Coroutine();
         }
         
-        public class B2GameManagerFixedUpdateSystem : FixedUpdateSystem<b2GameManager>
-        {
-            protected override void FixedUpdate(b2GameManager self)
-            {
-                if(Global.Settings.Pause) return;
-                self.B2World.Step();
-                self.SyncTrans();
-            }
-        }
-        
         public class b2WorldManagerDestroySystem: DestroySystem<b2GameManager>
         {
             protected override void Destroy(b2GameManager self)
@@ -57,14 +46,12 @@ namespace ET.Client
             }
         }
 
-        public static void Update(this b2GameManager self)
+        public static void FixedUpdate(this b2GameManager self)
         {
             //Single Step
-            if (Global.Settings.Pause && Global.Settings.SingleStep)
-            {
-                self.B2World.SingleStep();
-                self.SyncTrans();
-            }
+            if (Global.Settings.Pause && !Global.Settings.SingleStep) return;
+            self.B2World.Step();
+            self.SyncTrans();
         }
         
         private static void SyncTrans(this b2GameManager self)

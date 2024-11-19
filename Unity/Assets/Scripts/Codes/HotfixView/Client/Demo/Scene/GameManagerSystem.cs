@@ -20,20 +20,19 @@ namespace ET.Client
             }
         }
         
-        public class GameManagerUpdateSystem: UpdateSystem<GameManager>
+        [FriendOf(typeof(b2GameManager))]
+        public class GameManagerFixedUpdateSystem : FixedUpdateSystem<GameManager>
         {
-            protected override void Update(GameManager self)
+            protected override void FixedUpdate(GameManager self)
             {
-                // Publish Event --->  Update Game
-                //Input
-                BBInputComponent.Instance.Update();
-                //Single step 
-                b2GameManager.Instance.Update();
-                TimelineManager.Instance.Update();
+                BBInputComponent.Instance.FixedUpdate();
+                b2GameManager.Instance.FixedUpdate();
+                TimelineManager.Instance.FixedUpdate();
+                //init singleStep
                 Global.Settings.SingleStep = false;
             }
         }
-        
+
         public static void Reload(this GameManager self)
         {
             //Editor

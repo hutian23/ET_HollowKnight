@@ -225,7 +225,7 @@
             Editor Only Mode Utility.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.EditorOnlyModeConfig.Update">
+        <member name="M:Sirenix.OdinInspector.Editor.EditorOnlyModeConfig.FixedUpdate">
             <summary>
             Gaither all necessary information about the editor only state.
             </summary>
@@ -1316,7 +1316,7 @@
             Finds the first child recursively, that matches a given predicate.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.Update(System.Boolean)">
+        <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.FixedUpdate(System.Boolean)">
             <summary>
             Updates the property. This method resets the temporary context, and updates the value entry and the property children.
             </summary>
@@ -1496,7 +1496,7 @@
             The number of children on the property.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.PropertyChildren.Update">
+        <member name="M:Sirenix.OdinInspector.Editor.PropertyChildren.FixedUpdate">
             <summary>
             Updates this instance of <see cref="T:Sirenix.OdinInspector.Editor.PropertyChildren"/>.
             </summary>
@@ -1698,7 +1698,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyTree.UpdateID">
             <summary>
-            The current update ID of the tree. This is incremented once, each update, and is used by <see cref="M:Sirenix.OdinInspector.Editor.InspectorProperty.Update(System.Boolean)"/> to avoid updating multiple times in the same update round.
+            The current update ID of the tree. This is incremented once, each update, and is used by <see cref="M:Sirenix.OdinInspector.Editor.InspectorProperty.FixedUpdate(System.Boolean)"/> to avoid updating multiple times in the same update round.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyTree.TargetType">
@@ -2051,7 +2051,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyTree`1.UpdateID">
             <summary>
-            The current update ID of the tree. This is incremented once, each update, and is used by <see cref="M:Sirenix.OdinInspector.Editor.InspectorProperty.Update(System.Boolean)" /> to avoid updating multiple times in the same update round.
+            The current update ID of the tree. This is incremented once, each update, and is used by <see cref="M:Sirenix.OdinInspector.Editor.InspectorProperty.FixedUpdate(System.Boolean)" /> to avoid updating multiple times in the same update round.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyTree`1.UnitySerializedObject">
@@ -2649,7 +2649,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.IPropertyValueCollection.RevertUnappliedValues">
             <summary>
-            Reverts the value collection to its origin values (found in <see cref="P:Sirenix.OdinInspector.Editor.IPropertyValueCollection.Original"/>) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update"/> call, and marks the value collection as being clean again.
+            Reverts the value collection to its origin values (found in <see cref="P:Sirenix.OdinInspector.Editor.IPropertyValueCollection.Original"/>) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate"/> call, and marks the value collection as being clean again.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.IPropertyValueCollection.ForceSetValue(System.Int32,System.Object)">
@@ -2662,7 +2662,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.IPropertyValueCollection.Original">
             <summary>
-            The original values of the value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update"/> call.
+            The original values of the value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate"/> call.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.IPropertyValueCollection`1">
@@ -2682,7 +2682,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.IPropertyValueCollection`1.Original">
             <summary>
-            The original values of the value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update"/> call.
+            The original values of the value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate"/> call.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.IPropertyValueCollection`1.ForceSetValue(System.Int32,`0)">
@@ -2795,7 +2795,7 @@
             An event that is invoked during <see cref="M:Sirenix.OdinInspector.Editor.IPropertyValueEntry.ApplyChanges"/>, when any child values have changed.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.IPropertyValueEntry.Update">
+        <member name="M:Sirenix.OdinInspector.Editor.IPropertyValueEntry.FixedUpdate">
             <summary>
             Updates the values contained in this value entry to the actual values in the target objects, and updates its state (override, type of value, etc.) accordingly.
             </summary>
@@ -2913,7 +2913,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollection.WeakOriginal">
             <summary>
-            The original values of the (loosely typed) value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update"/> call.
+            The original values of the (loosely typed) value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate"/> call.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollection.Item(System.Int32)">
@@ -2937,7 +2937,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueCollection.RevertUnappliedValues">
             <summary>
-            Reverts the value collection to its origin values (found in <see cref="!:Original" />) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update" /> call, and marks the value collection as being clean again.
+            Reverts the value collection to its origin values (found in <see cref="!:Original" />) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate" /> call, and marks the value collection as being clean again.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueCollection.Contains(System.Object)">
@@ -3035,7 +3035,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollection`1.WeakOriginal">
             <summary>
-            The original values of the (loosely typed) value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update" /> call.
+            The original values of the (loosely typed) value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate" /> call.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollection`1.Item(System.Int32)">
@@ -3060,7 +3060,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueCollection`1.RevertUnappliedValues">
             <summary>
-            Reverts the value collection to its origin values (found in <see cref="!:Original" />) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update" /> call, and marks the value collection as being clean again.
+            Reverts the value collection to its origin values (found in <see cref="!:Original" />) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate" /> call, and marks the value collection as being clean again.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueCollection`1.CopyTo(System.Array,System.Int32)">
@@ -3174,12 +3174,12 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.WeakOriginal">
             <summary>
-            The original values of the (loosely typed) value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update" /> call.
+            The original values of the (loosely typed) value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate" /> call.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.Original">
             <summary>
-            The original values of the value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update" /> call.
+            The original values of the value collection, such as they were immediately after the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate" /> call.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.Item(System.Int32)">
@@ -3205,7 +3205,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.RevertUnappliedValues">
             <summary>
-            Reverts the value collection to its origin values (found in <see cref="P:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.Original" />) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update" /> call, and marks the value collection as being clean again.
+            Reverts the value collection to its origin values (found in <see cref="P:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.Original" />) from the last <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate" /> call, and marks the value collection as being clean again.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueCollectionAlias`2.Contains(System.Object)">
@@ -3393,7 +3393,7 @@
             An event that is invoked during <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.ApplyChanges" />, when any child values have changed.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update">
+        <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate">
             <summary>
             Updates the values contained in this value entry to the actual values in the target objects, and updates its state (override, type of value, etc.) accordingly.
             </summary>
@@ -3441,7 +3441,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Create(Sirenix.OdinInspector.Editor.InspectorProperty,System.Type,System.Boolean)">
             <summary>
-            Creates a value entry for a given property, of a given value type. Note that the created value entry is returned un-updated, and needs to have <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.Update"/> called on it before it can be used.
+            Creates a value entry for a given property, of a given value type. Note that the created value entry is returned un-updated, and needs to have <see cref="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.FixedUpdate"/> called on it before it can be used.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntry.ValueIsPrefabDifferent(System.Object,System.Int32)">
@@ -3732,7 +3732,7 @@
             True if any changes were made, otherwise, false.
             </returns>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntryAlias.Update">
+        <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntryAlias.FixedUpdate">
             <summary>
             Updates the values contained in this value entry to the actual values in the target objects, and updates its state (override, type of value, etc.) accordingly.
             </summary>
@@ -3875,7 +3875,7 @@
             True if any changes were made, otherwise, false.
             </returns>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntryAlias`2.Update">
+        <member name="M:Sirenix.OdinInspector.Editor.PropertyValueEntryAlias`2.FixedUpdate">
             <summary>
             Updates the values contained in this value entry to the actual values in the target objects, and updates its state (override, type of value, etc.) accordingly.
             </summary>

@@ -32,6 +32,7 @@
         public const int ShakeTimer = 114;
         public const int LoopTimer = 115;
         public const int HitStopTestTimer = 116;
+        public const int HitboxCheckTimer = 117;
         public const int CallbackCheckTimer = 118;
     }
 }

@@ -1986,7 +1986,7 @@
             Initializes a new instance of the <see cref="T:Sirenix.Utilities.Editor.GUIPagingHelper"/> class.
             </summary>
         </member>
-        <member name="M:Sirenix.Utilities.Editor.GUIPagingHelper.Update(System.Int32)">
+        <member name="M:Sirenix.Utilities.Editor.GUIPagingHelper.FixedUpdate(System.Int32)">
             <summary>
             Updates all values based on <paramref name="elementCount"/> and <see cref="!:NumberOfItemsPrPage"/>.
             </summary>
@@ -2062,7 +2062,7 @@
         <member name="P:Sirenix.Utilities.Editor.GUIPagingHelper.ElementCount">
             <summary>
             Gets the total number of elements.
-            Use <see cref="M:Sirenix.Utilities.Editor.GUIPagingHelper.Update(System.Int32)"/> to change the value.
+            Use <see cref="M:Sirenix.Utilities.Editor.GUIPagingHelper.FixedUpdate(System.Int32)"/> to change the value.
             </summary>
         </member>
         <member name="M:Sirenix.Utilities.Editor.GUIPagingHelper.DrawToolbarPagingButtons(UnityEngine.Rect@,System.Boolean,System.Boolean,System.Int32)">
@@ -8248,7 +8248,7 @@
             Gets a value indicating whether this instance is new frame.
             </summary>
         </member>
-        <member name="M:Sirenix.Utilities.Editor.GUIFrameCounter.Update">
+        <member name="M:Sirenix.Utilities.Editor.GUIFrameCounter.FixedUpdate">
             <summary>
             Updates the frame counter and returns itself.
             </summary>

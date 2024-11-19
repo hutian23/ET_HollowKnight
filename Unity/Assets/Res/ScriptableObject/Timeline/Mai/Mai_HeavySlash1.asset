@@ -1045,8 +1045,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_HeavySlash1
-  Script: "@Trigger:\nInputType: LightPunchPressed;\nInAir: false;\nreturn;\n\n@Main:\nCollisionEvent:
-    (TriggerStay), (Hurt_Body)\n  EndCollisionEvent:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nMarkerEvent:
+  Script: "@Trigger:\nInputType: LightPunchPressed;\nInAir: false;\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nMarkerEvent:
     (Open_WhiffWindow)\n    OpenWhiffWindow;\n    AddWhiffOption: 'Mai_GroundDash';\n   
     EndMarkerEvent:\nMarkerEvent: (Open_GCWindow)\n    DisposeWhiffWindow;\n    OpenGCWindow;\n   
     AddGCOption: 'Mai_HeavySlash2';\n    AddGCOption: 'Mai_2C';\n    EndMarkerEvent:\nMarkerEvent:
