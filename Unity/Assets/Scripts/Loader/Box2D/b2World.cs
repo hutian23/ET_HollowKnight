@@ -39,7 +39,6 @@ namespace ET
         {
             //物理世界以固定帧率进行刷新
             TimeStep = 1 / 60f;
-            StepCount++;
             Global.Settings.StepCount = StepCount;
             
             World.AllowSleep = TestSettings.EnableSleep;
@@ -51,6 +50,7 @@ namespace ET
             PreStep();
             World.Step(TimeStep, TestSettings.VelocityIterations, TestSettings.PositionIterations);
             PostStep();
+            StepCount++;
         }
         
         public override void BeginContact(Contact contact)

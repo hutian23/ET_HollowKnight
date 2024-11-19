@@ -72,7 +72,7 @@ namespace ET.Client
             return TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
         }
 
-        private static void TimerUpdate(this BBTimerComponent self)
+        public static void TimerUpdate(this BBTimerComponent self)
         {
             //计算当前帧
             long now = self._gameTimer.ElapsedTicks;

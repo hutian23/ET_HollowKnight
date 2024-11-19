@@ -24,9 +24,11 @@ namespace ET.Client
             }
 
             //update one step
+            //thats the fucking problem!!!
             if (Global.Settings.SingleStep)
             {
                 bbTimer.Accumulator += bbTimer.GetFrameLength();
+                bbTimer.TimerUpdate();
             }
             await ETTask.CompletedTask;
         }

@@ -6,27 +6,28 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    [FriendOf(typeof (HitboxComponent))]
-    [FriendOf(typeof (b2Body))]
-    public class HandleUpdateHitBoxCallback: AInvokeHandler<UpdateHitboxCallback>
+    [FriendOf(typeof(HitboxComponent))]
+    [FriendOf(typeof(b2Body))]
+    [FriendOf(typeof(b2GameManager))]
+    public class HandleUpdateHitBoxCallback : AInvokeHandler<UpdateHitboxCallback>
     {
         public override void Handle(UpdateHitboxCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
             b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            
+
             //更新关键帧
-            hitBoxComponent.keyFrame = args.Keyframe; 
+            hitBoxComponent.keyFrame = args.Keyframe;
 
             //1. Dispose old hitBoxFixtures
             for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
             {
                 Fixture fixture = b2Body.hitBoxFixtures[i];
                 b2Body.body.DestroyFixture(fixture);
-            }  
+            }
             b2Body.hitBoxFixtures.Clear();
-            
+
             //2. update hitBoxFixtures
             foreach (BoxInfo info in args.Keyframe.boxInfos)
             {
@@ -39,10 +40,11 @@ namespace ET.Client
                     Friction = 1f,
                     UserData = new FixtureData()
                     {
-                        InstanceId = b2Body.InstanceId, 
-                        LayerMask = LayerType.Unit, 
+                        InstanceId = b2Body.InstanceId,
+                        LayerMask = LayerType.Unit,
                         IsTrigger = info.hitboxType is not HitboxType.Squash,
                         UserData = info,
+                        TriggerEnterId = TriggerEnterType.CollisionEvent,
                         TriggerStayId = TriggerStayType.CollisionEvent,
                     }
                 };

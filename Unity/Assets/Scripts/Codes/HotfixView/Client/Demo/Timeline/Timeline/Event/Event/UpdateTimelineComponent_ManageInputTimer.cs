@@ -28,10 +28,11 @@ namespace ET.Client
                 inputTimer.Restart();
             }
 
-            //FixedUpdate one step
+            //
             if (Global.Settings.SingleStep)
             {
                 inputTimer.Accumulator += inputTimer.GetFrameLength();
+                inputTimer.TimerUpdate();
             }
 
             await ETTask.CompletedTask;

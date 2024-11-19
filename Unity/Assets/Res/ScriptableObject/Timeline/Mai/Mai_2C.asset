@@ -838,33 +838,36 @@ MonoBehaviour:
 
     BBSprite: ''2c_4'', 2;
 
-    LogWarning: ''HitFrameStart'';
+    LogWarning: ''hitbox Start'';
 
     BBSprite:
     ''2c_5'', 1;
 
+    LogWarning: ''Hitbox End'';
+
     OpenGCWindow;
 
-    AddGCOption: ''Mai_GroundDash'';
-
     AddGCOption:
-    ''Mai_Jump'';
+    ''Mai_GroundDash'';
 
-    BBSprite: ''2c_5'', 3;
+    AddGCOption: ''Mai_Jump'';
+
+    BBSprite: ''2c_5'',
+    3;
 
     BBSprite: ''2c_6'', 3;
 
-    BBSprite:
-    ''2c_6'', 2;
+    BBSprite: ''2c_6'', 2;
 
-    BBSprite: ''2c_7'', 2;
+    BBSprite: ''2c_7'',
+    2;
 
     BBSprite: ''2c_8'', 2;
 
-    BBSprite:
-    ''2c_9'', 2;
+    BBSprite: ''2c_9'', 2;
 
-    BBSprite: ''2c_10'', 3;
+    BBSprite: ''2c_10'',
+    3;
 
     BBSprite: ''2c_11'', 3;
 

@@ -111,6 +111,11 @@ namespace Timeline
 
             return maxFrame;
         }
+
+        public int GetNow()
+        {
+            return CurrentFrame;
+        }
     }
 
     public abstract class RuntimeTrack

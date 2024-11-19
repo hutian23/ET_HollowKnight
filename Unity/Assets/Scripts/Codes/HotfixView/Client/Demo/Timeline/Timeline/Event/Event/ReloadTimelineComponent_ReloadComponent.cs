@@ -14,6 +14,7 @@
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             timelineComponent.Init();
 
+            //这里跟执行顺序有关，我们希望先执行逻辑，再进行物理模拟(eg. 同一帧内，先更新hitbox生成夹具，然后再进行碰撞检测，实现更新hitbox就能立刻调用碰撞回调的效果)
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.ReLoad();
 
