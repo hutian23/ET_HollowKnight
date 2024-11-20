@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Box2DSharp.Dynamics.Contacts;
-using ET.Event;
 using Timeline;
 
 namespace ET.Client
@@ -10,10 +8,7 @@ namespace ET.Client
     {
         public HitboxKeyframe keyFrame;
 
-        //记录当前帧Hitbox的碰撞信息
-        public Queue<CollisionInfo> infoQueue = new(MaxContactCount);
-
-        public long checkTimer;
-        public const int MaxContactCount = 100;
+        //考虑到回调有注册先后顺序的问题?
+        public Queue<string> callbackQueue = new();
     }
 }

@@ -48,8 +48,12 @@ namespace ET.Client
 
         public static void FixedUpdate(this b2GameManager self)
         {
-            //Single Step
-            if (Global.Settings.Pause && !Global.Settings.SingleStep) return;
+            if (Global.Settings.Pause) return;
+            self.Step();
+        }
+
+        public static void Step(this b2GameManager self)
+        {
             self.B2World.Step();
             self.SyncTrans();
         }

@@ -12,6 +12,11 @@ namespace ET
         public bool Pause;
     }
 
+    public struct SingleStepCallback
+    {
+        public bool SingleStep;
+    }
+
     public struct UpdateBehaviorCallback
     {
         public long instanceId;

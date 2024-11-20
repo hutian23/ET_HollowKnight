@@ -382,18 +382,19 @@ MonoBehaviour:
 
     @Main:
 
-    OpenCancelWindow;
+    SetVelocityX:
+    0;
 
-    BBSprite:
-    ''Mai_Land_1'', 2;
+    BBSprite: ''Mai_Land_1'', 2;
 
     BBSprite: ''Mai_Land_2'', 3;
 
-    BBSprite: ''Mai_Land_3'',
-    4;
+    BBSprite:
+    ''Mai_Land_3'', 4;
 
     BBSprite: ''Mai_Land_4'', 3;
 
-    BBSprite: ''Mai_Land_5'', 2;
+    BBSprite: ''Mai_Land_5'',
+    2;
 
     return;'

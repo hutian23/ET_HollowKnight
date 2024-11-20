@@ -37,8 +37,6 @@ namespace ET.Client
                 BBInputComponent.Instance.FixedUpdate();
                 TimelineManager.Instance.FixedUpdate();
                 b2GameManager.Instance.FixedUpdate();
-                //init singleStep
-                Global.Settings.SingleStep = false;
             }
         }
 

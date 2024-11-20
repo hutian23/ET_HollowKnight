@@ -1,5 +1,4 @@
 ﻿using ET.Event;
-using Timeline;
 
 namespace ET.Client
 {
@@ -8,18 +7,18 @@ namespace ET.Client
     [FriendOf(typeof(TriggerEvent))]
     [FriendOf(typeof(HitboxComponent))]
     [FriendOf(typeof(BBParser))]
+    [FriendOf(typeof(BBCallback))]
     public class TriggerStay_HandleCollisionEvent : AInvokeHandler<TriggerStayCallback>
     {
         public override void Handle(TriggerStayCallback args)
         {
             CollisionInfo info = args.info;
-            
+
             b2Body b2Body = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            hitboxComponent.EnqueueInfo(info);
-            
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
         }
     }
 }

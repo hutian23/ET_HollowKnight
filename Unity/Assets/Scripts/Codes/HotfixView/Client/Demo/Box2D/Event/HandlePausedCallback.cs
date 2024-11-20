@@ -1,4 +1,5 @@
-﻿using Testbed.Abstractions;
+﻿using MongoDB.Bson;
+using Testbed.Abstractions;
 
 namespace ET.Client
 {
@@ -7,8 +8,10 @@ namespace ET.Client
     {
         public override void Handle(PausedCallback args)
         {
-            //pause b2world
             Global.Settings.Pause = args.Pause;
+            //抛出事件?
+            // loader层只能调用回调，不能抛出事件
+            EventSystem.Instance.PublishAsync(ClientSceneManagerComponent.Instance.Get(1), new PausedCallback() { Pause = args.Pause }).Coroutine();
         }
     }
 }

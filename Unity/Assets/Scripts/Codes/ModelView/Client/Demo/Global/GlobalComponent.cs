@@ -3,6 +3,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
+    //GlobalComponent 挂载在rootScene下
     public class GlobalComponent: Entity, IAwake
     {
         [StaticField]

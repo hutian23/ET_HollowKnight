@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ET.Event;
 
 namespace ET.Client
 {
@@ -23,7 +24,7 @@ namespace ET.Client
             }
         }
 
-        public class DialogueDispatcherComponentDestorySystem: DestroySystem<DialogueDispatcherComponent>
+        public class DialogueDispatcherComponentDestroySystem: DestroySystem<DialogueDispatcherComponent>
         {
             protected override void Destroy(DialogueDispatcherComponent self)
             {
@@ -144,6 +145,20 @@ namespace ET.Client
                 }
                 self.BBInputHandlers.Add(handler.GetInputType(),handler);
             }
+
+            self.CollisionCallbacks.Clear();
+            var collisionCallbacks = EventSystem.Instance.GetTypes(typeof (CollisionCallbackAttribute));
+            foreach (var type in collisionCallbacks)
+            {
+                CollisionCallback callback = Activator.CreateInstance(type) as CollisionCallback;
+                if (callback == null)
+                {
+                    Log.Error($"this obj is not a collisionCallback:{type.Name}");
+                    continue;
+                }
+                
+                self.CollisionCallbacks.Add(callback.GetCollisionType(), callback);
+            }
         }
 
         public static async ETTask<Status> Handle(this DialogueDispatcherComponent self, Unit unit, object node, ETCancellationToken token)
@@ -223,6 +238,17 @@ namespace ET.Client
             if (!self.BBInputHandlers.TryGetValue(name, out BBInputHandler handler))
             {
                 Log.Error($"not found bbinputhandler: {name}");
+                return null;
+            }
+
+            return handler;
+        }
+
+        public static CollisionCallback GetCollisionCallback(this DialogueDispatcherComponent self, string name)
+        {
+            if (!self.CollisionCallbacks.TryGetValue(name, out CollisionCallback handler))
+            {
+                Log.Error($"not found collision callback: {name}");
                 return null;
             }
 

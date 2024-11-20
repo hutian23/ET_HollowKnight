@@ -346,8 +346,6 @@ MonoBehaviour:
 
     @Main:
 
-    OpenCancelWindow;
-
     BBSprite:
     ''Mai_LightLand_1'', 3;
 

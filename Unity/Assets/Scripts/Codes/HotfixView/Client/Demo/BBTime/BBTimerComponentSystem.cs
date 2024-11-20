@@ -29,7 +29,7 @@ namespace ET.Client
             }
         }
 
-        public class BBTimerComponentDestorySystem: DestroySystem<BBTimerComponent>
+        public class BBTimerComponentDestroySystem: DestroySystem<BBTimerComponent>
         {
             protected override void Destroy(BBTimerComponent self)
             {

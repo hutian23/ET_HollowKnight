@@ -15,10 +15,10 @@
 
         public static void FixedUpdate(this TimelineManager self)
         {
-            foreach (long instanceId in self.instanceIds)
-            {
-                EventSystem.Instance.PublishAsync(self.DomainScene(), new UpdateTimelineComponent() { instanceId = instanceId }).Coroutine();
-            }
+            // foreach (long instanceId in self.instanceIds)
+            // {
+            //     EventSystem.Instance.PublishAsync(self.DomainScene(), new UpdateTimelineComponent() { instanceId = instanceId }).Coroutine();
+            // }
         }
 
         public class TimelineManagerDestroySystem: DestroySystem<TimelineManager>

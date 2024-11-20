@@ -63,6 +63,12 @@ namespace ET
             EventSystem.Instance.Invoke(new EndContact() { contact = contact });
         }
 
+        protected override void PostStep()
+        {
+            base.PostStep();
+            //TODO HandleCollisionEvent
+        }
+
         public override void PreSolve(Contact contact, in Manifold oldManifold)
         {
             base.PreSolve(contact, in oldManifold);

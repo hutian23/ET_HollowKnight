@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [ChildOf(typeof(BBParser))]
+    [ChildOf]
     public class BBCallback : Entity,IAwake,IDestroy
     {
         public long CheckTimer;

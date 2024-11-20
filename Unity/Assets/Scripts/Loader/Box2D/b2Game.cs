@@ -304,7 +304,7 @@ namespace ET
             //Single Step
             if (key.f3Key.wasPressedThisFrame)
             {
-                Global.Settings.SingleStep = !Global.Settings.SingleStep;
+                EventSystem.Instance?.Invoke(new SingleStepCallback(){SingleStep = !Global.Settings.SingleStep});
             }
         }
 
