@@ -45,7 +45,7 @@
         {
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            BBTimerComponent bbTimer = inputWait.GetComponent<BBTimerComponent>();
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.UpdateFlipTimer, inputWait);
             token.Add(() => { bbTimer.Remove(ref timer); });

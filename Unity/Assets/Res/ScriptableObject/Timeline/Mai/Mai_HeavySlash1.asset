@@ -992,7 +992,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 34|Timeline.EventInfo, Unity.Loader
@@ -1030,6 +1030,18 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 37|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 9
+    - Name: keyframeName
+      Entry: 1
+      Data: HitStart
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -1045,11 +1057,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_HeavySlash1
-  Script: "@Trigger:\nInputType: LightPunchPressed;\nInAir: false;\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nMarkerEvent:
-    (Open_WhiffWindow)\n    OpenWhiffWindow;\n    AddWhiffOption: 'Mai_GroundDash';\n   
-    EndMarkerEvent:\nMarkerEvent: (Open_GCWindow)\n    DisposeWhiffWindow;\n    OpenGCWindow;\n   
-    AddGCOption: 'Mai_HeavySlash2';\n    AddGCOption: 'Mai_2C';\n    EndMarkerEvent:\nMarkerEvent:
-    (TransitionCancel)\n    DisposeGCWindow;\n    OpenTransitionWindow;\n    AddGCOption:
-    'Mai_Run';\n    AddGCOption: 'Mai_GroundDash';\n    EndMarkerEvent:\nRegistCallback:
-    (WasHit: true), 'HitCallback'\n  LogWarning: 'HelloWorld';\n  EndCallback:\nStartTimeline;\nSetTransition:
+  Script: "@Trigger:\nInputType: LightPunchPressed;\nInAir: false;\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nStartTimeline;\nSetTransition:
     'TransitionToSquit';\nreturn;\n\n@Exit:\nSetVelocityX: 0;\nreturn;"

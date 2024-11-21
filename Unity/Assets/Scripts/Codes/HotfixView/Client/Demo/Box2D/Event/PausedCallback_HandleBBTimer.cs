@@ -3,43 +3,22 @@
 namespace ET.Client
 {
     [Event((SceneType.Client))]
-    [FriendOf(typeof(TimelineManager))]
+    [FriendOf(typeof(BBTimerManager))]
     public class PausedCallback_HandleBBTimer : AEvent<PausedCallback>
     {
         protected override async ETTask Run(Scene scene, PausedCallback args)
         {
-            foreach (long instanceId in TimelineManager.Instance.instanceIds)
+            foreach (long instanceId in BBTimerManager.Instance.instanceIds)
             {
-                TimelineComponent timelineComponent = Root.Instance.Get(instanceId) as TimelineComponent;
-                
-                //1. combat timer
-                // 关闭 / 启动 当前场景下所有unit的战斗计时器
-                BBTimerComponent combatTimer = timelineComponent.GetComponent<BBTimerComponent>();
+                BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
                 if (Global.Settings.Pause)
                 {
-                    combatTimer.Pause();
+                    bbTimer.Pause();
                 }
                 else
                 {
-                    combatTimer.Restart();
+                    bbTimer.Restart();
                 }
-                
-                //2. input timer(if unit is player)
-                InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-                if (inputWait == null)
-                {
-                    continue;
-                }
-                BBTimerComponent inputTimer = inputWait.GetComponent<BBTimerComponent>();
-                if (Global.Settings.Pause)
-                {
-                    inputTimer.Pause();
-                }
-                else
-                {
-                    inputTimer.Restart();
-                }
-
             }
             await ETTask.CompletedTask;
         }

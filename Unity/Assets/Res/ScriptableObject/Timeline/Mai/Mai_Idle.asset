@@ -346,14 +346,17 @@ MonoBehaviour:
 
     @Main:
 
+    InitSubCoroutine;
+
     # Init
 
-    # Idle --> Squit
+    #
+    Idle --> Squit
 
-    SetTransition:
-    ''TransitionToSquit'';
+    SetTransition: ''TransitionToSquit'';
 
-    SetVelocityX: 0;
+    SetVelocityX:
+    0;
 
     UpdateFlip;
 

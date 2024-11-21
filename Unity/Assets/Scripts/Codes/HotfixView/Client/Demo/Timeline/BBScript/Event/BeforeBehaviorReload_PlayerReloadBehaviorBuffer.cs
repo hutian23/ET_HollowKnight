@@ -27,14 +27,9 @@
             buffer.GCOptions.Clear();
             buffer.WhiffOptions.Clear();
 
-            //3. 
+            //3. 移除行为机控制器，进入行为后如果取消到其他行为由当前行为决定
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.Remove(ref buffer.CheckTimer);
-            // 进入一些特殊行为，不会启动行为机
-            if (!bbParser.ContainParam("CancelBehaviorTimer"))
-            {
-                buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BehaviorCheckTimer, buffer);
-            }
             await ETTask.CompletedTask;
         }
     }

@@ -11,10 +11,7 @@ namespace ET.Client
     {
         public long timer;
         public long Ops;
-
-        //BBScript中init协程中注册到这里
-        public HashSet<BBInputHandler> handlers = new();
-        public HashSet<string> runningHandlers = new();
+        
         public Dictionary<string, bool> bufferDict = new();
 
         public ETCancellationToken Token = new();

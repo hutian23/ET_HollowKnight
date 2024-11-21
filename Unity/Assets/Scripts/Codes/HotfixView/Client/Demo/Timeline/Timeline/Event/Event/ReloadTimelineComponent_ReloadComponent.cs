@@ -19,16 +19,12 @@
             
             timelineComponent.Init();
 
-            //这里跟执行顺序有关，我们希望先执行逻辑，再进行物理模拟(eg. 同一帧内，先更新hitbox生成夹具，然后再进行碰撞检测，实现更新hitbox就能立刻调用碰撞回调的效果)
+            //这里跟执行顺序有关，我们希望先执行逻辑，再进行物理模拟(ps: 同一帧内，先更新hitbox生成夹具，然后再进行碰撞检测，实现更新hitbox就能立刻调用碰撞回调的效果)
             bbTimer.ReLoad();
 
             //获得输入，更新输入缓冲区定时器
             //只有玩家会挂载inputWait
-            if (inputWait != null)
-            {
-                inputWait.Init();
-                inputWait.StartInputHandleTimer();
-            }
+            inputWait?.Init();
 
             //清空碰撞事件组件
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
@@ -44,25 +40,23 @@
             timelineComponent.AddComponent<ObjectWait>();
 
             //重载行为机
-            #region SkillBuffer
             //1-0 初始化
             buffer.Init();
-
+            
             //1-1 RootInit
             string RootScript = buffer.GetParent<TimelineComponent>().GetTimelinePlayer().BBPlayable.rootScript;
             parser.InitScript(RootScript);
             await parser.Invoke("RootInit", parser.cancellationToken);
             if (parser.cancellationToken.IsCancel()) return;
-            #endregion
             buffer.WaitHitStunNotify().Coroutine();
-
+            
             //1-2 重载Parser,进入默认行为
             BehaviorInfo info = buffer.GetInfoByOrder(0);
             timelineComponent.Reload(info.Timeline, info.behaviorOrder);
             
             //1-3 注册变量
             timelineComponent.RegistParam("OnGround", false);
-
+            
             await ETTask.CompletedTask;
         }
     }

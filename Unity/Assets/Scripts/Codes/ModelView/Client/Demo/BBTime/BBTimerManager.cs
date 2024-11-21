@@ -8,7 +8,9 @@ namespace ET.Client
         [StaticField]
         public static BBTimerManager Instance;
 
+        public long SceneTimer_InstanceId;
+        
         //管理当前场景下的帧计时器
-        public List<long> instanceId = new();
+        public List<long> instanceIds = new();
     }
 }

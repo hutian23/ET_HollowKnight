@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using Testbed.Abstractions;
+﻿using Testbed.Abstractions;
 
 namespace ET.Client
 {

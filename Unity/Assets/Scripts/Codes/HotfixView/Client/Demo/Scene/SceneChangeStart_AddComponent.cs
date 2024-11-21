@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 namespace ET.Client
 {
     [Event(SceneType.Client)]
-    public class SceneChangeStart_AddComponent: AEvent<EventType.SceneChangeStart>
+    [FriendOf(typeof(BBTimerManager))]
+    public class SceneChangeStart_AddComponent : AEvent<EventType.SceneChangeStart>
     {
         protected override async ETTask Run(Scene scene, EventType.SceneChangeStart args)
         {
@@ -21,7 +22,12 @@ namespace ET.Client
             //添加物理世界管理组件
             currentScene.AddComponent<b2GameManager>();
             currentScene.AddComponent<GameManager>();
-            currentScene.AddComponent<BBTimerComponent>();
+
+            currentScene.AddComponent<BBTimerManager>();
+            //注册SceneTimer
+            BBTimerComponent sceneTimer = currentScene.AddComponent<BBTimerComponent>();
+            BBTimerManager.Instance.SceneTimer_InstanceId = sceneTimer.InstanceId;
+            BBTimerManager.Instance.RegistTimer(sceneTimer);
         }
     }
 }
