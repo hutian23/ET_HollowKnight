@@ -25,12 +25,7 @@ namespace ET.Client
             go.transform.localScale = new Vector3( b2Body.GetFlip(), 1, 1);
             
             //2. Dispose old hitBoxFixtures
-            for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
-            {
-                Fixture fixture = b2Body.hitBoxFixtures[i];
-                b2Body.body.DestroyFixture(fixture);
-            }
-            b2Body.hitBoxFixtures.Clear();
+            b2Body.ClearHitbox();
             
             //3. FixedUpdate hitBoxFixtures
             foreach (BoxInfo info in hitBoxComponent.keyFrame.boxInfos)

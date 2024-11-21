@@ -1,14 +1,15 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (BehaviorInfo))]
-    [FriendOf(typeof (BehaviorBuffer))]
-    [FriendOf(typeof (BBTimerComponent))]
+    [FriendOf(typeof(BehaviorInfo))]
+    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BBTimerComponent))]
+    [FriendOfAttribute(typeof(ET.Client.b2Body))]
     public static class BehaviorBufferSystem
     {
         [Invoke(BBTimerInvokeType.BehaviorCheckTimer)]
-        [FriendOf(typeof (BehaviorBuffer))]
-        [FriendOf(typeof (BehaviorInfo))]
-        public class BehaviorCheckTimer: BBTimer<BehaviorBuffer>
+        [FriendOf(typeof(BehaviorBuffer))]
+        [FriendOf(typeof(BehaviorInfo))]
+        public class BehaviorCheckTimer : BBTimer<BehaviorBuffer>
         {
             protected override void Run(BehaviorBuffer self)
             {
@@ -21,7 +22,7 @@
                     {
                         break;
                     }
-                    
+
                     bool ret = info.BehaviorCheck();
                     if (ret)
                     {
@@ -29,13 +30,13 @@
                         {
                             self.GetParent<TimelineComponent>().Reload(info.Timeline, info.behaviorOrder);
                         }
-                    
+
                         break;
                     }
                 }
             }
         }
-        
+
         public static void Init(this BehaviorBuffer self)
         {
             self.CheckTimer = 0;
@@ -83,7 +84,7 @@
             }
             return self.GetChild<BehaviorInfo>(infoId);
         }
-        
+
         #region Param
 
         public static T RegistParam<T>(this BehaviorBuffer self, string paramName, T value)
@@ -109,7 +110,7 @@
 
             if (variable.value is not T value)
             {
-                Log.Error($"cannot format {variable.name} to {typeof (T)}");
+                Log.Error($"cannot format {variable.name} to {typeof(T)}");
                 return default;
             }
 
@@ -140,12 +141,12 @@
             {
                 return false;
             }
-            
+
             self.paramDict[paramName].Recycle();
             self.paramDict.Remove(paramName);
             return true;
         }
-        
+
         public static void ClearParam(this BehaviorBuffer self)
         {
             foreach (var kv in self.paramDict)
@@ -155,7 +156,7 @@
 
             self.paramDict.Clear();
         }
-        
+
         #endregion
 
         #region GCOption
@@ -206,20 +207,24 @@
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             ObjectWait objectWait = timelineComponent.GetComponent<ObjectWait>();
-            
+
             //1. 等待事件通知，执行下面语句
             WaitHitStunBehavior wait = await objectWait.Wait<WaitHitStunBehavior>();
             if (wait.Error != WaitTypeError.Success) return;
-            //(bug: 可能是协程问题，切换行为时无法销毁hitbox的fixture)
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            await bbTimer.WaitFrameAsync();
+
+            b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body.ClearHitbox();
             
+            //(bug: 可能是协程问题，切换行为时无法销毁hitbox的fixture)
+            // BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            // await bbTimer.WaitFrameAsync();
+
             //2. 取消当前行为，切换到受攻击行为
-            BehaviorInfo info = self.GetHitStun(wait.hitStunFlag);
-            self.RegistParam("CancelBehaviorTimer", true);
-            timelineComponent.Reload(info.Timeline,info.behaviorOrder);
+            // BehaviorInfo info = self.GetHitStun(wait.hitStunFlag);
+            // self.RegistParam("CancelBehaviorTimer", true);
+            // timelineComponent.Reload(info.Timeline,info.behaviorOrder);
         }
-        
+
         #endregion
     }
 }

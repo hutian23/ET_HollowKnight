@@ -1,6 +1,4 @@
-﻿using Box2DSharp.Dynamics;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Client)]
     [FriendOf(typeof(b2Body))]
@@ -17,12 +15,7 @@ namespace ET.Client
             BBParser bbParser = unit.GetComponent<TimelineComponent>().GetComponent<BBParser>();
             
             //1. 销毁旧夹具
-            for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
-            {
-                Fixture fixture = b2Body.hitBoxFixtures[i];
-                b2Body.body.DestroyFixture(fixture);
-            }  
-            b2Body.hitBoxFixtures.Clear();
+            b2Body.ClearHitbox();
             
             //2. 转向
             FlipState preFlag = b2Body.Flip;
@@ -52,6 +45,7 @@ namespace ET.Client
                 callback.Dispose(bbParser);
             }
             hitboxComponent.Init();
+            
             await ETTask.CompletedTask;
         }
     }

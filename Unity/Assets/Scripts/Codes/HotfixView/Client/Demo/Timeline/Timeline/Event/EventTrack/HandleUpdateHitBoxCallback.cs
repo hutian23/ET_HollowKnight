@@ -21,13 +21,8 @@ namespace ET.Client
             hitBoxComponent.keyFrame = args.Keyframe;
 
             //1. Dispose old hitBoxFixtures
-            for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
-            {
-                Fixture fixture = b2Body.hitBoxFixtures[i];
-                b2Body.body.DestroyFixture(fixture);
-            }
-            b2Body.hitBoxFixtures.Clear();
-
+            b2Body.ClearHitbox();
+            
             //2. update hitBoxFixtures
             foreach (BoxInfo info in args.Keyframe.boxInfos)
             {

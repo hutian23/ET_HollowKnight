@@ -1,4 +1,5 @@
-﻿using Box2DSharp.Testbed.Unity.Inspection;
+﻿using Box2DSharp.Dynamics;
+using Box2DSharp.Testbed.Unity.Inspection;
 using UnityEngine;
 using Transform = Box2DSharp.Common.Transform;
 
@@ -43,7 +44,7 @@ namespace ET.Client
             go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
             self.UpdateFlag = false;
         }
-
+        
         public static System.Numerics.Vector2 GetVelocity(this b2Body self)
         {
             return self.body.LinearVelocity;
@@ -96,6 +97,16 @@ namespace ET.Client
         public static System.Numerics.Vector2 GetPosition(this b2Body self)
         {
             return self.body.GetPosition();
+        }
+
+        public static void ClearHitbox(this b2Body self)
+        {
+            for (int i = 0; i < self.hitBoxFixtures.Count; i++)
+            {
+                Fixture fixture = self.hitBoxFixtures[i];
+                self.body.DestroyFixture(fixture);
+            }
+            self.hitBoxFixtures.Clear();
         }
     }
 }
