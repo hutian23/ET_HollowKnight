@@ -22,7 +22,13 @@ namespace ET.Client
             
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            hitboxComponent.callbackQueue.Enqueue(match.Groups["callBack"].Value);
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            
+            hitboxComponent.callbackSet.Add(match.Groups["callBack"].Value);
+            //调用注册事件
+            string callBackName = match.Groups["callBack"].Value;
+            CollisionCallback callback = DialogueDispatcherComponent.Instance.GetCollisionCallback(callBackName);
+            callback.Regist(bbParser);
             
             await ETTask.CompletedTask;
             return Status.Success;

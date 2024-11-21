@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ET.Event;
 using Timeline;
 
 namespace ET.Client
@@ -8,7 +9,10 @@ namespace ET.Client
     {
         public HitboxKeyframe keyFrame;
 
-        //考虑到回调有注册先后顺序的问题?
-        public Queue<string> callbackQueue = new();
+        //当前帧收集碰撞信息
+        public Queue<CollisionInfo> infoQueue = new();
+        
+        //当前行为注册的碰撞回调
+        public HashSet<string> callbackSet = new();
     }
 }

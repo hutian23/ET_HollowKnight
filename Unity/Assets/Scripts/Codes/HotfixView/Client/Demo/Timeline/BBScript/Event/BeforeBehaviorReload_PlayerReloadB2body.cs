@@ -14,6 +14,7 @@ namespace ET.Client
             b2Body b2Body = b2GameManager.Instance.GetBody(unit.InstanceId);
             InputWait inputWait = unit.GetComponent<TimelineComponent>().GetComponent<InputWait>();
             HitboxComponent hitboxComponent = unit.GetComponent<TimelineComponent>().GetComponent<HitboxComponent>();
+            BBParser bbParser = unit.GetComponent<TimelineComponent>().GetComponent<BBParser>();
             
             //1. 销毁旧夹具
             for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
@@ -45,6 +46,11 @@ namespace ET.Client
             
             
             //3. 更新hitbox Callback
+            foreach (string callbackName in hitboxComponent.callbackSet)
+            {
+                CollisionCallback callback = DialogueDispatcherComponent.Instance.GetCollisionCallback(callbackName);
+                callback.Dispose(bbParser);
+            }
             hitboxComponent.Init();
             await ETTask.CompletedTask;
         }

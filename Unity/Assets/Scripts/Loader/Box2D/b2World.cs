@@ -66,7 +66,7 @@ namespace ET
         protected override void PostStep()
         {
             base.PostStep();
-            //TODO HandleCollisionEvent
+            EventSystem.Instance.Invoke(new PostStepCallback());
         }
 
         public override void PreSolve(Contact contact, in Manifold oldManifold)
@@ -396,5 +396,9 @@ namespace ET
     public struct PreSolveContact
     {
         public Contact contact;
+    }
+
+    public struct PostStepCallback
+    {
     }
 }

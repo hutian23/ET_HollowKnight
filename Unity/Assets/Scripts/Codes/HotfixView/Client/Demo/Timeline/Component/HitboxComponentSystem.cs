@@ -7,8 +7,8 @@
         public static void Init(this HitboxComponent self)
         {
             self.keyFrame = null;
-            self.callbackQueue.Clear();
+            self.callbackSet.Clear();
+            self.infoQueue.Clear();
         }
-        
     }
 }

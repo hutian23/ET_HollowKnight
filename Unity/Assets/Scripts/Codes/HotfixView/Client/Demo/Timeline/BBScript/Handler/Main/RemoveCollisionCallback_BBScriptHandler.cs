@@ -20,9 +20,15 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            // TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            // HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            // hitboxComponent.callbackQueue.Remove(match.Groups["Callback"].Value);
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            
+            hitboxComponent.callbackSet.Remove(match.Groups["Callback"].Value);
+            
+            //调用dispose函数
+            CollisionCallback callback = DialogueDispatcherComponent.Instance.GetCollisionCallback(match.Groups["Callback"].Value);
+            callback.Dispose(bbParser);
             
             await ETTask.CompletedTask;
             return Status.Success;

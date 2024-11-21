@@ -12,14 +12,17 @@
         {
             //解决热重载时，组件调用顺序的问题
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BBParser parser = timelineComponent.GetComponent<BBParser>();
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
+            
             timelineComponent.Init();
 
             //这里跟执行顺序有关，我们希望先执行逻辑，再进行物理模拟(eg. 同一帧内，先更新hitbox生成夹具，然后再进行碰撞检测，实现更新hitbox就能立刻调用碰撞回调的效果)
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             bbTimer.ReLoad();
 
             //获得输入，更新输入缓冲区定时器
-            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             //只有玩家会挂载inputWait
             if (inputWait != null)
             {
@@ -29,6 +32,11 @@
 
             //清空碰撞事件组件
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            foreach (string callbackName in hitboxComponent.callbackSet)
+            {
+                CollisionCallback callback = DialogueDispatcherComponent.Instance.GetCollisionCallback(callbackName);
+                callback.Dispose(parser);
+            }
             hitboxComponent.Init();
 
             //清空等待事件
@@ -37,9 +45,6 @@
 
             //重载行为机
             #region SkillBuffer
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BBParser parser = timelineComponent.GetComponent<BBParser>();
-
             //1-0 初始化
             buffer.Init();
 
