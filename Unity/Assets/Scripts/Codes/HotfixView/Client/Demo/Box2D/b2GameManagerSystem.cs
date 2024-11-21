@@ -1,5 +1,5 @@
-﻿using ET.Event;
-using Testbed.Abstractions;
+﻿using System.Collections.Generic;
+using ET.Event;
 using Camera = UnityEngine.Camera;
 
 namespace ET.Client
@@ -23,7 +23,8 @@ namespace ET.Client
             //create new b2World
             self.B2World?.Dispose();
             self.B2World = new b2World(self.Game);
-
+            self.Paused = false;
+            
             //dispose b2body
             foreach (var kv in self.BodyDict)
             {
@@ -48,7 +49,7 @@ namespace ET.Client
 
         public static void FixedUpdate(this b2GameManager self)
         {
-            if (Global.Settings.Pause) return;
+            if (self.Paused) return;
             self.Step();
         }
 
@@ -70,12 +71,7 @@ namespace ET.Client
 
         public static b2Body GetBody(this b2GameManager self, long unitId)
         {
-            if (self.BodyDict.TryGetValue(unitId, out b2Body body))
-            {
-                return body;
-            }
-
-            return null;
+            return self.BodyDict.GetValueOrDefault(unitId);
         }
     }
 }

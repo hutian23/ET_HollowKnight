@@ -9,6 +9,7 @@
             {
                 BBTimerManager.Instance = self;
                 self.instanceIds.Clear();
+                self.FrozenIds.Clear();
                 self.SceneTimer_InstanceId = 0;
             }
         }

@@ -11,5 +11,6 @@ namespace ET.Client
         public b2Game Game;
         public b2World B2World;
         public Dictionary<long, b2Body> BodyDict = new();
+        public bool Paused = false;
     }
 }
