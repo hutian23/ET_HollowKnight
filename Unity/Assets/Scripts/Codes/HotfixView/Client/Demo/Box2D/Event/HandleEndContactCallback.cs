@@ -5,21 +5,24 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    public class HandleEndContactCallback : AInvokeHandler<EndContact>
+    public class HandleEndContactCallback : AInvokeHandler<EndContactCallback>
     {
-        public override void Handle(EndContact args)
+        public override void Handle(EndContactCallback args)
         {
-            Fixture fixtureA = args.contact.FixtureA;
-            Fixture fixtureB = args.contact.FixtureB;
+            Fixture fixtureA = args.Contact.FixtureA;
+            Fixture fixtureB = args.Contact.FixtureB;
             
-            if (fixtureA.UserData is not FixtureData dataA || fixtureB.UserData is not FixtureData dataB)
+            
+            if (fixtureA == null || fixtureB == null || 
+                fixtureA.UserData is not FixtureData dataA ||
+                fixtureB.UserData is not FixtureData dataB)
             {
                 return;
             }
 
             if (dataA.TriggerExitId != 0)
             {
-                EventSystem.Instance.Invoke(dataA.TriggerExitId, new TriggerExitCallback()
+                EventSystem.Instance.Invoke(dataA.TriggerExitId,new TriggerExitCallback()
                 {
                     info = new CollisionInfo()
                     {
@@ -27,21 +30,24 @@ namespace ET.Client
                         fixtureB =  fixtureB,
                         dataA = dataA,
                         dataB = dataB,
-                        Contact = args.contact
+                        Contact = args.Contact
                     }
                 });
             }
 
             if (dataB.TriggerExitId != 0)
             {
-                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback(){  info =  new CollisionInfo()
+                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback()
                 {
-                    fixtureA = fixtureB,
-                    fixtureB = fixtureA,
-                    dataA = dataB,
-                    dataB = dataA,
-                    Contact = args.contact
-                }});
+                    info =  new CollisionInfo()
+                    {
+                        fixtureA = fixtureB,
+                        fixtureB = fixtureA,
+                        dataA = dataB,
+                        dataB = dataA,
+                        Contact = args.Contact
+                    }
+                });
             }
         }
     }

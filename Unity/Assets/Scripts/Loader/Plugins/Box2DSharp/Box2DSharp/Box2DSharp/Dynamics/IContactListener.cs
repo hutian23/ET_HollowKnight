@@ -28,7 +28,7 @@ namespace Box2DSharp.Dynamics
         /// Note: this is called even when the number of contact points is zero.
         /// Note: this is not called for sensors.
         /// Note: if you set the number of contact points to zero, you will not
-        /// get an EndContact callback. However, you may get a BeginContact callback
+        /// get an EndContactCallback callback. However, you may get a BeginContact callback
         /// the next step.
         void PreSolve(Contact contact, in Manifold oldManifold);
 

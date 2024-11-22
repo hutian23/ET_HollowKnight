@@ -7,7 +7,7 @@ namespace ET.Client
     {
         [StaticField]
         public static b2GameManager Instance;
-
+        
         public b2Game Game;
         public b2World B2World;
         public Dictionary<long, b2Body> BodyDict = new();

@@ -41,7 +41,7 @@ namespace ET.Client
                         UserData = info,
                         TriggerEnterId = TriggerEnterType.CollisionEvent,
                         TriggerStayId = TriggerStayType.CollisionEvent,
-                    }
+                    },
                 };
                 Fixture fixture = b2Body.body.CreateFixture(fixtureDef);
                 b2Body.hitBoxFixtures.Add(fixture);

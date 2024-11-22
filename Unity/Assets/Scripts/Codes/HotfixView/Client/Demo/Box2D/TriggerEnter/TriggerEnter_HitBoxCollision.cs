@@ -18,9 +18,12 @@ namespace ET.Client
             b2Body B2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(B2Body.unitId) as Unit;
             
-            //通知unit切换行为
-            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            timelineComponent.GetComponent<ObjectWait>().Notify(new WaitHitStunBehavior(){hitStunFlag = "KnockBack",Error = WaitTypeError.Success});
+            b2GameManager.Instance.AddPostStepCallback(() =>
+            {
+                //通知unit切换行为
+                TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
+                timelineComponent.GetComponent<ObjectWait>().Notify(new WaitHitStunBehavior(){hitStunFlag = "KnockBack",Error = WaitTypeError.Success}); 
+            });
         }
     }
 }

@@ -5,18 +5,20 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    public class HandlePreSolveContactCallback : AInvokeHandler<PreSolveContact>
+    public class HandlePostSolveContactCallback : AInvokeHandler<PreSolveCallback>
     {
-        public override void Handle(PreSolveContact args)
+        public override void Handle(PreSolveCallback args)
         {
-            Fixture fixtureA = args.contact.FixtureA;
-            Fixture fixtureB = args.contact.FixtureB;
+            Fixture fixtureA = args.Contact.FixtureA;
+            Fixture fixtureB = args.Contact.FixtureB;
 
-            if (fixtureA.UserData is not FixtureData dataA || fixtureB.UserData is not FixtureData dataB)
+            if (fixtureA == null || fixtureB == null || 
+                fixtureA.UserData is not FixtureData dataA ||
+                fixtureB.UserData is not FixtureData dataB)
             {
                 return;
             }
-
+            
             if (dataA.TriggerStayId != 0)
             {
                 EventSystem.Instance.Invoke(dataA.TriggerStayId,new TriggerStayCallback()
@@ -27,7 +29,7 @@ namespace ET.Client
                         fixtureB =  fixtureB,
                         dataA = dataA,
                         dataB = dataB,
-                        Contact = args.contact
+                        Contact = args.Contact
                     }
                 });
             }
@@ -42,7 +44,7 @@ namespace ET.Client
                         fixtureB = fixtureA,
                         dataA = dataB,
                         dataB = dataA,
-                        Contact = args.contact
+                        Contact = args.Contact
                     }
                 });
             }

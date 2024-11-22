@@ -94,7 +94,7 @@ MonoBehaviour:
       Data: 7|UnityEngine.Keyframe[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: UnityEngine.Keyframe, UnityEngine.CoreModule
@@ -169,10 +169,43 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
+      Data: 0.318736672
+    - Name: m_Value
+      Entry: 4
+      Data: -3.94382358
+    - Name: m_InTangent
+      Entry: 4
+      Data: -2.67354774
+    - Name: m_OutTangent
+      Entry: 4
+      Data: -2.67354774
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 1
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
       Data: 0.466666669
     - Name: m_Value
       Entry: 4
-      Data: -4
+      Data: -4.09872437
     - Name: m_InTangent
       Entry: 4
       Data: 0

@@ -135,7 +135,7 @@ namespace Testbed.TestCases
                 {
                     _touching[index.Value] = false;
                 }
-                Debug.LogWarning("EndContact");
+                Debug.LogWarning("EndContactCallback");
             }
 
             if (fixtureB == _sensor)
@@ -145,7 +145,7 @@ namespace Testbed.TestCases
                 {
                     _touching[index.Value] = false;
                 }
-                Debug.LogWarning("EndContact");
+                Debug.LogWarning("EndContactCallback");
             }
         }
     }

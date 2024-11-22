@@ -48,7 +48,6 @@
             parser.InitScript(RootScript);
             await parser.Invoke("RootInit", parser.cancellationToken);
             if (parser.cancellationToken.IsCancel()) return;
-            buffer.WaitHitStunNotify().Coroutine();
             
             //1-2 重载Parser,进入默认行为
             BehaviorInfo info = buffer.GetInfoByOrder(0);

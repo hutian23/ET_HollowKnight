@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ET.Event;
 using Camera = UnityEngine.Camera;
 
@@ -72,6 +73,11 @@ namespace ET.Client
         public static b2Body GetBody(this b2GameManager self, long unitId)
         {
             return self.BodyDict.GetValueOrDefault(unitId);
+        }
+
+        public static void AddPostStepCallback(this b2GameManager self, Action action)
+        {
+            self.B2World.PostStepCallback += action;
         }
     }
 }

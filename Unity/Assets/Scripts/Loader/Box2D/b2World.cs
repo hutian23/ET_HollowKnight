@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
@@ -52,26 +53,70 @@ namespace ET
             PostStep();
             StepCount++;
         }
+
+        //在碰撞事件中涉及删除夹具等操作需要添加到这里
+        public Action PostStepCallback;
+        
+        protected override void PostStep()
+        {
+            base.PostStep();
+            
+            #region TriggerEnter
+
+            int count1 = BeginContactQueue.Count;
+            while (count1-- > 0)
+            {
+                Contact beginContact = BeginContactQueue.Dequeue();
+                EventSystem.Instance.Invoke(new BeginContactCallback(){Contact = beginContact});
+            }
+            
+            #endregion
+
+            #region TriggerStay
+
+            int count3 = PreSolveQueue.Count;
+            while (count3-- > 0)
+            {
+                Contact preSolveContact = PreSolveQueue.Dequeue();
+                EventSystem.Instance.Invoke(new PreSolveCallback(){Contact = preSolveContact});
+            }
+            
+            #endregion
+            
+            #region TriggerExit
+            
+            int count2 = EndContactQueue.Count;
+            while (count2-- > 0)
+            {
+                Contact endContact = EndContactQueue.Dequeue();
+                EventSystem.Instance.Invoke(new EndContactCallback(){Contact = endContact});
+            }
+            #endregion
+            
+            EventSystem.Instance.Invoke(new PostStepCallback());
+        }
+        
+        private readonly Queue<Contact> BeginContactQueue=  new();
+        private readonly Queue<Contact> EndContactQueue=  new();
+        private readonly Queue<Contact> PreSolveQueue = new();
+        
         
         public override void BeginContact(Contact contact)
         {
-            EventSystem.Instance.Invoke(new BeginContact() { contact = contact });
+            base.BeginContact(contact);
+            BeginContactQueue.Enqueue(contact);
         }
 
         public override void EndContact(Contact contact)
         {
-            EventSystem.Instance.Invoke(new EndContact() { contact = contact });
-        }
-
-        protected override void PostStep()
-        {
-            base.PostStep();
-            EventSystem.Instance.Invoke(new PostStepCallback());
+            base.EndContact(contact);
+            EndContactQueue.Enqueue(contact);
         }
 
         public override void PreSolve(Contact contact, in Manifold oldManifold)
         {
             base.PreSolve(contact, in oldManifold);
+            //TODO 这里可以用Filter来优化?
             if (contact.FixtureA.UserData is not FixtureData dataA || contact.FixtureB.UserData is not FixtureData dataB)
             {
                 contact.SetEnabled(false);
@@ -83,7 +128,6 @@ namespace ET
                 contact.SetEnabled(false);
                 return;
             }
-                
             //TODO 优化 这里先直接设置pushBox不会相互碰撞
             if (dataA.UserData is BoxInfo infoA && 
                 dataB.UserData is BoxInfo infoB &&
@@ -93,12 +137,11 @@ namespace ET
                 contact.SetEnabled(false);
                 return;
             }
-            
+            //两个都是触发器
             if (dataA.IsTrigger || dataB.IsTrigger)
             {
-                //TriggerStay事件
-                EventSystem.Instance.Invoke(new PreSolveContact(){contact = contact});
                 contact.SetEnabled(false);
+                PreSolveQueue.Enqueue(contact);
             }
         }
 
@@ -383,19 +426,19 @@ namespace ET
         #endregion
     }
 
-    public struct BeginContact
+    public struct BeginContactCallback
     {
-        public Contact contact;
+        public Contact Contact;
     }
 
-    public struct EndContact
+    public struct EndContactCallback
     {
-        public Contact contact;
+        public Contact Contact;
     }
-
-    public struct PreSolveContact
+    
+    public struct PreSolveCallback
     {
-        public Contact contact;
+        public Contact Contact;
     }
 
     public struct PostStepCallback
