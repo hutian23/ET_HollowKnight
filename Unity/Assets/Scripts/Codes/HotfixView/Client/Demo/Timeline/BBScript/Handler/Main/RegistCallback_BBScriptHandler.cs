@@ -10,7 +10,7 @@ namespace ET.Client
         protected override void Run(BBCallback self)
         {
             BBParser parser = self.GetParent<BBParser>();
-            BBTimerComponent bbTimer = parser.GetParent<TimelineComponent>().GetComponent<BBTimerComponent>();
+            BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
             
             //exec trigger
             BBScriptData data = BBScriptData.Create(self.trigger, 0, null);
@@ -23,7 +23,7 @@ namespace ET.Client
             parser.RegistSubCoroutine(startIndex, endIndex, "CallbackCoroutine").Coroutine();
             
             //Dispose bbCallback
-            bbTimer.Remove(ref self.CheckTimer);
+            postStepTimer.Remove(ref self.CheckTimer);
             parser.callBackDict.Remove(self.callBackName);
             parser.RemoveChild(self.Id);
         }
@@ -71,7 +71,7 @@ namespace ET.Client
             //2. regist callback entity
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
             BBCallback bbCallback = bbParser.AddChild<BBCallback>();
             bbParser.callBackDict.Add(callbackName, bbCallback);
 
@@ -105,11 +105,11 @@ namespace ET.Client
             bbCallback.trigger = trigger;
             
             //3-2 check callback trigger per frame
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.CallbackCheckTimer, bbCallback);
+            long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.CallbackCheckTimer, bbCallback);
             bbCallback.CheckTimer = timer;
             token.Add(() =>
             {
-                bbTimer.Remove(ref timer);
+                postStepTimer.Remove(ref timer);
             });
             
             await ETTask.CompletedTask;

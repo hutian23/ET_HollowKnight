@@ -8,9 +8,7 @@ namespace ET.Client
         {
             return "HitStop";
         }
-
-        //算是出版的HitStop的想法
-        //然后这个SingleStep的时候会bug
+        
         //HitStop: 8;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
@@ -26,13 +24,23 @@ namespace ET.Client
                 Log.Error($"cannot format HitStop to int!");
                 return Status.Failed;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBTimerComponent combatTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            BBTimerComponent SceneTimer = GameManager.Instance.DomainScene().GetComponent<BBTimerComponent>();
+
+            HitStopCor(parser, hitStop, token).Coroutine();
             
             await ETTask.CompletedTask;
             return Status.Success;
+        }
+
+        private async ETTask HitStopCor(BBParser parser,int hitStop, ETCancellationToken token)
+        {
+            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+
+            int hertz = bbTimer.GetHertz();
+            bbTimer.SetHertz(0);
+            await sceneTimer.WaitAsync(hitStop, token);
+            bbTimer.SetHertz(hertz);
         }
     }
 }

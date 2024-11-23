@@ -331,7 +331,7 @@ namespace ET.Client
             self.Hertz = Hertz;
         }
 
-        public static float GetHertz(this BBTimerComponent self)
+        public static int GetHertz(this BBTimerComponent self)
         {
             return self.Hertz;
         }
