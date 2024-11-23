@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ET.Event;
 using Camera = UnityEngine.Camera;
 
@@ -14,13 +13,16 @@ namespace ET.Client
             protected override void Awake(b2GameManager self)
             {
                 b2GameManager.Instance = self;
-                self.Game = Camera.main.GetComponent<b2Game>();
+                self.PreStepTimer = self.AddChild<BBTimerComponent>().Id;
+                self.PostStepTimer = self.AddChild<BBTimerComponent>().Id;
                 self.Reload();
             }
         }
 
         public static void Reload(this b2GameManager self)
         {
+            self.Game = Camera.main.GetComponent<b2Game>();
+            
             //create new b2World
             self.B2World?.Dispose();
             self.B2World = new b2World(self.Game);
@@ -29,10 +31,17 @@ namespace ET.Client
             //dispose b2body
             foreach (var kv in self.BodyDict)
             {
-                kv.Value.Dispose();
+                b2Body body = self.GetChild<b2Body>(kv.Value);
+                body.Dispose();
             }
             self.BodyDict.Clear();
 
+            //reload timer
+            BBTimerComponent PreStepTimer = self.GetChild<BBTimerComponent>(self.PreStepTimer);
+            BBTimerComponent PostStepTimer = self.GetChild<BBTimerComponent>(self.PostStepTimer);
+            PreStepTimer.ReLoad();
+            PostStepTimer.ReLoad();
+            
             //create hitbox
             EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterB2WorldCreated() { B2World = self.B2World }).Coroutine();
         }
@@ -62,9 +71,9 @@ namespace ET.Client
         
         private static void SyncTrans(this b2GameManager self)
         {
-            foreach (Entity child in self.Children.Values)
+            foreach (long id in self.BodyDict.Values)
             {
-                b2Body body = child as b2Body;
+                b2Body body = self.GetChild<b2Body>(id);
                 body.SyncUnitTransform();
                 EventSystem.Instance.PublishAsync(self.ClientScene(), new AfterSyncTransform() { instanceId = body.unitId }).Coroutine();
             }
@@ -72,9 +81,25 @@ namespace ET.Client
 
         public static b2Body GetBody(this b2GameManager self, long unitId)
         {
-            return self.BodyDict.GetValueOrDefault(unitId);
+            if (!self.BodyDict.TryGetValue(unitId, out long id))
+            {
+                Log.Error($"does not exist b2Body, unitId: {unitId}");
+                return null;
+            }
+
+            return self.GetChild<b2Body>(id);
         }
 
+        public static BBTimerComponent GetPreStepTimer(this b2GameManager self)
+        {
+            return self.GetChild<BBTimerComponent>(self.PreStepTimer);
+        }
+
+        public static BBTimerComponent GetPostStepTimer(this b2GameManager self)
+        {
+            return self.GetChild<BBTimerComponent>(self.PostStepTimer);
+        }
+        
         public static void AddPostStepCallback(this b2GameManager self, Action action)
         {
             self.B2World.PostStepCallback += action;

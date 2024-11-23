@@ -56,6 +56,12 @@ namespace ET
 
         //在碰撞事件中涉及删除夹具等操作需要添加到这里
         public Action PostStepCallback;
+
+        protected override void PreStep()
+        {
+            base.PreStep();
+            EventSystem.Instance.Invoke(new PreStepCallback());
+        }
         
         protected override void PostStep()
         {
@@ -441,6 +447,11 @@ namespace ET
         public Contact Contact;
     }
 
+    public struct PreStepCallback
+    {
+        
+    }
+    
     public struct PostStepCallback
     {
     }

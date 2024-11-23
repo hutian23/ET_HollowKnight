@@ -1,5 +1,30 @@
-﻿namespace ET.Client
+﻿using ET.Event;
+using Timeline;
+
+namespace ET.Client
 {
+    [Invoke(BBTimerInvokeType.PostStepTimer)]
+    [FriendOf(typeof(HitboxComponent))]
+    public class WaitHitTimer : BBTimer<HitboxComponent>
+    {
+        protected override void Run(HitboxComponent hitboxComponent)
+        {
+            int count = hitboxComponent.CollisionBuffer.Count;
+            while (count-- > 0)
+            {
+                CollisionInfo info = hitboxComponent.CollisionBuffer.Dequeue();
+                hitboxComponent.CollisionBuffer.Enqueue(info);
+                
+                BoxInfo boxInfoA = info.dataA.UserData as BoxInfo;
+                BoxInfo boxInfoB = info.dataB.UserData as BoxInfo;
+                if (boxInfoA.hitboxType is HitboxType.Hit && boxInfoB.hitboxType is HitboxType.Hurt)
+                {
+                    Log.Warning("Hit");
+                }
+            }
+        }
+    }
+
     [FriendOf(typeof(BBParser))]
     public class WaitHit_BBScriptHandler : BBScriptHandler
     {
@@ -14,53 +39,13 @@
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            ObjectWait objectWait = timelineComponent.GetComponent<ObjectWait>();
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-
-            //1. 清除旧回调
-            objectWait.Notify(new WaitHit() { Error = WaitTypeError.Destroy });
-
-            //2. 跳过回调代码块
-            int index = bbParser.function_Pointers[data.functionID];
-            int endIndex = index, startIndex = index + 1;
-            while (++index < bbParser.opDict.Count)
+            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            
+            long timer = b2GameManager.Instance.GetPostStepTimer().NewFrameTimer(BBTimerInvokeType.PostStepTimer, hitboxComponent);
+            token.Add(() =>
             {
-                string opLine = bbParser.opDict[index];
-                if (opLine.Equals("EndHit:"))
-                {
-                    endIndex = index;
-                    break;
-                }
-            }
-            bbParser.function_Pointers[data.functionID] = endIndex;
-            
-            //3. 注册变量
-            bbParser.RegistParam("WaitHit_StartIndex", startIndex);
-            bbParser.RegistParam("WaitHit_EndIndex", endIndex);
-            
-            //2. 等待执行回调
-            WaitHitCoroutine(timelineComponent).Coroutine();
-            
-            await ETTask.CompletedTask;
-            return Status.Success;
-        }
-
-        private async ETTask<Status> WaitHitCoroutine(TimelineComponent timelineComponent)
-        {
-            ObjectWait objectWait = timelineComponent.GetComponent<ObjectWait>();
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-
-            WaitHit wait = await objectWait.Wait<WaitHit>(bbParser.cancellationToken);
-            if (wait.Error != WaitTypeError.Success)
-            {
-                return Status.Failed;
-            }
-            
-            int startIndex = bbParser.GetParam<int>("WaitHit_StartIndex");
-            int endIndex=  bbParser.GetParam<int>("WaitHit_EndIndex");
-            bbParser.RegistSubCoroutine(startIndex, endIndex, "WaitHitCallback").Coroutine();
-            bbParser.RemoveParam("WaitHit_StartIndex");
-            bbParser.RemoveParam("WaitHit_EndIndex");
+                b2GameManager.Instance.GetPostStepTimer().Remove(ref timer);
+            });
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -38,12 +38,7 @@
             }
             
             
-            //3. 更新hitbox Callback
-            foreach (string callbackName in hitboxComponent.callbackSet)
-            {
-                CollisionCallback callback = DialogueDispatcherComponent.Instance.GetCollisionCallback(callbackName);
-                callback.Dispose(bbParser);
-            }
+            //3. 更新hitbox
             hitboxComponent.Init();
             
             await ETTask.CompletedTask;

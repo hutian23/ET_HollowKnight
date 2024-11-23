@@ -17,8 +17,6 @@ namespace ET.Client
         public static void ReLoad(this BBTimerComponent self)
         {
             self.Init();
-            self._gameTimer.Start();
-            self.LastTime = self._gameTimer.ElapsedTicks;
         }
         
         public class BBTimerComponentDestroySystem: DestroySystem<BBTimerComponent>
@@ -55,7 +53,6 @@ namespace ET.Client
             self.Hertz = 60;
             self.minFrame = long.MaxValue;
             self.curFrame = 0;
-            self.LastTime = 0;
             self.Accumulator = 0;
         }
 
@@ -124,6 +121,51 @@ namespace ET.Client
             }
         }
 
+        public static void Step(this BBTimerComponent self)
+        {
+            self.curFrame++;
+            if (self.curFrame < self.minFrame)
+            {
+                return;
+            }
+            
+            foreach (long k in self.TimerId.Select(kv => kv.Key))
+            {
+                // 设置定时器中的最小执行帧号
+                if (k > self.curFrame)
+                {
+                    self.minFrame = k;
+                    break;
+                }
+
+                self.timeOutTime.Enqueue(k);
+            }
+
+            while (self.timeOutTime.Count > 0)
+            {
+                long time = self.timeOutTime.Dequeue();
+                var list = self.TimerId[time];
+                for (int i = 0; i < list.Count; i++)
+                {
+                    long timerId = list[i];
+                    self.timeOutTimerIds.Enqueue(timerId);
+                }
+
+                self.TimerId.Remove(time);
+            }
+
+            while (self.timeOutTimerIds.Count > 0)
+            {
+                long timerId = self.timeOutTimerIds.Dequeue();
+
+                if (!self.timerActions.Remove(timerId, out BBTimerAction timerAction))
+                {
+                    continue;
+                }
+                self.Run(timerAction);
+            }
+        }
+        
         private static void Run(this BBTimerComponent self, BBTimerAction timerAction)
         {
             switch (timerAction.TimerClass)

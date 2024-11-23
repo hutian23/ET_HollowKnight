@@ -15,7 +15,7 @@ namespace ET.Client
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            hitboxComponent.infoQueue.Enqueue(info);
+            hitboxComponent.CollisionBuffer.Enqueue(info);
         }
     }
 }

@@ -34,5 +34,9 @@
         public const int HitStopTestTimer = 116;
         public const int HitboxCheckTimer = 117;
         public const int CallbackCheckTimer = 118;
+        
+        //物理模拟相关的生命周期函数
+        public const int PreStepTimer = 320;
+        public const int PostStepTimer = 420;
     }
 }

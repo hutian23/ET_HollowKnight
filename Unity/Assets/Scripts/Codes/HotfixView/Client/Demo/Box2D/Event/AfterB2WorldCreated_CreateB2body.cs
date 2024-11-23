@@ -34,7 +34,7 @@ namespace ET.Client
                 b2Body b2Body = b2GameManager.Instance.AddChild<b2Body>();
                 b2Body.body = body;
                 b2Body.unitId = timelineComponent.GetParent<Unit>().InstanceId;
-                b2GameManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body);
+                b2GameManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
             }
 
             await ETTask.CompletedTask;

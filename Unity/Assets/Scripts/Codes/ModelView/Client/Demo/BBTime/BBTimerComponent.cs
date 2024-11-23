@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace ET.Client
 {
@@ -42,7 +41,8 @@ namespace ET.Client
     {
         public object Args;
     }
-
+    
+    [ChildOf]
     [ComponentOf]
     public class BBTimerComponent: Entity, IAwake, IDestroy, IUpdate
     {
@@ -62,8 +62,6 @@ namespace ET.Client
         
         //标准更新频率60fps
         public int Hertz = 60;
-        public long LastTime;
         public long Accumulator;
-        public Stopwatch _gameTimer = new();
     }
 }
