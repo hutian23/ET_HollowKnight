@@ -20,15 +20,7 @@ namespace ET.Client
             self._gameTimer.Start();
             self.LastTime = self._gameTimer.ElapsedTicks;
         }
-
-        public class BBTimerComponentUpdateSystem: UpdateSystem<BBTimerComponent>
-        {
-            protected override void Update(BBTimerComponent self)
-            {
-                self.TimerUpdate();
-            }
-        }
-
+        
         public class BBTimerComponentDestroySystem: DestroySystem<BBTimerComponent>
         {
             protected override void Destroy(BBTimerComponent self)
@@ -69,26 +61,26 @@ namespace ET.Client
 
         public static long GetFrameLength(this BBTimerComponent self)
         {
-            return TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
+            //Hertz = 0, 完全静止
+            return self.Hertz == 0? 0 : TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
         }
 
-        public static void TimerUpdate(this BBTimerComponent self)
+        public static void TimerUpdate(this BBTimerComponent self, long accumulator)
         {
-            //计算当前帧
-            long now = self._gameTimer.ElapsedTicks;
-            long frameTime = now - self.LastTime;
-
-            self.LastTime = now;
-            self.Accumulator += frameTime;
+            if (self.Hertz == 0)
+            {
+                return;
+            }
 
             long Dt = self.GetFrameLength();
-
+            
+            self.Accumulator += accumulator;
             while (self.Accumulator >= Dt)
             {
                 self.Accumulator -= Dt;
                 ++self.curFrame;
             }
-
+            
             //当前帧没有可执行的定时器，就不进行遍历了
             if (self.curFrame < self.minFrame)
             {
@@ -201,7 +193,7 @@ namespace ET.Client
             }
 
             ETTask tcs = ETTask.Create(true);
-            //将回调传入ETTask,Upate中取出 并执行回调
+            //将回调传入ETTask,Update中取出 并执行回调
             BBTimerAction timer = BBTimerAction.Create(self.GetId(),
                 TimerClass.OnceWaitTimer,
                 self.curFrame,
@@ -272,7 +264,7 @@ namespace ET.Client
         {
             if (tillFrame < self.curFrame)
             {
-                Log.Error($"tillframe should be bigger than currentFrame:{tillFrame} {self.curFrame}");
+                Log.Error($"till frame should be bigger than currentFrame:{tillFrame} {self.curFrame}");
             }
 
             BBTimerAction timer = BBTimerAction.Create(self.GetId(), TimerClass.OnceTimer, self.curFrame, tillFrame - self.curFrame, type, args);
@@ -294,28 +286,12 @@ namespace ET.Client
 
         public static void SetHertz(this BBTimerComponent self, int Hertz)
         {
-            if (Hertz <= 0)
-            {
-                Log.Warning("TimerComponent's Hz must be positive");
-                return;
-            }
-
             self.Hertz = Hertz;
         }
 
-        public static float GetTimeScale(this BBTimerComponent self)
+        public static float GetHertz(this BBTimerComponent self)
         {
             return self.Hertz;
-        }
-
-        public static void Pause(this BBTimerComponent self)
-        {
-            self._gameTimer.Stop();
-        }
-
-        public static void Restart(this BBTimerComponent self)
-        {
-            self._gameTimer.Start();
         }
     }
 }

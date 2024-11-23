@@ -31,17 +31,8 @@ namespace ET.Client
             BBTimerComponent combatTimer = timelineComponent.GetComponent<BBTimerComponent>();
             BBTimerComponent SceneTimer = GameManager.Instance.DomainScene().GetComponent<BBTimerComponent>();
             
-            WaitCor(SceneTimer,combatTimer,hitStop, token).Coroutine();
-            
             await ETTask.CompletedTask;
             return Status.Success;
-        }
-
-        private async ETTask WaitCor(BBTimerComponent bbTimer, BBTimerComponent combatTimer,int hitStop, ETCancellationToken token)
-        {
-            combatTimer.Pause();
-            await bbTimer.WaitAsync(hitStop, token);
-            combatTimer.Restart();
         }
     }
 }

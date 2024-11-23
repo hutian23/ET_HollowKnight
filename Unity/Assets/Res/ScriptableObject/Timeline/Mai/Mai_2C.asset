@@ -817,58 +817,10 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_2C
-  Script: '@Trigger:
-
-    InputType: 2MPPressed;
-
-    return;
-
-
-    @Main:
-
-    SetTransition:
-    ''SquitToIdle'';
-
-    BBSprite: ''2c_1'', 2;
-
-    BBSprite: ''2c_2'', 2;
-
-    BBSprite:
-    ''2c_3'', 2;
-
-    BBSprite: ''2c_4'', 2;
-
-    CollisionCallback: ''HitTest'';
-
-    BBSprite:
-    ''2c_5'', 1;
-
-    RemoveCollisionCallback: ''HitTest'';
-
-    OpenGCWindow;
-
-    AddGCOption:
-    ''Mai_GroundDash'';
-
-    AddGCOption: ''Mai_Jump'';
-
-    BBSprite: ''2c_5'',
-    3;
-
-    BBSprite: ''2c_6'', 3;
-
-    BBSprite: ''2c_6'', 3;
-
-    BBSprite: ''2c_7'',
-    2;
-
-    BBSprite: ''2c_8'', 2;
-
-    BBSprite: ''2c_9'', 2;
-
-    BBSprite: ''2c_10'',
-    3;
-
-    BBSprite: ''2c_11'', 3;
-
-    return;'
+  Script: "@Trigger:\nInputType: 2MPPressed;\nreturn;\n\n@Main:\nSetTransition: 'SquitToIdle';\nBBSprite:
+    '2c_1', 2;\nBBSprite: '2c_2', 2;\nBBSprite: '2c_3', 2;\nBBSprite: '2c_4', 2;\nBBSprite:
+    '2c_5', 1;\n\n#\u56DE\u8C03\u653B\u51FB\u4E8B\u4EF6\nWaitHit:\nLogWarning: 'Hello_World';\nHitStun:
+    'KnockBack'; \nHitNumeric: 200;\nEndHit:\n\nOpenGCWindow;\nAddGCOption: 'Mai_GroundDash';\nAddGCOption:
+    'Mai_Jump';\nBBSprite: '2c_5', 3;\nBBSprite: '2c_6', 3;\nBBSprite: '2c_6', 3;\nBBSprite:
+    '2c_7', 2;\nBBSprite: '2c_8', 2;\nBBSprite: '2c_9', 2;\nBBSprite: '2c_10', 3;\nBBSprite:
+    '2c_11', 3;\nreturn;"

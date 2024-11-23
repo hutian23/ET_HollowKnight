@@ -24,9 +24,9 @@ namespace ET.Client
             currentScene.AddComponent<GameManager>();
 
             currentScene.AddComponent<BBTimerManager>();
-            //注册SceneTimer
+            
+            //注册SceneTimer到timerManager
             BBTimerComponent sceneTimer = currentScene.AddComponent<BBTimerComponent>();
-            BBTimerManager.Instance.SceneTimer_InstanceId = sceneTimer.InstanceId;
             BBTimerManager.Instance.RegistTimer(sceneTimer);
         }
     }

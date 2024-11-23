@@ -47,7 +47,7 @@ namespace ET.Client
             Global.Settings.SingleStep = false;
 
             //4. reload global timer
-            BBTimerManager.Instance.SceneTimer().ReLoad();
+            BBTimerManager.Instance.Reload();
             //1. b2World reload
             b2GameManager.Instance.Reload();
             //2. timeline

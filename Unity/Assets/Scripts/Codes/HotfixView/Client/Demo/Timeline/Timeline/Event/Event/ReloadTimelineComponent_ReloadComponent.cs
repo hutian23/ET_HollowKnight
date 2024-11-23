@@ -28,11 +28,6 @@
 
             //清空碰撞事件组件
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            foreach (string callbackName in hitboxComponent.callbackSet)
-            {
-                CollisionCallback callback = DialogueDispatcherComponent.Instance.GetCollisionCallback(callbackName);
-                callback.Dispose(parser);
-            }
             hitboxComponent.Init();
 
             //清空等待事件
