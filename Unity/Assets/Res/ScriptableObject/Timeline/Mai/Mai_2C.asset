@@ -818,8 +818,9 @@ MonoBehaviour:
       Data: 
   timelineName: Mai_2C
   Script: "@Trigger:\nInputType: 2MPPressed;\nreturn;\n\n@Main:\nSetTransition: 'SquitToIdle';\nBBSprite:
-    '2c_1', 2;\nBBSprite: '2c_2', 2;\nBBSprite: '2c_3', 2;\nBBSprite: '2c_4', 2;\n\n#\u56DE\u8C03\u653B\u51FB\u4E8B\u4EF6\nRegistCallback:
-    (Hit: xx), 'HitCheck'\n  HitStop: 10;\n  EndCallback:\n\nBBSprite: '2c_5', 1;\nOpenGCWindow;\nAddGCOption:
+    '2c_1', 2;\nBBSprite: '2c_2', 2;\nBBSprite: '2c_3', 2;\nBBSprite: '2c_4', 2;\nRegistCallback:
+    (Hit: true), 'HitCheck'\n    HitStop: 15;\n    EndCallback:\nHitNotify:\n   
+    HitStun: KnockBack;\n    EndHitNotify: \nBBSprite: '2c_5', 1;\nOpenGCWindow;\nAddGCOption:
     'Mai_GroundDash';\nAddGCOption: 'Mai_Jump';\nBBSprite: '2c_5', 3;\nBBSprite:
     '2c_6', 3;\nBBSprite: '2c_6', 3;\nBBSprite: '2c_7', 2;\nBBSprite: '2c_8', 2;\nBBSprite:
     '2c_9', 2;\nBBSprite: '2c_10', 3;\nBBSprite: '2c_11', 3;\nreturn;"

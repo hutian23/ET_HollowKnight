@@ -33,12 +33,10 @@ namespace ET.Client
             int order = buffer.Children.Count - 1;
             info.Timeline = timeline;
             info.behaviorOrder = order;
-            info.behaviorName = timeline.timelineName;
+            info.behaviorName = hitFlag;
             info.moveType = MoveType.HitStun;
-            buffer.behaviorNameMap.Add(info.behaviorName, info.Id);
+            buffer.behaviorNameMap.Add(hitFlag, info.Id);
             buffer.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
-            buffer.hitStunFlagMap.Add(hitFlag, info.Id);
-            
             info.LoadSkillInfo(timeline);
             
             await ETTask.CompletedTask;

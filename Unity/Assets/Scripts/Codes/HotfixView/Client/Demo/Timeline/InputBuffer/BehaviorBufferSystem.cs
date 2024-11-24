@@ -51,7 +51,6 @@
             }
             self.behaviorOrderMap.Clear();
             self.infoIds.Clear();
-            self.hitStunFlagMap.Clear();
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)
@@ -187,19 +186,6 @@
 
             BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
             return self.ContainGCOption(info.behaviorOrder);
-        }
-
-        #endregion
-
-        #region HitStun
-        public static BehaviorInfo GetHitStun(this BehaviorBuffer self, string hitStunFlag)
-        {
-            if (!self.hitStunFlagMap.TryGetValue(hitStunFlag, out long infoId))
-            {
-                Log.Error($"does not exist hitStun behavior, hitStunFlag: {hitStunFlag}");
-                return null;
-            }
-            return self.GetChild<BehaviorInfo>(infoId);
         }
 
         #endregion

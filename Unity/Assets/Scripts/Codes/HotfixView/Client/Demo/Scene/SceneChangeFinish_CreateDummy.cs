@@ -23,7 +23,10 @@ namespace ET.Client
             dummy.AddComponent<GameObjectComponent>().GameObject = go;
             
             TimelineComponent timelineComponent = dummy.AddComponent<TimelineComponent>();
-            timelineComponent.AddComponent<BBTimerComponent>(); // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
+            
+            BBTimerComponent combatTimer = timelineComponent.AddComponent<BBTimerComponent>(); // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
+            BBTimerManager.Instance.RegistTimer(combatTimer);
+            
             timelineComponent.AddComponent<BBParser>().SetEntityId(timelineComponent.InstanceId);
             timelineComponent.AddComponent<HitboxComponent>();
             timelineComponent.AddComponent<TimelineEventManager>();

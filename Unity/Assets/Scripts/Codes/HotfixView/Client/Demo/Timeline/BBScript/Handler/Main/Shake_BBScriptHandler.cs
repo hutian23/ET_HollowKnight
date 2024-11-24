@@ -10,30 +10,27 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            b2Body b2Body =  b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             
             //销毁shake effect
             long shakeCnt = timelineComponent.GetParam<long>("ShakeCnt");
-            timelineComponent.UpdateParam("ShakeCnt",--shakeCnt);
+            self.UpdateParam("ShakeCnt",--shakeCnt);
             
-            if (shakeCnt <= 0f)
+            if (shakeCnt <= 0f) 
             {
                 long shakeTimer = timelineComponent.GetParam<long>("ShakeTimer");
-                bbTimer.Remove(ref shakeTimer);
-                timelineComponent.TryRemoveParam("ShakeTimer");
-                timelineComponent.TryRemoveParam("ShakeCnt");
-                timelineComponent.TryRemoveParam("Shake");
-                timelineComponent.TryRemoveParam("ShakeLength");
-                b2Body.SetUpdateFlag();
+                sceneTimer.Remove(ref shakeTimer);
+                self.TryRemoveParam("ShakeTimer");
+                self.TryRemoveParam("ShakeCnt");
+                self.TryRemoveParam("Shake");
+                self.TryRemoveParam("ShakeLength");
                 return;
             }
             
-            int shakeLength = timelineComponent.GetParam<int>("ShakeLength");
-            Random random = new();
-            Vector2 shakePos = new(random.Next(-shakeLength,shakeLength ) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
-            timelineComponent.UpdateParam("Shake",shakePos);
-            b2Body.SetUpdateFlag();
+            // int shakeLength = self.GetParam<int>("ShakeLength");
+            // Random random = new();
+            // Vector2 shakePos = new(random.Next(-shakeLength,shakeLength ) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
+            // timelineComponent.UpdateParam("Shake",shakePos);
         }
     }
 
@@ -67,24 +64,18 @@ namespace ET.Client
             }
             
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.ShakeTimer, bbParser);
-            timelineComponent.RegistParam("Shake", Vector2.zero);
-            timelineComponent.RegistParam("ShakeCnt", shakeTimer);
-            timelineComponent.RegistParam("ShakeTimer", timer);
-            timelineComponent.RegistParam("ShakeLength", ShakeLength);
+            long timer = sceneTimer.NewFrameTimer(BBTimerInvokeType.ShakeTimer, bbParser);
+            bbParser.RegistParam("Shake", Vector2.zero);
+            bbParser.RegistParam("ShakeCnt", shakeTimer);
+            bbParser.RegistParam("ShakeTimer", timer);
+            bbParser.RegistParam("ShakeLength", ShakeLength);
             
             token.Add(() =>
             {
-                timelineComponent.TryRemoveParam("Shake");
-                timelineComponent.TryRemoveParam("ShakeCnt");
-                timelineComponent.TryRemoveParam("ShakeTimer");
-                timelineComponent.TryRemoveParam("ShakeLength");
-                b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-                b2Body.SetUpdateFlag();
-                bbTimer.Remove(ref timer);
+                sceneTimer.Remove(ref timer);
             });
             
             await ETTask.CompletedTask;

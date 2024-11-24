@@ -726,7 +726,7 @@ MonoBehaviour:
 
     # HitStop
 
-    Shake: 2300, 16;
+    Shake: 1800, 15;
 
     Gravity: 0;
 
@@ -735,66 +735,62 @@ MonoBehaviour:
 
     SetVelocityY: 0;
 
+    #HitStop
+
     BBSprite: ''KnockBack_1'', 1;
-
-    WaitFrame: 15;
-
 
     SetVelocityX:
     -8000;
 
     SetVelocityY: 25000;
 
-    BBSprite: ''KnockBack_1'', 3;
+    BBSprite: ''KnockBack_2'', 3;
 
     BBSprite:
-    ''KnockBack_2'', 3;
-
-    BBSprite: ''KnockBack_3'', 3;
+    ''KnockBack_3'', 3;
 
     Gravity: 150000;
 
+    BBSprite: ''KnockBack_4'', 3;
+
     BBSprite:
-    ''KnockBack_4'', 3;
+    ''KnockBack_5'', 3;
 
-    BBSprite: ''KnockBack_5'', 3;
+    BBSprite: ''KnockBack_6'', 3;
 
-    BBSprite: ''KnockBack_6'',
+    BBSprite: ''KnockBack_7'',
     3;
-
-    BBSprite: ''KnockBack_7'', 3;
 
 
     #FallLoop
 
     SetVelocityX: 0;
 
-    BeginLoop:
-    (InAir: true)
+    BeginLoop: (InAir: true)
 
-    BBSprite: ''KnockBack_8'', 4;
+    BBSprite:
+    ''KnockBack_8'', 4;
 
-    BBSprite: ''KnockBack_9'',
-    4;
+    BBSprite: ''KnockBack_9'', 4;
 
     EndLoop:
 
 
     #Land
 
-    SetVelocityX: 0;
+    SetVelocityX:
+    0;
 
-    BBSprite: ''KnockBack_10'',
-    4;
+    BBSprite: ''KnockBack_10'', 4;
 
     BBSprite: ''KnockBack_11'', 4;
 
-    BBSprite: ''KnockBack_12'', 4;
-
     BBSprite:
-    ''KnockBack_13'', 4;
+    ''KnockBack_12'', 4;
 
-    BBSprite: ''KnockBack_14'', 20;
+    BBSprite: ''KnockBack_13'', 4;
 
-    SetTransition:
-    ''HardDownRecovery'';'
+    BBSprite: ''KnockBack_14'',
+    20;
+
+    SetTransition: ''HardDownRecovery'';'

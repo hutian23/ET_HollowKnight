@@ -7,7 +7,9 @@
         LateUpdate,
         Load,
 #if !DOTNET
-        FixedUpdate,   
+        FixedUpdate,
+        PreStep,
+        PostStep,
 #endif
         Max,
     }

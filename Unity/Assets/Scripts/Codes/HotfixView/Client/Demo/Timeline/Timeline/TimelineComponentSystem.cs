@@ -108,7 +108,7 @@ namespace ET.Client
             EventSystem.Instance.PublishAsync(self.DomainScene(), new BeforeBehaviorReload() { behaviorOrder = behaviorOrder, instanceId = self.GetParent<Unit>().InstanceId }).Coroutine();
             parser.Main().Coroutine();
         }
-
+        
         #region Param
         public static T RegistParam<T>(this TimelineComponent self, string paramName, T value)
         {

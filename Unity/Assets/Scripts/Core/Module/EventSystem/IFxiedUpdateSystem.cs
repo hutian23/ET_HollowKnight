@@ -3,9 +3,7 @@ using System;
 
 namespace ET
 {
-
-    public interface 
-            IFixedUpdate
+    public interface IFixedUpdate
     {
     }
     
@@ -34,7 +32,7 @@ namespace ET
 
         public void Run(Entity o)
         {
-            this.FixedUpdate((T)o);
+            FixedUpdate((T)o);
         }
 
         protected abstract void FixedUpdate(T self);
