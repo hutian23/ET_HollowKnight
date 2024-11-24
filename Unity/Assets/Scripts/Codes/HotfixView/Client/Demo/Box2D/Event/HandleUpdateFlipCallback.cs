@@ -46,8 +46,7 @@ namespace ET.Client
                         TriggerStayId = TriggerStayType.CollisionEvent,
                     },
                 };
-                Fixture fixture = b2Body.body.CreateFixture(fixtureDef);
-                b2Body.hitBoxFixtures.Add(fixture);
+                b2Body.CreateHitbox(fixtureDef);
             }
         }
     }

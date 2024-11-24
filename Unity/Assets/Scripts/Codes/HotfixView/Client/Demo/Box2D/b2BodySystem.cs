@@ -5,17 +5,16 @@ using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (b2Body))]
-    [FriendOf(typeof (RootMotionComponent))]
+    [FriendOf(typeof(b2Body))]
+    [FriendOf(typeof(RootMotionComponent))]
     public static class b2BodySystem
     {
-        public class b2BodyDestroySystem: DestroySystem<b2Body>
+        public class b2BodyDestroySystem : DestroySystem<b2Body>
         {
             protected override void Destroy(b2Body self)
             {
                 self.unitId = 0;
                 self.hitBoxFixtures.Clear();
-                self.fixtures.Clear();
                 self.body = null;
                 self.Flip = FlipState.Left;
                 self.UpdateFlag = false;
@@ -23,7 +22,15 @@ namespace ET.Client
             }
         }
 
-        public static void SyncUnitTransform(this b2Body self)
+        public class B2bodyPostStepSystem : PostStepSystem<b2Body>
+        {
+            protected override void PosStepUpdate(b2Body self)
+            {
+                self.SyncUnitTransform();
+            }
+        }
+
+        private static void SyncUnitTransform(this b2Body self)
         {
             Unit unit = Root.Instance.Get(self.unitId) as Unit;
 
@@ -32,7 +39,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
             self.trans = curTrans;
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
@@ -44,7 +51,7 @@ namespace ET.Client
             go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
             self.UpdateFlag = false;
         }
-        
+
         public static System.Numerics.Vector2 GetVelocity(this b2Body self)
         {
             return self.body.LinearVelocity;
@@ -54,7 +61,7 @@ namespace ET.Client
         {
             self.body.SetLinearVelocity(value);
         }
-        
+
         public static void SetVelocityX(this b2Body self, float velocityX)
         {
             var oldVel = self.body.LinearVelocity;
@@ -89,11 +96,11 @@ namespace ET.Client
             self.UpdateFlag = false;
         }
 
-        public static void SetPosition(this b2Body self,System.Numerics.Vector2 position)
+        public static void SetPosition(this b2Body self, System.Numerics.Vector2 position)
         {
             self.body.SetTransform(position, 0f);
         }
-        
+
         public static System.Numerics.Vector2 GetPosition(this b2Body self)
         {
             return self.body.GetPosition();
@@ -101,12 +108,28 @@ namespace ET.Client
 
         public static void ClearHitbox(this b2Body self)
         {
+            if (b2GameManager.Instance.IsLocked())
+            {
+                Log.Error($"cannot dispose fixture while b2World is locked!!");
+                return;
+            }
             for (int i = 0; i < self.hitBoxFixtures.Count; i++)
             {
                 Fixture fixture = self.hitBoxFixtures[i];
                 self.body.DestroyFixture(fixture);
             }
             self.hitBoxFixtures.Clear();
+        }
+
+        public static void CreateHitbox(this b2Body self,FixtureDef fixtureDef)
+        {
+            if (b2GameManager.Instance.IsLocked())
+            {
+                Log.Error($"cannot dispose fixture while b2World is locked!!");
+                return;
+            }
+            Fixture fixture = self.body.CreateFixture(fixtureDef);
+            self.hitBoxFixtures.Add(fixture);
         }
     }
 }

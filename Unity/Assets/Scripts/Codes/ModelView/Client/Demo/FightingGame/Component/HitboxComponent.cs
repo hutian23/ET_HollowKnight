@@ -5,7 +5,7 @@ using Timeline;
 namespace ET.Client
 {
     [ComponentOf(typeof (TimelineComponent))]
-    public class HitboxComponent: Entity, IAwake, IDestroy
+    public class HitboxComponent: Entity, IAwake, IDestroy, IPostStep
     {
         public HitboxKeyframe keyFrame;
 

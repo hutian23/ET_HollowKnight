@@ -9,16 +9,14 @@ namespace ET.Client
         public override void Handle(TriggerExitCallback args)
         {
             CollisionInfo info = args.info;
-            
-            if(info.dataB.LayerMask != LayerType.Ground) return;
+
+            if (info.dataB.LayerMask != LayerType.Ground)
+            {
+                return;
+            }
             
             TimelineComponent timelineComponent = Root.Instance.Get(info.dataA.InstanceId) as TimelineComponent;
-            timelineComponent.UpdateParam("OnGround", false);
-            EventSystem.Instance.PublishAsync(timelineComponent.ClientScene(), new OnGroundChanged()
-            {
-                instanceId = timelineComponent.InstanceId,
-                OnGround = false
-            }).Coroutine();
+            timelineComponent.UpdateParam("InAir", true);
         }
     }
 }

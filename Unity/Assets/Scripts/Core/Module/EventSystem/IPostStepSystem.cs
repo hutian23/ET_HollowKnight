@@ -13,6 +13,7 @@ namespace ET
         void Run(Entity o);
     }
 
+    [ObjectSystem]
     public abstract class PostStepSystem<T>: IPostStepSystem where T : Entity, IPostStep
     {
         public Type Type()

@@ -19,6 +19,25 @@ namespace ET.Client
             }
         }
 
+        public class b2WorldManagerDestroySystem: DestroySystem<b2GameManager>
+        {
+            protected override void Destroy(b2GameManager self)
+            {
+                b2GameManager.Instance = null;
+                self.Game = null;
+                self.B2World?.Dispose();
+                self.BodyDict.Clear();
+            }
+        }
+        
+        public class b2WorldManagerPostStepSystem : PostStepSystem<b2GameManager>
+        {
+            protected override void PosStepUpdate(b2GameManager self)
+            {
+                self.GetPostStepTimer().Step();
+            }
+        }
+
         public static void Reload(this b2GameManager self)
         {
             self.Game = Camera.main.GetComponent<b2Game>();
@@ -46,17 +65,6 @@ namespace ET.Client
             EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterB2WorldCreated() { B2World = self.B2World }).Coroutine();
         }
         
-        public class b2WorldManagerDestroySystem: DestroySystem<b2GameManager>
-        {
-            protected override void Destroy(b2GameManager self)
-            {
-                b2GameManager.Instance = null;
-                self.Game = null;
-                self.B2World?.Dispose();
-                self.BodyDict.Clear();
-            }
-        }
-
         public static void FixedUpdate(this b2GameManager self)
         {
             if (self.Paused) return;
@@ -66,18 +74,8 @@ namespace ET.Client
         public static void Step(this b2GameManager self)
         {
             self.B2World.Step();
-            self.SyncTrans();
         }
         
-        private static void SyncTrans(this b2GameManager self)
-        {
-            foreach (long id in self.BodyDict.Values)
-            {
-                b2Body body = self.GetChild<b2Body>(id);
-                body.SyncUnitTransform();
-                EventSystem.Instance.PublishAsync(self.ClientScene(), new AfterSyncTransform() { instanceId = body.unitId }).Coroutine();
-            }
-        }
 
         public static b2Body GetBody(this b2GameManager self, long unitId)
         {
@@ -99,10 +97,10 @@ namespace ET.Client
         {
             return self.GetChild<BBTimerComponent>(self.PostStepTimer);
         }
-        
-        public static void AddPostStepCallback(this b2GameManager self, Action action)
+
+        public static bool IsLocked(this b2GameManager self)
         {
-            self.B2World.PostStepCallback += action;
+            return self.B2World.IsLocked;
         }
     }
 }

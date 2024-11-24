@@ -18,12 +18,9 @@
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             
             timelineComponent.Init();
-
-            //这里跟执行顺序有关，我们希望先执行逻辑，再进行物理模拟(ps: 同一帧内，先更新hitbox生成夹具，然后再进行碰撞检测，实现更新hitbox就能立刻调用碰撞回调的效果)
             bbTimer.ReLoad();
 
-            //获得输入，更新输入缓冲区定时器
-            //只有玩家会挂载inputWait
+            //获得输入，更新输入缓冲区定时器, 只有玩家会挂载inputWait
             inputWait?.Init();
 
             //清空碰撞事件组件
@@ -45,13 +42,7 @@
             if (parser.cancellationToken.IsCancel()) return;
             
             //1-2 重载Parser,进入默认行为
-            BehaviorInfo info = buffer.GetInfoByOrder(0);
-            timelineComponent.Reload(info.Timeline, info.behaviorOrder);
-            
-            //1-3 注册变量
-            timelineComponent.RegistParam("OnGround", false);
-            
-            await ETTask.CompletedTask;
+            timelineComponent.Reload(0);
         }
     }
 }

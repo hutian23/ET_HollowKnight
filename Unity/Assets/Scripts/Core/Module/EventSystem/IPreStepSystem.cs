@@ -1,7 +1,6 @@
 ﻿#if !DOTNET
 using System;
 
-
 namespace ET
 {
     public interface IPreStep

@@ -152,8 +152,7 @@ namespace Box2DSharp.Dynamics
         /// The minimum is 1.
         public float TreeQuality => ContactManager.BroadPhase.GetTreeQuality();
 
-        public World()
-            : this(new Vector2(0, -10))
+        public World(): this(new Vector2(0, -10))
         { }
 
         public World(in Vector2 gravity)

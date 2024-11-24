@@ -726,7 +726,7 @@ MonoBehaviour:
 
     # HitStop
 
-    Shake: 1800, 15;
+    # Shake: 1800, 15;
 
     Gravity: 0;
 

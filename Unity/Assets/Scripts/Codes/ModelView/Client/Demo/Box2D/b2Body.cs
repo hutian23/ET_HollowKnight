@@ -6,7 +6,7 @@ using Transform = Box2DSharp.Common.Transform;
 namespace ET.Client
 {
     [ChildOf(typeof (b2GameManager))]
-    public class b2Body: Entity, IAwake, IDestroy
+    public class b2Body: Entity, IAwake, IDestroy, IPostStep
     {
         //记录unit的instanceId
         public long unitId;
@@ -20,8 +20,6 @@ namespace ET.Client
 
         //当前帧建立的hitBox
         public List<Fixture> hitBoxFixtures = new();
-
-        public List<Fixture> fixtures = new();
         
         public FlipState Flip = FlipState.Left;
         public int Gravity;
@@ -39,10 +37,5 @@ namespace ET.Client
     {
         public long instanceId;
         public FlipState curFlip;
-    }
-
-    public struct AfterSyncTransform
-    {
-        public long instanceId;
     }
 }

@@ -397,24 +397,27 @@ MonoBehaviour:
     BBSprite:
     ''Hurt_1'', 1;
 
+    WaitFrame: 20;
+
     # HitStop
 
     WaitFrame: 10;
 
-    SetVelocityY: 30000;
+    SetVelocityY:
+    30000;
 
-    SetVelocityX:
-    -5000;
+    SetVelocityX: -5000;
 
     BBSprite: ''Hurt_1'', 1;
+
+    BBSprite:
+    ''Hurt_2'', 2;
+
+    BBSprite: ''Hurt_3'', 2;
 
     BBSprite: ''Hurt_2'', 2;
 
     BBSprite:
-    ''Hurt_3'', 2;
-
-    BBSprite: ''Hurt_2'', 2;
-
-    BBSprite: ''Hurt_1'', 2;
+    ''Hurt_1'', 2;
 
     return;'

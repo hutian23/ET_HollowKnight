@@ -119,8 +119,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nInitPos: 2000, 3000;\nGravity: 150000;\nNumericType: MaxFall,
-    50000;\nNumericType: MiddleFall, 2000;\nNumericType: MaxDash, 1;\nNumericType:
+  rootScript: "@RootInit:\nInitPos: 2000, 3000;\nRegistAirCheck;\nGravity: 150000;\nNumericType:
+    MaxFall, 50000;\nNumericType: MiddleFall, 2000;\nNumericType: MaxDash, 1;\nNumericType:
     DashCount, 1;\nNumericType: MaxJump, 2;\nNumericType: JumpCount, 2;\n\n# Base\nRegistMove:
     (Dummy_Idle)\n    MoveType: None;\n    EndMove:\n#Super\nRegistMove: (Mai_HardDownRecovery)\n   
     MoveType: Super;\n    EndMove:\n\n# HitStun\nRegistHitStun: Mai_KnockBack, KnockBack;\nreturn;\n\n"

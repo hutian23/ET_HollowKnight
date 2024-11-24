@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ET
 {
@@ -577,6 +575,86 @@ namespace ET
                     try
                     {
                         iFixedUpdateSystem.Run(component);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
+                }
+            }
+        }
+
+        public void PostStepUpdate()
+        {
+            Queue<long> queue = this.queues[(int)InstanceQueueIndex.PostStep];
+            int count = queue.Count;
+            while (count-- > 0)
+            {
+                long instanceId = queue.Dequeue();
+                Entity component = Root.Instance.Get(instanceId);
+                if (component == null)
+                {
+                    continue;
+                }
+
+                if (component.IsDisposed)
+                {
+                    continue;
+                }
+                
+                List<object> iPostStepSystems = this.typeSystems.GetSystems(component.GetType(), typeof (IPostStepSystem));
+                if (iPostStepSystems == null)
+                {
+                    continue;
+                }
+
+                queue.Enqueue(instanceId);
+
+                foreach (IPostStepSystem iPostStepSystem in iPostStepSystems)
+                {
+                    try
+                    {
+                        iPostStepSystem.Run(component);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
+                }
+            }
+        }
+        
+        public void PreStepUpdate()
+        {
+            Queue<long> queue = this.queues[(int)InstanceQueueIndex.PreStep];
+            int count = queue.Count;
+            while (count-- > 0)
+            {
+                long instanceId = queue.Dequeue();
+                Entity component = Root.Instance.Get(instanceId);
+                if (component == null)
+                {
+                    continue;
+                }
+
+                if (component.IsDisposed)
+                {
+                    continue;
+                }
+                
+                List<object> iPreStepSystems = this.typeSystems.GetSystems(component.GetType(), typeof (IPreStepSystem));
+                if (iPreStepSystems == null)
+                {
+                    continue;
+                }
+
+                queue.Enqueue(instanceId);
+
+                foreach (IPreStepSystem iPreStepSystem in iPreStepSystems)
+                {
+                    try
+                    {
+                        iPreStepSystem.Run(component);
                     }
                     catch (Exception e)
                     {

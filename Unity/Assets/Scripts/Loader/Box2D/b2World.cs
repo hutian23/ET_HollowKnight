@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
@@ -17,6 +16,9 @@ namespace ET
     public class b2World: TestBase
     {
         private b2Game Game;
+
+        //限制执行碰撞事件期间不能增删夹具
+        public bool IsLocked;
         
         public b2World(b2Game _Game)
         {
@@ -53,70 +55,32 @@ namespace ET
             PostStep();
             StepCount++;
         }
-
-        //在碰撞事件中涉及删除夹具等操作需要添加到这里
-        public Action PostStepCallback;
-
+        
         protected override void PreStep()
         {
             base.PreStep();
-            EventSystem.Instance.Invoke(new PreStepCallback());
+            
+            EventSystem.Instance.PreStepUpdate();
+            IsLocked = true;
         }
         
         protected override void PostStep()
         {
             base.PostStep();
             
-            #region TriggerEnter
-
-            int count1 = BeginContactQueue.Count;
-            while (count1-- > 0)
-            {
-                Contact beginContact = BeginContactQueue.Dequeue();
-                EventSystem.Instance.Invoke(new BeginContactCallback(){Contact = beginContact});
-            }
-            
-            #endregion
-
-            #region TriggerStay
-
-            int count3 = PreSolveQueue.Count;
-            while (count3-- > 0)
-            {
-                Contact preSolveContact = PreSolveQueue.Dequeue();
-                EventSystem.Instance.Invoke(new PreSolveCallback(){Contact = preSolveContact});
-            }
-            
-            #endregion
-            
-            #region TriggerExit
-            
-            int count2 = EndContactQueue.Count;
-            while (count2-- > 0)
-            {
-                Contact endContact = EndContactQueue.Dequeue();
-                EventSystem.Instance.Invoke(new EndContactCallback(){Contact = endContact});
-            }
-            #endregion
-            
-            EventSystem.Instance.Invoke(new PostStepCallback());
+            IsLocked = false;
+            EventSystem.Instance.PostStepUpdate();
         }
-        
-        private readonly Queue<Contact> BeginContactQueue=  new();
-        private readonly Queue<Contact> EndContactQueue=  new();
-        private readonly Queue<Contact> PreSolveQueue = new();
-        
         
         public override void BeginContact(Contact contact)
         {
             base.BeginContact(contact);
-            BeginContactQueue.Enqueue(contact);
+            EventSystem.Instance.Invoke(new BeginContactCallback(){Contact = contact});
         }
 
         public override void EndContact(Contact contact)
         {
-            base.EndContact(contact);
-            EndContactQueue.Enqueue(contact);
+            EventSystem.Instance.Invoke(new EndContactCallback(){Contact = contact});
         }
 
         public override void PreSolve(Contact contact, in Manifold oldManifold)
@@ -147,10 +111,9 @@ namespace ET
             if (dataA.IsTrigger || dataB.IsTrigger)
             {
                 contact.SetEnabled(false);
-                PreSolveQueue.Enqueue(contact);
+                EventSystem.Instance.Invoke(new PostSolveCallback(){Contact = contact});
             }
         }
-
         #region Render
 
         private void DrawB2World()
@@ -442,17 +405,8 @@ namespace ET
         public Contact Contact;
     }
     
-    public struct PreSolveCallback
+    public struct PostSolveCallback
     {
         public Contact Contact;
-    }
-
-    public struct PreStepCallback
-    {
-        
-    }
-    
-    public struct PostStepCallback
-    {
     }
 }

@@ -5,9 +5,9 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    public class HandlePostSolveContactCallback : AInvokeHandler<PreSolveCallback>
+    public class HandlePostSolveContactCallback : AInvokeHandler<PostSolveCallback>
     {
-        public override void Handle(PreSolveCallback args)
+        public override void Handle(PostSolveCallback args)
         {
             Fixture fixtureA = args.Contact.FixtureA;
             Fixture fixtureB = args.Contact.FixtureB;

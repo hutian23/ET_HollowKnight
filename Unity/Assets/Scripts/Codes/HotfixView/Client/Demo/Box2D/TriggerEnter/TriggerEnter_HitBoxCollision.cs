@@ -10,20 +10,13 @@ namespace ET.Client
     {
         public override void Handle(TriggerEnterCallback args)
         {
-            CollisionInfo info = args.info;
-            
-            BoxInfo boxInfo = info.dataB.UserData as BoxInfo;
-            if (boxInfo.hitboxType is not HitboxType.Hurt) return;
-            
-            b2Body B2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
-            Unit unit = Root.Instance.Get(B2Body.unitId) as Unit;
-            
-            b2GameManager.Instance.AddPostStepCallback(() =>
-            {
-                //通知unit切换行为
-                TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-                timelineComponent.GetComponent<ObjectWait>().Notify(new WaitHitStunBehavior(){hitStunFlag = "KnockBack",Error = WaitTypeError.Success}); 
-            });
+            // CollisionInfo info = args.info;
+            //
+            // BoxInfo boxInfo = info.dataB.UserData as BoxInfo;
+            // if (boxInfo.hitboxType is not HitboxType.Hurt) return;
+            //
+            // b2Body B2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
+            // Unit unit = Root.Instance.Get(B2Body.unitId) as Unit;
         }
     }
 }
