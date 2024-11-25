@@ -1,5 +1,4 @@
-﻿using System;
-using ET.Event;
+﻿using ET.Event;
 using Camera = UnityEngine.Camera;
 
 namespace ET.Client
@@ -34,6 +33,11 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2GameManager self)
             {
+                foreach (var kv in self.BodyDict)
+                {
+                    b2Body b2Body = self.GetChild<b2Body>(kv.Value);
+                    b2Body.PostStep();
+                }
                 self.GetPostStepTimer().Step();
             }
         }

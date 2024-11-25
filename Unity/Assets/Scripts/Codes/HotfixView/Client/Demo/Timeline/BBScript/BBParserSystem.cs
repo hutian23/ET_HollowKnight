@@ -141,7 +141,7 @@ namespace ET.Client
                 }
 
                 //5. 执行一条语句相当于一个子协程
-                BBScriptData data = BBScriptData.Create(opLine, funcId, null); //池化，不然GC很高
+                BBScriptData data = BBScriptData.Create(self.ReplaceParam(opLine), funcId, null); //池化，不然GC很高
                 Status ret = await handler.Handle(self, data, token);
                 data.Recycle();
 
@@ -266,6 +266,28 @@ namespace ET.Client
             subToken.Cancel();
         }
 
+        private static string ReplaceParam(this BBParser self, string opLine)
+        {
+            MatchCollection matches = Regex.Matches(opLine, @"\[(.*?)\]");
+            string result = opLine;
+            for (int i = 0; i < matches.Count; i++)
+            {
+                string content = matches[i].Groups[1].Value;
+                string replace = string.Empty;
+                //find param
+                foreach (var param in self.paramDict)
+                {
+                    if (param.Key.Equals(content))
+                    {
+                       replace = param.Value.value.ToString();
+                    }
+                }
+
+                result = result.Replace(matches[i].Value, replace);
+            }
+            return result;
+        }
+        
         public static T RegistParam<T>(this BBParser self, string paramName, T value)
         {
             if (self.paramDict.ContainsKey(paramName))

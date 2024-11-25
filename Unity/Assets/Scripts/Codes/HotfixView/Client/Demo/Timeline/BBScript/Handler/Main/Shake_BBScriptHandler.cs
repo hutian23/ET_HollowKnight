@@ -9,16 +9,15 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             
             //销毁shake effect
-            long shakeCnt = timelineComponent.GetParam<long>("ShakeCnt");
+            long shakeCnt = self.GetParam<long>("ShakeCnt");
             self.UpdateParam("ShakeCnt",--shakeCnt);
             
             if (shakeCnt <= 0f) 
             {
-                long shakeTimer = timelineComponent.GetParam<long>("ShakeTimer");
+                long shakeTimer = self.GetParam<long>("ShakeTimer");
                 sceneTimer.Remove(ref shakeTimer);
                 self.TryRemoveParam("ShakeTimer");
                 self.TryRemoveParam("ShakeCnt");
@@ -27,10 +26,12 @@ namespace ET.Client
                 return;
             }
             
-            // int shakeLength = self.GetParam<int>("ShakeLength");
-            // Random random = new();
-            // Vector2 shakePos = new(random.Next(-shakeLength,shakeLength ) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
-            // timelineComponent.UpdateParam("Shake",shakePos);
+            int shakeLength = self.GetParam<int>("ShakeLength");
+            Random random = new();
+            Vector3 shakePos = new(random.Next(-shakeLength,shakeLength ) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
+
+            GameObject go = self.GetParent<TimelineComponent>().GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
+            go.transform.position += shakePos;
         }
     }
 

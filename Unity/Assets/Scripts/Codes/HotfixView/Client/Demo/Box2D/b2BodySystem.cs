@@ -22,15 +22,7 @@ namespace ET.Client
             }
         }
 
-        public class B2bodyPostStepSystem : PostStepSystem<b2Body>
-        {
-            protected override void PosStepUpdate(b2Body self)
-            {
-                self.SyncUnitTransform();
-            }
-        }
-
-        private static void SyncUnitTransform(this b2Body self)
+        public static void PostStep(this b2Body self)
         {
             Unit unit = Root.Instance.Get(self.unitId) as Unit;
 

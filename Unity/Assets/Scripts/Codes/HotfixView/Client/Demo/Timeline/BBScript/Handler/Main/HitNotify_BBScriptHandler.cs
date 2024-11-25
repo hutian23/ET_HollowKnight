@@ -34,7 +34,7 @@ namespace ET.Client
                 //执行回调
                 int startIndex = self.GetParam<int>("HitNotify_StartIndex");
                 int endIndex = self.GetParam<int>("HitNotify_EndIndex");
-
+                
                 self.RegistParam("HitData", info.dataB);
                 self.RegistSubCoroutine(startIndex,endIndex,"HitNotifyCoroutine").Coroutine();
                 self.RemoveParam("HitData");
