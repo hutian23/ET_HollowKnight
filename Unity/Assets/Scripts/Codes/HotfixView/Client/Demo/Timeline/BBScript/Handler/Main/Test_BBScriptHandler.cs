@@ -10,6 +10,7 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
+            Log.Warning(parser.GetParam<long>("HitStop").ToString());
             await ETTask.CompletedTask;
             return Status.Success;
         }

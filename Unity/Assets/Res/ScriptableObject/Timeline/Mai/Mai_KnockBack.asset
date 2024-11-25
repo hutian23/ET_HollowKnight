@@ -722,75 +722,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_KnockBack
-  Script: '@Main:
-
-    # HitStop
-
-    # Shake: 1800, 15;
-
-    Gravity: 0;
-
-    SetVelocityX:
-    0;
-
-    SetVelocityY: 0;
-
-    #HitStop
-
-    BBSprite: ''KnockBack_1'', 1;
-
-    SetVelocityX:
-    -8000;
-
-    SetVelocityY: 25000;
-
-    BBSprite: ''KnockBack_2'', 3;
-
-    BBSprite:
-    ''KnockBack_3'', 3;
-
-    Gravity: 150000;
-
-    BBSprite: ''KnockBack_4'', 3;
-
-    BBSprite:
-    ''KnockBack_5'', 3;
-
-    BBSprite: ''KnockBack_6'', 3;
-
-    BBSprite: ''KnockBack_7'',
-    3;
-
-
-    #FallLoop
-
-    SetVelocityX: 0;
-
-    BeginLoop: (InAir: true)
-
-    BBSprite:
-    ''KnockBack_8'', 4;
-
-    BBSprite: ''KnockBack_9'', 4;
-
-    EndLoop:
-
-
-    #Land
-
-    SetVelocityX:
-    0;
-
-    BBSprite: ''KnockBack_10'', 4;
-
-    BBSprite: ''KnockBack_11'', 4;
-
-    BBSprite:
-    ''KnockBack_12'', 4;
-
-    BBSprite: ''KnockBack_13'', 4;
-
-    BBSprite: ''KnockBack_14'',
-    20;
-
-    SetTransition: ''HardDownRecovery'';'
+  Script: "@Main:\nGravity: 0;\nSetVelocityX: 0;\nSetVelocityY: 0;\nBBSprite: 'KnockBack_1',
+    1;\nHitStop: [Domain.HitStop];\nSetVelocityX: -8000;\nSetVelocityY: 25000;\nBBSprite:
+    'KnockBack_2', 3;\nBBSprite: 'KnockBack_3', 3;\nGravity: 150000;\n#Gravity: [Timeline.MaxGravity];\nBBSprite:
+    'KnockBack_4', 3;\nBBSprite: 'KnockBack_5', 3;\nBBSprite: 'KnockBack_6', 3;\nBBSprite:
+    'KnockBack_7', 3;\n#FallLoop\nSetVelocityX: 0;\nBeginLoop: (InAir: true)\n   
+    BBSprite: 'KnockBack_8', 4;\n    BBSprite: 'KnockBack_9', 4;\n    EndLoop:\n#Land\nSetVelocityX:
+    0;\nBBSprite: 'KnockBack_10', 4;\nBBSprite: 'KnockBack_11', 4;\nBBSprite: 'KnockBack_12',
+    4;\nBBSprite: 'KnockBack_13', 4;\nBBSprite: 'KnockBack_14', 20;\nSetTransition:
+    'HardDownRecovery';"
