@@ -6,6 +6,9 @@ namespace ET.Client
     public class TimelineComponent: Entity, IAwake, IDestroy
     {
         public Dictionary<string, SharedVariable> paramDict = new();
+
+        public Dictionary<string, long> callbackDict = new();
+        public Dictionary<string, long> markerEventDict = new();
     }
 
     //回调，调用后退出事件

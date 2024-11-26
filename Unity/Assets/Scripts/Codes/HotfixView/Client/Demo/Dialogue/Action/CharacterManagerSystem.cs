@@ -110,7 +110,7 @@ namespace ET.Client
             self.RemoveTalker(characterName);
             Talker talker = self.AddChild<Talker>();
             self.talkers.Add(characterName, talker.Id);
-            talker.Init(characterName, clip);
+            // talker.Init(characterName, clip);
             return talker;
         }
 

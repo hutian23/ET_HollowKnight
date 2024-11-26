@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ET;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Timeline.Editor;
+using EventSystem = ET.EventSystem;
 
 namespace Timeline
 {
@@ -74,20 +74,12 @@ namespace Timeline
     }
 #endif
 
-    public struct EventMarkerCallback
+    public struct UpdateEventTrackCallback
     {
         public long instanceId;
-        public BBEventTrack track;
-        public EventInfo info;
+        public string markerName;
     }
-
-    public struct InitEventTrack
-    {
-        public long instanceId;
-        public RuntimeEventTrack RuntimeEventTrack;
-        public int initType;
-    }
-
+    
     public class RuntimeEventTrack: RuntimeTrack
     {
         private TimelinePlayer timelinePlayer => RuntimePlayable.TimelinePlayer;
@@ -98,17 +90,22 @@ namespace Timeline
 
         public override void Bind()
         {
-            //Init component of event track
-            EventSystem.Instance?.Invoke(new InitEventTrack() { instanceId = timelinePlayer.instanceId, RuntimeEventTrack = this, initType = 0 });
         }
 
         public override void UnBind()
         {
-            EventSystem.Instance?.Invoke(new InitEventTrack() { instanceId = timelinePlayer.instanceId, RuntimeEventTrack = this, initType = 1 });
         }
 
         public override void SetTime(int targetFrame)
         {
+            BBEventTrack eventTrack = Track as BBEventTrack;
+            foreach (EventInfo info in eventTrack.EventInfos)
+            {
+                if (info.frame == targetFrame)
+                {
+                    EventSystem.Instance.Invoke(new UpdateEventTrackCallback() { instanceId = this.timelinePlayer.instanceId, markerName = info.keyframeName});
+                }
+            }
         }
     }
 }

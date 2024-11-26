@@ -29,7 +29,7 @@ namespace ET.Client
             }
 
             Unit ch = characterManager.GetCharacter(character);
-            ch.AnimPlay(clipName);
+            // ch.AnimPlay(clipName);
             
             await ETTask.CompletedTask;
         }

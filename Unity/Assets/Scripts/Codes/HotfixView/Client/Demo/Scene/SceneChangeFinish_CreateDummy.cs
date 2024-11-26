@@ -29,7 +29,6 @@ namespace ET.Client
             
             timelineComponent.AddComponent<BBParser>().SetEntityId(timelineComponent.InstanceId);
             timelineComponent.AddComponent<HitboxComponent>();
-            timelineComponent.AddComponent<TimelineEventManager>();
             timelineComponent.AddComponent<BehaviorBuffer>();
         }
     }

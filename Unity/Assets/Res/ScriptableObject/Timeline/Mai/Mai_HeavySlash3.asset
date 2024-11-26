@@ -1276,8 +1276,4 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_HeavySlash3
-  Script: "@Trigger:\nInputType: LightPunchPressed;\nGCOption: 'Mai_HeavySlash3';\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nMarkerEvent:
-    (Open_WhiffWindow)\n  OpenWhiffWindow;\n  AddWhiffOption: 'Mai_GroundDash';\n 
-    EndMarkerEvent:\nMarkerEvent: (Open_GCWindow)\n  DisposeWhiffWindow;\n  OpenGCWindow;\n 
-    EndMarkerEvent:\nMarkerEvent: (TransitionCancel)\n  DisposeGCWindow;\n  OpenTransitionWindow;\n 
-    AddGCOption: 'Mai_Run';\n  EndMarkerEvent:\nStartTimeline;\nreturn;"
+  Script: "@Trigger:\nInputType: LightPunchPressed;\nGCOption: 'Mai_HeavySlash3';\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nStartTimeline;\nreturn;"

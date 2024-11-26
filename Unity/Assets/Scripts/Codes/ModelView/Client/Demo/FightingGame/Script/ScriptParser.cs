@@ -4,7 +4,6 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [ComponentOf(typeof (TimelineComponent))]
-    [ChildOf(typeof (TimelineEventManager))]
     public class ScriptParser: Entity, IAwake<long>, IDestroy, ILoad
     {
         //Unit的唯一Id

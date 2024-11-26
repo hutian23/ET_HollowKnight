@@ -13,15 +13,10 @@ namespace ET.Client
 
             Scene clientScene = await SceneFactory.CreateClientScene(1, "Game");
             clientScene.AddComponent<Storage>();
-            clientScene.AddComponent<Input>();
-            clientScene.AddComponent<TODEventSystem>();
             clientScene.AddComponent<OperaComponent>();
-            // clientScene.AddComponent<ScriptDispatcherComponent>();
             clientScene.AddComponent<DialogueDispatcherComponent>();
 
             Unit player = TODUnitFactory.CreatePlayer(clientScene);
-            // player.AddComponent<NumericComponent>();
-            // player.AddComponent<DialogueStorageManager>();
 
             await Storage.Instance.SaveStorage(0, player);
             //反序列化存档
