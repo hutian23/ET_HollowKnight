@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
@@ -30,6 +31,7 @@ namespace ET
             Draw = Global.DebugDraw;
             TestSettings = Global.Settings;
             World.Draw = Global.DebugDraw;
+            World.SetContactFilter(new B2ContactFilter());
         }
 
         public override void Dispose()
@@ -80,40 +82,22 @@ namespace ET
 
         public override void EndContact(Contact contact)
         {
+            base.EndContact(contact);
             EventSystem.Instance.Invoke(new EndContactCallback(){Contact = contact});
         }
 
         public override void PreSolve(Contact contact, in Manifold oldManifold)
         {
             base.PreSolve(contact, in oldManifold);
-            //TODO 这里可以用Filter来优化?
-            if (contact.FixtureA.UserData is not FixtureData dataA || contact.FixtureB.UserData is not FixtureData dataB)
-            {
-                contact.SetEnabled(false);
-                return;
-            }
-            //同一刚体的夹具
-            if (contact.FixtureA.Body == contact.FixtureB.Body)
-            {
-                contact.SetEnabled(false);
-                return;
-            }
-            //TODO 优化 这里先直接设置pushBox不会相互碰撞
-            if (dataA.UserData is BoxInfo infoA && 
-                dataB.UserData is BoxInfo infoB &&
-                infoA.hitboxType is HitboxType.Squash &&
-                infoB.hitboxType is HitboxType.Squash)
-            {
-                contact.SetEnabled(false);
-                return;
-            }
-            //两个都是触发器
-            if (dataA.IsTrigger || dataB.IsTrigger)
+            if (contact.FixtureA.UserData is FixtureData dataA &&
+                contact.FixtureB.UserData is FixtureData dataB &&
+                (dataA.IsTrigger || dataB.IsTrigger))
             {
                 contact.SetEnabled(false);
                 EventSystem.Instance.Invoke(new PostSolveCallback(){Contact = contact});
             }
         }
+        
         #region Render
 
         private void DrawB2World()
