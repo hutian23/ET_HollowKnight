@@ -7,17 +7,17 @@
             return "SquitHold";
         }
 
-        public override async ETTask<Status> Handle(Unit unit, ETCancellationToken token)
+        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
         {
             InputWait inputWait = BBInputHelper.GetInputWait(unit);
             
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.DOWN | BBOperaType.DOWNLEFT | BBOperaType.DOWNRIGHT, FuzzyInputType.OR);
             if (wait.Error is not WaitTypeError.Success)
             {
-                return Status.Failed;
+                return InputStatus.Failed;
             }
-            await ETTask.CompletedTask;
-            return Status.Success;
+            
+            return InputStatus.Success;
         }
     }
 }

@@ -7,7 +7,7 @@
             return "2MPPressed";
         }
         
-        public override async ETTask<Status> Handle(Unit unit, ETCancellationToken token)
+        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
         {
             InputWait inputWait = BBInputHelper.GetInputWait(unit);
             
@@ -18,7 +18,7 @@
                 bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.MIDDLEPUNCH);
                 return WasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return Status.Failed;
+            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
             
             //2. 按下攻击键的同一帧，判断是否包含以下输入
             long op = wait.OP;
@@ -26,11 +26,9 @@
                 (op & BBOperaType.DOWNLEFT) != 0||
                 (op & BBOperaType.DOWNRIGHT) != 0)
             {
-                return Status.Success;
+                return InputStatus.Success;
             }
-            
-            await ETTask.CompletedTask;
-            return Status.Failed;
+            return InputStatus.Failed;
         }
     }
 }

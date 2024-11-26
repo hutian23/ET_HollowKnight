@@ -275,7 +275,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_Run
-  Script: "@Trigger:\nInputType: RunHold;\nreturn;\n\n@Main:\n# Run ---> Idle\nSetTransition:
-    'RunToIdle';\n# Run ---> Squit\nSetTransition: 'TransitionToSquit';\nOpenCancelWindow;\nUpdateFlip;\nMoveX:
-    15000;\nBeginLoop: (InputType: RunHold)\n  LoopTimeline;\n  EndLoop:\nCancelMoveX;\nSetVelocityX:
+  Script: "@Trigger:\nInputType: RunHold;\nreturn;\n\n@Main:\nInitSubCoroutine;\n#
+    Run ---> Idle\nSetTransition: 'RunToIdle';\n# Run ---> Squit\nSetTransition:
+    'TransitionToSquit';\nOpenCancelWindow;\nUpdateFlip;\nMoveX: 15000;\nBeginLoop:
+    (InputType: RunHold)\n  LoopTimeline;\n  EndLoop:\nCancelMoveX;\nSetVelocityX:
     0;\nreturn;\n"

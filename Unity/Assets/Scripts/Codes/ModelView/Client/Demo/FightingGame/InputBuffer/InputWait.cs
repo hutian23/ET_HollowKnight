@@ -20,16 +20,9 @@ namespace ET.Client
         public Queue<InputBuffer> bufferQueue = new();
         public const int MaxStack = 30;
 
-        public Dictionary<int, long> PressedDict = new();
-        public Dictionary<int, long> ReleasedDict = new();
+        public Dictionary<long, long> PressedDict = new();
     }
-
-    public struct AfterUpdateInput
-    {
-        public long OP;
-        public long instanceId;
-    }
-
+    
     public class InputBuffer
     {
         public BBInputHandler handler;
@@ -104,6 +97,17 @@ namespace ET.Client
             checkFunc = null;
             ObjectPool.Instance.Recycle(this);
         }
+    }
+    
+    public struct InputStatus
+    {
+        public int buffFrame;
+        public Status ret;
+        
+        [StaticField]
+        public static InputStatus Success = new() { buffFrame = 5, ret = Status.Success };
+        [StaticField]
+        public static InputStatus Failed = new() { buffFrame = 0, ret = Status.Failed };
     }
 
     public struct WaitInput: IWaitType

@@ -7,7 +7,7 @@
             return "LightPunchPressed";
         }
 
-        public override async ETTask<Status> Handle(Unit unit, ETCancellationToken token)
+        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
         {
             InputWait inputWait = BBInputHelper.GetInputWait(unit);
 
@@ -17,10 +17,10 @@
                 bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.LIGHTPUNCH);
                 return WasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return Status.Failed;
+            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
 
             await ETTask.CompletedTask;
-            return Status.Success;
+            return InputStatus.Success;
         }
     }
 }

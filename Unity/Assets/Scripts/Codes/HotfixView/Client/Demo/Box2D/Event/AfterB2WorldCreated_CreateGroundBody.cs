@@ -35,27 +35,27 @@ namespace ET.Client
             };
             
             //obstacle
-            BodyDef obstacleDef = new() { BodyType = BodyType.StaticBody, Position = new Vector2(-5, 4f) };
-            Body obstacleBody = World.CreateBody(obstacleDef);
-            PolygonShape box = new();
-            box.SetAsBox(1f, 1f);
-            Fixture obstacleFixture = obstacleBody.CreateFixture(box, 0.0f);
-            obstacleFixture.Friction = 0f;
-            obstacleFixture.UserData = new FixtureData()
-            {
-                InstanceId = 0, 
-                LayerMask = LayerType.Unit,
-                UserData = new BoxInfo()
-                {
-                    boxName = "ObstacleHitBox",
-                    center = UnityEngine.Vector2.zero,
-                    hitboxType = HitboxType.Hit,
-                    size = UnityEngine.Vector2.zero
-                },
-                TriggerStayId = TriggerStayType.HitCollision,
-                TriggerEnterId = TriggerEnterType.HitBoxCollision,
-                IsTrigger = true
-            };
+            // BodyDef obstacleDef = new() { BodyType = BodyType.StaticBody, Position = new Vector2(-5, 4f) };
+            // Body obstacleBody = World.CreateBody(obstacleDef);
+            // PolygonShape box = new();
+            // box.SetAsBox(1f, 1f);
+            // Fixture obstacleFixture = obstacleBody.CreateFixture(box, 0.0f);
+            // obstacleFixture.Friction = 0f;
+            // obstacleFixture.UserData = new FixtureData()
+            // {
+            //     InstanceId = 0, 
+            //     LayerMask = LayerType.Unit,
+            //     UserData = new BoxInfo()
+            //     {
+            //         boxName = "ObstacleHitBox",
+            //         center = UnityEngine.Vector2.zero,
+            //         hitboxType = HitboxType.Hit,
+            //         size = UnityEngine.Vector2.zero
+            //     },
+            //     TriggerStayId = TriggerStayType.HitCollision,
+            //     TriggerEnterId = TriggerEnterType.HitBoxCollision,
+            //     IsTrigger = true
+            // };
             await ETTask.CompletedTask;
         }
     }

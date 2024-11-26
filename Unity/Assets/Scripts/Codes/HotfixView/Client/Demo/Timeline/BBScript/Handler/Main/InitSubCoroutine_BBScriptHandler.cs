@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOfAttribute(typeof(ET.Client.BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorBuffer))]
     public class InitSubCoroutine_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()

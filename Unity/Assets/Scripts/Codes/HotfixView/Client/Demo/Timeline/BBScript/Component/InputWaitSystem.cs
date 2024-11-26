@@ -65,7 +65,7 @@ namespace ET.Client
             self.HandleKeyInput(ops, BBOperaType.HEAVYPUNCH);
             self.HandleKeyInput(ops, BBOperaType.HEAVYKICK);
         }
-
+        
         private static void HandleKeyInput(this InputWait self, long ops, int operaType)
         {
             BBTimerComponent bbTimer = BBTimerManager.Instance.SceneTimer();
@@ -83,8 +83,8 @@ namespace ET.Client
                 self.PressedDict[operaType] = long.MaxValue;
             }
         }
-
-        public static bool WasPressedThisFrame(this InputWait self, int operaType)
+        
+        public static bool WasPressedThisFrame(this InputWait self, long operaType)
         {
             return self.PressedDict[operaType] == BBTimerManager.Instance.SceneTimer().GetNow();
         }
@@ -158,22 +158,28 @@ namespace ET.Client
         {
             while (true)
             {
-                //输入检测携程，等待输入
+                //1. 输入检测携程，等待输入
                 TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-                Status ret = await handler.Handle(timelineComponent.GetParent<Unit>(), token);
-                if (token.IsCancel()) return;
-                
-                //输入携程判定成功，添加技能缓冲
-                if (ret is Status.Success)
+                InputStatus status = await handler.Handle(timelineComponent.GetParent<Unit>(), token);
+                if (token.IsCancel())
                 {
-                    //考虑到hitStop(TODO增加说明)
+                    return;
+                }
+                
+                //2. 输入携程判定成功，添加技能缓冲
+                if (status.ret is Status.Success)
+                {
+                    //考虑到卡肉
                     BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-                    InputBuffer buffer = InputBuffer.Create(handler, bbTimer.GetNow(), bbTimer.GetNow() + 5);
+                    InputBuffer buffer = InputBuffer.Create(handler, bbTimer.GetNow(), bbTimer.GetNow() + status.buffFrame);
                     self.AddBuffer(buffer);
                 }
 
                 await TimerComponent.Instance.WaitFrameAsync(token);
-                if (token.IsCancel()) return;
+                if (token.IsCancel())
+                {
+                    return;
+                }
             }
         }
 

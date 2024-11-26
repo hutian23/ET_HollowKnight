@@ -1,21 +1,23 @@
 ﻿using System.Text.RegularExpressions;
+using Box2DSharp.Testbed.Unity.Inspection;
 using UnityEngine;
 using Random = System.Random;
 
 namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.ShakeTimer)]
+    [FriendOf(typeof(b2Body))]
     public class ShakeTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
-            
+
             //销毁shake effect
             long shakeCnt = self.GetParam<long>("ShakeCnt");
-            self.UpdateParam("ShakeCnt",--shakeCnt);
-            
-            if (shakeCnt <= 0f) 
+            self.UpdateParam("ShakeCnt", --shakeCnt);
+
+            if (shakeCnt <= 0f)
             {
                 long shakeTimer = self.GetParam<long>("ShakeTimer");
                 sceneTimer.Remove(ref shakeTimer);
@@ -25,13 +27,14 @@ namespace ET.Client
                 self.TryRemoveParam("ShakeLength");
                 return;
             }
-            
+
             int shakeLength = self.GetParam<int>("ShakeLength");
             Random random = new();
-            Vector3 shakePos = new(random.Next(-shakeLength,shakeLength ) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
+            Vector3 shakePos = new(random.Next(-shakeLength, shakeLength) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
 
+            b2Body b2Body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             GameObject go = self.GetParent<TimelineComponent>().GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
-            go.transform.position += shakePos;
+            go.transform.position = b2Body.trans.Position.ToUnityVector3() + shakePos;
         }
     }
 

@@ -11,7 +11,7 @@
         {
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<InputWait>().GetComponent<BBTimerComponent>();
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
             long timer = bbParser.GetParam<long>("MoveXTimer");
             bbTimer.Remove(ref timer);

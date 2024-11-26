@@ -9,6 +9,6 @@
     {
         public abstract string GetInputType();
 
-        public abstract ETTask<Status> Handle(Unit unit, ETCancellationToken token);
+        public abstract ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token);
     }
 }

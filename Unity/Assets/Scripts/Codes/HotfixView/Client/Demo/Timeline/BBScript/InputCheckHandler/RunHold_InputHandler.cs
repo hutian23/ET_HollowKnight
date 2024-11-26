@@ -8,17 +8,16 @@
         }
 
         //关于需要持续按住按键的操作可以参考如下
-        public override async ETTask<Status> Handle(Unit unit, ETCancellationToken token)
+        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
         {
             InputWait inputWait = BBInputHelper.GetInputWait(unit);
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.LEFT | BBOperaType.RIGHT, FuzzyInputType.OR);
             if (wait.Error is not WaitTypeError.Success)
             {
-                return Status.Failed;
+                return InputStatus.Failed;
             }
-
-            await ETTask.CompletedTask;
-            return Status.Success;
+            
+            return new InputStatus(){buffFrame = 4,ret = Status.Success};
         }
     }
 }
