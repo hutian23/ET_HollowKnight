@@ -1,4 +1,5 @@
-﻿using ET.Event;
+﻿using System.Numerics;
+using ET.Event;
 using Timeline;
 
 namespace ET.Client
@@ -21,15 +22,24 @@ namespace ET.Client
                 
                 BoxInfo boxInfoA = info.dataA.UserData as BoxInfo;
                 BoxInfo boxInfoB = info.dataB.UserData as BoxInfo;
-                if (boxInfoA.hitboxType is HitboxType.Throw && boxInfoB.hitboxType is HitboxType.Squash)
-                {
-                    //移除定时器
-                    long timer = self.GetParam<long>("ThrowCheckTimer");
-                    postStepTimer.Remove(ref timer);
-                    self.RemoveParam("ThrowCheckTimer");
-                    self.RegistParam("ThrowHit", info.dataB);
-                    break;
-                }
+                if (boxInfoA.hitboxType is not HitboxType.Throw || boxInfoB.hitboxType is not HitboxType.Squash) continue;
+                
+                //1. 移除定时器
+                long timer = self.GetParam<long>("ThrowCheckTimer");
+                postStepTimer.Remove(ref timer);
+                self.RemoveParam("ThrowCheckTimer");
+                    
+                //2. 
+                self.RegistParam("ThrowHit", info.dataB);
+                    
+                //3. Set targetBind 
+                Log.Warning("Throw");
+                Vector2 targetBind = self.GetParam<Vector2>("TargetBind");
+                b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+                b2Body hitBody = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
+                hitBody.SetPosition(b2Body.GetPosition() + targetBind);
+                
+                break;
             }
         }
     }

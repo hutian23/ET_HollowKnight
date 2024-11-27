@@ -674,10 +674,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: -1.4
+      Data: -2.79014778
     - Name: 
       Entry: 4
-      Data: -0.95
+      Data: -0.950000048
     - Name: 
       Entry: 8
       Data: 
@@ -686,7 +686,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1.7
+      Data: 4.480297
     - Name: 
       Entry: 4
       Data: 3
@@ -1057,7 +1057,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
+      Data: -1.8
     - Name: 
       Entry: 4
       Data: 0
@@ -1084,13 +1084,13 @@ MonoBehaviour:
       Data: 
   timelineName: Mai_Throw
   Script: "@Trigger:\nInputType: 5HPPressed;\nInAir: false;\nreturn;\n\n@Main:\nBBSprite:
-    'Start_1', 1;\nBBSprite: 'Start_2', 2;\nWaitThrow;\nBBSprite: 'Start_3', 4;\n#
-    Throw_Failed\nBeginIf: (Throw: false)\n  BBSprite: 'Fail_1', 3;\n  BBSprite:
-    'Fail_2', 3;\n  BBSprite: 'Fail_3', 3;\n  BBSprite: 'Fail_4', 3;\n  BBSprite:
-    'Fail_5', 3;\n  EndIf:\n# Throw_Success\nBeginIf: (Throw: true)\n  BBSprite:
-    'Start_3', 15;\n  BBSprite: 'Success_1', 3;\n  BBSprite: 'Success_2', 3;\n  BBSprite:
-    'Success_3', 3;\n  BBSprite: 'Success_4', 3;\n  BBSprite: 'Success_5', 5;\n 
-    BBSprite: 'Success_6', 5;\n  BBSprite: 'Success_7', 10;\n  BBSprite: 'Success_8',
+    'Start_1', 1;\nBBSprite: 'Start_2', 2;\nTargetBind: 2000, 0;\nWaitThrow;\nBBSprite:
+    'Start_3', 4;\n# Throw_Failed\nBeginIf: (Throw: false)\n  BBSprite: 'Fail_1',
+    3;\n  BBSprite: 'Fail_2', 3;\n  BBSprite: 'Fail_3', 3;\n  BBSprite: 'Fail_4',
+    3;\n  BBSprite: 'Fail_5', 3;\n  EndIf:\n# Throw_Success\nBeginIf: (Throw: true)\n 
+    BBSprite: 'Start_3', 15;\n  BBSprite: 'Success_1', 3;\n  BBSprite: 'Success_2',
+    3;\n  BBSprite: 'Success_3', 3;\n  BBSprite: 'Success_4', 3;\n  BBSprite: 'Success_5',
+    5;\n  BBSprite: 'Success_6', 5;\n  BBSprite: 'Success_7', 10;\n  BBSprite: 'Success_8',
     5;\n  BBSprite: 'Success_9', 5;\n  BBSprite: 'Success_10', 5;\n  BBSprite: 'Success_11',
     5;\n  BBSprite: 'Success_12', 4;\n  BBSprite: 'Success_13', 3;\n  BBSprite: 'Success_14',
     3;\n  BBSprite: 'Success_15', 3;\n  EndIf:\nreturn;"
