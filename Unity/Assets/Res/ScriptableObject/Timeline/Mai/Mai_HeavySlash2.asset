@@ -1444,5 +1444,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_HeavySlash2
-  Script: "@Trigger:\nInputType: LightPunchPressed;\nGCOption: 'Mai_HeavySlash2';\nreturn;\n\n@Main:\n#
+  Script: "@Trigger:\nInputType: LPPressed;\nGCOption: 'Mai_HeavySlash2';\nreturn;\n\n@Main:\n#
     \u52A8\u753B\u5E27\u4E8B\u4EF6\nStartTimeline;\nreturn;"

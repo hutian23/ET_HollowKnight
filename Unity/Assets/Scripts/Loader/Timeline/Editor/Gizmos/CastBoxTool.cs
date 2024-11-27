@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using Box2DSharp.Testbed.Unity.Inspection;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEditor.IMGUI.Controls;
@@ -45,7 +44,16 @@ namespace Timeline.Editor
                             boundsHandle.SetColor(Color.yellow);
                             break;
                         case HitboxType.Throw:
+                            boundsHandle.SetColor(Color.blue);
+                            break;
+                        case HitboxType.Proximity:
                             boundsHandle.SetColor(Color.magenta);
+                            break;
+                        case HitboxType.None:
+                            boundsHandle.SetColor(Color.black);
+                            break;
+                        case HitboxType.Gizmos:
+                            boundsHandle.SetColor(Color.white);
                             break;
                     }
 

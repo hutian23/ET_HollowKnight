@@ -98,12 +98,17 @@ namespace Timeline
 
         public override void SetTime(int targetFrame)
         {
+            if (!timelinePlayer.HasBindUnit)
+            {
+                return;
+            }
+            
             BBEventTrack eventTrack = Track as BBEventTrack;
             foreach (EventInfo info in eventTrack.EventInfos)
             {
                 if (info.frame == targetFrame)
                 {
-                    EventSystem.Instance.Invoke(new UpdateEventTrackCallback() { instanceId = this.timelinePlayer.instanceId, markerName = info.keyframeName});
+                    EventSystem.Instance?.Invoke(new UpdateEventTrackCallback() { instanceId = this.timelinePlayer.instanceId, markerName = info.keyframeName});
                 }
             }
         }

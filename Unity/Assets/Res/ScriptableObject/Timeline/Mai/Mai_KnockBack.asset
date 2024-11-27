@@ -722,12 +722,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_KnockBack
-  Script: "@Main:\nGravity: 0;\nSetVelocityX: 0;\nSetVelocityY: 0;\nHitStop: [StopFrame];\nShake:
-    [Hit_ShakeLength], [Hit_ShakeFrame];\nBBSprite: 'KnockBack_1', 1;\nSetVelocityX:
-    -8000;\nSetVelocityY: 25000;\nBBSprite: 'KnockBack_2', 3;\nBBSprite: 'KnockBack_3',
-    3;\nGravity: 150000;\nBBSprite: 'KnockBack_4', 3;\nBBSprite: 'KnockBack_5', 3;\nBBSprite:
-    'KnockBack_6', 3;\nBBSprite: 'KnockBack_7', 3;\n#FallLoop\n#SetVelocityX: 0;\nBeginLoop:
-    (InAir: true)\n    BBSprite: 'KnockBack_8', 4;\n    BBSprite: 'KnockBack_9',
-    4;\n    EndLoop:\n#Land\nSetVelocityX: 0;\nBBSprite: 'KnockBack_10', 4;\nBBSprite:
-    'KnockBack_11', 4;\nBBSprite: 'KnockBack_12', 4;\nBBSprite: 'KnockBack_13', 4;\nBBSprite:
-    'KnockBack_14', 20;\nSetTransition: 'HardDownRecovery';"
+  Script: "@Main:\nGravity: 0;\nSetVelocityX: 0;\nSetVelocityY: 0;\nShake: [Hit_ShakeLength],
+    [Hit_ShakeFrame];\nBBSprite: 'KnockBack_1', 1;\nSetVelocityX: -8000;\nSetVelocityY:
+    25000;\nBBSprite: 'KnockBack_2', 3;\nBBSprite: 'KnockBack_3', 3;\nGravity: 150000;\nBBSprite:
+    'KnockBack_4', 3;\nBBSprite: 'KnockBack_5', 3;\nBBSprite: 'KnockBack_6', 3;\nBBSprite:
+    'KnockBack_7', 3;\n#FallLoop\n#SetVelocityX: 0;\nBeginLoop: (InAir: true)\n   
+    BBSprite: 'KnockBack_8', 4;\n    BBSprite: 'KnockBack_9', 4;\n    EndLoop:\n#Land\nSetVelocityX:
+    0;\nBBSprite: 'KnockBack_10', 4;\nBBSprite: 'KnockBack_11', 4;\nBBSprite: 'KnockBack_12',
+    4;\nBBSprite: 'KnockBack_13', 4;\nBBSprite: 'KnockBack_14', 20;\nSetTransition:
+    'HardDownRecovery';\nreturn;"

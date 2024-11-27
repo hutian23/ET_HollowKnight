@@ -1,10 +1,10 @@
 ﻿namespace ET.Client
 {
-    public class LightPunchPressed_InputHandler: BBInputHandler
+    public class Input_5LPPressed_InputHandler: BBInputHandler
     {
         public override string GetInputType()
         {
-            return "LightPunchPressed";
+            return "5LPPressed";
         }
 
         public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
@@ -18,8 +18,7 @@
                 return WasPressedThisFrame;
             });
             if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
-
-            await ETTask.CompletedTask;
+            
             return InputStatus.Success;
         }
     }

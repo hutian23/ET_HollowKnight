@@ -31,7 +31,16 @@ namespace Timeline.Editor
                     Gizmos.color = Color.yellow;
                     break;
                 case HitboxType.Throw:
+                    Gizmos.color = Color.blue;
+                    break;
+                case HitboxType.Proximity:
                     Gizmos.color = Color.magenta;
+                    break;
+                case HitboxType.Other:
+                    Gizmos.color = Color.black;
+                    break;
+                case HitboxType.Gizmos:
+                    Gizmos.color = Color.white;
                     break;
             }
 

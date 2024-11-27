@@ -37,5 +37,6 @@
         
         //物理模拟相关的生命周期函数
         public const int HitNotifyTimer = 119;
+        public const int ThrowCheckTimer = 120;
     }
 }
