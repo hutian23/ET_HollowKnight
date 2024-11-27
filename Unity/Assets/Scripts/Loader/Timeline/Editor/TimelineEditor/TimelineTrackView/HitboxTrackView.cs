@@ -80,7 +80,7 @@ namespace Timeline.Editor
             menu.AppendAction("Paste keyframe", _ =>
             {
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
-                //copy target not a hitboxkeyframe
+                //copy target not a hitBoxKeyFrame
                 HitboxKeyframe targetKeyframe = BBTimelineSettings.GetSettings().CopyTarget as HitboxKeyframe;
                 if (targetKeyframe == null)
                 {
@@ -101,7 +101,7 @@ namespace Timeline.Editor
 
         private bool CanPaste()
         {
-            //copy target not a hitboxkeyframe
+            //copy target not a hitBoxKeyFrame
             HitboxKeyframe targetKeyframe = BBTimelineSettings.GetSettings().CopyTarget as HitboxKeyframe;
             return targetKeyframe != null;
         }

@@ -3,7 +3,7 @@
     public class HitboxMarkerView: MarkerView
     {
         // private readonly VisualElement MarkerView;
-        public HitboxKeyframe keyframe => keyframeBase as HitboxKeyframe;
+        private HitboxKeyframe keyframe => keyframeBase as HitboxKeyframe;
        
         public override void Select()
         {

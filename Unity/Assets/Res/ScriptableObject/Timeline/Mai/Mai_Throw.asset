@@ -28,7 +28,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|Timeline.BBAnimationTrack, Unity.Loader
@@ -999,6 +999,68 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 56|Timeline.BBTargetBindTrack, Unity.Loader
+    - Name: Name
+      Entry: 1
+      Data: TargetBind
+    - Name: Enable
+      Entry: 5
+      Data: true
+    - Name: Clips
+      Entry: 7
+      Data: 57|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TargetBindInfos
+      Entry: 7
+      Data: 58|System.Collections.Generic.List`1[[Timeline.TargetBindInfo, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 59|Timeline.TargetBindInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 2
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: TargetPosition
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
