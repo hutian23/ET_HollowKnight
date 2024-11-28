@@ -12,7 +12,6 @@
             b2Body b2Body = b2GameManager.Instance.GetBody(unit.InstanceId);
             InputWait inputWait = unit.GetComponent<TimelineComponent>().GetComponent<InputWait>();
             HitboxComponent hitboxComponent = unit.GetComponent<TimelineComponent>().GetComponent<HitboxComponent>();
-            BBParser bbParser = unit.GetComponent<TimelineComponent>().GetComponent<BBParser>();
             
             //1. 销毁旧夹具
             b2Body.ClearHitbox();
@@ -36,7 +35,6 @@
             {
                 EventSystem.Instance.Invoke(new UpdateFlipCallback() { instanceId = b2Body.unitId,curFlip = curFlag});
             }
-            
             
             //3. 更新hitbox
             hitboxComponent.Init();

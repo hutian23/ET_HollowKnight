@@ -9,10 +9,10 @@ namespace ET.Client
         {
             BBParser parser = self.GetParent<TimelineComponent>().GetComponent<BBParser>();
 
-            if (!self.CheckInput(parser.GetParam<string>("InputCheck")))
-            {
-                EventSystem.Instance.Invoke(new CancelBehaviorCallback(){instanceId = parser.InstanceId});
-            }
+            // if (!self.CheckInput(parser.GetParam<string>("InputCheck")))
+            // {
+            //     EventSystem.Instance.Invoke(new CancelBehaviorCallback(){instanceId = parser.InstanceId});
+            // }
         }
     }
 

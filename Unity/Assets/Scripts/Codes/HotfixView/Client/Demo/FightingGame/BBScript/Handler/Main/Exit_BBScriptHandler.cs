@@ -1,6 +1,8 @@
 ﻿namespace ET.Client
 {
     [FriendOf(typeof(BBParser))]
+    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorInfo))]
     public class Exit_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -12,12 +14,23 @@
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
 
-            //取消行为
-            // EventSystem.Instance.Invoke(new CancelBehaviorCallback() { instanceId = bbParser.InstanceId });
-            bbParser.cancellationToken.Cancel();
-            
+            buffer.SetCurrentOrder(-1);
+            foreach (long id in buffer.DescendInfoList)
+            {
+                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(id);
+                if (info.moveType is MoveType.Etc || info.moveType is MoveType.HitStun)
+                {
+                    continue;
+                }
+
+                if (info.BehaviorCheck())
+                {
+                    timelineComponent.Reload(info.behaviorOrder);
+                }
+            }
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

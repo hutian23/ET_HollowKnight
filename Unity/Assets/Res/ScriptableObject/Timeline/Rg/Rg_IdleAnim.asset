@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dad01b398c6f634c9e134265baa14a1, type: 3}
-  m_Name: Rg_Idle
+  m_Name: Rg_IdleAnim
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 7400000, guid: f5420f65636486a40bb486a2e0b65a8c, type: 2}
+    - {fileID: 7400000, guid: 94db68f347b82d34080aa1642e206005, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -28,7 +28,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|Timeline.BBAnimationTrack, Unity.Loader
@@ -53,13 +53,13 @@ MonoBehaviour:
       Data: false
     - Name: Name
       Entry: 1
-      Data: Idle
+      Data: IdleAnimation
     - Name: StartFrame
       Entry: 3
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 48
+      Data: 81
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -270,249 +270,14 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 14|Timeline.BBEventTrack, Unity.Loader
-    - Name: Name
-      Entry: 1
-      Data: Marker
-    - Name: Enable
-      Entry: 5
-      Data: true
-    - Name: Clips
-      Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: EventInfos
-      Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 13
-    - Name: 
-      Entry: 7
-      Data: 17|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 0
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 18|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 4
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 19|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 8
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 12
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 21|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 16
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 22|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 20
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_6
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 23|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 24
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 24|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 28
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_8
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 25|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 32
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_9
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 26|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 36
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_10
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 27|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 40
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_11
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 28|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 44
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_12
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 29|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 48
-    - Name: keyframeName
-      Entry: 1
-      Data: Idle_13
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  timelineName: Rg_Idle
+  timelineName: Rg_IdleAnim
   Script: '@Main:
 
-    SetVelocityX: 0;
+    StartTimeline;
 
-    IdleAnim: Rg_IdleAnim;
-
-    UpdateFlip;
-
-    DefaultWindow;
-
-    SetMarker:
-    ''Loop'';
-
-    BBSprite: ''Idle_1'', 4;
-
-    BBSprite: ''Idle_2'', 4;
-
-    BBSprite:
-    ''Idle_3'', 4;
-
-    BBSprite: ''Idle_4'', 4;
-
-    BBSprite: ''Idle_5'', 6;
-
-    BBSprite:
-    ''Idle_6'', 6;
-
-    BBSprite: ''Idle_7'', 7;
-
-    BBSprite: ''Idle_8'', 5;
-
-    BBSprite:
-    ''Idle_9'', 4;
-
-    BBSprite: ''Idle_10'', 4;
-
-    BBSprite: ''Idle_11'', 4;
-
-    BBSprite:
-    ''Idle_12'', 4;
-
-    BBSprite: ''Idle_13'', 4;
-
-    GotoMarker: ''Loop'';
-
-    return;'
+    Exit;'

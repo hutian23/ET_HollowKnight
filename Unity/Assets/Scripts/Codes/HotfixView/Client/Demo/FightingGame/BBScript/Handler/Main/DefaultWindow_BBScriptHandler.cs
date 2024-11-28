@@ -68,7 +68,7 @@ namespace ET.Client
                     break;
                 }
                 //一些特殊行为不会添加到行为机中
-                if (info.moveType is MoveType.HitStun)
+                if (info.moveType is MoveType.HitStun || info.moveType is MoveType.Etc)
                 {
                     continue;
                 }
@@ -80,6 +80,11 @@ namespace ET.Client
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.DefaultWindowTimer, bbParser);
             bbParser.RegistParam("BehaviorCheckTimer", timer);
 
+            token.Add(() =>
+            {
+                bbTimer.Remove(ref timer);
+            });
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

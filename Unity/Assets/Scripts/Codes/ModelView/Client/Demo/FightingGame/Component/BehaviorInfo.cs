@@ -23,6 +23,7 @@ namespace ET.Client
         Normal = 3,
         Special = 4,
         Super = 5,
-        HitStun = 6
+        HitStun = 6,
+        Etc = 7
     }
 }
