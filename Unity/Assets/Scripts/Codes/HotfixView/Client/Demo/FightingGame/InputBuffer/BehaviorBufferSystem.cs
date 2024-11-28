@@ -5,40 +5,8 @@
     [FriendOf(typeof(BBTimerComponent))]
     public static class BehaviorBufferSystem
     {
-        [Invoke(BBTimerInvokeType.BehaviorCheckTimer)]
-        [FriendOf(typeof(BehaviorBuffer))]
-        [FriendOf(typeof(BehaviorInfo))]
-        public class BehaviorCheckTimer : BBTimer<BehaviorBuffer>
-        {
-            protected override void Run(BehaviorBuffer self)
-            {
-                foreach (long infoId in self.infoIds)
-                {
-                    BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
-                    //已经进入当前行为，不会重复检查进入条件
-                    //比当前行为权值小的行为也不会进行检查
-                    if (info.behaviorOrder == self.currentOrder)
-                    {
-                        break;
-                    }
-
-                    bool ret = info.BehaviorCheck();
-                    if (ret)
-                    {
-                        if (self.currentOrder != info.behaviorOrder)
-                        {
-                            self.GetParent<TimelineComponent>().Reload(info.Timeline, info.behaviorOrder);
-                        }
-
-                        break;
-                    }
-                }
-            }
-        }
-
         public static void Init(this BehaviorBuffer self)
         {
-            self.CheckTimer = 0;
             self.GCOptions.Clear();
             self.WhiffOptions.Clear();
             self.ClearParam();
@@ -50,7 +18,7 @@
                 self.RemoveChild(kv.Value);
             }
             self.behaviorOrderMap.Clear();
-            self.infoIds.Clear();
+            self.DescendInfoList.Clear();
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)

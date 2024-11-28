@@ -42,7 +42,7 @@ namespace ET.Client
             info.behaviorName = timeline.timelineName;
             buffer.behaviorNameMap.Add(info.behaviorName,info.Id); //快速访问到组件
             buffer.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
-            buffer.infoIds.Add(info.Id);
+            buffer.DescendInfoList.Add(info.Id);
             
             //2-2. 加载 trigger
             info.LoadSkillInfo(timeline);

@@ -37,6 +37,8 @@ namespace ET.Client
             info.moveType = MoveType.HitStun;
             buffer.behaviorNameMap.Add(hitFlag, info.Id);
             buffer.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
+            buffer.DescendInfoList.Add(info.Id);
+            
             info.LoadSkillInfo(timeline);
             
             await ETTask.CompletedTask;

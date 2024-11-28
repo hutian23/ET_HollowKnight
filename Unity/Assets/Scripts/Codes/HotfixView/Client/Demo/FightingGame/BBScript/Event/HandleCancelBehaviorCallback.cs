@@ -15,10 +15,7 @@
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
 
             //3. 遍历所有可执行行为，找到一个进入
-            buffer.SetCurrentOrder(-1);
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            bbTimer.Remove(ref buffer.CheckTimer);
-            buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.BehaviorCheckTimer, buffer);
+            buffer.SetCurrentOrder(-1); 
         }
     }
 } 

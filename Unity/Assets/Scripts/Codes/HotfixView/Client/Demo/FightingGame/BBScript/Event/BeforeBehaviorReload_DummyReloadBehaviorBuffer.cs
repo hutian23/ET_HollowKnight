@@ -40,10 +40,7 @@
             buffer.ClearParam();
             buffer.GCOptions.Clear();
             buffer.WhiffOptions.Clear();
-
-            //4. 重新启动行为机定时器
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            bbTimer.Remove(ref buffer.CheckTimer);
+            
             await ETTask.CompletedTask;
         }
     }

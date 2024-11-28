@@ -13,8 +13,6 @@
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-
-            bbTimer.Remove(ref buffer.CheckTimer);
             buffer.GCOptions.Clear();
             
             await ETTask.CompletedTask;

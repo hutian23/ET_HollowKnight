@@ -8,8 +8,6 @@ namespace ET.Client
     [ComponentOf(typeof (TimelineComponent))]
     public class BehaviorBuffer: Entity, IAwake, IDestroy
     {
-        public long CheckTimer;
-        
         //当前行为
         public int currentOrder;
 
@@ -21,14 +19,8 @@ namespace ET.Client
         //方便通过behaviorName找到behaviorInfo
         public Dictionary<string, long> behaviorNameMap = new();
         public Dictionary<int, long> behaviorOrderMap = new();
-        
-        //行为机遍历
-        public SortedSet<long> infoIds = new(Comparer<long>.Create((x, y) => y.CompareTo(x)));
-    }
 
-    public struct WaitHitStunBehavior : IWaitType
-    {
-        public string hitStunFlag;
-        public int Error { get; set; }
+        //方便倒序获取行为信息组件
+        public SortedSet<long> DescendInfoList = new(Comparer<long>.Create((x, y) => y.CompareTo(x)));
     }
 }

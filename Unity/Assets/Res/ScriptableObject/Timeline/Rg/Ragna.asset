@@ -16,20 +16,20 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 2affb37f3f1d84942b6912d82c84e175, type: 2}
+    - {fileID: 11400000, guid: b458a6d3716ca96489f7794bcc0bb6d9, type: 2}
+    - {fileID: 11400000, guid: 4e71f16bde188e44cb12e40eb4964cc9, type: 2}
+    - {fileID: 11400000, guid: 42480f4718ee6124089d800eb7e91ec4, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Timelines
+    - Name: Layers
       Entry: 7
-      Data: 0|ET.ListComponent`1[[Timeline.BBTimeline, Unity.Loader]], Unity.Core
+      Data: 0|System.Collections.Generic.List`1[[Timeline.BehaviorLayer, Unity.Loader]],
+        mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
       Data: 0
     - Name: 
       Entry: 13
@@ -37,3 +37,76 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Parameters
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[ET.Client.SharedVariable, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: timelineDict
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Timeline.BBTimeline,
+        Unity.Loader]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rg_Idle
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rg_Run
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rg_Squit
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  rootScript: "@RootInit:\nInitPos: 0, 10000;\nGravity: 150000;\nNumericType: MaxGravity,
+    150000;\nNumericType: MaxFall, 50000;\n\nRegistMove: (Rg_Idle)\n  MoveType: None;\n 
+    EndMove:\nRegistMove: (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_Squit)\n 
+    MoveType: Move;\n  EndMove:\nreturn;"

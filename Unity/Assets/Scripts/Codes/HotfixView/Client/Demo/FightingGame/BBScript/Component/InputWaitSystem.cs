@@ -122,12 +122,6 @@ namespace ET.Client
             }
         }
 
-        public static void InputNotify(this InputWait self)
-        {
-            //输入窗口打开,处理预输入逻辑
-            self.Notify(self.Ops);
-        }
-
         public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, Func<bool> checkFunc = null)
         {
             InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc);

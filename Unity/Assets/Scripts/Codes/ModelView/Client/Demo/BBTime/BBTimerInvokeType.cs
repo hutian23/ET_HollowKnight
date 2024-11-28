@@ -25,6 +25,7 @@
         public const int AirMoveTimer = 107;
         public const int InertiaTimer = 108;
         public const int LinearDampingTimer = 109;
+        public const int DefaultWindowTimer = 220;
         public const int WhiffWindowTimer = 110;
         public const int GCWindowTimer = 111;
         public const int CancelWindowTimer = 112;

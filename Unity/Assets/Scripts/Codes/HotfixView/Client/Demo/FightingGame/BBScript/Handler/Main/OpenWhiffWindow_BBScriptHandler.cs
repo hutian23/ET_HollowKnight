@@ -1,29 +1,29 @@
 ﻿namespace ET.Client
 {
-    [Invoke(BBTimerInvokeType.WhiffWindowTimer)]
-    [FriendOf(typeof(BehaviorBuffer))]
-    [FriendOf(typeof(BehaviorInfo))]
-    public class WhiffWindowTimer : BBTimer<BBParser>
-    {
-        protected override void Run(BBParser self)
-        {
-            //预输入
-            InputWait inputWait = self.GetParent<TimelineComponent>().GetComponent<InputWait>();
-            inputWait.InputNotify();
-
-            BehaviorBuffer buffer = self.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
-            foreach (int option in buffer.WhiffOptions)
-            {
-                BehaviorInfo info = buffer.GetInfoByOrder(option);
-                bool ret = info.BehaviorCheck();
-                if (ret)
-                {
-                    self.GetParent<TimelineComponent>().Reload(info.Timeline, info.behaviorOrder);
-                    break;
-                }
-            }
-        }
-    }
+    // [Invoke(BBTimerInvokeType.WhiffWindowTimer)]
+    // [FriendOf(typeof(BehaviorBuffer))]
+    // [FriendOf(typeof(BehaviorInfo))]
+    // public class WhiffWindowTimer : BBTimer<BBParser>
+    // {
+    //     protected override void Run(BBParser self)
+    //     {
+    //         //预输入
+    //         InputWait inputWait = self.GetParent<TimelineComponent>().GetComponent<InputWait>();
+    //         inputWait.InputNotify();
+    //
+    //         BehaviorBuffer buffer = self.GetParent<TimelineComponent>().GetComponent<BehaviorBuffer>();
+    //         foreach (int option in buffer.WhiffOptions)
+    //         {
+    //             BehaviorInfo info = buffer.GetInfoByOrder(option);
+    //             bool ret = info.BehaviorCheck();
+    //             if (ret)
+    //             {
+    //                 self.GetParent<TimelineComponent>().Reload(info.Timeline, info.behaviorOrder);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
 
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(BehaviorBuffer))]
@@ -43,14 +43,7 @@
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-
-            bbTimer.Remove(ref buffer.CheckTimer);
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.WhiffWindowTimer, bbParser);
-            buffer.CheckTimer = timer;
-            bbParser.cancellationToken.Add(() =>
-            {
-                bbTimer.Remove(ref timer);
-            });
+            
 
             await ETTask.CompletedTask;
             return Status.Success;

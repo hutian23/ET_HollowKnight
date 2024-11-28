@@ -686,7 +686,7 @@ MonoBehaviour:
       Data: 
   instanceId: 0
   ApplyRootMotion: 1
-  BBPlayable: {fileID: 11400000, guid: b08df29221071a849b0e549f7223945d, type: 2}
+  BBPlayable: {fileID: 11400000, guid: 94b58ded95a18bf49958a695850fae83, type: 2}
   CurrentTimeline: {fileID: 11400000, guid: 3db21ea503a2acf41a86a07c8518ad0d, type: 2}
   initPos: {x: 0, y: 0, z: 0}
 --- !u!114 &8844023896634408005

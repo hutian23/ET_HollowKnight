@@ -1090,5 +1090,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Mai_HeavySlash1
-  Script: "@Trigger:\nInputType: LPPressed;\nInAir: false;\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nStartTimeline;\nSetTransition:
+  Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nreturn;\n\n@Main:\n#\u52A8\u753B\u5E27\u4E8B\u4EF6\nStartTimeline;\nSetTransition:
     'TransitionToSquit';\nreturn;\n\n@Exit:\nSetVelocityX: 0;\nreturn;"

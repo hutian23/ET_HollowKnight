@@ -1,13 +1,13 @@
 ﻿namespace ET.Client
 {
-    [Invoke(BBTimerInvokeType.CancelWindowTimer)]
-    public class CancelWindowTimer: BBTimer<BBParser>
-    {
-        protected override void Run(BBParser self)
-        {
-            self.GetParent<TimelineComponent>().GetComponent<InputWait>().InputNotify();
-        }
-    }
+    // [Invoke(BBTimerInvokeType.CancelWindowTimer)]
+    // public class CancelWindowTimer: BBTimer<BBParser>
+    // {
+    //     protected override void Run(BBParser self)
+    //     {
+    //         self.GetParent<TimelineComponent>().GetComponent<InputWait>().InputNotify();
+    //     }
+    // }
 
     [FriendOf(typeof (BehaviorInfo))]
     //一般用于普通的移动行为，比如Idle , run , Squit

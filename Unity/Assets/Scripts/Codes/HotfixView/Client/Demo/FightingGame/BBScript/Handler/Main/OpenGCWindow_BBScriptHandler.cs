@@ -1,47 +1,5 @@
 ﻿namespace ET.Client
 {
-    [Invoke(BBTimerInvokeType.GCWindowTimer)]
-    [FriendOf(typeof(BehaviorBuffer))]
-    [FriendOf(typeof(BehaviorInfo))]
-    public class GCWindowTimer : BBTimer<BBParser>
-    {
-        protected override void Run(BBParser self)
-        {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-
-            //1. 处理输入
-            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            inputWait.InputNotify();
-
-            //2. 处理行为
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo curInfo = buffer.GetInfoByOrder(buffer.currentOrder);
-            foreach (long infoId in buffer.infoIds)
-            {
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
-                if (info.behaviorOrder == curInfo.behaviorOrder)
-                {
-                    continue;
-                }
-
-                //2-1 加特林取消不能取消到该行为
-                bool ret = (info.moveType > curInfo.moveType) || buffer.ContainGCOption(info.behaviorOrder);
-                if (!ret)
-                {
-                    continue;
-                }
-                
-                //2-2 检查trigger
-                ret = info.BehaviorCheck();
-                if (ret)
-                {
-                    timelineComponent.Reload(info.Timeline, info.behaviorOrder);
-                    break;
-                }
-            }
-        }
-    }
-
     [FriendOf(typeof(BehaviorBuffer))]
     [FriendOf(typeof(BBParser))]
     //加特林取消窗口，招式之间相互取消
@@ -60,14 +18,6 @@
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             
-            bbTimer.Remove(ref buffer.CheckTimer);
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.GCWindowTimer, bbParser);
-            buffer.CheckTimer = timer;
-            bbParser.cancellationToken.Add(() =>
-            {
-                bbTimer.Remove(ref timer);
-            });
-
             await ETTask.CompletedTask;
             return Status.Success;
         }
