@@ -17,7 +17,7 @@
                 return InputStatus.Failed;
             }
             
-            return new InputStatus(){buffFrame = 3,ret = Status.Success};
+            return new InputStatus(){buffFrame = 5,ret = Status.Success};
         }
     }
 }

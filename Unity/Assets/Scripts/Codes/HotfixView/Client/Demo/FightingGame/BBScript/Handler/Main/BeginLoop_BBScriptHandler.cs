@@ -55,9 +55,9 @@ namespace ET.Client
                 //cancel loop coroutine
                 ETCancellationToken loopToken = self.GetParam<ETCancellationToken>("LoopToken");
                 loopToken.Cancel();
-                self.RemoveParam("LoopToken");
-                self.RemoveParam("LoopStartIndex");
-                self.RemoveParam("LoopEndIndex");
+                self.TryRemoveParam("LoopToken");
+                self.TryRemoveParam("LoopStartIndex");
+                self.TryRemoveParam("LoopEndIndex");
             }
         }
     }

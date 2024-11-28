@@ -38,8 +38,9 @@ namespace ET.Client
                 },
             };
             b2Body B2body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            B2body.body.CreateFixture(fixtureDef);
-
+            Fixture groundCheckBox = B2body.body.CreateFixture(fixtureDef);
+            timelineComponent.RegistParam("GroundCheckBox", groundCheckBox);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }
