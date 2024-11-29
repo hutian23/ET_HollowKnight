@@ -160,7 +160,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -0.6
+      Data: -0.62
     - Name: 
       Entry: 8
       Data: 
@@ -172,7 +172,7 @@ MonoBehaviour:
       Data: 1.75
     - Name: 
       Entry: 4
-      Data: 3.1
+      Data: 3.14
     - Name: 
       Entry: 8
       Data: 
@@ -232,7 +232,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -0.6
+      Data: -0.62
     - Name: 
       Entry: 8
       Data: 
@@ -244,7 +244,7 @@ MonoBehaviour:
       Data: 1.35
     - Name: 
       Entry: 4
-      Data: 3.1
+      Data: 3.14
     - Name: 
       Entry: 8
       Data: 
@@ -315,7 +315,7 @@ MonoBehaviour:
       Data: 18|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: keyframeName
       Entry: 1
       Data: Walk_2
@@ -327,7 +327,7 @@ MonoBehaviour:
       Data: 19|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 4
+      Data: 2
     - Name: keyframeName
       Entry: 1
       Data: Walk_3
@@ -339,7 +339,7 @@ MonoBehaviour:
       Data: 20|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 6
+      Data: 3
     - Name: keyframeName
       Entry: 1
       Data: Walk_4
@@ -351,7 +351,7 @@ MonoBehaviour:
       Data: 21|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 8
+      Data: 4
     - Name: keyframeName
       Entry: 1
       Data: Walk_5
@@ -363,7 +363,7 @@ MonoBehaviour:
       Data: 22|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 10
+      Data: 5
     - Name: keyframeName
       Entry: 1
       Data: Walk_6
@@ -375,7 +375,7 @@ MonoBehaviour:
       Data: 23|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 12
+      Data: 6
     - Name: keyframeName
       Entry: 1
       Data: Walk_7
@@ -387,7 +387,7 @@ MonoBehaviour:
       Data: 24|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 14
+      Data: 7
     - Name: keyframeName
       Entry: 1
       Data: Walk_8
@@ -399,7 +399,7 @@ MonoBehaviour:
       Data: 25|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 16
+      Data: 8
     - Name: keyframeName
       Entry: 1
       Data: Walk_9
@@ -411,7 +411,7 @@ MonoBehaviour:
       Data: 26|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 18
+      Data: 9
     - Name: keyframeName
       Entry: 1
       Data: Walk_10
@@ -471,7 +471,7 @@ MonoBehaviour:
 
     BBSprite: ''Walk_9'', 3;
 
-    BBSprite: ''Walk_10'', 3;
+    #BBSprite: ''Walk_10'', 3;
 
     EndLoop:
 

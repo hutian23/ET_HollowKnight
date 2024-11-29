@@ -160,7 +160,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -0.6
+      Data: -0.62
     - Name: 
       Entry: 8
       Data: 
@@ -172,7 +172,7 @@ MonoBehaviour:
       Data: 1.75
     - Name: 
       Entry: 4
-      Data: 3.1
+      Data: 3.14
     - Name: 
       Entry: 8
       Data: 
@@ -232,7 +232,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -0.6
+      Data: -0.62
     - Name: 
       Entry: 8
       Data: 
@@ -244,7 +244,7 @@ MonoBehaviour:
       Data: 1.35
     - Name: 
       Entry: 4
-      Data: 3.1
+      Data: 3.14
     - Name: 
       Entry: 8
       Data: 

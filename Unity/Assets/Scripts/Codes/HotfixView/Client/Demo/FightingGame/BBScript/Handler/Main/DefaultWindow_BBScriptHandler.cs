@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.DefaultWindowTimer)]
     [FriendOf(typeof(BehaviorInfo))]
+    [FriendOf(typeof(BehaviorBuffer))]
     public class DefaultWindowTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
@@ -13,10 +12,9 @@ namespace ET.Client
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
             int currentOrder = buffer.GetCurrentOrder();
-            List<long> behaviorCheckList = self.GetParam<List<long>>("BehaviorCheckList");
-            for(int i = 0; i < behaviorCheckList.Count; i++)
+            for (int i = 0; i < buffer.BehaviorCheckList.Count; i++)
             {
-                long id = behaviorCheckList[i];
+                long id = buffer.BehaviorCheckList[i];
                 BehaviorInfo info = buffer.GetChild<BehaviorInfo>(id);
                 if (info.BehaviorCheck())
                 {
@@ -25,16 +23,14 @@ namespace ET.Client
                 }
             }
 
-            if (currentOrder == buffer.GetCurrentOrder()) return;
-            
+            if (currentOrder == buffer.GetCurrentOrder())
+            {
+                return;
+            }
+
             //初始化
-            behaviorCheckList.Clear();
-            self.TryRemoveParam("BehaviorCheckList");
-            
-            long timer = self.GetParam<long>("BehaviorCheckTimer");
-            bbTimer.Remove(ref timer);
-            self.TryRemoveParam("BehaviorCheckTimer");
-            
+            buffer.BehaviorCheckList.Clear();
+            bbTimer.Remove(ref buffer.CheckTimer);
             //切换行为
             timelineComponent.Reload(currentOrder);
         }
@@ -55,10 +51,13 @@ namespace ET.Client
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+         
+            //1. 初始化
+            bbTimer.Remove(ref buffer.CheckTimer);
+            buffer.BehaviorCheckList.Clear();
             
-            //1. 获取全部当前可切换的行为
+            //2. 获取全部当前可切换的行为
             int currentOrder = buffer.GetCurrentOrder();
-            List<long> behaviorCheckList = new();
             foreach (long id in buffer.DescendInfoList)
             {
                 BehaviorInfo info = buffer.GetChild<BehaviorInfo>(id);
@@ -72,17 +71,15 @@ namespace ET.Client
                 {
                     continue;
                 }
-                behaviorCheckList.Add(info.Id);
+                buffer.BehaviorCheckList.Add(info.Id);
             }
-            bbParser.RegistParam("BehaviorCheckList", behaviorCheckList);
             
-            //2. 启动行为机定时器
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.DefaultWindowTimer, bbParser);
-            bbParser.RegistParam("BehaviorCheckTimer", timer);
-
+            //3. 启动行为机定时器
+            buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.DefaultWindowTimer, bbParser);
+            
             token.Add(() =>
             {
-                bbTimer.Remove(ref timer);
+                bbTimer.Remove(ref buffer.CheckTimer);
             });
             
             await ETTask.CompletedTask;

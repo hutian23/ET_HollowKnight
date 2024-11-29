@@ -19,6 +19,8 @@
             }
             self.behaviorOrderMap.Clear();
             self.DescendInfoList.Clear();
+            self.CheckTimer = 0;
+            self.BehaviorCheckList.Clear();
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)

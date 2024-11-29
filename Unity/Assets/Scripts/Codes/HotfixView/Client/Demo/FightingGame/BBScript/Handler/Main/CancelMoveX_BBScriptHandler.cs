@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public class CancelRemoveX_BBScriptHandler : BBScriptHandler
+    public class CancelMoveX_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {

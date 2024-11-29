@@ -13,11 +13,14 @@
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            
             //1. 记录CurrentOrder
             bbParser.RegistParam("CurrentOrder", args.behaviorOrder);
             buffer.SetCurrentOrder(args.behaviorOrder);
-
+            buffer.BehaviorCheckList.Clear();
+            bbTimer.Remove(ref buffer.CheckTimer);
+            
             //2. 清空回调
             foreach (var kv in timelineComponent.callbackDict)
             {
