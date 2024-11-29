@@ -436,6 +436,8 @@ MonoBehaviour:
   timelineName: Rg_Walk
   Script: '@Trigger:
 
+    InAir: false;
+
     InputType: RunHold;
 
     return;

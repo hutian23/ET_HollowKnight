@@ -28,11 +28,12 @@
                 if (info.BehaviorCheck())
                 {
                     timelineComponent.Reload(info.behaviorOrder);
+                    Log.Warning(info.behaviorOrder.ToString());
+                    break;
                 }
             }
 
             await ETTask.CompletedTask;
-            return Status.Return;
             return Status.Return;
         }
     }

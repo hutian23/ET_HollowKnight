@@ -22,6 +22,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9a573f846b76a304aaab4e2984e9b943, type: 2}
     - {fileID: 11400000, guid: 6967c2dd9575d98449785051fcdfad27, type: 2}
     - {fileID: 11400000, guid: 4cec73c719e1e68428ca8cc240a99be7, type: 2}
+    - {fileID: 11400000, guid: 561d224701301904fbe31d6a2bb04fbf, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -66,7 +67,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 7
       Data: 
@@ -140,15 +141,29 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rg_AirBrone
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
   rootScript: "@RootInit:\nInitPos: 0, 10000;\nGravity: 150000;\nNumericType: MaxGravity,
-    150000;\nNumericType: MaxFall, 50000;\n# Input\nRegistInput: RunHold;\nRegistInput:
-    SquitHold;\nRegistInput: JumpPressed;\n# Move\nRegistMove: (Rg_Idle)\n  MoveType:
-    None;\n  EndMove:\nRegistMove: (Rg_Walk)\n  MoveType: Move;\n  EndMove:\nRegistMove:
-    (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_Squit)\n  MoveType:
+    150000;\nNumericType: MaxFall, 50000;\nNumericType: MaxJump, 2;\nNumericType:
+    JumpCount, 2;\n# \u6CE8\u518C\u843D\u5730\u56DE\u8C03\nRegistAirCheck;\n# Input\nRegistInput:
+    RunHold;\nRegistInput: SquitHold;\nRegistInput: JumpPressed;\n# Move\nRegistMove:
+    (Rg_Idle)\n  MoveType: None;\n  EndMove:\nRegistMove: (Rg_Walk)\n  MoveType:
+    Move;\n  EndMove:\nRegistMove: (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove:
+    (Rg_Squit)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_AirBrone)\n  MoveType:
     Move;\n  EndMove:\nRegistMove: (Rg_Jump)\n  MoveType: Move;\n  EndMove:\nRegistMove:
     (Rg_IdleAnim)\n  MoveType: Etc;\n  EndMove:\nreturn;"

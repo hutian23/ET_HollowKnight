@@ -18,7 +18,7 @@
             });
             if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
             
-            return InputStatus.Success;
+            return new InputStatus(){buffFrame = 8, ret = Status.Success};
         }
     }
 }

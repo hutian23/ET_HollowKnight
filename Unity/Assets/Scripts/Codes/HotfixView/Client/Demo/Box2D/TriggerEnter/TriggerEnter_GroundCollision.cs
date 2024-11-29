@@ -16,9 +16,10 @@ namespace ET.Client
             
             TimelineComponent timelineComponent = Root.Instance.Get(info.dataA.InstanceId) as TimelineComponent;
             timelineComponent.UpdateParam("InAir", false);
-
-            b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            EventSystem.Instance.Invoke(new OnGroundChanged(){instanceId = timelineComponent.InstanceId, OnGround = true});
+            
+            //jump recharge
+            int jump = (int)timelineComponent.GetParam<long>("MaxJump");
+            timelineComponent.UpdateParam("JumpCount", jump);
         }
     }
 }
