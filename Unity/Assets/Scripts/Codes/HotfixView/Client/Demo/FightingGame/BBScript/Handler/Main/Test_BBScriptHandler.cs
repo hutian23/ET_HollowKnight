@@ -10,7 +10,7 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Log.Warning(parser.GetParam<long>("StopFrame").ToString());
+            Log.Warning(parser.GetParam<bool>("Transition_MiddleLand").ToString());
             await ETTask.CompletedTask;
             return Status.Success;
         }

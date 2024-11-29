@@ -28,7 +28,6 @@
                 if (info.BehaviorCheck())
                 {
                     timelineComponent.Reload(info.behaviorOrder);
-                    Log.Warning(info.behaviorOrder.ToString());
                     break;
                 }
             }

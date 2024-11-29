@@ -509,6 +509,8 @@ MonoBehaviour:
 
     UpdateFlip;
 
+    DefaultWindow;
+
     MoveX:
     13000;
 
@@ -517,8 +519,6 @@ MonoBehaviour:
     BBSprite: ''PreRun_2'', 2;
 
     #Run
-
-    DefaultWindow;
 
     BeginLoop:
     (InputType: RunHold)
