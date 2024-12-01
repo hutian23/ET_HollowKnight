@@ -509,59 +509,62 @@ MonoBehaviour:
 
     UpdateFlip;
 
+    SetTransition:
+    ''PreSquit'';
+
     DefaultWindow;
 
-    MoveX:
-    13000;
+    MoveX: 13000;
 
-    BBSprite: ''PreRun_1'', 1;
+    BBSprite: ''PreRun_1'',
+    1;
 
     BBSprite: ''PreRun_2'', 2;
 
     #Run
 
-    BeginLoop:
-    (InputType: RunHold)
+    BeginLoop: (InputType: RunHold)
 
-    BBSprite: ''Run_1'', 4;
+    BBSprite:
+    ''Run_1'', 4;
 
     BBSprite: ''Run_2'', 4;
 
-    BBSprite:
-    ''Run_3'', 4;
+    BBSprite: ''Run_3'', 4;
 
-    BBSprite: ''Run_4'', 4;
+    BBSprite:
+    ''Run_4'', 4;
 
     BBSprite: ''Run_5'', 4;
 
-    BBSprite:
-    ''Run_6'', 4;
+    BBSprite: ''Run_6'', 4;
 
     EndLoop:
 
     CancelMoveX;
 
-    SetVelocityX: 0;
+    SetVelocityX:
+    0;
 
     #Transition
 
     TransitionWindow;
 
+    BBSprite: ''RunToIdle_1'', 3;
+
     BBSprite:
-    ''RunToIdle_1'', 3;
+    ''RunToIdle_2'', 3;
 
-    BBSprite: ''RunToIdle_2'', 3;
+    BBSprite: ''RunToIdle_3'', 3;
 
-    BBSprite: ''RunToIdle_3'',
+    BBSprite: ''RunToIdle_4'',
     3;
-
-    BBSprite: ''RunToIdle_4'', 3;
 
     BBSprite: ''RunToIdle_5'', 3;
 
-    BBSprite:
-    ''RunToIdle_6'', 3;
+    BBSprite: ''RunToIdle_6'', 3;
 
-    BBSprite: ''RunToIdle_7'', 3;
+    BBSprite:
+    ''RunToIdle_7'', 3;
 
     Exit;'

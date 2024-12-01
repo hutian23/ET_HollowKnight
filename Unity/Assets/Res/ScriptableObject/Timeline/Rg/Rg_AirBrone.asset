@@ -906,6 +906,8 @@ MonoBehaviour:
     BeginIf:
     (InputType: SquitHold)
 
+    SetTransition: ''PreSquit'';
+
     Exit;
 
     EndIf:

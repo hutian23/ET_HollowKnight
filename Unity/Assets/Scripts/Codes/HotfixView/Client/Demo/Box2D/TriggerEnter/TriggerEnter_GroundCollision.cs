@@ -18,9 +18,12 @@ namespace ET.Client
             timelineComponent.UpdateParam("InAir", false);
             
             //jump recharge
-            int jump = (int)timelineComponent.GetParam<long>("MaxJump");
-            timelineComponent.UpdateParam("JumpCount", jump);
+            int maxJump = (int)timelineComponent.GetParam<long>("MaxJump");
+            timelineComponent.UpdateParam("JumpCount", maxJump);
             
+            //dash recharge
+            int maxDash = (int)timelineComponent.GetParam<long>("MaxDash");
+            timelineComponent.UpdateParam("DashCount", maxDash);
             
             //Land
             b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);

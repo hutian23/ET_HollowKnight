@@ -592,7 +592,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_Jump
-  Script: "@Trigger:\n#NumericCheck: JumpCount > 1;\nInputType: JumpPressed;\nreturn;\n\n@Main:\nSetVelocityX:
+  Script: "@Trigger:\nNumericCheck: JumpCount > 0;\nInputType: JumpPressed;\nreturn;\n\n@Main:\nSetVelocityX:
     0;\nBeginIf: (InAir: false)\nBBSprite: 'PreJump_1', 4;\nBBSprite: 'PreJump_2',
     4;\nEndIf: \nAirMoveX: 15000;\nUpdateFlip;\nGravity: 0;\nNumericAdd: JumpCount,
     -1;\nSetVelocityY: 26000;\nBBSprite: 'Jump_1', 3;\nBBSprite: 'Jump_2', 1;\nGCWindow;\nBBSprite:
