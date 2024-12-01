@@ -4,17 +4,17 @@ namespace ET.Client
 {
     [FriendOf(typeof(BehaviorBuffer))]
     [FriendOf(typeof(BehaviorInfo))]
-    public class AddWhiffOption_BBScriptHandler : BBScriptHandler
+    public class WhiffOption_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "AddWhiffOption";
+            return "WhiffOption";
         }
 
-        //AddWhiffOption: 'Mai_Run';
+        //WhiffOption: 'Mai_Run';
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"AddWhiffOption: '(?<Option>\w+)';");
+            Match match = Regex.Match(data.opLine, @"WhiffOption: '(?<Option>\w+)';");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);

@@ -514,7 +514,7 @@ MonoBehaviour:
 
     DefaultWindow;
 
-    MoveX: 13000;
+    MoveX:13000;
 
     BBSprite: ''PreRun_1'',
     1;
