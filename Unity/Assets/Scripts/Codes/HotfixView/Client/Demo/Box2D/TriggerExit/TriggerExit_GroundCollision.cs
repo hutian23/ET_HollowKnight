@@ -17,6 +17,16 @@ namespace ET.Client
             
             TimelineComponent timelineComponent = Root.Instance.Get(info.dataA.InstanceId) as TimelineComponent;
             timelineComponent.UpdateParam("InAir", true);
+            
+            //离地直接完成充能
+            if (timelineComponent.ContainParam("DashRechargeToken"))
+            {
+                ETCancellationToken rechargeToken = timelineComponent.GetParam<ETCancellationToken>("DashRechargeToken");
+                rechargeToken.Cancel();
+                timelineComponent.TryRemoveParam("DashRechargeToken");
+            }
+            int maxDash = (int)timelineComponent.GetParam<long>("MaxDash");
+            timelineComponent.UpdateParam("DashCount", maxDash);
         }
     }
 }

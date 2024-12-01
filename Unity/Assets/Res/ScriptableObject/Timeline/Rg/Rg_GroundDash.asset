@@ -886,9 +886,9 @@ MonoBehaviour:
     NumericAdd: DashCount, -1;
 
     BeginIf:
-    (NumericCheck: DashCount > 0)
+    (NumericCheck: DashCount = 0)
 
-    DashRecharge;
+    DashRecharge: 60;
 
     EndIf:
 
