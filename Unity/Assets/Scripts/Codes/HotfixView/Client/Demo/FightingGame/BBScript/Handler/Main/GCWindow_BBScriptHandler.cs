@@ -12,17 +12,22 @@
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
             int currentOrder = -1;
-            for (int i = 0; i < buffer.BehaviorCheckList.Count; i++)
+            BehaviorInfo curInfo = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
+            foreach (long infoId in buffer.DescendInfoList)
             {
-                long id = buffer.BehaviorCheckList[i];
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(id);
-                if (info.BehaviorCheck())
+                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
+                if (info.moveType is MoveType.HitStun || info.moveType is MoveType.Etc)
+                {
+                    continue;
+                }
+
+                if ((info.moveType > curInfo.moveType || buffer.ContainGCOption(info.behaviorOrder)) && info.BehaviorCheck())
                 {
                     currentOrder = info.behaviorOrder;
                     break;
                 }
             }
-
+            
             if (currentOrder == -1)
             {
                 return;
@@ -59,28 +64,6 @@
             buffer.GCOptions.Clear();
             buffer.BehaviorCheckList.Clear();
             bbTimer.Remove(ref buffer.CheckTimer);
-
-            //2.
-            BehaviorInfo curInfo = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
-            foreach (long infoId in buffer.DescendInfoList)
-            {
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
-                if (info.moveType is MoveType.HitStun or MoveType.Etc)
-                {
-                    continue;
-                }
-
-                //可进入比当前行为层级高的行为
-                if (info.moveType > curInfo.moveType)
-                {
-                    buffer.BehaviorCheckList.Add(info.Id);
-                }
-                //同层或者低层但是设置了可取消
-                else if(buffer.ContainGCOption(info.behaviorOrder))
-                {
-                    buffer.BehaviorCheckList.Add(info.Id);
-                }
-            }
             
             //4. 启动定时器
             buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.GCWindowTimer, bbParser);
