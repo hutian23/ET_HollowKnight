@@ -25,7 +25,7 @@ namespace ET.Client
             //启动输入检测携程
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             BBInputHandler handler = DialogueDispatcherComponent.Instance.GetInputHandler(match.Groups["InputType"].Value);
-            inputWait.InputCheckCor(handler,inputWait.Token).Coroutine();    
+            // inputWait.InputCheckCor(handler,inputWait.Token).Coroutine();    
             
             await ETTask.CompletedTask;
             return Status.Success;

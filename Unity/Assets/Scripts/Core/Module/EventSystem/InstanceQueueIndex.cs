@@ -10,6 +10,7 @@
         FixedUpdate,
         PreStep,
         PostStep,
+        FrameUpdate,
 #endif
         Max,
     }

@@ -12,11 +12,11 @@ namespace ET.Client
         public long timer;
         public long Ops;
         
-        public Dictionary<string, bool> bufferDict = new();
-
         public ETCancellationToken Token = new();
         public List<InputCallback> tcss = new();
 
+        //标记当前缓冲区已经有该
+        public Dictionary<string, bool> bufferDict = new();
         public Queue<InputBuffer> bufferQueue = new();
         public const int MaxStack = 30;
 

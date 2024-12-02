@@ -62,8 +62,8 @@ namespace ET.Client
             //reload timer
             BBTimerComponent PreStepTimer = self.GetChild<BBTimerComponent>(self.PreStepTimer);
             BBTimerComponent PostStepTimer = self.GetChild<BBTimerComponent>(self.PostStepTimer);
-            PreStepTimer.ReLoad();
-            PostStepTimer.ReLoad();
+            PreStepTimer.Reload();
+            PostStepTimer.Reload();
             
             //create hitbox
             EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterB2WorldCreated() { B2World = self.B2World }).Coroutine();

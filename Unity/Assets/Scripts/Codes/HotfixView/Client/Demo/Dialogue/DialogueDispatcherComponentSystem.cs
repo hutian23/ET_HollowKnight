@@ -143,7 +143,7 @@ namespace ET.Client
                     Log.Error($"this obj is not a bbinputHandler:{bbInput.Name}");
                     continue;
                 }
-                self.BBInputHandlers.Add(handler.GetInputType(),handler);
+                self.BBInputHandlers.Add(handler.GetBufferType(),handler);
             }
         }
 

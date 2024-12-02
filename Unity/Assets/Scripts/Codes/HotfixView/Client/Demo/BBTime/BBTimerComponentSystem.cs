@@ -10,20 +10,15 @@ namespace ET.Client
         {
             protected override void Awake(BBTimerComponent self)
             {
-                self.ReLoad();
+                self.Reload();
             }
-        }
-
-        public static void ReLoad(this BBTimerComponent self)
-        {
-            self.Init();
         }
         
         public class BBTimerComponentDestroySystem: DestroySystem<BBTimerComponent>
         {
             protected override void Destroy(BBTimerComponent self)
             {
-                self.Init();
+                self.Reload();
             }
         }
 
@@ -37,7 +32,7 @@ namespace ET.Client
             return self.curFrame;
         }
 
-        private static void Init(this BBTimerComponent self)
+        public static void Reload(this BBTimerComponent self)
         {
             //回收所有定时器
             foreach (BBTimerAction action in self.timerActions.Values)
@@ -54,12 +49,24 @@ namespace ET.Client
             self.minFrame = long.MaxValue;
             self.curFrame = 0;
             self.Accumulator = 0;
+            self.idGenerator = 0;
         }
 
         public static long GetFrameLength(this BBTimerComponent self)
         {
             //Hertz = 0, 完全静止
             return self.Hertz == 0? 0 : TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
+        }
+
+        public static void SceneTimerUpdate(this BBTimerComponent self, long accumulator)
+        {
+            long preFrame = self.curFrame;
+            self.TimerUpdate(accumulator);
+            long Dt = self.curFrame - preFrame;
+            while (Dt -- > 0)
+            {
+                EventSystem.Instance.FrameUpdate();
+            }
         }
 
         public static void TimerUpdate(this BBTimerComponent self, long accumulator)

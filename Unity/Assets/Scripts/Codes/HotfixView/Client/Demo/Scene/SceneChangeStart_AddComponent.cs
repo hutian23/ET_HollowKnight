@@ -27,7 +27,7 @@ namespace ET.Client
             
             //注册SceneTimer到timerManager
             BBTimerComponent sceneTimer = currentScene.AddComponent<BBTimerComponent>();
-            BBTimerManager.Instance.RegistTimer(sceneTimer);
+            BBTimerManager.Instance.RegistSceneTimer(sceneTimer);
         }
     }
 }

@@ -2,15 +2,18 @@
 {
     public class JumpPressed_InputHandler: BBInputHandler
     {
-        public override string GetInputType()
+        public override string GetHandlerType()
         {
             return "JumpPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
+        public override string GetBufferType()
         {
-            InputWait inputWait = BBInputHelper.GetInputWait(unit);
+            return "JumpPressed";
+        }
 
+        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        {
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.LIGHTKICK, FuzzyInputType.OR, () =>
             {
                 bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.LIGHTKICK);

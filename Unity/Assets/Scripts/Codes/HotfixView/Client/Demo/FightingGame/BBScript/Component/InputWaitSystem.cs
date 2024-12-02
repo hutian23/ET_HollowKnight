@@ -147,32 +147,14 @@ namespace ET.Client
 
             return ret;
         }
-
-        public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, int waitFrame, Func<bool> checkFunc = null)
-        {
-            InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc);
-            self.tcss.Add(tcs);
-
-            void CancelAction()
-            {
-                self.tcss.Remove(tcs);
-                tcs.SetResult(new WaitInput(){Error = WaitTypeError.Cancel});
-                tcs.Recycle();
-            }
-
-            WaitInput ret;
-            
-            await ETTask.CompletedTask;
-            return new WaitInput();
-        }
-
+        
         public static async ETTask InputCheckCor(this InputWait self, BBInputHandler handler, ETCancellationToken token)
         {
             while (true)
             {
                 //1. 输入检测携程，等待输入
                 TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-                InputStatus status = await handler.Handle(timelineComponent.GetParent<Unit>(), token);
+                InputStatus status = await handler.Handle(self, token);
                 if (token.IsCancel())
                 {
                     return;
@@ -217,9 +199,9 @@ namespace ET.Client
 
                 if (bbTimer.GetNow() > buffer.lastedFrame)
                 {
-                    if (self.bufferDict.ContainsKey(handler.GetInputType()))
+                    if (self.bufferDict.ContainsKey(handler.GetBufferType()))
                     {
-                        self.bufferDict[handler.GetInputType()] = false;
+                        self.bufferDict[handler.GetBufferType()] = false;
                     }
 
                     buffer.Recycle();
@@ -227,13 +209,13 @@ namespace ET.Client
                 }
 
                 self.bufferQueue.Enqueue(buffer);
-                if (!self.bufferDict.ContainsKey(handler.GetInputType()))
+                if (!self.bufferDict.ContainsKey(handler.GetBufferType()))
                 {
-                    self.bufferDict.Add(handler.GetInputType(), true);
+                    self.bufferDict.Add(handler.GetBufferType(), true);
                 }
                 else
                 {
-                    self.bufferDict[handler.GetInputType()] = true;
+                    self.bufferDict[handler.GetBufferType()] = true;
                 }
             }
         }
@@ -243,7 +225,7 @@ namespace ET.Client
             return (self.Ops & op) != 0;
         }
         
-        public static bool CheckInput(this InputWait self, string inputType)
+        public static bool CheckBuff(this InputWait self, string inputType)
         {
             self.bufferDict.TryGetValue(inputType, out bool value);
             return value;

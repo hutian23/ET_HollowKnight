@@ -18,7 +18,7 @@
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             
             timelineComponent.Init();
-            bbTimer.ReLoad();
+            bbTimer.Reload();
 
             //获得输入，更新输入缓冲区定时器, 只有玩家会挂载inputWait
             inputWait?.Init();

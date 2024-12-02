@@ -2,15 +2,18 @@
 {
     public class RunHold_InputHandler: BBInputHandler
     {
-        public override string GetInputType()
+        public override string GetHandlerType()
         {
             return "RunHold";
         }
 
-        //关于需要持续按住按键的操作可以参考如下
-        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
+        public override string GetBufferType()
         {
-            InputWait inputWait = BBInputHelper.GetInputWait(unit);
+            return "RunHold";
+        }
+
+        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        {
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.LEFT | BBOperaType.RIGHT, FuzzyInputType.OR);
             if (wait.Error is not WaitTypeError.Success)
             {

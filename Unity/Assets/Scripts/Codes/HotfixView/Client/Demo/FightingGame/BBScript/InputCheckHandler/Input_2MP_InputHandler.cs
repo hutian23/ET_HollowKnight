@@ -2,15 +2,18 @@
 {
     public class Input_2MPPressed_InputHandler : BBInputHandler
     {
-        public override string GetInputType()
+        public override string GetHandlerType()
         {
             return "2MPPressed";
         }
-        
-        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
+
+        public override string GetBufferType()
         {
-            InputWait inputWait = BBInputHelper.GetInputWait(unit);
-            
+            return "2MPPressed";
+        }
+
+        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        {
             //1. Wait attack input
             WaitInput wait = await inputWait.Wait(BBOperaType.MIDDLEPUNCH, FuzzyInputType.OR, () =>
             {

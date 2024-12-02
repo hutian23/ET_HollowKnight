@@ -2,15 +2,18 @@
 {
     public class MiddlePunchPressed_InputHandler : BBInputHandler
     {
-        public override string GetInputType()
+        public override string GetHandlerType()
         {
             return "MiddlePunchPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
+        public override string GetBufferType()
         {
-            InputWait inputWait = BBInputHelper.GetInputWait(unit);
+            return "MiddlePunchPressed";
+        }
 
+        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        {
             //1. Wait 
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.MIDDLEPUNCH, FuzzyInputType.OR, () =>
             {

@@ -2,15 +2,18 @@
 {
     public class Input_5LPPressed_InputHandler: BBInputHandler
     {
-        public override string GetInputType()
+        public override string GetHandlerType()
         {
             return "5LPPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
+        public override string GetBufferType()
         {
-            InputWait inputWait = BBInputHelper.GetInputWait(unit);
+            return "5LPPressed";
+        }
 
+        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        {
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.LIGHTPUNCH, FuzzyInputType.OR, () =>
             {
                 //避免闭包

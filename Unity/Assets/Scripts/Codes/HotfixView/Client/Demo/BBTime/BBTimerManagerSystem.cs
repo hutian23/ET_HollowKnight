@@ -21,6 +21,10 @@ namespace ET.Client
                 long Accumulator = now - self.LastTime;
                 self.LastTime = now;
                 
+                //1. SceneTimer
+                self.SceneTimer().SceneTimerUpdate(Accumulator);
+                
+                //2. timeline Timer
                 foreach (long instanceId in self.instanceIds)
                 {
                     BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
@@ -29,8 +33,20 @@ namespace ET.Client
             }
         }
 
+        public class BBTimerManagerFrameUpdateSystem : FrameUpdateSystem<BBTimerManager>
+        {
+            protected override void FrameUpdate(BBTimerManager self)
+            {
+                Log.Warning("FrameUpdate"+ self.SceneTimer().GetNow());
+            }
+        }
+        
         public static void Step(this BBTimerManager self)
         {
+            //1. SceneTimer
+            self.SceneTimer().SceneTimerUpdate(TimeSpan.FromSeconds(1 / 60f).Ticks);
+            
+            //2. timeline timer
             foreach (long instanceId in self.instanceIds)
             {
                 BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
@@ -42,13 +58,26 @@ namespace ET.Client
         {
             self._gameTimer.Restart();
             self.LastTime = 0;
+            
+            self.SceneTimer().Reload();
+            foreach (long instanceId in self.instanceIds)
+            {
+                BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
+                bbTimer.Reload();
+            }
         }
         
         public static BBTimerComponent SceneTimer(this BBTimerManager self)
         {
-            return BBTimerManager.Instance.GetParent<Scene>().GetComponent<BBTimerComponent>();
+            BBTimerComponent sceneTimer = Root.Instance.Get(self.SceneTimerId) as BBTimerComponent;
+            return sceneTimer;
         }
 
+        public static void RegistSceneTimer(this BBTimerManager self, BBTimerComponent sceneTimer)
+        {
+            self.SceneTimerId = sceneTimer.InstanceId;
+        }
+        
         //管理timer
         public static void RegistTimer(this BBTimerManager self, BBTimerComponent bbTimer)
         {

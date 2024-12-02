@@ -2,15 +2,18 @@
 {
     public class DashPressed_InputHandler : BBInputHandler
     {
-        public override string GetInputType()
+        public override string GetHandlerType()
         {
             return "DashPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(Unit unit, ETCancellationToken token)
+        public override string GetBufferType()
         {
-            InputWait inputWait = BBInputHelper.GetInputWait(unit);
+            return "DashPressed";
+        }
 
+        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        {
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.HEAVYKICK, FuzzyInputType.AND, () =>
             {
                 //避免闭包
@@ -21,5 +24,6 @@
             
             return new InputStatus(){buffFrame = 7,ret = Status.Success};
         }
+        
     }
 }
