@@ -148,6 +148,24 @@ namespace ET.Client
             return ret;
         }
 
+        public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, int waitFrame, Func<bool> checkFunc = null)
+        {
+            InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc);
+            self.tcss.Add(tcs);
+
+            void CancelAction()
+            {
+                self.tcss.Remove(tcs);
+                tcs.SetResult(new WaitInput(){Error = WaitTypeError.Cancel});
+                tcs.Recycle();
+            }
+
+            WaitInput ret;
+            
+            await ETTask.CompletedTask;
+            return new WaitInput();
+        }
+
         public static async ETTask InputCheckCor(this InputWait self, BBInputHandler handler, ETCancellationToken token)
         {
             while (true)

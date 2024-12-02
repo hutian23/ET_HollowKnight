@@ -744,7 +744,7 @@ MonoBehaviour:
       Data: 24|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 22
+      Data: 24
     - Name: keyframeName
       Entry: 1
       Data: Whiff_End
@@ -767,6 +767,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_5D
-  Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nGCOption: 'Rg_5D';\nreturn;\n\n@Main:\nMarkerEvent:
-    (Whiff_Start)\n  WhiffWindow;\n  WhiffOption: 'Rg_GroundDash';\n  EndMarkerEvent:\nMarkerEvent:
-    (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_TC_End';\n  EndMarkerEvent:\nStartTimeline;\nExit;"
+  Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nGCOption: 'Rg_5D';\nreturn;\n\n@Main:\nSetTransition:
+    'PreSquit';\nMarkerEvent: (Whiff_Start)\n  WhiffWindow;\n  WhiffOption: 'Rg_GroundDash';\n 
+    EndMarkerEvent:\nMarkerEvent: (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_TC_End';\n 
+    EndMarkerEvent:\nStartTimeline;\nExit;"

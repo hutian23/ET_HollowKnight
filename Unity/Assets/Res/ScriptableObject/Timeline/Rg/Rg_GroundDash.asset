@@ -852,7 +852,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 21|Timeline.EventInfo, Unity.Loader
@@ -902,6 +902,18 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 25|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 10
+    - Name: keyframeName
+      Entry: 1
+      Data: GC_Start
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -917,32 +929,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_GroundDash
-  Script: '@Trigger:
-
-    NumericCheck: DashCount > 0;
-
-    InputType: DashPressed;
-
-    InAir:
-    false;
-
-    return;
-
-
-    @Main:
-
-    NumericAdd: DashCount, -1;
-
-    BeginIf:
-    (NumericCheck: DashCount = 0)
-
-    DashRecharge: 50;
-
-    EndIf:
-
-    SetTransition:
-    ''SquitToIdle'';
-
-    StartTimeline;
-
-    Exit;'
+  Script: "@Trigger:\nNumericCheck: DashCount > 0;\nInputType: DashPressed;\nInAir:
+    false;\nreturn;\n\n@Main:\nNumericAdd: DashCount, -1;\nBeginIf: (NumericCheck:
+    DashCount = 0)\nDashRecharge: 50;\nEndIf:\nSetTransition: 'SquitToIdle';\nMarkerEvent:
+    (GC_Start)\n  GCWindow;\n  GCOption: 'Rg_Jump';\n  EndMarkerEvent:\nStartTimeline;\nExit;"

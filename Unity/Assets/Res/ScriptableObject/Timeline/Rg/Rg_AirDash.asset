@@ -654,7 +654,19 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 21|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 7
+    - Name: keyframeName
+      Entry: 1
+      Data: GC_Start
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -671,22 +683,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_AirDash
-  Script: '@Trigger:
-
-    NumericCheck: DashCount > 0;
-
-    InputType: DashPressed;
-
-    InAir:
-    true;
-
-    return;
-
-
-    @Main:
-
-    NumericAdd: DashCount, -1;
-
-    StartTimeline;
-
-    Exit;'
+  Script: "@Trigger:\nNumericCheck: DashCount > 0;\nInputType: DashPressed;\nInAir:
+    true;\nreturn;\n\n@Main:\nNumericAdd: DashCount, -1;\nMarkerEvent: (GC_Start)\n 
+    GCWindow;\n  GCOption: 'Rg_Jump';\n  EndMarkerEvent:\nStartTimeline;\nExit;"

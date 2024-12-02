@@ -1076,6 +1076,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_5B
-  Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nreturn;\n\n@Main:\nMarkerEvent:
-    (Whiff_Start)\n  WhiffWindow;\n  WhiffOption: 'Rg_GroundDash';\n  EndMarkerEvent:\nMarkerEvent:
-    (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_5C';\n  EndMarkerEvent:\nStartTimeline;\nExit;"
+  Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nreturn;\n\n@Main:\nSetTransition:
+    'PreSquit';\nMarkerEvent: (Whiff_Start)\n  WhiffWindow;\n  WhiffOption: 'Rg_GroundDash';\n 
+    EndMarkerEvent:\nMarkerEvent: (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_5C';\n 
+    EndMarkerEvent:\nStartTimeline;\nExit;"
