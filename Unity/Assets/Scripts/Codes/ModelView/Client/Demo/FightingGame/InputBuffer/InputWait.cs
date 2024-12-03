@@ -7,46 +7,19 @@ namespace ET.Client
     /// 输入模块
     /// </summary>
     [ComponentOf(typeof (TimelineComponent))]
-    public class InputWait: Entity, IAwake, IDestroy
+    public class InputWait: Entity, IAwake, IDestroy, IFrameUpdate
     {
-        public long timer;
         public long Ops;
         
-        public ETCancellationToken Token = new();
+        public ETCancellationToken Token = new(); // 用于取消所有输入等待协程
         public List<InputCallback> tcss = new();
+        public Queue<string> InputWaitRunQueue = new();
 
-        //标记当前缓冲区已经有该
-        public Dictionary<string, bool> bufferDict = new();
-        public Queue<InputBuffer> bufferQueue = new();
-        public const int MaxStack = 30;
-
+        public bool BufferFlag; // 设置输入缓冲区是否启动
+        public Dictionary<string, long> BufferDict = new(); // 记录了输入缓冲有效的最大帧号
         public Dictionary<long, long> PressedDict = new();
     }
     
-    public class InputBuffer
-    {
-        public BBInputHandler handler;
-        public long startFrame;
-        public long lastedFrame;
-
-        public static InputBuffer Create(BBInputHandler handler, long startFrame, long lastedFrame)
-        {
-            InputBuffer buffer = ObjectPool.Instance.Fetch<InputBuffer>();
-            buffer.handler = handler;
-            buffer.startFrame = startFrame;
-            buffer.lastedFrame = lastedFrame;
-            return buffer;
-        }
-
-        public void Recycle()
-        {
-            handler = null;
-            startFrame = 0;
-            lastedFrame = 0;
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
     public class InputCallback
     {
         public bool IsDisposed
@@ -73,19 +46,22 @@ namespace ET.Client
             t.SetResult(new WaitInput() { Error = WaitTypeError.Destroy });
         }
 
+        //Param
         public long OP;
         public int waitType;
         public Func<bool> checkFunc;
+        public long timeOut;
 
         private ETTask<WaitInput> tcs;
 
-        public static InputCallback Create(long OP, int waitType, Func<bool> checkFunc)
+        public static InputCallback Create(long OP, int waitType, Func<bool> checkFunc,long timeOut)
         {
             InputCallback callback = ObjectPool.Instance.Fetch<InputCallback>();
             callback.OP = OP;
             callback.waitType = waitType;
             callback.tcs = ETTask<WaitInput>.Create(true);
             callback.checkFunc = checkFunc;
+            callback.timeOut = timeOut;
             return callback;
         }
 
@@ -95,19 +71,19 @@ namespace ET.Client
             waitType = 0;
             tcs = null;
             checkFunc = null;
+            timeOut = -1;
             ObjectPool.Instance.Recycle(this);
         }
     }
     
-    public struct InputStatus
+    public struct InputBuffer
     {
-        public int buffFrame;
+        public long curFrame; //添加到缓冲区时的帧号
+        public long buffFrame;
         public Status ret;
         
         [StaticField]
-        public static InputStatus Success = new() { buffFrame = 5, ret = Status.Success };
-        [StaticField]
-        public static InputStatus Failed = new() { buffFrame = 0, ret = Status.Failed };
+        public static InputBuffer None = new() { curFrame = -1, buffFrame = -1, ret = Status.Failed };
     }
 
     public struct WaitInput: IWaitType
@@ -143,11 +119,13 @@ namespace ET.Client
         public const int UP = 2 << 7;
         public const int UPRIGHT = 2 << 8;
 
-        public const int LIGHTPUNCH = 2 << 9;
-        public const int LIGHTKICK = 2 << 10;
-        public const int MIDDLEPUNCH = 2 << 11;
-        public const int MIDDLEKICK = 2 << 12;
-        public const int HEAVYPUNCH = 2 << 13;
-        public const int HEAVYKICK = 2 << 14;
+        public const int X = 2 << 9;
+        public const int A = 2 << 10;
+        public const int Y = 2 << 11;
+        public const int B = 2 << 12;
+        public const int RB = 2 << 13;
+        public const int RT = 2 << 14;
+        public const int LB = 2 << 15;
+        public const int LT = 2 << 16;
     }
 }

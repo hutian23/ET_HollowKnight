@@ -12,16 +12,16 @@
             return "JumpPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait inputWait, ETCancellationToken token)
         {
-            WaitInput wait = await inputWait.Wait(OP: BBOperaType.LIGHTKICK, FuzzyInputType.OR, () =>
+            WaitInput wait = await inputWait.Wait(OP: BBOperaType.A, FuzzyInputType.OR, () =>
             {
-                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.LIGHTKICK);
+                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.A);
                 return WasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
-            
-            return new InputStatus(){buffFrame = 8, ret = Status.Success};
+            if (wait.Error != WaitTypeError.Success) return InputBuffer.None;
+
+            return inputWait.CreateBuffer(10);
         }
     }
 }

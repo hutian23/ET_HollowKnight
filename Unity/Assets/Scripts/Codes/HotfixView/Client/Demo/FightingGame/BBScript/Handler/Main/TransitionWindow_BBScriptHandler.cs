@@ -10,7 +10,6 @@
             //在过度动画取消窗口内，行为机逻辑上已经进入中立状态，可以切换进所有行为
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
             int currenOrder = -1;
             foreach (long infoId in buffer.DescendInfoList)
@@ -34,8 +33,8 @@
             }
             
             //初始化
-            buffer.BehaviorCheckList.Clear();
-            bbTimer.Remove(ref buffer.CheckTimer);
+            buffer.DisposeWindow();
+            
             //切换行为
             timelineComponent.Reload(currenOrder);
         }
@@ -43,6 +42,7 @@
 
     [FriendOf(typeof(BehaviorBuffer))]
     [FriendOf(typeof(BBParser))]
+    [FriendOf(typeof(InputWait))]
     public class TransitionWindow_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -53,23 +53,7 @@
         //OpenTransitionWindow;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            
-            //1. 初始化
-            bbTimer.Remove(ref buffer.CheckTimer);
-            buffer.BehaviorCheckList.Clear();
-            
-            //3. 过渡行为可以被
-            buffer.CheckTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.TransitionWindowTimer, bbParser);
-            
-            token.Add(() =>
-            {
-                bbTimer.Remove(ref buffer.CheckTimer);
-            });
-            
+            BBInputHelper.OpenWindow(parser, token, BBTimerInvokeType.TransitionWindowTimer);
             await ETTask.CompletedTask;
             return Status.Success;
         }

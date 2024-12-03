@@ -5,42 +5,32 @@ namespace ET.Client
     [FriendOf(typeof (InputWait))]
     public static class InputWaitSystem
     {
-        [Invoke(BBTimerInvokeType.BBInputHandleTimer)]
-        [FriendOf(typeof (BBInputComponent))]
-        [FriendOf(typeof (InputWait))]
-        public class BBInputHandleTimer: BBTimer<InputWait>
+        public class InputWaitFrameUpdateSystem: FrameUpdateSystem<InputWait>
         {
-            protected override void Run(InputWait self)
+            protected override void FrameUpdate(InputWait self)
             {
-                self.Ops = BBInputComponent.Instance.CheckInput();
-                //1. 更新按键历史
+                self.Ops = BBInputComponent.Instance.CheckInput();  
+                //1. 启动输入检测协程 
+                self.StartInputHandler();
+                //2. 更新按键历史
                 self.UpdateKeyHistory(self.Ops);
-                //2. 添加缓冲
+                //3. 添加缓冲
                 self.Notify(self.Ops);
-                //2. 更新缓冲区
-                self.UpdateBuffer();
             }
         }
 
         public static void Init(this InputWait self)
         {
-            BBTimerManager.Instance.SceneTimer().Remove(ref self.timer);
-            self.timer = BBTimerManager.Instance.SceneTimer().NewFrameTimer(BBTimerInvokeType.BBInputHandleTimer, self);
             self.Ops = 0;
             
             self.Token?.Cancel();
             self.tcss.ForEach(tcs => tcs.Recycle());
             self.tcss.Clear();
             self.Token = new ETCancellationToken();
+            self.InputWaitRunQueue.Clear();
 
-            self.bufferDict.Clear();
-            int count = self.bufferQueue.Count;
-            while (count-- > 0)
-            {
-                InputBuffer buffer = self.bufferQueue.Dequeue();
-                buffer.Recycle();
-            }
-
+            self.BufferFlag = false;
+            self.BufferDict.Clear();
             self.PressedDict.Clear();
             self.RegistKeyHistory();
         }
@@ -49,33 +39,38 @@ namespace ET.Client
 
         private static void RegistKeyHistory(this InputWait self)
         {
-            self.PressedDict.Add(BBOperaType.LIGHTPUNCH, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.LIGHTKICK, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.MIDDLEPUNCH, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.HEAVYKICK, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.HEAVYPUNCH, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.X, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.A, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.Y, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.B, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.RT, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.RB, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.LB, long.MaxValue);
+            self.PressedDict.Add(BBOperaType.LT, long.MaxValue);
         }
 
         private static void UpdateKeyHistory(this InputWait self, long ops)
         {
-            self.HandleKeyInput(ops, BBOperaType.LIGHTPUNCH);
-            self.HandleKeyInput(ops, BBOperaType.LIGHTKICK);
-            self.HandleKeyInput(ops, BBOperaType.MIDDLEPUNCH);
-            self.HandleKeyInput(ops, BBOperaType.MIDDLEKICK);
-            self.HandleKeyInput(ops, BBOperaType.HEAVYPUNCH);
-            self.HandleKeyInput(ops, BBOperaType.HEAVYKICK);
+            self.HandleKeyInput(ops, BBOperaType.X);
+            self.HandleKeyInput(ops, BBOperaType.A);
+            self.HandleKeyInput(ops, BBOperaType.Y);
+            self.HandleKeyInput(ops, BBOperaType.B);
+            self.HandleKeyInput(ops, BBOperaType.RB);
+            self.HandleKeyInput(ops, BBOperaType.RT);
+            self.HandleKeyInput(ops, BBOperaType.LB);
+            self.HandleKeyInput(ops, BBOperaType.LT);
         }
         
         private static void HandleKeyInput(this InputWait self, long ops, int operaType)
         {
-            BBTimerComponent bbTimer = BBTimerManager.Instance.SceneTimer();
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             bool ret = (ops & operaType) != 0;
             //更新按键是在哪一帧按下的
             if (ret)
             {
-                if (self.PressedDict[operaType] > bbTimer.GetNow())
+                if (self.PressedDict[operaType] > sceneTimer.GetNow())
                 {
-                    self.PressedDict[operaType] = bbTimer.GetNow();
+                    self.PressedDict[operaType] = sceneTimer.GetNow();
                 }
             }
             else
@@ -101,9 +96,18 @@ namespace ET.Client
         {
             for (int i = 0; i < self.tcss.Count; i++)
             {
-                BBTimerComponent bbTimer = BBTimerManager.Instance.SceneTimer();
+                BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
                 InputCallback callback = self.tcss[i];
-                //1. 当前输入不符合条件
+                
+                //1.  检测回调是否过期
+                if (callback.timeOut != -1 && callback.timeOut < sceneTimer.GetNow())
+                {
+                    callback.SetResult(new WaitInput(){frame = 0, Error = WaitTypeError.Timeout});
+                    self.tcss.Remove(callback);
+                    continue;
+                }
+                
+                //2. 当前输入不符合条件
                 switch (callback.waitType)
                 {
                     case FuzzyInputType.OR:
@@ -114,17 +118,26 @@ namespace ET.Client
                         break;
                 }
 
-                if (callback.checkFunc != null && !callback.checkFunc.Invoke()) continue;
-
-                //2. 不同技能可能有不同的判定逻辑
-                callback.SetResult(new WaitInput() { frame = bbTimer.GetNow(), Error = WaitTypeError.Success, OP = op });
+                //3. 执行回调的前置条件
+                if (callback.checkFunc != null && !callback.checkFunc.Invoke())
+                {
+                    continue;
+                }
+                
+                //4. 执行回调
+                callback.SetResult(new WaitInput() { frame = sceneTimer.GetNow(), Error = WaitTypeError.Success, OP = op });
                 self.tcss.Remove(callback);
             }
         }
 
-        public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, Func<bool> checkFunc = null)
+        public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, Func<bool> checkFunc = null, long timeOut = -1)
         {
-            InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc);
+            //需要检测回调是否过期
+            if (timeOut != -1)
+            {
+                timeOut = BBTimerManager.Instance.SceneTimer().GetNow() + timeOut;
+            }
+            InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc, timeOut);
             self.tcss.Add(tcs);
 
             void CancelAction()
@@ -148,87 +161,55 @@ namespace ET.Client
             return ret;
         }
         
-        public static async ETTask InputCheckCor(this InputWait self, BBInputHandler handler, ETCancellationToken token)
+        private static void StartInputHandler(this InputWait self)
         {
-            while (true)
+            int count = self.InputWaitRunQueue.Count;
+            while (count -- > 0)
             {
-                //1. 输入检测携程，等待输入
-                TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-                InputStatus status = await handler.Handle(self, token);
-                if (token.IsCancel())
-                {
-                    return;
-                }
+               string handlerName = self.InputWaitRunQueue.Dequeue();
+               self.InputCheckCor(handlerName).Coroutine();
+            }
+        }
+        
+        private static async ETTask InputCheckCor(this InputWait self, string handlerName)
+        {
+            //1. 启动输入检测携程，等待输入
+            BBInputHandler handler = DialogueDispatcherComponent.Instance.GetInputHandler(handlerName);
+            InputBuffer buffer = await handler.Handle(self, self.Token);
+            if (self.Token.IsCancel()) return;
                 
-                //2. 输入携程判定成功，添加技能缓冲
-                if (status.ret is Status.Success)
-                {
-                    //考虑到卡肉
-                    BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-                    InputBuffer buffer = InputBuffer.Create(handler, bbTimer.GetNow(), bbTimer.GetNow() + status.buffFrame);
-                    self.AddBuffer(buffer);
-                }
-
-                await TimerComponent.Instance.WaitFrameAsync(token);
-                if (token.IsCancel())
-                {
-                    return;
-                }
-            }
-        }
-
-        private static void AddBuffer(this InputWait self, InputBuffer buffer)
-        {
-            while (self.bufferQueue.Count >= InputWait.MaxStack)
+            //2. 输入携程判定成功并且正在输入窗口中，更新技能缓冲的最大有效帧号
+            if (buffer.ret is Status.Success && self.BufferFlag)
             {
-                InputBuffer oldBuffer = self.bufferQueue.Dequeue();
-                oldBuffer.Recycle();
+                if (!self.BufferDict.ContainsKey(handler.GetBufferType()))
+                {
+                    self.BufferDict.TryAdd(handler.GetBufferType(), -1);
+                }
+                self.BufferDict[handler.GetBufferType()] = buffer.buffFrame + buffer.curFrame;
             }
-            self.bufferQueue.Enqueue(buffer);
-        }
-
-        private static void UpdateBuffer(this InputWait self)
-        {
-            BBTimerComponent bbTimer = self.GetParent<TimelineComponent>().GetComponent<BBTimerComponent>();
             
-            int count = self.bufferQueue.Count;
-            while (count-- > 0)
-            {
-                InputBuffer buffer = self.bufferQueue.Dequeue();
-                BBInputHandler handler = buffer.handler;
-
-                if (bbTimer.GetNow() > buffer.lastedFrame)
-                {
-                    if (self.bufferDict.ContainsKey(handler.GetBufferType()))
-                    {
-                        self.bufferDict[handler.GetBufferType()] = false;
-                    }
-
-                    buffer.Recycle();
-                    continue;
-                }
-
-                self.bufferQueue.Enqueue(buffer);
-                if (!self.bufferDict.ContainsKey(handler.GetBufferType()))
-                {
-                    self.bufferDict.Add(handler.GetBufferType(), true);
-                }
-                else
-                {
-                    self.bufferDict[handler.GetBufferType()] = true;
-                }
-            }
+            //3. 下一帧重新启动输入协程
+            self.InputWaitRunQueue.Enqueue(handler.GetHandlerType());
         }
-
+        
         public static bool ContainKey(this InputWait self, long op)
         {
             return (self.Ops & op) != 0;
         }
-        
-        public static bool CheckBuff(this InputWait self, string inputType)
+
+        public static void DisposeBuffer(this InputWait self)
         {
-            self.bufferDict.TryGetValue(inputType, out bool value);
-            return value;
+            self.BufferFlag = false;// 当前打开输入窗口
+            self.BufferDict.Clear();
+        }
+
+        public static bool CheckBuffer(this InputWait self, string bufferName, long curFrame)
+        {
+            if (!self.BufferDict.TryGetValue(bufferName, out long timeOutFrame))
+            {
+                return false;
+            }
+            return timeOutFrame >= curFrame;
         }
     }
 }

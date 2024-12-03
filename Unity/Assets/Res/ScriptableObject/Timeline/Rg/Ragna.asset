@@ -265,15 +265,16 @@ MonoBehaviour:
   rootScript: "@RootInit:\nInitPos: 0, 10000;\nGravity: 100000;\nNumericType: MaxGravity,
     150000;\nNumericType: MaxFall, 45000;\nNumericType: MaxJump, 2;\nNumericType:
     MaxDash, 2;\nNumericType: DashCount, 2;\nNumericType: JumpCount, 2;\n# \u6CE8\u518C\u843D\u5730\u56DE\u8C03\nRegistAirCheck;\n#
-    Input\nRegistInput: RunHold;\nRegistInput: SquitHold;\nRegistInput: JumpPressed;\nRegistInput:
-    DashPressed;\nRegistInput: 5LPPressed;\n# Move\nRegistMove: (Rg_Idle)\n  MoveType:
-    None;\n  EndMove:\nRegistMove: (Rg_Walk)\n  MoveType: Move;\n  EndMove:\nRegistMove:
-    (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_SquitToIdle)\n  MoveType:
-    Move;\n  EndMove:\nRegistMove: (Rg_Squit)\n  MoveType: Move;\n  EndMove:\nRegistMove:
-    (Rg_AirBrone)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_Jump)\n  MoveType:
-    Move;\n  EndMove:\nRegistMove: (Rg_5B)\n  MoveType: Normal;\n  EndMove:\nRegistMove:
-    (Rg_5C)\n  MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_5D)\n  MoveType: Normal;\n 
-    EndMove:\nRegistMove: (Rg_TC_End)\n  MoveType: Normal;\n  EndMove:\nRegistMove:
-    (Rg_AirDash)\n  MoveType: Special;\n  EndMove:\nRegistMove: (Rg_GroundDash)\n 
+    Input\nRegistInput: RunHold;\nRegistInput: SquatHold;\nRegistInput: JumpPressed;\nRegistInput:
+    DashPressed;\nRegistInput: 5LPPressed;\nRegistInput: Modern_ShouRyuKen;\n# Move\nRegistMove:
+    (Rg_Idle)\n  MoveType: None;\n  EndMove:\nRegistMove: (Rg_Walk)\n  MoveType:
+    Move;\n  EndMove:\nRegistMove: (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove:
+    (Rg_SquitToIdle)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_Squit)\n  MoveType:
+    Move;\n  EndMove:\nRegistMove: (Rg_AirBrone)\n  MoveType: Move;\n  EndMove:\nRegistMove:
+    (Rg_Jump)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_5B)\n  MoveType: Normal;\n 
+    EndMove:\nRegistMove: (Rg_5C)\n  MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_5D)\n 
+    MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_TC_End)\n  MoveType: Normal;\n 
+    EndMove:\nRegistMove: (Rg_AirDash)\n  MoveType: Special;\n  EndMove:\nRegistMove:
+    (Rg_GroundDash)\n  MoveType: Special;\n  EndMove:\nRegistMove: (Rg_ShouRyuuKenn)\n 
     MoveType: Special;\n  EndMove:\nRegistMove: (Rg_IdleAnim)\n  MoveType: Etc;\n 
     EndMove:\nreturn;"

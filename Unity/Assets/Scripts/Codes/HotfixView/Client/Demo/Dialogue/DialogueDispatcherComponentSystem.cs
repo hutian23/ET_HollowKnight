@@ -140,10 +140,10 @@ namespace ET.Client
                 BBInputHandler handler = Activator.CreateInstance(bbInput) as BBInputHandler;
                 if (handler == null)
                 {
-                    Log.Error($"this obj is not a bbinputHandler:{bbInput.Name}");
+                    Log.Error($"this obj is not a bbInputHandler:{bbInput.Name}");
                     continue;
                 }
-                self.BBInputHandlers.Add(handler.GetBufferType(),handler);
+                self.BBInputHandlers.Add(handler.GetHandlerType(),handler);
             }
         }
 

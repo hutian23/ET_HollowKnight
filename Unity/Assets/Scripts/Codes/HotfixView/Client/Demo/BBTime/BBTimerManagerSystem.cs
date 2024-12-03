@@ -32,14 +32,6 @@ namespace ET.Client
                 }
             }
         }
-
-        public class BBTimerManagerFrameUpdateSystem : FrameUpdateSystem<BBTimerManager>
-        {
-            protected override void FrameUpdate(BBTimerManager self)
-            {
-                Log.Warning("FrameUpdate"+ self.SceneTimer().GetNow());
-            }
-        }
         
         public static void Step(this BBTimerManager self)
         {

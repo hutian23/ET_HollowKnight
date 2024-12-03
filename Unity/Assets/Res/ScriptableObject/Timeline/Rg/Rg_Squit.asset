@@ -620,7 +620,7 @@ MonoBehaviour:
 
     InAir: false;
 
-    InputType: SquitHold;
+    InputType: SquatHold;
 
     return;
 
@@ -644,7 +644,7 @@ MonoBehaviour:
     EndIf:
 
     BeginLoop:
-    (InputType: SquitHold)
+    (InputType: SquatHold)
 
     BBSprite: ''Squit_1'', 4;
 

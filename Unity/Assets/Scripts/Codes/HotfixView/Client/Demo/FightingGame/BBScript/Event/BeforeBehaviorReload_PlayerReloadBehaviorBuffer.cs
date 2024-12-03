@@ -13,15 +13,13 @@
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             
             //1. 记录CurrentOrder
             bbParser.RegistParam("CurrentOrder", args.behaviorOrder);
             buffer.SetCurrentOrder(args.behaviorOrder);
-            buffer.BehaviorCheckList.Clear();
-            bbTimer.Remove(ref buffer.CheckTimer);
             
             //2. 清空回调
+            //TODO 预编译环节生成以下组件
             foreach (var kv in timelineComponent.callbackDict)
             {
                 TimelineCallback callback = timelineComponent.GetChild<TimelineCallback>(kv.Value);
@@ -44,8 +42,7 @@
                 bbParser.RegistParam(variable.name, variable.value);
             }
             buffer.ClearParam();
-            buffer.GCOptions.Clear();
-            buffer.WhiffOptions.Clear();
+            
             await ETTask.CompletedTask;
         }
     }

@@ -12,17 +12,17 @@
             return "DashPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait self, ETCancellationToken token)
         {
-            WaitInput wait = await inputWait.Wait(OP: BBOperaType.HEAVYKICK, FuzzyInputType.AND, () =>
+            WaitInput wait = await self.Wait(OP: BBOperaType.RT, FuzzyInputType.AND, () =>
             {
                 //避免闭包
-                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.HEAVYKICK);
+                bool WasPressedThisFrame = self.WasPressedThisFrame(BBOperaType.RT);
                 return WasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
-            
-            return new InputStatus(){buffFrame = 7,ret = Status.Success};
+            if (wait.Error != WaitTypeError.Success) return InputBuffer.None;
+
+            return self.CreateBuffer(7);
         }
         
     }

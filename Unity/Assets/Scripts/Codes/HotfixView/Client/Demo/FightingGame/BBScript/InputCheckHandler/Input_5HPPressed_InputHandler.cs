@@ -12,16 +12,16 @@
             return "5HPPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait inputWait, ETCancellationToken token)
         {
-            WaitInput wait = await inputWait.Wait(BBOperaType.HEAVYPUNCH, FuzzyInputType.OR, () =>
+            WaitInput wait = await inputWait.Wait(BBOperaType.RB, FuzzyInputType.OR, () =>
             {
-                bool wasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.HEAVYPUNCH);
+                bool wasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.RB);
                 return wasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
+            if (wait.Error != WaitTypeError.Success) return InputBuffer.None;
             
-            return InputStatus.Success;
+            return InputBuffer.None;
         }
     }
 }

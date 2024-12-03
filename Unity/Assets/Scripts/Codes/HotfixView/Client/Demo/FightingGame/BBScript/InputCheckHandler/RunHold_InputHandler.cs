@@ -12,15 +12,15 @@
             return "RunHold";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait self, ETCancellationToken token)
         {
-            WaitInput wait = await inputWait.Wait(OP: BBOperaType.LEFT | BBOperaType.RIGHT, FuzzyInputType.OR);
+            WaitInput wait = await self.Wait(OP: BBOperaType.LEFT | BBOperaType.RIGHT, FuzzyInputType.OR);
             if (wait.Error is not WaitTypeError.Success)
             {
-                return InputStatus.Failed;
+                return InputBuffer.None;
             }
-            
-            return new InputStatus(){buffFrame = 5,ret = Status.Success};
+
+            return self.CreateBuffer( 4);
         }
     }
 }

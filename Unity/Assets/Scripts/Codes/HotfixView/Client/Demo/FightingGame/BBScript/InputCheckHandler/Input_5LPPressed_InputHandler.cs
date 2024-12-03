@@ -12,17 +12,17 @@
             return "5LPPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait inputWait, ETCancellationToken token)
         {
-            WaitInput wait = await inputWait.Wait(OP: BBOperaType.LIGHTPUNCH, FuzzyInputType.OR, () =>
+            WaitInput wait = await inputWait.Wait(OP: BBOperaType.X, FuzzyInputType.OR, () =>
             {
                 //避免闭包
-                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.LIGHTPUNCH);
+                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.X);
                 return WasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
-            
-            return InputStatus.Success;
+            if (wait.Error != WaitTypeError.Success) return InputBuffer.None;
+
+            return inputWait.CreateBuffer(15);
         }
     }
 }

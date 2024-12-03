@@ -23,7 +23,6 @@ namespace ET.Client
         //方便倒序获取行为信息组件
         public SortedSet<long> DescendInfoList = new(Comparer<long>.Create((x, y) => y.CompareTo(x)));
 
-        public long CheckTimer;
-        public List<long> BehaviorCheckList = new();
+        public long WindowTimer;
     }
 }

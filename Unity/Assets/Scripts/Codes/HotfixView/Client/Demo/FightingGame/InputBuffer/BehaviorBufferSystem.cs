@@ -19,8 +19,7 @@
             }
             self.behaviorOrderMap.Clear();
             self.DescendInfoList.Clear();
-            self.CheckTimer = 0;
-            self.BehaviorCheckList.Clear();
+            self.WindowTimer = 0;
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)
@@ -51,6 +50,13 @@
                 return null;
             }
             return self.GetChild<BehaviorInfo>(infoId);
+        }
+
+        public static void DisposeWindow(this BehaviorBuffer self)
+        {
+            self.GCOptions.Clear();
+            self.WhiffOptions.Clear();
+            self.GetParent<TimelineComponent>().GetComponent<BBTimerComponent>().Remove(ref self.WindowTimer);
         }
 
         #region Param

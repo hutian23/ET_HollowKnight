@@ -2,33 +2,34 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (InputWait))]
-    public class RegistInput_BBScriptHandler: BBScriptHandler
+    [FriendOf(typeof(InputWait))]
+    public class InputBuffer_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "RegistInput";
+            return "InputBuffer";
         }
 
-        //RegistInput: '236P';
-        //note: 只能在RootInit携程中使用!
+        //InputBuffer: true;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"RegistInput: (?<InputType>\w+);");
+            Match match = Regex.Match(data.opLine, @"InputBuffer: ((?<InputBuffer>\w+));");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
             
-            
-            //启动输入检测携程
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            
-            BBInputHandler inputHandler = DialogueDispatcherComponent.Instance.GetInputHandler(match.Groups["InputType"].Value);
-            inputWait.InputWaitRunQueue.Enqueue(inputHandler.GetHandlerType());
-            
+            inputWait.DisposeBuffer();
+
+            if (match.Groups["InputBuffer"].Value.Equals("true"))
+            {
+                inputWait.BufferFlag = true;
+                token.Add(() => { inputWait.DisposeBuffer(); });
+            }
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

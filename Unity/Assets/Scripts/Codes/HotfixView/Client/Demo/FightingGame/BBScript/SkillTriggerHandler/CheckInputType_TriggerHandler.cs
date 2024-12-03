@@ -21,7 +21,9 @@ namespace ET.Client
             
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             InputWait wait = timelineComponent.GetComponent<InputWait>();
-            return wait.CheckBuff(match.Groups["InputType"].Value);
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            
+            return wait.CheckBuffer(match.Groups["InputType"].Value,bbTimer.GetNow());
         }
     }
 }

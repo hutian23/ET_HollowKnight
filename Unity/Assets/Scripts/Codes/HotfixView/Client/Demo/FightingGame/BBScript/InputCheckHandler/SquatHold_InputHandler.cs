@@ -12,15 +12,15 @@
             return "SquatHold";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait inputWait, ETCancellationToken token)
         {
             WaitInput wait = await inputWait.Wait(OP: BBOperaType.DOWN | BBOperaType.DOWNLEFT | BBOperaType.DOWNRIGHT, FuzzyInputType.OR);
             if (wait.Error is not WaitTypeError.Success)
             {
-                return InputStatus.Failed;
+                return InputBuffer.None;
             }
-            
-            return InputStatus.Success;
+
+            return inputWait.CreateBuffer(3);
         }
     }
 }

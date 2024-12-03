@@ -12,18 +12,18 @@
             return "MiddlePunchPressed";
         }
 
-        public override async ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token)
+        public override async ETTask<InputBuffer> Handle(InputWait inputWait, ETCancellationToken token)
         {
             //1. Wait 
-            WaitInput wait = await inputWait.Wait(OP: BBOperaType.MIDDLEPUNCH, FuzzyInputType.OR, () =>
+            WaitInput wait = await inputWait.Wait(OP: BBOperaType.Y, FuzzyInputType.OR, () =>
             {
                 //避免闭包
-                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.MIDDLEPUNCH);
+                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.Y);
                 return WasPressedThisFrame;
             });
-            if (wait.Error != WaitTypeError.Success) return InputStatus.Failed;
+            if (wait.Error != WaitTypeError.Success) return InputBuffer.None;
 
-            return InputStatus.Success;
+            return inputWait.DefaultBuffer();
         }
     }
 }

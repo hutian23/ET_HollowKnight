@@ -10,6 +10,6 @@
         public abstract string GetHandlerType();
         public abstract string GetBufferType();
 
-        public abstract ETTask<InputStatus> Handle(InputWait inputWait, ETCancellationToken token);
+        public abstract ETTask<InputBuffer> Handle(InputWait self, ETCancellationToken token);
     }
 }

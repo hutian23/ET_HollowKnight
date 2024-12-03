@@ -131,35 +131,35 @@ namespace ET.Client
                 {
                     Image op_UI = refer.Get<GameObject>($"OP{i + 1}").GetComponent<Image>();
                     op_UI.SetVisible(true);
-                    if ((op & BBOperaType.LIGHTPUNCH) != 0)
+                    if ((op & BBOperaType.X) != 0)
                     {
                         op_UI.overrideSprite = self.lp;
-                        op ^= BBOperaType.LIGHTPUNCH;
+                        op ^= BBOperaType.X;
                     }
-                    else if ((op & BBOperaType.LIGHTKICK) != 0)
+                    else if ((op & BBOperaType.A) != 0)
                     {
                         op_UI.overrideSprite = self.lk;
-                        op ^= BBOperaType.LIGHTKICK;
+                        op ^= BBOperaType.A;
                     }
-                    else if ((op & BBOperaType.MIDDLEPUNCH) != 0)
+                    else if ((op & BBOperaType.Y) != 0)
                     {
                         op_UI.overrideSprite = self.mp;
-                        op ^= BBOperaType.MIDDLEPUNCH;
+                        op ^= BBOperaType.Y;
                     }
-                    else if ((op & BBOperaType.MIDDLEKICK) != 0)
+                    else if ((op & BBOperaType.B) != 0)
                     {
                         op_UI.overrideSprite = self.mk;
-                        op ^= BBOperaType.MIDDLEKICK;
+                        op ^= BBOperaType.B;
                     }
-                    else if ((op & BBOperaType.HEAVYPUNCH) != 0)
+                    else if ((op & BBOperaType.RB) != 0)
                     {
                         op_UI.overrideSprite = self.hp;
-                        op ^= BBOperaType.HEAVYPUNCH;
+                        op ^= BBOperaType.RB;
                     }
-                    else if ((op & BBOperaType.HEAVYKICK) != 0)
+                    else if ((op & BBOperaType.RT) != 0)
                     {
                         op_UI.overrideSprite = self.hk;
-                        op ^= BBOperaType.HEAVYKICK;
+                        op ^= BBOperaType.RT;
                     }
                     else
                     {
@@ -181,12 +181,12 @@ namespace ET.Client
             self.View.E_Arrow_LeftImage.Setalpha((ops & BBOperaType.LEFT) != 0? enable : disable);
             self.View.E_Arrow_DownLeftImage.Setalpha((ops & BBOperaType.DOWNLEFT) != 0? enable : disable);
 
-            self.View.E_LightPunchImage.Setalpha((ops & BBOperaType.LIGHTPUNCH) != 0? enable : disable);
-            self.View.E_LightKickImage.Setalpha((ops & BBOperaType.LIGHTKICK) != 0? enable : disable);
-            self.View.E_MiddlePunchImage.Setalpha((ops & BBOperaType.MIDDLEPUNCH) != 0? enable : disable);
-            self.View.E_MiddleKickImage.Setalpha((ops & BBOperaType.MIDDLEKICK) != 0? enable : disable);
-            self.View.E_HeavyPunchImage.Setalpha((ops & BBOperaType.HEAVYPUNCH) != 0? enable : disable);
-            self.View.E_HeavyKickImage.Setalpha((ops & BBOperaType.HEAVYKICK) != 0? enable : disable);
+            self.View.E_LightPunchImage.Setalpha((ops & BBOperaType.X) != 0? enable : disable);
+            self.View.E_LightKickImage.Setalpha((ops & BBOperaType.A) != 0? enable : disable);
+            self.View.E_MiddlePunchImage.Setalpha((ops & BBOperaType.Y) != 0? enable : disable);
+            self.View.E_MiddleKickImage.Setalpha((ops & BBOperaType.B) != 0? enable : disable);
+            self.View.E_HeavyPunchImage.Setalpha((ops & BBOperaType.RB) != 0? enable : disable);
+            self.View.E_HeavyKickImage.Setalpha((ops & BBOperaType.RT) != 0? enable : disable);
         }
 
         private static void InitFrameDataList(this DlgFtg self)

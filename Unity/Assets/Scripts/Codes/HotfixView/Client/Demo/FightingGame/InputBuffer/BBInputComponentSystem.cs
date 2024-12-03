@@ -18,12 +18,12 @@ namespace ET.Client
         public static void Reload(this BBInputComponent self)
         {
             self.WasPressedDict.Clear();
-            self.WasPressedDict.Add(BBOperaType.LIGHTPUNCH, false);
-            self.WasPressedDict.Add(BBOperaType.LIGHTKICK, false);
-            self.WasPressedDict.Add(BBOperaType.MIDDLEPUNCH, false);
-            self.WasPressedDict.Add(BBOperaType.MIDDLEKICK, false);
-            self.WasPressedDict.Add(BBOperaType.HEAVYPUNCH, false);
-            self.WasPressedDict.Add(BBOperaType.HEAVYKICK, false);
+            self.WasPressedDict.Add(BBOperaType.X, false);
+            self.WasPressedDict.Add(BBOperaType.A, false);
+            self.WasPressedDict.Add(BBOperaType.Y, false);
+            self.WasPressedDict.Add(BBOperaType.B, false);
+            self.WasPressedDict.Add(BBOperaType.RB, false);
+            self.WasPressedDict.Add(BBOperaType.RT, false);
         }
 
         public static void FixedUpdate(this BBInputComponent self)
@@ -90,50 +90,50 @@ namespace ET.Client
             // 轻拳
             if (gamepad.xButton.isPressed)
             {
-                ops |= BBOperaType.LIGHTPUNCH;
+                ops |= BBOperaType.X;
             }
 
             //中拳
             if (gamepad.yButton.isPressed)
             {
-                ops |= BBOperaType.MIDDLEPUNCH;
+                ops |= BBOperaType.Y;
             }
 
             //重拳
             if (gamepad.rightShoulder.isPressed)
             {
-                ops |= BBOperaType.HEAVYPUNCH;
+                ops |= BBOperaType.RB;
             }
 
             //轻脚
             if (gamepad.aButton.isPressed)
             {
-                ops |= BBOperaType.LIGHTKICK;
+                ops |= BBOperaType.A;
             }
 
             //中脚
             if (gamepad.bButton.isPressed)
             {
-                ops |= BBOperaType.MIDDLEKICK;
+                ops |= BBOperaType.B;
             }
 
             //重脚
             if (gamepad.rightTrigger.isPressed)
             {
-                ops |= BBOperaType.HEAVYKICK;
+                ops |= BBOperaType.RT;
             }
             
             
             //LB（组合键）
             if (gamepad.leftShoulder.isPressed)
             {
-                ops |= BBOperaType.HEAVYKICK | BBOperaType.HEAVYPUNCH;
+                ops |= BBOperaType.LB;
             }
 
             //LT
             if (gamepad.leftTrigger.isPressed)
             {
-                ops |= BBOperaType.MIDDLEKICK | BBOperaType.MIDDLEPUNCH;
+                ops |= BBOperaType.LT;
             }
 
             return ops;

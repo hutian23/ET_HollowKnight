@@ -904,7 +904,7 @@ MonoBehaviour:
     #TransitionToSquit
 
     BeginIf:
-    (InputType: SquitHold)
+    (InputType: SquatHold)
 
     SetTransition: ''PreSquit'';
 
@@ -919,7 +919,7 @@ MonoBehaviour:
     BeginIf:
     (TransitionCached: ''MiddleLand'')
 
-    BBSprite: ''Land_1'', 2;
+    BBSprite: ''Land_1'', 3;
 
     BBSprite:
     ''Land_2'', 4;
