@@ -8,12 +8,6 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            //惯性
-            if (self.ContainParam("Inertia"))
-            {
-                return;
-            }
-                
             InputWait inputWait = self.GetParent<TimelineComponent>().GetComponent<InputWait>();
 
             // -1 -- left 1 -- right 0 -- middle
@@ -33,6 +27,18 @@ namespace ET.Client
             b2Body B2body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             Vector2 curV = new(flip * self.GetParam<long>("AirMoveX") / 1000f ,B2body.GetVelocity().Y);
             B2body.SetVelocity(curV);
+            
+            //already in air, remove timer
+            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
+            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+
+            if (self.ContainParam("AirMoveXTimer") && !timelineComponent.GetParam<bool>("InAir"))
+            {
+                long timer = self.GetParam<long>("AirMoveXTimer");
+                bbTimer.Remove(ref timer);
+                self.TryRemoveParam("AirMoveXTimer");
+                self.TryRemoveParam("AirMoveX");
+            }
         }
     }
 
@@ -66,6 +72,7 @@ namespace ET.Client
             token.Add(() => { bbTimer.Remove(ref timer);});
 
             bbParser.RegistParam("AirMoveX", moveX);
+            bbParser.RegistParam("AirMoveXTimer", timer);
             
             await ETTask.CompletedTask;
             return Status.Success;

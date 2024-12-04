@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 16
+      Data: 18
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 16
+      Data: 18
     - Name: 
       Entry: 7
       Data: 17|Timeline.EventInfo, Unity.Loader
@@ -491,6 +491,30 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 33|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 16
+    - Name: keyframeName
+      Entry: 1
+      Data: frame_17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 34|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 17
+    - Name: keyframeName
+      Entry: 1
+      Data: frame_18
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -515,45 +539,70 @@ MonoBehaviour:
 
     @Main:
 
+    InputBuffer:
+    true;
+
+    BBSprite: ''frame_1'', 2;
+
+    WhiffWindow;
+
+    WhiffOption: ''Rg_GroundDash'';
+
     BBSprite:
-    ''frame_1'', 2;
+    ''frame_2'', 2;
 
-    BBSprite: ''frame_2'', 2;
+    SetVelocityX: 12000;
 
-    BBSprite: ''frame_3'', 2;
+    BBSprite: ''frame_3'', 3;
 
     BBSprite:
-    ''frame_4'', 2;
+    ''frame_4'', 3;
 
     BBSprite: ''frame_5'', 2;
 
+    WhiffOption: ''Rg_AirDash'';
+
+    SetVelocityY:
+    40000;
+
+    Gravity: 150000;
+
     BBSprite: ''frame_6'', 2;
 
+    BBSprite: ''frame_7'',
+    2;
+
+    BBSprite: ''frame_8'', 2;
+
+    GCWindow;
+
+    GCOption: ''Rg_AirDash'';
+
     BBSprite:
-    ''frame_7'', 5;
+    ''frame_8'', 2;
 
-    BBSprite: ''frame_8'', 5;
-
-    BBSprite: ''frame_7'', 5;
-
-    BBSprite:
-    ''frame_9'', 3;
+    BBSprite: ''frame_9'', 4;
 
     BBSprite: ''frame_10'', 2;
 
-    BBSprite: ''frame_11'',
-    2;
+    BBSprite:
+    ''frame_11'', 2;
 
     BBSprite: ''frame_12'', 2;
 
-    BBSprite: ''frame_13'', 2;
+    BBSprite: ''frame_13'',
+    2;
 
-    BBSprite:
-    ''frame_14'', 2;
+    BBSprite: ''frame_14'', 2;
 
     BBSprite: ''frame_15'', 2;
 
-    BBSprite: ''frame_16'',
+    BBSprite:
+    ''frame_16'', 2;
+
+    BBSprite: ''frame_17'', 2;
+
+    BBSprite: ''frame_18'',
     2;
 
     Exit;'

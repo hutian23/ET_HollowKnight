@@ -14,14 +14,11 @@
 
         public override async ETTask<InputBuffer> Handle(InputWait inputWait, ETCancellationToken token)
         {
-            WaitInput wait = await inputWait.Wait(OP: BBOperaType.X, FuzzyInputType.OR, () =>
+            WaitInput wait = await inputWait.Wait(OP: BBOperaType.X, FuzzyInputType.OR);
+            if (wait.Error != WaitTypeError.Success)
             {
-                //避免闭包
-                bool WasPressedThisFrame = inputWait.WasPressedThisFrame(BBOperaType.X);
-                return WasPressedThisFrame;
-            });
-            if (wait.Error != WaitTypeError.Success) return InputBuffer.None;
-
+                return InputBuffer.None;
+            }
             return inputWait.CreateBuffer(15);
         }
     }

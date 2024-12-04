@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Testbed.Abstractions;
 
 namespace ET.Client
 {
@@ -67,6 +68,8 @@ namespace ET.Client
             {
                 EventSystem.Instance.FrameUpdate();
             }
+
+            Global.Settings.StepCount = self.GetNow();
         }
 
         public static void TimerUpdate(this BBTimerComponent self, long accumulator)

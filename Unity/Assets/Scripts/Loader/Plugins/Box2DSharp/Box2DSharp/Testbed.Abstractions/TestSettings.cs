@@ -128,6 +128,6 @@ namespace Testbed.Abstractions
         
         public long instanceId;
 
-        public int StepCount;
+        public long StepCount;
     }
 }

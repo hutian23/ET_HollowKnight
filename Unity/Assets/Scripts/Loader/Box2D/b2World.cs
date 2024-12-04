@@ -54,7 +54,6 @@ namespace ET
             World.Step(TimeStep, TestSettings.VelocityIterations, TestSettings.PositionIterations);
             PostStep();
             StepCount++;
-            Global.Settings.StepCount = StepCount;
         }
         
         protected override void PreStep()

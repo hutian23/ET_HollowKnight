@@ -901,35 +901,26 @@ MonoBehaviour:
 
     EndLoop:
 
-    #TransitionToSquit
-
-    BeginIf:
-    (InputType: SquatHold)
-
-    SetTransition: ''PreSquit'';
-
-    Exit;
-
-    EndIf:
-
     #MiddleLand
+
+    SetVelocityX:
+    0;
 
     TransitionWindow;
 
-    BeginIf:
-    (TransitionCached: ''MiddleLand'')
-
-    BBSprite: ''Land_1'', 3;
+    BeginIf: (TransitionCached: ''MiddleLand'')
 
     BBSprite:
-    ''Land_2'', 4;
+    ''Land_1'', 3;
+
+    BBSprite: ''Land_2'', 4;
 
     EndIf:
 
-    BBSprite: ''Land_3'', 3;
-
-    BBSprite: ''Land_4'',
+    BBSprite: ''Land_3'',
     3;
+
+    BBSprite: ''Land_4'', 3;
 
     BBSprite: ''Land_5'', 3;
 

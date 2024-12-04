@@ -9,12 +9,11 @@ namespace ET.Client
         {
             protected override void FrameUpdate(InputWait self)
             {
-                self.BuffInput();
-                //1. 启动输入检测协程 
-                self.StartInputHandler();
-                //2. 更新按键历史
+                //1. 缓冲输入，最多可缓冲100帧指令
+                self.curOP = BBInputComponent.Instance.CheckInput();
+                //3. 更新按键历史
                 self.UpdateKeyHistory(self.curOP);
-                //3. 添加缓冲
+                //4. 添加缓冲
                 self.Notify(self.curOP);
             }
         }
@@ -22,17 +21,16 @@ namespace ET.Client
         public static void Init(this InputWait self)
         {
             self.curOP = 0;
-            self.OPQueue.Clear();
             
             self.Token?.Cancel();
             self.tcss.ForEach(tcs => tcs.Recycle());
             self.tcss.Clear();
             self.Token = new ETCancellationToken();
-            self.InputWaitRunQueue.Clear();
 
             self.BufferFlag = false;
             self.BufferDict.Clear();
             self.PressedDict.Clear();
+            self.PressingDict.Clear();
             self.RegistKeyHistory();
         }
 
@@ -48,6 +46,24 @@ namespace ET.Client
             self.PressedDict.Add(BBOperaType.RB, long.MaxValue);
             self.PressedDict.Add(BBOperaType.LB, long.MaxValue);
             self.PressedDict.Add(BBOperaType.LT, long.MaxValue);
+
+            self.PressingDict.Add(BBOperaType.DOWNLEFT, -1);
+            self.PressingDict.Add(BBOperaType.DOWN, -1);
+            self.PressingDict.Add(BBOperaType.DOWNRIGHT, -1);
+            self.PressingDict.Add(BBOperaType.LEFT, -1);
+            self.PressingDict.Add(BBOperaType.MIDDLE, -1);
+            self.PressingDict.Add(BBOperaType.RIGHT, -1);
+            self.PressingDict.Add(BBOperaType.UPLEFT, -1);
+            self.PressingDict.Add(BBOperaType.UP, -1);
+            self.PressingDict.Add(BBOperaType.UPRIGHT, -1);
+            self.PressingDict.Add(BBOperaType.X, -1);
+            self.PressingDict.Add(BBOperaType.A, -1);
+            self.PressingDict.Add(BBOperaType.Y, -1);
+            self.PressingDict.Add(BBOperaType.B, -1);
+            self.PressingDict.Add(BBOperaType.RB, -1);
+            self.PressingDict.Add(BBOperaType.RT, -1);
+            self.PressingDict.Add(BBOperaType.LB, -1);
+            self.PressingDict.Add(BBOperaType.LT, -1);
         }
 
         private static void UpdateKeyHistory(this InputWait self, long ops)
@@ -60,6 +76,24 @@ namespace ET.Client
             self.HandleKeyInput(ops, BBOperaType.RT);
             self.HandleKeyInput(ops, BBOperaType.LB);
             self.HandleKeyInput(ops, BBOperaType.LT);
+
+            self.HandlePressingInput(ops, BBOperaType.DOWNLEFT);
+            self.HandlePressingInput(ops, BBOperaType.DOWN);
+            self.HandlePressingInput(ops, BBOperaType.DOWNRIGHT);
+            self.HandlePressingInput(ops, BBOperaType.LEFT);
+            self.HandlePressingInput(ops, BBOperaType.MIDDLE);
+            self.HandlePressingInput(ops, BBOperaType.RIGHT);
+            self.HandlePressingInput(ops, BBOperaType.UPLEFT);
+            self.HandlePressingInput(ops, BBOperaType.UP);
+            self.HandlePressingInput(ops, BBOperaType.UPRIGHT);
+            self.HandlePressingInput(ops, BBOperaType.X);
+            self.HandlePressingInput(ops, BBOperaType.A);
+            self.HandlePressingInput(ops, BBOperaType.Y);
+            self.HandlePressingInput(ops, BBOperaType.B);
+            self.HandlePressingInput(ops, BBOperaType.RB);
+            self.HandlePressingInput(ops, BBOperaType.RT);
+            self.HandlePressingInput(ops, BBOperaType.LB);
+            self.HandlePressingInput(ops, BBOperaType.LT);
         }
         
         private static void HandleKeyInput(this InputWait self, long ops, int operaType)
@@ -67,17 +101,21 @@ namespace ET.Client
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             bool ret = (ops & operaType) != 0;
             //更新按键是在哪一帧按下的
-            if (ret)
+            if (ret && self.PressingDict[operaType] < sceneTimer.GetNow()) //从松开到按下状态
             {
-                if (self.PressedDict[operaType] > sceneTimer.GetNow())
-                {
-                    self.PressedDict[operaType] = sceneTimer.GetNow();
-                }
+                self.PressedDict[operaType] = sceneTimer.GetNow();
             }
-            else
+        }
+
+        private static void HandlePressingInput(this InputWait self, long ops, int operaType)
+        {
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+            bool ret = (ops & operaType) != 0;
+            if (!ret)
             {
-                self.PressedDict[operaType] = long.MaxValue;
+                return;
             }
+            self.PressingDict[operaType] = sceneTimer.GetNow();
         }
         
         public static bool WasPressedThisFrame(this InputWait self, long operaType)
@@ -87,29 +125,43 @@ namespace ET.Client
 
         public static bool IsPressed(this InputWait self, int operaType)
         {
-            return (self.curOP & operaType) != 0;
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+            return self.PressingDict[operaType] == sceneTimer.GetNow();
         }
 
-        #endregion
-
-        private static void BuffInput(this InputWait self)
+        public static bool IsReleased(this InputWait self, int operaType)
         {
-            self.curOP = BBInputComponent.Instance.CheckInput();
-            self.OPQueue.Enqueue(self.curOP);
-            
-            //超出容量
-            int count = self.OPQueue.Count;
-            while (count-- > InputWait.MaxStack)
-            {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                self.OPQueue.Dequeue();
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+            return self.PressingDict[operaType] < sceneTimer.GetNow();
+        }
+
+        public static long GetPressedFrame(this InputWait self, int operaType)
+        {
+            return self.PressedDict[operaType];
+        }
+        
+        /// <summary>
+        /// 比如5帧之前按下x键之后松开，设置有效帧数为6帧，则此时仍然可以判定x为按下状态
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="operaType">要查询的指令</param>
+        /// <param name="buffFrame">在给定帧数内认为按键仍然有效</param>
+        /// <returns></returns>
+        public static bool IsKeyCached(this InputWait self, int operaType, int buffFrame = 5)
+        {
+            if (self.PressingDict[operaType] == -1)
+            {
+                return false;
             }
 
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
-            Log.Warning(sceneTimer.GetNow() +"  "+self.OPQueue.Count + (sceneTimer.GetNow() - self.OPQueue.Count));
+            return self.PressingDict[operaType] + buffFrame >= sceneTimer.GetNow();
         }
         
+        #endregion
+        
         //https://www.zhihu.com/question/36951135/answer/69880133
-        private static void Notify(this InputWait self, long op)
+        private static void Notify(this InputWait self,long op)
         {
             for (int i = 0; i < self.tcss.Count; i++)
             {
@@ -117,12 +169,12 @@ namespace ET.Client
                 InputCallback callback = self.tcss[i];
                 
                 //1.  检测回调是否过期
-                if (callback.timeOut != -1 && callback.timeOut < sceneTimer.GetNow())
-                {
-                    callback.SetResult(new WaitInput(){frame = 0, Error = WaitTypeError.Timeout});
-                    self.tcss.Remove(callback);
-                    continue;
-                }
+                // if (callback.timeOut != -1 && callback.timeOut < sceneTimer.GetNow())
+                // {
+                //     callback.SetResult(new WaitInput(){frame = 0, Error = WaitTypeError.Timeout});
+                //     self.tcss.Remove(callback);
+                //     continue;
+                // }
                 
                 //2. 当前输入不符合条件
                 switch (callback.waitType)
@@ -134,7 +186,7 @@ namespace ET.Client
                         if ((op & callback.OP) != callback.OP) continue;
                         break;
                 }
-
+            
                 //3. 执行回调的前置条件
                 if (callback.checkFunc != null && !callback.checkFunc.Invoke())
                 {
@@ -150,10 +202,10 @@ namespace ET.Client
         public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, Func<bool> checkFunc = null, long timeOut = -1)
         {
             //需要检测回调是否过期
-            if (timeOut != -1)
-            {
-                timeOut = BBTimerManager.Instance.SceneTimer().GetNow() + timeOut;
-            }
+            // if (timeOut != -1)
+            // {
+            //     timeOut = BBTimerManager.Instance.SceneTimer().GetNow() + timeOut;
+            // }
             InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc, timeOut);
             self.tcss.Add(tcs);
 
@@ -177,15 +229,11 @@ namespace ET.Client
 
             return ret;
         }
-        
-        private static void StartInputHandler(this InputWait self)
+
+        private static async ETTask Test(this InputWait self,string handler)
         {
-            int count = self.InputWaitRunQueue.Count;
-            while (count -- > 0)
-            {
-               string handlerName = self.InputWaitRunQueue.Dequeue();
-               self.InputCheckCor(handlerName).Coroutine();
-            }
+            Log.Warning(handler);
+            await ETTask.CompletedTask;
         }
         
         private static async ETTask InputCheckCor(this InputWait self, string handlerName)
@@ -204,20 +252,11 @@ namespace ET.Client
                 }
                 self.BufferDict[handler.GetBufferType()] = buffer.buffFrame + buffer.curFrame;
             }
-            
-            //3. 下一帧重新启动输入协程
-            self.InputWaitRunQueue.Enqueue(handler.GetHandlerType());
         }
         
         public static bool ContainKey(this InputWait self, long op)
         {
             return (self.curOP & op) != 0;
-        }
-
-        public static void DisposeBuffer(this InputWait self)
-        {
-            self.BufferFlag = false;// 当前打开输入窗口
-            self.BufferDict.Clear();
         }
 
         public static bool CheckBuffer(this InputWait self, string bufferName, long curFrame)

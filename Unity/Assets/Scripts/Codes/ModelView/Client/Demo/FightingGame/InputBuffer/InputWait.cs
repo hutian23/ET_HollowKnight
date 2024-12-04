@@ -10,16 +10,15 @@ namespace ET.Client
     public class InputWait: Entity, IAwake, IDestroy, IFrameUpdate
     {
         public long curOP;
-        public Queue<long> OPQueue = new();
         public const int MaxStack = 100;
         
         public ETCancellationToken Token = new(); // 用于取消所有输入等待协程
         public List<InputCallback> tcss = new();
-        public Queue<string> InputWaitRunQueue = new();
 
         public bool BufferFlag; // 设置输入缓冲区是否启动
         public Dictionary<string, long> BufferDict = new(); // 记录了输入缓冲有效的最大帧号
         public Dictionary<long, long> PressedDict = new();
+        public Dictionary<long, long> PressingDict = new();
     }
     
     public class InputCallback
