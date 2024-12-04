@@ -9,19 +9,20 @@ namespace ET.Client
         {
             protected override void FrameUpdate(InputWait self)
             {
-                self.Ops = BBInputComponent.Instance.CheckInput();  
+                self.BuffInput();
                 //1. 启动输入检测协程 
                 self.StartInputHandler();
                 //2. 更新按键历史
-                self.UpdateKeyHistory(self.Ops);
+                self.UpdateKeyHistory(self.curOP);
                 //3. 添加缓冲
-                self.Notify(self.Ops);
+                self.Notify(self.curOP);
             }
         }
 
         public static void Init(this InputWait self)
         {
-            self.Ops = 0;
+            self.curOP = 0;
+            self.OPQueue.Clear();
             
             self.Token?.Cancel();
             self.tcss.ForEach(tcs => tcs.Recycle());
@@ -86,11 +87,27 @@ namespace ET.Client
 
         public static bool IsPressed(this InputWait self, int operaType)
         {
-            return (self.Ops & operaType) != 0;
+            return (self.curOP & operaType) != 0;
         }
 
         #endregion
 
+        private static void BuffInput(this InputWait self)
+        {
+            self.curOP = BBInputComponent.Instance.CheckInput();
+            self.OPQueue.Enqueue(self.curOP);
+            
+            //超出容量
+            int count = self.OPQueue.Count;
+            while (count-- > InputWait.MaxStack)
+            {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                self.OPQueue.Dequeue();
+            }
+
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+            Log.Warning(sceneTimer.GetNow() +"  "+self.OPQueue.Count + (sceneTimer.GetNow() - self.OPQueue.Count));
+        }
+        
         //https://www.zhihu.com/question/36951135/answer/69880133
         private static void Notify(this InputWait self, long op)
         {
@@ -194,7 +211,7 @@ namespace ET.Client
         
         public static bool ContainKey(this InputWait self, long op)
         {
-            return (self.Ops & op) != 0;
+            return (self.curOP & op) != 0;
         }
 
         public static void DisposeBuffer(this InputWait self)

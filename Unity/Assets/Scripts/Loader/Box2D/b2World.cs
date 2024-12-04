@@ -43,7 +43,6 @@ namespace ET
         {
             //物理世界以固定帧率进行刷新
             TimeStep = 1 / 60f;
-            Global.Settings.StepCount = StepCount;
             
             World.AllowSleep = TestSettings.EnableSleep;
             World.WarmStarting = TestSettings.EnableWarmStarting;
@@ -55,6 +54,7 @@ namespace ET
             World.Step(TimeStep, TestSettings.VelocityIterations, TestSettings.PositionIterations);
             PostStep();
             StepCount++;
+            Global.Settings.StepCount = StepCount;
         }
         
         protected override void PreStep()

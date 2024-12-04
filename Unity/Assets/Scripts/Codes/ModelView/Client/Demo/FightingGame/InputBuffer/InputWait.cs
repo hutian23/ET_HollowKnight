@@ -9,7 +9,9 @@ namespace ET.Client
     [ComponentOf(typeof (TimelineComponent))]
     public class InputWait: Entity, IAwake, IDestroy, IFrameUpdate
     {
-        public long Ops;
+        public long curOP;
+        public Queue<long> OPQueue = new();
+        public const int MaxStack = 100;
         
         public ETCancellationToken Token = new(); // 用于取消所有输入等待协程
         public List<InputCallback> tcss = new();

@@ -476,46 +476,46 @@ MonoBehaviour:
 
     IdleAnim: Rg_IdleAnim;
 
-    UpdateFlip;
+    InputBuffer:
+    true;
 
     DefaultWindow;
 
-    SetTransition:
-    ''PreSquit'';
+    SetTransition: ''PreSquit'';
 
     SetMarker: ''Loop'';
 
-    BBSprite: ''Idle_1'', 4;
-
     BBSprite:
-    ''Idle_2'', 4;
+    ''Idle_1'', 4;
+
+    BBSprite: ''Idle_2'', 4;
 
     BBSprite: ''Idle_3'', 4;
 
-    BBSprite: ''Idle_4'', 4;
-
     BBSprite:
-    ''Idle_5'', 6;
+    ''Idle_4'', 4;
+
+    BBSprite: ''Idle_5'', 6;
 
     BBSprite: ''Idle_6'', 6;
 
-    BBSprite: ''Idle_7'', 7;
-
     BBSprite:
-    ''Idle_8'', 5;
+    ''Idle_7'', 7;
+
+    BBSprite: ''Idle_8'', 5;
 
     BBSprite: ''Idle_9'', 4;
 
-    BBSprite: ''Idle_10'', 4;
-
     BBSprite:
-    ''Idle_11'', 4;
+    ''Idle_10'', 4;
+
+    BBSprite: ''Idle_11'', 4;
 
     BBSprite: ''Idle_12'', 4;
 
-    BBSprite: ''Idle_13'', 4;
+    BBSprite:
+    ''Idle_13'', 4;
 
-    GotoMarker:
-    ''Loop'';
+    GotoMarker: ''Loop'';
 
     return;'
