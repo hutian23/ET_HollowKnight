@@ -27,6 +27,7 @@ namespace ET.Client
             self.BufferFlag = false;
             self.BufferDict.Clear();
             self.PressedDict.Clear();
+            self.IsPressingDict.Clear();
             self.PressingDict.Clear();
             self.RegistKeyHistory();
         }
@@ -35,32 +36,73 @@ namespace ET.Client
 
         private static void RegistKeyHistory(this InputWait self)
         {
-            self.PressedDict.Add(BBOperaType.X, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.A, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.Y, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.B, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.RT, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.RB, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.LB, long.MaxValue);
-            self.PressedDict.Add(BBOperaType.LT, long.MaxValue);
-
-            self.PressingDict.Add(BBOperaType.DOWNLEFT, -1);
-            self.PressingDict.Add(BBOperaType.DOWN, -1);
-            self.PressingDict.Add(BBOperaType.DOWNRIGHT, -1);
-            self.PressingDict.Add(BBOperaType.LEFT, -1);
-            self.PressingDict.Add(BBOperaType.MIDDLE, -1);
-            self.PressingDict.Add(BBOperaType.RIGHT, -1);
-            self.PressingDict.Add(BBOperaType.UPLEFT, -1);
-            self.PressingDict.Add(BBOperaType.UP, -1);
-            self.PressingDict.Add(BBOperaType.UPRIGHT, -1);
+            self.PressedDict.Add(BBOperaType.X, -1);
             self.PressingDict.Add(BBOperaType.X, -1);
+            self.IsPressingDict.Add(BBOperaType.X, false);
+            
+            self.PressedDict.Add(BBOperaType.A, -1);
             self.PressingDict.Add(BBOperaType.A, -1);
+            self.IsPressingDict.Add(BBOperaType.A, false);
+
+            self.PressedDict.Add(BBOperaType.Y, -1);
             self.PressingDict.Add(BBOperaType.Y, -1);
+            self.IsPressingDict.Add(BBOperaType.Y, false);
+            
+            self.PressedDict.Add(BBOperaType.B, -1);
             self.PressingDict.Add(BBOperaType.B, -1);
-            self.PressingDict.Add(BBOperaType.RB, -1);
+            self.IsPressingDict.Add(BBOperaType.B, false);
+            
+            self.PressedDict.Add(BBOperaType.RT, -1);
             self.PressingDict.Add(BBOperaType.RT, -1);
+            self.IsPressingDict.Add(BBOperaType.RT, false);
+            
+            self.PressedDict.Add(BBOperaType.RB, -1);
+            self.PressingDict.Add(BBOperaType.RB, -1);
+            self.IsPressingDict.Add(BBOperaType.RB, false);
+            
+            self.PressedDict.Add(BBOperaType.LB, -1);
             self.PressingDict.Add(BBOperaType.LB, -1);
+            self.IsPressingDict.Add(BBOperaType.LB, false);
+            
+            self.PressedDict.Add(BBOperaType.LT, -1);
             self.PressingDict.Add(BBOperaType.LT, -1);
+            self.IsPressingDict.Add(BBOperaType.LT, false);
+
+            self.PressedDict.Add(BBOperaType.DOWNLEFT, -1);
+            self.PressingDict.Add(BBOperaType.DOWNLEFT, -1);
+            self.IsPressingDict.Add(BBOperaType.DOWNLEFT, false);
+
+            self.PressedDict.Add(BBOperaType.LEFT, -1);
+            self.PressingDict.Add(BBOperaType.LEFT, -1);
+            self.IsPressingDict.Add(BBOperaType.LEFT, false);
+            
+            self.PressedDict.Add(BBOperaType.UPLEFT, -1);
+            self.PressingDict.Add(BBOperaType.UPLEFT, -1);
+            self.IsPressingDict.Add(BBOperaType.UPLEFT, false);
+            
+            self.PressedDict.Add(BBOperaType.UP, -1);
+            self.PressingDict.Add(BBOperaType.UP, -1);
+            self.IsPressingDict.Add(BBOperaType.UP, false);
+            
+            self.PressedDict.Add(BBOperaType.UPRIGHT, -1);
+            self.PressingDict.Add(BBOperaType.UPRIGHT, -1);
+            self.IsPressingDict.Add(BBOperaType.UPRIGHT, false);
+            
+            self.PressedDict.Add(BBOperaType.RIGHT, -1);
+            self.PressingDict.Add(BBOperaType.RIGHT, -1);
+            self.IsPressingDict.Add(BBOperaType.RIGHT, false);
+            
+            self.PressedDict.Add(BBOperaType.DOWNRIGHT, -1);
+            self.PressingDict.Add(BBOperaType.DOWNRIGHT, -1);
+            self.IsPressingDict.Add(BBOperaType.DOWNRIGHT, false);
+            
+            self.PressedDict.Add(BBOperaType.DOWN, -1);
+            self.PressingDict.Add(BBOperaType.DOWN, -1);
+            self.IsPressingDict.Add(BBOperaType.DOWN, false);
+            
+            self.PressedDict.Add(BBOperaType.MIDDLE, -1);
+            self.PressingDict.Add(BBOperaType.MIDDLE, -1);
+            self.IsPressingDict.Add(BBOperaType.MIDDLE, false);
         }
 
         private static void UpdateKeyHistory(this InputWait self, long ops)
@@ -73,46 +115,37 @@ namespace ET.Client
             self.HandleKeyInput(ops, BBOperaType.RT);
             self.HandleKeyInput(ops, BBOperaType.LB);
             self.HandleKeyInput(ops, BBOperaType.LT);
-
-            self.HandlePressingInput(ops, BBOperaType.DOWNLEFT);
-            self.HandlePressingInput(ops, BBOperaType.DOWN);
-            self.HandlePressingInput(ops, BBOperaType.DOWNRIGHT);
-            self.HandlePressingInput(ops, BBOperaType.LEFT);
-            self.HandlePressingInput(ops, BBOperaType.MIDDLE);
-            self.HandlePressingInput(ops, BBOperaType.RIGHT);
-            self.HandlePressingInput(ops, BBOperaType.UPLEFT);
-            self.HandlePressingInput(ops, BBOperaType.UP);
-            self.HandlePressingInput(ops, BBOperaType.UPRIGHT);
-            self.HandlePressingInput(ops, BBOperaType.X);
-            self.HandlePressingInput(ops, BBOperaType.A);
-            self.HandlePressingInput(ops, BBOperaType.Y);
-            self.HandlePressingInput(ops, BBOperaType.B);
-            self.HandlePressingInput(ops, BBOperaType.RB);
-            self.HandlePressingInput(ops, BBOperaType.RT);
-            self.HandlePressingInput(ops, BBOperaType.LB);
-            self.HandlePressingInput(ops, BBOperaType.LT);
+            self.HandleKeyInput(ops, BBOperaType.DOWNLEFT);
+            self.HandleKeyInput(ops, BBOperaType.LEFT);
+            self.HandleKeyInput(ops, BBOperaType.UPLEFT);
+            self.HandleKeyInput(ops, BBOperaType.UP);
+            self.HandleKeyInput(ops, BBOperaType.UPRIGHT);
+            self.HandleKeyInput(ops, BBOperaType.RIGHT);
+            self.HandleKeyInput(ops, BBOperaType.DOWNRIGHT);
+            self.HandleKeyInput(ops, BBOperaType.DOWN);
+            self.HandleKeyInput(ops, BBOperaType.MIDDLE);
         }
         
         private static void HandleKeyInput(this InputWait self, long ops, int operaType)
         {
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             bool ret = (ops & operaType) != 0;
-            //更新按键是在哪一帧按下的
-            if (ret && self.PressingDict[operaType] < sceneTimer.GetNow()) //从松开到按下状态
+            if (ret)
             {
-                self.PressedDict[operaType] = sceneTimer.GetNow();
+                //按键持续按住
+                self.PressingDict[operaType] = sceneTimer.GetNow();
+                //记录按键哪一帧按下
+                if (!self.IsPressingDict[operaType])
+                {
+                    self.PressedDict[operaType] = sceneTimer.GetNow();
+                }
+                //按键处于按住状态
+                self.IsPressingDict[operaType] = true;
             }
-        }
-
-        private static void HandlePressingInput(this InputWait self, long ops, int operaType)
-        {
-            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
-            bool ret = (ops & operaType) != 0;
-            if (!ret)
+            else
             {
-                return;
+                self.IsPressingDict[operaType] = false;
             }
-            self.PressingDict[operaType] = sceneTimer.GetNow();
         }
         
         public static bool WasPressedThisFrame(this InputWait self, long operaType)
@@ -120,6 +153,11 @@ namespace ET.Client
             return self.PressedDict[operaType] == BBTimerManager.Instance.SceneTimer().GetNow();
         }
 
+        public static bool WasReleasedThisFrame(this InputWait self, long operaType)
+        {
+            return self.PressingDict[operaType] >= 0 && BBTimerManager.Instance.SceneTimer().GetNow() - self.PressingDict[operaType] == 1;
+        }
+        
         public static bool IsPressed(this InputWait self, int operaType)
         {
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
@@ -128,9 +166,8 @@ namespace ET.Client
 
         public static bool IsPressing(this InputWait self, int operaType)
         {
-            return self.PressingDict[operaType] == BBTimerManager.Instance.SceneTimer().GetNow();
+            return self.IsPressingDict[operaType];
         }
-
         
         public static bool IsReleased(this InputWait self, int operaType)
         {

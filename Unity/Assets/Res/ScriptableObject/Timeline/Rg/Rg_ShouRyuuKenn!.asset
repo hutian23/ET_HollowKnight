@@ -532,7 +532,9 @@ MonoBehaviour:
   timelineName: Rg_ShouRyuuKenn
   Script: '@Trigger:
 
-    InputType: ShouRyuKen;
+    #InputType: ShouRyuKen;
+
+    InputType: 5LPHold;
 
     return;
 

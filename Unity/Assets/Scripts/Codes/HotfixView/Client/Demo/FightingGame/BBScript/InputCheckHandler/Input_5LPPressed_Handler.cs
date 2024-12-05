@@ -1,20 +1,20 @@
 ﻿namespace ET.Client
 {
-    public class Input_DashPressed_Handler: InputHandler
+    public class Input_5LPPressed_Handler : InputHandler
     {
         public override string GetHandlerType()
         {
-            return "DashPressed";
+            return "5LPPressed";
         }
 
         public override string GetBufferType()
         {
-            return "DashPressed";
+            return "5LPPressed";
         }
 
         public override long Handle(InputWait self)
         {
-            return self.IsPressed(BBOperaType.RT)? self.GetBuffFrame(10) : -1;
+            return self.WasPressedThisFrame(BBOperaType.X) ? self.GetBuffFrame(10) : -1;
         }
     }
 }

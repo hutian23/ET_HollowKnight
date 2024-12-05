@@ -16,7 +16,7 @@
         public override long Handle(InputWait self)
         {
             bool direction = self.IsKeyCached(BBOperaType.DOWN) || self.IsKeyCached(BBOperaType.DOWNLEFT) || self.IsKeyCached(BBOperaType.DOWNRIGHT);
-            return direction && self.IsPressing(BBOperaType.X)? self.GetBuffFrame(10): -1;
+            return direction && self.WasPressedThisFrame(BBOperaType.X)? self.GetBuffFrame(10): -1;
         }
     }
 }

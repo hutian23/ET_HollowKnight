@@ -22,8 +22,7 @@ namespace ET.Client
             
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            inputWait.BufferFlag = true;
-
+            
             if (match.Groups["InputBuffer"].Value.Equals("true"))
             {
                 inputWait.BufferFlag = true;

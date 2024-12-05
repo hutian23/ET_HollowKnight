@@ -21,10 +21,10 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            
             //启动输入检测携程
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
+            inputWait.handleQueue.Enqueue(match.Groups["InputType"].Value);
             
             await ETTask.CompletedTask;
             return Status.Success;
