@@ -156,13 +156,12 @@ namespace ET.Client
             long funcId = IdGenerater.Instance.GenerateInstanceId();
             self.function_Pointers.Add(funcId, startIndex);
 
-            while (self.function_Pointers[funcId] < endIndex)
+            while (++self.function_Pointers[funcId] < endIndex)
             {
                 if (self.cancellationToken.IsCancel()) return Status.Failed;
                 
                 //1. 根据 opType 匹配 handler
                 string opLine = self.opDict[self.function_Pointers[funcId]];
-                self.function_Pointers[funcId]++;
                 
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
@@ -188,7 +187,6 @@ namespace ET.Client
                 if (self.cancellationToken.IsCancel() || ret == Status.Failed) return Status.Failed;
                 if (ret != Status.Success) return ret;
             }
-            await ETTask.CompletedTask;
             return Status.Success;
         }
 

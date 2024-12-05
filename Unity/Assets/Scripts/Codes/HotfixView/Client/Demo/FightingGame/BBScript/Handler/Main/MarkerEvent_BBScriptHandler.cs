@@ -27,7 +27,7 @@ namespace ET.Client
             
             //跳过动画帧事件的代码块
             int index = parser.function_Pointers[data.functionID];
-            int endIndex = index, startIndex = index + 1;
+            int endIndex = index, startIndex = index;
             while (++index < bbParser.opDict.Count)
             {
                 string opLine = bbParser.opDict[index];
