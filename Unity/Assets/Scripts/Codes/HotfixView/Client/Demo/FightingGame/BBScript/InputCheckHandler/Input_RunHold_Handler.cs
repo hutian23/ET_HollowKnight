@@ -15,7 +15,7 @@
         //同步检测时，只需要判断当前帧是否按下即可
         public override long Handle(InputWait self)
         {
-            return self.IsPressing(BBOperaType.LEFT) || self.IsPressing(BBOperaType.RIGHT)? self.GetBuffFrame(4) : -1;
+            return self.IsPressing(BBOperaType.LEFT) || self.IsPressing(BBOperaType.RIGHT)? self.GetBuffFrame(7) : -1;
         }
     }
 }
