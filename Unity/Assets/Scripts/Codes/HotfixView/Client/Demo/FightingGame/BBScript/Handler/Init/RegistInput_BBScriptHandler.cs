@@ -26,9 +26,6 @@ namespace ET.Client
             TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             
-            BBInputHandler inputHandler = DialogueDispatcherComponent.Instance.GetInputHandler(match.Groups["InputType"].Value);
-            inputWait.InputWaitRunQueue.Enqueue(inputHandler.GetHandlerType());
-            
             await ETTask.CompletedTask;
             return Status.Success;
         }

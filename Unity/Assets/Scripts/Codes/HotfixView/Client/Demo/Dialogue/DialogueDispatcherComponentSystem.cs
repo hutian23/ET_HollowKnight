@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ET.Event;
 
 namespace ET.Client
 {
@@ -121,30 +120,31 @@ namespace ET.Client
 
             self.BBTriggerHandlers.Clear();
             var bbTriggerHandlers = EventSystem.Instance.GetTypes(typeof (BBTriggerAttribute));
-            foreach (var bbtrigger in bbTriggerHandlers)
+            foreach (var bbTrigger in bbTriggerHandlers)
             {
-                BBTriggerHandler handler = Activator.CreateInstance(bbtrigger) as BBTriggerHandler;
+                BBTriggerHandler handler = Activator.CreateInstance(bbTrigger) as BBTriggerHandler;
                 if (handler == null)
                 {
-                    Log.Error($"this obj is not a bbTriggerHandler:{bbtrigger.Name}");
+                    Log.Error($"this obj is not a bbTriggerHandler:{bbTrigger.Name}");
                     continue;
                 }
                 
                 self.BBTriggerHandlers.Add(handler.GetTriggerType(), handler);
             }
             
-            self.BBInputHandlers.Clear();
-            var bbInputHandlers = EventSystem.Instance.GetTypes(typeof (BBInputAttribute));
-            foreach (var bbInput in bbInputHandlers)
+            self.InputHandlers.Clear();
+            var inputHandlers = EventSystem.Instance.GetTypes(typeof (InputAttribute));
+            foreach (var inputHandler in inputHandlers)
             {
-                BBInputHandler handler = Activator.CreateInstance(bbInput) as BBInputHandler;
+                InputHandler handler = Activator.CreateInstance(inputHandler) as InputHandler;
                 if (handler == null)
                 {
-                    Log.Error($"this obj is not a bbInputHandler:{bbInput.Name}");
+                    Log.Error($"this obj is not a inputHandler: {inputHandler.Name}");
                     continue;
                 }
-                self.BBInputHandlers.Add(handler.GetHandlerType(),handler);
-            }
+
+                self.InputHandlers.Add(handler.GetHandlerType(), handler);
+            } 
         }
 
         public static async ETTask<Status> Handle(this DialogueDispatcherComponent self, Unit unit, object node, ETCancellationToken token)
@@ -219,11 +219,11 @@ namespace ET.Client
             return handler;
         }
 
-        public static BBInputHandler GetInputHandler(this DialogueDispatcherComponent self, string name)
+        public static InputHandler Get_InputHandler(this DialogueDispatcherComponent self, string name)
         {
-            if (!self.BBInputHandlers.TryGetValue(name, out BBInputHandler handler))
+            if (!self.InputHandlers.TryGetValue(name, out InputHandler handler))
             {
-                Log.Error($"not found bbinputhandler: {name}");
+                Log.Error($"not found inputHandler: {name}");
                 return null;
             }
 

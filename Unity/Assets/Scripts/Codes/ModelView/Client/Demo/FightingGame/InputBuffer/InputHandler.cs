@@ -1,15 +1,16 @@
 ﻿namespace ET.Client
 {
-    public class BBInputAttribute: BaseAttribute
+    public class InputAttribute: BaseAttribute
     {
     }
-
-    [BBInput]
-    public abstract class BBInputHandler
+    
+    [Input]
+    public abstract class InputHandler
     {
         public abstract string GetHandlerType();
+
         public abstract string GetBufferType();
 
-        public abstract ETTask<InputBuffer> Handle(InputWait self, ETCancellationToken token);
+        public abstract int Handle(InputWait self);
     }
 }

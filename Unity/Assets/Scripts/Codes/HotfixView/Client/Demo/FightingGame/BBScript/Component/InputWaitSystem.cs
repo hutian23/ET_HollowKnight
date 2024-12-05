@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 
 namespace ET.Client
 {
+    //https://www.zhihu.com/question/36951135/answer/69880133
     [FriendOf(typeof (InputWait))]
     public static class InputWaitSystem
     {
@@ -9,23 +10,18 @@ namespace ET.Client
         {
             protected override void FrameUpdate(InputWait self)
             {
-                //1. 缓冲输入，最多可缓冲100帧指令
                 self.curOP = BBInputComponent.Instance.CheckInput();
+                self.UpdateInput(self.curOP);
                 //3. 更新按键历史
                 self.UpdateKeyHistory(self.curOP);
-                //4. 添加缓冲
-                self.Notify(self.curOP);
             }
         }
 
         public static void Init(this InputWait self)
         {
             self.curOP = 0;
-            
-            self.Token?.Cancel();
-            self.tcss.ForEach(tcs => tcs.Recycle());
-            self.tcss.Clear();
-            self.Token = new ETCancellationToken();
+            self.infoQueue.Clear();
+            self.infoList.Clear();
 
             self.BufferFlag = false;
             self.BufferDict.Clear();
@@ -129,6 +125,12 @@ namespace ET.Client
             return self.PressingDict[operaType] == sceneTimer.GetNow();
         }
 
+        public static bool IsPressing(this InputWait self, int operaType)
+        {
+            return self.PressingDict[operaType] == BBTimerManager.Instance.SceneTimer().GetNow();
+        }
+
+        
         public static bool IsReleased(this InputWait self, int operaType)
         {
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
@@ -159,99 +161,23 @@ namespace ET.Client
         }
         
         #endregion
-        
-        //https://www.zhihu.com/question/36951135/answer/69880133
-        private static void Notify(this InputWait self,long op)
+
+        private static void UpdateInput(this InputWait self,long ops)
         {
-            for (int i = 0; i < self.tcss.Count; i++)
-            {
-                BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
-                InputCallback callback = self.tcss[i];
-                
-                //1.  检测回调是否过期
-                // if (callback.timeOut != -1 && callback.timeOut < sceneTimer.GetNow())
-                // {
-                //     callback.SetResult(new WaitInput(){frame = 0, Error = WaitTypeError.Timeout});
-                //     self.tcss.Remove(callback);
-                //     continue;
-                // }
-                
-                //2. 当前输入不符合条件
-                switch (callback.waitType)
+            self.infoQueue.Enqueue(new InputInfo()
                 {
-                    case FuzzyInputType.OR:
-                        if ((op & callback.OP) == 0) continue;
-                        break;
-                    case FuzzyInputType.AND:
-                        if ((op & callback.OP) != callback.OP) continue;
-                        break;
-                }
+                    op = ops,
+                    Flip = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId).GetFlip(),
+                    frame = BBTimerManager.Instance.SceneTimer().GetNow()
+                });
             
-                //3. 执行回调的前置条件
-                if (callback.checkFunc != null && !callback.checkFunc.Invoke())
-                {
-                    continue;
-                }
-                
-                //4. 执行回调
-                callback.SetResult(new WaitInput() { frame = sceneTimer.GetNow(), Error = WaitTypeError.Success, OP = op });
-                self.tcss.Remove(callback);
-            }
-        }
-
-        public static async ETTask<WaitInput> Wait(this InputWait self, long OP, int waitType, Func<bool> checkFunc = null, long timeOut = -1)
-        {
-            //需要检测回调是否过期
-            // if (timeOut != -1)
-            // {
-            //     timeOut = BBTimerManager.Instance.SceneTimer().GetNow() + timeOut;
-            // }
-            InputCallback tcs = InputCallback.Create(OP, waitType, checkFunc, timeOut);
-            self.tcss.Add(tcs);
-
-            void CancelAction()
+            //超出容量部分出列
+            int count = self.infoQueue.Count;
+            while (count-- > InputWait.MaxStack)
             {
-                self.tcss.Remove(tcs);
-                tcs.SetResult(new WaitInput() { Error = WaitTypeError.Cancel });
-                tcs.Recycle();
+                self.infoQueue.Dequeue();
             }
-
-            WaitInput ret;
-            try
-            {
-                self.Token?.Add(CancelAction);
-                ret = await tcs.Task;
-            }
-            finally
-            {
-                self.Token.Remove(CancelAction);
-            }
-
-            return ret;
-        }
-
-        private static async ETTask Test(this InputWait self,string handler)
-        {
-            Log.Warning(handler);
-            await ETTask.CompletedTask;
-        }
-        
-        private static async ETTask InputCheckCor(this InputWait self, string handlerName)
-        {
-            //1. 启动输入检测携程，等待输入
-            BBInputHandler handler = DialogueDispatcherComponent.Instance.GetInputHandler(handlerName);
-            InputBuffer buffer = await handler.Handle(self, self.Token);
-            if (self.Token.IsCancel()) return;
-                
-            //2. 输入携程判定成功并且正在输入窗口中，更新技能缓冲的最大有效帧号
-            if (buffer.ret is Status.Success && self.BufferFlag)
-            {
-                if (!self.BufferDict.ContainsKey(handler.GetBufferType()))
-                {
-                    self.BufferDict.TryAdd(handler.GetBufferType(), -1);
-                }
-                self.BufferDict[handler.GetBufferType()] = buffer.buffFrame + buffer.curFrame;
-            }
+            self.infoList = self.infoQueue.ToList();
         }
         
         public static bool ContainKey(this InputWait self, long op)
