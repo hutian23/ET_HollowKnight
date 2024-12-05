@@ -4,17 +4,12 @@
     [FriendOf(typeof(InputWait))]
     public static class BBInputHelper
     {
-        public static InputBuffer CreateBuffer(this InputWait self, long lastFrame)
+        public static long GetBuffFrame(this InputWait self, int buffFrame)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
-            return new InputBuffer() { curFrame = bbTimer.GetNow(), buffFrame = lastFrame, ret = Status.Success };
-        }
-
-        public static InputBuffer DefaultBuffer(this InputWait self)
-        {
-            return self.CreateBuffer(5);
+            return bbTimer.GetNow() + buffFrame;
         }
 
         //共用代码

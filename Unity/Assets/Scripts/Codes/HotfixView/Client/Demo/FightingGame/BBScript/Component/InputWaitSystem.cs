@@ -12,8 +12,8 @@ namespace ET.Client
             {
                 self.curOP = BBInputComponent.Instance.CheckInput();
                 self.UpdateInput(self.curOP);
-                //3. 更新按键历史
                 self.UpdateKeyHistory(self.curOP);
+                self.UpdateBuffer();
             }
         }
 
@@ -22,6 +22,7 @@ namespace ET.Client
             self.curOP = 0;
             self.infoQueue.Clear();
             self.infoList.Clear();
+            self.handleQueue.Clear();
 
             self.BufferFlag = false;
             self.BufferDict.Clear();
@@ -178,6 +179,35 @@ namespace ET.Client
                 self.infoQueue.Dequeue();
             }
             self.infoList = self.infoQueue.ToList();
+        }
+
+        private static void UpdateBuffer(this InputWait self)
+        {
+            //输入缓冲区并未打开
+            if (!self.BufferFlag) return;
+            
+            //RootInit中将InputHandler添加到队列中
+            int count = self.handleQueue.Count;
+            while (count -- > 0)
+            {
+                string handlerName = self.handleQueue.Dequeue();
+                self.handleQueue.Enqueue(handlerName);
+             
+                //找到对应handler
+                InputHandler handler = DialogueDispatcherComponent.Instance.GetInputHandler(handlerName);
+                string bufferType = handler.GetBufferType(); //缓冲类型
+                
+                //更新缓冲最大有效帧
+                long buffFrame = handler.Handle(self);
+                if (!self.BufferDict.ContainsKey(bufferType))
+                {
+                    self.BufferDict.TryAdd(bufferType, -1);
+                }
+                if (buffFrame > self.BufferDict[bufferType])
+                {
+                    self.BufferDict[bufferType] = buffFrame;
+                }
+            }
         }
         
         public static bool ContainKey(this InputWait self, long op)

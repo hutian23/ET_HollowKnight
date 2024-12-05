@@ -13,6 +13,7 @@ namespace ET.Client
         public const int MaxStack = 100;
         public Queue<InputInfo> infoQueue = new();
         public List<InputInfo> infoList = new(); //将队列转成List
+        public Queue<string> handleQueue = new();
         
         public bool BufferFlag; // 设置输入缓冲区是否启动
         public Dictionary<string, long> BufferDict = new(); // 记录了输入缓冲有效的最大帧号

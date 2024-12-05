@@ -13,9 +13,10 @@
             return "2LPPressed";
         }
 
-        public override int Handle(InputWait self)
+        public override long Handle(InputWait self)
         {
-            return -1;
+            bool direction = self.IsKeyCached(BBOperaType.DOWN) || self.IsKeyCached(BBOperaType.DOWNLEFT) || self.IsKeyCached(BBOperaType.DOWNRIGHT);
+            return direction && self.IsPressing(BBOperaType.X)? self.GetBuffFrame(10): -1;
         }
     }
 }

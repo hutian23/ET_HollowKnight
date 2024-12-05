@@ -12,7 +12,7 @@
             return "DashPressed";
         }
 
-        public override int Handle(InputWait self)
+        public override long Handle(InputWait self)
         {
             return self.IsPressed(BBOperaType.RT)? 10 : -1;
         }

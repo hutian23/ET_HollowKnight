@@ -219,7 +219,7 @@ namespace ET.Client
             return handler;
         }
 
-        public static InputHandler Get_InputHandler(this DialogueDispatcherComponent self, string name)
+        public static InputHandler GetInputHandler(this DialogueDispatcherComponent self, string name)
         {
             if (!self.InputHandlers.TryGetValue(name, out InputHandler handler))
             {
