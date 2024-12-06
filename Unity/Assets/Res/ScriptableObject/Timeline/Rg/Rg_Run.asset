@@ -528,52 +528,45 @@ MonoBehaviour:
     BeginLoop: (InputType:
     RunHold)
 
-    BeginIf: (InAir: false)
-
-    LogWarning: ''Hello_Word'';
-
-    EndIf:
-
-    BBSprite:
-    ''Run_1'', 4;
+    BBSprite: ''Run_1'', 4;
 
     BBSprite: ''Run_2'', 4;
 
-    BBSprite: ''Run_3'', 4;
-
     BBSprite:
-    ''Run_4'', 4;
+    ''Run_3'', 4;
+
+    BBSprite: ''Run_4'', 4;
 
     BBSprite: ''Run_5'', 4;
 
-    BBSprite: ''Run_6'', 4;
+    BBSprite:
+    ''Run_6'', 4;
 
     EndLoop:
 
     CancelMoveX;
 
-    SetVelocityX:
-    0;
+    SetVelocityX: 0;
 
     #Transition
 
     TransitionWindow;
 
-    BBSprite: ''RunToIdle_1'', 3;
-
     BBSprite:
-    ''RunToIdle_2'', 3;
+    ''RunToIdle_1'', 3;
 
-    BBSprite: ''RunToIdle_3'', 3;
+    BBSprite: ''RunToIdle_2'', 3;
 
-    BBSprite: ''RunToIdle_4'',
+    BBSprite: ''RunToIdle_3'',
     3;
+
+    BBSprite: ''RunToIdle_4'', 3;
 
     BBSprite: ''RunToIdle_5'', 3;
 
-    BBSprite: ''RunToIdle_6'', 3;
-
     BBSprite:
-    ''RunToIdle_7'', 3;
+    ''RunToIdle_6'', 3;
+
+    BBSprite: ''RunToIdle_7'', 3;
 
     Exit;'

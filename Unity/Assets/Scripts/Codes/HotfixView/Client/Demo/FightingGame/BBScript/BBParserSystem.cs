@@ -34,14 +34,6 @@ namespace ET.Client
                 kv.Value.Recycle();
             }
             self.paramDict.Clear();
-            
-            //回收callback
-            foreach (var kv in self.callBackDict)
-            {
-                long id = kv.Value.Id;
-                self.RemoveChild(id);
-            }
-            self.callBackDict.Clear();
         }
         
         public static void InitScript(this BBParser self, string script)

@@ -6,8 +6,8 @@ namespace ET.Client
     public class TimelineComponent: Entity, IAwake, IDestroy
     {
         public Dictionary<string, SharedVariable> paramDict = new();
-
         public Dictionary<string, long> callbackDict = new();
+        public Dictionary<string, long> rootCallbackDict = new(); //在RootInit协程中注册的回调，不会随行为切换销毁
         public Dictionary<string, long> markerEventDict = new();
     }
     
@@ -15,12 +15,6 @@ namespace ET.Client
     {
         public long instanceId;
         public int behaviorOrder;
-    }
-
-    public struct AfterTimelineEvaluated
-    {
-        public long instanceId;
-        public int targetFrame;
     }
 
     public struct OnGroundChanged

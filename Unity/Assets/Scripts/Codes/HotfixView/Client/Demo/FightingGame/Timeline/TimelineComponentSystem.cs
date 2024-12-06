@@ -99,11 +99,8 @@ namespace ET.Client
         }
 
         public static void Evaluate(this TimelineComponent self, int targetFrame)
-        {
-            //抛出事件
-            EventSystem.Instance.PublishAsync(self.ClientScene().CurrentScene(), new AfterTimelineEvaluated() { instanceId = self.InstanceId, targetFrame = targetFrame }).Coroutine();
-            RuntimePlayable playable = self.GetTimelinePlayer().RuntimePlayable;
-            playable.Evaluate(targetFrame);
+        { 
+            self.GetTimelinePlayer().RuntimePlayable.Evaluate(targetFrame);
         }
 
         #endregion
