@@ -151,14 +151,18 @@ namespace ET.Client
             return Status.Success;
         }
         
-        public static async ETTask<Status> RegistSubCoroutine(this BBParser self, int startIndex, int endIndex, string funcName)
+        public static async ETTask<Status> RegistSubCoroutine(this BBParser self, int startIndex, int endIndex, ETCancellationToken token)
         {
+            //生成协程Id
             long funcId = IdGenerater.Instance.GenerateInstanceId();
             self.function_Pointers.Add(funcId, startIndex);
-
+            
+            //热重载时销毁子协程
+            self.cancellationToken.Add(token.Cancel);
+            
             while (++self.function_Pointers[funcId] < endIndex)
             {
-                if (self.cancellationToken.IsCancel()) return Status.Failed;
+                if (token.IsCancel()) return Status.Failed;
                 
                 //1. 根据 opType 匹配 handler
                 string opLine = self.opDict[self.function_Pointers[funcId]];
@@ -181,10 +185,10 @@ namespace ET.Client
                 
                 //2. 执行语句
                 BBScriptData data = BBScriptData.Create(self.ReplaceParam(opLine), funcId, null);
-                Status ret = await handler.Handle(self, data, self.cancellationToken);
+                Status ret = await handler.Handle(self, data, token);
                 data.Recycle();
                 
-                if (self.cancellationToken.IsCancel() || ret == Status.Failed) return Status.Failed;
+                if (token.IsCancel() || ret == Status.Failed) return Status.Failed;
                 if (ret != Status.Success) return ret;
             }
             return Status.Success;

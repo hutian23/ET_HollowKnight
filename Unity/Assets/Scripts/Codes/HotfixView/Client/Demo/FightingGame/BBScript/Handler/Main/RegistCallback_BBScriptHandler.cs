@@ -12,7 +12,6 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBParser parser = timelineComponent.GetComponent<BBParser>();
-            
             BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
 
             //exec trigger
@@ -23,7 +22,7 @@ namespace ET.Client
             if (!ret) return;
             //exec callback
             int startIndex = self.startIndex, endIndex = self.endIndex;
-            parser.RegistSubCoroutine(startIndex, endIndex, "CallbackCoroutine").Coroutine();
+            parser.RegistSubCoroutine(startIndex, endIndex, parser.cancellationToken).Coroutine();
 
             //Dispose bbCallback
             postStepTimer.Remove(ref self.CheckTimer);

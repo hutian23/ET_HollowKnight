@@ -6,6 +6,7 @@ namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.HitNotifyTimer)]
     [FriendOf(typeof(HitboxComponent))]
+    [FriendOf(typeof(BBParser))]
     public class PostStepTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
@@ -21,12 +22,12 @@ namespace ET.Client
             {
                 CollisionInfo info = hitboxComponent.CollisionBuffer.Dequeue();
                 hitboxComponent.CollisionBuffer.Enqueue(info);
-                
+
                 BoxInfo boxInfoA = info.dataA.UserData as BoxInfo;
                 BoxInfo boxInfoB = info.dataB.UserData as BoxInfo;
                 if (hitBuffer.Contains(info.dataB.InstanceId) ||
-                    boxInfoA.hitboxType is not HitboxType.Hit || 
-                    boxInfoB.hitboxType is not HitboxType.Hurt )
+                    boxInfoA.hitboxType is not HitboxType.Hit ||
+                    boxInfoB.hitboxType is not HitboxType.Hurt)
                 {
                     continue;
                 }
@@ -34,11 +35,11 @@ namespace ET.Client
                 //执行回调
                 int startIndex = self.GetParam<int>("HitNotify_StartIndex");
                 int endIndex = self.GetParam<int>("HitNotify_EndIndex");
-                
+
                 self.RegistParam("HitData", info.dataB);
-                self.RegistSubCoroutine(startIndex,endIndex,"HitNotifyCoroutine").Coroutine();
+                self.RegistSubCoroutine(startIndex, endIndex, self.cancellationToken).Coroutine();
                 self.RemoveParam("HitData");
-                
+
                 hitBuffer.Add(info.dataB.InstanceId);
             }
         }

@@ -4,6 +4,7 @@ namespace ET.Client
 {
     [Invoke]
     [FriendOf(typeof(TimelineMarkerEvent))]
+    [FriendOf(typeof(BBParser))]
     public class HandleUpdateMarkerEventCallback : AInvokeHandler<UpdateEventTrackCallback>
     {
         public override void Handle(UpdateEventTrackCallback args)
@@ -14,16 +15,16 @@ namespace ET.Client
                 Log.Error($"cannot find timeline component: {args.instanceId}");
                 return;
             }
-            
+
             //不存在帧事件
             TimelineMarkerEvent markerEvent = timelineComponent.GetMarkerEvent(args.markerName);
             if (markerEvent == null)
             {
                 return;
             }
-            
+
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            bbParser.RegistSubCoroutine(markerEvent.startIndex, markerEvent.endIndex, markerEvent.markerName).Coroutine();
+            bbParser.RegistSubCoroutine(markerEvent.startIndex, markerEvent.endIndex, bbParser.cancellationToken).Coroutine();
         }
     }
 }

@@ -28,7 +28,6 @@ namespace ET.Client
             Stack<SyntaxNode> conditionStack = new Stack<SyntaxNode>();
 
             int index = parser.function_Pointers[data.functionID];
-            Log.Warning(parser.opDict[index]);
             //嵌套if的根节点
             SyntaxNode rootNode = SyntaxNode.Create(SyntaxType.Condition, index);
             conditionStack.Push(rootNode);
