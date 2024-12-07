@@ -22,22 +22,21 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             
             //跳过动画帧事件的代码块
-            int index = parser.Coroutine_Pointers[data.functionID];
+            int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
-            while (++index < bbParser.opDict.Count)
+            while (++index < parser.opDict.Count)
             {
-                string opLine = bbParser.opDict[index];
+                string opLine = parser.opDict[index];
                 if (opLine.Equals("EndMarkerEvent:"))
                 {
                     endIndex = index;
                     break;
                 }
             }
-            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
+            parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
 
             TimelineMarkerEvent markerEvent = timelineComponent.AddChild<TimelineMarkerEvent>();
             timelineComponent.markerEventDict.Add(match.Groups[1].Value, markerEvent.Id);

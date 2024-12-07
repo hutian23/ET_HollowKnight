@@ -32,7 +32,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             BBTimerComponent bbTimer = inputWait.GetComponent<BBTimerComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();

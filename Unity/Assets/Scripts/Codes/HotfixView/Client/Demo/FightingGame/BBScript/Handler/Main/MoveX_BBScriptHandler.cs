@@ -34,14 +34,13 @@ namespace ET.Client
 
             //注册变量
             long.TryParse(match.Groups[1].Value, out long moveX);
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            bbParser.RegistParam("MoveX", moveX / 1000f);
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            parser.RegistParam("MoveX", moveX / 1000f);
 
             //启动定时器
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.MoveXTimer, parser); 
-            bbParser.RegistParam("MoveXTimer", timer);
+            parser.RegistParam("MoveXTimer", timer);
             
             token.Add(() => { bbTimer.Remove(ref timer); });
 

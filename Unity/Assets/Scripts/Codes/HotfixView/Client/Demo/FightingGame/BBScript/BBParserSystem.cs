@@ -12,7 +12,6 @@ namespace ET.Client
             protected override void Destroy(BBParser self)
             {
                 self.Cancel();
-                self.EntityId = 0;
             }
         }
 
@@ -21,88 +20,29 @@ namespace ET.Client
         /// </summary>
         public static void Cancel(this BBParser self)
         {
-            self.cancellationToken?.Cancel();
-            self.funcMap.Clear();
-            self.opLines = null;
-            self.opDict.Clear();
+            self.CancellationToken?.Cancel();
             self.Coroutine_Pointers.Clear();
-
             //回收变量
-            foreach (var kv in self.paramDict)
+            foreach (var kv in self.ParamDict)
             {
                 kv.Value.Recycle();
             }
-            self.paramDict.Clear();
+            self.ParamDict.Clear();
+            self.opDict.Clear();
         }
         
         public static void InitScript(this BBParser self, string script)
         {
             self.Cancel();
-            self.opLines = script;
-
             //热重载取消所有BBParser子协程
-            self.cancellationToken = new ETCancellationToken();
-
-            //建立执行语句和指针的映射
-            string[] opLines = self.opLines.Split("\n");
-            int pointer = 0;
-            foreach (string opLine in opLines)
-            {
-                string op = opLine.Trim();
-                if (string.IsNullOrEmpty(op) || op.StartsWith('#')) continue; //空行 or 注释行
-                self.opDict[pointer++] = op;
-            }
-
-            foreach (var kv in self.opDict)
-            {
-                //函数指针
-                string pattern = "@([^:]+)";
-                Match match = Regex.Match(kv.Value, pattern);
-                if (match.Success)
-                {
-                    self.funcMap.TryAdd(match.Groups[1].Value, kv.Key);
-                }
-
-                //匹配marker
-                string pattern2 = @"SetMarker:\s+'([^']*)'";
-                Match match2 = Regex.Match(kv.Value, pattern2);
-                if (match2.Success)
-                {
-                    self.markers.TryAdd(match2.Groups[1].Value, kv.Key);
-                }
-            }
+            self.CancellationToken = new ETCancellationToken();
         }
-
-        public static async ETTask<Status> Main(this BBParser self)
-        {
-            Status ret = await self.Invoke("Main", self.cancellationToken);
-            return ret;
-        }
-
-        public static int GetMarker(this BBParser self, string markerName)
-        {
-            if (self.markers.TryGetValue(markerName, out int index))
-            {
-                return index;
-            }
-
-            Log.Error($"not found marker: {markerName}");
-            return -1;
-        }
-
+        
         /// <summary>
-        /// 同步调用 Main函数或者在Main函数中调用函数
-        /// 异步调用 不需要记录指针
+        /// 传入函数的头指针
         /// </summary>
-        public static async ETTask<Status> Invoke(this BBParser self, string funcName, ETCancellationToken token)
+        public static async ETTask<Status> Invoke(this BBParser self, int index, ETCancellationToken token)
         {
-            //1. 找到函数入口指针
-            if (!self.funcMap.TryGetValue(funcName, out int index))
-            {
-                Log.Warning($"not found function : {funcName}");
-                return Status.Failed;
-            }
-
             //2. 当前协程唯一标识符,生成协程ID和调用指针的映射关系
             long funcId = IdGenerater.Instance.GenerateInstanceId();
             self.Coroutine_Pointers.Add(funcId, index);
@@ -140,6 +80,9 @@ namespace ET.Client
             return Status.Success;
         }
         
+        /// <summary>
+        ///  以子协程的形式执行代码块
+        /// </summary>
         public static async ETTask<Status> RegistSubCoroutine(this BBParser self, int startIndex, int endIndex, ETCancellationToken token)
         {
             //生成协程Id
@@ -147,7 +90,7 @@ namespace ET.Client
             self.Coroutine_Pointers.Add(funcId, startIndex);
             
             //热重载时销毁子协程
-            self.cancellationToken.Add(token.Cancel);
+            self.CancellationToken.Add(token.Cancel);
             
             while (++self.Coroutine_Pointers[funcId] < endIndex)
             {
@@ -190,7 +133,7 @@ namespace ET.Client
                 string content = matches[i].Groups[1].Value;
                 string replace = string.Empty;
                 //find param
-                foreach (var param in self.paramDict)
+                foreach (var param in self.ParamDict)
                 {
                     if (param.Key.Equals(content))
                     {
@@ -205,20 +148,20 @@ namespace ET.Client
         
         public static T RegistParam<T>(this BBParser self, string paramName, T value)
         {
-            if (self.paramDict.ContainsKey(paramName))
+            if (self.ParamDict.ContainsKey(paramName))
             {
                 Log.Error($"already contain params:{paramName}");
                 return default;
             }
 
             SharedVariable variable = SharedVariable.Create(paramName, value);
-            self.paramDict.Add(paramName, variable);
+            self.ParamDict.Add(paramName, variable);
             return value;
         }
 
         public static void UpdateParam<T>(this BBParser self, string paramName, T value)
         {
-            foreach ((string key, SharedVariable variable) in self.paramDict)
+            foreach ((string key, SharedVariable variable) in self.ParamDict)
             {
                 if (!key.Equals(paramName))
                 {
@@ -234,7 +177,7 @@ namespace ET.Client
         
         public static T GetParam<T>(this BBParser self, string paramName)
         {
-            if (!self.paramDict.TryGetValue(paramName, out SharedVariable variable))
+            if (!self.ParamDict.TryGetValue(paramName, out SharedVariable variable))
             {
                 Log.Error($"does not exist param:{paramName}!");
                 return default;
@@ -251,41 +194,31 @@ namespace ET.Client
 
         public static bool ContainParam(this BBParser self, string paramName)
         {
-            return self.paramDict.ContainsKey(paramName);
+            return self.ParamDict.ContainsKey(paramName);
         }
         
         public static void RemoveParam(this BBParser self, string paramName)
         {
-            if (!self.paramDict.ContainsKey(paramName))
+            if (!self.ParamDict.ContainsKey(paramName))
             {
                 Log.Error($"does not exist param:{paramName}!");
                 return;
             }
 
-            self.paramDict[paramName].Recycle();
-            self.paramDict.Remove(paramName);
+            self.ParamDict[paramName].Recycle();
+            self.ParamDict.Remove(paramName);
         }
         
         public static bool TryRemoveParam(this BBParser self, string paramName)
         {
-            if (!self.paramDict.ContainsKey(paramName))
+            if (!self.ParamDict.ContainsKey(paramName))
             {
                 return false;
             }
             
-            self.paramDict[paramName].Recycle();
-            self.paramDict.Remove(paramName);
+            self.ParamDict[paramName].Recycle();
+            self.ParamDict.Remove(paramName);
             return true;
-        }
-
-        public static void SetEntityId(this BBParser self, long instanceId)
-        {
-            self.EntityId = instanceId;
-        }
-
-        public static long GetEntityId(this BBParser self)
-        {
-            return self.EntityId;
         }
     }
 }

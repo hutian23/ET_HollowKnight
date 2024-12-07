@@ -36,13 +36,13 @@
             buffer.Init();
             
             //1-1 RootInit
-            string RootScript = buffer.GetParent<TimelineComponent>().GetTimelinePlayer().BBPlayable.rootScript;
+            string RootScript = timelineComponent.GetTimelinePlayer().BBPlayable.rootScript;
             parser.InitScript(RootScript);
-            await parser.Invoke("RootInit", parser.cancellationToken);
-            if (parser.cancellationToken.IsCancel()) return;
+            await parser.Invoke(1, parser.CancellationToken);
+            if (parser.CancellationToken.IsCancel()) return;
             
             //1-2 重载Parser,进入默认行为
-            timelineComponent.Reload(0);
+            // timelineComponent.Reload(0);
         }
     }
 }

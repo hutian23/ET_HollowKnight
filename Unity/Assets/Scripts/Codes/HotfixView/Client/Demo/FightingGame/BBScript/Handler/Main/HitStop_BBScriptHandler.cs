@@ -33,7 +33,7 @@ namespace ET.Client
 
         private async ETTask HitStopCor(BBParser parser,int hitStop, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
 

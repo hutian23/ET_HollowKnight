@@ -22,7 +22,7 @@ namespace ET.Client
             }
             
             //启动输入检测携程
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             inputWait.handleQueue.Enqueue(match.Groups["InputType"].Value);
             

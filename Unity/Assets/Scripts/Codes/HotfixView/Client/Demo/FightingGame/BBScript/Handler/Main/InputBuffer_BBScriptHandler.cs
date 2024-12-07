@@ -19,8 +19,8 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             
             if (match.Groups["InputBuffer"].Value.Equals("true"))

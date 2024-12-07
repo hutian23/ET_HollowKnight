@@ -19,7 +19,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             string behaviorName = match.Groups["Animation"].Value;
             IdleAnimCor(timelineComponent, behaviorName, token).Coroutine();
             

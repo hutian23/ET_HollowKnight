@@ -21,7 +21,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BehaviorInfo info = buffer.GetInfoByName(match.Groups["Option"].Value);
             if (info.behaviorOrder == buffer.currentOrder)

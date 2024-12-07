@@ -19,7 +19,7 @@ namespace ET.Client
                 return false;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             
             return buffer.ContainGCOption(match.Groups["GCOption"].Value);

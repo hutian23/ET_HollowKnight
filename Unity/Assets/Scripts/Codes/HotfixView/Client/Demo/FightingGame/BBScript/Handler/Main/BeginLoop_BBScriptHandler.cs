@@ -79,31 +79,30 @@ namespace ET.Client
                 Log.Error($"Loop_Handler must have at least one triggerHandler!");
                 return Status.Failed;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
             //跳过BeginLoop代码块
-            int index = bbParser.Coroutine_Pointers[data.functionID];
+            int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
-            while (++index < bbParser.opDict.Count)
+            while (++index < parser.opDict.Count)
             {
-                string opLine = bbParser.opDict[index];
+                string opLine = parser.opDict[index];
                 if (opLine.Equals("EndLoop:"))
                 {
                     endIndex = index;
                     break;
                 }
             }
-            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
+            parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
 
             //不是执行完代码块之后再判定是否符合条件进入下一次循环，如果条件不符合直接退出Loop协程
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.LoopTimer, bbParser);
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.LoopTimer, parser);
             ETCancellationToken loopToken = new();
-            bbParser.RegistParam("LoopTimer", timer);
-            bbParser.RegistParam("LoopToken", loopToken);
-            bbParser.RegistParam("LoopTriggerIndex", startIndex);
+            parser.RegistParam("LoopTimer", timer); 
+            parser.RegistParam("LoopToken", loopToken);
+            parser.RegistParam("LoopTriggerIndex", startIndex);
             
             token.Add(() =>
             {
@@ -112,7 +111,7 @@ namespace ET.Client
             });
 
             //4. start loop coroutine
-            await LoopCoroutine(bbParser, startIndex, endIndex, loopToken);
+            await LoopCoroutine(parser, startIndex, endIndex, loopToken);
             
             return token.IsCancel()? Status.Failed : Status.Success;
         }

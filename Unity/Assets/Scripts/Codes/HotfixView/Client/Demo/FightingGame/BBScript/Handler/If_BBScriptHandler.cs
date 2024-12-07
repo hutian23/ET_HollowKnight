@@ -27,7 +27,7 @@ namespace ET.Client
         {
             Stack<SyntaxNode> conditionStack = new Stack<SyntaxNode>();
 
-            int index = parser.Coroutine_Pointers[data.functionID];
+            int index = parser.Coroutine_Pointers[data.CoroutineID];
             //嵌套if的根节点
             SyntaxNode rootNode = SyntaxNode.Create(SyntaxType.Condition, index);
             conditionStack.Push(rootNode);
@@ -67,7 +67,7 @@ namespace ET.Client
         private async ETTask<Status> HandleSyntaxTree(BBParser parser, BBScriptData data, SyntaxNode node, ETCancellationToken token)
         {
             string opLine = parser.opDict[node.index];
-            parser.Coroutine_Pointers[data.functionID] = node.index;
+            parser.Coroutine_Pointers[data.CoroutineID] = node.index;
 
             switch (node.nodeType)
             {
@@ -92,13 +92,13 @@ namespace ET.Client
                             return Status.Failed;
                         }
 
-                        BBScriptData _data = BBScriptData.Create(op, data.functionID, null);
+                        BBScriptData _data = BBScriptData.Create(op, data.CoroutineID, null);
                         //判定失败, 跳过整个if块中的代码
                         bool ret = DialogueDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(parser, _data);
                         _data.Recycle();
                         if (!ret)
                         {
-                            parser.Coroutine_Pointers[data.functionID] = node.endIndex;
+                            parser.Coroutine_Pointers[data.CoroutineID] = node.endIndex;
                             return Status.Success;
                         }
                     }
@@ -121,7 +121,7 @@ namespace ET.Client
                         return Status.Failed;
                     }
 
-                    BBScriptData _data = BBScriptData.Create(opLine, data.functionID, null);
+                    BBScriptData _data = BBScriptData.Create(opLine, data.CoroutineID, null);
                     Status ret = await handler.Handle(parser, _data, token);
                     _data.Recycle();
                     
@@ -139,7 +139,7 @@ namespace ET.Client
             }
 
             //指针跳过EndIf
-            if (node.nodeType == SyntaxType.Condition) parser.Coroutine_Pointers[data.functionID] = node.endIndex;
+            if (node.nodeType == SyntaxType.Condition) parser.Coroutine_Pointers[data.CoroutineID] = node.endIndex;
             return Status.Success;
         }
 

@@ -15,8 +15,7 @@
         //共用代码
         public static void OpenWindow(BBParser parser, ETCancellationToken token,int invokeType)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
 
@@ -25,7 +24,7 @@
 
             // 输入系统依赖两个模块, 控制器模块和输入模块
             //2. 启动行为机定时器
-            buffer.WindowTimer = bbTimer.NewFrameTimer(invokeType, bbParser);
+            buffer.WindowTimer = bbTimer.NewFrameTimer(invokeType, parser);
             
             token.Add(() =>
             {

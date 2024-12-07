@@ -18,8 +18,8 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return false;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
             switch (match.Groups["Throw"].Value)

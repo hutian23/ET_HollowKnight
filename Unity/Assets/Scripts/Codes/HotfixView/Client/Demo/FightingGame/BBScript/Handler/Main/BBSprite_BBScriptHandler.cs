@@ -24,7 +24,7 @@ namespace ET.Client
             string marker = match.Groups["Sprite"].Value;
             int.TryParse(match.Groups["WaitFrame"].Value, out int waitFrame);
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             RuntimePlayable runtimePlayable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
             

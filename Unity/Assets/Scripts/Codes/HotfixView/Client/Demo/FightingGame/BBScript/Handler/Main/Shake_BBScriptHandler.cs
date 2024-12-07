@@ -66,8 +66,8 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["ShakeLength"].Value} to long");
                 return Status.Failed;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 

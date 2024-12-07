@@ -25,7 +25,7 @@ namespace ET.Client
             BBTimerComponent combatTimer = timelineComponent.AddComponent<BBTimerComponent>(); 
             BBTimerManager.Instance.RegistTimer(combatTimer);
             
-            timelineComponent.AddComponent<BBParser>().SetEntityId(timelineComponent.InstanceId);
+            timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<HitboxComponent>();
             timelineComponent.AddComponent<BehaviorBuffer>();
             timelineComponent.AddComponent<InputWait>();

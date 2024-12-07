@@ -27,10 +27,8 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["ParamValue"].Value} to long!");
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            FixtureData dataB = bbParser.GetParam<FixtureData>("HitData");
+            
+            FixtureData dataB = parser.GetParam<FixtureData>("HitData");
             b2Body b2Body = Root.Instance.Get(dataB.InstanceId) as b2Body;
             
             //注册变量

@@ -13,10 +13,8 @@ namespace ET.Client
         //Hit_GotoState: 'KnockBack';
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-
-            FixtureData dataB = bbParser.GetParam<FixtureData>("HitData");
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            FixtureData dataB = parser.GetParam<FixtureData>("HitData");
             
             b2Body b2Body = Root.Instance.Get(dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;

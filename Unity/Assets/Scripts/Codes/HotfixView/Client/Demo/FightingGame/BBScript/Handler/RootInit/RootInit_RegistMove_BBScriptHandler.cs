@@ -27,8 +27,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetTimeline(match.Groups["behaviorName"].Value);
 
@@ -46,17 +45,14 @@ namespace ET.Client
             
             //2-2. 加载 trigger
             info.LoadSkillInfo(timeline);
-            BBExecutable executable = info.AddComponent<BBExecutable>();
-            executable.Parse(timeline.Script);
-            
-            
+
             //2-3 调用行为初始化协程
-            bbParser.RegistParam("InfoId", info.Id);
-            int index = bbParser.Coroutine_Pointers[data.functionID];
+            parser.RegistParam("InfoId", info.Id);
+            int index = parser.Coroutine_Pointers[data.CoroutineID];
   
-            while (++index < bbParser.opDict.Count)
+            while (++index < parser.opDict.Count)
             {
-                string opLine = bbParser.opDict[index];
+                string opLine = parser.opDict[index];
                 Match match2 = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match2.Success)
                 {
@@ -77,16 +73,16 @@ namespace ET.Client
                     return Status.Failed;
                 }
 
-                BBScriptData _data = BBScriptData.Create(opLine, data.functionID, null);
-                Status ret = await handler.Handle(bbParser, _data, token);
-                bbParser.Coroutine_Pointers[data.functionID] = index;
+                BBScriptData _data = BBScriptData.Create(opLine, data.CoroutineID, null);
+                Status ret = await handler.Handle(parser, _data, token);
+                parser.Coroutine_Pointers[data.CoroutineID] = index;
                 
                 if (token.IsCancel()) return Status.Failed;
                 if (ret != Status.Success) return ret;
             }
             //跳转到EndMove外
-            bbParser.Coroutine_Pointers[data.functionID] = index;
-            bbParser.RemoveParam("InfoId");
+            parser.Coroutine_Pointers[data.CoroutineID] = index;
+            parser.RemoveParam("InfoId");
 
             await ETTask.CompletedTask;
             return Status.Success;

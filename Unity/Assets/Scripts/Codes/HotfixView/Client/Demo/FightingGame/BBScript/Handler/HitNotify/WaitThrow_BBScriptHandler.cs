@@ -53,12 +53,11 @@ namespace ET.Client
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
 
-            long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.ThrowCheckTimer, bbParser);
-            bbParser.RegistParam("ThrowCheckTimer", timer);
+            long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.ThrowCheckTimer, parser);
+            parser.RegistParam("ThrowCheckTimer", timer);
             
             token.Add(() =>
             {

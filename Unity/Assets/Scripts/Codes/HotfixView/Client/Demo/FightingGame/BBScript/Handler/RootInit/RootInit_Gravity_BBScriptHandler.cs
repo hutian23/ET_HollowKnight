@@ -55,8 +55,7 @@ namespace ET.Client
             }
 
             //注册重力变量
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             
             long.TryParse(match.Groups["gravity"].Value,out long gravity);
             timelineComponent.TryRemoveParam("Gravity");
@@ -71,7 +70,7 @@ namespace ET.Client
                 timelineComponent.RemoveParam("GravityTimer");
             }
 
-            long gravityTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.GravityCheckTimer, bbParser);
+            long gravityTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.GravityCheckTimer, parser);
             timelineComponent.RegistParam("GravityTimer", gravityTimer);
             
             await ETTask.CompletedTask;

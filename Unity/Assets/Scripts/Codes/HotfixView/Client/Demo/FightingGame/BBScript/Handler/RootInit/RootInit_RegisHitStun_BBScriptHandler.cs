@@ -24,7 +24,7 @@ namespace ET.Client
             string behaviorName = match.Groups["BehaviorName"].Value;
             string hitFlag = match.Groups["HitFlag"].Value;
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetTimeline(behaviorName);
 

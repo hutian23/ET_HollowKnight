@@ -15,7 +15,7 @@ namespace ET.Client
         //RegistCallback: (Hit: xxx), 'HitCheck'
         public override bool Check(BBParser parser, BBScriptData data)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
            
             int count = hitboxComponent.CollisionBuffer.Count;

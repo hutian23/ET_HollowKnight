@@ -37,7 +37,7 @@ namespace ET.Client
                 int endIndex = self.GetParam<int>("HitNotify_EndIndex");
 
                 self.RegistParam("HitData", info.dataB);
-                self.RegistSubCoroutine(startIndex, endIndex, self.cancellationToken).Coroutine();
+                self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
                 self.RemoveParam("HitData");
 
                 hitBuffer.Add(info.dataB.InstanceId);
@@ -54,7 +54,7 @@ namespace ET.Client
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
 
@@ -64,7 +64,7 @@ namespace ET.Client
             bbParser.RegistParam("HitNotifyTimer", timer);
 
             //跳过代码块
-            int index = bbParser.Coroutine_Pointers[data.functionID];
+            int index = bbParser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index+1;
             while (++index < bbParser.opDict.Count)
             {
@@ -75,7 +75,7 @@ namespace ET.Client
                     break;
                 }
             }
-            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
+            bbParser.Coroutine_Pointers[data.CoroutineID] = endIndex;
             bbParser.RegistParam("HitNotify_StartIndex", startIndex);
             bbParser.RegistParam("HitNotify_EndIndex", endIndex);
             

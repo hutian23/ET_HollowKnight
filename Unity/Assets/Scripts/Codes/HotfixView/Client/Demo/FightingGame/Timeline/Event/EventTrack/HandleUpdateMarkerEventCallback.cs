@@ -24,7 +24,7 @@ namespace ET.Client
             }
 
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            bbParser.RegistSubCoroutine(markerEvent.startIndex, markerEvent.endIndex, bbParser.cancellationToken).Coroutine();
+            bbParser.RegistSubCoroutine(markerEvent.startIndex, markerEvent.endIndex, bbParser.CancellationToken).Coroutine();
         }
     }
 }

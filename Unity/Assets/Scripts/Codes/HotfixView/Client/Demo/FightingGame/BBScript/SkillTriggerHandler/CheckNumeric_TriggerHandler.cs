@@ -18,7 +18,7 @@ namespace ET.Client
                 return false;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             long value = timelineComponent.GetParam<long>(match.Groups[1].Value);
             if (!long.TryParse(match.Groups[3].Value, out long checkValue))
             {

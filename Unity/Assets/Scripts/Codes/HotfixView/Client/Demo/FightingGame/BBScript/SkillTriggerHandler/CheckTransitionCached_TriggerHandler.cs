@@ -24,8 +24,8 @@ namespace ET.Client
             }
 
             string transitionFlag = $"Transition_{match.Groups["transition"].Value}";
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             if (!bbParser.ContainParam(transitionFlag))
             {

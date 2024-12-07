@@ -18,8 +18,8 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return false;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             InputWait wait = timelineComponent.GetComponent<InputWait>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             

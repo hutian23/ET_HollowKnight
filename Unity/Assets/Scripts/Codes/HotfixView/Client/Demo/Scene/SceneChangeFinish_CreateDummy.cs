@@ -27,7 +27,7 @@ namespace ET.Client
             BBTimerComponent combatTimer = timelineComponent.AddComponent<BBTimerComponent>(); // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
             BBTimerManager.Instance.RegistTimer(combatTimer);
             
-            timelineComponent.AddComponent<BBParser>().SetEntityId(timelineComponent.InstanceId);
+            timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<HitboxComponent>();
             timelineComponent.AddComponent<BehaviorBuffer>();
         }

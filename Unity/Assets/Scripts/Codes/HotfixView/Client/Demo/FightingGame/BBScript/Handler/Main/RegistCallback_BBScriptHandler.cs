@@ -22,7 +22,7 @@ namespace ET.Client
             if (!ret) return;
             //exec callback
             int startIndex = self.startIndex, endIndex = self.endIndex;
-            parser.RegistSubCoroutine(startIndex, endIndex, parser.cancellationToken).Coroutine();
+            parser.RegistSubCoroutine(startIndex, endIndex, parser.CancellationToken).Coroutine();
 
             //Dispose bbCallback
             postStepTimer.Remove(ref self.CheckTimer);
@@ -72,25 +72,24 @@ namespace ET.Client
             }
 
             //2. regist callback entity
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
             TimelineCallback timelineCallback = timelineComponent.AddChild<TimelineCallback>();
             timelineComponent.callbackDict.Add(callbackName, timelineCallback.Id);
 
             //3. skip callback group
-            int index = bbParser.Coroutine_Pointers[data.functionID];
+            int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index + 1;
-            while (++index < bbParser.opDict.Count)
+            while (++index < parser.opDict.Count)
             {
-                string opLine = bbParser.opDict[index];
+                string opLine = parser.opDict[index];
                 if (opLine.Equals("EndCallback:"))
                 {
                     endIndex = index;
                     break;
                 }
             }
-            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
+            parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
 
             //3. init bbCallback
             timelineCallback.startIndex = startIndex;

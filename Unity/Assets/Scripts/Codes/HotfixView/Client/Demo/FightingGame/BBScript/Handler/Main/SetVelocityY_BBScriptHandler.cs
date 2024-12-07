@@ -24,8 +24,8 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["Velocity"].Value} to long");
                 return Status.Failed;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             body.SetVelocityY(velocity/1000f);
             

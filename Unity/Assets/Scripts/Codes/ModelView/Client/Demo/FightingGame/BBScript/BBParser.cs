@@ -8,33 +8,23 @@ namespace ET.Client
     [ChildOf]
     public class BBParser: Entity, IAwake, IDestroy, ILoad
     {
-        public long EntityId;
-        public Dictionary<string, int> funcMap = new(); // 记录状态块的索引
-        public Dictionary<string, int> markers = new(); //标记位置
-        public string opLines; // 脚本
         public Dictionary<int, string> opDict = new();
-        public ETCancellationToken cancellationToken; //取消当前执行的所有子协程
-        
-        //协程ID --> 协程指针
-        public Dictionary<long, int> Coroutine_Pointers = new();
-        
-        //在携程内注册变量，携程执行完毕dispose
-        //TODO这部分需要优化，对象池管理
-        public Dictionary<string, SharedVariable> paramDict = new();
+        public ETCancellationToken CancellationToken; // 取消当前执行的所有子协程
+        public Dictionary<long, int> Coroutine_Pointers = new(); // 协程ID --> 协程指针
+        public Dictionary<string, SharedVariable> ParamDict = new(); // 在携程内注册变量，携程执行完毕dispose
     }
-
-    [Serializable]
+    
     public class BBScriptData
     {
         public string opLine; //指令码
-        public long functionID; //协程ID
+        public long CoroutineID; //协程ID
         public object userData; //数据体
 
         public static BBScriptData Create(string opLine, long functionID, object userData)
         {
             BBScriptData scriptData = ObjectPool.Instance.Fetch<BBScriptData>();
             scriptData.opLine = opLine;
-            scriptData.functionID = functionID;
+            scriptData.CoroutineID = functionID;
             scriptData.userData = userData;
             return scriptData;
         }
@@ -42,12 +32,12 @@ namespace ET.Client
         public void Recycle()
         {
             opLine = string.Empty;
-            functionID = 0;
+            this.CoroutineID = 0;
             userData = null;
             ObjectPool.Instance.Recycle(this);
         }
     }
-
+    
     #region If
     public enum SyntaxType
     {

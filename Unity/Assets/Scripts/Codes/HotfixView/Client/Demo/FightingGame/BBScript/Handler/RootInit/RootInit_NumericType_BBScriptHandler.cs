@@ -19,7 +19,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             if (timelineComponent.ContainParam(match.Groups["NumericType"].Value))
             {
                 Log.Error($"already exist NumericType:{match.Groups["NumericType"].Value}");

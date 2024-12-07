@@ -24,8 +24,8 @@ namespace ET.Client
                 Log.Error($"cannot parse waitFrame to int");
                 return Status.Failed;
             }
-            
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             ETCancellationToken rechargeToken = timelineComponent.RegistParam("DashRechargeToken", new ETCancellationToken());
             RechargeCor(timelineComponent,waitFrame, rechargeToken).Coroutine();
             

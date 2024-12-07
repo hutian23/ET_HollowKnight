@@ -25,10 +25,8 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            TimelineComponent timelineComponent = Root.Instance.Get(parser.GetEntityId()) as TimelineComponent;
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            bbParser.TryRemoveParam("TargetBind");
-            bbParser.RegistParam("TargetBind",new System.Numerics.Vector2(bindX / 1000f, bindY / 1000f));
+            parser.TryRemoveParam("TargetBind");
+            parser.RegistParam("TargetBind",new System.Numerics.Vector2(bindX / 1000f, bindY / 1000f));
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -11,8 +11,10 @@ namespace ET.Client
         public int behaviorOrder;
         public MoveType moveType;
         
-        //Trigger
-        public List<string> opLines = new();
+        // BBScript
+        public List<string> opDict = new();
+        public Dictionary<string, int> function_Pointer = new();
+        public Dictionary<string, int> marker_Pointer = new();
     }
 
     public enum MoveType
