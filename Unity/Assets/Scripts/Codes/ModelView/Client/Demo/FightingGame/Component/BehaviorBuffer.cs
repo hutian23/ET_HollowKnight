@@ -6,7 +6,7 @@ namespace ET.Client
     /// 该组件用于管理行为切换
     /// </summary>
     [ComponentOf(typeof (TimelineComponent))]
-    public class BehaviorBuffer: Entity, IAwake, IDestroy
+    public class BehaviorBuffer: Entity, IAwake, IDestroy, ILoad
     {
         //当前行为
         public int currentOrder;

@@ -5,7 +5,15 @@
     [FriendOf(typeof(BBTimerComponent))]
     public static class BehaviorBufferSystem
     {
-        public static void Init(this BehaviorBuffer self)
+        public class BehaviorBufferLoadSystem : LoadSystem<BehaviorBuffer>
+        {
+            protected override void Load(BehaviorBuffer self)
+            {
+                self.Init();
+            }
+        }
+
+        private static void Init(this BehaviorBuffer self)
         {
             self.GCOptions.Clear();
             self.WhiffOptions.Clear();

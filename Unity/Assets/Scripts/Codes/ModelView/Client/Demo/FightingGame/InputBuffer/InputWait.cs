@@ -6,7 +6,7 @@ namespace ET.Client
     /// 输入模块
     /// </summary>
     [ComponentOf(typeof (TimelineComponent))]
-    public class InputWait: Entity, IAwake, IDestroy, IFrameUpdate
+    public class InputWait: Entity, IAwake, IDestroy, IFrameUpdate, ILoad
     {
         public long curOP;
         public const int MaxStack = 100;

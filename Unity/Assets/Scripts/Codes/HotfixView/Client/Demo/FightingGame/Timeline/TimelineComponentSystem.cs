@@ -16,9 +16,6 @@ namespace ET.Client
                 GameObject go = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
                 TimelinePlayer timelinePlayer = go.GetComponent<TimelinePlayer>();
                 timelinePlayer.instanceId = self.InstanceId;
-
-                //单例管理
-                TimelineManager.Instance.instanceIds.Add(self.InstanceId);
             }
         }
 
@@ -28,11 +25,18 @@ namespace ET.Client
             protected override void Destroy(TimelineComponent self)
             {
                 self.Init();
-                TimelineManager.Instance.instanceIds.Remove(self.InstanceId);
+            }
+        }
+        
+        public class TimelineComponentLoadSystem : LoadSystem<TimelineComponent>
+        {
+            protected override void Load(TimelineComponent self)
+            {
+                self.Init();
             }
         }
 
-        public static void Init(this TimelineComponent self)
+        private static void Init(this TimelineComponent self)
         {
             self.ClearParam();
             foreach (var kv in self.callbackDict)
@@ -112,7 +116,7 @@ namespace ET.Client
             
             //2. 调用行为携程
             BBParser parser = self.GetComponent<BBParser>();
-            parser.InitScript(timeline.Script);
+            // parser.InitScript(timeline.Script);
             
             //3.切换行为前，初始化组件
             EventSystem.Instance.PublishAsync(self.DomainScene(), new BeforeBehaviorReload() { behaviorOrder = behaviorOrder, instanceId = self.GetParent<Unit>().InstanceId }).Coroutine();

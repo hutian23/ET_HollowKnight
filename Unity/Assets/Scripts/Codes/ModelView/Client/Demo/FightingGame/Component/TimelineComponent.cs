@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [ComponentOf(typeof (Unit))]
-    public class TimelineComponent: Entity, IAwake, IDestroy
+    public class TimelineComponent: Entity, IAwake, IDestroy, ILoad
     {
         public Dictionary<string, SharedVariable> paramDict = new();
         public Dictionary<string, long> callbackDict = new();

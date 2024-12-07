@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
@@ -31,11 +32,11 @@ namespace ET.Client
             self.opDict.Clear();
         }
         
-        public static void InitScript(this BBParser self, string script)
+        public static void Init(this BBParser self, Dictionary<int,string> opDict)
         {
             self.Cancel();
-            //热重载取消所有BBParser子协程
-            self.CancellationToken = new ETCancellationToken();
+            self.CancellationToken = new ETCancellationToken(); //热重载取消所有BBParser子协程
+            self.opDict = opDict;
         }
         
         /// <summary>

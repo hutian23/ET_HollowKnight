@@ -17,7 +17,15 @@ namespace ET.Client
             }
         }
 
-        public static void Init(this InputWait self)
+        public class InputWaitLoadSystem : LoadSystem<InputWait>
+        {
+            protected override void Load(InputWait self)
+            {
+                self.Init();
+            }
+        }
+
+        private static void Init(this InputWait self)
         {
             self.curOP = 0;
             self.infoQueue.Clear();
