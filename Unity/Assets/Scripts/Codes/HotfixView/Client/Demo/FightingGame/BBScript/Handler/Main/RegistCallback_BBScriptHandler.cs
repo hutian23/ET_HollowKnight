@@ -79,7 +79,7 @@ namespace ET.Client
             timelineComponent.callbackDict.Add(callbackName, timelineCallback.Id);
 
             //3. skip callback group
-            int index = bbParser.function_Pointers[data.functionID];
+            int index = bbParser.Coroutine_Pointers[data.functionID];
             int endIndex = index, startIndex = index + 1;
             while (++index < bbParser.opDict.Count)
             {
@@ -90,7 +90,7 @@ namespace ET.Client
                     break;
                 }
             }
-            bbParser.function_Pointers[data.functionID] = endIndex;
+            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
 
             //3. init bbCallback
             timelineCallback.startIndex = startIndex;

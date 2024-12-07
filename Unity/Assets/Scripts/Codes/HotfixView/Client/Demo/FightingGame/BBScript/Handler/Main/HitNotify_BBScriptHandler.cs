@@ -64,7 +64,7 @@ namespace ET.Client
             bbParser.RegistParam("HitNotifyTimer", timer);
 
             //跳过代码块
-            int index = bbParser.function_Pointers[data.functionID];
+            int index = bbParser.Coroutine_Pointers[data.functionID];
             int endIndex = index, startIndex = index+1;
             while (++index < bbParser.opDict.Count)
             {
@@ -75,7 +75,7 @@ namespace ET.Client
                     break;
                 }
             }
-            bbParser.function_Pointers[data.functionID] = endIndex;
+            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
             bbParser.RegistParam("HitNotify_StartIndex", startIndex);
             bbParser.RegistParam("HitNotify_EndIndex", endIndex);
             

@@ -16,7 +16,7 @@ namespace ET.Client
         public ETCancellationToken cancellationToken; //取消当前执行的所有子协程
         
         //协程ID --> 协程指针
-        public Dictionary<long, int> function_Pointers = new();
+        public Dictionary<long, int> Coroutine_Pointers = new();
         
         //在携程内注册变量，携程执行完毕dispose
         //TODO这部分需要优化，对象池管理
@@ -48,6 +48,7 @@ namespace ET.Client
         }
     }
 
+    #region If
     public enum SyntaxType
     {
         None,
@@ -80,4 +81,5 @@ namespace ET.Client
             ObjectPool.Instance.Recycle(this);
         }
     }
+    #endregion
 }

@@ -27,7 +27,7 @@ namespace ET.Client
         {
             Stack<SyntaxNode> conditionStack = new Stack<SyntaxNode>();
 
-            int index = parser.function_Pointers[data.functionID];
+            int index = parser.Coroutine_Pointers[data.functionID];
             //嵌套if的根节点
             SyntaxNode rootNode = SyntaxNode.Create(SyntaxType.Condition, index);
             conditionStack.Push(rootNode);
@@ -67,7 +67,7 @@ namespace ET.Client
         private async ETTask<Status> HandleSyntaxTree(BBParser parser, BBScriptData data, SyntaxNode node, ETCancellationToken token)
         {
             string opLine = parser.opDict[node.index];
-            parser.function_Pointers[data.functionID] = node.index;
+            parser.Coroutine_Pointers[data.functionID] = node.index;
 
             switch (node.nodeType)
             {
@@ -98,7 +98,7 @@ namespace ET.Client
                         _data.Recycle();
                         if (!ret)
                         {
-                            parser.function_Pointers[data.functionID] = node.endIndex;
+                            parser.Coroutine_Pointers[data.functionID] = node.endIndex;
                             return Status.Success;
                         }
                     }
@@ -139,7 +139,7 @@ namespace ET.Client
             }
 
             //指针跳过EndIf
-            if (node.nodeType == SyntaxType.Condition) parser.function_Pointers[data.functionID] = node.endIndex;
+            if (node.nodeType == SyntaxType.Condition) parser.Coroutine_Pointers[data.functionID] = node.endIndex;
             return Status.Success;
         }
 

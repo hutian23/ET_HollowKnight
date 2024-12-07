@@ -25,8 +25,7 @@ namespace ET.Client
             self.funcMap.Clear();
             self.opLines = null;
             self.opDict.Clear();
-            self.markers.Clear();
-            self.function_Pointers.Clear();
+            self.Coroutine_Pointers.Clear();
 
             //回收变量
             foreach (var kv in self.paramDict)
@@ -106,15 +105,15 @@ namespace ET.Client
 
             //2. 当前协程唯一标识符,生成协程ID和调用指针的映射关系
             long funcId = IdGenerater.Instance.GenerateInstanceId();
-            self.function_Pointers.Add(funcId, index);
+            self.Coroutine_Pointers.Add(funcId, index);
 
             //3. 逐条执行语句
-            while (++self.function_Pointers[funcId] < self.opDict.Count)
+            while (++self.Coroutine_Pointers[funcId] < self.opDict.Count)
             {
                 if (token.IsCancel()) return Status.Failed;
 
                 //4. 语句(OPType: xxxx;) 根据 OPType 匹配handler
-                string opLine = self.opDict[self.function_Pointers[funcId]];
+                string opLine = self.opDict[self.Coroutine_Pointers[funcId]];
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
                 {
@@ -123,8 +122,6 @@ namespace ET.Client
                 }
 
                 string opType = match.Value;
-                if (opType == "SetMarker") continue; //Init时执行过，跳过
-
                 if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
                 {
                     Log.Error($"not found script handler； {opType}");
@@ -147,17 +144,17 @@ namespace ET.Client
         {
             //生成协程Id
             long funcId = IdGenerater.Instance.GenerateInstanceId();
-            self.function_Pointers.Add(funcId, startIndex);
+            self.Coroutine_Pointers.Add(funcId, startIndex);
             
             //热重载时销毁子协程
             self.cancellationToken.Add(token.Cancel);
             
-            while (++self.function_Pointers[funcId] < endIndex)
+            while (++self.Coroutine_Pointers[funcId] < endIndex)
             {
                 if (token.IsCancel()) return Status.Failed;
                 
                 //1. 根据 opType 匹配 handler
-                string opLine = self.opDict[self.function_Pointers[funcId]];
+                string opLine = self.opDict[self.Coroutine_Pointers[funcId]];
                 
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
@@ -167,8 +164,6 @@ namespace ET.Client
                 }
                 
                 string opType = match.Value;
-                if (opType == "SetMarker") continue;
-                
                 if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
                 {
                     Log.Error($"not found script handler: {opType}");

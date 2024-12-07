@@ -85,7 +85,7 @@ namespace ET.Client
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
             //跳过BeginLoop代码块
-            int index = bbParser.function_Pointers[data.functionID];
+            int index = bbParser.Coroutine_Pointers[data.functionID];
             int endIndex = index, startIndex = index;
             while (++index < bbParser.opDict.Count)
             {
@@ -96,7 +96,7 @@ namespace ET.Client
                     break;
                 }
             }
-            bbParser.function_Pointers[data.functionID] = endIndex;
+            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
 
             //不是执行完代码块之后再判定是否符合条件进入下一次循环，如果条件不符合直接退出Loop协程
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.LoopTimer, bbParser);

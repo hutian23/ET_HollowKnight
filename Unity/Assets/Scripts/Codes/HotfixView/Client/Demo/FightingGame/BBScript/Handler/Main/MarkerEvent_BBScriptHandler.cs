@@ -26,7 +26,7 @@ namespace ET.Client
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             
             //跳过动画帧事件的代码块
-            int index = parser.function_Pointers[data.functionID];
+            int index = parser.Coroutine_Pointers[data.functionID];
             int endIndex = index, startIndex = index;
             while (++index < bbParser.opDict.Count)
             {
@@ -37,7 +37,7 @@ namespace ET.Client
                     break;
                 }
             }
-            bbParser.function_Pointers[data.functionID] = endIndex;
+            bbParser.Coroutine_Pointers[data.functionID] = endIndex;
 
             TimelineMarkerEvent markerEvent = timelineComponent.AddChild<TimelineMarkerEvent>();
             timelineComponent.markerEventDict.Add(match.Groups[1].Value, markerEvent.Id);

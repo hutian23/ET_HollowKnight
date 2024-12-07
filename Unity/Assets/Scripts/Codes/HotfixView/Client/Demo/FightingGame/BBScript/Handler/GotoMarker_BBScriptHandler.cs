@@ -20,7 +20,7 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            parser.function_Pointers[data.functionID] = parser.GetMarker(match.Groups["marker"].Value);
+            parser.Coroutine_Pointers[data.functionID] = parser.GetMarker(match.Groups["marker"].Value);
             await TimerComponent.Instance.WaitFrameAsync(token);
             return token.IsCancel()? Status.Failed : Status.Success;
         }

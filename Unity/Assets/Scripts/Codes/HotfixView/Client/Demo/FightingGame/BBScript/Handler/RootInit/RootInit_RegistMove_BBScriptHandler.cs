@@ -46,10 +46,13 @@ namespace ET.Client
             
             //2-2. 加载 trigger
             info.LoadSkillInfo(timeline);
-
+            BBExecutable executable = info.AddComponent<BBExecutable>();
+            executable.Parse(timeline.Script);
+            
+            
             //2-3 调用行为初始化协程
             bbParser.RegistParam("InfoId", info.Id);
-            int index = bbParser.function_Pointers[data.functionID];
+            int index = bbParser.Coroutine_Pointers[data.functionID];
   
             while (++index < bbParser.opDict.Count)
             {
@@ -76,13 +79,13 @@ namespace ET.Client
 
                 BBScriptData _data = BBScriptData.Create(opLine, data.functionID, null);
                 Status ret = await handler.Handle(bbParser, _data, token);
-                bbParser.function_Pointers[data.functionID] = index;
+                bbParser.Coroutine_Pointers[data.functionID] = index;
                 
                 if (token.IsCancel()) return Status.Failed;
                 if (ret != Status.Success) return ret;
             }
             //跳转到EndMove外
-            bbParser.function_Pointers[data.functionID] = index;
+            bbParser.Coroutine_Pointers[data.functionID] = index;
             bbParser.RemoveParam("InfoId");
 
             await ETTask.CompletedTask;
