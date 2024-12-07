@@ -7,7 +7,6 @@
         protected override async ETTask Run(Scene scene, ReloadTimelineComponent args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            
             //清空等待事件
             timelineComponent.RemoveComponent<ObjectWait>();
             timelineComponent.AddComponent<ObjectWait>();

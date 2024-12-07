@@ -50,13 +50,6 @@ namespace ET.Client
         {
             self._gameTimer.Restart();
             self.LastTime = 0;
-            
-            self.SceneTimer().Reload();
-            foreach (long instanceId in self.instanceIds)
-            {
-                BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
-                bbTimer.Reload();
-            }
         }
         
         public static BBTimerComponent SceneTimer(this BBTimerManager self)

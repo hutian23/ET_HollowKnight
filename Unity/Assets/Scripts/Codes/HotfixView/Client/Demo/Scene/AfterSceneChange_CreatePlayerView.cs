@@ -16,19 +16,21 @@ namespace ET.Client
             GameObject go = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
 
             //2. 以下组件 切换场景时全部销毁
-            player.AddComponent<ObjectWait>();
             player.AddComponent<GameObjectComponent>().GameObject = go;
+            player.AddComponent<ObjectWait>();
             
             //3. Timeline
             TimelineComponent timelineComponent = player.AddComponent<TimelineComponent>();
+            
             // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
             BBTimerComponent combatTimer = timelineComponent.AddComponent<BBTimerComponent>(); 
             BBTimerManager.Instance.RegistTimer(combatTimer);
             
-            timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<HitboxComponent>();
-            timelineComponent.AddComponent<BehaviorBuffer>();
             timelineComponent.AddComponent<InputWait>();
+            timelineComponent.AddComponent<ObjectWait>();
+            timelineComponent.AddComponent<BBParser>();
+            timelineComponent.AddComponent<BehaviorBuffer>();
         }
     }
 }

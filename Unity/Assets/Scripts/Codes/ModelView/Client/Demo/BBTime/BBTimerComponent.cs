@@ -44,7 +44,7 @@ namespace ET.Client
     
     [ChildOf]
     [ComponentOf]
-    public class BBTimerComponent: Entity, IAwake, IDestroy, IUpdate
+    public class BBTimerComponent: Entity, IAwake, IDestroy, IUpdate, ILoad
     {
         public readonly MultiMap<long, long> TimerId = new();
 

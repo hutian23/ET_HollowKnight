@@ -15,6 +15,14 @@ namespace ET.Client
             }
         }
         
+        public class BBTimerComponentLoadSystem : LoadSystem<BBTimerComponent>
+        {
+            protected override void Load(BBTimerComponent self)
+            {
+                self.Reload();
+            }
+        }
+        
         public class BBTimerComponentDestroySystem: DestroySystem<BBTimerComponent>
         {
             protected override void Destroy(BBTimerComponent self)

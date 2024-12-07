@@ -9,7 +9,6 @@ namespace ET.Client
     //这个事件用于建立Unit和b2world中刚体的映射
     public class HandleCreateB2bodyCallback : AInvokeHandler<CreateB2bodyCallback>
     {
-
         public override void Handle(CreateB2bodyCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
