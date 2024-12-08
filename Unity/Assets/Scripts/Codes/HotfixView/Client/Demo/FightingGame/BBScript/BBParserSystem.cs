@@ -29,14 +29,14 @@ namespace ET.Client
                 kv.Value.Recycle();
             }
             self.ParamDict.Clear();
-            self.opDict.Clear();
+            self.opDict = null; 
         }
         
         public static void Init(this BBParser self, Dictionary<int,string> opDict)
         {
             self.Cancel();
             self.CancellationToken = new ETCancellationToken(); //热重载取消所有BBParser子协程
-            self.opDict = opDict;
+            self.opDict = opDict; 
         }
         
         /// <summary>

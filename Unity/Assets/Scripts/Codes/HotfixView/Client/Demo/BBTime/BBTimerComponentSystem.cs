@@ -363,6 +363,7 @@ namespace ET.Client
         public static void IsFrameUpdateTimer(this BBTimerComponent self)
         {
             self.IsFrameUpdate = true;
+            BBTimerManager.Instance.RegistTimer(self.InstanceId);
         }
     }
 }

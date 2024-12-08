@@ -11,6 +11,7 @@ namespace ET.Client
             protected override void Awake(BBTimerManager self)
             {
                 BBTimerManager.Instance = self;
+                self.Reload();
             }
         }
         

@@ -473,7 +473,7 @@ MonoBehaviour:
 
     BBSprite: ''Walk_9'', 3;
 
-    #BBSprite: ''Walk_10'', 3;
+    BBSprite: ''Walk_10'', 3;
 
     EndLoop:
 

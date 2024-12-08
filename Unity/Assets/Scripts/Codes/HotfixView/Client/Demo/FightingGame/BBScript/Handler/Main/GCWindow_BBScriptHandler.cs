@@ -19,7 +19,7 @@
                 {
                     continue;
                 }
-
+                
                 if ((info.moveType > curInfo.moveType || buffer.ContainGCOption(info.behaviorOrder)) && info.BehaviorCheck())
                 {
                     currentOrder = info.behaviorOrder;

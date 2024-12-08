@@ -267,14 +267,13 @@ MonoBehaviour:
     MaxDash, 2;\nNumericType: DashCount, 2;\nNumericType: JumpCount, 2;\n# \u6CE8\u518C\u843D\u5730\u56DE\u8C03\nRegistAirCheck;\n#
     Input\nRegistInput: RunHold;\nRegistInput: 2LPPressed;\nRegistInput: 5LPPressed;\nRegistInput:
     DashPressed;\nRegistInput: 5LPHold;\nRegistInput: ShouRyuKen;\n# Move\nRegistMove:
-    (Rg_Idle)\n  MoveType: None;\n  EndMove:\nreturn;\nRegistMove: (Rg_Walk)\n  MoveType:
-    Move;\n  EndMove:\nRegistMove: (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove:
-    (Rg_SquitToIdle)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_Squit)\n  MoveType:
-    Move;\n  EndMove:\nRegistMove: (Rg_AirBrone)\n  MoveType: Move;\n  EndMove:\nRegistMove:
-    (Rg_Jump)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_5B)\n  MoveType: Normal;\n 
-    EndMove:\nRegistMove: (Rg_5D)\n  MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_5C)\n 
-    MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_TC_End)\n  MoveType: Normal;\n 
-    EndMove:\nRegistMove: (Rg_AirDash)\n  MoveType: Special;\n  EndMove:\nRegistMove:
-    (Rg_GroundDash)\n  MoveType: Special;\n  EndMove:\nRegistMove: (Rg_ShouRyuuKenn)\n 
-    MoveType: Special;\n  EndMove:\nRegistMove: (Rg_IdleAnim)\n  MoveType: Etc;\n 
-    EndMove:\nreturn;"
+    (Rg_Idle)\n  MoveType: None;\n  EndMove:\nRegistMove: (Rg_Run)\n  MoveType: Move;\n 
+    EndMove:\nRegistMove: (Rg_SquitToIdle)\n  MoveType: Move;\n  EndMove:\nreturn;\nRegistMove:
+    (Rg_Squit)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_AirBrone)\n  MoveType:
+    Move;\n  EndMove:\nRegistMove: (Rg_Jump)\n  MoveType: Move;\n  EndMove:\nRegistMove:
+    (Rg_5B)\n  MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_5D)\n  MoveType: Normal;\n 
+    EndMove:\nRegistMove: (Rg_5C)\n  MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_TC_End)\n 
+    MoveType: Normal;\n  EndMove:\nRegistMove: (Rg_AirDash)\n  MoveType: Special;\n 
+    EndMove:\nRegistMove: (Rg_GroundDash)\n  MoveType: Special;\n  EndMove:\nRegistMove:
+    (Rg_ShouRyuuKenn)\n  MoveType: Special;\n  EndMove:\nRegistMove: (Rg_IdleAnim)\n 
+    MoveType: Etc;\n  EndMove:\nreturn;"

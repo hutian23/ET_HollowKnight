@@ -16,22 +16,23 @@
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
 
-            buffer.SetCurrentOrder(-1);
-            foreach (long id in buffer.DescendInfoList)
+            int targetOrder = 0;
+            foreach (var infoId in buffer.DescendInfoList)
             {
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(id);
-                if (info.moveType is MoveType.Etc || info.moveType is MoveType.HitStun)
+                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
+                if (info.moveType is MoveType.HitStun || info.moveType is MoveType.Etc)
                 {
                     continue;
                 }
-
                 if (info.BehaviorCheck())
                 {
-                    timelineComponent.Reload(info.behaviorOrder);
+                    targetOrder = info.behaviorOrder;
                     break;
                 }
             }
-
+            
+            timelineComponent.Reload(targetOrder);
+            
             await ETTask.CompletedTask;
             return Status.Return;
         }

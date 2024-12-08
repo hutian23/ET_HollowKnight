@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 15
+      Data: 11
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 15
+      Data: 12
     - Name: 
       Entry: 7
       Data: 17|Timeline.EventInfo, Unity.Loader
@@ -443,42 +443,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 29|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 12
-    - Name: keyframeName
-      Entry: 1
-      Data: RunToIdle_5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 30|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 13
-    - Name: keyframeName
-      Entry: 1
-      Data: RunToIdle_6
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 31|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 14
-    - Name: keyframeName
-      Entry: 1
-      Data: RunToIdle_7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -561,12 +525,5 @@ MonoBehaviour:
     3;
 
     BBSprite: ''RunToIdle_4'', 3;
-
-    BBSprite: ''RunToIdle_5'', 3;
-
-    BBSprite:
-    ''RunToIdle_6'', 3;
-
-    BBSprite: ''RunToIdle_7'', 3;
 
     Exit;'

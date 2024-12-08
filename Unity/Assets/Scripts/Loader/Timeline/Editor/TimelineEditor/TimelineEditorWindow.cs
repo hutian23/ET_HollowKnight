@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ET;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -212,9 +211,6 @@ namespace Timeline.Editor
 
         public static void OpenWindow(TimelinePlayer timelinePlayer, BBTimeline timeline)
         {
-            //Stop runtime behavior
-            EventSystem.Instance?.Invoke(new EditTimelineCallback() { instanceId = timelinePlayer.instanceId });
-
             TimelineEditorWindow window = GetWindow<TimelineEditorWindow>();
             window.Dispose();
             window.TimelinePlayer = timelinePlayer;

@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Timeline;
 
 namespace ET.Client
@@ -61,40 +62,35 @@ namespace ET.Client
 
         public static bool BehaviorCheck(this BehaviorInfo self)
         {
-            // bool res = true;
-            // foreach (string opline in self.opLines)
-            // {
-            //     Match match = Regex.Match(opline, @"^\w+");
-            //     if (!match.Success)
-            //     {
-            //         DialogueHelper.ScripMatchError(opline);
-            //         return false;
-            //     }
-            //
-            //     BBTriggerHandler handler = DialogueDispatcherComponent.Instance.GetTrigger(match.Value);
-            //     BBScriptData data = BBScriptData.Create(opline, 0, 0);
-            //     BBParser parser = self.GetParent<BehaviorBuffer>().GetParent<TimelineComponent>().GetComponent<BBParser>();
-            //
-            //     bool ret = handler.Check(parser, data);
-            //     if (ret is false)
-            //     {
-            //         res = false;
-            //         break;
-            //     }
-            // }
-
-            return false;
+            int index = self.GetFunctionPointer("Trigger");
+            if (index == -1) return false;
+            
+            bool res = true;
+            for (int i = index + 1; i < self.opDict.Count; i++)
+            {
+                string opLine = self.opDict[i];
+                Match match = Regex.Match(opLine, @"^\w+");
+                if (!match.Success)
+                {
+                    DialogueHelper.ScripMatchError(opLine);
+                    return false;
+                }
+                if (match.Value.Equals("return")) break;
+                
+                BBTriggerHandler handler = DialogueDispatcherComponent.Instance.GetTrigger(match.Value);
+                BBScriptData data = BBScriptData.Create(opLine, 0, 0);
+                BBParser parser = self.GetParent<BehaviorBuffer>().GetParent<TimelineComponent>().GetComponent<BBParser>();
+                
+                res = handler.Check(parser, data);
+                if (res is false) break;
+            }
+            
+            return res;
         }
 
         public static int GetFunctionPointer(this BehaviorInfo self, string functionName)
         {
-            if (!self.function_Pointer.TryGetValue(functionName, out int index))
-            {
-                Log.Error($"does not exist function pointer: {functionName}");
-                return -1;
-            }
-
-            return index;
+            return self.function_Pointer.GetValueOrDefault(functionName, -1);
         }
 
         public static int GetMarker(this BehaviorInfo self, string markerName)

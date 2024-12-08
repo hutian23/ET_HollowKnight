@@ -22,7 +22,6 @@ namespace ET.Client
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             InputWait wait = timelineComponent.GetComponent<InputWait>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            
             return wait.CheckBuffer(match.Groups["InputType"].Value,bbTimer.GetNow());
         }
     }

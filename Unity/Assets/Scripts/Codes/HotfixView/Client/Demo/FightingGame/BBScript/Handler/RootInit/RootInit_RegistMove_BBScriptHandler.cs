@@ -44,7 +44,7 @@ namespace ET.Client
             
             //3. 跳过Move代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
-            int endIndex = index, startIndex = index + 1;
+            int endIndex = index, startIndex = index;
             while (++index < parser.opDict.Count)
             {
                 string opLine = parser.opDict[index];
@@ -54,7 +54,7 @@ namespace ET.Client
                     break;
                 }
             }
-            parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
+            parser.Coroutine_Pointers[data.CoroutineID] = index;
             
             //4. RegistMove代码块作为子协程执行
             parser.RegistParam("InfoId", info.Id);
