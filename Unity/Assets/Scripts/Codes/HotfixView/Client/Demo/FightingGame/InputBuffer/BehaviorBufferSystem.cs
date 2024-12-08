@@ -36,6 +36,7 @@
             self.behaviorOrderMap.Clear();
             self.DescendInfoList.Clear();
             self.WindowTimer = 0;
+            
             EventSystem.Instance.PublishAsync(self.ClientScene(), new AfterTimelineComponentReload(){instanceId = self.GetParent<TimelineComponent>().InstanceId}).Coroutine();
         }
 

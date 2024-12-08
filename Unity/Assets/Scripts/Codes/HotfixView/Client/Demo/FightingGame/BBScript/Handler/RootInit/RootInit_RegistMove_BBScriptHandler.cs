@@ -31,60 +31,40 @@ namespace ET.Client
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetTimeline(match.Groups["behaviorName"].Value);
 
-            //2. 生成行为信息组件
+            //2. 注册BehaviorInfo组件到BehaviorBuffer
             BehaviorInfo info = buffer.AddChild<BehaviorInfo>();
-            
-            //2-1 行为 order
             int order = buffer.Children.Count - 1;
             info.Timeline = timeline;
             info.behaviorOrder = order;
             info.behaviorName = timeline.timelineName;
+            info.LoadSkillInfo(timeline);
             buffer.behaviorNameMap.Add(info.behaviorName,info.Id); //快速访问到组件
             buffer.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
             buffer.DescendInfoList.Add(info.Id);
             
-            //2-2. 加载 trigger
-            info.LoadSkillInfo(timeline);
-
-            //2-3 调用行为初始化协程
-            parser.RegistParam("InfoId", info.Id);
+            //3. 跳过Move代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
-  
+            int endIndex = index, startIndex = index + 1;
             while (++index < parser.opDict.Count)
             {
                 string opLine = parser.opDict[index];
-                Match match2 = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
-                if (!match2.Success)
+                if (opLine.Equals("EndCallback:"))
                 {
-                    DialogueHelper.ScripMatchError(opLine);
-                    return Status.Failed;
-                }
-                
-                string opType = match2.Value;
-                //退出
-                if (opType.Equals("EndMove"))
-                {
+                    endIndex = index;
                     break;
                 }
-
-                if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
-                {
-                    Log.Error($"not found script handler: {opType}");
-                    return Status.Failed;
-                }
-
-                BBScriptData _data = BBScriptData.Create(opLine, data.CoroutineID, null);
-                Status ret = await handler.Handle(parser, _data, token);
-                parser.Coroutine_Pointers[data.CoroutineID] = index;
-                
-                if (token.IsCancel()) return Status.Failed;
-                if (ret != Status.Success) return ret;
             }
-            //跳转到EndMove外
-            parser.Coroutine_Pointers[data.CoroutineID] = index;
+            parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
+            
+            //4. RegistMove代码块作为子协程执行
+            parser.RegistParam("InfoId", info.Id);
+            await parser.RegistSubCoroutine(startIndex, endIndex, token);
+            if (token.IsCancel())
+            {
+                return Status.Failed;
+            }
             parser.RemoveParam("InfoId");
-
-            await ETTask.CompletedTask;
+            
             return Status.Success;
         }
     }

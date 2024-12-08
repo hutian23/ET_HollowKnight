@@ -1,11 +1,12 @@
 ﻿using ET.Event;
+using Testbed.Abstractions;
 using Camera = UnityEngine.Camera;
 
 namespace ET.Client
 {
     [FriendOf(typeof (b2WorldManager))]
     [FriendOf(typeof (b2Body))]
-    public static class b2GameManagerSystem
+    public static class b2WorldManagerSystem
     {
         public class b2WorldManagerAwakeSystem: AwakeSystem<b2WorldManager>
         {
@@ -31,6 +32,7 @@ namespace ET.Client
         {
             protected override void FixedUpdate(b2WorldManager self)
             {
+                if (Global.Settings.Pause) return;
                 self.Step();
             }
         }
@@ -73,6 +75,9 @@ namespace ET.Client
             BBTimerComponent PostStepTimer = self.GetChild<BBTimerComponent>(self.PostStepTimer);
             PreStepTimer.Reload();
             PostStepTimer.Reload();
+
+            Global.Settings.Pause = false;
+            Global.Settings.SingleStep = false;
         }
         
         private static void Reload(this b2WorldManager self)
