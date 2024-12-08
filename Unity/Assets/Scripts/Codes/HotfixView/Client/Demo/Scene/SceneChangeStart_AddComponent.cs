@@ -14,20 +14,15 @@ namespace ET.Client
             await ResourcesComponent.Instance.LoadBundleAsync($"{currentScene.Name}.unity3d");
             // 切换到map场景
             await SceneManager.LoadSceneAsync(currentScene.Name);
-
+            
+            //管理逻辑帧
+            currentScene.AddComponent<BBTimerManager>();
+            //管理物理帧
+            currentScene.AddComponent<b2WorldManager>();
             //管理输入
             currentScene.AddComponent<BBInputComponent>();
-            //Timeline管理
-            currentScene.AddComponent<TimelineManager>();
-            //添加物理世界管理组件
-            currentScene.AddComponent<b2GameManager>();
-            currentScene.AddComponent<GameManager>();
-
-            currentScene.AddComponent<BBTimerManager>();
-            
-            //注册SceneTimer到timerManager
-            BBTimerComponent sceneTimer = currentScene.AddComponent<BBTimerComponent>();
-            BBTimerManager.Instance.RegistSceneTimer(sceneTimer);
+            //注册SceneTimer
+            currentScene.AddComponent<BBTimerComponent>();
         }
     }
 }

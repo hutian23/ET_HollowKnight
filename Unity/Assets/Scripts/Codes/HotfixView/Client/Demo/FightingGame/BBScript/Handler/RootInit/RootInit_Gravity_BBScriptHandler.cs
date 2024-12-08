@@ -10,7 +10,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             
             //根运动，不需要模拟重力
             if (body.GetComponent<RootMotionComponent>() != null)

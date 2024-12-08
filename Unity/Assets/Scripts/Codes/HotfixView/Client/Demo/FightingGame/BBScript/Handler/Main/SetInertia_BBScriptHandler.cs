@@ -8,7 +8,7 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             
             int preFlip = self.GetParam<int>("Inertia_PreFlip");
@@ -55,7 +55,7 @@ namespace ET.Client
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.InertiaTimer, parser);
             parser.RegistParam("Inertia_Timer", timer);

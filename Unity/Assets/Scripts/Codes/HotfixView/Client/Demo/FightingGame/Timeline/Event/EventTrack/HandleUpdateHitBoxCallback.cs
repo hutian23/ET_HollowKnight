@@ -8,14 +8,14 @@ namespace ET.Client
     [Invoke]
     [FriendOf(typeof(HitboxComponent))]
     [FriendOf(typeof(b2Body))]
-    [FriendOf(typeof(b2GameManager))]
+    [FriendOf(typeof(b2WorldManager))]
     public class HandleUpdateHitBoxCallback : AInvokeHandler<UpdateHitboxCallback>
     {
         public override void Handle(UpdateHitboxCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
 
             //更新关键帧
             hitBoxComponent.keyFrame = args.Keyframe;

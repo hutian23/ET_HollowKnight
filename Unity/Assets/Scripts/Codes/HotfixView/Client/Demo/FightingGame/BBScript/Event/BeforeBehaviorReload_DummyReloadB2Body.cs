@@ -9,7 +9,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, BeforeBehaviorReload args)
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
-            b2Body b2Body = b2GameManager.Instance.GetBody(unit.InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             HitboxComponent hitboxComponent = unit.GetComponent<TimelineComponent>().GetComponent<HitboxComponent>();
 
             //1. 销毁旧夹具

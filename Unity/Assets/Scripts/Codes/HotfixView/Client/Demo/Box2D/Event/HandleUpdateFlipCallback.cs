@@ -18,7 +18,7 @@ namespace ET.Client
             HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
 
             //1. Set Flip
-            b2Body b2Body = b2GameManager.Instance.GetBody(args.instanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(args.instanceId);
             b2Body.Flip = args.curFlip;
             //1-1 go sync flipState
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;

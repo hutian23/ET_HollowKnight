@@ -25,4 +25,9 @@ namespace ET.Client
 
         public long WindowTimer;
     }
+
+    public struct AfterTimelineComponentReload
+    {
+        public long instanceId;
+    }
 }

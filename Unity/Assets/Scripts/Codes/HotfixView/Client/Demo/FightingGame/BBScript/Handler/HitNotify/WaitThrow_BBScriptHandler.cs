@@ -12,7 +12,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
+            BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
             
             int count = hitboxComponent.CollisionBuffer.Count;
             while (count -- > 0)
@@ -35,7 +35,7 @@ namespace ET.Client
                 //3. Set targetBind 
                 Log.Warning("Throw");
                 Vector2 targetBind = self.GetParam<Vector2>("TargetBind");
-                b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+                b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
                 b2Body hitBody = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
                 hitBody.SetPosition(b2Body.GetPosition() + targetBind);
                 
@@ -54,7 +54,7 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
+            BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
 
             long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.ThrowCheckTimer, parser);
             parser.RegistParam("ThrowCheckTimer", timer);

@@ -28,7 +28,7 @@ namespace ET.Client
             Vector2 pos = new Vector2(posX, posY) / 1000f;
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            b2Body b2Body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             b2Body.SetPosition(pos);
             
             await ETTask.CompletedTask;

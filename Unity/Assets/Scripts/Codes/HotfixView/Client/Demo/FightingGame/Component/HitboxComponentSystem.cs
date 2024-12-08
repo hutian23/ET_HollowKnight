@@ -11,6 +11,14 @@
             }
         }
         
+        public class HitboxComponentAwakeSystem : AwakeSystem<HitboxComponent>
+        {
+            protected override void Awake(HitboxComponent self)
+            {
+                EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.GetParent<TimelineComponent>().InstanceId});
+            }
+        }
+        
         public class HitboxComponentLoadSystem : LoadSystem<HitboxComponent>
         {
             protected override void Load(HitboxComponent self)

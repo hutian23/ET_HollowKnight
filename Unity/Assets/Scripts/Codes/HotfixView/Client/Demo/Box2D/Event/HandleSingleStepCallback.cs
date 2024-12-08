@@ -16,7 +16,7 @@ namespace ET.Client
             BBTimerManager.Instance.Step();
             
             //2. 物理层更新一帧
-            b2GameManager.Instance.Step();
+            b2WorldManager.Instance.Step();
         }
     }
 }

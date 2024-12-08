@@ -32,7 +32,7 @@ namespace ET.Client
             Random random = new();
             Vector3 shakePos = new(random.Next(-shakeLength, shakeLength) / 25000f, random.Next(-shakeLength, shakeLength) / 25000f);
 
-            b2Body b2Body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             GameObject go = self.GetParent<TimelineComponent>().GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
             go.transform.position = b2Body.trans.Position.ToUnityVector3() + shakePos;
         }

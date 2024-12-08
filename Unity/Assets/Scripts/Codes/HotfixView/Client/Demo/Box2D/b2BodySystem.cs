@@ -100,7 +100,7 @@ namespace ET.Client
 
         public static void ClearHitbox(this b2Body self)
         {
-            if (b2GameManager.Instance.IsLocked())
+            if (b2WorldManager.Instance.IsLocked())
             {
                 Log.Error($"cannot dispose fixture while b2World is locked!!");
                 return;
@@ -115,7 +115,7 @@ namespace ET.Client
 
         public static void CreateHitbox(this b2Body self,FixtureDef fixtureDef)
         {
-            if (b2GameManager.Instance.IsLocked())
+            if (b2WorldManager.Instance.IsLocked())
             {
                 Log.Error($"cannot dispose fixture while b2World is locked!!");
                 return;

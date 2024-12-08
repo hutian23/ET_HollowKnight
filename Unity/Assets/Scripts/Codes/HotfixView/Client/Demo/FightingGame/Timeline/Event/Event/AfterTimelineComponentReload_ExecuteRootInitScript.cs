@@ -1,15 +1,12 @@
 ﻿namespace ET.Client
 {
-    [Event(SceneType.Current)]
+    [Event(SceneType.Client)]
     [FriendOf(typeof(BBParser))]
-    public class ReloadTimelineComponent_ReloadComponent : AEvent<ReloadTimelineComponent>
+    public class AfterTimelineComponentReload_ExecuteRootInitScript : AEvent<AfterTimelineComponentReload>
     {
-        protected override async ETTask Run(Scene scene, ReloadTimelineComponent args)
+        protected override async ETTask Run(Scene scene, AfterTimelineComponentReload args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            //清空等待事件
-            timelineComponent.RemoveComponent<ObjectWait>();
-            timelineComponent.AddComponent<ObjectWait>();
             
             //1-1 RootInit
             // string RootScript = timelineComponent.GetTimelinePlayer().BBPlayable.rootScript;
@@ -19,6 +16,7 @@
             
             //1-2 重载Parser,进入默认行为
             // timelineComponent.Reload(0);
+            Log.Warning("Hello World");
             await ETTask.CompletedTask;
         }
     }

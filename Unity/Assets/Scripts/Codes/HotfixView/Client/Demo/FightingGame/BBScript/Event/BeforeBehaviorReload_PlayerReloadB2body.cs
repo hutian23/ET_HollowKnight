@@ -9,7 +9,7 @@
         protected override async ETTask Run(Scene scene, BeforeBehaviorReload args)
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
-            b2Body b2Body = b2GameManager.Instance.GetBody(unit.InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             InputWait inputWait = unit.GetComponent<TimelineComponent>().GetComponent<InputWait>();
             HitboxComponent hitboxComponent = unit.GetComponent<TimelineComponent>().GetComponent<HitboxComponent>();
             

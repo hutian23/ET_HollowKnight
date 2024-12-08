@@ -24,7 +24,7 @@ namespace ET.Client
                 flip = 1;
             }
             
-            b2Body B2body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body B2body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             Vector2 curV = new(flip * self.GetParam<long>("AirMoveX") / 1000f ,B2body.GetVelocity().Y);
             B2body.SetVelocity(curV);
             

@@ -5,11 +5,19 @@
     [FriendOf(typeof(BBTimerComponent))]
     public static class BehaviorBufferSystem
     {
+        public class BehaviorBufferAwakeSystem : AwakeSystem<BehaviorBuffer>
+        {
+            protected override void Awake(BehaviorBuffer self)
+            {
+                self.Init();
+            }
+        }
+        
         public class BehaviorBufferLoadSystem : LoadSystem<BehaviorBuffer>
         {
             protected override void Load(BehaviorBuffer self)
             {
-                self.Init();
+                self.Init(); 
             }
         }
 
@@ -28,6 +36,7 @@
             self.behaviorOrderMap.Clear();
             self.DescendInfoList.Clear();
             self.WindowTimer = 0;
+            EventSystem.Instance.PublishAsync(self.ClientScene(), new AfterTimelineComponentReload(){instanceId = self.GetParent<TimelineComponent>().InstanceId}).Coroutine();
         }
 
         public static void SetCurrentOrder(this BehaviorBuffer self, int order)

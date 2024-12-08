@@ -26,7 +26,7 @@ namespace ET.Client
             timelineComponent.UpdateParam("DashCount", maxDash);
             
             //Land
-            b2Body body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
             
             float MaxFall = -timelineComponent.GetParam<long>("MaxFall") / 1000f;

@@ -60,7 +60,7 @@ namespace ET.Client
 
             //缓存b2Body.instanceId
             bbParser.RegistParam("HitBuffer", new HashSet<long>());
-            long timer = b2GameManager.Instance.GetPostStepTimer().NewFrameTimer(BBTimerInvokeType.HitNotifyTimer, bbParser);
+            long timer = b2WorldManager.Instance.GetPostStepTimer().NewFrameTimer(BBTimerInvokeType.HitNotifyTimer, bbParser);
             bbParser.RegistParam("HitNotifyTimer", timer);
 
             //跳过代码块
@@ -81,7 +81,7 @@ namespace ET.Client
             
             token.Add(() =>
             {
-                b2GameManager.Instance.GetPostStepTimer().Remove(ref timer);
+                b2WorldManager.Instance.GetPostStepTimer().Remove(ref timer);
             });
 
             await ETTask.CompletedTask;

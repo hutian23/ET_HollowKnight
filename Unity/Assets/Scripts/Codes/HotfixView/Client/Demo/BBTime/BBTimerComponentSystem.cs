@@ -59,6 +59,12 @@ namespace ET.Client
             self.curFrame = 0;
             self.Accumulator = 0;
             self.idGenerator = 0;
+            
+            //重新注册进BBTimerManager
+            if (self.IsFrameUpdate)
+            {
+                BBTimerManager.Instance.RegistTimer(self.InstanceId);
+            }
         }
 
         public static long GetFrameLength(this BBTimerComponent self)
@@ -352,6 +358,11 @@ namespace ET.Client
         public static int GetHertz(this BBTimerComponent self)
         {
             return self.Hertz;
+        }
+
+        public static void IsFrameUpdateTimer(this BBTimerComponent self)
+        {
+            self.IsFrameUpdate = true;
         }
     }
 }

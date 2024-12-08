@@ -17,6 +17,14 @@ namespace ET.Client
             }
         }
 
+        public class InputWaitAwakeSystem : AwakeSystem<InputWait>
+        {
+            protected override void Awake(InputWait self)
+            {
+                self.Init();
+            }
+        }
+        
         public class InputWaitLoadSystem : LoadSystem<InputWait>
         {
             protected override void Load(InputWait self)
@@ -213,7 +221,7 @@ namespace ET.Client
             self.infoQueue.Enqueue(new InputInfo()
                 {
                     op = ops,
-                    Flip = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId).GetFlip(),
+                    Flip = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId).GetFlip(),
                     frame = BBTimerManager.Instance.SceneTimer().GetNow()
                 });
             

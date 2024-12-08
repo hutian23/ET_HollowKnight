@@ -37,7 +37,7 @@ namespace ET.Client
                     TriggerExitId = TriggerExitType.GroundCollision
                 },
             };
-            b2Body B2body = b2GameManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body B2body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             Fixture groundCheckBox = B2body.body.CreateFixture(fixtureDef);
             timelineComponent.RegistParam("GroundCheckBox", groundCheckBox);
             

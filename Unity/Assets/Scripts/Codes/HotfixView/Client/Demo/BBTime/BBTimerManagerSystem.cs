@@ -33,6 +33,14 @@ namespace ET.Client
             }
         }
         
+        public class BBTimerManagerReloadSystem : LoadSystem<BBTimerManager>
+        {
+            protected override void Load(BBTimerManager self)
+            {
+                self.Reload();
+            }
+        }
+        
         public static void Step(this BBTimerManager self)
         {
             //1. SceneTimer
@@ -46,32 +54,28 @@ namespace ET.Client
             }
         }
 
-        public static void Reload(this BBTimerManager self)
+        private static void Reload(this BBTimerManager self)
         {
             self._gameTimer.Restart();
             self.LastTime = 0;
+            self.instanceIds.Clear();
         }
         
         public static BBTimerComponent SceneTimer(this BBTimerManager self)
         {
-            BBTimerComponent sceneTimer = Root.Instance.Get(self.SceneTimerId) as BBTimerComponent;
+            BBTimerComponent sceneTimer = self.GetParent<Scene>().GetComponent<BBTimerComponent>();
             return sceneTimer;
-        }
-
-        public static void RegistSceneTimer(this BBTimerManager self, BBTimerComponent sceneTimer)
-        {
-            self.SceneTimerId = sceneTimer.InstanceId;
         }
         
         //管理timer
-        public static void RegistTimer(this BBTimerManager self, BBTimerComponent bbTimer)
+        public static void RegistTimer(this BBTimerManager self, long instanceId)
         {
-            self.instanceIds.Add(bbTimer.InstanceId);
+            self.instanceIds.Add(instanceId);
         }
 
-        public static void RemoveTimer(this BBTimerManager self, BBTimerComponent bbTimer)
+        public static void RemoveTimer(this BBTimerManager self, long instanceId)
         {
-            self.instanceIds.Remove(bbTimer.InstanceId);
+            self.instanceIds.Remove(instanceId);
         }
         
         public static void Pause(this BBTimerManager self,bool pause)

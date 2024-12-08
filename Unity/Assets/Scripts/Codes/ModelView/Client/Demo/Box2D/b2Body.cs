@@ -5,7 +5,7 @@ using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
 {
-    [ChildOf(typeof (b2GameManager))]
+    [ChildOf(typeof (b2WorldManager))]
     public class b2Body: Entity, IAwake, IDestroy, IPostStep
     {
         //记录unit的instanceId

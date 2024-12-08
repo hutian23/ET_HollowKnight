@@ -12,7 +12,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBParser parser = timelineComponent.GetComponent<BBParser>();
-            BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
+            BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
 
             //exec trigger
             BBScriptData data = BBScriptData.Create(self.trigger, 0, null);
@@ -73,7 +73,7 @@ namespace ET.Client
 
             //2. regist callback entity
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent postStepTimer = b2GameManager.Instance.GetPostStepTimer();
+            BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
             TimelineCallback timelineCallback = timelineComponent.AddChild<TimelineCallback>();
             timelineComponent.callbackDict.Add(callbackName, timelineCallback.Id);
 

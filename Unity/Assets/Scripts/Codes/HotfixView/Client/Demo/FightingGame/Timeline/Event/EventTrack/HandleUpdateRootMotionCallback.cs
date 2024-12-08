@@ -12,7 +12,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             Unit unit = timelineComponent.GetParent<Unit>();
-            b2Body B2body = b2GameManager.Instance.GetBody(unit.InstanceId);
+            b2Body B2body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             if (args.ApplyRootMotion)
             {
                 RootMotionComponent rootMotion = B2body.GetComponent<RootMotionComponent>() ?? B2body.AddComponent<RootMotionComponent>();

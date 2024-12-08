@@ -21,7 +21,7 @@ namespace ET.Client
 
             //Find Component
             Unit unit = timelineComponent.GetParent<Unit>();
-            b2Body b2body = b2GameManager.Instance.GetBody(unit.InstanceId);
+            b2Body b2body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BehaviorInfo info = buffer.GetCurrentOrder() == -1? null : buffer.GetInfoByOrder(buffer.GetCurrentOrder());
 

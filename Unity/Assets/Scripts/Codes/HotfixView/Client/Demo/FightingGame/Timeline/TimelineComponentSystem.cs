@@ -7,7 +7,6 @@ namespace ET.Client
     [FriendOf(typeof(TimelineComponent))]
     public static class TimelineComponentSystem
     {
-        [FriendOf(typeof(TimelineManager))]
         public class TimelineComponentAwakeSystem : AwakeSystem<TimelineComponent>
         {
             protected override void Awake(TimelineComponent self)
@@ -18,8 +17,7 @@ namespace ET.Client
                 timelinePlayer.instanceId = self.InstanceId;
             }
         }
-
-        [FriendOf(typeof(TimelineManager))]
+        
         public class TimelineComponentDestroySystem : DestroySystem<TimelineComponent>
         {
             protected override void Destroy(TimelineComponent self)

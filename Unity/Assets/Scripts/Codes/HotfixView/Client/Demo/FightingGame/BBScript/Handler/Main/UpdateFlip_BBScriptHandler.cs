@@ -8,7 +8,7 @@
         protected override void Run(InputWait self)
         {
             //更新刚体朝向
-            b2Body b2Body = b2GameManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             
             FlipState preFlip = b2Body.Flip;
             FlipState curFlip = preFlip;
