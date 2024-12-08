@@ -27,7 +27,7 @@ namespace ET.Client
             string behavior = match.Groups["behavior"].Value;
             BehaviorInfo info = buffer.GetInfoByName(behavior);
 
-            timelineComponent.Reload(info.Timeline, info.behaviorOrder);
+            timelineComponent.Reload(info.behaviorOrder);
 
             await ETTask.CompletedTask;
             return Status.Success;

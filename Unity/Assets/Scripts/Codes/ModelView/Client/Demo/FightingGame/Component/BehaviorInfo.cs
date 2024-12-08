@@ -12,7 +12,7 @@ namespace ET.Client
         public MoveType moveType;
         
         // BBScript
-        public List<string> opDict = new();
+        public Dictionary<int, string> opDict = new();
         public Dictionary<string, int> function_Pointer = new();
         public Dictionary<string, int> marker_Pointer = new();
     }

@@ -51,7 +51,7 @@ namespace ET.Client
                 //匹配Marker指针
                 string pattern2 = @"SetMarker:\s+'([^']*)'";
                 Match match2 = Regex.Match(opLine, pattern2);
-                if (match.Success)
+                if (match2.Success)
                 {
                     self.marker_Pointer.TryAdd(match2.Groups[1].Value, i);
                 }
@@ -84,6 +84,28 @@ namespace ET.Client
             // }
 
             return false;
+        }
+
+        public static int GetFunctionPointer(this BehaviorInfo self, string functionName)
+        {
+            if (!self.function_Pointer.TryGetValue(functionName, out int index))
+            {
+                Log.Error($"does not exist function pointer: {functionName}");
+                return -1;
+            }
+
+            return index;
+        }
+
+        public static int GetMarker(this BehaviorInfo self, string markerName)
+        {
+            if (!self.marker_Pointer.TryGetValue(markerName, out int index))
+            {
+                Log.Error($"does not exist marker pointer: {markerName}");
+                return -1;
+            }
+
+            return index;
         }
     }
 }

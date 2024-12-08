@@ -266,8 +266,8 @@ MonoBehaviour:
     150000;\nNumericType: MaxFall, 45000;\nNumericType: MaxJump, 2;\nNumericType:
     MaxDash, 2;\nNumericType: DashCount, 2;\nNumericType: JumpCount, 2;\n# \u6CE8\u518C\u843D\u5730\u56DE\u8C03\nRegistAirCheck;\n#
     Input\nRegistInput: RunHold;\nRegistInput: 2LPPressed;\nRegistInput: 5LPPressed;\nRegistInput:
-    DashPressed;\nRegistInput: 5LPHold;\nRegistInput: ShouRyuKen;\nreturn;\n# Move\nRegistMove:
-    (Rg_Idle)\n  MoveType: None;\n  EndMove:\nRegistMove: (Rg_Walk)\n  MoveType:
+    DashPressed;\nRegistInput: 5LPHold;\nRegistInput: ShouRyuKen;\n# Move\nRegistMove:
+    (Rg_Idle)\n  MoveType: None;\n  EndMove:\nreturn;\nRegistMove: (Rg_Walk)\n  MoveType:
     Move;\n  EndMove:\nRegistMove: (Rg_Run)\n  MoveType: Move;\n  EndMove:\nRegistMove:
     (Rg_SquitToIdle)\n  MoveType: Move;\n  EndMove:\nRegistMove: (Rg_Squit)\n  MoveType:
     Move;\n  EndMove:\nRegistMove: (Rg_AirBrone)\n  MoveType: Move;\n  EndMove:\nRegistMove:

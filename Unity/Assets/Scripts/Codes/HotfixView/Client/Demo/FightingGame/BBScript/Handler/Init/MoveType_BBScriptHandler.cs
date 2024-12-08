@@ -26,7 +26,7 @@ namespace ET.Client
                 Log.Error($"cannot parser {match.Groups["MoveType"].Value} to MoveType");
                 return Status.Failed;
             }
-
+            
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BehaviorInfo info = buffer.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));

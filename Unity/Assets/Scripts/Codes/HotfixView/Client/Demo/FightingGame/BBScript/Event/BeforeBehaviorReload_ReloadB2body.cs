@@ -4,7 +4,7 @@
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(InputWait))]
     [FriendOf(typeof(HitboxComponent))]
-    public class BeforeBehaviorReload_PlayerReloadB2body : AEvent<BeforeBehaviorReload>
+    public class BeforeBehaviorReload_ReloadB2body : AEvent<BeforeBehaviorReload>
     {
         protected override async ETTask Run(Scene scene, BeforeBehaviorReload args)
         {

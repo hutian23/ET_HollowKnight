@@ -20,12 +20,16 @@ namespace ET.Client
             {
                 string op = opLine.Trim();
                 if (string.IsNullOrEmpty(op) || op.StartsWith('#')) continue;
-                opDict[pointer++] = opLine;
+                opDict[pointer++] = op;
             }
             
-            //2. 
+            //2. RootInit Coroutine
             parser.Init(opDict);
             await parser.Invoke(1, parser.CancellationToken);
+            if (parser.CancellationToken.IsCancel()) return;
+            
+            //3. enter default behavior
+            timelineComponent.Reload(0);
         }
     }
 }

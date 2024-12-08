@@ -474,7 +474,7 @@ MonoBehaviour:
 
     SetVelocityX: 0;
 
-    IdleAnim: Rg_IdleAnim;
+    #IdleAnim: Rg_IdleAnim;
 
     InputBuffer:
     true;

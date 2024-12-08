@@ -48,7 +48,7 @@ namespace ET.Client
             while (++index < parser.opDict.Count)
             {
                 string opLine = parser.opDict[index];
-                if (opLine.Equals("EndCallback:"))
+                if (opLine.Equals("EndMove:"))
                 {
                     endIndex = index;
                     break;
@@ -63,7 +63,7 @@ namespace ET.Client
             {
                 return Status.Failed;
             }
-            parser.RemoveParam("InfoId");
+            parser.TryRemoveParam("InfoId");
             
             return Status.Success;
         }

@@ -19,6 +19,13 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
+
+            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorInfo info = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
+            
+            int markerPointer = info.GetMarker(match.Groups["marker"].Value);
+            parser.Coroutine_Pointers[data.CoroutineID] = markerPointer;
             
             await TimerComponent.Instance.WaitFrameAsync(token);
             return token.IsCancel()? Status.Failed : Status.Success;
