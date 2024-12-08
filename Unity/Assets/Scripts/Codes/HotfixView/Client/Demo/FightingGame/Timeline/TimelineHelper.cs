@@ -17,14 +17,12 @@
             BBParser parser = self.GetComponent<BBParser>();
             BehaviorInfo info = buffer.GetInfoByOrder(behaviorOrder);
             
-            // 切换行为前回调
-            EventSystem.Instance.PublishAsync(self.ClientScene(), new BeforeBehaviorReload() { instanceId = self.GetParent<Unit>().InstanceId, behaviorOrder = behaviorOrder }).Coroutine();
-            
             //渲染层 重新生成PlayableGraph
             self.GetTimelinePlayer().Init(info.Timeline);
-            
-            // 调用Main协程
             parser.Init(info.opDict);
+            // 切换行为前回调
+            EventSystem.Instance.PublishAsync(self.ClientScene(), new BeforeBehaviorReload() { instanceId = self.GetParent<Unit>().InstanceId, behaviorOrder = behaviorOrder }).Coroutine();
+            // 调用Main协程
             parser.Invoke(info.GetFunctionPointer("Main"), parser.CancellationToken).Coroutine();
         }
     }

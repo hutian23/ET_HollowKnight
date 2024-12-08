@@ -9,27 +9,29 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, SceneChangeFinish args)
         {
             //1. load dummy go
-            // await ResourcesComponent.Instance.LoadBundleAsync($"dummy.unity3d");
-            // GameObject prefab = (GameObject)ResourcesComponent.Instance.GetAsset($"dummy.unity3d", $"Dummy");
-            // GameObject go = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
-            // go.name = "Dummy";
+            // for (int i = 0; i < 10; i++)
+            // {
+            //     await ResourcesComponent.Instance.LoadBundleAsync($"dummy.unity3d");
+            //     GameObject prefab = (GameObject)ResourcesComponent.Instance.GetAsset($"dummy.unity3d", $"Dummy");
+            //     GameObject go = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
+            //     go.name = "Dummy";
             //
-            // //2. create dummy unit
-            // UnitComponent unitComponent = scene.CurrentScene().GetComponent<UnitComponent>();
-            // Unit dummy = unitComponent.AddChild<Unit, int>(1005);
+            //     //2. create dummy unit
+            //     UnitComponent unitComponent = scene.CurrentScene().GetComponent<UnitComponent>();
+            //     Unit dummy = unitComponent.AddChild<Unit, int>(1005);
             //
-            // //3. dummy component
-            // dummy.AddComponent<ObjectWait>();
-            // dummy.AddComponent<GameObjectComponent>().GameObject = go;
+            //     //3. dummy component
+            //     dummy.AddComponent<ObjectWait>();
+            //     dummy.AddComponent<GameObjectComponent>().GameObject = go;
             //
-            // TimelineComponent timelineComponent = dummy.AddComponent<TimelineComponent>();
+            //     TimelineComponent timelineComponent = dummy.AddComponent<TimelineComponent>();
             //
-            // BBTimerComponent combatTimer = timelineComponent.AddComponent<BBTimerComponent>(); // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
-            // BBTimerManager.Instance.RegistTimer(combatTimer);
-            //
-            // timelineComponent.AddComponent<HitboxComponent>();
-            // timelineComponent.AddComponent<BBParser>();
-            // timelineComponent.AddComponent<BehaviorBuffer>();
+            //     timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
+            //     timelineComponent.AddComponent<HitboxComponent>();
+            //     timelineComponent.AddComponent<ObjectWait>();
+            //     timelineComponent.AddComponent<BBParser>();
+            //     timelineComponent.AddComponent<BehaviorBuffer>();
+            // }
             await ETTask.CompletedTask;
         }
     }

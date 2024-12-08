@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
@@ -8,37 +7,13 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            InputWait inputWait = self.GetParent<TimelineComponent>().GetComponent<InputWait>();
-
-            // -1 -- left 1 -- right 0 -- middle
-            int flip = 0;
-            bool Left = inputWait.IsPressed(BBOperaType.LEFT) | inputWait.IsPressed(BBOperaType.UPLEFT) | inputWait.IsPressed(BBOperaType.DOWNLEFT);
-            bool right = inputWait.IsPressed(BBOperaType.RIGHT) | inputWait.IsPressed(BBOperaType.DOWNRIGHT) | inputWait.IsPressed(BBOperaType.UPRIGHT);
-            //回中
-            if (Left)
-            {
-                flip = -1;
-            }
-            else if (right)
-            {
-                flip = 1;
-            }
-            
-            b2Body B2body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
-            Vector2 curV = new(flip * self.GetParam<long>("AirMoveX") / 1000f ,B2body.GetVelocity().Y);
-            B2body.SetVelocity(curV);
-            
-            //already in air, remove timer
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-
-            if (self.ContainParam("AirMoveXTimer") && !timelineComponent.GetParam<bool>("InAir"))
-            {
-                long timer = self.GetParam<long>("AirMoveXTimer");
-                bbTimer.Remove(ref timer);
-                self.TryRemoveParam("AirMoveXTimer");
-                self.TryRemoveParam("AirMoveX");
-            }
+            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
+            
+            //当前回中，则不会进行移动
+            bool IsMiddle = inputWait.IsPressing(BBOperaType.MIDDLE);
+            b2Body B2body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            B2body.SetVelocityX(IsMiddle ? 0 : self.GetParam<long>("AirMoveX") / 1000f);
         }
     }
 

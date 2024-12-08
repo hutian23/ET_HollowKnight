@@ -24,15 +24,9 @@ namespace ET.Client
             }
 
             string transitionFlag = $"Transition_{match.Groups["transition"].Value}";
-
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            if (!bbParser.ContainParam(transitionFlag))
-            {
-                return false;
-            }
-
-            return bbParser.GetParam<bool>($"Transition_{match.Groups["transition"].Value}");
+            return bbParser.ContainParam(transitionFlag);
         }
     }
 }

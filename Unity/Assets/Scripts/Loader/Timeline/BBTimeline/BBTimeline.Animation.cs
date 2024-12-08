@@ -7,7 +7,6 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-using Testbed.Abstractions;
 using Timeline.Editor;
 #endif
 using UnityEngine.Animations;
@@ -39,7 +38,7 @@ namespace Timeline
 
         public bool ApplyRootMotion;
 
-        //rootmotion data
+        //rootMotion data
         [OdinSerialize, NonSerialized]
         public Dictionary<string, AnimationCurve> rootMotionDict = new();
 
@@ -255,10 +254,10 @@ namespace Timeline
             Output.SetInputWeight(Index, weight);
         }
 
-        private float GetInputWeight()
-        {
-            return Output.GetInputWeight(Index);
-        }
+        // private float GetInputWeight()
+        // {
+        //     return Output.GetInputWeight(Index);
+        // }
 
         public void SetTime(int targetFrame)
         {
@@ -278,10 +277,10 @@ namespace Timeline
             //Runtime mode ---> invoke update trans callback
             else
             {
-                var pos = animationClip.CurrentPosition(clipInFrame + 1);
-                var prePos = animationClip.CurrentPosition(clipInFrame);
+                Vector3 pos = animationClip.CurrentPosition(clipInFrame + 1);
+                Vector3 prePos = animationClip.CurrentPosition(clipInFrame);
                 //dv = dx / dt 
-                var velocity = (pos - prePos) * Global.Settings.Hertz;
+                Vector3 velocity = (pos - prePos) * 60;
 
                 EventSystem.Instance.Invoke(new UpdateRootMotionCallback()
                 {

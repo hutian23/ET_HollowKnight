@@ -884,4 +884,4 @@ MonoBehaviour:
   Script: "@Trigger:\nNumericCheck: DashCount > 0;\nInputType: DashPressed;\nInAir:
     false;\nreturn;\n\n@Main:\nNumericAdd: DashCount, -1;\nBeginIf: (NumericCheck:
     DashCount = 0)\nDashRecharge: 50;\nEndIf:\nSetTransition: 'SquitToIdle';\nMarkerEvent:
-    (GC_Start)\n  GCWindow;\n  GCOption: 'Rg_Jump';\n  EndMarkerEvent:\nStartTimeline;\nExit;"
+    (GC_Start)\n  InputBuffer: true;\n  GCWindow;\n  GCOption: 'Rg_Jump';\n  EndMarkerEvent:\nStartTimeline;\nExit;"

@@ -866,42 +866,46 @@ MonoBehaviour:
 
     @Main:
 
+    InputBuffer:
+    true;
+
     DefaultWindow;
 
-    AirMoveX:
-    15000;
+    AirMoveX: 15000;
 
     UpdateFlip;
 
-    Gravity: 100000;
+    Gravity:
+    100000;
 
-    BeginIf: (TransitionCached:
-    ''JumpToFall'')
+    BeginIf: (TransitionCached: ''JumpToFall'')
 
-    BBSprite: ''JumpToFall_1'', 4;
-
-    BBSprite: ''JumpToFall_2'',
+    BBSprite: ''JumpToFall_1'',
     4;
+
+    BBSprite: ''JumpToFall_2'', 4;
 
     BBSprite: ''JumpToFall_3'', 4;
 
-    BBSprite: ''JumpToFall_4'', 4;
-
     BBSprite:
-    ''JumpToFall_5'', 4;
+    ''JumpToFall_4'', 4;
+
+    BBSprite: ''JumpToFall_5'', 4;
 
     EndIf:
 
-    BeginLoop: (InAir: true)
+    BeginLoop:
+    (InAir: true)
 
-    BBSprite:
-    ''Fall_1'', 3;
+    BBSprite: ''Fall_1'', 3;
 
     BBSprite: ''Fall_2'', 3;
 
     EndLoop:
 
     #MiddleLand
+
+    RemoveAirMoveX;
 
     SetVelocityX:
     0;

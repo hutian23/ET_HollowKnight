@@ -18,7 +18,6 @@ namespace ET.Client
                 self.body = null;
                 self.Flip = FlipState.Left;
                 self.UpdateFlag = false;
-                self.Gravity = 0;
             }
         }
 

@@ -551,9 +551,9 @@ MonoBehaviour:
     BBSprite:
     ''frame_2'', 2;
 
-    SetVelocityX: 12000;
-
     BBSprite: ''frame_3'', 3;
+
+    SetVelocityX: 12000;
 
     BBSprite:
     ''frame_4'', 3;

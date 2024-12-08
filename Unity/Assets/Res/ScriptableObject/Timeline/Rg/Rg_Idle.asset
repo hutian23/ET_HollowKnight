@@ -479,6 +479,8 @@ MonoBehaviour:
 
     SetVelocityX: 0;
 
+    UpdateFlip;
+
     IdleAnim:
     Rg_IdleAnim;
 

@@ -28,15 +28,6 @@ namespace ET.Client
             }
         }
         
-        public class B2WorldManagerFixedUpdateSystem : FixedUpdateSystem<b2WorldManager>
-        {
-            protected override void FixedUpdate(b2WorldManager self)
-            {
-                if (Global.Settings.Pause) return;
-                self.Step();
-            }
-        }
-        
         public class b2WorldManagerPostStepSystem : PostStepSystem<b2WorldManager>
         {
             protected override void PosStepUpdate(b2WorldManager self)

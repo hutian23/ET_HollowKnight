@@ -31,8 +31,6 @@ namespace ET.Client
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BehaviorInfo info = buffer.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
             info.moveType = moveType;
-
-            Log.Warning(info.moveType.ToString());
             
             await ETTask.CompletedTask;
             return Status.Success;

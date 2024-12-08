@@ -30,7 +30,6 @@
                     break;
                 }
             }
-            
             timelineComponent.Reload(targetOrder);
             
             await ETTask.CompletedTask;

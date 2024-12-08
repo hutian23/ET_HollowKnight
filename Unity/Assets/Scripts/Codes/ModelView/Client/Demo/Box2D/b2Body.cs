@@ -22,7 +22,6 @@ namespace ET.Client
         public List<Fixture> hitBoxFixtures = new();
         
         public FlipState Flip = FlipState.Left;
-        public int Gravity;
     }
 
     [Flags]

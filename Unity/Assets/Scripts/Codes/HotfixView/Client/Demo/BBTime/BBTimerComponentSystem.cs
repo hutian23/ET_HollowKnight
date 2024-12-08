@@ -77,13 +77,15 @@ namespace ET.Client
         {
             long preFrame = self.curFrame;
             self.TimerUpdate(accumulator);
+            
             long Dt = self.curFrame - preFrame;
             while (Dt -- > 0)
             {
                 EventSystem.Instance.FrameUpdate();
+                b2WorldManager.Instance.Step();
             }
-
-            Global.Settings.StepCount = self.GetNow();
+            
+            Global.Settings.StepCount = self.curFrame;
         }
 
         public static void TimerUpdate(this BBTimerComponent self, long accumulator)

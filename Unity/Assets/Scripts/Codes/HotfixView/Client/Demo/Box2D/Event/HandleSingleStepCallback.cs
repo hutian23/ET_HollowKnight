@@ -11,12 +11,7 @@ namespace ET.Client
             {
                 return;
             }
-
-            //1. 更新timer
             BBTimerManager.Instance.Step();
-            
-            //2. 物理层更新一帧
-            b2WorldManager.Instance.Step();
         }
     }
 }
