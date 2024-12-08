@@ -1,4 +1,5 @@
 ﻿using System;
+using Testbed.Abstractions;
 
 namespace ET.Client
 {
@@ -20,6 +21,7 @@ namespace ET.Client
                 long now = self._gameTimer.ElapsedTicks;
                 long Accumulator = now - self.LastTime;
                 self.LastTime = now;
+                Accumulator = (long)(Accumulator * (Global.Settings.Hertz / 60f));
                 
                 //1. SceneTimer
                 self.SceneTimer().SceneTimerUpdate(Accumulator);
