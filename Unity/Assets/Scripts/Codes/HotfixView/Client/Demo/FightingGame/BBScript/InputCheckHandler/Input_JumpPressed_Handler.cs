@@ -14,7 +14,7 @@
 
         public override long Handle(InputWait self)
         {
-            return self.WasPressedThisFrame(BBOperaType.A)? self.GetBuffFrame(12) : -1;
+            return self.WasPressedThisFrame(BBOperaType.A)? self.GetBuffFrame(8) : -1;
         }
     }
 }

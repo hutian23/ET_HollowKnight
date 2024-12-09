@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
-    public class b2WorldManager: Entity, IAwake, IDestroy, IFixedUpdate, IPostStep, ILoad
+    public class b2WorldManager: Entity, IAwake, IDestroy, IFixedUpdate, IPostStep, ILoad, IPreStep
     {
         [StaticField]
         public static b2WorldManager Instance;

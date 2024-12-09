@@ -13,7 +13,8 @@ namespace ET
         void Run(Entity o);
     }
 
-    public abstract class PreStepSystem<T>: IPostStepSystem where T : Entity, IPreStep
+    [ObjectSystem]
+    public abstract class PreStepSystem<T>: IPreStepSystem where T : Entity, IPreStep
     {
         public Type Type()
         {

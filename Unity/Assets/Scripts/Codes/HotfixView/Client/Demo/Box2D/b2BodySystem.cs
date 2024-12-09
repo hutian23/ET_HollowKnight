@@ -26,8 +26,7 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2Body self)
             {
-                Unit unit = Root.Instance.Get(self.unitId) as Unit;
-
+                //未发生位置更新，渲染层无需刷新
                 Transform curTrans = self.body.GetTransform();
                 if (self.trans.Equals(curTrans))
                 {
@@ -36,6 +35,7 @@ namespace ET.Client
 
                 //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
                 self.trans = curTrans;
+                Unit unit = Root.Instance.Get(self.unitId) as Unit;
                 GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
                 Vector2 position = curTrans.Position.ToUnityVector2();
                 Vector3 axis = new(0, 0, curTrans.Rotation.Angle * Mathf.Rad2Deg);
