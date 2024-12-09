@@ -32,11 +32,6 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2WorldManager self)
             {
-                foreach (var kv in self.BodyDict)
-                {
-                    b2Body b2Body = self.GetChild<b2Body>(kv.Value);
-                    b2Body.PostStep();
-                }
                 self.GetPostStepTimer().Step();
             }
         }

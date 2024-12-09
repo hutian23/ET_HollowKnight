@@ -1,4 +1,5 @@
 ﻿using ET.Event;
+using Timeline;
 
 namespace ET.Client
 {
@@ -9,6 +10,13 @@ namespace ET.Client
     {
         public override void Handle(TriggerStayCallback args)
         {
+            CollisionInfo info = args.info;
+            
+            BoxInfo boxInfoB = info.dataB.UserData as BoxInfo;
+            if (boxInfoB.hitboxType is HitboxType.Hit)
+            {
+                Log.Warning("Hit");
+            }
         }
     }
 }

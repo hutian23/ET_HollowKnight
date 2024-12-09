@@ -17,30 +17,33 @@ namespace ET.Client
                 self.hitBoxFixtures.Clear();
                 self.body = null;
                 self.Flip = FlipState.Left;
-                self.UpdateFlag = false;
+                self.Hertz = 0;
+                self.Velocity = System.Numerics.Vector2.Zero;
             }
         }
-
-        public static void PostStep(this b2Body self)
+        
+        public class B2bodyPostStepSystem : PostStepSystem<b2Body>
         {
-            Unit unit = Root.Instance.Get(self.unitId) as Unit;
-
-            Transform curTrans = self.body.GetTransform();
-            if (self.trans.Equals(curTrans) && !self.UpdateFlag)
+            protected override void PosStepUpdate(b2Body self)
             {
-                return;
+                Unit unit = Root.Instance.Get(self.unitId) as Unit;
+
+                Transform curTrans = self.body.GetTransform();
+                if (self.trans.Equals(curTrans))
+                {
+                    return;
+                }
+
+                //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
+                self.trans = curTrans;
+                GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
+                Vector2 position = curTrans.Position.ToUnityVector2();
+                Vector3 axis = new(0, 0, curTrans.Rotation.Angle * Mathf.Rad2Deg);
+
+                go.transform.position = position;
+                go.transform.eulerAngles = axis;
+                go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
             }
-
-            //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
-            self.trans = curTrans;
-            GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
-            Vector2 position = curTrans.Position.ToUnityVector2();
-            Vector3 axis = new(0, 0, curTrans.Rotation.Angle * Mathf.Rad2Deg);
-
-            go.transform.position = position;
-            go.transform.eulerAngles = axis;
-            go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
-            self.UpdateFlag = false;
         }
 
         public static System.Numerics.Vector2 GetVelocity(this b2Body self)
@@ -75,16 +78,6 @@ namespace ET.Client
         public static int GetFlip(this b2Body self)
         {
             return (int)self.Flip;
-        }
-
-        public static void SetUpdateFlag(this b2Body self)
-        {
-            self.UpdateFlag = true;
-        }
-
-        public static void RemoveUpdateFlag(this b2Body self)
-        {
-            self.UpdateFlag = false;
         }
 
         public static void SetPosition(this b2Body self, System.Numerics.Vector2 position)

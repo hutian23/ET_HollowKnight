@@ -674,40 +674,43 @@ MonoBehaviour:
 
     @Main:
 
-    InputBuffer:
-    true;
+    SetVelocityX:
+    0;
+
+    InputBuffer: true;
 
     BBSprite: ''frame_1'', 2;
 
     WhiffWindow;
 
-    WhiffOption: ''Rg_GroundDash'';
+    WhiffOption:
+    ''Rg_GroundDash'';
 
-    BBSprite:
-    ''frame_2'', 2;
+    BBSprite: ''frame_2'', 2;
 
-    BBSprite: ''frame_3'', 3;
+    BBSprite: ''frame_3'',
+    3;
 
     SetVelocityX: 12000;
 
-    BBSprite:
-    ''frame_4'', 3;
+    BBSprite: ''frame_4'', 3;
 
-    BBSprite: ''frame_5'', 2;
+    BBSprite: ''frame_5'',
+    2;
 
     WhiffOption: ''Rg_AirDash'';
 
-    SetVelocityY:
-    40000;
+    SetVelocityY: 40000;
 
-    Gravity: 150000;
+    Gravity:
+    150000;
 
     BBSprite: ''frame_6'', 2;
 
-    BBSprite: ''frame_7'',
-    2;
+    BBSprite: ''frame_7'', 2;
 
-    BBSprite: ''frame_8'', 2;
+    BBSprite:
+    ''frame_8'', 2;
 
     GCWindow;
 

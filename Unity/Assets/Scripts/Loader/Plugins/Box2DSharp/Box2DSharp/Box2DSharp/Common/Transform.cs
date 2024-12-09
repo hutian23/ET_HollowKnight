@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Box2DSharp.Common
 {
-    public struct Transform : IFormattable
+    public struct Transform : IFormattable, IEquatable<Transform>
     {
         public Vector2 Position;
 
@@ -45,6 +45,13 @@ namespace Box2DSharp.Common
         public new string ToString()
         {
             return $"({Position.X},{Position.Y}), Cos:{Rotation.Cos}, Sin:{Rotation.Sin})";
+        }
+
+        public bool Equals(Transform trans2)
+        {
+            return Vector2.DistanceSquared(trans2.Position, Position) < Settings.Epsilon * Settings.Epsilon && 
+                   Math.Abs(trans2.Rotation.Sin - Rotation.Sin) < Settings.Epsilon &&
+                   Math.Abs(trans2.Rotation.Cos - Rotation.Cos) < Settings.Epsilon;
         }
     }
 }

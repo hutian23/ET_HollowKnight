@@ -278,6 +278,8 @@ MonoBehaviour:
   timelineName: Rg_IdleAnim
   Script: '@Main:
 
+    InputBuffer: true;
+
     TransitionWindow;
 
     StartTimeline;
