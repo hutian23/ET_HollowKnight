@@ -632,45 +632,47 @@ MonoBehaviour:
 
     UpdateFlip;
 
+    InputBuffer: true;
+
     DefaultWindow;
 
-    BeginIf: (TransitionCached: ''PreSquit'')
+    BeginIf:
+    (TransitionCached: ''PreSquit'')
+
+    BBSprite: ''PreSquit_1'', 3;
 
     BBSprite:
-    ''PreSquit_1'', 3;
-
-    BBSprite: ''PreSquit_2'', 3;
+    ''PreSquit_2'', 3;
 
     EndIf:
 
-    BeginLoop:
-    (InputType: SquatHold)
+    BeginLoop: (InputType: SquatHold)
 
-    BBSprite: ''Squit_1'', 4;
+    BBSprite:
+    ''Squit_1'', 4;
 
-    BBSprite: ''Squit_2'',
-    4;
+    BBSprite: ''Squit_2'', 4;
 
     BBSprite: ''Squit_3'', 4;
 
-    BBSprite: ''Squit_4'', 4;
-
     BBSprite:
-    ''Squit_5'', 4;
-
-    BBSprite: ''Squit_6'', 4;
-
-    BBSprite: ''Squit_7'', 4;
-
-    BBSprite:
-    ''Squit_6'', 4;
+    ''Squit_4'', 4;
 
     BBSprite: ''Squit_5'', 4;
 
-    BBSprite: ''Squit_4'', 4;
+    BBSprite: ''Squit_6'', 4;
 
     BBSprite:
-    ''Squit_3'', 4;
+    ''Squit_7'', 4;
+
+    BBSprite: ''Squit_6'', 4;
+
+    BBSprite: ''Squit_5'', 4;
+
+    BBSprite:
+    ''Squit_4'', 4;
+
+    BBSprite: ''Squit_3'', 4;
 
     BBSprite: ''Squit_2'', 4;
 

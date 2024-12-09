@@ -25,13 +25,22 @@ namespace ET.Client
                 Accumulator= (long)(Accumulator * (Global.Settings.Hertz / 60f));
                 
                 //1. SceneTimer
+                long preFrame = self.SceneTimer().GetNow();
                 self.SceneTimer().SceneTimerUpdate(Accumulator);
+                long curFrame = self.SceneTimer().GetNow();
                 
                 //2. timeline Timer
                 foreach (long instanceId in self.instanceIds)
                 {
                     BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
                     bbTimer?.TimerUpdate(Accumulator);
+                }
+                
+                //3. 物理模拟
+                long Dt = curFrame - preFrame;
+                while (Dt-- > 0)
+                {
+                    b2WorldManager.Instance.Step();
                 }
             }
         }
@@ -55,6 +64,9 @@ namespace ET.Client
                 BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
                 bbTimer?.TimerUpdate(TimeSpan.FromSeconds(1/60f).Ticks);
             }
+            
+            //调用顺序，物理帧要在逻辑帧执行完毕之后
+            b2WorldManager.Instance.Step();
         }
 
         private static void Reload(this BBTimerManager self)

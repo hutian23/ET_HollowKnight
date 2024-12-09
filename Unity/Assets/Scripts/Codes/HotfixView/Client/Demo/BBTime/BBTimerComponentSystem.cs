@@ -82,7 +82,6 @@ namespace ET.Client
             while (Dt -- > 0)
             {
                 EventSystem.Instance.FrameUpdate();
-                b2WorldManager.Instance.Step();
             }
             
             Global.Settings.StepCount = self.curFrame;
