@@ -32,7 +32,7 @@ namespace ET.Client
                 {
                     Shape = shape,
                     Density = 1.0f,
-                    Friction = 1f,
+                    Friction = 0f,
                     UserData = new FixtureData()
                     {
                         InstanceId = b2Body.InstanceId,

@@ -21,7 +21,7 @@ namespace ET.Client
                 LinearDamping = 0f,
                 AngularDamping = 0f,
                 AllowSleep = true,
-                FixedRotation = true 
+                FixedRotation = true,
             };
             Body body = world.CreateBody(bodyDef);
 

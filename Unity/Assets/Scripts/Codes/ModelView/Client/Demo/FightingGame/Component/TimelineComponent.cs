@@ -9,6 +9,8 @@ namespace ET.Client
         public Dictionary<string, long> callbackDict = new();
         public Dictionary<string, long> rootCallbackDict = new(); //在RootInit协程中注册的回调，不会随行为切换销毁
         public Dictionary<string, long> markerEventDict = new();
+
+        public int Hertz = 60;
     }
     
     public struct BeforeBehaviorReload

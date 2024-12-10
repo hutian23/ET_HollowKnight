@@ -6,10 +6,9 @@ using Transform = Box2DSharp.Common.Transform;
 namespace ET.Client
 {
     [FriendOf(typeof(b2Body))]
-    [FriendOf(typeof(RootMotionComponent))]
     public static class b2BodySystem
     {
-        public class b2BodyDestroySystem : DestroySystem<b2Body>
+        public class b2BodyDestroySystem: DestroySystem<b2Body>
         {
             protected override void Destroy(b2Body self)
             {
@@ -17,8 +16,6 @@ namespace ET.Client
                 self.hitBoxFixtures.Clear();
                 self.body = null;
                 self.Flip = FlipState.Left;
-                self.Hertz = 0;
-                self.Velocity = System.Numerics.Vector2.Zero;
             }
         }
         
@@ -26,7 +23,7 @@ namespace ET.Client
         {
             protected override void PreStepUpdate(b2Body self)
             {
-                self.body.SetLinearVelocity(self.Velocity);
+                Log.Warning(self.GetVelocity()+"  "+"Prestep");
             }
         }
         
@@ -34,6 +31,7 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2Body self)
             {
+                Log.Warning(self.GetVelocity()+"  "+ "PostStep");
                 //未发生位置更新，渲染层无需刷新
                 Transform curTrans = self.body.GetTransform();
                 if (self.trans.Equals(curTrans))
@@ -56,26 +54,26 @@ namespace ET.Client
 
         public static System.Numerics.Vector2 GetVelocity(this b2Body self)
         {
-            return self.Velocity;
+            return self.body.LinearVelocity;
         }
 
         public static void SetVelocity(this b2Body self, System.Numerics.Vector2 value)
         {
-            self.Velocity = value * new System.Numerics.Vector2((int)self.Flip, 1);
+            self.body.SetLinearVelocity(value);
         }
 
         public static void SetVelocityX(this b2Body self, float velocityX)
         {
-            System.Numerics.Vector2 oldVel = self.Velocity;
+            System.Numerics.Vector2 oldVel = self.body.LinearVelocity;
             System.Numerics.Vector2 newVel = new(-velocityX * self.GetFlip(), oldVel.Y);
-            self.Velocity = newVel;
+            self.SetVelocity(newVel);
         }
 
         public static void SetVelocityY(this b2Body self, float velocityY)
         {
-            System.Numerics.Vector2 oldVel = self.Velocity;
+            System.Numerics.Vector2 oldVel = self.body.LinearVelocity;
             System.Numerics.Vector2 newVel = new(oldVel.X, velocityY);
-            self.Velocity = newVel;
+            self.SetVelocity(newVel);
         }
 
         public static void SetFlip(this b2Body self, FlipState flipState)

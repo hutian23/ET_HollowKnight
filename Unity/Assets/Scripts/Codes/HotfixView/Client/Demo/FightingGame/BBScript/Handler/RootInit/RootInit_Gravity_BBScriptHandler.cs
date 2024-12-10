@@ -8,21 +8,12 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             b2Body body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            
-            //根运动，不需要模拟重力
-            if (body.GetComponent<RootMotionComponent>() != null)
-            {
-                return;
-            }
-            
-            //将时间戳转成秒单位
-            float tick = bbTimer.GetFrameLength() / 10000000f;
             
             //y轴方向当前帧速度改变量
             float g = - timelineComponent.GetParam<long>("Gravity") / 1000f;
-            float dv = tick * g;
+            //定时器对TimeScale更改无感知，正常按照60帧执行逻辑
+            float dv = (1 / 60f) * g;
 
             float curY = body.GetVelocity().Y + dv;
             float maxFall = - timelineComponent.GetParam<long>("MaxFall") / 1000f;
@@ -31,7 +22,6 @@ namespace ET.Client
             {
                 curY = maxFall;
             }
-
             body.SetVelocityY(curY);
         }
     }

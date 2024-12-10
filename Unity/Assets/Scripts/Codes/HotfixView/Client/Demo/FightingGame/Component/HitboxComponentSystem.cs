@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Numerics;
+
+namespace ET.Client
 {
     [FriendOf(typeof(HitboxComponent))]
     public static class HitboxComponentSystem

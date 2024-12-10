@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Box2DSharp.Dynamics;
 using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
 {
     [ChildOf(typeof (b2WorldManager))]
-    public class b2Body: Entity, IAwake, IDestroy, IPostStep, IPreStep
+    public class b2Body: Entity, IAwake, IDestroy, IPostStep, IPreStep, IFrameUpdate
     {
         public Body body;
         
@@ -16,8 +15,6 @@ namespace ET.Client
         
         public Transform trans; // 当前step中b2World中刚体的位置转换信息
         public FlipState Flip = FlipState.Left;
-        public Vector2 Velocity; // 不考虑TimeScale的速度, 速度更改在下一物理帧生效
-        public int Hertz; // TimeScale,刚体的真实速度为Velocity * Hertz
     }
 
     [Flags]

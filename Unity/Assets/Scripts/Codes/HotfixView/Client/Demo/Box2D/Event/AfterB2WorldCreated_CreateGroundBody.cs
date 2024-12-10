@@ -40,7 +40,6 @@ namespace ET.Client
             PolygonShape box = new();
             box.SetAsBox(1f, 1f);
             Fixture obstacleFixture = obstacleBody.CreateFixture(box, 0.0f);
-            obstacleFixture.Friction = 0f;
             obstacleFixture.UserData = new FixtureData()
             {
                 InstanceId = 0, 

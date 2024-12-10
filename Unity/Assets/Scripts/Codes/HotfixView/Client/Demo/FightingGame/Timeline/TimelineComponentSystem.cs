@@ -50,6 +50,8 @@ namespace ET.Client
                 markerEvent.Dispose();
             }
             self.markerEventDict.Clear();
+
+            self.Hertz = 60;
         }
         
         #region TimelinePlayer
@@ -220,6 +222,12 @@ namespace ET.Client
             }
 
             return self.GetChild<TimelineMarkerEvent>(id);
+        }
+
+        public static void SetHertz(this TimelineComponent self,int hertz)
+        {
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
+            bbTimer.SetHertz(hertz);
         }
     }
 }

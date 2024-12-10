@@ -70,7 +70,7 @@ namespace ET.Client
         public static long GetFrameLength(this BBTimerComponent self)
         {
             //Hertz = 0, 完全静止
-            return self.Hertz == 0? 0 : TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
+            return self.Hertz == 0 ? 0 : TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
         }
 
         public static void SceneTimerUpdate(this BBTimerComponent self, long accumulator)
