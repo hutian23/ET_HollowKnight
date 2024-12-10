@@ -9,7 +9,7 @@ namespace ET.Client
         {
             b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             float v = self.GetParam<float>("MoveX");
-            b2Body.SetVelocityX(v);   
+            b2Body.SetVelocityX(v);
         }
     }
 

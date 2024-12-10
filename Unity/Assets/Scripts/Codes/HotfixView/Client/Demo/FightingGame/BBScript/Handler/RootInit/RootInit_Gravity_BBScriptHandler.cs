@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
@@ -25,15 +24,15 @@ namespace ET.Client
             float g = - timelineComponent.GetParam<long>("Gravity") / 1000f;
             float dv = tick * g;
 
-            Vector2 curV = body.GetVelocity() + new Vector2(0, dv);
+            float curY = body.GetVelocity().Y + dv;
             float maxFall = - timelineComponent.GetParam<long>("MaxFall") / 1000f;
             //约束最大下落速度
-            if (curV.Y < maxFall)
+            if (curY < maxFall)
             {
-                curV = new Vector2(curV.X, maxFall);
+                curY = maxFall;
             }
-            
-            body.SetVelocity(curV);
+
+            body.SetVelocityY(curY);
         }
     }
 

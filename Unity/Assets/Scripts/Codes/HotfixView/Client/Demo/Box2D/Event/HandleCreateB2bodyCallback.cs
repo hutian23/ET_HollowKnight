@@ -1,5 +1,4 @@
 ﻿using Box2DSharp.Dynamics;
-using Vector2 = System.Numerics.Vector2;
 
 namespace ET.Client
 {
@@ -18,7 +17,6 @@ namespace ET.Client
             BodyDef bodyDef = new()
             {
                 BodyType = BodyType.DynamicBody,
-                Position = new Vector2(0, 10f),
                 GravityScale = 0f,
                 LinearDamping = 0f,
                 AngularDamping = 0f,

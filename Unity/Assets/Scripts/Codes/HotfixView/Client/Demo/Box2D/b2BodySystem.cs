@@ -22,6 +22,14 @@ namespace ET.Client
             }
         }
         
+        public class B2bodyPreStepSystem : PreStepSystem<b2Body>
+        {
+            protected override void PreStepUpdate(b2Body self)
+            {
+                self.body.SetLinearVelocity(self.Velocity);
+            }
+        }
+        
         public class B2bodyPostStepSystem : PostStepSystem<b2Body>
         {
             protected override void PosStepUpdate(b2Body self)
@@ -48,26 +56,26 @@ namespace ET.Client
 
         public static System.Numerics.Vector2 GetVelocity(this b2Body self)
         {
-            return self.body.LinearVelocity;
+            return self.Velocity;
         }
 
         public static void SetVelocity(this b2Body self, System.Numerics.Vector2 value)
         {
-            self.body.SetLinearVelocity(value);
+            self.Velocity = value * new System.Numerics.Vector2((int)self.Flip, 1);
         }
 
         public static void SetVelocityX(this b2Body self, float velocityX)
         {
-            var oldVel = self.body.LinearVelocity;
-            var newVel = new System.Numerics.Vector2(-velocityX * self.GetFlip(), oldVel.Y);
-            self.body.SetLinearVelocity(newVel);
+            System.Numerics.Vector2 oldVel = self.Velocity;
+            System.Numerics.Vector2 newVel = new(-velocityX * self.GetFlip(), oldVel.Y);
+            self.Velocity = newVel;
         }
 
         public static void SetVelocityY(this b2Body self, float velocityY)
         {
-            var oldVel = self.body.LinearVelocity;
-            var newVel = new System.Numerics.Vector2(oldVel.X, velocityY);
-            self.body.SetLinearVelocity(newVel);
+            System.Numerics.Vector2 oldVel = self.Velocity;
+            System.Numerics.Vector2 newVel = new(oldVel.X, velocityY);
+            self.Velocity = newVel;
         }
 
         public static void SetFlip(this b2Body self, FlipState flipState)

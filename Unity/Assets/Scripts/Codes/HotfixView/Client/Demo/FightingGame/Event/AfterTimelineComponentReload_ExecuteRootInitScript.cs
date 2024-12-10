@@ -25,7 +25,7 @@ namespace ET.Client
             
             //2. RootInit Coroutine
             parser.Init(opDict);
-            await parser.Invoke(1, parser.CancellationToken);
+            await parser.Invoke(0, parser.CancellationToken);
             if (parser.CancellationToken.IsCancel()) return;
             
             //3. enter default behavior

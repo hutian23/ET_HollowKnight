@@ -17,7 +17,7 @@ namespace ET.Client
             {
                 RootMotionComponent rootMotion = B2body.GetComponent<RootMotionComponent>() ?? B2body.AddComponent<RootMotionComponent>();
                 rootMotion.velocity = args.velocity.ToVector2();
-                B2body.body.SetLinearVelocity(rootMotion.velocity * B2body.GetFlip());
+                B2body.SetVelocity(rootMotion.velocity);
             }
             else
             {
