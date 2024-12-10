@@ -13,25 +13,28 @@ namespace Timeline
     {
         public long instanceId;
     }
-
+    
     public struct PreviewReloadCallback
     {
         public long instanceId;
         public BehaviorClip Clip;
     }
 
-    public struct EditTimelineCallback
+    public struct UpdateTimeScaleCallback
     {
         public long instanceId;
+        public float hertz;
     }
-
+    
     #endregion
 
     public sealed class TimelinePlayer: SerializedMonoBehaviour
     {
         [HideInInspector]
-        public long instanceId; // DialogueComponent
-
+        public long instanceId; // TimelineComponent组件id
+        [HideInInspector]
+        public float Hertz = 60; //TimeScale
+        
         public bool ApplyRootMotion;
 
         public bool IsValid => PlayableGraph.IsValid();

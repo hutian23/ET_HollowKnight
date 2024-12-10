@@ -19,7 +19,6 @@ namespace ET.Client
                 return;
             }
             B2body.SetVelocity(args.velocity.ToVector2() * new Vector2(B2body.GetFlip(),1));
-            Log.Warning(args.velocity+"  "+ "RootMotion"+"  "+B2body.GetVelocity());
         }
     }
 }

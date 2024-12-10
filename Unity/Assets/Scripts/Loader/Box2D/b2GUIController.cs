@@ -170,7 +170,7 @@ namespace ET
 
                         ImGuiTreeNodeFlags leafNodeFlags = ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen;
                         ImGuiTreeNodeFlags parentNodeFlags = ImGuiTreeNodeFlags.OpenOnArrow | ImGuiTreeNodeFlags.OpenOnDoubleClick;
-
+                        
                         for (int i = 0; i < root.GetComponentsInChildren<TimelinePlayer>().Length; i++)
                         {
                             TimelinePlayer timelinePlayer = root.GetComponentsInChildren<TimelinePlayer>()[i];
@@ -202,12 +202,14 @@ namespace ET
 
                                     ImGui.TreePop();
                                 }
-
+                                
+                                ImGui.SliderFloat("Hertz", ref timelinePlayer.Hertz, 0f, 120.0f, "%.0f hz");
+                                EventSystem.Instance.Invoke(new UpdateTimeScaleCallback() { instanceId = timelinePlayer.instanceId,hertz = timelinePlayer.Hertz});
+                                
                                 ImGui.TreePop();
                             }
                         }
                     }
-
                     ImGui.EndTabBar();
                 }
 

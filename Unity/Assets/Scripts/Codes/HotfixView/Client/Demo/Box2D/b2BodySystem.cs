@@ -23,7 +23,6 @@ namespace ET.Client
         {
             protected override void PreStepUpdate(b2Body self)
             {
-                Log.Warning(self.GetVelocity()+"  "+"Prestep");
             }
         }
         
@@ -31,7 +30,6 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2Body self)
             {
-                Log.Warning(self.GetVelocity()+"  "+ "PostStep");
                 //未发生位置更新，渲染层无需刷新
                 Transform curTrans = self.body.GetTransform();
                 if (self.trans.Equals(curTrans))
