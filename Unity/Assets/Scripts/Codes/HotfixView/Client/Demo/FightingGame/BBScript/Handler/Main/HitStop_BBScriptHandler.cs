@@ -36,7 +36,7 @@ namespace ET.Client
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
 
-            timelineComponent.SetHertz(20);
+            timelineComponent.SetHertz(10);
             await sceneTimer.WaitAsync(hitStop, token);
             timelineComponent.SetHertz(60);
         }

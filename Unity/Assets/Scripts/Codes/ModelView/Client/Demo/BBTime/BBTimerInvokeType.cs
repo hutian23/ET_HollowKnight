@@ -17,27 +17,22 @@
         //和行为有关的计时器
         public const int UpdateFlipTimer = 100;
         public const int MoveXTimer = 101;
-        public const int InputCheckTimer = 102;
-        public const int GatlingCancelCheckTimer = 103;
-        public const int GroundCheckTimer = 104;
-        public const int GravityCheckTimer = 105;
-        public const int AirCheckTimer = 106;
-        public const int AirMoveTimer = 107;
-        public const int InertiaTimer = 108;
-        public const int LinearDampingTimer = 109;
-        public const int DefaultWindowTimer = 220;
-        public const int WhiffWindowTimer = 110;
-        public const int GCWindowTimer = 111;
-        public const int CancelWindowTimer = 112;
-        public const int TransitionWindowTimer = 113;
-        public const int ShakeTimer = 114;
-        public const int LoopTimer = 115;
-        public const int HitStopTestTimer = 116;
-        public const int HitboxCheckTimer = 117;
-        public const int CallbackCheckTimer = 118;
+        public const int GravityCheckTimer = 102;
+        public const int AirMoveTimer = 103;
+        public const int InertiaTimer = 104;
+        public const int DefaultWindowTimer = 105;
+        public const int WhiffWindowTimer = 106;
+        public const int GCWindowTimer = 107;
+        public const int CancelWindowTimer = 108;
+        public const int TransitionWindowTimer = 109;
+        public const int ShakeTimer = 110;
+        public const int LoopTimer = 111;
+        public const int CallbackCheckTimer = 112;
         
         //物理模拟相关的生命周期函数
-        public const int HitNotifyTimer = 119;
-        public const int ThrowCheckTimer = 120;
+        public const int HitCheckTimer = 113;
+        public const int HitNotifyTimer = 114;
+        public const int ThrowCheckTimer = 115;
+        
     }
 }
