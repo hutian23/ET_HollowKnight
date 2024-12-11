@@ -8,21 +8,21 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            b2Body body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             
             //y轴方向当前帧速度改变量
             float g = - timelineComponent.GetParam<long>("Gravity") / 1000f;
             //定时器对TimeScale更改无感知，正常按照60帧执行逻辑
             float dv = (1 / 60f) * g;
 
-            float curY = body.GetVelocity().Y + dv;
+            float curY = b2Unit.GetVelocity().Y + dv;
             float maxFall = - timelineComponent.GetParam<long>("MaxFall") / 1000f;
             //约束最大下落速度
             if (curY < maxFall)
             {
                 curY = maxFall;
             }
-            body.SetVelocityY(curY);
+            b2Unit.SetVelocityY(curY);
         }
     }
 

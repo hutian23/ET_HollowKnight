@@ -108,10 +108,10 @@ namespace Testbed.TestCases
         /// <inheritdoc />
         protected override void PreStep()
         {
-            var torque1 = Joint1.GetMotorTorque(TestSettings.Hertz);
+            var torque1 = Joint1.GetMotorTorque(TestSettings.TimeScale);
             DrawString($"Motor Torque 1= {torque1}");
 
-            var torque2 = Joint2.GetMotorTorque(TestSettings.Hertz);
+            var torque2 = Joint2.GetMotorTorque(TestSettings.TimeScale);
             DrawString($"Motor Torque 2= {torque2}");
         }
 

@@ -9,11 +9,11 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             
             //当前回中，则不会进行移动
             bool IsMiddle = inputWait.IsPressing(BBOperaType.MIDDLE);
-            b2Body B2body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            B2body.SetVelocityX(IsMiddle ? 0 : self.GetParam<long>("AirMoveX") / 1000f);
+            b2Unit.SetVelocityX(IsMiddle ? 0 : self.GetParam<long>("AirMoveX") / 1000f);
         }
     }
 

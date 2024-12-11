@@ -8,14 +8,14 @@ namespace ET.Client
 {
     [Invoke]
     [FriendOf(typeof (b2Body))]
-    [FriendOf(typeof (HitboxComponent))]
+    [FriendOf(typeof (b2Unit))]
     public class HandleUpdateFlipCallback: AInvokeHandler<UpdateFlipCallback>
     {
         public override void Handle(UpdateFlipCallback args)
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            b2Unit hitBoxComponent = timelineComponent.GetComponent<b2Unit>();
 
             //1. Set Flip
             b2Body b2Body = b2WorldManager.Instance.GetBody(args.instanceId);

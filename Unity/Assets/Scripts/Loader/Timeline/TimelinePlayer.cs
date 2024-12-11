@@ -20,10 +20,10 @@ namespace Timeline
         public BehaviorClip Clip;
     }
 
-    public struct UpdateTimeScaleCallback
+    public struct UpdateHertzCallback
     {
         public long instanceId;
-        public float hertz;
+        public float Hertz;
     }
     
     #endregion

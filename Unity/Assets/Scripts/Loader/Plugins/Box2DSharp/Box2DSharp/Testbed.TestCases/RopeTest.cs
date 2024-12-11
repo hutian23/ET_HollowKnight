@@ -95,7 +95,7 @@ namespace Testbed.TestCases
 
         protected override void PreStep()
         {
-            var dt = TestSettings.Hertz > 0.0f ? 1.0f / TestSettings.Hertz : 0.0f;
+            var dt = TestSettings.TimeScale > 0.0f ? 1.0f / TestSettings.TimeScale : 0.0f;
             if (Input.IsKeyDown(KeyCodes.Comma))
             {
                 Position1.X -= Speed * dt;

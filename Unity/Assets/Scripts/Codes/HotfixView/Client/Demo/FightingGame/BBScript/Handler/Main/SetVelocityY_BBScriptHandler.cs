@@ -26,8 +26,8 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            b2Body body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-            body.SetVelocityY(velocity/1000f);
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            b2Unit.SetVelocityY(velocity / 1000f);
             
             await ETTask.CompletedTask;
             return Status.Success;

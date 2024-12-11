@@ -19,13 +19,6 @@ namespace ET.Client
             }
         }
         
-        public class B2bodyPreStepSystem : PreStepSystem<b2Body>
-        {
-            protected override void PreStepUpdate(b2Body self)
-            {
-            }
-        }
-        
         public class B2bodyPostStepSystem : PostStepSystem<b2Body>
         {
             protected override void PosStepUpdate(b2Body self)
@@ -59,21 +52,7 @@ namespace ET.Client
         {
             self.body.SetLinearVelocity(value);
         }
-
-        public static void SetVelocityX(this b2Body self, float velocityX)
-        {
-            System.Numerics.Vector2 oldVel = self.body.LinearVelocity;
-            System.Numerics.Vector2 newVel = new(-velocityX * self.GetFlip(), oldVel.Y);
-            self.SetVelocity(newVel);
-        }
-
-        public static void SetVelocityY(this b2Body self, float velocityY)
-        {
-            System.Numerics.Vector2 oldVel = self.body.LinearVelocity;
-            System.Numerics.Vector2 newVel = new(oldVel.X, velocityY);
-            self.SetVelocity(newVel);
-        }
-
+        
         public static void SetFlip(this b2Body self, FlipState flipState)
         {
             self.Flip = flipState;

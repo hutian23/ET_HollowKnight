@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Invoke(TriggerStayType.CollisionEvent)]
-    [FriendOf(typeof(HitboxComponent))]
+    [FriendOf(typeof(b2Unit))]
     [FriendOf(typeof(b2Body))]
     public class TriggerStay_HandleCollisionEvent : AInvokeHandler<TriggerStayCallback>
     {
@@ -14,8 +14,8 @@ namespace ET.Client
             b2Body b2Body = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
-            hitboxComponent.CollisionBuffer.Enqueue(info);
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            b2Unit.CollisionBuffer.Enqueue(info);
         }
     }
 }

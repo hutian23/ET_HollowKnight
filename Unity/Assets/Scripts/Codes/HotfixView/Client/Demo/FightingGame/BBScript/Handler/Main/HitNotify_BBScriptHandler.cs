@@ -5,23 +5,23 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.HitNotifyTimer)]
-    [FriendOf(typeof(HitboxComponent))]
+    [FriendOf(typeof(b2Unit))]
     [FriendOf(typeof(BBParser))]
     public class PostStepTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            HitboxComponent hitboxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
 
             //受击者已经触发过回调，不会再次触发
             HashSet<long> hitBuffer = self.GetParam<HashSet<long>>("HitBuffer");
 
-            int count = hitboxComponent.CollisionBuffer.Count;
+            int count = b2Unit.CollisionBuffer.Count;
             while (count-- > 0)
             {
-                CollisionInfo info = hitboxComponent.CollisionBuffer.Dequeue();
-                hitboxComponent.CollisionBuffer.Enqueue(info);
+                CollisionInfo info = b2Unit.CollisionBuffer.Dequeue();
+                b2Unit.CollisionBuffer.Enqueue(info);
 
                 BoxInfo boxInfoA = info.dataA.UserData as BoxInfo;
                 BoxInfo boxInfoB = info.dataB.UserData as BoxInfo;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Testbed.Abstractions;
+﻿using System.Linq;
 
 namespace ET.Client
 {
@@ -70,21 +68,7 @@ namespace ET.Client
         public static long GetFrameLength(this BBTimerComponent self)
         {
             //Hertz = 0, 完全静止
-            return self.Hertz == 0 ? 0 : TimeSpan.FromSeconds((float)1 / self.Hertz).Ticks;
-        }
-
-        public static void SceneTimerUpdate(this BBTimerComponent self, long accumulator)
-        {
-            long preFrame = self.curFrame;
-            self.TimerUpdate(accumulator);
-            
-            long Dt = self.curFrame - preFrame;
-            while (Dt -- > 0)
-            {
-                EventSystem.Instance.FrameUpdate();
-            }
-            
-            Global.Settings.StepCount = self.curFrame;
+            return self.Hertz == 0 ? 0 : (long)(1f / self.Hertz * 10000000);
         }
 
         public static void TimerUpdate(this BBTimerComponent self, long accumulator)
@@ -101,48 +85,48 @@ namespace ET.Client
             {
                 self.Accumulator -= Dt;
                 ++self.curFrame;
-            }
-            
-            //当前帧没有可执行的定时器，就不进行遍历了
-            if (self.curFrame < self.minFrame)
-            {
-                return;
-            }
-
-            foreach (long k in self.TimerId.Select(kv => kv.Key))
-            {
-                // 设置定时器中的最小执行帧号
-                if (k > self.curFrame)
+                
+                //当前帧没有可执行的定时器，就不进行遍历了
+                if (self.curFrame < self.minFrame)
                 {
-                    self.minFrame = k;
-                    break;
+                    return;
                 }
 
-                self.timeOutTime.Enqueue(k);
-            }
-
-            while (self.timeOutTime.Count > 0)
-            {
-                long time = self.timeOutTime.Dequeue();
-                var list = self.TimerId[time];
-                for (int i = 0; i < list.Count; i++)
+                foreach (long k in self.TimerId.Select(kv => kv.Key))
                 {
-                    long timerId = list[i];
-                    self.timeOutTimerIds.Enqueue(timerId);
+                    // 设置定时器中的最小执行帧号
+                    if (k > self.curFrame)
+                    {
+                        self.minFrame = k;
+                        break;
+                    }
+
+                    self.timeOutTime.Enqueue(k);
                 }
 
-                self.TimerId.Remove(time);
-            }
-
-            while (self.timeOutTimerIds.Count > 0)
-            {
-                long timerId = self.timeOutTimerIds.Dequeue();
-
-                if (!self.timerActions.Remove(timerId, out BBTimerAction timerAction))
+                while (self.timeOutTime.Count > 0)
                 {
-                    continue;
+                    long time = self.timeOutTime.Dequeue();
+                    var list = self.TimerId[time];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        long timerId = list[i];
+                        self.timeOutTimerIds.Enqueue(timerId);
+                    }
+
+                    self.TimerId.Remove(time);
                 }
-                self.Run(timerAction);
+
+                while (self.timeOutTimerIds.Count > 0)
+                {
+                    long timerId = self.timeOutTimerIds.Dequeue();
+
+                    if (!self.timerActions.Remove(timerId, out BBTimerAction timerAction))
+                    {
+                        continue;
+                    }
+                    self.Run(timerAction);
+                }
             }
         }
 

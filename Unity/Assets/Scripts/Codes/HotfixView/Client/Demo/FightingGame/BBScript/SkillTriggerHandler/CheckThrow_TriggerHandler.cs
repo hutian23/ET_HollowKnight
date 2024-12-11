@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(HitboxComponent))]
+    [FriendOf(typeof(b2Unit))]
     public class CheckThrow_TriggerHandler : BBTriggerHandler
     {
         public override string GetTriggerType()

@@ -71,10 +71,10 @@ namespace Testbed.TestCases
         /// <inheritdoc />
         protected override void OnRender()
         {
-            var torque = Joint.GetMotorTorque(TestSettings.Hertz);
+            var torque = Joint.GetMotorTorque(TestSettings.TimeScale);
             DrawString($"Motor Torque = {torque}");
 
-            var F = Joint.GetReactionForce(TestSettings.Hertz);
+            var F = Joint.GetReactionForce(TestSettings.TimeScale);
             DrawString($"Reaction Force = ({F.X}, {F.X})");
         }
     }

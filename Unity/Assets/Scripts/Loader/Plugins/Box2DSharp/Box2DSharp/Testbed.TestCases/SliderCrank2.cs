@@ -127,7 +127,7 @@ namespace Testbed.TestCases
         protected override void OnRender()
         {
             DrawString("Keys: F toggle friction, M toggle motor");
-            var torque = _joint1.GetMotorTorque(TestSettings.Hertz);
+            var torque = _joint1.GetMotorTorque(TestSettings.TimeScale);
             DrawString($"Motor Torque = {torque}");
             DrawString($"Friction: {_joint2.IsMotorEnabled()}");
             DrawString($"Motor: {_joint1.IsMotorEnabled()}");

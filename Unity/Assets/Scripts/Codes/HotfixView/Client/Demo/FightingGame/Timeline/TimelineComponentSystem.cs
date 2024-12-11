@@ -51,7 +51,7 @@ namespace ET.Client
             }
             self.markerEventDict.Clear();
 
-            self.Hertz = 60;
+            self.SetHertz(60);
         }
         
         #region TimelinePlayer
@@ -226,8 +226,12 @@ namespace ET.Client
 
         public static void SetHertz(this TimelineComponent self,int hertz)
         {
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            bbTimer.SetHertz(hertz);
+            EventSystem.Instance.Invoke(new UpdateHertzCallback(){instanceId = self.InstanceId,Hertz = hertz});
+        }
+
+        public static int GetHertz(this TimelineComponent self)
+        {
+            return self.Hertz;
         }
     }
 }

@@ -109,7 +109,7 @@ namespace Testbed.Abstractions
 
         public void Step()
         {
-            TimeStep = TestSettings.Hertz > 0.0f ? 1.0f / TestSettings.Hertz : 0f;
+            TimeStep = TestSettings.TimeScale > 0.0f ? 1.0f / TestSettings.TimeScale : 0f;
 
             if (TestSettings.Pause)
             {

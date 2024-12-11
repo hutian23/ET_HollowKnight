@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOfAttribute(typeof(ET.Client.HitboxComponent))]
+    [FriendOfAttribute(typeof(ET.Client.b2Unit))]
     [FriendOfAttribute(typeof(ET.Client.InputWait))]
     public class Test_BBScriptHandler : BBScriptHandler
     {
@@ -11,8 +11,7 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Log.Warning(data.CoroutineID.ToString());
-
+            Log.Warning(BBTimerManager.Instance.SceneTimer().GetNow().ToString());
             await ETTask.CompletedTask;
             return Status.Success;
         }

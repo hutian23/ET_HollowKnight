@@ -72,9 +72,9 @@ namespace Testbed.TestCases
 
         protected override void PreStep()
         {
-            if (_go && 1 / TestSettings.Hertz > 0.0f)
+            if (_go && 1 / TestSettings.TimeScale > 0.0f)
             {
-                _time += 1 / TestSettings.Hertz;
+                _time += 1 / TestSettings.TimeScale;
             }
 
             _linearOffset = new Vector2

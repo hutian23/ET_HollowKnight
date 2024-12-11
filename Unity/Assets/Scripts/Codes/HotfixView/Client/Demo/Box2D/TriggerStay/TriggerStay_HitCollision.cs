@@ -15,7 +15,7 @@ namespace ET.Client
             BoxInfo boxInfoB = info.dataB.UserData as BoxInfo;
             if (boxInfoB.hitboxType is HitboxType.Hit)
             {
-                Log.Warning("Hit");
+                // Log.Warning("Hit");
             }
         }
     }

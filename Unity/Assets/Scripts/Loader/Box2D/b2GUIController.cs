@@ -83,7 +83,7 @@ namespace ET
                     {
                         ImGui.SliderInt("Vel Iters", ref Global.Settings.VelocityIterations, 0, 50);
                         ImGui.SliderInt("Pos Iters", ref Global.Settings.PositionIterations, 0, 50);
-                        ImGui.SliderFloat("Hertz", ref Global.Settings.Hertz, 5.0f, 120.0f, "%.0f hz");
+                        ImGui.SliderFloat("TimeScale", ref Global.Settings.TimeScale, 0.0f, 6.0f, "x %.1f");
 
                         ImGui.Separator();
 
@@ -203,8 +203,8 @@ namespace ET
                                     ImGui.TreePop();
                                 }
                                 
-                                ImGui.SliderFloat("Hertz", ref timelinePlayer.Hertz, 0f, 120.0f, "%.0f hz");
-                                EventSystem.Instance.Invoke(new UpdateTimeScaleCallback() { instanceId = timelinePlayer.instanceId,hertz = timelinePlayer.Hertz});
+                                ImGui.SliderFloat("Hertz", ref timelinePlayer.Hertz, 0f, 120f, "%.0f hz");
+                                EventSystem.Instance.Invoke(new UpdateHertzCallback() { instanceId = timelinePlayer.instanceId,Hertz = timelinePlayer.Hertz});
                                 
                                 ImGui.TreePop();
                             }

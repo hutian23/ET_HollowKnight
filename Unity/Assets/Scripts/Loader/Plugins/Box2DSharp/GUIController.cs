@@ -61,7 +61,7 @@ namespace Box2DSharp.Testbed.Unity
                     {
                         ImGui.SliderInt("Vel Iters", ref Global.Settings.VelocityIterations, 0, 50);
                         ImGui.SliderInt("Pos Iters", ref Global.Settings.PositionIterations, 0, 50);
-                        ImGui.SliderFloat("Hertz", ref Global.Settings.Hertz, 5.0f, 120.0f, "%.0f hz");
+                        ImGui.SliderFloat("Hertz", ref Global.Settings.TimeScale, 5.0f, 120.0f, "%.0f hz");
 
                         ImGui.Separator();
 

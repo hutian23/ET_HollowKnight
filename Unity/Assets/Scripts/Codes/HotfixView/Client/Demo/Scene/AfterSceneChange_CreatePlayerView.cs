@@ -25,7 +25,7 @@ namespace ET.Client
             
             // 战斗相关的计时器(因为和角色行为逻辑关联性强，作为timeline的组件)
             timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer(); 
-            timelineComponent.AddComponent<HitboxComponent>();
+            timelineComponent.AddComponent<b2Unit>();
             timelineComponent.AddComponent<InputWait>();
             timelineComponent.AddComponent<ObjectWait>();
             timelineComponent.AddComponent<BBParser>();

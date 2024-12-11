@@ -7,9 +7,9 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Unit b2Unit = self.GetParent<TimelineComponent>().GetComponent<b2Unit>();
             float v = self.GetParam<float>("MoveX");
-            b2Body.SetVelocityX(v);
+            b2Unit.SetVelocityX(v);
         }
     }
 

@@ -10,7 +10,7 @@ namespace ET.Client
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
-            HitboxComponent hitboxComponent = unit.GetComponent<TimelineComponent>().GetComponent<HitboxComponent>();
+            b2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<b2Unit>();
 
             //1. 销毁旧夹具
             for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)

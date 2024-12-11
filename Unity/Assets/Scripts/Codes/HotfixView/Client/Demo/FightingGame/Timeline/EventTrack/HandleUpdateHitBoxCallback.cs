@@ -6,7 +6,7 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    [FriendOf(typeof(HitboxComponent))]
+    [FriendOf(typeof(b2Unit))]
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(b2WorldManager))]
     public class HandleUpdateHitBoxCallback : AInvokeHandler<UpdateHitboxCallback>
@@ -14,7 +14,7 @@ namespace ET.Client
         public override void Handle(UpdateHitboxCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            HitboxComponent hitBoxComponent = timelineComponent.GetComponent<HitboxComponent>();
+            b2Unit hitBoxComponent = timelineComponent.GetComponent<b2Unit>();
             b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
 
             //更新关键帧

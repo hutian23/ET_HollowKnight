@@ -15,7 +15,7 @@ namespace Testbed.Abstractions
             TestIndex = 0;
             WindowWidth = 1600;
             WindowHeight = 900;
-            Hertz = 60.0f;
+            this.TimeScale = 60.0f;
             VelocityIterations = 8;
             PositionIterations = 3;
             DrawShapes = true;
@@ -72,7 +72,7 @@ namespace Testbed.Abstractions
         public int WindowHeight;
 
         [DataMember]
-        public float Hertz;
+        public float TimeScale;
 
         [DataMember]
         public int VelocityIterations;

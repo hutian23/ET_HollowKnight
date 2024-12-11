@@ -17,7 +17,7 @@ namespace ET.Client
             
             if (curFlip == preFlip)
             {
-                b2Body.SetVelocityX(self.GetParam<long>("Inertia") / 1000f);
+                // b2Body.SetVelocityX(self.GetParam<long>("Inertia") / 1000f);
                 return;
             }
             

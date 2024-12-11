@@ -1,5 +1,4 @@
-﻿using System;
-using Testbed.Abstractions;
+﻿using Testbed.Abstractions;
 
 namespace ET.Client
 {
@@ -15,6 +14,7 @@ namespace ET.Client
             }
         }
         
+        // 21462  166666
         public class BBTimerManagerUpdateSystem : UpdateSystem<BBTimerManager>
         {
             protected override void Update(BBTimerManager self)
@@ -22,26 +22,9 @@ namespace ET.Client
                 long now = self._gameTimer.ElapsedTicks;
                 long Accumulator = now - self.LastTime;
                 self.LastTime = now;
-                Accumulator= (long)(Accumulator * (Global.Settings.Hertz / 60f));
-                
-                //1. SceneTimer
-                long preFrame = self.SceneTimer().GetNow();
-                self.SceneTimer().SceneTimerUpdate(Accumulator);
-                long curFrame = self.SceneTimer().GetNow();
-                
-                //2. timeline Timer
-                foreach (long instanceId in self.instanceIds)
-                {
-                    BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
-                    bbTimer?.TimerUpdate(Accumulator);
-                }
-                
-                //3. 物理模拟
-                long Dt = curFrame - preFrame;
-                while (Dt-- > 0)
-                {
-                    b2WorldManager.Instance.Step();
-                }
+
+                self.SceneTimer().SetHertz((int)(Global.Settings.TimeScale * 60));
+                self.Step(Accumulator);
             }
         }
         
@@ -55,24 +38,40 @@ namespace ET.Client
         
         public static void Step(this BBTimerManager self)
         {
-            //1. SceneTimer
-            self.SceneTimer().SceneTimerUpdate(TimeSpan.FromSeconds(1 / 60f).Ticks);
+            long Accumulator = self.SceneTimer().GetFrameLength();
+            self.Step(Accumulator);
+        }
+
+        private static void Step(this BBTimerManager self, long Accumulator)
+        {
+            //执行顺序
+            //1. 场景计时器的定时器和异步任务
+            BBTimerComponent sceneTimer = self.SceneTimer();
+            long preFrame = sceneTimer.GetNow();
+            sceneTimer.TimerUpdate(Accumulator);
+            long curFrame = sceneTimer.GetNow();
+            Global.Settings.StepCount = curFrame;
             
-            //2. timeline timer
-            foreach (long instanceId in self.instanceIds)
+            long Dt = curFrame - preFrame;
+            while (Dt-- > 0)
             {
-                BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
-                bbTimer?.TimerUpdate(TimeSpan.FromSeconds(1/60f).Ticks);
+                //2. FrameUpdate 生命周期事件
+                EventSystem.Instance.FrameUpdate();
+                //3. Timeline相关 定时器和异步任务
+                foreach (long instanceId in self.instanceIds)
+                {
+                    BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
+                    bbTimer?.TimerUpdate(166666);
+                }
+                //4. 物理层 PreStep PostStep生命周期事件
+                b2WorldManager.Instance.Step();
             }
-            
-            //调用顺序，物理帧要在逻辑帧执行完毕之后
-            b2WorldManager.Instance.Step();
         }
 
         private static void Reload(this BBTimerManager self)
         {
             self._gameTimer.Restart();
-            self.LastTime = 0;
+            self.LastTime = self._gameTimer.ElapsedTicks;
             self.instanceIds.Clear();
         }
         

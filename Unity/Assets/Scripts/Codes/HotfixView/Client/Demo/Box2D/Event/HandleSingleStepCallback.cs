@@ -11,6 +11,7 @@ namespace ET.Client
             {
                 return;
             }
+            
             BBTimerManager.Instance.Step();
         }
     }

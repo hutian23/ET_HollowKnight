@@ -20,11 +20,11 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            Unit unit = timelineComponent.GetParent<Unit>();
-            b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
-
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            
             long.TryParse(match.Groups[1].Value, out long velX);
-            b2Body.SetVelocityX(velX / 1000f);
+            b2Unit.SetVelocityX(velX / 1000f);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

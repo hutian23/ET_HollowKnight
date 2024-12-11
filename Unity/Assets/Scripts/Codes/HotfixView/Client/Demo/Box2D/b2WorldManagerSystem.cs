@@ -56,7 +56,7 @@ namespace ET.Client
         {
             self.Game = null;
             self.B2World?.Dispose();
-            
+
             foreach (var kv in self.BodyDict)
             {
                 b2Body body = self.GetChild<b2Body>(kv.Value);
@@ -69,7 +69,7 @@ namespace ET.Client
             BBTimerComponent PostStepTimer = self.GetChild<BBTimerComponent>(self.PostStepTimer);
             PreStepTimer.Reload();
             PostStepTimer.Reload();
-
+            
             Global.Settings.Pause = false;
             Global.Settings.SingleStep = false;
         }
