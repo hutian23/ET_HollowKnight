@@ -23,6 +23,7 @@ namespace ET.Client
             currentScene.AddComponent<BBInputComponent>();
             //注册SceneTimer
             currentScene.AddComponent<BBTimerComponent>();
+            currentScene.AddComponent<CameraManager>();
         }
     }
 }

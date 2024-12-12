@@ -1381,5 +1381,5 @@ MonoBehaviour:
   Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nreturn;\n\n@Main:\nSetTransition:
     'PreSquit';\nMarkerEvent: (Whiff_Start)\n    InputBuffer: true;\n    WhiffWindow;\n   
     WhiffOption: 'Rg_GroundDash';\n    EndMarkerEvent:\nMarkerEvent: (Hit_Start)\n   
-    WaitHit: \n    HitStop: 8;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent: (Whiff_End)\n   
-    GCWindow;\n    GCOption: 'Rg_5C';\n    EndMarkerEvent:\nStartTimeline;\nExit;"
+    WaitHit: \n    HitStop: 20, 10;\n    ScreenShake: 50, 50;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent:
+    (Whiff_End)\n    GCWindow;\n    GCOption: 'Rg_5C';\n    EndMarkerEvent:\nStartTimeline;\nExit;"

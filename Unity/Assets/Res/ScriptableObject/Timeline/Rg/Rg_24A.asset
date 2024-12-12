@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dad01b398c6f634c9e134265baa14a1, type: 3}
-  m_Name: Rg_5C
+  m_Name: Rg_24A
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 7400000, guid: b4c00a119cb6e47469bfe8bb1782b989, type: 2}
+    - {fileID: 7400000, guid: 792f511686757bb4a8a58d56863a8579, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -53,13 +53,13 @@ MonoBehaviour:
       Data: false
     - Name: Name
       Entry: 1
-      Data: Rg_5C
+      Data: Rg_24A
     - Name: StartFrame
       Entry: 3
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 46
+      Data: 63
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
       Data: 7|UnityEngine.Keyframe[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: UnityEngine.Keyframe, UnityEngine.CoreModule
@@ -136,7 +136,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.166666672
+      Data: 0.383333325
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -145,10 +145,10 @@ MonoBehaviour:
       Data: 0
     - Name: m_OutTangent
       Entry: 4
-      Data: 0
+      Data: -43.3333244
     - Name: m_TangentMode
       Entry: 3
-      Data: 136
+      Data: 69
     - Name: m_WeightedMode
       Entry: 3
       Data: 0
@@ -169,10 +169,43 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.366666675
+      Data: 0.533333361
     - Name: m_Value
       Entry: 4
-      Data: -3
+      Data: -6.5
+    - Name: m_InTangent
+      Entry: 4
+      Data: -43.3333244
+    - Name: m_OutTangent
+      Entry: 4
+      Data: -13.3517561
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 5
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.241723686
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.783333361
+    - Name: m_Value
+      Entry: 4
+      Data: -8
     - Name: m_InTangent
       Entry: 4
       Data: 0
@@ -181,7 +214,7 @@ MonoBehaviour:
       Data: 0
     - Name: m_TangentMode
       Entry: 3
-      Data: 136
+      Data: 1
     - Name: m_WeightedMode
       Entry: 3
       Data: 0
@@ -226,7 +259,7 @@ MonoBehaviour:
       Data: 9|UnityEngine.Keyframe[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 10
     - Name: 
       Entry: 7
       Data: UnityEngine.Keyframe, UnityEngine.CoreModule
@@ -268,7 +301,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.166666672
+      Data: 0.233333334
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -301,7 +334,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.316666663
+      Data: 0.25
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -334,7 +367,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.366666675
+      Data: 0.333333343
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -367,7 +400,40 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.5
+      Data: 0.416666657
+    - Name: m_Value
+      Entry: 4
+      Data: 0
+    - Name: m_InTangent
+      Entry: 4
+      Data: 0
+    - Name: m_OutTangent
+      Entry: 4
+      Data: 0
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 136
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.433333337
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -433,7 +499,73 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.55
+      Data: 0.533333361
+    - Name: m_Value
+      Entry: 4
+      Data: 0
+    - Name: m_InTangent
+      Entry: 4
+      Data: 0
+    - Name: m_OutTangent
+      Entry: 4
+      Data: 0
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 136
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.75
+    - Name: m_Value
+      Entry: 4
+      Data: 0
+    - Name: m_InTangent
+      Entry: 4
+      Data: 0
+    - Name: m_OutTangent
+      Entry: 4
+      Data: 0
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 136
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.783333361
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -490,7 +622,7 @@ MonoBehaviour:
       Data: 11|UnityEngine.Keyframe[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 10
     - Name: 
       Entry: 7
       Data: UnityEngine.Keyframe, UnityEngine.CoreModule
@@ -532,7 +664,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.166666672
+      Data: 0.233333334
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -565,7 +697,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.316666663
+      Data: 0.25
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -598,7 +730,7 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.366666675
+      Data: 0.333333343
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -631,7 +763,40 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.5
+      Data: 0.416666657
+    - Name: m_Value
+      Entry: 4
+      Data: 0
+    - Name: m_InTangent
+      Entry: 4
+      Data: 0
+    - Name: m_OutTangent
+      Entry: 4
+      Data: 0
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 136
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.433333337
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -697,7 +862,73 @@ MonoBehaviour:
       Data: 1
     - Name: m_Time
       Entry: 4
-      Data: 0.55
+      Data: 0.533333361
+    - Name: m_Value
+      Entry: 4
+      Data: 0
+    - Name: m_InTangent
+      Entry: 4
+      Data: 0
+    - Name: m_OutTangent
+      Entry: 4
+      Data: 0
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 136
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.75
+    - Name: m_Value
+      Entry: 4
+      Data: 0
+    - Name: m_InTangent
+      Entry: 4
+      Data: 0
+    - Name: m_OutTangent
+      Entry: 4
+      Data: 0
+    - Name: m_TangentMode
+      Entry: 3
+      Data: 136
+    - Name: m_WeightedMode
+      Entry: 3
+      Data: 0
+    - Name: m_InWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: m_OutWeight
+      Entry: 4
+      Data: 0.333333343
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Keyframe, UnityEngine.CoreModule
+    - Name: ver
+      Entry: 3
+      Data: 1
+    - Name: m_Time
+      Entry: 4
+      Data: 0.783333361
     - Name: m_Value
       Entry: 4
       Data: 0
@@ -925,7 +1156,7 @@ MonoBehaviour:
       Data: 20|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 16
+      Data: 23
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -950,10 +1181,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: -2.87
+      Data: -2
     - Name: 
       Entry: 4
-      Data: -0.3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -962,10 +1193,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 4
+      Data: 5.7
     - Name: 
       Entry: 4
-      Data: 2.7
+      Data: 4.4
     - Name: 
       Entry: 8
       Data: 
@@ -1094,7 +1325,7 @@ MonoBehaviour:
       Data: 26|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 25
+      Data: 41
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -1259,16 +1490,16 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 34|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 3
+      Data: 23
     - Name: keyframeName
       Entry: 1
-      Data: Whiff_Start
+      Data: Hit_1
     - Name: 
       Entry: 8
       Data: 
@@ -1277,10 +1508,10 @@ MonoBehaviour:
       Data: 35|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 25
+      Data: 29
     - Name: keyframeName
       Entry: 1
-      Data: Whiff_End
+      Data: Hit_2
     - Name: 
       Entry: 8
       Data: 
@@ -1289,22 +1520,10 @@ MonoBehaviour:
       Data: 36|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 40
+      Data: 35
     - Name: keyframeName
       Entry: 1
-      Data: GC_End
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 37|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 16
-    - Name: keyframeName
-      Entry: 1
-      Data: Hit_Start
+      Data: Hit_3
     - Name: 
       Entry: 8
       Data: 
@@ -1323,10 +1542,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  timelineName: Rg_5C
-  Script: "@Trigger:\nInputType: 5LPPressed;\nInAir: false;\nGCOption: 'Rg_5C';\nreturn;\n\n@Main:\nSetTransition:
-    'PreSquit';\nMarkerEvent: (Whiff_Start)\n  InputBuffer: true;\n  WhiffWindow;\n 
-    WhiffOption: 'Rg_GroundDash';\n  EndMarkerEvent:\nMarkerEvent: (Hit_Start)\n   
-    WaitHit: \n    HitStop: 10, 10;\n    ScreenShake: 120, 15;\n    EndHit:\n   
-    EndMarkerEvent:\nMarkerEvent: (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_5D';\n 
-    EndMarkerEvent:\nStartTimeline;\nExit;"
+  timelineName: Rg_24A
+  Script: "@Trigger:\nInputType: 2LPPressed;;\nInAir: false;\nreturn;\n\n@Main:\nMarkerEvent:
+    (Hit_1)\n    WaitHit:\n    HitStop: 0, 50;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent:
+    (Hit_2)\n    WaitHit:\n    HitStop: 0, 50;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent:
+    (Hit_3)\n    WaitHit:\n    HitStop: 0, 50;\n    EndHit:\n    EndMarkerEvent:\nStartTimeline;\nExit;\n"

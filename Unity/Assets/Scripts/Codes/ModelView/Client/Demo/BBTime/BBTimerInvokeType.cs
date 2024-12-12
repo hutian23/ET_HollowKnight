@@ -30,9 +30,9 @@
         public const int CallbackCheckTimer = 112;
         
         //物理模拟相关的生命周期函数
-        public const int HitCheckTimer = 113;
-        public const int HitNotifyTimer = 114;
-        public const int ThrowCheckTimer = 115;
+        public const int HitCheckTimer = 313;
+        public const int HitNotifyTimer = 314;
+        public const int ThrowCheckTimer = 315;
         
     }
 }

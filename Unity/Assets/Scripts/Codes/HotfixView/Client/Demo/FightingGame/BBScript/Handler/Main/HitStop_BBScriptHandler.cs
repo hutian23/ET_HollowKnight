@@ -9,34 +9,39 @@ namespace ET.Client
             return "HitStop";
         }
         
-        //HitStop: 8;
+        //HitStop: 6, 8;(Hertz, hitStopFrame)
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "HitStop: (?<HitStop>.*?);");
+            Match match = Regex.Match(data.opLine, "HitStop: (?<TimeScale>.*?), (?<HitStop>.*?);");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
+            if (!int.TryParse(match.Groups["TimeScale"].Value, out int hertz))
+            {
+                Log.Error($"cannot format timeScale to int!");
+                return Status.Failed;
+            }
             if (!int.TryParse(match.Groups["HitStop"].Value, out int hitStop))
             {
                 Log.Error($"cannot format HitStop to int!");
                 return Status.Failed;
             }
 
-            HitStopCor(parser, hitStop, token).Coroutine();
+            HitStopCor(parser, hertz, hitStop, token).Coroutine();
             
             await ETTask.CompletedTask;
             return Status.Success;
         }
 
-        private async ETTask HitStopCor(BBParser parser,int hitStop, ETCancellationToken token)
+        private async ETTask HitStopCor(BBParser parser, int hertz, int hitStop, ETCancellationToken token)
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
 
-            timelineComponent.SetHertz(10);
+            timelineComponent.SetHertz(hertz);
             await sceneTimer.WaitAsync(hitStop, token);
             timelineComponent.SetHertz(60);
         }
