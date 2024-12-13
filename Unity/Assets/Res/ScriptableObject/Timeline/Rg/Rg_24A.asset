@@ -1544,6 +1544,7 @@ MonoBehaviour:
       Data: 
   timelineName: Rg_24A
   Script: "@Trigger:\nInputType: 2LPPressed;;\nInAir: false;\nreturn;\n\n@Main:\nMarkerEvent:
-    (Hit_1)\n    WaitHit:\n    HitStop: 0, 50;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent:
-    (Hit_2)\n    WaitHit:\n    HitStop: 0, 50;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent:
-    (Hit_3)\n    WaitHit:\n    HitStop: 0, 50;\n    EndHit:\n    EndMarkerEvent:\nStartTimeline;\nExit;\n"
+    (Hit_1)\n    WaitHit:\n    HitStop: 0, 4;\n    ScreenShake: 80, 100;\n    EndHit:\n   
+    EndMarkerEvent:\nMarkerEvent: (Hit_2)\n    WaitHit:\n    HitStop: 0, 4;\n   
+    ScreenShake: 80, 100;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent: (Hit_3)\n   
+    WaitHit:\n    HitStop: 0, 4;\n    ScreenShake: 80, 100;\n    EndHit:\n    EndMarkerEvent:\nStartTimeline;\nExit;\n"
