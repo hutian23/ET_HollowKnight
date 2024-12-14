@@ -11,7 +11,7 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Log.Warning(BBTimerManager.Instance.SceneTimer().GetNow().ToString());
+            Log.Warning(parser.GetParam<string>("StopFrame"));
             await ETTask.CompletedTask;
             return Status.Success;
         }

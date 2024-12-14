@@ -184,5 +184,21 @@
         }
 
         #endregion
+
+        #region HitFlag
+
+        public static int GetHitStun(this BehaviorBuffer self, string hitFlag)
+        {
+            if (!self.hitMap.TryGetValue(hitFlag, out long infoId))
+            {
+                Log.Error($"doest not exist hitStun behavior, Name:{hitFlag}");
+                return 0;
+            }
+
+            BehaviorInfo info = self.GetChild<BehaviorInfo>(infoId);
+            return info.behaviorOrder;
+        }
+
+        #endregion
     }
 }

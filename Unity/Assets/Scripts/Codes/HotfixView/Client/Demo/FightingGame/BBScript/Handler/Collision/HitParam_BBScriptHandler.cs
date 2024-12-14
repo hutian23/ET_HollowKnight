@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Timeline;
+using ET.Event;
 
 namespace ET.Client
 {
@@ -11,6 +11,7 @@ namespace ET.Client
             return "HitParam";
         }
 
+        //代码块中可执行，需要注册Hurt_CollisionInfo变量
         //HitParam: StopFrame, 10;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
@@ -20,21 +21,17 @@ namespace ET.Client
                 DialogueHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            string paramName = match.Groups["ParamName"].Value;
-            if (!long.TryParse(match.Groups["ParamValue"].Value, out long paramValue))
-            {
-                Log.Error($"cannot format {match.Groups["ParamValue"].Value} to long!");
-                return Status.Failed;
-            }
+            CollisionInfo info = parser.GetParam<CollisionInfo>("Hurt_CollisionInfo");
             
-            FixtureData dataB = parser.GetParam<FixtureData>("HitData");
-            b2Body b2Body = Root.Instance.Get(dataB.InstanceId) as b2Body;
+            //查询组件
+            b2Body b2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
+            Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
+            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
+            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             
             //注册变量
-            Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
-            unit.GetComponent<TimelineComponent>().GetComponent<BehaviorBuffer>().RegistParam(paramName, paramValue);
-
+            buffer.RegistParam(match.Groups["ParamName"].Value, match.Groups["ParamValue"].Value);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }
