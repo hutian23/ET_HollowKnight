@@ -34,6 +34,7 @@
                 self.RemoveChild(kv.Value);
             }
             self.behaviorOrderMap.Clear();
+            self.hitMap.Clear();
             self.DescendInfoList.Clear();
             self.WindowTimer = 0;
             
