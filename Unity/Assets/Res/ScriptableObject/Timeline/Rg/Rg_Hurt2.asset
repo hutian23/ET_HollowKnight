@@ -376,15 +376,18 @@ MonoBehaviour:
   timelineName: Rg_Hurt2
   Script: '@Main:
 
-    BBSprite: ''hurt_5'', 15;
+    Shake: 1000, 10;
 
-    BBSprite: ''hurt_4'', 3;
+    BBSprite: ''hurt_5'', [StopFrame];
 
     BBSprite:
-    ''hurt_3'', 3;
+    ''hurt_4'', 3;
+
+    BBSprite: ''hurt_3'', 3;
 
     BBSprite: ''hurt_2'', 3;
 
-    BBSprite: ''hurt_1'', 3;
+    BBSprite:
+    ''hurt_1'', 3;
 
     Exit;'

@@ -56,7 +56,7 @@ namespace ET
         {
             base.PreStep();
             
-            EventSystem.Instance.PreStepUpdate();
+            EventSystem.Instance.Invoke(new PreStepCallback());
             IsLocked = true;
         }
         
@@ -65,7 +65,7 @@ namespace ET
             base.PostStep();
             
             IsLocked = false;
-            EventSystem.Instance.PostStepUpdate();
+            EventSystem.Instance.Invoke(new PostStepCallback());
         }
         
         public override void BeginContact(Contact contact)
@@ -371,6 +371,15 @@ namespace ET
         }
 
         #endregion
+    }
+
+    public struct PreStepCallback
+    {
+        
+    }
+    
+    public struct PostStepCallback
+    {
     }
 
     public struct BeginContactCallback

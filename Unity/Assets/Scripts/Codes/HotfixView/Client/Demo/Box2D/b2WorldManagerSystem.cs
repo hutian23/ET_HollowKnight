@@ -28,22 +28,6 @@ namespace ET.Client
             }
         }
         
-        public class B2WorldManagerPreStepSystem : PreStepSystem<b2WorldManager>
-        {
-            protected override void PreStepUpdate(b2WorldManager self)
-            {
-                self.GetPreStepTimer().Step();
-            }
-        }
-        
-        public class b2WorldManagerPostStepSystem : PostStepSystem<b2WorldManager>
-        {
-            protected override void PosStepUpdate(b2WorldManager self)
-            {
-                self.GetPostStepTimer().Step();
-            }
-        }
-        
         public class b2WorldManagerLoadSystem : LoadSystem<b2WorldManager>
         {
             protected override void Load(b2WorldManager self)

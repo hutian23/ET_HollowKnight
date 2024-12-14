@@ -12,9 +12,10 @@ namespace ET.Client
         {
             protected override void Destroy(b2Body self)
             {
+                self.body = null;
                 self.unitId = 0;
                 self.hitBoxFixtures.Clear();
-                self.body = null;
+                self.trans = default;
                 self.Flip = FlipState.Left;
             }
         }
@@ -34,7 +35,7 @@ namespace ET.Client
                 self.trans = curTrans;
                 Unit unit = Root.Instance.Get(self.unitId) as Unit;
                 GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
-                Vector2 position = curTrans.Position.ToUnityVector2();
+                Vector3 position = curTrans.Position.ToUnityVector3();
                 Vector3 axis = new(0, 0, curTrans.Rotation.Angle * Mathf.Rad2Deg);
 
                 go.transform.position = position;
