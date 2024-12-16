@@ -629,35 +629,45 @@ MonoBehaviour:
   timelineName: Rg_Hurt1
   Script: '@Main:
 
+    Shake: [ShakeLength], [ShakeFrame];
+
     Gravity: 0;
 
-    SetVelocityY: 10000;
+    BBSprite:
+    ''frame_1'', [StopFrame];
 
-    BBSprite: ''frame_2'',
-    4;
+    SetVelocityX: [VelocityX];
 
-    BBSprite: ''frame_3'', 4;
+    SetVelocityY:
+    [VelocityY];
 
     BBSprite: ''frame_2'', 4;
 
-    Gravity:
-    100000;
+    BBSprite: ''frame_3'', 4;
+
+    BBSprite:
+    ''frame_2'', 4;
+
+    Gravity: 130000;
 
     BBSprite: ''frame_4'', 3;
 
-    BBSprite: ''frame_5'', 4;
+    BBSprite:
+    ''frame_5'', 4;
 
-    BeginLoop:
-    (InAir: true)
+    BeginLoop: (InAir: true)
 
     BBSprite: ''frame_6'', 4;
 
-    BBSprite: ''frame_7'', 4;
+    BBSprite:
+    ''frame_7'', 4;
 
     EndLoop:
 
-    BBSprite:
-    ''frame_8'', 3;
+    SetVelocityX: 0;
+
+    BBSprite: ''frame_8'',
+    3;
 
     BBSprite: ''frame_9'', 3;
 

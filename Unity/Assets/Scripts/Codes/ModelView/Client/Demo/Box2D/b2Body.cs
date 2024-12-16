@@ -13,6 +13,7 @@ namespace ET.Client
         public List<Fixture> hitBoxFixtures = new(); // 当前帧的判定框,更新关键帧(UpdateHitboxCallback/UpdateFlipCallback)时刷新这个列表
         public Transform trans; // 当前step中b2World中刚体的位置转换信息
         public FlipState Flip = FlipState.Left;
+        public bool UpdateFlag; // 手动刷新渲染层
     }
 
     [Flags]

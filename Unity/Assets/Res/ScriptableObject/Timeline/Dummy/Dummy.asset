@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 68c83a91061492e428bcb7d6633df9e0, type: 2}
     - {fileID: 11400000, guid: 6f9eac133b92446419d50a6fc28124be, type: 2}
     - {fileID: 11400000, guid: cf27ba9d4833bbd48a225e6e79d93722, type: 2}
+    - {fileID: 11400000, guid: 64bd36170e219fa40a45f32635c12e1a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -63,7 +64,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -101,13 +102,27 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rg_HardDownRecovery
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nInitPos: 2000, 3000;\nGravity: 150000;\nNumericType: MaxFall,
-    50000;\nNumericType: MiddleFall, 2000;\n\n# Base\nRegistMove: (Dummy_Idle)\n   
-    MoveType: None;\n    EndMove:\nRegistMove: (Rg_Hurt1)\n    MoveType: HitStun;\n   
-    HitFlag: Hurt1;\n    EndMove:\nRegistMove: (Rg_Hurt2)\n    MoveType: HitStun;\n   
-    HitFlag: Hurt2;\n    EndMove:\nreturn;\n\n"
+  rootScript: "@RootInit:\nInitPos: 2000, 3000;\nGravity: 150000;\nNumericType: MaxGravity,
+    150000;\nNumericType: MaxFall, 45000;\nNumericType: MaxJump, 2;\nNumericType:
+    MaxDash, 2;\nNumericType: DashCount, 2;\nNumericType: JumpCount, 2;\nRegistAirCheck;\n\n#
+    Base\nRegistMove: (Dummy_Idle)\n    MoveType: None;\n    EndMove:\nRegistMove:
+    (Rg_Hurt1)\n    MoveType: HitStun;\n    HitFlag: Hurt1;\n    EndMove:\nRegistMove:
+    (Rg_Hurt2)\n    MoveType: HitStun;\n    HitFlag: Hurt2;\n    EndMove:\nRegistMove:
+    (Rg_HardDownRecovery)\n    MoveType: HitStun;\n    EndMove:\nreturn;\n\n"

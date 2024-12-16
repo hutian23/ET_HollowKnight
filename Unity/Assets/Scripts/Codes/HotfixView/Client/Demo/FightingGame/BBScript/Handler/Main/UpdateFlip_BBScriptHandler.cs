@@ -9,28 +9,18 @@
         {
             //更新刚体朝向
             b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
-            
-            FlipState preFlip = b2Body.Flip;
-            FlipState curFlip = preFlip;
-            
-            bool left = self.IsPressed(BBOperaType.LEFT) || self.IsPressed(BBOperaType.DOWNLEFT) || self.IsPressed(BBOperaType.UPLEFT);
-            bool right = self.IsPressed(BBOperaType.RIGHT) || self.IsPressed(BBOperaType.DOWNRIGHT) || self.IsPressed(BBOperaType.UPRIGHT);
-            if (left)
+            if (self.IsPressing(BBOperaType.LEFT) ||
+                self.IsPressing(BBOperaType.DOWNLEFT) ||
+                self.IsPressing(BBOperaType.UPLEFT))
             {
-                curFlip = FlipState.Left;
+                b2Body.SetFlip(FlipState.Left);
             }
-            else if(right)
+            else if(self.IsPressing(BBOperaType.RIGHT) || 
+                    self.IsPressing(BBOperaType.DOWNRIGHT) ||
+                    self.IsPressing(BBOperaType.UPRIGHT))
             {
-                curFlip = FlipState.Right;
+                b2Body.SetFlip(FlipState.Right);
             }
-            
-            //转向发生更新
-            if (curFlip == preFlip)
-            {
-                return;
-            }
-            
-            EventSystem.Instance.Invoke(new UpdateFlipCallback(){instanceId = b2Body.unitId,curFlip = curFlip});
         }
     }
 

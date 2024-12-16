@@ -15,7 +15,7 @@ namespace ET.Client
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            b2Unit hitBoxComponent = timelineComponent.GetComponent<b2Unit>();
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
 
             //1. Set Flip
             b2Body b2Body = b2WorldManager.Instance.GetBody(args.instanceId);
@@ -28,7 +28,7 @@ namespace ET.Client
             b2Body.ClearHitbox();
             
             //3. FixedUpdate hitBoxFixtures
-            foreach (BoxInfo info in hitBoxComponent.keyFrame.boxInfos)
+            foreach (BoxInfo info in b2Unit.keyFrame.boxInfos)
             {
                 PolygonShape shape = new();
                 shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);

@@ -14,11 +14,11 @@ namespace ET.Client
         public override void Handle(UpdateHitboxCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            b2Unit hitBoxComponent = timelineComponent.GetComponent<b2Unit>();
+            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
 
             //更新关键帧
-            hitBoxComponent.keyFrame = args.Keyframe;
+            b2Unit.keyFrame = args.Keyframe;
 
             //1. Dispose old hitBoxFixtures
             b2Body.ClearHitbox();

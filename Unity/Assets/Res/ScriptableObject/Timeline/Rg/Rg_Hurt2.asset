@@ -378,21 +378,21 @@ MonoBehaviour:
 
     Shake: [ShakeLength], [ShakeFrame];
 
-    PushBack: -10000,
-    38000;
+    PushBack: [PushBack_V],
+    [PushBack_F];
 
     BBSprite: ''hurt_5'', [StopFrame];
 
-    BBSprite: ''hurt_4'', 3;
+    BBSprite: ''hurt_4'',
+    3;
 
-    BBSprite:
-    ''hurt_3'', 3;
+    BBSprite: ''hurt_3'', 3;
 
     BBSprite: ''hurt_2'', 3;
 
-    BBSprite: ''hurt_1'', 3;
+    BBSprite:
+    ''hurt_1'', 3;
 
-    SetVelocityX:
-    0;
+    SetVelocityX: 0;
 
     Exit;'

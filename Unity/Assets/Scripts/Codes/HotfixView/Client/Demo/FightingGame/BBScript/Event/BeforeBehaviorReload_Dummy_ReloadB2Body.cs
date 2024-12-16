@@ -1,10 +1,8 @@
-﻿using Box2DSharp.Dynamics;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Current)]
     [FriendOf(typeof(b2Body))]
-    public class BeforeBehaviorReload_DummyReloadB2Body : AEvent<BeforeBehaviorReload>
+    public class BeforeBehaviorReload_Dummy_ReloadB2Body : AEvent<BeforeBehaviorReload>
     {
         protected override async ETTask Run(Scene scene, BeforeBehaviorReload args)
         {
@@ -13,12 +11,9 @@ namespace ET.Client
             b2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<b2Unit>();
 
             //1. 销毁旧夹具
-            for (int i = 0; i < b2Body.hitBoxFixtures.Count; i++)
-            {
-                Fixture fixture = b2Body.hitBoxFixtures[i];
-                b2Body.body.DestroyFixture(fixture);
-            }
-            b2Body.hitBoxFixtures.Clear();
+            b2Body.ClearHitbox();
+            //2. 更新hitbox
+            b2Unit.Init();
 
             await ETTask.CompletedTask;
         }

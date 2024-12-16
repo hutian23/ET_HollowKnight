@@ -17,6 +17,7 @@ namespace ET.Client
                 self.hitBoxFixtures.Clear();
                 self.trans = default;
                 self.Flip = FlipState.Left;
+                self.UpdateFlag = false;
             }
         }
         
@@ -24,12 +25,13 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2Body self)
             {
-                //未发生位置更新，渲染层无需刷新
+                //未发生更新，渲染层无需刷新
                 Transform curTrans = self.body.GetTransform();
-                if (self.trans.Equals(curTrans))
+                if (self.trans.Equals(curTrans) && !self.UpdateFlag)
                 {
                     return;
                 }
+                self.UpdateFlag = false;
 
                 //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
                 self.trans = curTrans;
@@ -56,6 +58,10 @@ namespace ET.Client
         
         public static void SetFlip(this b2Body self, FlipState flipState)
         {
+            if (self.Flip != flipState)
+            {
+                EventSystem.Instance.Invoke(new UpdateFlipCallback(){instanceId = self.unitId,curFlip = flipState});
+            }
             self.Flip = flipState;
         }
 
