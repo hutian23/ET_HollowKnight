@@ -56,13 +56,20 @@ namespace ET.Client
             self.body.SetLinearVelocity(value);
         }
         
-        public static void SetFlip(this b2Body self, FlipState flipState)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="flipState"></param>
+        /// <param name="refresh">需要翻转hitbox</param>
+        public static void SetFlip(this b2Body self, FlipState flipState, bool refresh = false)
         {
-            if (self.Flip != flipState)
+            if (self.Flip != flipState && refresh)
             {
                 EventSystem.Instance.Invoke(new UpdateFlipCallback(){instanceId = self.unitId,curFlip = flipState});
             }
             self.Flip = flipState;
+            self.UpdateFlag = true;
         }
 
         public static int GetFlip(this b2Body self)

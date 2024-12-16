@@ -22,17 +22,21 @@ namespace ET.Client
                 return Status.Failed;
             }
             CollisionInfo info = parser.GetParam<CollisionInfo>("Hurt_CollisionInfo");
-            
+
             //查询组件
-            b2Body b2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
-            Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
+            b2Body bodyA = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
+            b2Body bodyB = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
+            Unit unit = Root.Instance.Get(bodyB.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+
+            // 受击者的朝向面向玩家
+            bodyB.SetFlip(bodyA.GetFlip() == (int)FlipState.Left ? FlipState.Right : FlipState.Left);
 
             //查询对应的受击行为
             int order = buffer.GetHitStun(match.Groups["hitFlag"].Value);
             timelineComponent.Reload(order);
-            
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

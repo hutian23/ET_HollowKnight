@@ -21,6 +21,7 @@
             self.GetTimelinePlayer().Init(info.Timeline);
             parser.Init(info.opDict);
             // 切换行为前回调
+            // 物理层回调 + 逻辑层回调
             EventSystem.Instance.PublishAsync(self.DomainScene(), new BeforeBehaviorReload() { instanceId = self.GetParent<Unit>().InstanceId, behaviorOrder = behaviorOrder }).Coroutine();
             // 调用Main协程
             parser.Invoke(info.GetFunctionPointer("Main"), parser.CancellationToken).Coroutine();

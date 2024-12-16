@@ -13,13 +13,13 @@
                 self.IsPressing(BBOperaType.DOWNLEFT) ||
                 self.IsPressing(BBOperaType.UPLEFT))
             {
-                b2Body.SetFlip(FlipState.Left);
+                b2Body.SetFlip(FlipState.Left, true);
             }
             else if(self.IsPressing(BBOperaType.RIGHT) || 
                     self.IsPressing(BBOperaType.DOWNRIGHT) ||
                     self.IsPressing(BBOperaType.UPRIGHT))
             {
-                b2Body.SetFlip(FlipState.Right);
+                b2Body.SetFlip(FlipState.Right, true);
             }
         }
     }

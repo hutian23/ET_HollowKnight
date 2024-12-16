@@ -22,15 +22,14 @@
                 inputWait.IsPressing(BBOperaType.UPLEFT) ||
                 inputWait.IsPressing(BBOperaType.DOWNLEFT))
             {
-                b2Body.Flip = FlipState.Left;
+                b2Body.SetFlip(FlipState.Left);
             }
             else if (inputWait.IsPressing(BBOperaType.RIGHT) ||
                      inputWait.IsPressing(BBOperaType.UPRIGHT) ||
                      inputWait.IsPressing(BBOperaType.DOWNRIGHT))
             {
-                b2Body.Flip = FlipState.Right;
+                b2Body.SetFlip(FlipState.Right);
             }
-            b2Body.UpdateFlag = true;
             
             await ETTask.CompletedTask;
         }
