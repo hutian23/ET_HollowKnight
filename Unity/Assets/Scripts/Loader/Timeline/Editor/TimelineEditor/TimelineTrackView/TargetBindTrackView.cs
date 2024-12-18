@@ -16,7 +16,7 @@ namespace Timeline.Editor
             int index = EditorWindow.BBTimeline.Tracks.IndexOf(track);
             transform.position = new Vector3(0, index * 40, 0);
 
-            foreach (TargetBindInfo info in TargetBindTrack.TargetBindInfos)
+            foreach (TargetBindKeyFrame info in TargetBindTrack.KeyFrames)
             {
                 TargetBindMarkerView markerView = new();
                 markerView.Init(this, info);
@@ -65,29 +65,29 @@ namespace Timeline.Editor
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
                 EditorWindow.ApplyModify(() =>
                 {
-                    TargetBindTrack.TargetBindInfos.Add(new TargetBindInfo(){frame = targetFrame});
+                    TargetBindTrack.KeyFrames.Add(new TargetBindKeyFrame(){frame = targetFrame});
                 },"Create targetBind KeyFrame");
             },ContainKeyFrame(localMousePos.x)? DropdownMenuAction.Status.Hidden : DropdownMenuAction.Status.Normal);
             menu.AppendAction("Remove KeyFrame", _ =>
             {
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
-                TargetBindInfo info = TargetBindTrack.GetInfo(targetFrame);
+                TargetBindKeyFrame keyFrame = TargetBindTrack.GetInfo(targetFrame);
                 EditorWindow.ApplyModify(() =>
                 {
-                    TargetBindTrack.TargetBindInfos.Remove(info);
+                    TargetBindTrack.KeyFrames.Remove(keyFrame);
                 }, "Remove TargetBind KeyFrame");
             }, ContainKeyFrame(localMousePos.x)? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Hidden);
             menu.AppendAction("Copy KeyFrame", _ =>
             {
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
-                TargetBindInfo copyInfo = MongoHelper.Clone(TargetBindTrack.GetInfo(targetFrame));
-                BBTimelineSettings.GetSettings().CopyTarget = copyInfo;
+                TargetBindKeyFrame copyKeyFrame = MongoHelper.Clone(TargetBindTrack.GetInfo(targetFrame));
+                BBTimelineSettings.GetSettings().CopyTarget = copyKeyFrame;
             },ContainKeyFrame(localMousePos.x)? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Hidden);
             menu.AppendAction("Paste KeyFrame", _ =>
             {
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
-                TargetBindInfo info = BBTimelineSettings.GetSettings().CopyTarget as TargetBindInfo;
-                if (info == null)
+                TargetBindKeyFrame keyFrame = BBTimelineSettings.GetSettings().CopyTarget as TargetBindKeyFrame;
+                if (keyFrame == null)
                 {
                     return;
                 }
@@ -98,19 +98,19 @@ namespace Timeline.Editor
                     return;
                 }
 
-                TargetBindInfo cloneInfo = MongoHelper.Clone(info);
-                cloneInfo.frame = targetFrame;
+                TargetBindKeyFrame cloneKeyFrame = MongoHelper.Clone(keyFrame);
+                cloneKeyFrame.frame = targetFrame;
                 EditorWindow.ApplyModify(() =>
                 {
-                    TargetBindTrack.TargetBindInfos.Add(cloneInfo);
+                    TargetBindTrack.KeyFrames.Add(cloneKeyFrame);
                 },"Paste TargetBind KeyFrame");
             },CanPaste()? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Hidden);
         }
 
         private bool CanPaste()
         {
-            TargetBindInfo info = BBTimelineSettings.GetSettings().CopyTarget as TargetBindInfo;
-            return info != null;
+            TargetBindKeyFrame keyFrame = BBTimelineSettings.GetSettings().CopyTarget as TargetBindKeyFrame;
+            return keyFrame != null;
         }
 
         private bool ContainKeyFrame(float x)

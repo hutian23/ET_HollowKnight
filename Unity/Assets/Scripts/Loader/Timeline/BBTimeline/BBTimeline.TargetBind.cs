@@ -17,13 +17,13 @@ namespace Timeline
     public class BBTargetBindTrack: BBTrack
     {
         [NonSerialized,OdinSerialize]
-        public List<TargetBindInfo> TargetBindInfos = new();
+        public List<TargetBindKeyFrame> KeyFrames = new();
         
         public override Type RuntimeTrackType => typeof (RuntimeTargetBindTrack);
 
-        public TargetBindInfo GetInfo(int targetFrame)
+        public TargetBindKeyFrame GetInfo(int targetFrame)
         {
-            return TargetBindInfos.FirstOrDefault(info => info.frame == targetFrame);
+            return this.KeyFrames.FirstOrDefault(info => info.frame == targetFrame);
         }
         
 #if UNITY_EDITOR
@@ -31,13 +31,13 @@ namespace Timeline
 
         public override int GetMaxFrame()
         {
-            return TargetBindInfos.Count > 0 ? TargetBindInfos.Max(info => info.frame) : 0;
+            return this.KeyFrames.Count > 0 ? this.KeyFrames.Max(info => info.frame) : 0;
         }
 #endif
     }
 
     [Serializable]
-    public class TargetBindInfo: BBKeyframeBase
+    public class TargetBindKeyFrame: BBKeyframeBase
     {
         public Vector2 TargetPosition;
     }
@@ -46,13 +46,20 @@ namespace Timeline
 
     public class RuntimeTargetBindTrack: RuntimeTrack
     {
+        private TimelinePlayer timelinePlayer => RuntimePlayable.TimelinePlayer;
+        private readonly BBTargetBindTrack targetBindTrack;
+        private int currentFrame = -1;
+        
         public RuntimeTargetBindTrack(RuntimePlayable runtimePlayable, BBTrack track): base(runtimePlayable, track)
         {
+           targetBindTrack = Track as BBTargetBindTrack;
         }
 
         public override void Bind()
         {
-            
+            GameObject child = new(targetBindTrack.Name);
+            child.transform.SetParent(timelinePlayer.transform);
+            child.transform.localPosition = Vector2.zero;
         }
 
         public override void UnBind()
@@ -72,7 +79,7 @@ namespace Timeline
     [Serializable]
     public class BBTargetBindInspectorData: ShowInspectorData
     {
-        private TargetBindInfo curInfo;
+        private TargetBindKeyFrame curKeyFrame;
         
         [LabelText("当前帧: "),ReadOnly]
         public int currentFrame;
@@ -85,7 +92,7 @@ namespace Timeline
         {
             fieldView.EditorWindow.ApplyModifyWithoutButtonUndo(() =>
             {
-                curInfo.TargetPosition = curPos;
+                this.curKeyFrame.TargetPosition = curPos;
             },"Save TargetBind Frame");
         }
 
@@ -93,10 +100,10 @@ namespace Timeline
         
         public BBTargetBindInspectorData(object target): base(target)
         {
-            TargetBindInfo info = target as TargetBindInfo;
-            curInfo = info;
-            currentFrame = info.frame;
-            curPos = info.TargetPosition;
+            TargetBindKeyFrame keyFrame = target as TargetBindKeyFrame;
+            this.curKeyFrame = keyFrame;
+            currentFrame = keyFrame.frame;
+            curPos = keyFrame.TargetPosition;
         }
 
         public override void InspectorAwake(TimelineFieldView _fieldView)

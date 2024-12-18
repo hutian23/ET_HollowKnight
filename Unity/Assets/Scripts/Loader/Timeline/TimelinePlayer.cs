@@ -101,7 +101,7 @@ namespace Timeline
             var goSet = new HashSet<GameObject>();
             foreach (var component in GetComponentsInChildren<Component>())
             {
-                if (component.GetComponent<TimelineGenerate>() != null)
+                if (component.GetComponent<ITimelineGenerate>() != null)
                 {
                     goSet.Add(component.gameObject);
                 }

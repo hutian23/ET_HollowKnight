@@ -1,5 +1,4 @@
-﻿using Box2DSharp.Testbed.Unity.Inspection;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Timeline.Editor
 {
@@ -8,12 +7,6 @@ namespace Timeline.Editor
         public BoxInfo info;
         
 #if UNITY_EDITOR
-        // protected override void Reset()
-        // {
-        //     info.center = Vector3.zero;
-        //     info.size = Vector3.one;
-        // }
-
         protected override void OnDrawGizmos()
         {
             Matrix4x4 gizmosMatrixRecord = Gizmos.matrix;

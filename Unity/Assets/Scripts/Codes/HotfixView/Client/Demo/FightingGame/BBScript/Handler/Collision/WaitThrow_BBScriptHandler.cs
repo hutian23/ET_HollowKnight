@@ -6,6 +6,7 @@ namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.ThrowCheckTimer)]
     [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(BBParser))]
     public class ThrowCheckTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
@@ -13,7 +14,7 @@ namespace ET.Client
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
             b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
-            
+
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;
             int count = infoQueue.Count;
 
@@ -25,32 +26,44 @@ namespace ET.Client
                 BoxInfo infoA = info.dataA.UserData as BoxInfo;
                 BoxInfo infoB = info.dataB.UserData as BoxInfo;
                 if (infoA.hitboxType is HitboxType.Throw &&
-                    infoB.hitboxType is HitboxType.Hurt)
+                    infoB.hitboxType is HitboxType.Squash)
                 {
-                    //here: 注册变量供后面脚本使用
-                    self.RegistParam("ThrowHurt", infoB);
-                    
-                    //销毁定时器
+                    //here: 注册变量
+                    self.TryRemoveParam("ThrowHurt");
+                    self.TryRemoveParam("TargetBind");
+                    self.TryRemoveParam("Hurt_CollisionInfo");
+                    self.RegistParam("ThrowHurt", true);
+                    self.RegistParam("Hurt_CollisionInfo", info); // 调用hitStun指令
+                    self.RegistParam("TargetBind", info.dataB.InstanceId); // b2BodyId
+
+                    //子携程
+                    int startIndex = self.GetParam<int>("ThrowCheck_StartIndex");
+                    int endIndex = self.GetParam<int>("ThrowCheck_EndIndex");
+                    self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
+
+                    //初始化
                     long timer = self.GetParam<long>("ThrowCheckTimer");
                     postStepTimer.Remove(ref timer);
                     self.TryRemoveParam("ThrowCheckTimer");
+                    self.TryRemoveParam("ThrowCheck_StartIndex");
+                    self.TryRemoveParam("ThrowCheck_EndIndex");
                     break;
                 }
             }
         }
     }
-
-    public class ThrowCheck_BBScriptHandler : BBScriptHandler
+    [FriendOf(typeof(BBParser))]
+    public class WaitThrow_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "ThrowCheck";
+            return "WaitThrow";
         }
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
-            
+
             // 初始化
             if (parser.ContainParam("ThrowCheckTimer"))
             {
@@ -58,15 +71,34 @@ namespace ET.Client
                 postStepTimer.Remove(ref preTimer);
             }
             parser.TryRemoveParam("ThrowCheckTimer");
+            parser.TryRemoveParam("ThrowCheck_StartIndex");
+            parser.TryRemoveParam("ThrowCheck_EndIndex");
+            
+            //跳过代码块
+            int index = parser.Coroutine_Pointers[data.CoroutineID];
+            int endIndex = index, startIndex = index;
+            while (++index < parser.opDict.Count)
+            {
+                string opLine = parser.opDict[index];
+                if (opLine.Equals("EndThrow:"))
+                {
+                    endIndex = index;
+                    break;
+                }
+            }
+            parser.Coroutine_Pointers[data.CoroutineID] = index;
             
             // 注册定时器
             long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.ThrowCheckTimer, parser);
             parser.RegistParam("ThrowCheckTimer", timer);
+            parser.RegistParam("ThrowCheck_StartIndex", startIndex);
+            parser.RegistParam("ThrowCheck_EndIndex", endIndex);
+            
             token.Add(() =>
             {
                 postStepTimer.Remove(ref timer);
             });
-            
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

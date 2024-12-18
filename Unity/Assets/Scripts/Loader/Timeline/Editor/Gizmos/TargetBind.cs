@@ -2,7 +2,7 @@
 
 namespace Timeline.Editor
 {
-    public class TimelineGenerate: MonoBehaviour
+    public class TargetBind: MonoBehaviour, ITimelineGenerate
     {
     }
 }

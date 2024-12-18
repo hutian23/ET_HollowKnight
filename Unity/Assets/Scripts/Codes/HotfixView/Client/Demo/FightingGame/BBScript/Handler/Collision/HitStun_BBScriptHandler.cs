@@ -4,7 +4,7 @@ using ET.Event;
 namespace ET.Client
 {
     [FriendOf(typeof(b2Body))]
-    public class Hit_GotoState_BBScriptHandler : BBScriptHandler
+    public class HitStun_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {

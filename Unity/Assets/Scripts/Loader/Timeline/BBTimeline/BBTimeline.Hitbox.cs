@@ -144,7 +144,6 @@ namespace Timeline
                 GameObject child = new(HitboxName);
                 child.transform.SetParent(parent.transform);
                 child.transform.localPosition = Vector2.zero;
-                child.AddComponent<TimelineGenerate>();
                 CastBox castBox = child.AddComponent<CastBox>();
                 castBox.info = new BoxInfo() { hitboxType = HitboxType, boxName = HitboxName };
             }, "Create hitbox", false);
@@ -203,7 +202,6 @@ namespace Timeline
     public class RuntimeHitboxTrack: RuntimeTrack
     {
         private TimelinePlayer timelinePlayer => RuntimePlayable.TimelinePlayer;
-
         private int currentFrame = -1;
 
         public RuntimeHitboxTrack(RuntimePlayable runtimePlayable, BBTrack track): base(runtimePlayable, track)
@@ -217,7 +215,7 @@ namespace Timeline
         public override void UnBind()
         {
 #if UNITY_EDITOR
-            timelinePlayer.ClearTimelineGenerate();
+            ClearHitbox(timelinePlayer);
 #endif
         }
 
@@ -251,9 +249,29 @@ namespace Timeline
         }
 
 #if UNITY_EDITOR
+        private static void ClearHitbox(TimelinePlayer timelinePlayer)
+        {
+            //1. 销毁HitboxTrack运行时产生的组件
+            var goSet = new HashSet<GameObject>();
+            foreach (var component in timelinePlayer.GetComponentsInChildren<Component>())
+            {
+                if (component.GetComponent<CastBox>() != null)
+                {
+                    goSet.Add(component.gameObject);
+                }
+            }
+            foreach (GameObject go in goSet)
+            {
+                UnityEngine.Object.DestroyImmediate(go);
+            }
+        }
+        
         public static void GenerateHitbox(TimelinePlayer timelinePlayer, HitboxKeyframe keyframe)
         {
-            timelinePlayer.ClearTimelineGenerate();
+            //1. 销毁HitboxTrack运行时产生的组件
+            ClearHitbox(timelinePlayer);
+            
+            //2. 根据keyframe生成新的CastBox
             foreach (BoxInfo boxInfo in keyframe.boxInfos)
             {
                 if (boxInfo.hitboxType is HitboxType.None) continue;
@@ -265,8 +283,6 @@ namespace Timeline
                 GameObject child = new(boxInfo.boxName);
                 child.transform.SetParent(parent.transform);
                 child.transform.localPosition = Vector2.zero;
-                child.AddComponent<TimelineGenerate>();
-
                 //深拷贝
                 CastBox castBox = child.AddComponent<CastBox>();
                 castBox.info = MongoHelper.Clone(boxInfo);

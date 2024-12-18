@@ -2,12 +2,12 @@
 {
     public class TargetBindMarkerView : MarkerView
     {
-        private TargetBindInfo info => keyframeBase as TargetBindInfo;
+        private TargetBindKeyFrame KeyFrame => keyframeBase as TargetBindKeyFrame;
 
         public override void Select()
         {
             base.Select();
-            BBTargetBindInspectorData inspectorData = new(info);
+            BBTargetBindInspectorData inspectorData = new(this.KeyFrame);
             inspectorData.InspectorAwake(FieldView);
             TimelineInspectorData.CreateView(FieldView.ClipInspector, inspectorData);
         }

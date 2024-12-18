@@ -1,8 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
-    public class SetTargetBind_BBScriptHandler : BBScriptHandler
+    public class TargetBind_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
@@ -24,9 +25,21 @@ namespace ET.Client
                 Log.Error($"cannot format bindX/bindY to long");
                 return Status.Failed;
             }
+
+            if (!parser.ContainParam("TargetBind"))
+            {
+                Log.Error($"does not exist targetBind unit!!");
+                return Status.Failed;
+            }
             
-            parser.TryRemoveParam("TargetBind");
-            parser.RegistParam("TargetBind",new System.Numerics.Vector2(bindX / 1000f, bindY / 1000f));
+            long bodyId = parser.GetParam<long>("TargetBind");
+            b2Body bodyA = b2WorldManager.Instance.GetBody(parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body bodyB = Root.Instance.Get(bodyId) as b2Body;
+
+            // 翻转
+            Vector2 pos = bodyA.GetPosition();
+            Vector2 targetBindPos = pos + new Vector2(bindX * -bodyA.GetFlip(), bindY) / 1000f;
+            bodyB.SetPosition(targetBindPos);
             
             await ETTask.CompletedTask;
             return Status.Success;
