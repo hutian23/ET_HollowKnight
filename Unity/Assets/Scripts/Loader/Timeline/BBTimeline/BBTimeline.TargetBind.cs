@@ -29,7 +29,8 @@ namespace Timeline
         
 #if UNITY_EDITOR
         public override Type TrackViewType => typeof (TargetBindTrackView);
-
+        public string referName;
+        
         public override int GetMaxFrame()
         {
             return KeyFrames.Count > 0 ? KeyFrames.Max(info => info.frame) : 0;

@@ -26,7 +26,6 @@ namespace Timeline
             runtimePlayable.TimelinePlayer = _timelinePlayer;
             runtimePlayable.Init();
             runtimePlayable.RebindCallback += runtimePlayable.Rebind;
-            runtimePlayable.Evaluate(0);
             return runtimePlayable;
         }
 

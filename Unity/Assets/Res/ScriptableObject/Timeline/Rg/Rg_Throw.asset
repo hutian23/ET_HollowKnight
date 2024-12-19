@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 7400000, guid: 523da62edc93314409c7914a7ddd1d65, type: 2}
+    - {fileID: 11400000, guid: 0e3adf0b08857d74c8849501ca90476c, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1084,22 +1085,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: referName
-      Entry: 1
-      Data: Dummy
-    - Name: targetBindTrackName
-      Entry: 1
-      Data: TargetBind
-    - Name: SubTimelineName
-      Entry: 6
-      Data: 
     - Name: KeyFrames
       Entry: 7
       Data: 63|System.Collections.Generic.List`1[[Timeline.SubTimelineKeyFrame, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 64|Timeline.SubTimelineKeyFrame, Unity.Loader
@@ -1116,11 +1108,32 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 65|Timeline.SubTimelineKeyFrame, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 4
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: TimelineFrame
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
+    - Name: referName
+      Entry: 1
+      Data: Dummy
+    - Name: subTimeline
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

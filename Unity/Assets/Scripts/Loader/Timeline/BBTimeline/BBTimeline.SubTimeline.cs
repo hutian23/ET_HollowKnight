@@ -15,11 +15,6 @@ namespace Timeline
 #endif
     public class SubTimelineTrack: BBTrack
     {
-#if UNITY_EDITOR
-        public string referName;
-#endif
-        public string targetBindTrackName;
-        public string SubTimelineName;
         public List<SubTimelineKeyFrame> KeyFrames = new();
 
         public SubTimelineKeyFrame GetKeyFrame(int targetFrame)
@@ -31,6 +26,8 @@ namespace Timeline
         
 #if UNITY_EDITOR
         public override Type TrackViewType => typeof (SubTimelineTrackView);  
+        public string referName;
+        public BBTimeline subTimeline;
 #endif
     }
 
@@ -45,42 +42,49 @@ namespace Timeline
     [Serializable]
     public class SubTimelineInspectorData: ShowInspectorData
     {
-        [LabelText("当前帧: "), ReadOnly]
-        public int CurFrame;
+        [LabelText("当前帧: "), ReadOnly, PropertyOrder(0)]
+        public int curFrame;
         
-        // Track
-        [LabelText("绑定轨道(TargetBind): "), PropertyOrder(0)]
-        public string targetBindTrackName;
-        [LabelText("绑定对象: "), PropertyOrder(1)]
+        [LabelText("子对象: "), PropertyOrder(1)]
         public GameObject referGo;
-        [Button("绑定"),PropertyOrder(2)]
-        public void Bind()
+
+        [LabelText("子行为: ")]
+        public BBTimeline subTimeline;
+        
+        [LabelText("目标帧: "), PropertyOrder(3)]
+        public int timelineFrame;
+        
+        [Button("保存"), PropertyOrder(4)]
+        public void Save()
         {
             FieldView.EditorWindow.ApplyModifyWithoutButtonUndo(() =>
             {
-                Track.targetBindTrackName = targetBindTrackName;
-
+                KeyFrame.TimelineFrame = this.timelineFrame;
+                
                 if (referGo == null)
                 {
-                    return;
+                    Track.referName = string.Empty;
                 }
-                ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
-                if (refer.Get<GameObject>(refer.name) != null)
+                // 因为GameObject不能跨场景保存，因此仅保存引用
+                else
                 {
-                    refer.Add(refer.name, referGo);
+                    ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
+                    refer.Remove(referGo.name);
+                    refer.Add(referGo.name,referGo);
+                    Track.referName = referGo.name;
                 }
-                Track.referName = referGo.name;
-            }, "Rebind SubTimeline GameObject");
+
+                Track.subTimeline = subTimeline;
+            },"Save SubTimeline KeyFrame");
         }
-        
-        // KeyFrame
-        // [LabelText("目标帧: "),Space(5), PropertyOrder(3)]
-        // public int TimelineFrame;
-        // [Button("保存"), PropertyOrder(5)]
-        // public void Save()
-        // {
-        //     
-        // }
+
+        [Button("预览",DirtyOnClick = false), PropertyOrder(5)]
+        public void PreView()
+        {
+            TimelinePlayer referPlayer = referGo.GetComponent<TimelinePlayer>();
+            referPlayer.Init(subTimeline);
+            referPlayer.Evaluate(timelineFrame);
+        }
 
         private readonly SubTimelineKeyFrame KeyFrame;
         private readonly SubTimelineTrack Track;
@@ -95,18 +99,14 @@ namespace Timeline
         public override void InspectorAwake(TimelineFieldView _fieldView)
         {
             FieldView = _fieldView;
-            CurFrame = KeyFrame.frame;
-            targetBindTrackName = Track.targetBindTrackName;
-            if (!string.IsNullOrEmpty(Track.referName))
-            {
-                ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
-                referGo = refer.Get<GameObject>(Track.referName);
-                if (referGo == null)
-                {
-                    Debug.LogError($"does not exist refer gameObject:{Track.referName}");
-                }
-            }
-            // TimelineFrame = KeyFrame.TimelineFrame;
+            curFrame = KeyFrame.frame;
+            
+            timelineFrame = KeyFrame.TimelineFrame;
+            subTimeline = Track.subTimeline;
+            
+            //Find Refer GameObject
+            ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
+            referGo = refer.Get<GameObject>(Track.referName);
         }
 
         public override void InspectorUpdate(TimelineFieldView _fieldView)
@@ -124,12 +124,25 @@ namespace Timeline
     
     public class RuntimeSubTimelineTrack : RuntimeTrack
     {
+        private TimelinePlayer timelinePlayer => RuntimePlayable.TimelinePlayer;
+        
         public RuntimeSubTimelineTrack(RuntimePlayable runtimePlayable, BBTrack track): base(runtimePlayable, track)
         {
         }
 
         public override void Bind()
         {
+            SubTimelineTrack subTimelineTrack = Track as SubTimelineTrack;
+            
+            ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
+            GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
+            if (referGo == null)
+            {
+                return;
+            }
+            
+            TimelinePlayer subTimelinePlayer = referGo.GetComponent<TimelinePlayer>();
+            subTimelinePlayer.Init(subTimelineTrack.subTimeline);
         }
 
         public override void UnBind()
@@ -138,7 +151,28 @@ namespace Timeline
 
         public override void SetTime(int targetFrame)
         {
+            SubTimelineTrack subTimelineTrack = Track as SubTimelineTrack;
+         
+            //1. Find TimelinePlayer
+            ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
+            GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
+            if (referGo == null)
+            {
+                return;
+            }
+            TimelinePlayer subTimelinePlayer = referGo.GetComponent<TimelinePlayer>();
             
+            //2. Find current KeyFrame
+            foreach (SubTimelineKeyFrame keyFrame in subTimelineTrack.KeyFrames)
+            {
+                if (keyFrame.frame != targetFrame)
+                {
+                    continue;
+                }
+
+                subTimelinePlayer.Evaluate(keyFrame.TimelineFrame);
+                break;
+            }
         }
     }
     

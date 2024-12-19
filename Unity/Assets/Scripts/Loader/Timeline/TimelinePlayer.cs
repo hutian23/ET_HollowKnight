@@ -142,6 +142,10 @@ namespace Timeline
             #endregion
         }
         
+        public void Evaluate(int targetFrame)
+        {
+            RuntimePlayable.Evaluate(targetFrame);
+        }
         
 
         public void Dispose()
