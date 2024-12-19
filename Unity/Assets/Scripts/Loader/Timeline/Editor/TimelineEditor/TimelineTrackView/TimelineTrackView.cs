@@ -55,16 +55,6 @@ namespace Timeline.Editor
                 ClipViewMap.Add(clip, clipView);
                 FieldView.SelectionElements.Add(clipView);
             }
-            // foreach (BBClip clip in RuntimeTrack.Track.Clips)
-            // {
-            //     TimelineClipView clipView = Activator.CreateInstance(RuntimeTrack.Track.ClipViewType) as TimelineClipView;
-            //     clipView.SelectionContainer = FieldView;
-            //     clipView.Init(clip, this);
-            //
-            //     Add(clipView);
-            //     ClipViewMap.Add(clip, clipView);
-            //     FieldView.SelectionElements.Add(clipView);
-            // }
         }
 
         public virtual void Refresh()

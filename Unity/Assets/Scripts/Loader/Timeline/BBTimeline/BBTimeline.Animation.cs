@@ -69,7 +69,7 @@ namespace Timeline
         }
 
 #if UNITY_EDITOR
-        public override Type ShowInInpsectorType => typeof (AnimationClipInspectorData);
+        public override Type ShowInInSpectorType => typeof (AnimationClipInspectorData);
 #endif
     }
 

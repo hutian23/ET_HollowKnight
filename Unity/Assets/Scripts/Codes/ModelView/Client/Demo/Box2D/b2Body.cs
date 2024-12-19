@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Box2DSharp.Dynamics;
+using Timeline;
 using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
@@ -15,14 +15,7 @@ namespace ET.Client
         public FlipState Flip = FlipState.Left;
         public bool UpdateFlag; // 手动刷新渲染层
     }
-
-    [Flags]
-    public enum FlipState
-    {
-        Left = 1,
-        Right = -1
-    }
-
+    
     //转向后，更新夹具
     public struct UpdateFlipCallback
     {

@@ -155,7 +155,7 @@ namespace Timeline
             return false;
         }
 
-        public virtual Type ShowInInpsectorType => typeof (ShowInspectorData);
+        public virtual Type ShowInInSpectorType => typeof (ShowInspectorData);
 #endif
     }
 

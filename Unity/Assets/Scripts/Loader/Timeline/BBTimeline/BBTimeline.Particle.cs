@@ -36,7 +36,7 @@ namespace Timeline
         }
 
 #if UNITY_EDITOR
-        public override Type ShowInInpsectorType => typeof (ParticleClipInspectorData);
+        public override Type ShowInInSpectorType => typeof (ParticleClipInspectorData);
 #endif
     }
 

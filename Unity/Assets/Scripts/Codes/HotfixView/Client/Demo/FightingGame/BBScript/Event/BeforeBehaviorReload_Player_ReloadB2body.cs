@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using Timeline;
+
+namespace ET.Client
 {
     [Event(SceneType.Client)]
     [FriendOf(typeof(b2Body))]

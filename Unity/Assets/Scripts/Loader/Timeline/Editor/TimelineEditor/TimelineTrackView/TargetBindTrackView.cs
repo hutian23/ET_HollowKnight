@@ -46,7 +46,7 @@ namespace Timeline.Editor
             {
                 markerView.OnPointerDown(evt);
             }
-
+            
             //右键
             if (evt.button == 1)
             {

@@ -7,7 +7,7 @@ namespace Timeline.Editor
     public class MarkerView: VisualElement, ISelectable
     {
         private readonly VisualElement markerView;
-        private TimelineTrackView trackView;
+        public TimelineTrackView trackView;
 
         public BBKeyframeBase keyframeBase;
 

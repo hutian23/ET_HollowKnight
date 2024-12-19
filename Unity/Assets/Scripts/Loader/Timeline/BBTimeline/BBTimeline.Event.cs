@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Timeline.Editor;
+using UnityEngine;
 using EventSystem = ET.EventSystem;
 
 namespace Timeline
@@ -26,6 +27,20 @@ namespace Timeline
             return EventInfos.FirstOrDefault(info => info.frame == targetFrame);
         }
 
+        public EventInfo GetInfo(string markerName)
+        {
+            foreach (EventInfo info in EventInfos)
+            {
+                if (info.keyframeName.Equals(markerName))
+                {
+                    return info;
+                }
+            }
+            
+            Debug.LogError($"does not exist eventInfo for {markerName}");
+            return null;
+        }
+        
 #if UNITY_EDITOR
         public override Type TrackViewType => typeof (EventTrackView);
         public override int GetMaxFrame()

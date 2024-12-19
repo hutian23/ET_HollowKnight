@@ -249,7 +249,7 @@ namespace Timeline.Editor
 
         public void InspectorAwake()
         {
-            inspectorData = Activator.CreateInstance(BBClip.ShowInInpsectorType, BBClip) as ShowInspectorData;
+            inspectorData = Activator.CreateInstance(BBClip.ShowInInSpectorType, BBClip) as ShowInspectorData;
             inspectorData.InspectorAwake(FieldView);
             TimelineInspectorData.CreateView(FieldView.ClipInspector, inspectorData);
         }

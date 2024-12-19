@@ -27,7 +27,7 @@ namespace Timeline
     }
     
     #endregion
-
+    
     public sealed class TimelinePlayer: SerializedMonoBehaviour
     {
         [HideInInspector]
@@ -73,12 +73,6 @@ namespace Timeline
         }
 
 #if UNITY_EDITOR
-        [Button("行为编辑器"), ShowIf("HasNotBindUnit")]
-        public void OpenController()
-        {
-            BehaviorControllerEditor.OpenWindow(this);
-        }
-
         [Button("技能编辑器"), ShowIf("HasNotBindUnit")]
         public void OpenWindow()
         {
@@ -101,7 +95,7 @@ namespace Timeline
             var goSet = new HashSet<GameObject>();
             foreach (var component in GetComponentsInChildren<Component>())
             {
-                if (component.GetComponent<ITimelineGenerate>() != null)
+                if (typeof(ITimelineGenerate).IsAssignableFrom(component.GetType()))
                 {
                     goSet.Add(component.gameObject);
                 }
@@ -141,9 +135,10 @@ namespace Timeline
 
             CurrentTimeline = _timeline;
             RuntimePlayable = RuntimePlayable.Create(CurrentTimeline, this);
-
             #endregion
         }
+        
+        
 
         public void Dispose()
         {

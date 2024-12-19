@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using Timeline;
+
+namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.UpdateFlipTimer)]
     [FriendOf(typeof(InputWait))]

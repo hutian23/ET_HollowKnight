@@ -7,6 +7,10 @@ using UnityEngine.UIElements;
 
 namespace Timeline.Editor
 {
+    public interface ITimelineGenerate
+    {
+    }
+    
     public class TimelineFieldView: VisualElement, ISelection
     {
         public new class UxmlFactory: UxmlFactory<TimelineFieldView, UxmlTraits>
