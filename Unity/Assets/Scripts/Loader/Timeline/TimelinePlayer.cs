@@ -34,7 +34,6 @@ namespace Timeline
         public long instanceId; // TimelineComponent组件id
         [HideInInspector]
         public float Hertz = 60; //TimeScale
-        
         public bool ApplyRootMotion;
 
         public bool IsValid => PlayableGraph.IsValid();
@@ -70,6 +69,11 @@ namespace Timeline
         private void OnAnimatorMove()
         {
             //禁用AnimationClip对transform的修改
+        }
+
+        private void OnGUI()
+        {
+            Debug.LogWarning("Hello World");
         }
 
 #if UNITY_EDITOR

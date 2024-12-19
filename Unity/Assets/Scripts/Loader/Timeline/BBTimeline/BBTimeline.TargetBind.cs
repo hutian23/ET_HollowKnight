@@ -73,7 +73,7 @@ namespace Timeline
         {
             Object.DestroyImmediate(TargetBindGo);
         }
-
+        
         public override void SetTime(int targetFrame)
         {
             foreach (TargetBindKeyFrame keyFrame in BindTrack.KeyFrames)
@@ -82,10 +82,13 @@ namespace Timeline
                 {
                     continue;
                 }
+                
+                //更新TargetBindGo位置
                 if (TargetBindGo == null)
                 {
                     GenerateTargetBind();
                 }
+                TargetBindGo.transform.localPosition = keyFrame.LocalPosition;
             }
         }
 

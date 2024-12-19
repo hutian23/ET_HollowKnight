@@ -30,7 +30,6 @@ namespace Timeline
         public List<BehaviorClip> BehaviorClips = new();
 
 #if UNITY_EDITOR
-        [FormerlySerializedAs("linkData")]
         [HideReferenceObjectPicker]
         public List<BehaviorLinkData> linkDatas = new();
 #endif
