@@ -71,7 +71,7 @@ namespace Timeline.Editor
             menu.AppendAction("Remove KeyFrame", _ =>
             {
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
-                TargetBindKeyFrame keyFrame = TargetBindTrack.GetInfo(targetFrame);
+                TargetBindKeyFrame keyFrame = TargetBindTrack.GetKeyFrame(targetFrame);
                 EditorWindow.ApplyModify(() =>
                 {
                     TargetBindTrack.KeyFrames.Remove(keyFrame);
@@ -80,7 +80,7 @@ namespace Timeline.Editor
             menu.AppendAction("Copy KeyFrame", _ =>
             {
                 int targetFrame = FieldView.GetClosestFrame(localMousePos.x);
-                TargetBindKeyFrame copyKeyFrame = MongoHelper.Clone(TargetBindTrack.GetInfo(targetFrame));
+                TargetBindKeyFrame copyKeyFrame = MongoHelper.Clone(TargetBindTrack.GetKeyFrame(targetFrame));
                 BBTimelineSettings.GetSettings().CopyTarget = copyKeyFrame;
             },ContainKeyFrame(localMousePos.x)? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Hidden);
             menu.AppendAction("Paste KeyFrame", _ =>
@@ -116,7 +116,7 @@ namespace Timeline.Editor
         private bool ContainKeyFrame(float x)
         {
             int frame = FieldView.GetClosestFrame(x);
-            return TargetBindTrack.GetInfo(frame) != null;
+            return TargetBindTrack.GetKeyFrame(frame) != null;
         }
         #endregion
     }

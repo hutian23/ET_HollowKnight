@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Timeline.Editor;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,9 +23,28 @@ namespace Timeline
         
         public override Type RuntimeTrackType => typeof (RuntimeTargetBindTrack);
 
-        public TargetBindKeyFrame GetInfo(int targetFrame)
+        public TargetBindKeyFrame GetKeyFrame(int targetFrame)
         {
             return KeyFrames.FirstOrDefault(info => info.frame == targetFrame);
+        }
+
+        // 当前帧号是否存在关键帧，不存在则往时间轴左边取最近的关键帧 编辑器模式下可能会往回拉
+        public TargetBindKeyFrame GetClosestKeyFrame(int targetFrame)
+        {
+            int closestFrame = -1;
+            foreach (TargetBindKeyFrame keyFrame in KeyFrames)
+            {
+                if (keyFrame.frame == targetFrame)
+                {
+                    closestFrame = keyFrame.frame;
+                    break;
+                }
+                if (keyFrame.frame < targetFrame && targetFrame - keyFrame.frame < targetFrame - closestFrame)
+                {
+                    closestFrame = keyFrame.frame;
+                }
+            }
+            return closestFrame == -1 ? null : GetKeyFrame(closestFrame);
         }
         
 #if UNITY_EDITOR
@@ -68,29 +88,47 @@ namespace Timeline
         public override void Bind()
         {
             GenerateTargetBind();
+            EditorApplication.update += SyncPosition;
         }
 
         public override void UnBind()
         {
             Object.DestroyImmediate(TargetBindGo);
+            EditorApplication.update -= SyncPosition;
+        }
+
+        private void SyncPosition()
+        {
+            //1. Find refer GameObject
+            ReferenceCollector refer = TimelinePlayer.GetComponent<ReferenceCollector>();
+            GameObject referGo = refer.Get<GameObject>(BindTrack.referName);
+            if (referGo == null || TargetBindGo == null)
+            {
+                return;
+            }
+            //2. Sync Position
+            referGo.transform.position = TargetBindGo.transform.position;
+            //3. Sync Flip
+            TargetBind targetBind = TargetBindGo.GetComponent<TargetBind>();
+            referGo.transform.localScale = new Vector3((int)targetBind.curFlip, 1, 1);
         }
         
         public override void SetTime(int targetFrame)
         {
-            foreach (TargetBindKeyFrame keyFrame in BindTrack.KeyFrames)
+            TargetBindKeyFrame _keyFrame = TimelinePlayer.HasBindUnit? BindTrack.GetKeyFrame(targetFrame) : BindTrack.GetClosestKeyFrame(targetFrame);
+            if (_keyFrame == null)
             {
-                if (keyFrame.frame != targetFrame)
-                {
-                    continue;
-                }
-                
-                //更新TargetBindGo位置
-                if (TargetBindGo == null)
-                {
-                    GenerateTargetBind();
-                }
-                TargetBindGo.transform.localPosition = keyFrame.LocalPosition;
+                return;
             }
+            if (TargetBindGo == null)
+            {
+                GenerateTargetBind();
+            }
+            // 更新TargetBindGo位置
+            TargetBindGo.transform.localPosition = _keyFrame.LocalPosition;
+            // 更新转向
+            TargetBind targetBind = TargetBindGo.GetComponent<TargetBind>();
+            targetBind.curFlip = _keyFrame.Flip;
         }
 
         private void GenerateTargetBind()
@@ -101,6 +139,7 @@ namespace Timeline
             TargetBindGo.transform.localPosition = Vector3.zero;
             TargetBindGo.AddComponent<TargetBind>().TrackName = BindTrack.Name;
         }
+        
     }
 
     #endregion
@@ -109,12 +148,15 @@ namespace Timeline
     [Serializable]
     public class BBTargetBindInspectorData: ShowInspectorData
     {
-        private TargetBindKeyFrame CurKeyFrame;
+        private TargetBindKeyFrame KeyFrame;
         private BBTargetBindTrack BindTrack;
         private TimelineFieldView FieldView;
         
         [LabelText("当前帧: "), ReadOnly]
         public int CurFrame;
+        
+        [LabelText("绑定对象")]
+        public GameObject TargetBindGo;
         
         [LabelText("相对位置: "), ReadOnly]
         public Vector2 LocalPos;
@@ -127,14 +169,22 @@ namespace Timeline
         {
             FieldView.EditorWindow.ApplyModifyWithoutButtonUndo(() =>
             {
-                CurKeyFrame.Flip = Flip;
+                //保存绑定对象
+                ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
+                refer.Remove(TargetBindGo.name);
+                refer.Add(TargetBindGo.name, TargetBindGo);
+                BindTrack.referName = TargetBindGo.name;
+                
+                //保存转向
+                KeyFrame.Flip = Flip;
+                
                 //保存相对位置
                 foreach (TargetBind targetBind in FieldView.EditorWindow.TimelinePlayer.GetComponentsInChildren<TargetBind>())
                 {
                     if (targetBind.TrackName.Equals(BindTrack.Name))
                     {
                         GameObject targetGo = targetBind.gameObject;
-                        CurKeyFrame.LocalPosition = targetGo.transform.localPosition;
+                        KeyFrame.LocalPosition = targetGo.transform.localPosition;
                         return;
                     }
                 }
@@ -146,16 +196,20 @@ namespace Timeline
         public BBTargetBindInspectorData(object target, BBTargetBindTrack bindTrack): base(target)
         {
             TargetBindKeyFrame keyFrame = target as TargetBindKeyFrame; 
-            CurKeyFrame = keyFrame;
+            KeyFrame = keyFrame;
             BindTrack = bindTrack;
         }
 
         public override void InspectorAwake(TimelineFieldView _fieldView)
         {
             FieldView = _fieldView;
-            CurFrame = CurKeyFrame.frame;
-            LocalPos = CurKeyFrame.LocalPosition;
-            Flip = CurKeyFrame.Flip;
+            CurFrame = KeyFrame.frame;
+            LocalPos = KeyFrame.LocalPosition;
+            Flip = KeyFrame.Flip;
+
+            if (string.IsNullOrEmpty(BindTrack.referName)) return;
+            ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
+            TargetBindGo = refer.Get<GameObject>(BindTrack.referName);
         }
 
         public override void InspectorUpdate(TimelineFieldView _fieldView)

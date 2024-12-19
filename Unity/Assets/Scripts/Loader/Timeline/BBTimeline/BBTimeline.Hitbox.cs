@@ -33,6 +33,24 @@ namespace Timeline
             return null;
         }
 
+        public HitboxKeyframe GetClosestKeyframe(int targetFrame)
+        {
+            int closestFrame = -1;
+            foreach (HitboxKeyframe keyFrame in Keyframes)
+            {
+                if (keyFrame.frame == targetFrame)
+                {
+                    closestFrame = keyFrame.frame;
+                    break;
+                }
+                if (keyFrame.frame < targetFrame && targetFrame - keyFrame.frame < targetFrame - closestFrame)
+                {
+                    closestFrame = keyFrame.frame;
+                }
+            }
+            return closestFrame == -1 ? null : GetKeyframe(closestFrame);
+        }
+        
 #if UNITY_EDITOR
         public override Type TrackViewType => typeof (HitboxTrackView);
         public override int GetMaxFrame()
@@ -202,7 +220,6 @@ namespace Timeline
     public class RuntimeHitboxTrack: RuntimeTrack
     {
         private TimelinePlayer timelinePlayer => RuntimePlayable.TimelinePlayer;
-        private int currentFrame = -1;
 
         public RuntimeHitboxTrack(RuntimePlayable runtimePlayable, BBTrack track): base(runtimePlayable, track)
         {
@@ -222,30 +239,16 @@ namespace Timeline
         public override void SetTime(int targetFrame)
         {
             BBHitboxTrack hitboxTrack = Track as BBHitboxTrack;
-            foreach (HitboxKeyframe keyframe in hitboxTrack.Keyframes)
+            HitboxKeyframe _keyFrame = timelinePlayer.HasBindUnit? hitboxTrack.GetKeyframe(targetFrame) : hitboxTrack.GetClosestKeyframe(targetFrame);
+            if (_keyFrame == null) return;
+
+            if (timelinePlayer.HasBindUnit)
             {
-                if (keyframe.frame != targetFrame)
-                {
-                    continue;
-                }
-
-                //Hitbox没有发生更新
-                if (currentFrame == targetFrame)
-                {
-                    break;
-                }
-
-                currentFrame = targetFrame;
-
-                if (timelinePlayer.HasBindUnit)
-                {
-                    EventSystem.Instance.Invoke(new UpdateHitboxCallback() { instanceId = timelinePlayer.instanceId, Keyframe = keyframe });
-                }
-#if UNITY_EDITOR
-                GenerateHitbox(timelinePlayer, keyframe);
-#endif
-                break;
+                EventSystem.Instance.Invoke(new UpdateHitboxCallback() { instanceId = timelinePlayer.instanceId, Keyframe = _keyFrame });
             }
+#if UNITY_EDITOR
+            GenerateHitbox(timelinePlayer, _keyFrame);
+#endif
         }
 
 #if UNITY_EDITOR

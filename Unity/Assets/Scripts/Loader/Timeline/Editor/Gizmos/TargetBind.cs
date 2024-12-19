@@ -6,5 +6,8 @@ namespace Timeline.Editor
     {
         [Sirenix.OdinInspector.ReadOnly]
         public string TrackName;
+
+        [Sirenix.OdinInspector.ReadOnly]
+        public FlipState curFlip;
     }
 }

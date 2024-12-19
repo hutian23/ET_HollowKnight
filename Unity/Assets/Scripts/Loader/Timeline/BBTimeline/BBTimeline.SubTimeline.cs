@@ -21,6 +21,24 @@ namespace Timeline
         {
             return KeyFrames.FirstOrDefault(keyFrame => keyFrame.frame == targetFrame);
         }
+
+        public SubTimelineKeyFrame GetClosestKeyFrame(int targetFrame)
+        {
+            int closestFrame = -1;
+            foreach (SubTimelineKeyFrame keyFrame in KeyFrames)
+            {
+                if (keyFrame.frame == targetFrame)
+                {
+                    closestFrame = keyFrame.frame;
+                    break;
+                }
+                if (keyFrame.frame < targetFrame && targetFrame - keyFrame.frame < targetFrame - closestFrame)
+                {
+                    closestFrame = keyFrame.frame;
+                }
+            }
+            return closestFrame == -1 ? null : GetKeyFrame(closestFrame);
+        }
         
         public override Type RuntimeTrackType => typeof (RuntimeSubTimelineTrack);
         
@@ -125,6 +143,7 @@ namespace Timeline
     public class RuntimeSubTimelineTrack : RuntimeTrack
     {
         private TimelinePlayer timelinePlayer => RuntimePlayable.TimelinePlayer;
+        private SubTimelineTrack subTimelineTrack => Track as SubTimelineTrack;
         
         public RuntimeSubTimelineTrack(RuntimePlayable runtimePlayable, BBTrack track): base(runtimePlayable, track)
         {
@@ -132,8 +151,6 @@ namespace Timeline
 
         public override void Bind()
         {
-            SubTimelineTrack subTimelineTrack = Track as SubTimelineTrack;
-            
             ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
             GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
             if (referGo == null)
@@ -151,28 +168,16 @@ namespace Timeline
 
         public override void SetTime(int targetFrame)
         {
-            SubTimelineTrack subTimelineTrack = Track as SubTimelineTrack;
-         
             //1. Find TimelinePlayer
             ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
             GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
-            if (referGo == null)
-            {
-                return;
-            }
+            if (referGo == null) return;
             TimelinePlayer subTimelinePlayer = referGo.GetComponent<TimelinePlayer>();
             
             //2. Find current KeyFrame
-            foreach (SubTimelineKeyFrame keyFrame in subTimelineTrack.KeyFrames)
-            {
-                if (keyFrame.frame != targetFrame)
-                {
-                    continue;
-                }
-
-                subTimelinePlayer.Evaluate(keyFrame.TimelineFrame);
-                break;
-            }
+            SubTimelineKeyFrame _keyFrame = timelinePlayer.HasBindUnit ? subTimelineTrack.GetKeyFrame(targetFrame) : subTimelineTrack.GetClosestKeyFrame(targetFrame);
+            if (_keyFrame == null) return;
+            subTimelinePlayer.Evaluate(_keyFrame.TimelineFrame);
         }
     }
     
