@@ -193,7 +193,7 @@ PrefabInstance:
     - target: {fileID: 4287713381951760774, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -1.65
       objectReference: {fileID: 0}
     - target: {fileID: 4287713381951760774, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
         type: 3}
@@ -244,7 +244,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 234fc223273bb7b46961c6519aec1c5b,
+      objectReference: {fileID: 21300000, guid: 961d9e0de065e9c4eb73f10086f6c5a6,
         type: 3}
     - target: {fileID: 4287713381951760775, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
         type: 3}
@@ -285,55 +285,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 13826486}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &479597360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 479597361}
-  - component: {fileID: 479597362}
-  m_Layer: 0
-  m_Name: SquashBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &479597361
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479597360}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 535898620}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &479597362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479597360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f88562e969b4c649b2c693ec8a1d695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info:
-    boxName: SquashBox
-    hitboxType: 4
-    center: {x: 0, y: -0.62}
-    size: {x: 1.35, y: 3.14}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +644,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7b857f8ad0994bc4f93925645cd350a1,
+      objectReference: {fileID: 21300000, guid: 044df44dcce33c84eb8b36086a65ed5c,
         type: 3}
     - target: {fileID: 4287713381951760775, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
         type: 3}
@@ -740,29 +691,9 @@ PrefabInstance:
     - {fileID: 7283703571579198517, guid: c7a02efc57a5aa44bbf97b07f3f9ed02, type: 3}
     - {fileID: 748839800615863140, guid: c7a02efc57a5aa44bbf97b07f3f9ed02, type: 3}
     - {fileID: 6763021121451892069, guid: c7a02efc57a5aa44bbf97b07f3f9ed02, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4287713381951760774, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1535583694}
-    - targetCorrespondingSourceObject: {fileID: 8173683230465771605, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 479597361}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a02efc57a5aa44bbf97b07f3f9ed02, type: 3}
---- !u!4 &535898620 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8173683230465771605, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
-    type: 3}
-  m_PrefabInstance: {fileID: 535898619}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &535898621 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4287713381951760774, guid: c7a02efc57a5aa44bbf97b07f3f9ed02,
-    type: 3}
-  m_PrefabInstance: {fileID: 535898619}
-  m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &606622141
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -827,52 +758,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!1 &1535583693
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1535583694}
-  - component: {fileID: 1535583695}
-  m_Layer: 0
-  m_Name: TargetBind
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1535583694
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535583693}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 535898621}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1535583695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535583693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a139dfb0a7bd41a6858155ab0ef9a586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TrackName: TargetBind
-  curFlip: -1
 --- !u!1 &1717859285
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@ namespace ET.Client
             b2Body.ClearHitbox();
             
             //3. FixedUpdate hitBoxFixtures
+            if(b2Unit.keyFrame == null) return;
             foreach (BoxInfo info in b2Unit.keyFrame.boxInfos)
             {
                 PolygonShape shape = new();

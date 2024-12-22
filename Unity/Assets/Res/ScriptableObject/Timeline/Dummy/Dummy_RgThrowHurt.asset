@@ -245,11 +245,4 @@ MonoBehaviour:
 
     Gravity: 0;
 
-    TargetBind: 1530, 0;
-
-    BindWait: ''ThrowHurt_1'';
-
-    BindWait:
-    ''ThrowHurt_2'';
-
     Exit;'

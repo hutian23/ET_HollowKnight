@@ -79,6 +79,7 @@ namespace Timeline
     {
         public long instanceId;
         public TargetBindKeyFrame KeyFrame;
+        public BBTargetBindTrack BindTrack;
     }
     
     public class RuntimeTargetBindTrack: RuntimeTrack
@@ -112,7 +113,7 @@ namespace Timeline
                 return;
             }
             Object.DestroyImmediate(TargetBindGo);
-            EditorApplication.update -= SyncPosition;      
+            EditorApplication.update -= SyncPosition;   
 #endif
         }
         
@@ -125,7 +126,7 @@ namespace Timeline
                 {
                     return;
                 }
-                EventSystem.Instance.Invoke(new UpdateTargetBindCallback(){ instanceId = TimelinePlayer.instanceId, KeyFrame = _keyFrame});
+                EventSystem.Instance.Invoke(new UpdateTargetBindCallback(){ instanceId = TimelinePlayer.instanceId, KeyFrame = _keyFrame, BindTrack = BindTrack});
             }
             else
             {
@@ -150,6 +151,12 @@ namespace Timeline
 
         private void SyncPosition()
         {
+            // 运行时退出可能并没有销毁委托，导致空引用
+            if (TimelinePlayer == null)
+            {
+                EditorApplication.update -= SyncPosition;
+            }
+            
             //1. Find refer GameObject
             ReferenceCollector refer = TimelinePlayer.GetComponent<ReferenceCollector>();
             GameObject referGo = refer.Get<GameObject>(BindTrack.referName);

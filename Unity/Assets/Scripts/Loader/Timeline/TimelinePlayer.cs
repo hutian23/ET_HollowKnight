@@ -70,12 +70,7 @@ namespace Timeline
         {
             //禁用AnimationClip对transform的修改
         }
-
-        private void OnGUI()
-        {
-            Debug.LogWarning("Hello World");
-        }
-
+        
 #if UNITY_EDITOR
         [Button("技能编辑器"), ShowIf("HasNotBindUnit")]
         public void OpenWindow()

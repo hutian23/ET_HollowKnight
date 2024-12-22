@@ -25,16 +25,14 @@ namespace ET.Client
 
                 BoxInfo infoA = info.dataA.UserData as BoxInfo;
                 BoxInfo infoB = info.dataB.UserData as BoxInfo;
-                if (infoA.hitboxType is HitboxType.Throw &&
-                    infoB.hitboxType is HitboxType.Squash)
+                if (infoA.hitboxType is HitboxType.Throw && infoB.hitboxType is HitboxType.Squash)
                 {
                     //here: 注册变量
-                    self.TryRemoveParam("ThrowHurt");
-                    self.TryRemoveParam("TargetBind");
+                    self.TryRemoveParam("TargetBind_ThrowHurt");
                     self.TryRemoveParam("Hurt_CollisionInfo");
-                    self.RegistParam("ThrowHurt", true);
+                    
                     self.RegistParam("Hurt_CollisionInfo", info); // 调用hitStun指令
-                    self.RegistParam("TargetBind", info.dataB.InstanceId); // b2BodyId
+                    self.RegistParam("TargetBind_ThrowHurt", info.dataB.InstanceId); // b2BodyId
 
                     //子携程
                     int startIndex = self.GetParam<int>("ThrowCheck_StartIndex");

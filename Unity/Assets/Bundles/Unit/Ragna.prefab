@@ -31,37 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6028462822895001818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2459606224173352233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2621977588813916596}
-  m_Layer: 0
-  m_Name: GroundCheckPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2621977588813916596
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2459606224173352233}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7728331812354445378}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3556958695720729756
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +322,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6028462822895001818}
-  - {fileID: 2621977588813916596}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7728331812354445377
@@ -546,10 +514,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: RuntimeimePlayable
+    - Name: RuntimePlayable
       Entry: 6
       Data: 
   instanceId: 0
+  Hertz: 60
   ApplyRootMotion: 1
   BBPlayable: {fileID: 11400000, guid: b08df29221071a849b0e549f7223945d, type: 2}
   CurrentTimeline: {fileID: 11400000, guid: 3db21ea503a2acf41a86a07c8518ad0d, type: 2}
@@ -584,4 +553,4 @@ MonoBehaviour:
   - key: Other
     gameObject: {fileID: 1278987118862638616}
   - key: GroundCheckPoint
-    gameObject: {fileID: 2459606224173352233}
+    gameObject: {fileID: 0}

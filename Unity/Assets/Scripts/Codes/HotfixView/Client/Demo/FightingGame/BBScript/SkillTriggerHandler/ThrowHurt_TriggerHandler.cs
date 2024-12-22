@@ -22,9 +22,9 @@ namespace ET.Client
             switch (match.Groups["Result"].Value)
             {
                 case "true":
-                    return parser.ContainParam("ThrowHurt");
+                    return parser.ContainParam("TargetBind_ThrowHurt");
                 case "false":
-                    return !parser.ContainParam("ThrowHurt");
+                    return !parser.ContainParam("TargetBind_ThrowHurt");
                 default:
                     Log.Error($"does not match throw hurt result");
                     return false;
