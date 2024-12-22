@@ -17,7 +17,7 @@ namespace Timeline
     public class SubTimelineTrack: BBTrack
     {
         public List<SubTimelineKeyFrame> KeyFrames = new();
-
+        
         public SubTimelineKeyFrame GetKeyFrame(int targetFrame)
         {
             return KeyFrames.FirstOrDefault(keyFrame => keyFrame.frame == targetFrame);
@@ -144,6 +144,7 @@ namespace Timeline
     public struct UpdateSubTimelineCallback
     {
         public long instanceId;
+        public SubTimelineTrack Track;
         public SubTimelineKeyFrame keyFrame;
     }
     
@@ -189,7 +190,7 @@ namespace Timeline
                 {
                     return;
                 }
-                EventSystem.Instance.Invoke(new UpdateSubTimelineCallback(){instanceId = timelinePlayer.instanceId, keyFrame = _keyFrame});
+                EventSystem.Instance.Invoke(new UpdateSubTimelineCallback(){instanceId = timelinePlayer.instanceId, keyFrame = _keyFrame, Track = subTimelineTrack});
             }
             else
             {

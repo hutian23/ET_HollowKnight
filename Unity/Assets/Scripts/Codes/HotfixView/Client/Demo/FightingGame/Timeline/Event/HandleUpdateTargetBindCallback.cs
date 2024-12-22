@@ -11,14 +11,15 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
+            
             //Contain TargetBind Unit
-            if (!bbParser.ContainParam($"TargetBind_{args.BindTrack.Name}"))
+            if (!bbParser.ContainParam($"{args.BindTrack.Name}"))
             {
                 return;
             }
             
             //Sync TargetBind info
-            long b2BodyId = bbParser.GetParam<long>($"TargetBind_{args.BindTrack.Name}");
+            long b2BodyId = bbParser.GetParam<long>($"{args.BindTrack.Name}");
             b2Body BodyA = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
             b2Body BodyB = Root.Instance.Get(b2BodyId) as b2Body;
 

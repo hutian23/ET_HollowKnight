@@ -363,7 +363,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: -1.1
+      Data: -1.68744159
     - Name: 
       Entry: 4
       Data: -0.5
@@ -375,7 +375,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 2.174883
     - Name: 
       Entry: 4
       Data: 3.4
@@ -976,7 +976,7 @@ MonoBehaviour:
       Data: 56|Timeline.BBTargetBindTrack, Unity.Loader
     - Name: Name
       Entry: 1
-      Data: ThrowHurt
+      Data: TargetBind_ThrowHurt
     - Name: Enable
       Entry: 5
       Data: true
@@ -1005,33 +1005,6 @@ MonoBehaviour:
       Data: 59|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 2
-    - Name: keyframeName
-      Entry: 1
-      Data: 
-    - Name: LocalPosition
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: -1.65
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Flip
-      Entry: 3
-      Data: 18446744073709551615
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 60|Timeline.TargetBindKeyFrame, Unity.Loader
-    - Name: frame
-      Entry: 3
       Data: 4
     - Name: keyframeName
       Entry: 1
@@ -1056,7 +1029,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 61|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 60|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 5
@@ -1068,7 +1041,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: -2
+      Data: -2.1
     - Name: 
       Entry: 4
       Data: 0
@@ -1083,7 +1056,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 62|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 61|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 7
@@ -1110,7 +1083,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 63|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 62|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 6
@@ -1122,10 +1095,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: -1.5
+      Data: -1.7
     - Name: 
       Entry: 4
-      Data: 0.2
+      Data: 0.25
     - Name: 
       Entry: 8
       Data: 
@@ -1137,7 +1110,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 64|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 63|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 8
@@ -1164,7 +1137,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 65|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 64|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 11
@@ -1191,7 +1164,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 66|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 65|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 12
@@ -1218,7 +1191,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 67|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 66|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 13
@@ -1245,7 +1218,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 68|Timeline.TargetBindKeyFrame, Unity.Loader
+      Data: 67|Timeline.TargetBindKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 14
@@ -1261,6 +1234,33 @@ MonoBehaviour:
     - Name: 
       Entry: 4
       Data: -1.85
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Flip
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 68|Timeline.TargetBindKeyFrame, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 15
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: LocalPosition
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 2.5
+    - Name: 
+      Entry: 4
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -1287,7 +1287,7 @@ MonoBehaviour:
       Data: 69|Timeline.SubTimelineTrack, Unity.Loader
     - Name: Name
       Entry: 1
-      Data: SubTimeline
+      Data: SubTimeline_ThrowHurt
     - Name: Enable
       Entry: 5
       Data: true
@@ -1310,7 +1310,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 7
     - Name: 
       Entry: 7
       Data: 72|Timeline.SubTimelineKeyFrame, Unity.Loader
@@ -1331,7 +1331,7 @@ MonoBehaviour:
       Data: 73|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 4
+      Data: 3
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -1382,7 +1382,37 @@ MonoBehaviour:
       Data: 
     - Name: TimelineFrame
       Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 77|Timeline.SubTimelineKeyFrame, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 9
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: TimelineFrame
+      Entry: 3
       Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 78|Timeline.SubTimelineKeyFrame, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 10
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: TimelineFrame
+      Entry: 3
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -1410,13 +1440,16 @@ MonoBehaviour:
   timelineName: Rg_Throw
   Script: "@Trigger:\nInputType: 5MPPressed;\nInAir: false;\nreturn;\n\n@Main:\nBBSprite:
     'Start_1', 3;\nBBSprite: 'Start_2', 3;\n# \u6295\u6280\u5224\u5B9A\nWaitThrow:\n   
-    HitStun: 'RgThrowHurt';\n    EndThrow:\nBBSprite: 'Start_3', 7;\n#Throw Failed\nBeginIf:
-    (ThrowHurt: false)\n    BBSprite: 'Failed_1', 15;\n    BBSprite: 'Failed_2',
-    4;\n    BBSprite: 'Failed_3', 4;\n    BBSprite: 'Failed_4', 4;\n    Exit;\n   
-    EndIf:\n#Throw Successed\nBBSprite: 'Success_1', 3;\nBBSprite: 'Success_2', 3;\nBBSprite:
-    'Success_3', 3;\nBBSprite: 'Success_4', 3;\nBBSprite: 'Success_5', 5;\nBBSprite:
-    'Success_6', 5;\nBBSprite: 'Success_7', 5;\nBBSprite: 'Success_8', 8;\nBBSprite:
-    'Success_9', 4;\nBBSprite: 'Success_10', 4;\nBBSprite: 'Success_11', 4;\nBBSprite:
-    'Success_12', 4;\nBBSprite: 'Success_13', 4;\nBBSprite: 'Success_14', 4;\nBBSprite:
-    'Success_15', 4;\nBBSprite: 'Success_16', 3;\nBBSprite: 'Success_17', 3;\nBBSprite:
-    'Success_18', 3;\nReverse;\nExit;"
+    ThrowPoint: -1500, 0; \n    HitStun: 'RgThrowHurt';\n    EndThrow:\nBBSprite:
+    'Start_3', 7;\n#Throw Failed\nBeginIf: (ThrowHurt: false)\n    BBSprite: 'Failed_1',
+    15;\n    BBSprite: 'Failed_2', 4;\n    BBSprite: 'Failed_3', 4;\n    BBSprite:
+    'Failed_4', 4;\n    Exit;\n    EndIf:\n#Throw Successed\nBBSprite: 'Success_1',
+    4;\nBBSprite: 'Success_2', 4;\nBBSprite: 'Success_3', 4;\nBBSprite: 'Success_4',
+    4;\nBBSprite: 'Success_5', 4;\nScreenShake: 170, 100;\nBBSprite: 'Success_6',
+    4;\nBBSprite: 'Success_7', 4;\nBBSprite: 'Success_8', 10;\nBBSprite: 'Success_9',
+    4;\nBBSprite: 'Success_10', 4;\nBBSprite: 'Success_11', 4;\nBBSprite: 'Success_12',
+    4;\n# \u5C06\u654C\u4EBA\u629B\u98DE\nHitParam: ShakeLength, 300;\nHitParam:
+    ShakeFrame, 10;\nHitParam: StopFrame, 10;\nHitParam: VelocityX, 1000;\nHitParam:
+    VelocityY, 28000;\nHitStun: 'Hurt1';\nBBSprite: 'Success_13', 4;\nBBSprite: 'Success_14',
+    4;\nBBSprite: 'Success_15', 4;\nBBSprite: 'Success_16', 3;\nBBSprite: 'Success_17',
+    3;\nBBSprite: 'Success_18', 3;\nReverse;\nExit;"

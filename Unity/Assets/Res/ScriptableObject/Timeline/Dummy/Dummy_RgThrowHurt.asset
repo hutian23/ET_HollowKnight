@@ -218,7 +218,7 @@ MonoBehaviour:
       Data: 16|Timeline.EventInfo, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 4
+      Data: 5
     - Name: keyframeName
       Entry: 1
       Data: ThrowHurt_5
@@ -244,5 +244,10 @@ MonoBehaviour:
   Script: '@Main:
 
     Gravity: 0;
+
+    BBSprite: ''ThrowHurt_1'', 1;
+
+    WaitFrame:
+    10000;
 
     Exit;'
