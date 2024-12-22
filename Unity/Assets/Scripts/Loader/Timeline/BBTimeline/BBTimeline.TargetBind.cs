@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ET;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Timeline.Editor;
@@ -74,6 +75,12 @@ namespace Timeline
     
     #region Runtime
 
+    public struct UpdateTargetBindCallback
+    {
+        public long instanceId;
+        public TargetBindKeyFrame KeyFrame;
+    }
+    
     public class RuntimeTargetBindTrack: RuntimeTrack
     {
         private TimelinePlayer TimelinePlayer => RuntimePlayable.TimelinePlayer;
@@ -87,14 +94,58 @@ namespace Timeline
 
         public override void Bind()
         {
+#if UNITY_EDITOR
+            if (TimelinePlayer.HasBindUnit)
+            {
+                return;
+            }
             GenerateTargetBind();
-            EditorApplication.update += SyncPosition;
+            EditorApplication.update += SyncPosition;      
+#endif
         }
 
         public override void UnBind()
         {
+#if UNITY_EDITOR
+            if (TimelinePlayer.HasBindUnit)
+            {
+                return;
+            }
             Object.DestroyImmediate(TargetBindGo);
-            EditorApplication.update -= SyncPosition;
+            EditorApplication.update -= SyncPosition;      
+#endif
+        }
+        
+        public override void SetTime(int targetFrame)
+        {
+            if (TimelinePlayer.HasBindUnit)
+            {
+                TargetBindKeyFrame _keyFrame = BindTrack.GetKeyFrame(targetFrame);
+                if (_keyFrame == null)
+                {
+                    return;
+                }
+                EventSystem.Instance.Invoke(new UpdateTargetBindCallback(){ instanceId = TimelinePlayer.instanceId, KeyFrame = _keyFrame});
+            }
+            else
+            {
+#if UNITY_EDITOR
+                TargetBindKeyFrame _keyFrame = BindTrack.GetClosestKeyFrame(targetFrame);
+                if (_keyFrame == null)
+                {
+                    return;
+                }
+                if (TargetBindGo == null)
+                {
+                    GenerateTargetBind();
+                }
+                // 更新TargetBindGo位置
+                TargetBindGo.transform.localPosition = _keyFrame.LocalPosition;
+                // 更新转向
+                TargetBind targetBind = TargetBindGo.GetComponent<TargetBind>();
+                targetBind.curFlip = _keyFrame.Flip;        
+#endif
+            }
         }
 
         private void SyncPosition()
@@ -113,24 +164,6 @@ namespace Timeline
             referGo.transform.localScale = new Vector3((int)targetBind.curFlip, 1, 1);
         }
         
-        public override void SetTime(int targetFrame)
-        {
-            TargetBindKeyFrame _keyFrame = TimelinePlayer.HasBindUnit? BindTrack.GetKeyFrame(targetFrame) : BindTrack.GetClosestKeyFrame(targetFrame);
-            if (_keyFrame == null)
-            {
-                return;
-            }
-            if (TargetBindGo == null)
-            {
-                GenerateTargetBind();
-            }
-            // 更新TargetBindGo位置
-            TargetBindGo.transform.localPosition = _keyFrame.LocalPosition;
-            // 更新转向
-            TargetBind targetBind = TargetBindGo.GetComponent<TargetBind>();
-            targetBind.curFlip = _keyFrame.Flip;
-        }
-
         private void GenerateTargetBind()
         {
             //Generate TargetBind GameObject

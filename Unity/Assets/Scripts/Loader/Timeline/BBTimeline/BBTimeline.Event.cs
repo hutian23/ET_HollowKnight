@@ -119,13 +119,12 @@ namespace Timeline
             }
             
             BBEventTrack eventTrack = Track as BBEventTrack;
-            foreach (EventInfo info in eventTrack.EventInfos)
+            EventInfo info = eventTrack.GetInfo(targetFrame);
+            if (info == null)
             {
-                if (info.frame == targetFrame)
-                {
-                    EventSystem.Instance?.Invoke(new UpdateEventTrackCallback() { instanceId = this.timelinePlayer.instanceId, markerName = info.keyframeName});
-                }
+                return;
             }
+            EventSystem.Instance?.Invoke(new UpdateEventTrackCallback() { instanceId = timelinePlayer.instanceId, markerName = info.keyframeName});
         }
     }
 }

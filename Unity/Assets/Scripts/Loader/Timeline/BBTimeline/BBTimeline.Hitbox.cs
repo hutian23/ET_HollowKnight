@@ -239,16 +239,26 @@ namespace Timeline
         public override void SetTime(int targetFrame)
         {
             BBHitboxTrack hitboxTrack = Track as BBHitboxTrack;
-            HitboxKeyframe _keyFrame = timelinePlayer.HasBindUnit? hitboxTrack.GetKeyframe(targetFrame) : hitboxTrack.GetClosestKeyframe(targetFrame);
-            if (_keyFrame == null) return;
-
             if (timelinePlayer.HasBindUnit)
             {
+                HitboxKeyframe _keyFrame = hitboxTrack.GetKeyframe(targetFrame);
+                if (_keyFrame == null)
+                {
+                    return;
+                }
                 EventSystem.Instance.Invoke(new UpdateHitboxCallback() { instanceId = timelinePlayer.instanceId, Keyframe = _keyFrame });
             }
+            else
+            {
 #if UNITY_EDITOR
-            GenerateHitbox(timelinePlayer, _keyFrame);
-#endif
+                HitboxKeyframe _keyFrame = hitboxTrack.GetClosestKeyframe(targetFrame);
+                if (_keyFrame == null)
+                {
+                    return;
+                }
+                GenerateHitbox(timelinePlayer, _keyFrame);
+#endif   
+            }
         }
 
 #if UNITY_EDITOR
@@ -256,7 +266,7 @@ namespace Timeline
         {
             //1. 销毁HitboxTrack运行时产生的组件
             var goSet = new HashSet<GameObject>();
-            foreach (var component in timelinePlayer.GetComponentsInChildren<Component>())
+            foreach (Component component in timelinePlayer.GetComponentsInChildren<Component>())
             {
                 if (component.GetComponent<CastBox>() != null)
                 {
@@ -277,7 +287,10 @@ namespace Timeline
             //2. 根据keyframe生成新的CastBox
             foreach (BoxInfo boxInfo in keyframe.boxInfos)
             {
-                if (boxInfo.hitboxType is HitboxType.None) continue;
+                if (boxInfo.hitboxType is HitboxType.None)
+                {
+                    continue;
+                }
 
                 GameObject parent = timelinePlayer
                         .GetComponent<ReferenceCollector>()

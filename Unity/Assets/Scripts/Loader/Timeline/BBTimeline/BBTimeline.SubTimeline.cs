@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ET;
 using Sirenix.OdinInspector;
 using Timeline.Editor;
 using UnityEngine;
@@ -139,6 +140,12 @@ namespace Timeline
     #endregion
     
     #region Runtime
+
+    public struct UpdateSubTimelineCallback
+    {
+        public long instanceId;
+        public SubTimelineKeyFrame keyFrame;
+    }
     
     public class RuntimeSubTimelineTrack : RuntimeTrack
     {
@@ -151,6 +158,12 @@ namespace Timeline
 
         public override void Bind()
         {
+#if UNITY_EDITOR
+            if (timelinePlayer.HasBindUnit)
+            {
+                return;
+            }
+            
             ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
             GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
             if (referGo == null)
@@ -159,7 +172,8 @@ namespace Timeline
             }
             
             TimelinePlayer subTimelinePlayer = referGo.GetComponent<TimelinePlayer>();
-            subTimelinePlayer.Init(subTimelineTrack.subTimeline);
+            subTimelinePlayer.Init(subTimelineTrack.subTimeline);      
+#endif
         }
 
         public override void UnBind()
@@ -168,16 +182,36 @@ namespace Timeline
 
         public override void SetTime(int targetFrame)
         {
-            //1. Find TimelinePlayer
-            ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
-            GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
-            if (referGo == null) return;
-            TimelinePlayer subTimelinePlayer = referGo.GetComponent<TimelinePlayer>();
+            if (timelinePlayer.HasBindUnit)
+            {
+                SubTimelineKeyFrame _keyFrame = subTimelineTrack.GetKeyFrame(targetFrame);
+                if (_keyFrame == null)
+                {
+                    return;
+                }
+                EventSystem.Instance.Invoke(new UpdateSubTimelineCallback(){instanceId = timelinePlayer.instanceId, keyFrame = _keyFrame});
+            }
+            else
+            {
+#if UNITY_EDITOR
+                //1. Find TimelinePlayer
+                ReferenceCollector refer = timelinePlayer.GetComponent<ReferenceCollector>();
+                GameObject referGo = refer.Get<GameObject>(subTimelineTrack.referName);
+                if (referGo == null)
+                {
+                    return;
+                }
+                TimelinePlayer subTimelinePlayer = referGo.GetComponent<TimelinePlayer>();
             
-            //2. Find current KeyFrame
-            SubTimelineKeyFrame _keyFrame = timelinePlayer.HasBindUnit ? subTimelineTrack.GetKeyFrame(targetFrame) : subTimelineTrack.GetClosestKeyFrame(targetFrame);
-            if (_keyFrame == null) return;
-            subTimelinePlayer.Evaluate(_keyFrame.TimelineFrame);
+                //2. Find current KeyFrame
+                SubTimelineKeyFrame _keyFrame = subTimelineTrack.GetClosestKeyFrame(targetFrame);
+                if (_keyFrame == null)
+                {
+                    return;
+                }
+                subTimelinePlayer.Evaluate(_keyFrame.TimelineFrame);          
+#endif
+            }
         }
     }
     
