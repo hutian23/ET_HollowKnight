@@ -1450,6 +1450,6 @@ MonoBehaviour:
     4;\nBBSprite: 'Success_10', 4;\nBBSprite: 'Success_11', 4;\nBBSprite: 'Success_12',
     4;\n# \u5C06\u654C\u4EBA\u629B\u98DE\nHitParam: ShakeLength, 300;\nHitParam:
     ShakeFrame, 10;\nHitParam: StopFrame, 10;\nHitParam: VelocityX, 1000;\nHitParam:
-    VelocityY, 28000;\nHitStun: 'Hurt1';\nBBSprite: 'Success_13', 4;\nBBSprite: 'Success_14',
+    VelocityY, 28000;\nHitStun: 'Hurt3';\nBBSprite: 'Success_13', 4;\nBBSprite: 'Success_14',
     4;\nBBSprite: 'Success_15', 4;\nBBSprite: 'Success_16', 3;\nBBSprite: 'Success_17',
     3;\nBBSprite: 'Success_18', 3;\nReverse;\nExit;"
