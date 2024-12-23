@@ -999,7 +999,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 10
+      Data: 11
     - Name: 
       Entry: 7
       Data: 59|Timeline.TargetBindKeyFrame, Unity.Loader
@@ -1152,7 +1152,7 @@ MonoBehaviour:
       Data: -1.8
     - Name: 
       Entry: 4
-      Data: -0.4
+      Data: 0.1
     - Name: 
       Entry: 8
       Data: 
@@ -1179,7 +1179,7 @@ MonoBehaviour:
       Data: 0.9
     - Name: 
       Entry: 4
-      Data: -0.4
+      Data: 0.1
     - Name: 
       Entry: 8
       Data: 
@@ -1271,6 +1271,33 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 69|Timeline.TargetBindKeyFrame, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 9
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: LocalPosition
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: -2.15
+    - Name: 
+      Entry: 4
+      Data: 0.1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Flip
+      Entry: 3
+      Data: 18446744073709551615
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -1284,7 +1311,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 69|Timeline.SubTimelineTrack, Unity.Loader
+      Data: 70|Timeline.SubTimelineTrack, Unity.Loader
     - Name: Name
       Entry: 1
       Data: SubTimeline_ThrowHurt
@@ -1293,7 +1320,7 @@ MonoBehaviour:
       Data: true
     - Name: Clips
       Entry: 7
-      Data: 70|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+      Data: 71|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
@@ -1306,14 +1333,14 @@ MonoBehaviour:
       Data: 
     - Name: KeyFrames
       Entry: 7
-      Data: 71|System.Collections.Generic.List`1[[Timeline.SubTimelineKeyFrame, Unity.Loader]],
+      Data: 72|System.Collections.Generic.List`1[[Timeline.SubTimelineKeyFrame, Unity.Loader]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 7
     - Name: 
       Entry: 7
-      Data: 72|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 73|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 2
@@ -1328,10 +1355,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 73|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 74|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 3
+      Data: 4
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -1343,7 +1370,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 74|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 75|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 7
@@ -1358,7 +1385,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 75|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 76|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 8
@@ -1373,7 +1400,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 76|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 77|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 13
@@ -1388,7 +1415,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 77|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 78|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 9
@@ -1403,7 +1430,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 78|Timeline.SubTimelineKeyFrame, Unity.Loader
+      Data: 79|Timeline.SubTimelineKeyFrame, Unity.Loader
     - Name: frame
       Entry: 3
       Data: 10
@@ -1447,9 +1474,9 @@ MonoBehaviour:
     4;\nBBSprite: 'Success_2', 4;\nBBSprite: 'Success_3', 4;\nBBSprite: 'Success_4',
     4;\nBBSprite: 'Success_5', 4;\nScreenShake: 170, 100;\nBBSprite: 'Success_6',
     4;\nBBSprite: 'Success_7', 4;\nBBSprite: 'Success_8', 10;\nBBSprite: 'Success_9',
-    4;\nBBSprite: 'Success_10', 4;\nBBSprite: 'Success_11', 4;\nBBSprite: 'Success_12',
-    4;\n# \u5C06\u654C\u4EBA\u629B\u98DE\nHitParam: ShakeLength, 300;\nHitParam:
+    3;\nBBSprite: 'Success_10', 3;\nBBSprite: 'Success_11', 5;\nBBSprite: 'Success_12',
+    5;\n# \u5C06\u654C\u4EBA\u629B\u98DE\nHitParam: ShakeLength, 300;\nHitParam:
     ShakeFrame, 10;\nHitParam: StopFrame, 10;\nHitParam: VelocityX, 1000;\nHitParam:
-    VelocityY, 28000;\nHitStun: 'Hurt3';\nBBSprite: 'Success_13', 4;\nBBSprite: 'Success_14',
-    4;\nBBSprite: 'Success_15', 4;\nBBSprite: 'Success_16', 3;\nBBSprite: 'Success_17',
-    3;\nBBSprite: 'Success_18', 3;\nReverse;\nExit;"
+    VelocityY, 28000;\nHitStun: 'Hurt3';\nBBSprite: 'Success_13', 7;\nBBSprite: 'Success_14',
+    4;\nBBSprite: 'Success_15', 4;\nBBSprite: 'Success_16', 4;\nBBSprite: 'Success_17',
+    4;\nBBSprite: 'Success_18', 4;\nReverse;\nExit;"

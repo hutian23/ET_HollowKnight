@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 15
+      Data: 26
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 16
+      Data: 27
     - Name: 
       Entry: 7
       Data: 22|Timeline.EventInfo, Unity.Loader
@@ -624,6 +624,138 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 38|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 16
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 39|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 17
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_18
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 40|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 18
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_19
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 41|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 19
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_20
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 42|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 20
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_21
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 43|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 21
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_22
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 44|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 22
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_23
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 45|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 23
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_24
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 46|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 24
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_25
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 47|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 25
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_26
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 48|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 26
+    - Name: keyframeName
+      Entry: 1
+      Data: Frame_27
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -641,23 +773,41 @@ MonoBehaviour:
   timelineName: Rg_Hurt3
   Script: '@Main:
 
-    BBSprite: ''Frame_1'', 3;
+    # Fly
+
+    Gravity: 0;
+
+    SetVelocityY: 23000;
+
+    BBSprite:
+    ''Frame_1'', 3;
 
     BBSprite: ''Frame_2'', 3;
 
-    BBSprite:
-    ''Frame_3'', 3;
+    BBSprite: ''Frame_1'', 3;
 
-    BBSprite: ''Frame_4'', 3;
+    Gravity:
+    90000;
 
-    BBSprite: ''Frame_5'', 3;
+    # PreFall
 
-    BBSprite:
-    ''Frame_6'', 3;
+    BBSprite: ''Frame_3'', 4;
+
+    BBSprite: ''Frame_4'',
+    4;
+
+    BBSprite: ''Frame_5'', 4;
+
+    BBSprite: ''Frame_6'', 5;
+
+    BeginLoop:
+    (InAir: true)
 
     BBSprite: ''Frame_7'', 3;
 
     BBSprite: ''Frame_8'', 3;
+
+    EndLoop:
 
     BBSprite:
     ''Frame_9'', 3;
@@ -677,6 +827,30 @@ MonoBehaviour:
     BBSprite: ''Frame_15'', 3;
 
     BBSprite: ''Frame_16'',
-    3000;
+    80;
+
+    BBSprite: ''Frame_17'', 3;
+
+    BBSprite: ''Frame_18'', 3;
+
+    BBSprite:
+    ''Frame_19'', 3;
+
+    BBSprite: ''Frame_20'', 3;
+
+    BBSprite: ''Frame_21'',
+    3;
+
+    BBSprite: ''Frame_22'', 3;
+
+    BBSprite: ''Frame_23'', 3;
+
+    BBSprite:
+    ''Frame_24'', 3;
+
+    BBSprite: ''Frame_25'', 3;
+
+    BBSprite: ''Frame_26'',
+    3;
 
     Exit;'
