@@ -1329,6 +1329,7 @@ MonoBehaviour:
     WhiffOption: 'Rg_GroundDash';\n  EndMarkerEvent:\nMarkerEvent: (Hit_Start)\n   
     HurtNotify: Once\n    HitParam: ShakeLength, 300;\n    HitParam: ShakeFrame,
     10;\n    HitParam: StopFrame, 10;\n    HitParam: VelocityY, 18000;\n    HitParam:
-    VelocityX, -8000;\n    HitStun: 'Hurt1';\n    EndNotify:\n    WaitHit: \n   
-    HitStop: 10, 10;\n    ScreenShake: 170, 100;\n    EndHit:\n    EndMarkerEvent:\nMarkerEvent:
-    (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_5D';\n  EndMarkerEvent:\nStartTimeline;\nExit;"
+    VelocityX, -8000;\n    Hit_UpdateFlip;\n    HitStun: 'Hurt1';\n    EndNotify:\n   
+    WaitHit: \n    HitStop: 10, 10;\n    ScreenShake: 170, 100;\n    EndHit:\n   
+    EndMarkerEvent:\nMarkerEvent: (Whiff_End)\n  GCWindow;\n  GCOption: 'Rg_5D';\n 
+    EndMarkerEvent:\nStartTimeline;\nExit;"

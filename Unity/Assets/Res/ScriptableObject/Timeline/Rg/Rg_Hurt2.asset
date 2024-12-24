@@ -376,12 +376,14 @@ MonoBehaviour:
   timelineName: Rg_Hurt2
   Script: '@Main:
 
+    HitStop: 0, [StopFrame];
+
     Shake: [ShakeLength], [ShakeFrame];
 
-    PushBack: [PushBack_V],
-    [PushBack_F];
+    PushBack:
+    [PushBack_V], [PushBack_F];
 
-    BBSprite: ''hurt_5'', [StopFrame];
+    BBSprite: ''hurt_5'', 20;
 
     BBSprite: ''hurt_4'',
     3;

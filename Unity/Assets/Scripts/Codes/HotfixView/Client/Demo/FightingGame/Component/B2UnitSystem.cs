@@ -27,8 +27,6 @@ namespace ET.Client
         {
             self.keyFrame = null;
             self.CollisionBuffer.Clear();
-            self.Velocity = Vector2.Zero;
-            self.Hertz = 60;
         }
 
         public class B2UnitPreStepSystem : PreStepSystem<b2Unit>

@@ -29,7 +29,11 @@ namespace ET.Client
                 Log.Error($"cannot format HitStop to int!");
                 return Status.Failed;
             }
-
+            if (hitStop == 0)
+            {
+                return Status.Success;
+            }
+            
             HitStopCor(parser, hertz, hitStop, token).Coroutine();
             
             await ETTask.CompletedTask;

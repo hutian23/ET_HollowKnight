@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using ET.Event;
-using Timeline;
 
 namespace ET.Client
 {
@@ -25,15 +24,11 @@ namespace ET.Client
             CollisionInfo info = parser.GetParam<CollisionInfo>("Hurt_CollisionInfo");
 
             //查询组件
-            b2Body bodyA = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
-            b2Body bodyB = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
-            Unit unit = Root.Instance.Get(bodyB.unitId) as Unit;
+            b2Body body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
+            Unit unit = Root.Instance.Get(body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-
-            // 受击者的朝向面向玩家
-            bodyB.SetFlip(bodyA.GetFlip() == (int)FlipState.Left ? FlipState.Right : FlipState.Left);
-
+            
             //查询对应的受击行为
             int order = buffer.GetHitStun(match.Groups["hitFlag"].Value);
             timelineComponent.Reload(order);

@@ -243,11 +243,15 @@ MonoBehaviour:
   timelineName: RgThrowHurt
   Script: '@Main:
 
+    SetVelocityX: 0;
+
+    SetVelocityY: 0;
+
     Gravity: 0;
 
-    BBSprite: ''ThrowHurt_1'', 1;
+    BBSprite:
+    ''ThrowHurt_1'', 1;
 
-    WaitFrame:
-    10000;
+    WaitFrame: 10000;
 
     Exit;'

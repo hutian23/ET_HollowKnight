@@ -829,28 +829,28 @@ MonoBehaviour:
     BBSprite: ''Frame_16'',
     80;
 
-    BBSprite: ''Frame_17'', 3;
+    BBSprite: ''Frame_17'', 4;
 
-    BBSprite: ''Frame_18'', 3;
+    BBSprite: ''Frame_18'', 4;
 
     BBSprite:
-    ''Frame_19'', 3;
+    ''Frame_19'', 4;
 
-    BBSprite: ''Frame_20'', 3;
+    BBSprite: ''Frame_20'', 4;
 
     BBSprite: ''Frame_21'',
-    3;
+    4;
 
-    BBSprite: ''Frame_22'', 3;
+    BBSprite: ''Frame_22'', 4;
 
-    BBSprite: ''Frame_23'', 3;
+    BBSprite: ''Frame_23'', 4;
 
     BBSprite:
-    ''Frame_24'', 3;
+    ''Frame_24'', 4;
 
-    BBSprite: ''Frame_25'', 3;
+    BBSprite: ''Frame_25'', 4;
 
     BBSprite: ''Frame_26'',
-    3;
+    4;
 
     Exit;'

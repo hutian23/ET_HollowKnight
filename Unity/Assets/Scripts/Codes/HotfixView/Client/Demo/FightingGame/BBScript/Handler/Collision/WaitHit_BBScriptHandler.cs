@@ -34,18 +34,18 @@ namespace ET.Client
                 }
             }
             if (!wasHit) return;
-
+            
             //执行回调(子协程)
             int startIndex = self.GetParam<int>("HitCheck_StartIndex");
             int endIndex = self.GetParam<int>("HitCheck_EndIndex");
             self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
-
+            
             //初始化
             long timer = self.GetParam<long>("HitCheckTimer");
             postStepTimer.Remove(ref timer);
             self.TryRemoveParam("HitCheckTimer");
             self.TryRemoveParam("HitCheck_StartIndex");
-            self.TryRemoveParam("HitCheck_EndIndex");
+            self.TryRemoveParam("HitCheck_EndIndex");   
         }
     }
 
@@ -57,6 +57,7 @@ namespace ET.Client
             return "WaitHit";
         }
 
+        //WaitHit: Once / Repeat
         //打击框和受击框重叠，调用攻击回调，执行卡肉，回复能量等逻辑
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
@@ -90,7 +91,7 @@ namespace ET.Client
             parser.RegistParam("HitCheck_StartIndex", startIndex);
             parser.RegistParam("HitCheck_EndIndex", endIndex);
             parser.RegistParam("HitCheckTimer", timer);
-
+            
             token.Add(() =>
             {
                 postStepTimer.Remove(ref timer);

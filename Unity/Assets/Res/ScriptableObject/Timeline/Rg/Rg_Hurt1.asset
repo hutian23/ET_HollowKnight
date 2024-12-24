@@ -629,63 +629,62 @@ MonoBehaviour:
   timelineName: Rg_Hurt1
   Script: '@Main:
 
+    HitStop: 0, [StopFrame];
+
     Shake: [ShakeLength], [ShakeFrame];
 
-    Gravity: 0;
-
-    BBSprite:
-    ''frame_1'', [StopFrame];
+    Gravity:
+    0;
 
     SetVelocityX: [VelocityX];
 
-    SetVelocityY:
-    [VelocityY];
+    SetVelocityY: [VelocityY];
 
-    BBSprite: ''frame_2'', 4;
+    BBSprite:
+    ''frame_1'', 8;
 
     BBSprite: ''frame_3'', 4;
+
+    Gravity: 130000;
 
     BBSprite:
     ''frame_2'', 4;
 
-    Gravity: 130000;
-
     BBSprite: ''frame_4'', 3;
 
-    BBSprite:
-    ''frame_5'', 4;
+    BBSprite: ''frame_5'', 4;
 
-    BeginLoop: (InAir: true)
+    BeginLoop:
+    (InAir: true)
 
     BBSprite: ''frame_6'', 4;
 
-    BBSprite:
-    ''frame_7'', 4;
+    BBSprite: ''frame_7'', 4;
 
     EndLoop:
 
-    SetVelocityX: 0;
+    SetVelocityX:
+    0;
 
-    BBSprite: ''frame_8'',
-    3;
+    BBSprite: ''frame_8'', 3;
 
     BBSprite: ''frame_9'', 3;
 
-    BBSprite: ''frame_10'', 3;
-
     BBSprite:
-    ''frame_11'', 3;
+    ''frame_10'', 3;
 
-    BBSprite: ''frame_12'', 3;
+    BBSprite: ''frame_11'', 3;
 
-    BBSprite: ''frame_13'',
-    4;
+    BBSprite: ''frame_12'',
+    3;
+
+    BBSprite: ''frame_13'', 4;
 
     BBSprite: ''frame_14'', 4;
 
-    BBSprite: ''frame_15'', 4;
+    BBSprite:
+    ''frame_15'', 4;
 
-    GotoBehavior:
-    ''Rg_HardDownRecovery'';
+    GotoBehavior: ''Rg_HardDownRecovery'';
 
     Exit;'

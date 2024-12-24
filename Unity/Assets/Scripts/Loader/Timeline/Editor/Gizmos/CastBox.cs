@@ -2,7 +2,7 @@
 
 namespace Timeline.Editor
 {
-    public class CastBox: CastShapeBase
+    public class CastBox: CastShapeBase, ITimelineGenerate
     {
         public BoxInfo info;
         
@@ -30,14 +30,13 @@ namespace Timeline.Editor
                     Gizmos.color = Color.magenta;
                     break;
                 case HitboxType.Other:
-                    Gizmos.color = Color.black;
+                    Gizmos.color = Color.white;
                     break;
                 case HitboxType.Gizmos:
                     Gizmos.color = Color.white;
                     break;
             }
-
-            // Gizmos.matrix = transform.localToWorldMatrix;
+            
             Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
             Gizmos.DrawWireCube(info.center, info.size);
             Gizmos.color = gizmosColorRecord;

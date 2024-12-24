@@ -1176,7 +1176,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.9
+      Data: 0.8
     - Name: 
       Entry: 4
       Data: 0.1
@@ -1203,10 +1203,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 2.1
+      Data: 2.2
     - Name: 
       Entry: 4
-      Data: -1.95
+      Data: -2
     - Name: 
       Entry: 8
       Data: 
@@ -1465,18 +1465,16 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_Throw
-  Script: "@Trigger:\nInputType: 5MPPressed;\nInAir: false;\nreturn;\n\n@Main:\nBBSprite:
-    'Start_1', 3;\nBBSprite: 'Start_2', 3;\n# \u6295\u6280\u5224\u5B9A\nWaitThrow:\n   
-    ThrowPoint: -1500, 0; \n    HitStun: 'RgThrowHurt';\n    EndThrow:\nBBSprite:
-    'Start_3', 7;\n#Throw Failed\nBeginIf: (ThrowHurt: false)\n    BBSprite: 'Failed_1',
-    15;\n    BBSprite: 'Failed_2', 4;\n    BBSprite: 'Failed_3', 4;\n    BBSprite:
-    'Failed_4', 4;\n    Exit;\n    EndIf:\n#Throw Successed\nBBSprite: 'Success_1',
-    4;\nBBSprite: 'Success_2', 4;\nBBSprite: 'Success_3', 4;\nBBSprite: 'Success_4',
-    4;\nBBSprite: 'Success_5', 4;\nScreenShake: 170, 100;\nBBSprite: 'Success_6',
-    4;\nBBSprite: 'Success_7', 4;\nBBSprite: 'Success_8', 10;\nBBSprite: 'Success_9',
-    3;\nBBSprite: 'Success_10', 3;\nBBSprite: 'Success_11', 5;\nBBSprite: 'Success_12',
-    5;\n# \u5C06\u654C\u4EBA\u629B\u98DE\nHitParam: ShakeLength, 300;\nHitParam:
-    ShakeFrame, 10;\nHitParam: StopFrame, 10;\nHitParam: VelocityX, 1000;\nHitParam:
-    VelocityY, 28000;\nHitStun: 'Hurt3';\nBBSprite: 'Success_13', 7;\nBBSprite: 'Success_14',
-    4;\nBBSprite: 'Success_15', 4;\nBBSprite: 'Success_16', 4;\nBBSprite: 'Success_17',
-    4;\nBBSprite: 'Success_18', 4;\nReverse;\nExit;"
+  Script: "@Trigger:\nInputType: 5MPPressed;\nInAir: false;\nreturn;\n\n@Main:\nSetVelocityX:
+    0;\nSetVelocityY: 0;\nBBSprite: 'Start_1', 3;\nBBSprite: 'Start_2', 3;\n# \u6295\u6280\u5224\u5B9A\nWaitThrow:\nThrowPoint:
+    -1500, 0; \nHitStun: 'RgThrowHurt';\nEndThrow:\nBBSprite: 'Start_3', 7;\n#Throw
+    Failed\nBeginIf: (ThrowHurt: false)\nBBSprite: 'Failed_1', 15;\nBBSprite: 'Failed_2',
+    4;\nBBSprite: 'Failed_3', 4;\nBBSprite: 'Failed_4', 4;\nExit;\nEndIf:\n#Throw
+    Successed\nBBSprite: 'Success_1', 4;\nBBSprite: 'Success_2', 4;\nBBSprite: 'Success_3',
+    4;\nBBSprite: 'Success_4', 4;\nBBSprite: 'Success_5', 4;\nScreenShake: 170, 100;\nBBSprite:
+    'Success_6', 4;\nBBSprite: 'Success_7', 4;\nBBSprite: 'Success_8', 10;\nBBSprite:
+    'Success_9', 3;\nBBSprite: 'Success_10', 3;\nBBSprite: 'Success_11', 5;\nBBSprite:
+    'Success_12', 3;\nBBSprite: 'Success_13', 3;\n# \u5C06\u654C\u4EBA\u629B\u98DE\nHitStun:
+    'Hurt3';\nBBSprite: 'Success_13', 5;\nBBSprite: 'Success_14', 4;\nBBSprite: 'Success_15',
+    4;\nBBSprite: 'Success_16', 4;\nBBSprite: 'Success_17', 4;\nBBSprite: 'Success_18',
+    4;\nReverse;\nExit;"
