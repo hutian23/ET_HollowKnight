@@ -123,15 +123,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PC Computer - Hollow Knight - Mantis Lords Sisters of Battle_0
+      name: Dash_1
       rect:
         serializedVersion: 2
-        x: 3
+        x: 4
         y: 5798
-        width: 583
+        width: 582
         height: 186
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,6 +139,2400 @@ TextureImporter:
       bones: []
       spriteID: 0f8f4175686b4e542b6b64a0dd8898a0
       internalID: -619035711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gesture_3
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 11054
+        width: 118
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c774bf81674c6442acbf3dc1cb3eb21
+      internalID: -782688451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gesture_1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 11054
+        width: 118
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 276c670d67a936d4d93569a967325205
+      internalID: -582529749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throne_Idle
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 11119
+        width: 104
+        height: 331
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b77c6780b57e6e4185ea06df0b8a71c
+      internalID: -574645182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_Arrive_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 6328
+        width: 515
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29c953f2c45d41d4fa3bac35addfe46e
+      internalID: -1569326313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_Arrive_2
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 6328
+        width: 515
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec1591681895de7478d7753e368d8730
+      internalID: -1273550209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_Arrive_3
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 6329
+        width: 514
+        height: 554
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db3d271b573687f41a45d423a2978061
+      internalID: 75789715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_Arrive_4
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 6329
+        width: 515
+        height: 554
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 022b49eba5db76e48b8e6a04970f1e2e
+      internalID: -1351023365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_Arrive_5
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 6328
+        width: 514
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd693515879ad5243b249c0c367cf4e7
+      internalID: -456347515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_Arrive_6
+      rect:
+        serializedVersion: 2
+        x: 2604
+        y: 6328
+        width: 515
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2f723cd5b4e0d24ba8ce373fcd14370
+      internalID: -77290871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anticipate_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 6008
+        width: 529
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8c90cb67305aaf4280b5b1723cfe1ad
+      internalID: 62058609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anticipate_2
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 6008
+        width: 529
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c86fc7b958d54f44a6e2a7c043d9eec
+      internalID: 882259913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anticipate_3
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 6008
+        width: 529
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 667f531a0d36bbe47b09e34e3d92f796
+      internalID: -597183154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anticipate_4
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 6008
+        width: 529
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a996a446523c9947bdf16babd73f786
+      internalID: 1242316349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_2
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 5798
+        width: 582
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49dc92fe2358375418b03458158d70d0
+      internalID: 1584462434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dash_3
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 5798
+        width: 582
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2366a33d1b288b84eaa649fcfe67c5e5
+      internalID: 1622036722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 5519
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bfc3aad43b216b45b339e6f6f074486
+      internalID: 319017874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_2
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 5519
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a99384686d6f1f148ae45b637a136941
+      internalID: -1588644021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_3
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 5519
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9bc39237db74740bcb9a92c8209c24
+      internalID: -742577937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_4
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 5519
+        width: 524
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f432a664cfb87343a34c089a34b2bab
+      internalID: 392464939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_5
+      rect:
+        serializedVersion: 2
+        x: 2124
+        y: 5519
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 823117cb888978b46b5f7637b994fe6d
+      internalID: -1952789467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_6
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 5259
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6abef834ec6d4b140a4e7e6d72ea3b98
+      internalID: -304820569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_7
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 5259
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66d5f48fae39f6344a39308911e1e017
+      internalID: -1309281791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashRecover_8
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 5259
+        width: 525
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cbc5ff67529d0b4ba037ae30e275723
+      internalID: -103316335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashLeave_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4680
+        width: 596
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3a28e57d0c6f5545a22e2e2f07be906
+      internalID: 1073215697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashLeave_2
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 4680
+        width: 596
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd1b330b5c087444f9c6636e6a240e96
+      internalID: -631409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashLeave_3
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 4680
+        width: 596
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a11d456d674c96742a86853aeda5d9fb
+      internalID: -2007980000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DashLeave_4
+      rect:
+        serializedVersion: 2
+        x: 1807
+        y: 4680
+        width: 596
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34dbb183e9234124a8630a2cf5300d9a
+      internalID: -1757602628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4015
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 589a78915a1b94c4babb276a4fdcde7f
+      internalID: -1257169849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_2
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 4015
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c30e6f244d213524caabec01e41a4b3e
+      internalID: -645320694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_3
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 4015
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43176e173b0799040a505feea239a530
+      internalID: -714463963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_4
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 4015
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f240cddb0d75fae4fa87450780e57410
+      internalID: 2067051856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_5
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 3369
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08bf220e44aede54dbf6690dcff81163
+      internalID: -262797879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_9
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 2723
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8ba43c241abd54ebe86dd737153f9c
+      internalID: -1534913058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_6
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 3369
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cd776979c3835348aa91329b8cefba8
+      internalID: -866583374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_7
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 3369
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f4a1a4ceabe0849af80763f8d28350
+      internalID: 965168971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_8
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 3370
+        width: 763
+        height: 640
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc7e4a2cb6f4f9448d3c022927880da
+      internalID: 2101357905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_10
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 2723
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc3933c764f127d43a80cb7131562ba1
+      internalID: -1822788567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabArrive_11
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 2723
+        width: 764
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 668d9cab94f81ce459e744908f9e6fb5
+      internalID: -690851666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dstab_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 2074
+        width: 119
+        height: 625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0321f0b6f3fc1fc418ec8c6c41d22559
+      internalID: 452829966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dstab_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 2074
+        width: 119
+        height: 625
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2562ac9a51703ce4db2e35fd3e1fc197
+      internalID: -941313195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLand_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1529
+        width: 480
+        height: 521
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2326297b64d3c74885f31f86339b810
+      internalID: 1706062140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLand_2
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 1529
+        width: 480
+        height: 521
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3754f2170bb77b34fa2058d989128fad
+      internalID: 1286021148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLand_3
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 1530
+        width: 480
+        height: 520
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70560a1422959cc4694051024e52a353
+      internalID: -1573316493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLand_4
+      rect:
+        serializedVersion: 2
+        x: 1459
+        y: 1530
+        width: 480
+        height: 520
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3996265298d9194bb6706e7fd88d37d
+      internalID: 1067912699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLand_5
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 1532
+        width: 480
+        height: 520
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b1cc1910c3ef6b479234af5a5a62bd5
+      internalID: -618046197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLand_6
+      rect:
+        serializedVersion: 2
+        x: 2429
+        y: 1533
+        width: 479
+        height: 517
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a635277839959454e82c26d98797ef56
+      internalID: -1002585745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLeave_1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1135
+        width: 551
+        height: 370
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f41bcd8a035ef3a44b7f9990fe00ee4f
+      internalID: -1835884888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DstabLeave_2
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 1135
+        width: 552
+        height: 371
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14797a0778965ad49b58aecc16766755
+      internalID: 485882078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 624
+        width: 422
+        height: 487
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b65bbbeb95d882442baba87f39eecc28
+      internalID: -1657311601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_2
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 625
+        width: 422
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a29bb5573338c4f9a3dc8382970fad
+      internalID: 1735096701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_3
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 624
+        width: 422
+        height: 487
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d19aab1ef5310240b5f5c26db17f585
+      internalID: -1936420214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_4
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 624
+        width: 422
+        height: 487
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d2b28ca5918ddd43a893059cbe3b605
+      internalID: 1982365783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_5
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 624
+        width: 422
+        height: 487
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f5e096e6dab2164d8a25043a03cd5d7
+      internalID: -2039783321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathLeave_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 256
+        width: 365
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e94f6be7990d85d4db12057c4254c14b
+      internalID: -54440846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathLeave_2
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 256
+        width: 365
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b408cb3070f60468935ce96e846ba3
+      internalID: 1596491330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_1
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ffe948eb03311441b8713a4c6d86e73
+      internalID: 513528407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_2
+      rect:
+        serializedVersion: 2
+        x: 1951
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03e05a4af40974479e54e6935af1fae
+      internalID: -1592732045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_3
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c3577b0d0e560459a405103b1ad9ad
+      internalID: -1936162158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_4
+      rect:
+        serializedVersion: 2
+        x: 2189
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573d4a562c36bd54fbf76dd99d147ce8
+      internalID: -504596271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_5
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc98128721e96b04d98b24c37880b316
+      internalID: 1733339325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_6
+      rect:
+        serializedVersion: 2
+        x: 2427
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c37bed917cc179408c55a38806a8ae1
+      internalID: -1771793672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_7
+      rect:
+        serializedVersion: 2
+        x: 2546
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01fa86ccf1bcb4346934b4047e7b1c47
+      internalID: 1730348790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_8
+      rect:
+        serializedVersion: 2
+        x: 2665
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 519d48c6cf2e8424a87c147df693506d
+      internalID: -804172984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_9
+      rect:
+        serializedVersion: 2
+        x: 2784
+        y: 10474
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ff4fed09d30674b974cc278709c326
+      internalID: 350722653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_10
+      rect:
+        serializedVersion: 2
+        x: 2903
+        y: 10475
+        width: 114
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df3bd20cb84fd5648b4f40daf45d4d15
+      internalID: -920023387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_1
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 10372
+        width: 123
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d99e80bb48dca42910509f56b681f4
+      internalID: -1747862620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_2
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 10372
+        width: 123
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee7a6cb2ab6b7c84992414b8f9e55eb7
+      internalID: 1532469758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_3
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 10372
+        width: 123
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e29f64cb59ba75a4c83677a9504c6938
+      internalID: 1024641642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_4
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 10372
+        width: 123
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaebf06745a8de74f965dea431e310c9
+      internalID: 377556222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_5
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 10372
+        width: 123
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30a294b3ccc2d3748b5e2044880b8019
+      internalID: -1049702301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_6
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 10372
+        width: 123
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2791b30b238dfd40bbba32761c58dc8
+      internalID: -1610402988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_7
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 10372
+        width: 122
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f892789509667741b59a90a62690ec2
+      internalID: 1580206963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84badd224289ded42ad55ff2f63d8133
+      internalID: -135361591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_2
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 605264068d27143498db7b92e3483bde
+      internalID: 174659733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_3
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6963c508847e68e4b8cd3b19a5144f68
+      internalID: -394316149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_4
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674bec31fcc18d34f8d0dce7e7523ceb
+      internalID: -571158092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_5
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9fdefd96e7f672438bf6ad1ccaf5325
+      internalID: 401451979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_6
+      rect:
+        serializedVersion: 2
+        x: 2139
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82cdaa32083ceb94aa6a07ab597e2072
+      internalID: -2118724401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_7
+      rect:
+        serializedVersion: 2
+        x: 2566
+        y: 9559
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b60b6066b70ebc41829321eb4219577
+      internalID: 1098698592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_8
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 8765
+        width: 422
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d68f05973084e498c114f0d988a1f4
+      internalID: -2097152688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallArrive_9
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 8765
+        width: 421
+        height: 789
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf2fcfd1348db6a46bcc6a3f02ee3bff
+      internalID: -1778216814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallReady_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 8151
+        width: 468
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70f461e799094bb499795d987a307927
+      internalID: -1403759168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallReady_2
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 8151
+        width: 468
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ed41d1d0cefce4f94377d73f56ff6c
+      internalID: 1082941035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallReady_3
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 8151
+        width: 467
+        height: 591
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a646040f136ba2343b9017f872f69b11
+      internalID: -333261293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 7558
+        width: 613
+        height: 569
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39cd07f863cefb74d9118ad79d61ec4c
+      internalID: 1770233673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_2
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 7558
+        width: 613
+        height: 569
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ace7c828308f1eb40a29aeed932d3a5e
+      internalID: -1932165072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_3
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 7558
+        width: 613
+        height: 569
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3b7e82ec5c865747a031246384bfd26
+      internalID: 1657399486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_4
+      rect:
+        serializedVersion: 2
+        x: 1858
+        y: 7558
+        width: 613
+        height: 569
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa2d7c57be365848aac0695bdeb4bb7
+      internalID: -2014222467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 7437
+        width: 297
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d62b89580d2182642aba4f62eaea4a65
+      internalID: 504575189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile_2
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 7437
+        width: 297
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e853a302dc0d74799ffc09125094e8
+      internalID: -781643073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile_3
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 7437
+        width: 297
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2ded1363ee3eb4983d593589c9f03b
+      internalID: 195577918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallLeave_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 6907
+        width: 232
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 686473993cba6d043b9e5022a1b6516c
+      internalID: -926366008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallLeave_2
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 6907
+        width: 232
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d213e29e3c7e99459575745ad4b1d0f
+      internalID: -1803129695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallLeave_3
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 6930
+        width: 615
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0857d27c0415f894bbde7921b4f19103
+      internalID: -1350553612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallLeave_4
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 6930
+        width: 615
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57ef82d7525c31b4ca4b773804485ea9
+      internalID: -1347045496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallLeave_5
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 6930
+        width: 615
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ae37aa67ce4fe4baf4ae21040fc8ed
+      internalID: -1428183094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gesture_2
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 11054
+        width: 118
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e684ae89118271e48a0eb52cfaf6b77c
+      internalID: 1737363576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gesture_4
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 11054
+        width: 118
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07010e9234f2eb840ba3c05c2764e6ae
+      internalID: 653857225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gesture_5
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 11054
+        width: 118
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d98c78234914fe9498c1bd312db0e533
+      internalID: 1444672210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stand_1
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 10980
+        width: 100
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9affe61f32b8827429d22c303be5de35
+      internalID: -1367512433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stand_2
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 10980
+        width: 100
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b1e8b20c55a5d4b873947595a34650
+      internalID: -655047360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stand_3
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 10980
+        width: 100
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d99efdaca461c249b4773ee33e14008
+      internalID: 842386631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TripleGesture_1
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 10980
+        width: 115
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115ee89199b9b6a4eaaaf9f533bc9474
+      internalID: 784754593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TripleGesture_2
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 10980
+        width: 115
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7cbabc58bed32740b0342833fe96d03
+      internalID: 1777111607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleGesture_3
+      rect:
+        serializedVersion: 2
+        x: 1747
+        y: 10980
+        width: 115
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89ae5c5a84ac0464db49d491db076aa2
+      internalID: -2093807340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleGesture_4
+      rect:
+        serializedVersion: 2
+        x: 1867
+        y: 10980
+        width: 114
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c0025599a9fd5a469fcd922bac09e1c
+      internalID: -850136885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleGesture_5
+      rect:
+        serializedVersion: 2
+        x: 2018
+        y: 10980
+        width: 105
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c3fd1a778a3b2a4cab4f5936f37172d
+      internalID: 119632096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleGesture_6
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 10980
+        width: 105
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f85bc78e7429f4441945240ced93cf65
+      internalID: -1547727681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Look_1
+      rect:
+        serializedVersion: 2
+        x: 2270
+        y: 10974
+        width: 100
+        height: 476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 203594f49352f4c4e8ce503f69e8ba85
+      internalID: -1222109661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Look_2
+      rect:
+        serializedVersion: 2
+        x: 2375
+        y: 10974
+        width: 100
+        height: 476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3bda3939062c0d46a6c9e302eabaf24
+      internalID: 504941094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leave_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 10388
+        width: 212
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d647291d80b8d54cb19611d9d700a6f
+      internalID: 1582061597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leave_2
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 10388
+        width: 212
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f921dcda2e9950f448f0654bc1be4eab
+      internalID: -309012743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leave_3
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 10388
+        width: 212
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f47ea65e4a4bf584387b7433e545ccb7
+      internalID: 1719644870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leave_4
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 10388
+        width: 212
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cd6ef7e1d48f1148a31f13f0762cebd
+      internalID: 1101261953
       vertices: []
       indices: 
       edges: []
@@ -154,7 +2548,121 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PC Computer - Hollow Knight - Mantis Lords Sisters of Battle_0: -619035711
+      Anticipate_1: 62058609
+      Anticipate_2: 882259913
+      Anticipate_3: -597183154
+      Anticipate_4: 1242316349
+      Bow_1: 513528407
+      Bow_10: -920023387
+      Bow_2: -1592732045
+      Bow_3: -1936162158
+      Bow_4: -504596271
+      Bow_5: 1733339325
+      Bow_6: -1771793672
+      Bow_7: 1730348790
+      Bow_8: -804172984
+      Bow_9: 350722653
+      DashLeave_1: 1073215697
+      DashLeave_2: -631409
+      DashLeave_3: -2007980000
+      DashLeave_4: -1757602628
+      DashRecover_1: 319017874
+      DashRecover_2: -1588644021
+      DashRecover_3: -742577937
+      DashRecover_4: 392464939
+      DashRecover_5: -1952789467
+      DashRecover_6: -304820569
+      DashRecover_7: -1309281791
+      DashRecover_8: -103316335
+      Dash_1: -619035711
+      Dash_2: 1584462434
+      Dash_3: 1622036722
+      Dash_Arrive_1: -1569326313
+      Dash_Arrive_2: -1273550209
+      Dash_Arrive_3: 75789715
+      Dash_Arrive_4: -1351023365
+      Dash_Arrive_5: -456347515
+      Dash_Arrive_6: -77290871
+      DeathLeave_1: -54440846
+      DeathLeave_2: 1596491330
+      Death_1: -1657311601
+      Death_2: 1735096701
+      Death_3: -1936420214
+      Death_4: 1982365783
+      Death_5: -2039783321
+      DstabArrive_1: -1257169849
+      DstabArrive_10: -1822788567
+      DstabArrive_11: -690851666
+      DstabArrive_2: -645320694
+      DstabArrive_3: -714463963
+      DstabArrive_4: 2067051856
+      DstabArrive_5: -262797879
+      DstabArrive_6: -866583374
+      DstabArrive_7: 965168971
+      DstabArrive_8: 2101357905
+      DstabArrive_9: -1534913058
+      DstabLand_1: 1706062140
+      DstabLand_2: 1286021148
+      DstabLand_3: -1573316493
+      DstabLand_4: 1067912699
+      DstabLand_5: -618046197
+      DstabLand_6: -1002585745
+      DstabLeave_1: -1835884888
+      DstabLeave_2: 485882078
+      Dstab_1: 452829966
+      Dstab_2: -941313195
+      Gesture_1: -582529749
+      Gesture_2: 1737363576
+      Gesture_3: -782688451
+      Gesture_4: 653857225
+      Gesture_5: 1444672210
+      Leave_1: 1582061597
+      Leave_2: -309012743
+      Leave_3: 1719644870
+      Leave_4: 1101261953
+      Look_1: -1222109661
+      Look_2: 504941094
+      Projectile_1: 504575189
+      Projectile_2: -781643073
+      Projectile_3: 195577918
+      Stand_1: -1367512433
+      Stand_2: -655047360
+      Stand_3: 842386631
+      Throne_Idle: -574645182
+      Throw_1: 1770233673
+      Throw_2: -1932165072
+      Throw_3: 1657399486
+      Throw_4: -2014222467
+      TripleGesture_1: 784754593
+      TripleGesture_2: 1777111607
+      TrippleGesture_3: -2093807340
+      TrippleGesture_4: -850136885
+      TrippleGesture_5: 119632096
+      TrippleGesture_6: -1547727681
+      WallArrive_1: -135361591
+      WallArrive_2: 174659733
+      WallArrive_3: -394316149
+      WallArrive_4: -571158092
+      WallArrive_5: 401451979
+      WallArrive_6: -2118724401
+      WallArrive_7: 1098698592
+      WallArrive_8: -2097152688
+      WallArrive_9: -1778216814
+      WallLeave_1: -926366008
+      WallLeave_2: -1803129695
+      WallLeave_3: -1350553612
+      WallLeave_4: -1347045496
+      WallLeave_5: -1428183094
+      WallReady_1: -1403759168
+      WallReady_2: 1082941035
+      WallReady_3: -333261293
+      Wounded_1: -1747862620
+      Wounded_2: 1532469758
+      Wounded_3: 1024641642
+      Wounded_4: 377556222
+      Wounded_5: -1049702301
+      Wounded_6: -1610402988
+      Wounded_7: 1580206963
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
