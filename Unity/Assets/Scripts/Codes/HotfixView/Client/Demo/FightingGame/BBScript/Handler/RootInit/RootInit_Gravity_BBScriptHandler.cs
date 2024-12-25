@@ -7,6 +7,8 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
+            if (self.ContainParam("ApplyRootMotion")) return;
+            
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             

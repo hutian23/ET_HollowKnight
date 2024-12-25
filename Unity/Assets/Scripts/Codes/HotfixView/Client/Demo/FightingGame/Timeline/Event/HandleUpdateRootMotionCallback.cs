@@ -11,13 +11,17 @@ namespace ET.Client
         public override void Handle(UpdateRootMotionCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
+            BBParser parser = timelineComponent.GetComponent<BBParser>();
             b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             
             if (!args.ApplyRootMotion)
             {
+                parser.TryRemoveParam("ApplyRootMotion");
                 return;
             }
-            
+
+            parser.TryRemoveParam("ApplyRootMotion");
+            parser.RegistParam("ApplyRootMotion", true);
             //因为资源中默认朝向为左,横向速度需要翻转
             b2Unit.SetVelocity(args.velocity.ToVector2() * new Vector2(-1,1));
         }
