@@ -19,8 +19,9 @@ namespace ET
 
             if (dataA.UserData is BoxInfo infoA && dataB.UserData is BoxInfo infoB)
             {
-                // Squash box不会相互碰撞
-                if (infoA.hitboxType is HitboxType.Squash && infoB.hitboxType is HitboxType.Squash)
+                // Unit之间不会相互碰撞
+                if (infoA.hitboxType is HitboxType.Squash && infoB.hitboxType is HitboxType.Squash && 
+                    dataA.LayerMask is LayerType.Unit && dataB.LayerMask is LayerType.Unit)
                 {
                     return false;
                 }

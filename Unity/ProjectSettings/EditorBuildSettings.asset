@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test/b2WorldTest.unity
     guid: 9b18e2dc41a3cc44b842f182c417552f
+  - enabled: 1
+    path: Assets/Scenes/Test/BossSceneTest.unity
+    guid: aae7c34316f10f545a028b0de069562e
   m_configObjects: {}

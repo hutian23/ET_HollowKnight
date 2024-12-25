@@ -51,10 +51,13 @@ namespace ET
                         case HitboxType.Proximity:
                             boundsHandle.SetColor(Color.magenta);
                             break;
-                        case HitboxType.None:
-                            boundsHandle.SetColor(Color.white);
+                        case HitboxType.Other:
+                            Gizmos.color = Color.gray;
                             break;
                         case HitboxType.Gizmos:
+                            boundsHandle.SetColor(Color.cyan);
+                            break;
+                        case HitboxType.None:
                             boundsHandle.SetColor(Color.white);
                             break;
                     }
@@ -97,6 +100,7 @@ namespace ET
         private SerializedProperty m_size;
         private SerializedProperty m_hitboxName;
         private SerializedProperty m_hitboxType;
+        private SerializedProperty m_IsTrigger;
 
         private void OnEnable()
         {
@@ -104,6 +108,7 @@ namespace ET
             m_size = serializedObject.FindProperty("info.size");
             m_hitboxName = serializedObject.FindProperty("info.boxName");
             m_hitboxType = serializedObject.FindProperty("info.hitboxType");
+            m_IsTrigger= serializedObject.FindProperty("IsTrigger");
         }
 
         public override void OnInspectorGUI()
@@ -115,11 +120,15 @@ namespace ET
             
             // hitboxName
             string hitboxName = EditorGUILayout.TextField("Hitbox Name", m_hitboxName.stringValue);
-            this.m_hitboxName.stringValue = hitboxName;
+            m_hitboxName.stringValue = hitboxName;
             
             // hitboxType
             HitboxType newType = (HitboxType)EditorGUILayout.EnumPopup("Hitbox Type", (HitboxType)m_hitboxType.enumValueIndex);
             m_hitboxType.enumValueIndex = (int)newType;
+            
+            //IsTrigger
+            bool IsTrigger = EditorGUILayout.Toggle("IsTrigger",m_IsTrigger.boolValue);
+            m_IsTrigger.boolValue = IsTrigger;
             
             EditorGUILayout.Space(4);
             EditorGUILayout.PropertyField(m_center);

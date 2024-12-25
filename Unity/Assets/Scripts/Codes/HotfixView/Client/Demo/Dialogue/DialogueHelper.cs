@@ -217,158 +217,158 @@ namespace ET.Client
         public static async ETTask TypeCor(this DialogueComponent self, Text label, string content, ETCancellationToken token,
         bool CanSkip = true)
         {
-            self.AddTag(DialogueTag.TypeCor); //标注一下当前在打字携程中
-
-            ETCancellationToken typeToken = new(); //取消打印携程
-            long timer = 0; //定时器，打字间隔时间过大，动画从talk-->idle
-            token.Add(typeToken.Cancel);
-
-            if (CanSkip) SkipCheckCor(typeToken).Coroutine();
-
-            var currentText = "";
-            var len = content.Length;
-            var typeSpeed = Constants.TypeSpeed;
-            var tagOpened = false;
-            var tagType = ""; //标签属性
-
-            for (int i = 0; i < len; i++)
-            {
-                // [#ts=300]
-                if (content[i] == '[' && i + 4 < len && content.Substring(i, 5).Equals("[#ts="))
-                {
-                    string parseSpeed = "";
-                    for (int j = i + 5; j < len; j++)
-                    {
-                        if (content[j] == ']')
-                        {
-                            break;
-                        }
-
-                        parseSpeed += content[j];
-                    }
-
-                    if (!int.TryParse(parseSpeed, out typeSpeed))
-                    {
-                        typeSpeed = Constants.TypeSpeed;
-                    }
-
-                    i += 6 + parseSpeed.Length - 1;
-                    continue;
-                }
-
-                //[#wt=1000]
-                if (content[i] == '[' && i + 4 < len && content.Substring(i, 5).Equals("[#wt="))
-                {
-                    string waitTimeStr = "";
-                    int waitTime = 0;
-                    for (int j = i + 5; j < len; j++)
-                    {
-                        if (content[j] == ']')
-                        {
-                            break;
-                        }
-
-                        waitTimeStr += content[j];
-                    }
-
-                    if (!int.TryParse(waitTimeStr, out waitTime))
-                    {
-                        Log.Error($"停顿时间转换失败:{waitTimeStr}");
-                        return;
-                    }
-
-                    i += 6 + waitTimeStr.Length - 1;
-
-                    //快进了
-                    if (!typeToken.IsCancel()) await TimerComponent.Instance.WaitAsync(waitTime, typeToken);
-                    continue;
-                }
-
-                //ngui color tag(不知道是啥)
-                if (content[i] == '[' && i + 7 < len && content[i + 7] == ']')
-                {
-                    currentText += content.Substring(i, 8);
-                    i += 8 - 1;
-                    continue;
-                }
-
-                bool symbolDetected = false;
-                for (int j = 0; j < Constants._uguiSymbols.Length; j++)
-                {
-                    var symbol = $"<{Constants._uguiSymbols[j]}>";
-                    if (content[i] == '<' && i + (1 + Constants._uguiSymbols[j].Length) < len
-                        && content.Substring(i, 2 + Constants._uguiSymbols[j].Length).Equals(symbol))
-                    {
-                        currentText += symbol;
-                        i += (2 + Constants._uguiSymbols[j].Length) - 1;
-                        symbolDetected = true;
-                        tagOpened = true;
-                        tagType = Constants._uguiSymbols[j];
-                        break;
-                    }
-                }
-
-                //<color=#EA5B44FF></color>
-                if (content[i] == '<' && i + (1 + 15) < len && content.Substring(i, 2 + 6).Equals("<color=#") && content[i + 16] == '>')
-                {
-                    currentText += content.Substring(i, 2 + 6 + 8);
-                    i += (2 + 14) - 1;
-                    symbolDetected = true;
-                    tagOpened = true;
-                    tagType = "color";
-                }
-
-                //<size=30></size>
-                if (content[i] == '<' && i + 5 < len && content.Substring(i, 6).Equals("<size="))
-                {
-                    var parseSize = "";
-                    for (var j = i + 6; j < len; j++)
-                    {
-                        if (content[j] == '>') break;
-                        parseSize += content[j];
-                    }
-
-                    if (float.TryParse(parseSize, out float _))
-                    {
-                        currentText += content.Substring(i, 7 + parseSize.Length);
-                        i += (parseSize.Length + 7) - 1;
-                        symbolDetected = true;
-                        tagOpened = true;
-                        tagType = "size";
-                    }
-                }
-
-                //exit symbol </color> </size>
-                for (int j = 0; j < Constants._uguiCloseSymbols.Length; j++)
-                {
-                    var symbol = $"</{Constants._uguiCloseSymbols[j]}>";
-                    if (content[i] == '<' && i + (2 + Constants._uguiCloseSymbols[j].Length) < len &&
-                        content.Substring(i, 3 + Constants._uguiCloseSymbols[j].Length).Equals(symbol))
-                    {
-                        currentText += symbol;
-                        i += (3 + Constants._uguiCloseSymbols[j].Length) - 1;
-                        symbolDetected = true;
-                        tagOpened = false;
-                        break;
-                    }
-                }
-
-                if (symbolDetected) continue;
-                currentText += content[i];
-                label.text = currentText + (tagOpened? $"</{tagType}>" : "");
-
-                //这里这个token代表当前节点被取消执行了
-                if (token.IsCancel()) return;
-                if (typeToken.IsCancel()) continue;
-
-                self.AddTag(DialogueTag.Typing);
-                TimerComponent.Instance.Remove(ref timer);
-                timer = TimerComponent.Instance.NewOnceTimer(TimeInfo.Instance.ClientNow() + 200, TimerInvokeType.TypeingTimer, self);
-                await TimerComponent.Instance.WaitAsync(typeSpeed, typeToken);
-            }
-
-            TimerComponent.Instance.Remove(ref timer);
-            self.RemoveTag(DialogueTag.TypeCor);
+            // self.AddTag(DialogueTag.TypeCor); //标注一下当前在打字携程中
+            //
+            // ETCancellationToken typeToken = new(); //取消打印携程
+            // long timer = 0; //定时器，打字间隔时间过大，动画从talk-->idle
+            // token.Add(typeToken.Cancel);
+            //
+            // if (CanSkip) SkipCheckCor(typeToken).Coroutine();
+            //
+            // var currentText = "";
+            // var len = content.Length;
+            // var typeSpeed = Constants.TypeSpeed;
+            // var tagOpened = false;
+            // var tagType = ""; //标签属性
+            //
+            // for (int i = 0; i < len; i++)
+            // {
+            //     // [#ts=300]
+            //     if (content[i] == '[' && i + 4 < len && content.Substring(i, 5).Equals("[#ts="))
+            //     {
+            //         string parseSpeed = "";
+            //         for (int j = i + 5; j < len; j++)
+            //         {
+            //             if (content[j] == ']')
+            //             {
+            //                 break;
+            //             }
+            //
+            //             parseSpeed += content[j];
+            //         }
+            //
+            //         if (!int.TryParse(parseSpeed, out typeSpeed))
+            //         {
+            //             typeSpeed = Constants.TypeSpeed;
+            //         }
+            //
+            //         i += 6 + parseSpeed.Length - 1;
+            //         continue;
+            //     }
+            //
+            //     //[#wt=1000]
+            //     if (content[i] == '[' && i + 4 < len && content.Substring(i, 5).Equals("[#wt="))
+            //     {
+            //         string waitTimeStr = "";
+            //         int waitTime = 0;
+            //         for (int j = i + 5; j < len; j++)
+            //         {
+            //             if (content[j] == ']')
+            //             {
+            //                 break;
+            //             }
+            //
+            //             waitTimeStr += content[j];
+            //         }
+            //
+            //         if (!int.TryParse(waitTimeStr, out waitTime))
+            //         {
+            //             Log.Error($"停顿时间转换失败:{waitTimeStr}");
+            //             return;
+            //         }
+            //
+            //         i += 6 + waitTimeStr.Length - 1;
+            //
+            //         //快进了
+            //         if (!typeToken.IsCancel()) await TimerComponent.Instance.WaitAsync(waitTime, typeToken);
+            //         continue;
+            //     }
+            //
+            //     //ngui color tag(不知道是啥)
+            //     if (content[i] == '[' && i + 7 < len && content[i + 7] == ']')
+            //     {
+            //         currentText += content.Substring(i, 8);
+            //         i += 8 - 1;
+            //         continue;
+            //     }
+            //
+            //     bool symbolDetected = false;
+            //     for (int j = 0; j < Constants._uguiSymbols.Length; j++)
+            //     {
+            //         var symbol = $"<{Constants._uguiSymbols[j]}>";
+            //         if (content[i] == '<' && i + (1 + Constants._uguiSymbols[j].Length) < len
+            //             && content.Substring(i, 2 + Constants._uguiSymbols[j].Length).Equals(symbol))
+            //         {
+            //             currentText += symbol;
+            //             i += (2 + Constants._uguiSymbols[j].Length) - 1;
+            //             symbolDetected = true;
+            //             tagOpened = true;
+            //             tagType = Constants._uguiSymbols[j];
+            //             break;
+            //         }
+            //     }
+            //
+            //     //<color=#EA5B44FF></color>
+            //     if (content[i] == '<' && i + (1 + 15) < len && content.Substring(i, 2 + 6).Equals("<color=#") && content[i + 16] == '>')
+            //     {
+            //         currentText += content.Substring(i, 2 + 6 + 8);
+            //         i += (2 + 14) - 1;
+            //         symbolDetected = true;
+            //         tagOpened = true;
+            //         tagType = "color";
+            //     }
+            //
+            //     //<size=30></size>
+            //     if (content[i] == '<' && i + 5 < len && content.Substring(i, 6).Equals("<size="))
+            //     {
+            //         var parseSize = "";
+            //         for (var j = i + 6; j < len; j++)
+            //         {
+            //             if (content[j] == '>') break;
+            //             parseSize += content[j];
+            //         }
+            //
+            //         if (float.TryParse(parseSize, out float _))
+            //         {
+            //             currentText += content.Substring(i, 7 + parseSize.Length);
+            //             i += (parseSize.Length + 7) - 1;
+            //             symbolDetected = true;
+            //             tagOpened = true;
+            //             tagType = "size";
+            //         }
+            //     }
+            //
+            //     //exit symbol </color> </size>
+            //     for (int j = 0; j < Constants._uguiCloseSymbols.Length; j++)
+            //     {
+            //         var symbol = $"</{Constants._uguiCloseSymbols[j]}>";
+            //         if (content[i] == '<' && i + (2 + Constants._uguiCloseSymbols[j].Length) < len &&
+            //             content.Substring(i, 3 + Constants._uguiCloseSymbols[j].Length).Equals(symbol))
+            //         {
+            //             currentText += symbol;
+            //             i += (3 + Constants._uguiCloseSymbols[j].Length) - 1;
+            //             symbolDetected = true;
+            //             tagOpened = false;
+            //             break;
+            //         }
+            //     }
+            //
+            //     if (symbolDetected) continue;
+            //     currentText += content[i];
+            //     label.text = currentText + (tagOpened? $"</{tagType}>" : "");
+            //
+            //     //这里这个token代表当前节点被取消执行了
+            //     if (token.IsCancel()) return;
+            //     if (typeToken.IsCancel()) continue;
+            //
+            //     self.AddTag(DialogueTag.Typing);
+            //     TimerComponent.Instance.Remove(ref timer);
+            //     timer = TimerComponent.Instance.NewOnceTimer(TimeInfo.Instance.ClientNow() + 200, TimerInvokeType.TypeingTimer, self);
+            //     await TimerComponent.Instance.WaitAsync(typeSpeed, typeToken);
+            // }
+            //
+            // TimerComponent.Instance.Remove(ref timer);
+            // self.RemoveTag(DialogueTag.TypeCor);
         }
 
         #endregion

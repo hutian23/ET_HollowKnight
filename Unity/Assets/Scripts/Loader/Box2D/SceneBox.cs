@@ -5,6 +5,7 @@ namespace ET
 {
     public class SceneBox : CastShapeBase
     {
+        public bool IsTrigger;
         public BoxInfo info;
 
 #if UNITY_EDITOR
@@ -31,9 +32,12 @@ namespace ET
                     Gizmos.color = Color.magenta;
                     break;
                 case HitboxType.Other:
-                    Gizmos.color = Color.white;
+                    Gizmos.color = Color.gray;
                     break;
                 case HitboxType.Gizmos:
+                    Gizmos.color = Color.cyan;
+                    break;
+                default:
                     Gizmos.color = Color.white;
                     break;
             }
