@@ -56,15 +56,6 @@ namespace Timeline
             Dispose();
         }
 
-        [HideInInspector]
-        //根运动的初始位置，跟animationCurve中的差值即为这一帧的移动距离
-        public Vector3 initPos;
-
-        public void OnEnable()
-        {
-            initPos = transform.localPosition;
-        }
-
         // ReSharper disable once Unity.RedundantEventFunction
         private void OnAnimatorMove()
         {
@@ -104,11 +95,6 @@ namespace Timeline
             {
                 DestroyImmediate(go);
             }
-        }
-
-        public void ResetPosition()
-        {
-            transform.position = initPos;
         }
 #endif
 

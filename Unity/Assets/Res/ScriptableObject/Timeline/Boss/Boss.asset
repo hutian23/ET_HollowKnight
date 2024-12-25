@@ -80,4 +80,11 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: 
+  rootScript: '@RootInit:
+
+    RegistPos: Dash_Left, -1540, 3300;
+
+    RegistPos:
+    Dash_Right, 1540, 3300;
+
+    return;'

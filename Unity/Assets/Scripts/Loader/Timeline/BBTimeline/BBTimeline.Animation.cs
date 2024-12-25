@@ -172,8 +172,7 @@ namespace Timeline
             ClipPlayables.Clear();
             for (int i = 0; i < AnimationTrack.Clips.Count; i++)
             {
-                BBTimelineAnimationClipPlayable clipPlayable =
-                        BBTimelineAnimationClipPlayable.Create(RuntimePlayable, AnimationTrack.Clips[i] as BBAnimationClip, MixerPlayable, i);
+                BBTimelineAnimationClipPlayable clipPlayable = BBTimelineAnimationClipPlayable.Create(RuntimePlayable, AnimationTrack.Clips[i] as BBAnimationClip, MixerPlayable, i);
                 ClipPlayables.Add(clipPlayable);
             }
         }
@@ -272,7 +271,10 @@ namespace Timeline
 
             if (!timelinePlayer.HasBindUnit)
             {
-                timelinePlayer.transform.localPosition = animationClip.CurrentPosition(clipInFrame);
+                if (timelinePlayer.ApplyRootMotion)
+                {
+                    timelinePlayer.transform.localPosition = animationClip.CurrentPosition(clipInFrame);   
+                }
             }
             //Runtime mode ---> invoke update trans callback
             else
