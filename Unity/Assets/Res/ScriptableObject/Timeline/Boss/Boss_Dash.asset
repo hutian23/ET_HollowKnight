@@ -623,45 +623,52 @@ MonoBehaviour:
     BBSprite: ''Anticipate_6'', 10;
 
     SetVelocityX:
-    -75000;
-
-    ScreenShake: 130, 100;
+    -90000;
 
     BBSprite: ''Dash_1'', 3;
+
+    SetVelocityX: -70000;
 
     BBSprite:
     ''Dash_2'', 3;
 
-    BBSprite: ''Dash_3'', 11;
+    SetVelocityX: -50000;
+
+    BBSprite: ''Dash_3'', 3;
+
+    SetVelocityX:
+    -40000;
+
+    BBSprite: ''Dash_3'', 3;
 
     SetVelocityX: 0;
 
-    BBSprite:
-    ''Recover_1'', 3;
+    BBSprite: ''Recover_1'',
+    3;
 
     BBSprite: ''Recover_2'', 3;
 
-    BBSprite: ''Recover_3'',
-    3;
+    BBSprite: ''Recover_3'', 3;
 
-    BBSprite: ''Recover_4'', 3;
+    BBSprite:
+    ''Recover_4'', 3;
 
     BBSprite: ''Recover_5'', 3;
 
-    BBSprite:
-    ''Recover_6'', 3;
+    BBSprite: ''Recover_6'',
+    3;
 
     BBSprite: ''Recover_7'', 3;
 
-    BBSprite: ''Recover_8'',
-    3;
+    BBSprite: ''Recover_8'', 3;
 
-    BBSprite: ''Recover_9'', 5;
+    BBSprite:
+    ''Recover_9'', 5;
 
     BBSprite: ''Recover_10'', 5;
 
-    BBSprite:
-    ''Leave_1'', 4;
+    BBSprite: ''Leave_1'',
+    4;
 
     BBSprite: ''Leave_2'', 4;
 

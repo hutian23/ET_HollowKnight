@@ -106,6 +106,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nRegistMove: (Boss_Dstab)\n    MoveType: None;\n    EndMove:\nRegistMove:
-    (Boss_Dash)\n    MoveType: None;\n    EndMove:\nRegistMove: (Boss_WallThrow)\n   
+  rootScript: "@RootInit:\nRegistMove: (Boss_Dash)\n    MoveType: None;\n    EndMove:\nRegistMove:
+    (Boss_Dstab)\n    MoveType: None;\n    EndMove:\nRegistMove: (Boss_WallThrow)\n   
     MoveType: None;\n    EndMove:\nreturn;"
