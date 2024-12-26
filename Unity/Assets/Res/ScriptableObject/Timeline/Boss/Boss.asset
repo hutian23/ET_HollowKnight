@@ -17,6 +17,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: c2093ebe975d73448873173cd8619a5f, type: 2}
+    - {fileID: 11400000, guid: 2da44f1578811c84f968daed0cb66366, type: 2}
+    - {fileID: 11400000, guid: 03ffb5880c52d4045bd3d090e1382471, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -61,7 +63,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -75,16 +77,35 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Boss_WallThrow
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Boss_Dstab
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  rootScript: '@RootInit:
-
-    RegistPos: Dash_Left, -1540, 3300;
-
-    RegistPos:
-    Dash_Right, 1540, 3300;
-
-    return;'
+  rootScript: "@RootInit:\nRegistMove: (Boss_Dstab)\n    MoveType: None;\n    EndMove:\nRegistMove:
+    (Boss_Dash)\n    MoveType: None;\n    EndMove:\nRegistMove: (Boss_WallThrow)\n   
+    MoveType: None;\n    EndMove:\nreturn;"

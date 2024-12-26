@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dad01b398c6f634c9e134265baa14a1, type: 3}
-  m_Name: Boss_Dash
+  m_Name: Boss_WallThrow
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 7400000, guid: a32f8c5f45a1ea44faf78990fb29e21e, type: 2}
+    - {fileID: 7400000, guid: 40f3a56e0e337ae43978daa51714f8d9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 24
+      Data: 19
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -157,10 +157,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.5
+      Data: 1.7
     - Name: 
       Entry: 4
-      Data: -2.6
+      Data: -0.7
     - Name: 
       Entry: 8
       Data: 
@@ -169,10 +169,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 5.3
+      Data: 3.2
     - Name: 
       Entry: 4
-      Data: 3.3
+      Data: 6.2
     - Name: 
       Entry: 8
       Data: 
@@ -218,7 +218,7 @@ MonoBehaviour:
       Data: 14|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 22
+      Data: 17
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -275,7 +275,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 25
+      Data: 20
     - Name: 
       Entry: 7
       Data: 19|Timeline.EventInfo, Unity.Loader
@@ -404,7 +404,7 @@ MonoBehaviour:
       Data: 10
     - Name: keyframeName
       Entry: 1
-      Data: Dash_1
+      Data: Anticipate_7
     - Name: 
       Entry: 8
       Data: 
@@ -416,7 +416,7 @@ MonoBehaviour:
       Data: 11
     - Name: keyframeName
       Entry: 1
-      Data: Dash_2
+      Data: Anticipate_8
     - Name: 
       Entry: 8
       Data: 
@@ -428,7 +428,7 @@ MonoBehaviour:
       Data: 12
     - Name: keyframeName
       Entry: 1
-      Data: Dash_3
+      Data: Throw_1
     - Name: 
       Entry: 8
       Data: 
@@ -440,7 +440,7 @@ MonoBehaviour:
       Data: 13
     - Name: keyframeName
       Entry: 1
-      Data: Recover_1
+      Data: Throw_2
     - Name: 
       Entry: 8
       Data: 
@@ -452,7 +452,7 @@ MonoBehaviour:
       Data: 14
     - Name: keyframeName
       Entry: 1
-      Data: Recover_2
+      Data: Throw_3
     - Name: 
       Entry: 8
       Data: 
@@ -464,7 +464,7 @@ MonoBehaviour:
       Data: 15
     - Name: keyframeName
       Entry: 1
-      Data: Recover_3
+      Data: Recover_1
     - Name: 
       Entry: 8
       Data: 
@@ -476,7 +476,7 @@ MonoBehaviour:
       Data: 16
     - Name: keyframeName
       Entry: 1
-      Data: Recover_4
+      Data: Recover_2
     - Name: 
       Entry: 8
       Data: 
@@ -488,7 +488,7 @@ MonoBehaviour:
       Data: 17
     - Name: keyframeName
       Entry: 1
-      Data: Recover_5
+      Data: Leave_1
     - Name: 
       Entry: 8
       Data: 
@@ -500,7 +500,7 @@ MonoBehaviour:
       Data: 18
     - Name: keyframeName
       Entry: 1
-      Data: Recover_6
+      Data: Leave_2
     - Name: 
       Entry: 8
       Data: 
@@ -512,67 +512,7 @@ MonoBehaviour:
       Data: 19
     - Name: keyframeName
       Entry: 1
-      Data: Recover_7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 39|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 20
-    - Name: keyframeName
-      Entry: 1
-      Data: Recover_8
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 40|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 21
-    - Name: keyframeName
-      Entry: 1
-      Data: Recover_9
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 41|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 22
-    - Name: keyframeName
-      Entry: 1
-      Data: Recover_10
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 42|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 23
-    - Name: keyframeName
-      Entry: 1
-      Data: Leave_1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 43|Timeline.EventInfo, Unity.Loader
-    - Name: frame
-      Entry: 3
-      Data: 24
-    - Name: keyframeName
-      Entry: 1
-      Data: Leave_2
+      Data: Leave_3
     - Name: 
       Entry: 8
       Data: 
@@ -591,12 +531,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  timelineName: Boss_Dash
+  timelineName: Boss_WallThrow
   Script: '@Main:
 
     SetVelocityX: 0;
 
-    SetPos: -10400, 3150;
+    SetPos: 14700, 4000;
 
     BBSprite:
     ''Arrive_1'', 3;
@@ -606,7 +546,7 @@ MonoBehaviour:
     BBSprite: ''Arrive_3'',
     3;
 
-    BBSprite: ''Arrive_4'', 3;
+    BBSprite: ''Arrive_4'', 10;
 
     BBSprite: ''Anticipate_1'', 3;
 
@@ -616,53 +556,34 @@ MonoBehaviour:
     BBSprite: ''Anticipate_3'', 3;
 
     BBSprite: ''Anticipate_4'',
-    5;
-
-    BBSprite: ''Anticipate_5'', 6;
-
-    BBSprite: ''Anticipate_6'', 10;
-
-    SetVelocityX:
-    -75000;
-
-    ScreenShake: 130, 100;
-
-    BBSprite: ''Dash_1'', 3;
-
-    BBSprite:
-    ''Dash_2'', 3;
-
-    BBSprite: ''Dash_3'', 11;
-
-    SetVelocityX: 0;
-
-    BBSprite:
-    ''Recover_1'', 3;
-
-    BBSprite: ''Recover_2'', 3;
-
-    BBSprite: ''Recover_3'',
     3;
 
-    BBSprite: ''Recover_4'', 3;
+    BBSprite: ''Anticipate_5'', 3;
 
-    BBSprite: ''Recover_5'', 3;
-
-    BBSprite:
-    ''Recover_6'', 3;
-
-    BBSprite: ''Recover_7'', 3;
-
-    BBSprite: ''Recover_8'',
-    3;
-
-    BBSprite: ''Recover_9'', 5;
-
-    BBSprite: ''Recover_10'', 5;
+    BBSprite: ''Anticipate_6'', 3;
 
     BBSprite:
-    ''Leave_1'', 4;
+    ''Anticipate_7'', 6;
+
+    BBSprite: ''Anticipate_8'', 10;
+
+    BBSprite: ''Throw_1'',
+    4;
+
+    BBSprite: ''Throw_2'', 4;
+
+    BBSprite: ''Throw_3'', 6;
+
+    BBSprite:
+    ''Recover_1'', 4;
+
+    BBSprite: ''Recover_2'', 10;
+
+    BBSprite: ''Leave_1'',
+    4;
 
     BBSprite: ''Leave_2'', 4;
+
+    BBSprite: ''Leave_3'', 4;
 
     Exit;'

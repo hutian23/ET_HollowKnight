@@ -1,0 +1,1043 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2790473673389287455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7378424094701371400}
+  m_Layer: 0
+  m_Name: Squash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7378424094701371400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790473673389287455}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5591802705390180665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2805903732562807204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4763579617845937980}
+  m_Layer: 0
+  m_Name: Throw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4763579617845937980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805903732562807204}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5591802705390180665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4501584930538158563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5591802705390180665}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5591802705390180665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4501584930538158563}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8377990878098937264}
+  - {fileID: 8914176309104410508}
+  - {fileID: 4763579617845937980}
+  - {fileID: 7378424094701371400}
+  - {fileID: 6311927785917200794}
+  - {fileID: 2048493254951571517}
+  m_Father: {fileID: 1588890339249806441}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6765559763211144378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588890339249806441}
+  - component: {fileID: 2294578387043807294}
+  - component: {fileID: 3859023960364640404}
+  - component: {fileID: 3558284284230504358}
+  - component: {fileID: 8516105488984742731}
+  - component: {fileID: 5902321739661930749}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1588890339249806441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765559763211144378}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.4, y: 3.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5591802705390180665}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2294578387043807294
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765559763211144378}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 2016810935
+  m_SortingLayer: 1
+  m_SortingOrder: 100
+  m_Sprite: {fileID: -1569326313, guid: 21f58683489dd8242b4a6c94378e7f86, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.9375, y: 6.25}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &3859023960364640404
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765559763211144378}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3558284284230504358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765559763211144378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: Hit
+    gameObject: {fileID: 7846583307261501679}
+  - key: Hurt
+    gameObject: {fileID: 7344890441964391739}
+  - key: Throw
+    gameObject: {fileID: 2805903732562807204}
+  - key: Squash
+    gameObject: {fileID: 2790473673389287455}
+  - key: Other
+    gameObject: {fileID: 8503529743912335280}
+  - key: Gizmos
+    gameObject: {fileID: 8447208319175007062}
+--- !u!114 &8516105488984742731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765559763211144378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd2cdf17bd9f32449b016861d3df3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: c2093ebe975d73448873173cd8619a5f, type: 2}
+    - {fileID: 8516105488984742731}
+    - {fileID: 7400000, guid: a32f8c5f45a1ea44faf78990fb29e21e, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: RuntimePlayable
+      Entry: 7
+      Data: 0|Timeline.RuntimePlayable, Unity.Loader
+    - Name: Timeline
+      Entry: 10
+      Data: 0
+    - Name: TimelinePlayer
+      Entry: 10
+      Data: 1
+    - Name: RuntimeTracks
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[Timeline.RuntimeTrack, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 2|Timeline.RuntimeAnimationTrack, Unity.Loader
+    - Name: Track
+      Entry: 7
+      Data: 3|Timeline.BBAnimationTrack, Unity.Loader
+    - Name: Name
+      Entry: 1
+      Data: Animation
+    - Name: Enable
+      Entry: 5
+      Data: true
+    - Name: Clips
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 5|Timeline.BBAnimationClip, Unity.Loader
+    - Name: InValid
+      Entry: 5
+      Data: false
+    - Name: Name
+      Entry: 6
+      Data: 
+    - Name: StartFrame
+      Entry: 3
+      Data: 0
+    - Name: EndFrame
+      Entry: 3
+      Data: 24
+    - Name: animationClip
+      Entry: 10
+      Data: 2
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: rootMotionDict
+      Entry: 7
+      Data: 6|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.AnimationCurve,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 7|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Timeline.RuntimeHitboxTrack, Unity.Loader
+    - Name: Track
+      Entry: 7
+      Data: 9|Timeline.BBHitboxTrack, Unity.Loader
+    - Name: Name
+      Entry: 1
+      Data: Hitbox
+    - Name: Enable
+      Entry: 5
+      Data: true
+    - Name: Clips
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Keyframes
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[Timeline.HitboxKeyframe, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 12|Timeline.HitboxKeyframe, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 3
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: boxInfos
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[Timeline.BoxInfo, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 14|Timeline.BoxInfo, Unity.Loader
+    - Name: boxName
+      Entry: 1
+      Data: Hurt_1
+    - Name: hitboxType
+      Entry: 3
+      Data: 2
+    - Name: center
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 4
+      Data: -2.6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: size
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 5.3
+    - Name: 
+      Entry: 4
+      Data: 3.3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|Timeline.HitboxKeyframe, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 0
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: boxInfos
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[Timeline.BoxInfo, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|Timeline.HitboxKeyframe, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 22
+    - Name: keyframeName
+      Entry: 1
+      Data: 
+    - Name: boxInfos
+      Entry: 7
+      Data: 18|System.Collections.Generic.List`1[[Timeline.BoxInfo, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 19|Timeline.RuntimeEventTrack, Unity.Loader
+    - Name: Track
+      Entry: 7
+      Data: 20|Timeline.BBEventTrack, Unity.Loader
+    - Name: Name
+      Entry: 1
+      Data: Marker
+    - Name: Enable
+      Entry: 5
+      Data: true
+    - Name: Clips
+      Entry: 7
+      Data: 21|System.Collections.Generic.List`1[[Timeline.BBClip, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: EventInfos
+      Entry: 7
+      Data: 22|System.Collections.Generic.List`1[[Timeline.EventInfo, Unity.Loader]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 25
+    - Name: 
+      Entry: 7
+      Data: 23|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 0
+    - Name: keyframeName
+      Entry: 1
+      Data: Arrive_1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 24|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 1
+    - Name: keyframeName
+      Entry: 1
+      Data: Arrive_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 25|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 2
+    - Name: keyframeName
+      Entry: 1
+      Data: Arrive_3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 26|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 3
+    - Name: keyframeName
+      Entry: 1
+      Data: Arrive_4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 27|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 4
+    - Name: keyframeName
+      Entry: 1
+      Data: Anticipate_1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 28|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 5
+    - Name: keyframeName
+      Entry: 1
+      Data: Anticipate_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 29|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 6
+    - Name: keyframeName
+      Entry: 1
+      Data: Anticipate_3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 30|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 7
+    - Name: keyframeName
+      Entry: 1
+      Data: Anticipate_4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 31|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 8
+    - Name: keyframeName
+      Entry: 1
+      Data: Anticipate_5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 32|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 9
+    - Name: keyframeName
+      Entry: 1
+      Data: Anticipate_6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 33|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 10
+    - Name: keyframeName
+      Entry: 1
+      Data: Dash_1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 34|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 11
+    - Name: keyframeName
+      Entry: 1
+      Data: Dash_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 35|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 12
+    - Name: keyframeName
+      Entry: 1
+      Data: Dash_3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 36|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 13
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 37|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 14
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 38|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 15
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 39|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 16
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 40|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 17
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 41|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 18
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 42|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 19
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 43|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 20
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 44|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 21
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 45|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 22
+    - Name: keyframeName
+      Entry: 1
+      Data: Recover_10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 46|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 23
+    - Name: keyframeName
+      Entry: 1
+      Data: Leave_1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 47|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 24
+    - Name: keyframeName
+      Entry: 1
+      Data: Leave_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RebindCallback
+      Entry: 7
+      Data: 48|System.Action, mscorlib
+    - Name: target
+      Entry: 9
+      Data: 0
+    - Name: declaringType
+      Entry: 7
+      Data: 49|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Timeline.RuntimePlayable, Unity.Loader
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: methodName
+      Entry: 1
+      Data: Rebind
+    - Name: delegateType
+      Entry: 7
+      Data: 50|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: System.Action, mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: signature
+      Entry: 7
+      Data: 51|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  instanceId: 0
+  Hertz: 60
+  ApplyRootMotion: 0
+  BBPlayable: {fileID: 11400000, guid: d936653cf48ca124ba04963004224b1f, type: 2}
+  CurrentTimeline: {fileID: 11400000, guid: c2093ebe975d73448873173cd8619a5f, type: 2}
+--- !u!114 &5902321739661930749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765559763211144378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee256b00dc343a0ba7380053b2c0d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceId: 0
+--- !u!1 &7344890441964391739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8914176309104410508}
+  m_Layer: 0
+  m_Name: Hurt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8914176309104410508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344890441964391739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5591802705390180665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7846583307261501679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8377990878098937264}
+  m_Layer: 0
+  m_Name: Hit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8377990878098937264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846583307261501679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5591802705390180665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8447208319175007062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048493254951571517}
+  m_Layer: 0
+  m_Name: Gizmos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048493254951571517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8447208319175007062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5591802705390180665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8503529743912335280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6311927785917200794}
+  m_Layer: 0
+  m_Name: Other
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6311927785917200794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503529743912335280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5591802705390180665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

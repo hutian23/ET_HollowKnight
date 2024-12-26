@@ -340,8 +340,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nInitPos: 1100, 10000;\nGravity: 100000;\nNumericType:
-    MaxGravity, 150000;\nNumericType: MaxFall, 45000;\nNumericType: MaxJump, 2;\nNumericType:
+  rootScript: "@RootInit:\nSetPos: 1100, 10000;\nGravity: 100000;\nNumericType: MaxGravity,
+    150000;\nNumericType: MaxFall, 45000;\nNumericType: MaxJump, 2;\nNumericType:
     MaxDash, 2;\nNumericType: DashCount, 2;\nNumericType: JumpCount, 2;\n# \u6CE8\u518C\u843D\u5730\u56DE\u8C03\nRegistAirCheck;\n#
     Input\nRegistInput: RunHold;\nRegistInput: SquatHold;\nRegistInput: 2LPPressed;\nRegistInput:
     5LPPressed;\nRegistInput: 5MPPressed;\nRegistInput: DashPressed;\nRegistInput:

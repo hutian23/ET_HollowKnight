@@ -145,7 +145,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nInitPos: 2000, 3000;\nGravity: 150000;\nNumericType: MaxGravity,
+  rootScript: "@RootInit:\nSetPos: 2000, 3000;\nGravity: 150000;\nNumericType: MaxGravity,
     150000;\nNumericType: MaxFall, 45000;\nNumericType: MaxJump, 2;\nNumericType:
     MaxDash, 2;\nNumericType: DashCount, 2;\nNumericType: JumpCount, 2;\nRegistAirCheck;\n\n#
     Base\nRegistMove: (Dummy_Idle)\n    MoveType: None;\n    EndMove:\nRegistMove:

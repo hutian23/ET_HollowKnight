@@ -3,17 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
-    public class RootInit_InitPos_BBScriptHandler : BBScriptHandler
+    public class RootInit_SetPos_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "InitPos";
+            return "SetPos";
         }
 
         //InitPos: 3100, 1200;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "InitPos: (?<posX>.*?), (?<posY>.*?);");
+            Match match = Regex.Match(data.opLine, "SetPos: (?<posX>.*?), (?<posY>.*?);");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);

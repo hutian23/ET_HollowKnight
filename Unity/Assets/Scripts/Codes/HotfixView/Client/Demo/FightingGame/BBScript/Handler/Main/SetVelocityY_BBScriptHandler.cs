@@ -12,7 +12,7 @@ namespace ET.Client
         //SetVelocityY: 30;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"SetVelocityY: (?<Velocity>\w+)");
+            Match match = Regex.Match(data.opLine, @"SetVelocityY: (?<Velocity>.*?);");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);

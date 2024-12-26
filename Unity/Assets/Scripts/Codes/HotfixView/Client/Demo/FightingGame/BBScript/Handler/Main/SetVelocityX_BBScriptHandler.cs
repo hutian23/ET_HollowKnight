@@ -12,7 +12,7 @@ namespace ET.Client
         //SetVelocityX: 30;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"SetVelocityX:\s*(-?\d+(\.\d+)?);");
+            Match match = Regex.Match(data.opLine, @"SetVelocityX: (?<Velocity>.*?);");
             if (!match.Success)
             {
                 DialogueHelper.ScripMatchError(data.opLine);
@@ -22,7 +22,7 @@ namespace ET.Client
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             
-            long.TryParse(match.Groups[1].Value, out long velX);
+            long.TryParse(match.Groups["Velocity"].Value, out long velX);
             b2Unit.SetVelocityX(velX / 1000f);
             
             await ETTask.CompletedTask;
