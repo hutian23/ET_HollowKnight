@@ -1162,55 +1162,6 @@ MonoBehaviour:
     hitboxType: 0
     center: {x: 0, y: 9}
     size: {x: 2, y: 3}
---- !u!1 &1616720250
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1616720251}
-  - component: {fileID: 1616720252}
-  m_Layer: 0
-  m_Name: Hurt_1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1616720251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616720250}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7959015873132132738}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1616720252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616720250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f88562e969b4c649b2c693ec8a1d695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info:
-    boxName: Hurt_1
-    hitboxType: 2
-    center: {x: 1, y: -0.7}
-    size: {x: 3.25, y: 4.2}
 --- !u!1 &1711695727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,19 +1575,9 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8914176309104410508, guid: 2a6ee592a81921c4caacc51be84a2ed2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1616720251}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6ee592a81921c4caacc51be84a2ed2, type: 3}
---- !u!4 &7959015873132132738 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8914176309104410508, guid: 2a6ee592a81921c4caacc51be84a2ed2,
-    type: 3}
-  m_PrefabInstance: {fileID: 7959015873132132737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

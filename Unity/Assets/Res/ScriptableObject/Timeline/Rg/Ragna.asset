@@ -356,6 +356,4 @@ MonoBehaviour:
     EndMove:\nRegistMove: (Rg_GroundDash)\n  MoveType: Special;\n  EndMove:\nRegistMove:
     (Rg_24A)\n  MoveType: Special;\n   EndMove:\nRegistMove: (Rg_ShouRyuuKenn)\n 
     MoveType: Special;\n  EndMove:\nRegistMove: (Rg_Throw)\n  MoveType: Special;\n 
-    EndMove:\nRegistMove: (Rg_Hurt1)\n  MoveType: HitStun;\n  EndMove:\nRegistMove:
-    (Rg_HardDownRecovery)\n  MoveType: HitStun;\n  EndMove:\nRegistMove: (Rg_IdleAnim)\n 
-    MoveType: Etc;\n  EndMove:\nreturn;"
+    EndMove:\nRegistMove: (Rg_IdleAnim)\n  MoveType: Etc;\n  EndMove:\nreturn;"

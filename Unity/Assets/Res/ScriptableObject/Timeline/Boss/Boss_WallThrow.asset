@@ -532,58 +532,13 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Boss_WallThrow
-  Script: '@Main:
-
-    SetVelocityX: 0;
-
-    SetPos: 14700, 4000;
-
-    BBSprite:
-    ''Arrive_1'', 3;
-
-    BBSprite: ''Arrive_2'', 3;
-
-    BBSprite: ''Arrive_3'',
-    3;
-
-    BBSprite: ''Arrive_4'', 10;
-
-    BBSprite: ''Anticipate_1'', 3;
-
-    BBSprite:
-    ''Anticipate_2'', 3;
-
-    BBSprite: ''Anticipate_3'', 3;
-
-    BBSprite: ''Anticipate_4'',
-    3;
-
-    BBSprite: ''Anticipate_5'', 3;
-
-    BBSprite: ''Anticipate_6'', 3;
-
-    BBSprite:
-    ''Anticipate_7'', 6;
-
-    BBSprite: ''Anticipate_8'', 10;
-
-    BBSprite: ''Throw_1'',
-    4;
-
-    BBSprite: ''Throw_2'', 4;
-
-    BBSprite: ''Throw_3'', 6;
-
-    BBSprite:
-    ''Recover_1'', 4;
-
-    BBSprite: ''Recover_2'', 10;
-
-    BBSprite: ''Leave_1'',
-    4;
-
-    BBSprite: ''Leave_2'', 4;
-
-    BBSprite: ''Leave_3'', 4;
-
-    Exit;'
+  Script: "@Main:\nSetVelocityX: 0;\nSetPos: 14700, 4000;\nBBSprite: 'Arrive_1',
+    3;\nBBSprite: 'Arrive_2', 3;\nBBSprite: 'Arrive_3', 3;\nBBSprite: 'Arrive_4',
+    10;\nBBSprite: 'Anticipate_1', 3;\nBBSprite: 'Anticipate_2', 3;\nBBSprite: 'Anticipate_3',
+    3;\nBBSprite: 'Anticipate_4', 3;\nBBSprite: 'Anticipate_5', 3;\nBBSprite: 'Anticipate_6',
+    3;\nBBSprite: 'Anticipate_7', 6;\nBBSprite: 'Anticipate_8', 10;\nBBSprite: 'Throw_1',
+    1;\n# \u751F\u6210\u98DE\u884C\u9053\u5177\nCreateBall:\nBallType: SlashRing;\nBallLocalPos:
+    1000, 2000;\nBallV: 30000, 0;\nEndCreateBall:\nBBSprite: 'Throw_1', 3;\nBBSprite:
+    'Throw_2', 4;\nBBSprite: 'Throw_3', 6;\nBBSprite: 'Recover_1', 4;\nBBSprite:
+    'Recover_2', 10;\nBBSprite: 'Leave_1', 4;\nBBSprite: 'Leave_2', 4;\nBBSprite:
+    'Leave_3', 4;\nExit;"

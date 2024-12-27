@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c5b3524ad82f7148a06c6c02bdf2e1a, type: 3}
-  m_Name: Boss
+  m_Name: SlashRing
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: c2093ebe975d73448873173cd8619a5f, type: 2}
-    - {fileID: 11400000, guid: 2da44f1578811c84f968daed0cb66366, type: 2}
-    - {fileID: 11400000, guid: 03ffb5880c52d4045bd3d090e1382471, type: 2}
+    - {fileID: 11400000, guid: 45b4b8faa8db1684f8a1db81e03542b1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -63,40 +61,16 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 1
-      Data: Boss_Dash
+      Data: SlashRing_Idle
     - Name: $v
       Entry: 10
       Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: Boss_WallThrow
-    - Name: $v
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: Boss_Dstab
-    - Name: $v
-      Entry: 10
-      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -106,6 +80,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nPoolObject: 'SlashRing', 2;\nRegistMove: (Boss_WallThrow)\n   
-    MoveType: None;\n    EndMove:\nRegistMove: (Boss_Dash)\n    MoveType: None;\n   
-    EndMove:\nRegistMove: (Boss_Dstab)\n    MoveType: None;\n    EndMove:\nreturn;"
+  rootScript: "@RootInit:\nPoolObject: SlashRing, 2;\nRegistMove: (SlashRing_Idle)\n   
+    MoveType: None;\n    EndMove:\nreturn;"
