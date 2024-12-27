@@ -58,10 +58,18 @@ namespace ET.Client
                 //2. FrameUpdate 生命周期事件
                 EventSystem.Instance.FrameUpdate();
                 //3. Timeline相关 定时器和异步任务
-                foreach (long instanceId in self.instanceIds)
+                int _Dt = self.instanceIds.Count;
+                while (_Dt-- > 0)
                 {
+                    long instanceId = self.instanceIds.Dequeue();
+                    // 组件已经销毁
                     BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
-                    bbTimer?.TimerUpdate(166666);
+                    if (bbTimer == null)
+                    {
+                        continue;
+                    }
+                    bbTimer.TimerUpdate(166666);
+                    self.instanceIds.Enqueue(instanceId);
                 }
                 //4. 物理层 PreStep PostStep生命周期事件
                 b2WorldManager.Instance.Step();
@@ -84,12 +92,7 @@ namespace ET.Client
         //管理timer
         public static void RegistTimer(this BBTimerManager self, long instanceId)
         {
-            self.instanceIds.Add(instanceId);
-        }
-
-        public static void RemoveTimer(this BBTimerManager self, long instanceId)
-        {
-            self.instanceIds.Remove(instanceId);
+            self.instanceIds.Enqueue(instanceId);
         }
         
         public static void Pause(this BBTimerManager self,bool pause)

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     public static class GameObjectComponentSystem
     {
@@ -9,6 +7,11 @@ namespace ET.Client
         {
             protected override void Destroy(GameObjectComponent self)
             {
+                //池化对象则返回对象池
+                if (self.GameObject != null && self.GameObject.GetComponent<PoolObject>() != null)
+                {
+                    GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
+                }
                 UnityEngine.Object.Destroy(self.GameObject);
             }
         }

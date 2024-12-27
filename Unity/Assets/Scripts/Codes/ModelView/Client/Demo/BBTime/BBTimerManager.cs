@@ -9,7 +9,7 @@ namespace ET.Client
         [StaticField]
         public static BBTimerManager Instance;
 
-        public List<long> instanceIds = new(); //管理当前场景下的帧计时器
+        public Queue<long> instanceIds = new(); //管理当前场景下的帧计时器
         public Stopwatch _gameTimer = new();
         public long LastTime;
     }

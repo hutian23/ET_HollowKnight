@@ -25,7 +25,6 @@ namespace Timeline
         public long instanceId;
         public float Hertz;
     }
-    
     #endregion
     
     public sealed class TimelinePlayer: SerializedMonoBehaviour

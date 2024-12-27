@@ -1,4 +1,7 @@
-﻿namespace ET.Client
+﻿using Timeline;
+using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(BBParser))]
     public class CreateBall_BBScriptHandler : BBScriptHandler
@@ -32,6 +35,20 @@
             string ballType = parser.GetParam<string>("BallType");
             // Vector2 ballPos = parser.GetParam<Vector2>("BallPos");
             // Vector2 ballStartV = parser.GetParam<Vector2>("BallStartV");
+            
+            //3. 创建子弹unit
+            UnitComponent unitComponent = parser.ClientScene().CurrentScene().GetComponent<UnitComponent>();
+            Unit ball = unitComponent.AddChild<Unit, int>(1001);
+            GameObject ballGo = GameObjectPoolHelper.GetObjectFromPool(ballType);
+            ballGo.transform.SetParent(GlobalComponent.Instance.Unit);
+            ball.AddComponent<GameObjectComponent>().GameObject = ballGo;
+            
+            TimelineComponent timelineComponent = ball.AddComponent<TimelineComponent>();
+            timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
+            timelineComponent.AddComponent<b2Unit>();
+            timelineComponent.AddComponent<ObjectWait>();
+            timelineComponent.AddComponent<BBParser>();
+            timelineComponent.AddComponent<BehaviorBuffer>();
             
             return Status.Success;
         }

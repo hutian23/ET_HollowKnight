@@ -278,5 +278,17 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: SlashRing_Idle
-  Script: "@Main:\nBBSprite: 'Slash_1', 1;\nBeginLoop: (Test: xxx)\n  BBSprite: 'Slash_2',
-    3;\n  BBSprite: 'Slash_3', 3;\n  EndLoop:\nreturn;"
+  Script: '@Main:
+
+    BBSprite: ''Slash_1'', 3;
+
+    BeginLoop: (Test: xx)
+
+    BBSprite:
+    ''Slash_2'', 3;
+
+    BBSprite: ''Slash_3'', 3;
+
+    EndLoop:
+
+    Exit;'
