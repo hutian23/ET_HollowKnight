@@ -35,6 +35,24 @@ namespace ET.Client
                 self.Reload();
             }
         }
+        
+        // 销毁刚体
+        public class b2WorldManagerPreStepSystem : PreStepSystem<b2WorldManager>
+        {
+            protected override void PreStepUpdate(b2WorldManager self)
+            {
+                int count = self.DisposeQueue.Count;
+                while (count-- > 0)
+                {
+                    long instanceId = self.DisposeQueue.Dequeue();
+                    if (!self.BodyDict.ContainsKey(instanceId))
+                    {
+                        continue;
+                    }
+                    self.DestroyBody(instanceId);
+                }
+            }
+        }
 
         private static void Init(this b2WorldManager self)
         {
@@ -47,6 +65,7 @@ namespace ET.Client
                 body.Dispose();
             }
             self.BodyDict.Clear();
+            self.DisposeQueue.Clear();
             
             //reload timer
             BBTimerComponent PreStepTimer = self.GetChild<BBTimerComponent>(self.PreStepTimer);
@@ -63,26 +82,58 @@ namespace ET.Client
             self.Init();
             self.Game = Camera.main.GetComponent<b2Game>();
             self.B2World = new b2World(self.Game);
-            
             EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterB2WorldCreated() { B2World = self.B2World }).Coroutine();
         }
 
+        #region B2body
+        /// <summary>
+        /// 通过Unit.InstanceId查找对应的b2Body
+        /// </summary>
+        public static b2Body GetBody(this b2WorldManager self, long instanceId)
+        {
+            if (!self.BodyDict.TryGetValue(instanceId, out long id))
+            {
+                Log.Error($"does not exist b2Body, unit.InstanceId: {instanceId}");
+                return null;
+            }
+            return self.GetChild<b2Body>(id);
+        }
+
+        /// <summary>
+        /// 移除B2Body, 该方法不能在B2World.isLocked时调用
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="instanceId">Unit.InstanceId</param>
+        private static void DestroyBody(this b2WorldManager self, long instanceId)
+        {
+            b2Body b2Body = self.GetBody(instanceId);
+            if (b2Body == null)
+            {
+                return;
+            }
+            self.B2World.World.DestroyBody(b2Body.body);
+            b2Body.Dispose();
+        }
+
+        /// <summary>
+        /// 激活刚体
+        /// </summary>
+        public static void EnableBody(this b2WorldManager self, long instanceId,bool enable)
+        {
+            if (!self.BodyDict.ContainsKey(instanceId))
+            {
+                return;
+            }
+            b2Body b2Body = self.GetBody(instanceId);
+            b2Body.SetEnable(enable);
+        }
+        #endregion
+        
         public static void Step(this b2WorldManager self)
         {
             self.B2World.Step();
         }
         
-        public static b2Body GetBody(this b2WorldManager self, long unitId)
-        {
-            if (!self.BodyDict.TryGetValue(unitId, out long id))
-            {
-                Log.Error($"does not exist b2Body, unitId: {unitId}");
-                return null;
-            }
-
-            return self.GetChild<b2Body>(id);
-        }
-
         public static BBTimerComponent GetPreStepTimer(this b2WorldManager self)
         {
             return self.GetChild<BBTimerComponent>(self.PreStepTimer);

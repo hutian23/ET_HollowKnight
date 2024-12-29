@@ -10,10 +10,9 @@ namespace ET.Client
     {
         public override void Handle(CreateB2bodyCallback args)
         {
-            TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             World world = b2WorldManager.Instance.B2World.World;
 
-            //创建刚体
+            //1. 物理层创建刚体
             BodyDef bodyDef = new()
             {
                 BodyType = BodyType.DynamicBody,
@@ -25,9 +24,10 @@ namespace ET.Client
             };
             Body body = world.CreateBody(bodyDef);
 
+            //2. 建立Unit和刚体的映射关系
             b2Body b2Body = b2WorldManager.Instance.AddChild<b2Body>();
             b2Body.body = body;
-            b2Body.unitId = timelineComponent.GetParent<Unit>().InstanceId;
+            b2Body.unitId = args.instanceId;
             b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
         }
     }

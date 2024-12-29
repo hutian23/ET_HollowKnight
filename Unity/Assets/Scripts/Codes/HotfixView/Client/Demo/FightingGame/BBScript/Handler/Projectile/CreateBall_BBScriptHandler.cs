@@ -1,9 +1,9 @@
-﻿using Timeline;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ET.Client
 {
     [FriendOf(typeof(BBParser))]
+    [FriendOf(typeof(EnemyManager))]
     public class CreateBall_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -26,7 +26,7 @@ namespace ET.Client
                 }
             }
             parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
-            
+
             //2. 执行代码块
             Status ret = await parser.RegistSubCoroutine(startIndex, endIndex, token);
             if (token.IsCancel() || ret != Status.Success) return Status.Failed;
@@ -35,21 +35,25 @@ namespace ET.Client
             string ballType = parser.GetParam<string>("BallType");
             // Vector2 ballPos = parser.GetParam<Vector2>("BallPos");
             // Vector2 ballStartV = parser.GetParam<Vector2>("BallStartV");
-            
+
             //3. 创建子弹unit
             UnitComponent unitComponent = parser.ClientScene().CurrentScene().GetComponent<UnitComponent>();
+            //3-1 对象池获得GameObject
             Unit ball = unitComponent.AddChild<Unit, int>(1001);
             GameObject ballGo = GameObjectPoolHelper.GetObjectFromPool(ballType);
             ballGo.transform.SetParent(GlobalComponent.Instance.Unit);
             ball.AddComponent<GameObjectComponent>().GameObject = ballGo;
-            
+
             TimelineComponent timelineComponent = ball.AddComponent<TimelineComponent>();
             timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
-            timelineComponent.AddComponent<b2Unit>();
+            timelineComponent.AddComponent<b2Unit, long>(ball.InstanceId);
             timelineComponent.AddComponent<ObjectWait>();
             timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<BehaviorBuffer>();
-            
+
+            // 热重载时销毁ball
+            EnemyManager.Instance.ReloadQueue.Enqueue(ball.InstanceId);
+
             return Status.Success;
         }
     }

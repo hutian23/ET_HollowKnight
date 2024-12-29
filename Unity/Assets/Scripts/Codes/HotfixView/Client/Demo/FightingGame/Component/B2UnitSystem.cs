@@ -5,11 +5,12 @@ namespace ET.Client
     [FriendOf(typeof(b2Unit))]
     public static class B2UnitSystem
     {
-        public class B2UnitAwakeSystem : AwakeSystem<b2Unit>
+        public class B2UnitAwakeSystem : AwakeSystem<b2Unit,long>
         {
-            protected override void Awake(b2Unit self)
+            protected override void Awake(b2Unit self,long unitId)
             {
-                EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.GetParent<TimelineComponent>().InstanceId});
+                self.unitId = unitId;
+                EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.unitId});
             }
         }
         
@@ -19,10 +20,22 @@ namespace ET.Client
             {
                 self.Init();
                 //b2World创建刚体
-                EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.GetParent<TimelineComponent>().InstanceId});
+                EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.unitId});
             }
         }
         
+        [FriendOf(typeof(b2WorldManager))]
+        public class B2UnitDestroySystem : DestroySystem<b2Unit>
+        {
+            protected override void Destroy(b2Unit self)
+            {
+                // Unit销毁时， 物理层对应的刚体在PreStep生命周期中销毁
+                b2WorldManager.Instance.DisposeQueue.Enqueue(self.unitId);
+                // 刚体不再参与碰撞事件
+                b2WorldManager.Instance.EnableBody(self.unitId, false);
+            }
+        }
+
         public static void Init(this b2Unit self)
         {
             self.keyFrame = null;
@@ -33,10 +46,7 @@ namespace ET.Client
         {
             protected override void PreStepUpdate(b2Unit self)
             {
-                TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-                long instanceId = timelineComponent.GetParent<Unit>().InstanceId;
-                b2Body body = b2WorldManager.Instance.GetBody(instanceId);
-                
+                b2Body body = b2WorldManager.Instance.GetBody(self.unitId);
                 body.SetVelocity(self.Velocity * new Vector2(- body.GetFlip(), 1) * (self.Hertz / 60f));
             }
         }

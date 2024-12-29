@@ -11,6 +11,7 @@
                 if (self.GameObject != null && self.GameObject.GetComponent<PoolObject>() != null)
                 {
                     GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
+                    return;
                 }
                 UnityEngine.Object.Destroy(self.GameObject);
             }

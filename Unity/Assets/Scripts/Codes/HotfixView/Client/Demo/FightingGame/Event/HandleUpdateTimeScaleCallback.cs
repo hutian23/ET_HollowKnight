@@ -9,8 +9,9 @@ namespace ET.Client
         public override void Handle(UpdateHertzCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
+            if(timelineComponent == null) return;
+            
             int hertz = (int)args.Hertz;
-
             timelineComponent.Hertz = hertz;
 
             // 显示层更新

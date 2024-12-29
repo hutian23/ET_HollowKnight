@@ -6,7 +6,7 @@ namespace ET
 {
     [ChildOf]
     [DebuggerDisplay("ViewName,nq")]
-    public class Unit: Entity, IAwake<int>
+    public class Unit: Entity, IAwake<int>, IDestroy
     {
         public int ConfigId { get; set; } //配置表id
 

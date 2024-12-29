@@ -282,13 +282,32 @@ MonoBehaviour:
 
     BBSprite: ''Slash_1'', 3;
 
-    BeginLoop: (Test: xx)
+    BBSprite: ''Slash_2'', 5;
 
     BBSprite:
-    ''Slash_2'', 3;
+    ''Slash_3'', 5;
 
-    BBSprite: ''Slash_3'', 3;
+    BBSprite: ''Slash_2'', 5;
 
-    EndLoop:
+    BBSprite: ''Slash_3'', 5;
 
-    Exit;'
+    BBSprite:
+    ''Slash_2'', 5;
+
+    BBSprite: ''Slash_3'', 5;
+
+    BBSprite: ''Slash_2'', 5;
+
+    BBSprite:
+    ''Slash_3'', 5;
+
+    BBSprite: ''Slash_2'', 5;
+
+    BBSprite: ''Slash_3'', 5;
+
+    BBSprite:
+    ''Slash_2'', 5;
+
+    BBSprite: ''Slash_3'', 5;
+
+    Dispose;'

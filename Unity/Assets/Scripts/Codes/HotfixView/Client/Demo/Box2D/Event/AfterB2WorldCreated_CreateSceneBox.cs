@@ -8,8 +8,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Current)]
-    [FriendOf(typeof (b2Body))]
-    public class AfterB2WorldCreate_CreateSceneBox: AEvent<AfterB2WorldCreated>
+    [FriendOf(typeof(b2Body))]
+    [FriendOf(typeof(b2WorldManager))]
+    public class AfterB2WorldCreate_CreateSceneBox : AEvent<AfterB2WorldCreated>
     {
         protected override async ETTask Run(Scene scene, AfterB2WorldCreated args)
         {
@@ -22,7 +23,10 @@ namespace ET.Client
                 return;
             }
             
-            //create scene box
+            //1. 场景内的static刚体当成一个部分
+            Body sceneBody = World.CreateBody(new BodyDef() { BodyType = BodyType.StaticBody });
+            
+            //2. SceneBox作为sceneBody的Fixture
             foreach (SceneBox sceneBox in _World.GetComponentsInChildren<SceneBox>())
             {
                 PolygonShape shape = new();
@@ -40,10 +44,15 @@ namespace ET.Client
                         IsTrigger = sceneBox.IsTrigger
                     }
                 };
-                //create body
-                Body sceneBody = World.CreateBody(new BodyDef(){BodyType = BodyType.StaticBody});
                 sceneBody.CreateFixture(fixtureDef);
             }
+            
+            //3. 建立映射
+            b2Body b2Body = b2WorldManager.Instance.AddChild<b2Body>();
+            b2Body.body = sceneBody;
+            b2Body.unitId = 0;
+            b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
+
             await ETTask.CompletedTask;
         }
     }

@@ -80,5 +80,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  rootScript: "@RootInit:\nRegistMove: (SlashRing_Idle)\n    MoveType: None;\n   
-    EndMove:\nreturn;"
+  rootScript: "@RootInit:\nGravity: 100000;\nNumericType: MaxGravity, 150000;\nNumericType:
+    MaxFall, 45000;\nRegistMove: (SlashRing_Idle)\n    MoveType: None;\n    EndMove:\nreturn;"

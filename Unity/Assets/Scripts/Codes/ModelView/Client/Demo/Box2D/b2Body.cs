@@ -5,6 +5,7 @@ using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
 {
+    // 管理物理层的刚体
     [ChildOf(typeof (b2WorldManager))]
     public class b2Body: Entity, IAwake, IDestroy, IPostStep, IPreStep, IFrameUpdate
     {

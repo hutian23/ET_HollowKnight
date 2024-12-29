@@ -29,7 +29,7 @@ namespace ET.Client
                 
                 TimelineComponent timelineComponent = enemy.AddComponent<TimelineComponent>();
                 timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
-                timelineComponent.AddComponent<b2Unit>();
+                timelineComponent.AddComponent<b2Unit, long>(enemy.InstanceId);
                 timelineComponent.AddComponent<ObjectWait>();
                 timelineComponent.AddComponent<BBParser>();
                 timelineComponent.AddComponent<BehaviorBuffer>();

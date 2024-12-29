@@ -26,6 +26,12 @@ namespace ET.Client
         {
             protected override void PosStepUpdate(b2Body self)
             {
+                //static body
+                if (self.unitId == 0)
+                {
+                    return;
+                }
+                
                 //未发生更新，渲染层无需刷新
                 Transform curTrans = self.body.GetTransform();
                 if (self.trans.Equals(curTrans) && !self.UpdateFlag)
@@ -56,9 +62,19 @@ namespace ET.Client
         {
             self.body.SetLinearVelocity(value);
         }
+
+        /// <summary>
+        /// 激活刚体
+        /// 刚体处于未激活状态下，不会参与碰撞、射线检测、查询
+        /// 未激活刚体仍然可以创建夹具、关节
+        /// </summary>
+        public static void SetEnable(this b2Body self, bool isEnable)
+        {
+            self.body.IsEnabled = isEnable;
+        }
         
         /// <summary>
-        /// 
+        /// 刚体朝向
         /// </summary>
         /// <param name="self"></param>
         /// <param name="flipState"></param>
