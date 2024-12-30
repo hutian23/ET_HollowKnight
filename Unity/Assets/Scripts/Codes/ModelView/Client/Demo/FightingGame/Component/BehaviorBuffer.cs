@@ -10,7 +10,8 @@ namespace ET.Client
     {
         //当前行为
         public int currentOrder;
-
+        public long WindowTimer;
+        
         //共享变量，当前行为中缓存的一些变量，重载行为时会把缓存的共享变量添加到BBParser组件中
         public Dictionary<string, SharedVariable> paramDict = new();
         public HashSet<int> GCOptions = new();
@@ -21,11 +22,8 @@ namespace ET.Client
         public Dictionary<int, long> behaviorOrderMap = new();
         //通过统一的hitFlag找到不同角色的对应受击行为
         public Dictionary<string, long> hitMap = new(); 
-        
         //方便倒序获取行为信息组件
         public SortedSet<long> DescendInfoList = new(Comparer<long>.Create((x, y) => y.CompareTo(x)));
-
-        public long WindowTimer;
     }
 
     public struct AfterTimelineComponentReload

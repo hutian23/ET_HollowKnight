@@ -30,6 +30,7 @@ namespace ET.Client
             timelineComponent.AddComponent<ObjectWait>();
             timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<BehaviorBuffer>();
+            timelineComponent.AddComponent<BBScripProcessor>();
         }
     }
 }
