@@ -55,51 +55,51 @@ namespace Timeline.Editor
                 e.StopImmediatePropagation();
             }, () =>
             {
-                //OnDrop
-                Dragging = false;
-                Tweening = false;
-                EditorApplication.update -= TweenLayerViews;
-
-                int currentIndex = GetOrder();
-                //复位
-                playableGraph.Layers.Remove(behaviorLayer);
-                playableGraph.Layers.Insert(OriginalIndex, behaviorLayer);
-
-                if (OriginalIndex != currentIndex)
-                {
-                    //Undo
-                    Editor.ApplyModify(() =>
-                    {
-                        playableGraph.Layers.Remove(behaviorLayer);
-                        playableGraph.Layers.Insert(currentIndex, behaviorLayer);
-                    }, "Resort layers");
-                }
-
-                float targetY = Interval * currentIndex;
-                transform.position = new Vector3(0, targetY, 0);
-
-                //Update currentLayer Index
-                controllerEditor.layerIndex = currentIndex;
-                controllerEditor.RefreshLayerView();
+                // //OnDrop
+                // Dragging = false;
+                // Tweening = false;
+                // EditorApplication.update -= TweenLayerViews;
+                //
+                // int currentIndex = GetOrder();
+                // //复位
+                // playableGraph.Layers.Remove(behaviorLayer);
+                // playableGraph.Layers.Insert(OriginalIndex, behaviorLayer);
+                //
+                // if (OriginalIndex != currentIndex)
+                // {
+                //     //Undo
+                //     Editor.ApplyModify(() =>
+                //     {
+                //         playableGraph.Layers.Remove(behaviorLayer);
+                //         playableGraph.Layers.Insert(currentIndex, behaviorLayer);
+                //     }, "Resort layers");
+                // }
+                //
+                // float targetY = Interval * currentIndex;
+                // transform.position = new Vector3(0, targetY, 0);
+                //
+                // //Update currentLayer Index
+                // controllerEditor.layerIndex = currentIndex;
+                // controllerEditor.RefreshLayerView();
             }, (e) =>
             {
-                //OnMove
-                float targetY = transform.position.y + e.y;
-                targetY = Mathf.Clamp(targetY, 0, (playableGraph.Layers.Count - 1) * Interval);
-                transform.position = new Vector3(0, targetY, 0);
-
-                int index = GetOrder();
-                int targetIndex = Mathf.RoundToInt(targetY / Interval);
-                if (index != targetIndex)
-                {
-                    playableGraph.Layers.Remove(behaviorLayer);
-                    playableGraph.Layers.Insert(targetIndex, behaviorLayer);
-                }
-
-                if (!Tweening)
-                {
-                    EditorApplication.update += TweenLayerViews;
-                }
+                // //OnMove
+                // float targetY = transform.position.y + e.y;
+                // targetY = Mathf.Clamp(targetY, 0, (playableGraph.Layers.Count - 1) * Interval);
+                // transform.position = new Vector3(0, targetY, 0);
+                //
+                // int index = GetOrder();
+                // int targetIndex = Mathf.RoundToInt(targetY / Interval);
+                // if (index != targetIndex)
+                // {
+                //     playableGraph.Layers.Remove(behaviorLayer);
+                //     playableGraph.Layers.Insert(targetIndex, behaviorLayer);
+                // }
+                //
+                // if (!Tweening)
+                // {
+                //     EditorApplication.update += TweenLayerViews;
+                // }
             });
             this.AddManipulator(DragManipulator);
         }
@@ -144,7 +144,8 @@ namespace Timeline.Editor
 
         private int GetOrder()
         {
-            return playableGraph.Layers.IndexOf(behaviorLayer);
+            // return playableGraph.Layers.IndexOf(behaviorLayer);
+            return 1;
         }
 
         public bool InMiddle(Vector2 worldPosition)

@@ -131,12 +131,13 @@ namespace Timeline.Editor
             get
             {
                 //adjust layerView
-                if (_layerIndex >= PlayableGraph.Layers.Count)
-                {
-                    _layerIndex = 0;
-                }
-
-                return _layerIndex;
+                // if (_layerIndex >= PlayableGraph.Layers.Count)
+                // {
+                //     _layerIndex = 0;
+                // }
+                //
+                // return _layerIndex;
+                return -1;
             }
             set
             {
@@ -144,8 +145,9 @@ namespace Timeline.Editor
             }
         }
 
-        public BehaviorLayer currentLayer => PlayableGraph.Layers[layerIndex];
-
+        // public BehaviorLayer currentLayer => PlayableGraph.Layers[layerIndex];
+        public BehaviorLayer currentLayer;
+        
         public void RefreshLayerView()
         {
             layerViewsContainer.Clear();
@@ -155,19 +157,19 @@ namespace Timeline.Editor
             currentLayerLabel.text = currentLayer.layerName;
 
             //inspector create layerview
-            for (int i = 0; i < PlayableGraph.Layers.Count; i++)
-            {
-                BehaviorLayer layer = PlayableGraph.Layers[i];
-
-                BehaviorLayerView layerView = new();
-                layerView.Init(this, layer);
-                layerViewsContainer.Add(layerView);
-
-                if (i == layerIndex)
-                {
-                    layerView.Select();
-                }
-            }
+            // for (int i = 0; i < PlayableGraph.Layers.Count; i++)
+            // {
+            //     BehaviorLayer layer = PlayableGraph.Layers[i];
+            //
+            //     BehaviorLayerView layerView = new();
+            //     layerView.Init(this, layer);
+            //     layerViewsContainer.Add(layerView);
+            //
+            //     if (i == layerIndex)
+            //     {
+            //         layerView.Select();
+            //     }
+            // }
         }
 
         private DropdownMenuHandler layerMenuHandler;
@@ -179,17 +181,17 @@ namespace Timeline.Editor
                 var layers = layerViewsContainer.Query<BehaviorLayerView>().ToList();
                 layers[layerIndex].EditMode(true);
             });
-            menu.AppendAction("Remove Layer", _ =>
-            {
-                if (PlayableGraph.Layers.Count <= 1)
-                {
-                    Debug.LogError("PlayableGraph must be at least 1 layer!!!");
-                    return;
-                }
-
-                ApplyModify(() => { PlayableGraph.Layers.RemoveAt(layerIndex); }, "Remove Layer");
-                RefreshLayerView();
-            });
+            // menu.AppendAction("Remove Layer", _ =>
+            // {
+            //     if (PlayableGraph.Layers.Count <= 1)
+            //     {
+            //         Debug.LogError("PlayableGraph must be at least 1 layer!!!");
+            //         return;
+            //     }
+            //
+            //     ApplyModify(() => { PlayableGraph.Layers.RemoveAt(layerIndex); }, "Remove Layer");
+            //     RefreshLayerView();
+            // });
         }
 
         private void PointerDown(PointerDownEvent evt)
@@ -219,8 +221,8 @@ namespace Timeline.Editor
 
         private void AddLayer()
         {
-            ApplyModify(() => { PlayableGraph.Layers.Add(new BehaviorLayer() { layerName = "New Layer" }); }, "Add layer");
-            RefreshLayerView();
+            // ApplyModify(() => { PlayableGraph.Layers.Add(new BehaviorLayer() { layerName = "New Layer" }); }, "Add layer");
+            // RefreshLayerView();
         }
 
         #endregion
@@ -245,12 +247,12 @@ namespace Timeline.Editor
         {
             foreach (var param in BBTimelineEditorUtility.ParamsTypeDict)
             {
-                menu.AppendAction(param.Key, _ =>
-                {
-                    ApplyModify(() => { PlayableGraph.Parameters.Add(new SharedVariable() { name = "New Param", value = param.Value }); },
-                        "Add Param");
-                    RefreshParamView();
-                });
+                // menu.AppendAction(param.Key, _ =>
+                // {
+                //     ApplyModify(() => { PlayableGraph.Parameters.Add(new SharedVariable() { name = "New Param", value = param.Value }); },
+                //         "Add Param");
+                //     RefreshParamView();
+                // });
             }
         }
 
@@ -280,13 +282,13 @@ namespace Timeline.Editor
 
         private void ParamMenuBuilder(DropdownMenu menu)
         {
-            menu.AppendAction("Edit", _ => { SelectParamView.InEditMode(true); });
-            menu.AppendAction("Remove",
-                _ =>
-                {
-                    ApplyModify(() => { PlayableGraph.Parameters.Remove(SelectParamView.variable); }, "Remove param");
-                    RefreshParamView();
-                });
+            // menu.AppendAction("Edit", _ => { SelectParamView.InEditMode(true); });
+            // menu.AppendAction("Remove",
+            //     _ =>
+            //     {
+            //         ApplyModify(() => { PlayableGraph.Parameters.Remove(SelectParamView.variable); }, "Remove param");
+            //         RefreshParamView();
+            //     });
         }
 
         private void ShowParamSearchMenu(DropdownMenu menu)
@@ -310,20 +312,21 @@ namespace Timeline.Editor
 
         private List<SharedVariable> GetParams()
         {
-            if (SearchParamMode == "Name")
-            {
-                return FuzzySearch(PlayableGraph.Parameters);
-            }
-
-            BBTimelineEditorUtility.ParamsTypeDict.TryGetValue(SearchParamMode, out object o);
-            if (o == null)
-            {
-                Debug.LogError($"not found search type:{SearchParamMode}");
-                return null;
-            }
-
-            Type objType = o.GetType();
-            return FuzzySearch(PlayableGraph.Parameters.Where(v => v.value.GetType() == objType).ToList());
+            // if (SearchParamMode == "Name")
+            // {
+            //     return FuzzySearch(PlayableGraph.Parameters);
+            // }
+            //
+            // BBTimelineEditorUtility.ParamsTypeDict.TryGetValue(SearchParamMode, out object o);
+            // if (o == null)
+            // {
+            //     Debug.LogError($"not found search type:{SearchParamMode}");
+            //     return null;
+            // }
+            //
+            // Type objType = o.GetType();
+            // return FuzzySearch(PlayableGraph.Parameters.Where(v => v.value.GetType() == objType).ToList());
+            return null;
         }
 
         private List<SharedVariable> FuzzySearch(List<SharedVariable> variables)
@@ -355,14 +358,14 @@ namespace Timeline.Editor
 
         public static void OpenWindow(TimelinePlayer timelinePlayer)
         {
-            BehaviorControllerEditor controllerEditor = GetWindow<BehaviorControllerEditor>();
-            controllerEditor.timelinePlayer = timelinePlayer;
-            //添加默认layer
-            if (timelinePlayer.BBPlayable.Layers.Count == 0)
-            {
-                timelinePlayer.BBPlayable.Layers.Add(new BehaviorLayer());
-            }
-            controllerEditor.RefreshView();
+            // BehaviorControllerEditor controllerEditor = GetWindow<BehaviorControllerEditor>();
+            // controllerEditor.timelinePlayer = timelinePlayer;
+            // //添加默认layer
+            // if (timelinePlayer.BBPlayable.Layers.Count == 0)
+            // {
+            //     timelinePlayer.BBPlayable.Layers.Add(new BehaviorLayer());
+            // }
+            // controllerEditor.RefreshView();
         }
 
         public void RefreshView()

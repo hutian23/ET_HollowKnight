@@ -11,16 +11,10 @@ namespace Timeline
     [CreateAssetMenu(menuName = "ScriptableObject/BBTimeline/PlayableGraph", fileName = "BBPlayableGraph")]
     public class BBPlayableGraph: SerializedScriptableObject
     {
+        public TextAsset BBScript;
+        
         [TextArea(15,60)]
         public string rootScript;
-
-        [HideReferenceObjectPicker]
-        [OdinSerialize, NonSerialized]
-        public List<BehaviorLayer> Layers = new();
-
-        [HideReferenceObjectPicker]
-        [OdinSerialize, NonSerialized]
-        public List<SharedVariable> Parameters = new();
 
         [OdinSerialize]
         public Dictionary<string, BBTimeline> timelineDict = new();

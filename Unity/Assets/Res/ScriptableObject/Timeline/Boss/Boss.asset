@@ -106,6 +106,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  BBScript: {fileID: 4900000, guid: 603f41057190d71439afbc9bbe4b77ca, type: 3}
   rootScript: "@RootInit:\nPoolObject: 'SlashRing', 2;\nRegistMove: (Boss_WallThrow)\n   
     MoveType: None;\n    EndMove:\nRegistMove: (Boss_Dash)\n    MoveType: None;\n   
     EndMove:\nRegistMove: (Boss_Dstab)\n    MoveType: None;\n    EndMove:\nreturn;"

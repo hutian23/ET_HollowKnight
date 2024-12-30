@@ -22,39 +22,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Layers
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Timeline.BehaviorLayer, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Parameters
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[ET.Client.SharedVariable, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: timelineDict
       Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Timeline.BBTimeline,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Timeline.BBTimeline,
         Unity.Loader]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
@@ -80,5 +54,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  BBScript: {fileID: 1042094116111776886, guid: 6414006f0b0708f4d8cf3d64f00a91f2,
+    type: 3}
   rootScript: "@RootInit:\nGravity: 100000;\nNumericType: MaxGravity, 150000;\nNumericType:
     MaxFall, 45000;\nRegistMove: (SlashRing_Idle)\n    MoveType: None;\n    EndMove:\nreturn;"

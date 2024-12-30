@@ -277,25 +277,25 @@ namespace Timeline.Editor
             //root.RegisterCallback<PointerDownEvent>(_ => { BBTimelineSettings.GetSettings().SetActiveObject(Editor.PlayableGraph.root); });
             AddElement(root);
 
-            BehaviorLayer behaviorLayer = Editor.PlayableGraph.Layers[Editor.layerIndex];
+            // BehaviorLayer behaviorLayer = Editor.PlayableGraph.Layers[Editor.layerIndex];
             //create clip view
-            foreach (BehaviorClip behaviorClip in behaviorLayer.BehaviorClips)
-            {
-                BehaviorClipView behaviorClipView = new();
-                behaviorClipView.Init(behaviorClip);
-                AddElement(behaviorClipView);
-            }
-
-            //create edge
-            foreach (var linkData in behaviorLayer.linkDatas)
-            {
-                Port input = GetClipByGuid(linkData.inputGuid).Input;
-                Port output = GetClipByGuid(linkData.outputGuid).Output;
-
-                Edge edge = output.ConnectTo(input);
-                edge.viewDataKey = linkData.viewDataKey;
-                AddElement(edge);
-            }
+            // foreach (BehaviorClip behaviorClip in behaviorLayer.BehaviorClips)
+            // {
+            //     BehaviorClipView behaviorClipView = new();
+            //     behaviorClipView.Init(behaviorClip);
+            //     AddElement(behaviorClipView);
+            // }
+            //
+            // //create edge
+            // foreach (var linkData in behaviorLayer.linkDatas)
+            // {
+            //     Port input = GetClipByGuid(linkData.inputGuid).Input;
+            //     Port output = GetClipByGuid(linkData.outputGuid).Output;
+            //
+            //     Edge edge = output.ConnectTo(input);
+            //     edge.viewDataKey = linkData.viewDataKey;
+            //     AddElement(edge);
+            // }
 
             //Regist event
             RegisterCallback<MouseMoveEvent>(evt => { this.ScreenMousePosition = evt.mousePosition + Editor.position.position; });
