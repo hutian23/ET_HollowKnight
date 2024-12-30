@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace ET.Client
 {
     [FriendOf(typeof (BBParser))]
-    [FriendOf(typeof (DialogueDispatcherComponent))]
+    [FriendOf(typeof (ScriptDispatcherComponent))]
     public class If_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()
@@ -32,9 +32,9 @@ namespace ET.Client
             SyntaxNode rootNode = SyntaxNode.Create(SyntaxType.Condition, index);
             conditionStack.Push(rootNode);
 
-            while (++index < parser.opDict.Count && conditionStack.Count != 0)
+            while (++index < parser.OpDict.Count && conditionStack.Count != 0)
             {
-                string opLine = parser.opDict[index];
+                string opLine = parser.OpDict[index];
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
                 {
@@ -66,7 +66,7 @@ namespace ET.Client
 
         private async ETTask<Status> HandleSyntaxTree(BBParser parser, BBScriptData data, SyntaxNode node, ETCancellationToken token)
         {
-            string opLine = parser.opDict[node.index];
+            string opLine = parser.OpDict[node.index];
             parser.Coroutine_Pointers[data.CoroutineID] = node.index;
 
             switch (node.nodeType)
@@ -94,7 +94,7 @@ namespace ET.Client
 
                         BBScriptData _data = BBScriptData.Create(op, data.CoroutineID, null);
                         //判定失败, 跳过整个if块中的代码
-                        bool ret = DialogueDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(parser, _data);
+                        bool ret = ScriptDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(parser, _data);
                         _data.Recycle();
                         if (!ret)
                         {
@@ -115,7 +115,7 @@ namespace ET.Client
                         return Status.Failed;
                     }
 
-                    if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(match2.Value, out BBScriptHandler handler))
+                    if (!ScriptDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(match2.Value, out BBScriptHandler handler))
                     {
                         Log.Error($"not found script handler: {match2.Value}");
                         return Status.Failed;

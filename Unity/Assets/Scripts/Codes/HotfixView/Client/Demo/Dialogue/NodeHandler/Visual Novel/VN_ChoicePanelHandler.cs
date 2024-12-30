@@ -13,7 +13,7 @@ namespace ET.Client
             node.children.ForEach(targetID =>
             {
                 if (dialogueComponent.GetNode(targetID) is not VN_ChoiceNode choiceNode) return;
-                int ret = DialogueDispatcherComponent.Instance.Checks(unit, choiceNode.checkList);
+                int ret = ScriptDispatcherComponent.Instance.Checks(unit, choiceNode.checkList);
                 if (ret != 0) return;
 
                 dialogueComponent.SetNodeStatus(choiceNode, Status.Choice);

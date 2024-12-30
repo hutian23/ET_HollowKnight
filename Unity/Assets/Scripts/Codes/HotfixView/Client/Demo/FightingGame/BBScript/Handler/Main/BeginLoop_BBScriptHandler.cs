@@ -10,7 +10,7 @@ namespace ET.Client
         {
             //1, match trigger
             int startIndex = self.GetParam<int>("LoopTriggerIndex");
-            string LoopTrigger = self.opDict[startIndex];
+            string LoopTrigger = self.OpDict[startIndex];
             bool result = true;
             
             MatchCollection matches = Regex.Matches(LoopTrigger, @"\((.*?)\)");
@@ -34,7 +34,7 @@ namespace ET.Client
                 }
                 
                 BBScriptData _data = BBScriptData.Create(op, 0, null);
-                bool ret = DialogueDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(self, _data);
+                bool ret = ScriptDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(self, _data);
                 if (!ret)
                 {
                     result = false;
@@ -60,7 +60,7 @@ namespace ET.Client
     }
 
     [FriendOf(typeof(BBParser))]
-    [FriendOf(typeof(DialogueDispatcherComponent))]
+    [FriendOf(typeof(ScriptDispatcherComponent))]
     public class BeginLoop_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -86,9 +86,9 @@ namespace ET.Client
             //跳过BeginLoop代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
-            while (++index < parser.opDict.Count)
+            while (++index < parser.OpDict.Count)
             {
-                string opLine = parser.opDict[index];
+                string opLine = parser.OpDict[index];
                 if (opLine.Equals("EndLoop:"))
                 {
                     endIndex = index;

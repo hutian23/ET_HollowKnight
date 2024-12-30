@@ -3,36 +3,36 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DialogueDispatcherComponent))]
+    [FriendOf(typeof (ScriptDispatcherComponent))]
     public static class DialogueDispatcherComponentSystem
     {
-        public class DialogueDispatcherComponentAwakeSystem: AwakeSystem<DialogueDispatcherComponent>
+        public class DialogueDispatcherComponentAwakeSystem: AwakeSystem<ScriptDispatcherComponent>
         {
-            protected override void Awake(DialogueDispatcherComponent self)
+            protected override void Awake(ScriptDispatcherComponent self)
             {
-                DialogueDispatcherComponent.Instance = self;
+                ScriptDispatcherComponent.Instance = self;
                 self.Init();
             }
         }
 
-        public class DialogueDispatcherComponentLoadSystem: LoadSystem<DialogueDispatcherComponent>
+        public class DialogueDispatcherComponentLoadSystem: LoadSystem<ScriptDispatcherComponent>
         {
-            protected override void Load(DialogueDispatcherComponent self)
+            protected override void Load(ScriptDispatcherComponent self)
             {
                 self.Init();
             }
         }
 
-        public class DialogueDispatcherComponentDestroySystem: DestroySystem<DialogueDispatcherComponent>
+        public class DialogueDispatcherComponentDestroySystem: DestroySystem<ScriptDispatcherComponent>
         {
-            protected override void Destroy(DialogueDispatcherComponent self)
+            protected override void Destroy(ScriptDispatcherComponent self)
             {
                 self.dispatchHandlers.Clear();
-                DialogueDispatcherComponent.Instance = null;
+                ScriptDispatcherComponent.Instance = null;
             }
         }
 
-        private static void Init(this DialogueDispatcherComponent self)
+        private static void Init(this ScriptDispatcherComponent self)
         {
             self.dispatchHandlers.Clear();
             var nodeHandlers = EventSystem.Instance.GetTypes(typeof (DialogueAttribute));
@@ -147,12 +147,12 @@ namespace ET.Client
             } 
         }
 
-        public static async ETTask<Status> Handle(this DialogueDispatcherComponent self, Unit unit, object node, ETCancellationToken token)
+        public static async ETTask<Status> Handle(this ScriptDispatcherComponent self, Unit unit, object node, ETCancellationToken token)
         {
             if (self.dispatchHandlers.TryGetValue(node.GetType(), out NodeHandler handler))
             {
                 //执行脚本
-                await DialogueDispatcherComponent.Instance.ScriptHandles(unit, node as DialogueNode, token);
+                await ScriptDispatcherComponent.Instance.ScriptHandles(unit, node as DialogueNode, token);
                 if (token.IsCancel())
                 {
                     return Status.Failed;
@@ -164,7 +164,7 @@ namespace ET.Client
             return Status.Failed;
         }
 
-        private static int Check(this DialogueDispatcherComponent self, Unit unit, NodeCheckConfig nodeCheck)
+        private static int Check(this ScriptDispatcherComponent self, Unit unit, NodeCheckConfig nodeCheck)
         {
             if (!self.checker_dispatchHandlers.TryGetValue(nodeCheck.GetType(), out NodeCheckHandler nodeCheckerHandler))
             {
@@ -174,7 +174,7 @@ namespace ET.Client
             return nodeCheckerHandler.Check(unit, nodeCheck);
         }
 
-        public static int Checks(this DialogueDispatcherComponent self, Unit unit, List<NodeCheckConfig> nodeCheckList)
+        public static int Checks(this ScriptDispatcherComponent self, Unit unit, List<NodeCheckConfig> nodeCheckList)
         {
             if (nodeCheckList == null) return 0;
             foreach (var nodeCheck in nodeCheckList)
@@ -188,7 +188,7 @@ namespace ET.Client
             return 0;
         }
 
-        public static string GetReplaceStr(this DialogueDispatcherComponent self, Unit unit, string replaceType, string replaceText)
+        public static string GetReplaceStr(this ScriptDispatcherComponent self, Unit unit, string replaceType, string replaceText)
         {
             if (self.replaceHandlers.TryGetValue(replaceType, out ReplaceHandler handler))
             {
@@ -198,7 +198,7 @@ namespace ET.Client
             return string.Empty;
         }
 
-        public static BBCheckHandler GetBBCheckHandler(this DialogueDispatcherComponent self, string name)
+        public static BBCheckHandler GetBBCheckHandler(this ScriptDispatcherComponent self, string name)
         {
             if (self.BBCheckHandlers.TryGetValue(name, out BBCheckHandler handler))
             {
@@ -208,7 +208,7 @@ namespace ET.Client
             return null;
         }
 
-        public static BBTriggerHandler GetTrigger(this DialogueDispatcherComponent self, string name)
+        public static BBTriggerHandler GetTrigger(this ScriptDispatcherComponent self, string name)
         {
             if (!self.BBTriggerHandlers.TryGetValue(name, out BBTriggerHandler handler))
             {
@@ -219,7 +219,7 @@ namespace ET.Client
             return handler;
         }
 
-        public static InputHandler GetInputHandler(this DialogueDispatcherComponent self, string name)
+        public static InputHandler GetInputHandler(this ScriptDispatcherComponent self, string name)
         {
             if (!self.InputHandlers.TryGetValue(name, out InputHandler handler))
             {

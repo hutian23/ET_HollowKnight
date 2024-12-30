@@ -9,7 +9,7 @@
             {
                 DialogueNode child = dialogueComponent.GetNode(targetID);
                 // 找到子节点中第一个符合条件的执行
-                if (!child.NeedCheck || DialogueDispatcherComponent.Instance.Checks(unit, child.checkList) == 0)
+                if (!child.NeedCheck || ScriptDispatcherComponent.Instance.Checks(unit, child.checkList) == 0)
                 {
                     dialogueComponent.PushNextNode(targetID);
                     break;

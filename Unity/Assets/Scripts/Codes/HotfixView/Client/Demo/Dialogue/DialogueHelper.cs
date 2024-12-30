@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (DialogueComponent))]
-    [FriendOf(typeof (DialogueDispatcherComponent))]
+    [FriendOf(typeof (ScriptDispatcherComponent))]
     public static class DialogueHelper
     {
         public static DialogueTreeData LoadDialogueTree(string treeName, Language language)
@@ -49,7 +49,7 @@ namespace ET.Client
                 string replaceType = match.Value.Split(' ')[0]; //<Numeric <UnitConfig
                 replaceType = replaceType.Substring(1, replaceType.Length - 1);
 
-                string replaceStr = DialogueDispatcherComponent.Instance.GetReplaceStr(unit, replaceType, match.Value);
+                string replaceStr = ScriptDispatcherComponent.Instance.GetReplaceStr(unit, replaceType, match.Value);
                 if (string.IsNullOrEmpty(replaceStr)) continue; //没找到对应的handler，不替换
 
                 replaceText = replaceText.Replace(match.Value, replaceStr);
@@ -60,7 +60,7 @@ namespace ET.Client
 
         #region DialogueDispatchComponent,避免和DialogueHelper产生环形依赖
 
-        private static async ETTask CoroutineHandle(this DialogueDispatcherComponent self, Unit unit, DialogueNode node, List<string> corList,
+        private static async ETTask CoroutineHandle(this ScriptDispatcherComponent self, Unit unit, DialogueNode node, List<string> corList,
         ETCancellationToken token)
         {
             int index = 0;
@@ -99,7 +99,7 @@ namespace ET.Client
         /// <summary>
         /// 执行一行指令
         /// </summary>
-        private static async ETTask ScriptHandle(this DialogueDispatcherComponent self, Unit unit, DialogueNode node, string opType, string opCode,
+        private static async ETTask ScriptHandle(this ScriptDispatcherComponent self, Unit unit, DialogueNode node, string opType, string opCode,
         ETCancellationToken token)
         {
             if (!self.scriptHandlers.TryGetValue(opType, out DialogueScriptHandler handler))
@@ -112,7 +112,7 @@ namespace ET.Client
             await handler.Handle(unit, node, opCode, token);
         }
 
-        public static async ETTask ScriptHandles(this DialogueDispatcherComponent self, Unit unit, DialogueNode node, string scripts, ETCancellationToken token)
+        public static async ETTask ScriptHandles(this ScriptDispatcherComponent self, Unit unit, DialogueNode node, string scripts, ETCancellationToken token)
         {
             var opLines = scripts.Split("\n"); // 一行一行执行
             int index = 0;
@@ -159,7 +159,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask ScriptHandles(this DialogueDispatcherComponent self, Unit unit, DialogueNode node, ETCancellationToken token)
+        public static async ETTask ScriptHandles(this ScriptDispatcherComponent self, Unit unit, DialogueNode node, ETCancellationToken token)
         {
             await self.ScriptHandles(unit, node, node.Script, token);
         }
@@ -180,7 +180,7 @@ namespace ET.Client
                 uint targetID = children[index];
                 DialogueNode child = self.GetNode(targetID);
                 // 找到子节点中第一个符合条件的执行
-                if (!child.NeedCheck || DialogueDispatcherComponent.Instance.Checks(self.GetParent<Unit>(), child.checkList) == 0)
+                if (!child.NeedCheck || ScriptDispatcherComponent.Instance.Checks(self.GetParent<Unit>(), child.checkList) == 0)
                 {
                     return targetID;
                 }

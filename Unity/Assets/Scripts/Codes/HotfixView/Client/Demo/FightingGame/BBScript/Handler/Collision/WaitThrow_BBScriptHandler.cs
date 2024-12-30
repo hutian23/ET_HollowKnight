@@ -77,9 +77,9 @@ namespace ET.Client
             //跳过代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
-            while (++index < parser.opDict.Count)
+            while (++index < parser.OpDict.Count)
             {
-                string opLine = parser.opDict[index];
+                string opLine = parser.OpDict[index];
                 if (opLine.Equals("EndThrow:"))
                 {
                     endIndex = index;

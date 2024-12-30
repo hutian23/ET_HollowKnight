@@ -14,7 +14,7 @@ namespace ET.Client
             Scene clientScene = await SceneFactory.CreateClientScene(1, "Game");
             clientScene.AddComponent<Storage>();
             clientScene.AddComponent<OperaComponent>();
-            clientScene.AddComponent<DialogueDispatcherComponent>();
+            clientScene.AddComponent<ScriptDispatcherComponent>();
 
             Unit player = TODUnitFactory.CreatePlayer(clientScene);
 

@@ -150,7 +150,7 @@ namespace ET.Client
             switch (node.choiceType)
             {
                 default:
-                    int ret = DialogueDispatcherComponent.Instance.Checks(player, node.handle_Configs);
+                    int ret = ScriptDispatcherComponent.Instance.Checks(player, node.handle_Configs);
                     //选项是否被锁定
                     scrollItemChoice.E_SelectImage.color = (ret == 0) ? Color.white : Color.gray;
                     //选项是否可执行

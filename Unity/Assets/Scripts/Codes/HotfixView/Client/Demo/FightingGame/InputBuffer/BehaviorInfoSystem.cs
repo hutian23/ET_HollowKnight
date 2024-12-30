@@ -77,7 +77,7 @@ namespace ET.Client
                 }
                 if (match.Value.Equals("return")) break;
                 
-                BBTriggerHandler handler = DialogueDispatcherComponent.Instance.GetTrigger(match.Value);
+                BBTriggerHandler handler = ScriptDispatcherComponent.Instance.GetTrigger(match.Value);
                 BBScriptData data = BBScriptData.Create(opLine, 0, 0);
                 BBParser parser = self.GetParent<BehaviorBuffer>().GetParent<TimelineComponent>().GetComponent<BBParser>();
                 

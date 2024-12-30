@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
-    public class DialogueDispatcherComponent: Entity, IAwake, IDestroy, ILoad
+    public class ScriptDispatcherComponent: Entity, IAwake, IDestroy, ILoad
     {
         [StaticField]
-        public static DialogueDispatcherComponent Instance;
+        public static ScriptDispatcherComponent Instance;
 
         public Dictionary<Type, NodeHandler> dispatchHandlers = new();
 

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace ET.Client
 {
     [FriendOf(typeof (BBParser))]
-    [FriendOf(typeof (DialogueDispatcherComponent))]
+    [FriendOf(typeof (ScriptDispatcherComponent))]
     [FriendOf(typeof (DialogueComponent))]
     public static class BBParserSystem
     {
@@ -21,6 +21,8 @@ namespace ET.Client
         /// </summary>
         public static void Cancel(this BBParser self)
         {
+            self.OpDict.Clear();
+            self.GroupDict.Clear();
             self.CancellationToken?.Cancel();
             self.Coroutine_Pointers.Clear();
             //回收变量
@@ -29,14 +31,12 @@ namespace ET.Client
                 kv.Value.Recycle();
             }
             self.ParamDict.Clear();
-            self.opDict = null; 
         }
         
-        public static void Init(this BBParser self, Dictionary<int,string> opDict)
+        public static void Init(this BBParser self)
         {
             self.Cancel();
-            self.CancellationToken = new ETCancellationToken(); //热重载取消所有BBParser子协程
-            self.opDict = opDict; 
+            self.CancellationToken = new ETCancellationToken();
         }
         
         /// <summary>
@@ -49,33 +49,39 @@ namespace ET.Client
             self.Coroutine_Pointers.Add(funcId, index);
 
             //3. 逐条执行语句
-            while (++self.Coroutine_Pointers[funcId] < self.opDict.Count)
+            while (++self.Coroutine_Pointers[funcId] < self.OpDict.Count)
             {
-                if (token.IsCancel()) return Status.Failed;
-
                 //4. 语句(OPType: xxxx;) 根据 OPType 匹配handler
-                string opLine = self.opDict[self.Coroutine_Pointers[funcId]];
+                string opLine = self.OpDict[self.Coroutine_Pointers[funcId]];
+                //5. 因为用[GroupName]分割代码块，说明指针超出代码块了
+                if (opLine.StartsWith('['))
+                {
+                    return Status.Failed;
+                }
+                //6. 匹配opType
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
                 {
                     Log.Error($"{opLine}匹配失败! 请检查格式");
                     return Status.Failed;
                 }
-
                 string opType = match.Value;
-                if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
+                if (!ScriptDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
                 {
                     Log.Error($"not found script handler； {opType}");
                     return Status.Failed;
                 }
 
-                //5. 执行一条语句相当于一个子协程
+                //7. 执行当前指针的语句
                 BBScriptData data = BBScriptData.Create(self.ReplaceParam(opLine), funcId, null); //池化，不然GC很高
                 Status ret = await handler.Handle(self, data, token);
                 data.Recycle();
-
-                if (token.IsCancel() || ret == Status.Failed) return Status.Failed;
-                if (ret != Status.Success) return ret;
+                
+                //8. 协程中断(热重载、unit被销毁了....)
+                if (token.IsCancel())
+                {
+                    return ret;
+                }
             }
 
             return Status.Success;
@@ -98,7 +104,7 @@ namespace ET.Client
                 if (token.IsCancel()) return Status.Failed;
                 
                 //1. 根据 opType 匹配 handler
-                string opLine = self.opDict[self.Coroutine_Pointers[funcId]];
+                string opLine = self.OpDict[self.Coroutine_Pointers[funcId]];
                 
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
@@ -108,7 +114,7 @@ namespace ET.Client
                 }
                 
                 string opType = match.Value;
-                if (!DialogueDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
+                if (!ScriptDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
                 {
                     Log.Error($"not found script handler: {opType}");
                     return Status.Failed;
@@ -220,6 +226,11 @@ namespace ET.Client
             self.ParamDict[paramName].Recycle();
             self.ParamDict.Remove(paramName);
             return true;
+        }
+
+        public static int GetGroupIndex(this BBParser self, string groupName)
+        {
+            return self.GroupDict.GetValueOrDefault(groupName, -1);
         }
     }
 }

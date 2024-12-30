@@ -8,8 +8,10 @@ namespace ET.Client
     [ChildOf]
     public class BBParser: Entity, IAwake, IDestroy, ILoad
     {
-        public Dictionary<int, string> opDict = new();
-        public ETCancellationToken CancellationToken; // 取消当前执行的所有子协程
+        public Dictionary<int, string> OpDict = new();
+        public Dictionary<string, int> GroupDict = new();
+        
+        public ETCancellationToken CancellationToken; // 热重载时取消所有BBParser子协程
         public Dictionary<long, int> Coroutine_Pointers = new(); // 协程ID --> 协程指针
         public Dictionary<string, SharedVariable> ParamDict = new(); // 在携程内注册变量，携程执行完毕dispose
     }

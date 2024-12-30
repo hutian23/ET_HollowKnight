@@ -139,7 +139,7 @@ namespace ET.Client
             //1. 执行初始化
             RootNode root = self.GetNode(0) as RootNode;
             Unit unit = self.GetParent<Unit>();
-            await DialogueDispatcherComponent.Instance.ScriptHandles(unit, root, root.InitScript, self.token);
+            await ScriptDispatcherComponent.Instance.ScriptHandles(unit, root, root.InitScript, self.token);
             //2. 压入起始节点(不一定是根节点)
             DialogueNode node = startNode;
             self.workQueue.Enqueue(startNode);
@@ -160,7 +160,7 @@ namespace ET.Client
                     //4. 执行节点子协程
                     node = self.workQueue.Dequeue(); //将下一个节点压入queue执行
                     self.SetNodeStatus(node, Status.Pending);
-                    Status ret = await DialogueDispatcherComponent.Instance.Handle(unit, node, self.token);
+                    Status ret = await ScriptDispatcherComponent.Instance.Handle(unit, node, self.token);
                     self.SetNodeStatus(node, ret);
                     //5. 节点执行后的回调
                     await EventSystem.Instance.PublishAsync(self.DomainScene(), new AfterNodeExecuted() { ID = node.GetID(), component = self });

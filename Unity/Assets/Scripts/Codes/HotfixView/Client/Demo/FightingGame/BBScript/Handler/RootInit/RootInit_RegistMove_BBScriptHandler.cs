@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(BehaviorInfo))]
-    [FriendOf(typeof(DialogueDispatcherComponent))]
+    [FriendOf(typeof(ScriptDispatcherComponent))]
     [FriendOf(typeof(BehaviorBuffer))]
     public class RootInit_RegistMove_BBScriptHandler : BBScriptHandler
     {
@@ -45,9 +45,9 @@ namespace ET.Client
             //3. 跳过Move代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
-            while (++index < parser.opDict.Count)
+            while (++index < parser.OpDict.Count)
             {
-                string opLine = parser.opDict[index];
+                string opLine = parser.OpDict[index];
                 if (opLine.Equals("EndMove:"))
                 {
                     endIndex = index;

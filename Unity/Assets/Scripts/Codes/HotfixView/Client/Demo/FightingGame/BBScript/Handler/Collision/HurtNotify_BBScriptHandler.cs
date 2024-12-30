@@ -94,9 +94,9 @@ namespace ET.Client
             //2. 跳过代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
-            while (++index < parser.opDict.Count)
+            while (++index < parser.OpDict.Count)
             {
-                string opline = parser.opDict[index];
+                string opline = parser.OpDict[index];
                 if (opline.Equals("EndNotify:"))
                 {
                     endIndex = index;

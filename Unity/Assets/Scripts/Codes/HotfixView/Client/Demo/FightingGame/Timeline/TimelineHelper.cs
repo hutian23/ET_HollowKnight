@@ -19,7 +19,7 @@
             
             //渲染层 重新生成PlayableGraph
             self.GetTimelinePlayer().Init(info.Timeline);
-            parser.Init(info.opDict);
+            // parser.Init(info.opDict);
             // 切换行为前回调
             // 物理层回调 + 逻辑层回调
             EventSystem.Instance.PublishAsync(self.DomainScene(), new BeforeBehaviorReload() { instanceId = self.GetParent<Unit>().InstanceId, behaviorOrder = behaviorOrder }).Coroutine();

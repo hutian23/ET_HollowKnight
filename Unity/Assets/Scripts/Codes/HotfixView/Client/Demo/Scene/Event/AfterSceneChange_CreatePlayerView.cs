@@ -28,9 +28,9 @@ namespace ET.Client
             timelineComponent.AddComponent<b2Unit,long>(player.InstanceId);
             timelineComponent.AddComponent<InputWait>();
             timelineComponent.AddComponent<ObjectWait>();
-            timelineComponent.AddComponent<BBParser>();
             timelineComponent.AddComponent<BehaviorBuffer>();
-            timelineComponent.AddComponent<BBScripProcessor>();
+            timelineComponent.AddComponent<BBParser>();
+            timelineComponent.AddComponent<TimelineScripProcessor>();
         }
     }
 }

@@ -247,7 +247,7 @@ namespace ET.Client
                 self.handleQueue.Enqueue(handlerName);
              
                 //找到对应handler
-                InputHandler handler = DialogueDispatcherComponent.Instance.GetInputHandler(handlerName);
+                InputHandler handler = ScriptDispatcherComponent.Instance.GetInputHandler(handlerName);
                 string bufferType = handler.GetBufferType(); //缓冲类型
                 
                 //更新缓冲最大有效帧

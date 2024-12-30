@@ -16,7 +16,7 @@ namespace ET.Client
                 if (dialogueComponent.GetNode(targetID) is not VN_ChoiceNode choiceNode) return;
                 if (choiceNode.NeedCheck)
                 {
-                    int ret = DialogueDispatcherComponent.Instance.Checks(unit, choiceNode.checkList);
+                    int ret = ScriptDispatcherComponent.Instance.Checks(unit, choiceNode.checkList);
                     if (ret != 0) return;
                 }
 
@@ -39,7 +39,7 @@ namespace ET.Client
                     if (dialogueComponent.GetNode(targetID) is not VN_ChoiceNode choiceNode) return;
                     if (choiceNode.NeedCheck)
                     {
-                        int ret = DialogueDispatcherComponent.Instance.Checks(unit, choiceNode.checkList);
+                        int ret = ScriptDispatcherComponent.Instance.Checks(unit, choiceNode.checkList);
                         if (ret != 0) return;
                     }
 

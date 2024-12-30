@@ -16,7 +16,7 @@ namespace ET.Client
 
             //exec trigger
             BBScriptData data = BBScriptData.Create(self.trigger, 0, null);
-            bool ret = DialogueDispatcherComponent.Instance.GetTrigger(self.triggerType).Check(parser, data);
+            bool ret = ScriptDispatcherComponent.Instance.GetTrigger(self.triggerType).Check(parser, data);
             data.Recycle();
 
             if (!ret) return;
@@ -80,9 +80,9 @@ namespace ET.Client
             //3. skip callback group
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index + 1;
-            while (++index < parser.opDict.Count)
+            while (++index < parser.OpDict.Count)
             {
-                string opLine = parser.opDict[index];
+                string opLine = parser.OpDict[index];
                 if (opLine.Equals("EndCallback:"))
                 {
                     endIndex = index;

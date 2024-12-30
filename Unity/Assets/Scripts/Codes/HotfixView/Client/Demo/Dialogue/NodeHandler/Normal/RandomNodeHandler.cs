@@ -13,7 +13,7 @@ namespace ET.Client
             node.random.ForEach(i =>
             {
                 DialogueNode child = dialogueComponent.GetNode(i);
-                if(child.NeedCheck && DialogueDispatcherComponent.Instance.Checks(unit,child.checkList) != 0) return;
+                if(child.NeedCheck && ScriptDispatcherComponent.Instance.Checks(unit,child.checkList) != 0) return;
                 randomList.Add(i);
             });
             
