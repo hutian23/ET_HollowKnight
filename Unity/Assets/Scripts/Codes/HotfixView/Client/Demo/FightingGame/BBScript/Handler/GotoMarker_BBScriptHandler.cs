@@ -2,8 +2,9 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (BBParser))]
-    public class GotoMarker_BBScriptHandler: BBScriptHandler
+    [FriendOf(typeof(BBParser))]
+    [FriendOf(typeof(BehaviorInfo))]
+    public class GotoMarker_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
@@ -23,12 +24,12 @@ namespace ET.Client
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BehaviorInfo info = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
-            
-            int markerPointer = info.GetMarker(match.Groups["marker"].Value);
+
+            int markerPointer = parser.GetMarkerPointer(info.behaviorName, match.Groups["marker"].Value);
             parser.Coroutine_Pointers[data.CoroutineID] = markerPointer;
-            
+
             await TimerComponent.Instance.WaitFrameAsync(token);
-            return token.IsCancel()? Status.Failed : Status.Success;
+            return token.IsCancel() ? Status.Failed : Status.Success;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using MongoDB.Bson;
 using UnityEngine;
 
 namespace ET.Client
@@ -17,7 +18,7 @@ namespace ET.Client
             TextAsset asset = timelineComponent.GetTimelinePlayer().BBPlayable.BBScript;
 
             //1. 初始化
-            bbParser.Cancel();
+            bbParser.Init();
 
             //2. 解析textAsset
             string[] opLines = asset.text.Split('\n');
@@ -25,28 +26,73 @@ namespace ET.Client
             for (int i = 0; i < opLines.Length; i++)
             {
                 string op = opLines[i].Trim();
-                if (string.IsNullOrEmpty(op) || op.StartsWith('#')) continue;
+                if (string.IsNullOrEmpty(op) || op.StartsWith('#'))
+                {
+                    continue;
+                }
                 bbParser.OpDict[pointer++] = op;
             }
-
+            
             //3. 记录代码块头指针 
             pointer = 0;
             while (pointer < bbParser.OpDict.Count)
             {
-                string _opLine = bbParser.OpDict[pointer];
+                string opLine = bbParser.OpDict[pointer];
                 string pattern = @"\[(.*?)\]";
-                Match match = Regex.Match(_opLine, pattern);
+                Match match = Regex.Match(opLine, pattern);
                 if (match.Success)
                 {
-                    bbParser.GroupDict[match.Groups[1].Value] = pointer;
+                    bbParser.GroupPointerSet.Add(pointer);
                 }
                 pointer++;
             }
             
-            //4. RootInit协程(纯同步的!!!!这里不应该有异步逻辑)
-            bbParser.Invoke(1, bbParser.CancellationToken).Coroutine();
+            //4. 解析代码块
+            foreach (int index in bbParser.GroupPointerSet)
+            {
+                DataGroup group = DataGroup.Create();
+                // groupName
+                string opLine = bbParser.OpDict[index];
+                string pattern = @"\[(.*?)\]";
+                Match match = Regex.Match(opLine, pattern);
+                group.groupName = match.Groups[1].Value;
+
+                // groupStartIndex
+                group.startIndex = index;
+                // group Function Marker
+                pointer = index + 1;
+                while (pointer < bbParser.OpDict.Count)
+                {
+                    //执行超出代码块
+                    if (bbParser.GroupPointerSet.Contains(pointer)) break;
+                    string _opLine = bbParser.OpDict[pointer];
+                    //匹配函数指针
+                    string _pattern = "@([^:]+)";
+                    Match _match = Regex.Match(_opLine, _pattern);
+                    if (_match.Success)
+                    {
+                        group.funcPointers.TryAdd(_match.Groups[1].Value, pointer);
+                    }
+                
+                    //匹配Marker指针
+                    string _pattern2 = @"SetMarker:\s+'([^']*)'";
+                    Match _match2 = Regex.Match(_opLine, _pattern2);
+                    if (_match2.Success)
+                    {
+                        group.markerPointers.TryAdd(_match2.Groups[1].Value, pointer);
+                    }
+                    pointer++;
+                }
+                // group endIndex
+                group.endIndex = pointer;
+                bbParser.GroupDict.TryAdd(group.groupName, group);
+            }
             
-            //TODO: 默认行为
+            //4. RootInit协程(纯同步的!!!!这里不应该有异步逻辑)
+            bbParser.Invoke(bbParser.GetFunctionPointer("Root","RootInit"), bbParser.CancellationToken).Coroutine();
+            
+            //5. 进入默认行为
+            timelineComponent.Reload(0);
         }
     }
 }

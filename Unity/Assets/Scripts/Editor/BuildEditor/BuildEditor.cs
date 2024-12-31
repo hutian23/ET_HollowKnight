@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using ET.Client;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -195,6 +190,11 @@ namespace ET
                 BuildAssembliesHelper.MongoHelper_EditorInit();
             }
 
+            if (GUILayout.Button("更新脚本"))
+            {
+                AssetDatabase.Refresh();
+            }
+            
             GUILayout.Space(5);
         }
 

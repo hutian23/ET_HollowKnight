@@ -13,9 +13,6 @@ namespace Timeline
     {
         public string timelineName = "New BBTimeline";
         
-        [TextArea(10, 30)]
-        public string Script;
-        
         [NonSerialized, OdinSerialize]
         public List<BBTrack> Tracks = new();
         

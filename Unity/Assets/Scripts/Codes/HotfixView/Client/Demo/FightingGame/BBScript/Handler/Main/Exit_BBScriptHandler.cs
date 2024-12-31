@@ -24,7 +24,7 @@
                 {
                     continue;
                 }
-                if (info.BehaviorCheck())
+                if (info.Trigger())
                 {
                     targetOrder = info.behaviorOrder;
                     break;

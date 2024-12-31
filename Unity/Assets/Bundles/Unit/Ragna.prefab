@@ -520,9 +520,8 @@ MonoBehaviour:
   instanceId: 0
   Hertz: 60
   ApplyRootMotion: 1
-  BBPlayable: {fileID: 11400000, guid: b08df29221071a849b0e549f7223945d, type: 2}
+  BBPlayable: {fileID: 11400000, guid: 94b58ded95a18bf49958a695850fae83, type: 2}
   CurrentTimeline: {fileID: 11400000, guid: 3db21ea503a2acf41a86a07c8518ad0d, type: 2}
-  initPos: {x: 0, y: 0, z: 0}
 --- !u!114 &7237696647212242221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,5 +551,3 @@ MonoBehaviour:
     gameObject: {fileID: 3556958695720729756}
   - key: Other
     gameObject: {fileID: 1278987118862638616}
-  - key: GroundCheckPoint
-    gameObject: {fileID: 0}

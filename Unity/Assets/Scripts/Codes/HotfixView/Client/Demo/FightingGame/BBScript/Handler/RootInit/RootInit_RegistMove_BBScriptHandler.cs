@@ -37,7 +37,6 @@ namespace ET.Client
             info.Timeline = timeline;
             info.behaviorOrder = order;
             info.behaviorName = match.Groups["behaviorName"].Value;
-            info.LoadSkillInfo(timeline);
             buffer.behaviorNameMap.Add(info.behaviorName,info.Id); //快速访问到组件
             buffer.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
             buffer.DescendInfoList.Add(info.Id);

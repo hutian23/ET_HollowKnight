@@ -23,7 +23,7 @@
                 {
                     break;
                 }
-                if (info.BehaviorCheck())
+                if (info.Trigger())
                 {
                     currentOrder = info.behaviorOrder;
                     break;

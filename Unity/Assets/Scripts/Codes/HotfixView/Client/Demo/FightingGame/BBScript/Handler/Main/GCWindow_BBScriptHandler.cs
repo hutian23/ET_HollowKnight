@@ -20,7 +20,7 @@
                     continue;
                 }
                 
-                if ((info.moveType > curInfo.moveType || buffer.ContainGCOption(info.behaviorOrder)) && info.BehaviorCheck())
+                if ((info.moveType > curInfo.moveType || buffer.ContainGCOption(info.behaviorOrder)) && info.Trigger())
                 {
                     currentOrder = info.behaviorOrder;
                     break;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ET.Client;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEditor;
@@ -13,9 +11,6 @@ namespace Timeline
     {
         public TextAsset BBScript;
         
-        [TextArea(15,60)]
-        public string rootScript;
-
         [OdinSerialize]
         public Dictionary<string, BBTimeline> timelineDict = new();
         

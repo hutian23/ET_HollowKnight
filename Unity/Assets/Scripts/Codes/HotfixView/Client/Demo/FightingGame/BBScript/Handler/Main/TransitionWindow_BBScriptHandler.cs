@@ -20,7 +20,7 @@
                     continue;
                 }
 
-                if (info.BehaviorCheck())
+                if (info.Trigger())
                 {
                     currenOrder = info.behaviorOrder;
                     break;

@@ -9,7 +9,8 @@ namespace ET.Client
     public class BBParser: Entity, IAwake, IDestroy, ILoad
     {
         public Dictionary<int, string> OpDict = new();
-        public Dictionary<string, int> GroupDict = new();
+        public Dictionary<string, DataGroup> GroupDict = new();
+        public HashSet<int> GroupPointerSet = new();
         
         public ETCancellationToken CancellationToken; // 热重载时取消所有BBParser子协程
         public Dictionary<long, int> Coroutine_Pointers = new(); // 协程ID --> 协程指针
@@ -39,6 +40,36 @@ namespace ET.Client
             ObjectPool.Instance.Recycle(this);
         }
     }
+
+    #region DataGroup
+    public class DataGroup
+    {
+        public string groupName;
+        // 维护代码块起始、结束索引
+        public int startIndex;
+        public int endIndex;
+        // 代码块内函数头指针
+        public Dictionary<string, int> funcPointers = new();
+        public Dictionary<string, int> markerPointers = new();
+        
+        public static DataGroup Create()
+        {
+            DataGroup dataGroup = ObjectPool.Instance.Fetch<DataGroup>();
+            dataGroup.Recycle();
+            return ObjectPool.Instance.Fetch<DataGroup>();
+        }
+
+        public void Recycle()
+        {
+            groupName = string.Empty;
+            startIndex = 0;
+            endIndex = 0; 
+            funcPointers.Clear();
+            markerPointers.Clear();
+        }
+    }
+    
+    #endregion
     
     #region If
     public enum SyntaxType

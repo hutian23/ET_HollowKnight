@@ -14,7 +14,7 @@
             foreach (int order in buffer.WhiffOptions)
             {
                 BehaviorInfo info = buffer.GetInfoByOrder(order);
-                if (info.BehaviorCheck())
+                if (info.Trigger())
                 {
                     currentOrder = info.behaviorOrder;
                     break;
