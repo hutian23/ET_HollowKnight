@@ -1,6 +1,6 @@
-﻿using System.Text.RegularExpressions;
-using MongoDB.Bson;
-using UnityEngine;
+﻿using System.IO;
+using System.Text.RegularExpressions;
+using Timeline;
 
 namespace ET.Client
 {
@@ -14,14 +14,25 @@ namespace ET.Client
             //组件
             TimelineScripProcessor processor = Root.Instance.Get(args.instanceId) as TimelineScripProcessor;
             TimelineComponent timelineComponent = processor.GetParent<TimelineComponent>();
+            TimelinePlayer timelinePlayer = timelineComponent.GetTimelinePlayer();
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
-            TextAsset asset = timelineComponent.GetTimelinePlayer().BBPlayable.BBScript;
 
             //1. 初始化
             bbParser.Init();
 
             //2. 解析textAsset
-            string[] opLines = asset.text.Split('\n');
+            string script = string.Empty;
+            if (Define.IsEditor)
+            {
+                script = File.ReadAllText(timelinePlayer.GetScriptPath());
+            }
+            else
+            {
+                //TODO 打包后...
+            }
+            if (string.IsNullOrEmpty(script)) return;
+            
+            string[] opLines = script.Split('\n');
             int pointer = 0;
             for (int i = 0; i < opLines.Length; i++)
             {
@@ -56,7 +67,7 @@ namespace ET.Client
                 string pattern = @"\[(.*?)\]";
                 Match match = Regex.Match(opLine, pattern);
                 group.groupName = match.Groups[1].Value;
-
+            
                 // groupStartIndex
                 group.startIndex = index;
                 // group Function Marker

@@ -19,7 +19,7 @@ namespace ET
             DontDestroyOnLoad(gameObject);
 
             AppDomain.CurrentDomain.UnhandledException += (_, e) => { Log.Error(e.ExceptionObject.ToString()); };
-
+            
             Game.AddSingleton<MainThreadSynchronizationContext>();
 
             // 命令行参数
@@ -37,7 +37,6 @@ namespace ET
             Game.AddSingleton<CoroutineLockComponent>();
 
             ETTask.ExceptionHandler += Log.Error;
-
             Game.AddSingleton<CodeLoader>().Start();
 
             fixedUpdate.Start();

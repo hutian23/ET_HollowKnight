@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using ET;
+using ET.EventType;
 using Sirenix.OdinInspector;
 using Timeline.Editor;
 using UnityEngine;
@@ -95,8 +97,12 @@ namespace Timeline
                 DestroyImmediate(go);
             }
         }
-#endif
 
+        public string GetScriptPath()
+        {
+            return BBPlayable.BBScript.GetPath();
+        }
+#endif
         public BBTimeline GetTimeline(string timelineName)
         {
             return BBPlayable.GetTimeline(timelineName);

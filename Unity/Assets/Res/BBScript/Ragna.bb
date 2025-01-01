@@ -65,6 +65,7 @@ InputType: RunHold;
 return;
 
 @Main:
+LogWarning: '222';
 #PreRun
 UpdateFlip;
 #SetTransition: 'PreSquit';

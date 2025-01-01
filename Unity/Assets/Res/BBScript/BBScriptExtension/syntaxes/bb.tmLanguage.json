@@ -1,0 +1,94 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "bb",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#function"
+		},
+		{
+			"include": "#bracket"
+		},
+		{
+			"include": "#operaType"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#number"
+		},
+		{
+			"include": "#boolean"
+		}
+	],
+	"repository": {
+		"comment": {
+			"begin": "#",
+			"end": "\\n",
+			"name": "comment.line.double-slash"
+		},
+		"function":{
+			"begin": "@",
+			"end": ":",
+			"name": "support.function"
+		},
+		"bracket":{
+			"patterns": [
+				{
+					"name": "storage.modifier",
+					"match": "\\[(.*?)\\]"
+				},
+				{
+					"name": "storage.modifier",
+					"match": "\\((.*?)\\)"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.bb",
+					"match": "\\b(BeginIf|EndIf|BeginLoop|EndLoop|SetMarker|GotoMarker|return)\\b"
+				}
+			]
+		},
+		"operaType": {
+			"patterns": [
+				{
+					"name": "entity.name.type",
+					"match": "^\\s*\\w+"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.html",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"name": "comment.block",
+					"match": "\\\\."
+				}
+			]
+		},
+		"number": {
+			"name": "constant.numeric",
+			"match": "\\b\\d+\\.?\\d*\\b"  
+		},
+		"boolean": {
+			"patterns": [
+				{
+					"name": "entity.name.tag",
+					"match": "\\b(true|false)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.bb"
+}

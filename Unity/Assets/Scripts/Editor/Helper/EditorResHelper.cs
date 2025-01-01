@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
+using TextAsset = UnityEngine.TextCore.Text.TextAsset;
 
 namespace ET
 {
-    public class EditorResHelper
+    public static class EditorResHelper
     {
         /// <summary>
         /// 获取文件夹内所有的预制跟场景路径
         /// </summary>
         /// <param name="srcPath">源文件夹</param>
-        /// <param name="subDire">是否获取子文件夹</param>
         /// <returns></returns>
         public static List<string> GetPrefabsAndScenes(string srcPath)
         {

@@ -189,12 +189,6 @@ namespace ET
             {
                 BuildAssembliesHelper.MongoHelper_EditorInit();
             }
-
-            if (GUILayout.Button("更新脚本"))
-            {
-                AssetDatabase.Refresh();
-            }
-            
             GUILayout.Space(5);
         }
 
