@@ -26,7 +26,13 @@ namespace ET.Client
             //1. 场景内的static刚体当成一个部分
             Body sceneBody = World.CreateBody(new BodyDef() { BodyType = BodyType.StaticBody });
             
-            //2. SceneBox作为sceneBody的Fixture
+            //2. 建立映射
+            b2Body b2Body = b2WorldManager.Instance.AddChild<b2Body>();
+            b2Body.body = sceneBody;
+            b2Body.unitId = 0;
+            b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
+            
+            //3. SceneBox作为sceneBody的Fixture
             foreach (b2Box sceneBox in _World.GetComponentsInChildren<b2Box>())
             {
                 PolygonShape shape = new();
@@ -39,20 +45,16 @@ namespace ET.Client
                     UserData = new FixtureData()
                     {
                         InstanceId = 0, // 代表SceneBox
+                        Name = sceneBox.info.boxName,
+                        Type = FixtureType.Default,
                         LayerMask = LayerType.Ground,
-                        UserData = sceneBox.info,
-                        IsTrigger = sceneBox.IsTrigger
+                        IsTrigger = sceneBox.IsTrigger,
+                        UserData = sceneBox.info
                     }
                 };
-                sceneBody.CreateFixture(fixtureDef);
+                b2Body.CreateFixture(fixtureDef);
             }
             
-            //3. 建立映射
-            b2Body b2Body = b2WorldManager.Instance.AddChild<b2Body>();
-            b2Body.body = sceneBody;
-            b2Body.unitId = 0;
-            b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
-
             await ETTask.CompletedTask;
         }
     }

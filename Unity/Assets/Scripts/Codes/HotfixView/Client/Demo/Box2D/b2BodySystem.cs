@@ -107,27 +107,29 @@ namespace ET.Client
 
         #region Fixture
         /// <summary>
-        /// eg. 取消行为时，销毁hitbox
+        /// 取消行为时，销毁hitbox
         /// </summary>
         /// <param name="self"></param>
-        public static void ClearRuntimeGenerated(this b2Body self)
+        public static void ClearHitBoxes(this b2Body self)
         {
-            if (b2WorldManager.Instance.IsLocked())
-            {
-                Log.Error($"cannot dispose fixture while b2World is locked!!");
-                return;
-            }
-
             //销毁hitbox
+            QueueComponent<Fixture> removeQueue = QueueComponent<Fixture>.Create();
             for (int i = 0; i < self.Fixtures.Count; i++)
             {
                 Fixture fixture = self.Fixtures[i];
                 FixtureData data = (FixtureData)fixture.UserData;
-                
-                self.Fixtures.Remove(fixture);
-                self.FixtureDict.Remove(data.Name);
-                self.body.DestroyFixture(fixture);
+                if (data.Type is FixtureType.Hitbox)
+                {
+                    removeQueue.Enqueue(fixture);
+                }
             }
+            int count = removeQueue.Count;
+            while (count-- > 0)
+            {
+                Fixture fixture = removeQueue.Dequeue();
+                self.DestroyFixture(fixture);
+            }
+            removeQueue.Dispose();
         }
         
         /// <summary>
@@ -169,6 +171,13 @@ namespace ET.Client
             self.body.DestroyFixture(fixture);
             return true;
         }
+
+        public static bool DestroyFixture(this b2Body self, Fixture fixture)
+        {
+            FixtureData data = (FixtureData)fixture.UserData;
+            self.DestroyFixture(data.Name);
+            return true;
+        }
         
         public static void CreateFixture(this b2Body self,FixtureDef fixtureDef)
         {
@@ -178,13 +187,15 @@ namespace ET.Client
                 return;
             }
             FixtureData data = (FixtureData)fixtureDef.UserData;
+            if (self.FixtureDict.ContainsKey(data.Name))
+            {
+                Log.Error($"already contain fixture!, name: {data.Name}");
+                return;
+            }
             
             Fixture fixture = self.body.CreateFixture(fixtureDef);
             self.Fixtures.Add(fixture);
-            if (!self.FixtureDict.TryAdd(data.Name, fixture))
-            {
-                Log.Error($"already contain fixture!, name: {data.Name}");
-            }
+            self.FixtureDict.Add(data.Name, fixture);
         }
         #endregion
     }

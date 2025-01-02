@@ -110,6 +110,7 @@ namespace Timeline
         //传入碰撞事件时调用的组件instanceId
         public long InstanceId;
         public string Name;
+        public int Type;
         
         //碰撞事件
         public int TriggerEnterId;
@@ -118,8 +119,6 @@ namespace Timeline
         
         public long LayerMask;
         public bool IsTrigger;
-        //运行时创建的碰撞盒，热重载时销毁该夹具
-        public bool IsRuntimeGenerated;
         
         public object UserData; 
     }
@@ -129,6 +128,13 @@ namespace Timeline
         public const int None = 0;
         public const int Ground = 2 << 0;
         public const int Unit = 2 << 1;
+    }
+    
+    public static class FixtureType
+    {
+        public const int None = 0;
+        public const int Default = 1;
+        public const int Hitbox = 2;
     }
 
 #if UNITY_EDITOR

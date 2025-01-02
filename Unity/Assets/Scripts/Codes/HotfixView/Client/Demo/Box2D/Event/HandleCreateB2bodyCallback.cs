@@ -1,5 +1,4 @@
 ﻿using Box2DSharp.Dynamics;
-using UnityEngine;
 
 namespace ET.Client
 {
@@ -30,11 +29,6 @@ namespace ET.Client
             b2Body.body = body;
             b2Body.unitId = args.instanceId;
             b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
-            
-            //3. 存在b2Box子物体，生成夹具(行为机切换行为时不会销毁，热重载时销毁)
-            Unit unit = Root.Instance.Get(args.instanceId) as Unit;
-            GameObject go = unit.GetComponent<GameObjectComponent>().GameObject; 
-            Log.Warning(go.GetComponentsInChildren<b2Box>().Length.ToString());
         }
     }
 }

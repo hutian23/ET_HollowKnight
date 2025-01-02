@@ -8,46 +8,42 @@ namespace ET.Client
 {
     [Invoke]
     [FriendOf(typeof (b2Body))]
-    [FriendOf(typeof (b2Unit))]
     public class HandleUpdateFlipCallback: AInvokeHandler<UpdateFlipCallback>
     {
         public override void Handle(UpdateFlipCallback args)
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
-            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
-
-            //1. Set Flip
             b2Body b2Body = b2WorldManager.Instance.GetBody(args.instanceId);
-            b2Body.Flip = args.curFlip;
-            //1-1 go sync flipState
+            
+            //1. 显示层更新朝向
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
             go.transform.localScale = new Vector3( b2Body.GetFlip(), 1, 1);
             
-            //1. 更新hitbox朝向
-            b2Body.ClearFixtures();
-            if (b2Unit.keyFrame != null)
+            //2. 逻辑层
+            QueueComponent<FixtureData> dataQueue = new QueueComponent<FixtureData>();
+            foreach (Fixture fixture in b2Body.Fixtures)
             {
-                foreach (BoxInfo info in b2Unit.keyFrame.boxInfos)
+                dataQueue.Enqueue((FixtureData)fixture.UserData);
+            }
+            b2Body.ClearFixtures();
+            
+            int count = dataQueue.Count;
+            while (count-- > 0)
+            {
+                FixtureData data = dataQueue.Dequeue();
+                if (data.UserData is not BoxInfo info) continue;
+                //reset param of fixtureDef
+                data.InstanceId = b2Body.InstanceId;
+                PolygonShape shape = new();
+                shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);
+                FixtureDef fixtureDef = new()
                 {
-                    PolygonShape shape = new();
-                    shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);
-                    FixtureDef fixtureDef = new()
-                    {
-                        Shape = shape,
-                        Density = 1.0f,
-                        Friction = 0.0f,
-                        UserData = new FixtureData()
-                        {
-                            InstanceId = b2Body.InstanceId, 
-                            LayerMask = LayerType.Unit, 
-                            IsTrigger = info.hitboxType is not HitboxType.Squash,
-                            UserData = info,
-                            TriggerStayId = TriggerStayType.CollisionEvent,
-                        },
-                    };
-                    b2Body.CreateFixture(fixtureDef);
-                }   
+                    Shape = shape,
+                    Density = 1.0f,
+                    Friction = 0.0f,
+                    UserData = data
+                };
+                b2Body.CreateFixture(fixtureDef);
             }
         }
     }

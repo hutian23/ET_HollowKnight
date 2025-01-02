@@ -34,6 +34,10 @@ namespace Box2DSharp.Common
 
         public static Color Black { get; } = new Color(0x0000000);
 
+        public static Color Gray { get; } = new Color(0xFF7F7F7F);
+
+        public static Color Cyan { get; } = new Color(0xFF0FFFF);
+        
         public static Color White { get; } = FromArgb(255, 255, 255);
 
         public static Color Transparent { get; } = FromArgb(0, 0, 0, 0);

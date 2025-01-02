@@ -16,7 +16,7 @@ namespace ET.Client
             InputWait inputWait = unit.GetComponent<TimelineComponent>().GetComponent<InputWait>();
             
             //1. 销毁旧hitbox
-            b2Body.ClearRuntimeGenerated();
+            b2Body.ClearHitBoxes();
             //2. 更新hitbox
             b2Unit.Init();
             //3. 更新朝向

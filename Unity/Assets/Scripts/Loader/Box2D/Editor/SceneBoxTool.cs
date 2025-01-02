@@ -56,7 +56,7 @@ namespace ET
                             break;
                         case HitboxType.Gizmos:
                             boundsHandle.SetColor(Color.cyan);
-                            break;
+                            break;  
                         case HitboxType.None:
                             boundsHandle.SetColor(Color.white);
                             break;

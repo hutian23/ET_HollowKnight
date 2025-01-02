@@ -9,6 +9,7 @@ namespace ET.Client
     [FriendOf(typeof(b2Unit))]
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(b2WorldManager))]
+    //HitboxTrack的回调
     public class HandleUpdateHitBoxCallback : AInvokeHandler<UpdateHitboxCallback>
     {
         public override void Handle(UpdateHitboxCallback args)
@@ -20,10 +21,9 @@ namespace ET.Client
             //更新关键帧
             b2Unit.keyFrame = args.Keyframe;
 
-            //1. Dispose old hitBoxFixtures
-            b2Body.ClearFixtures();
-            
-            //2. update hitBoxFixtures
+            //1. 销毁旧的夹具
+            b2Body.ClearHitBoxes();
+            //2. 更新hitbox
             foreach (BoxInfo info in args.Keyframe.boxInfos)
             {
                 PolygonShape shape = new();
@@ -37,9 +37,9 @@ namespace ET.Client
                     {
                         InstanceId = b2Body.InstanceId,
                         Name = info.boxName,
+                        Type = FixtureType.Hitbox,
                         LayerMask = LayerType.Unit,
                         IsTrigger = info.hitboxType is not HitboxType.Squash,
-                        IsRuntimeGenerated = true,
                         UserData = info,
                         TriggerStayId = TriggerStayType.CollisionEvent,
                     },

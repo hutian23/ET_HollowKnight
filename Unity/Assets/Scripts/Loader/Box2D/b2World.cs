@@ -358,8 +358,8 @@ namespace ET
                             HitboxType.Squash => Global.Settings.ShowSquashBox? Color.Yellow : Color.Transparent,
                             HitboxType.Throw => Global.Settings.ShowThrowBox? Color.Blue : Color.Transparent,
                             HitboxType.Proximity => Global.Settings.ShowProximityBox? Color.Magenta : Color.Transparent,
-                            HitboxType.Other => Global.Settings.ShowOtherBox? Color.Black : Color.Transparent,
-                            HitboxType.Gizmos => Global.Settings.ShowGizmos? Color.White : Color.Transparent,
+                            HitboxType.Other => Global.Settings.ShowOtherBox? Color.Gray : Color.Transparent,
+                            HitboxType.Gizmos => Global.Settings.ShowGizmos? Color.Cyan : Color.Transparent,
                             _ => defaultColor
                         };
                     }

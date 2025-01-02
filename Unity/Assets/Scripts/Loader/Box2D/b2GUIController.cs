@@ -140,8 +140,8 @@ namespace ET
                         {
                             ImGui.Checkbox("HitBox", ref Global.Settings.ShowHitBox);
                             ImGui.Checkbox("HurtBox", ref Global.Settings.ShowHurtBox);
-                            ImGui.Checkbox("ThrowBox", ref Global.Settings.ShowThrowBox);
                             ImGui.Checkbox("SquashBox", ref Global.Settings.ShowSquashBox);
+                            ImGui.Checkbox("ThrowBox", ref Global.Settings.ShowThrowBox);
                             ImGui.Checkbox("ProximityBox", ref Global.Settings.ShowProximityBox);
                             ImGui.Checkbox("OtherBox", ref Global.Settings.ShowOtherBox);
                             ImGui.Checkbox("Gizmos", ref Global.Settings.ShowGizmos);
