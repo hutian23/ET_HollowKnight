@@ -15,7 +15,8 @@ namespace ET.Client
             {
                 self.body = null;
                 self.unitId = 0;
-                self.hitBoxFixtures.Clear();
+                self.Fixtures.Clear();
+                self.FixtureDict.Clear();
                 self.trans = default;
                 self.Flip = FlipState.Left;
                 self.UpdateFlag = false;
@@ -104,30 +105,87 @@ namespace ET.Client
             return self.body.GetPosition();
         }
 
-        public static void ClearHitbox(this b2Body self)
+        #region Fixture
+        /// <summary>
+        /// eg. 取消行为时，销毁hitbox
+        /// </summary>
+        /// <param name="self"></param>
+        public static void ClearRuntimeGenerated(this b2Body self)
         {
             if (b2WorldManager.Instance.IsLocked())
             {
                 Log.Error($"cannot dispose fixture while b2World is locked!!");
                 return;
             }
-            for (int i = 0; i < self.hitBoxFixtures.Count; i++)
+
+            //销毁hitbox
+            for (int i = 0; i < self.Fixtures.Count; i++)
             {
-                Fixture fixture = self.hitBoxFixtures[i];
+                Fixture fixture = self.Fixtures[i];
+                FixtureData data = (FixtureData)fixture.UserData;
+                
+                self.Fixtures.Remove(fixture);
+                self.FixtureDict.Remove(data.Name);
                 self.body.DestroyFixture(fixture);
             }
-            self.hitBoxFixtures.Clear();
         }
-
-        public static void CreateHitbox(this b2Body self,FixtureDef fixtureDef)
+        
+        /// <summary>
+        /// 热重载时调用，销毁所有夹具
+        /// </summary>
+        /// <param name="self"></param>
+        public static void ClearFixtures(this b2Body self)
         {
             if (b2WorldManager.Instance.IsLocked())
             {
                 Log.Error($"cannot dispose fixture while b2World is locked!!");
                 return;
             }
-            Fixture fixture = self.body.CreateFixture(fixtureDef);
-            self.hitBoxFixtures.Add(fixture);
+            for (int i = 0; i < self.Fixtures.Count; i++)
+            {
+                Fixture fixture = self.Fixtures[i];
+                self.body.DestroyFixture(fixture);
+            }
+            self.Fixtures.Clear();
+            self.FixtureDict.Clear();
         }
+
+        public static bool DestroyFixture(this b2Body self, string fixtureName)
+        {
+            if (b2WorldManager.Instance.IsLocked())
+            {
+                Log.Error($"cannot destroy fixture while b2World is locked!!");
+                return false;
+            }
+
+            if (!self.FixtureDict.TryGetValue(fixtureName, out Fixture fixture))
+            {
+                Log.Error($"not found fixture: {fixtureName}");
+                return false;
+            }
+
+            self.Fixtures.Remove(fixture);
+            self.FixtureDict.Remove(fixtureName);
+            self.body.DestroyFixture(fixture);
+            return true;
+        }
+        
+        public static void CreateFixture(this b2Body self,FixtureDef fixtureDef)
+        {
+            if (b2WorldManager.Instance.IsLocked())
+            {
+                Log.Error($"cannot create fixture while b2World is locked!!");
+                return;
+            }
+            FixtureData data = (FixtureData)fixtureDef.UserData;
+            
+            Fixture fixture = self.body.CreateFixture(fixtureDef);
+            self.Fixtures.Add(fixture);
+            if (!self.FixtureDict.TryAdd(data.Name, fixture))
+            {
+                Log.Error($"already contain fixture!, name: {data.Name}");
+            }
+        }
+        #endregion
     }
 }

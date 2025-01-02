@@ -107,13 +107,19 @@ namespace Timeline
     //有点套娃 --- > Fixture.UserData ---> FixtureData ---> UserData
     public struct FixtureData
     {
+        //传入碰撞事件时调用的组件instanceId
         public long InstanceId;
+        public string Name;
+        
+        //碰撞事件
         public int TriggerEnterId;
         public int TriggerStayId;
         public int TriggerExitId;
         
         public long LayerMask;
         public bool IsTrigger;
+        //运行时创建的碰撞盒，热重载时销毁该夹具
+        public bool IsRuntimeGenerated;
         
         public object UserData; 
     }

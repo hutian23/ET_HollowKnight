@@ -11,7 +11,8 @@ namespace ET.Client
     {
         public Body body;
         public long unitId; // 记录unit的instanceId
-        public List<Fixture> hitBoxFixtures = new(); // 当前帧的判定框,更新关键帧(UpdateHitboxCallback/UpdateFlipCallback)时刷新这个列表
+        public List<Fixture> Fixtures = new();
+        public Dictionary<string, Fixture> FixtureDict = new(); // 方便通过夹具名称查询夹具
         public Transform trans; // 当前step中b2World中刚体的位置转换信息
         public FlipState Flip = FlipState.Left;
         public bool UpdateFlag; // 手动刷新渲染层

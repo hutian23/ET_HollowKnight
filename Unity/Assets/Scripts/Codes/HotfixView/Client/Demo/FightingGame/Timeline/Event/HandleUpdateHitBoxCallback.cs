@@ -21,7 +21,7 @@ namespace ET.Client
             b2Unit.keyFrame = args.Keyframe;
 
             //1. Dispose old hitBoxFixtures
-            b2Body.ClearHitbox();
+            b2Body.ClearFixtures();
             
             //2. update hitBoxFixtures
             foreach (BoxInfo info in args.Keyframe.boxInfos)
@@ -36,13 +36,15 @@ namespace ET.Client
                     UserData = new FixtureData()
                     {
                         InstanceId = b2Body.InstanceId,
+                        Name = info.boxName,
                         LayerMask = LayerType.Unit,
                         IsTrigger = info.hitboxType is not HitboxType.Squash,
+                        IsRuntimeGenerated = true,
                         UserData = info,
                         TriggerStayId = TriggerStayType.CollisionEvent,
                     },
                 };
-                b2Body.CreateHitbox(fixtureDef);
+                b2Body.CreateFixture(fixtureDef);
             }
         }
     }

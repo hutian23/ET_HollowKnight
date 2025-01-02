@@ -11,7 +11,7 @@
             b2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<b2Unit>();
 
             //1. 销毁旧夹具
-            b2Body.ClearHitbox();
+            b2Body.ClearFixtures();
             //2. 更新hitbox
             b2Unit.Init();
 

@@ -1516,12 +1516,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 63dd20a4e0def8c48a88e8fb1d21572a,
-        type: 3}
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1574,23 +1568,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
-      propertyPath: asset
-      value: 
-      objectReference: {fileID: 1042094116111776886, guid: 6414006f0b0708f4d8cf3d64f00a91f2,
-        type: 3}
-    - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
-        type: 3}
-      propertyPath: ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
-        type: 3}
-      propertyPath: CurrentTimeline
-      value: 
-      objectReference: {fileID: 11400000, guid: 42480f4718ee6124089d800eb7e91ec4,
-        type: 2}
-    - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
-        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
@@ -1598,19 +1575,24 @@ PrefabInstance:
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: serializationData.ReferencedUnityObjects.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: serializationData.ReferencedUnityObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 42480f4718ee6124089d800eb7e91ec4,
+      objectReference: {fileID: 11400000, guid: b458a6d3716ca96489f7794bcc0bb6d9,
         type: 2}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: serializationData.ReferencedUnityObjects.Array.data[1]
       value: 
       objectReference: {fileID: 2107020367}
+    - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: serializationData.ReferencedUnityObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

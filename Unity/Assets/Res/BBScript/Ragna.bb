@@ -27,6 +27,18 @@ RegistMove: (Rg_Idle)
 RegistMove: (Rg_Run)
   MoveType: Move;
   EndMove:
+RegistMove: (Rg_SquitToIdle)
+  MoveType: Move;
+  EndMove:
+RegistMove: (Rg_Squit)
+  MoveType: Move;
+  EndMove:
+RegistMove: (Rg_AirBrone)
+  MoveType: Move;
+  EndMove:
+RegistMove: (Rg_Jump)
+  MoveType: Move;
+  EndMove:
 return;
 
 
@@ -57,7 +69,6 @@ BBSprite: 'Idle_12', 4;
 GotoMarker: 'Loop';
 Exit;
 
-
 [Rg_Run]
 @Trigger:
 InAir: false;
@@ -65,10 +76,9 @@ InputType: RunHold;
 return;
 
 @Main:
-LogWarning: '222';
 #PreRun
 UpdateFlip;
-#SetTransition: 'PreSquit';
+SetTransition: 'PreSquit';
 InputBuffer: true;
 DefaultWindow;
 MoveX:13000;
@@ -91,4 +101,109 @@ BBSprite: 'RunToIdle_1', 3;
 BBSprite: 'RunToIdle_2', 3;
 BBSprite: 'RunToIdle_3', 3;
 BBSprite: 'RunToIdle_4', 3;
+Exit;
+
+[Rg_SquitToIdle]
+@Trigger:
+Transition: 'SquitToIdle';
+return;
+
+@Main:
+DefaultWindow;
+BBSprite: 'SquitToIdle_2', 2;
+BBSprite: 'SquitToIdle_1', 2;
+Exit;
+
+[Rg_Squit]
+@Trigger:
+InAir: false;
+InputType: SquatHold;
+return;
+
+@Main:
+SetVelocityX: 0;
+UpdateFlip;
+InputBuffer: true;
+DefaultWindow;
+BeginIf: (TransitionCached: 'PreSquit')
+  BBSprite: 'PreSquit_1', 3;
+  BBSprite: 'PreSquit_2', 3;
+  EndIf:
+BeginLoop: (InputType: SquatHold)
+  BBSprite: 'Squit_1', 4;
+  BBSprite: 'Squit_2', 4;
+  BBSprite: 'Squit_3', 4;
+  BBSprite: 'Squit_4', 4;
+  BBSprite: 'Squit_5', 4;
+  BBSprite: 'Squit_6', 4;
+  BBSprite: 'Squit_7', 4;
+  BBSprite: 'Squit_6', 4;
+  BBSprite: 'Squit_5', 4;
+  BBSprite: 'Squit_4', 4;
+  BBSprite: 'Squit_3', 4;
+  BBSprite: 'Squit_2', 4;
+  EndLoop:
+TransitionWindow;
+BBSprite: 'PreSquit_2', 2;
+BBSprite: 'PreSquit_1', 2;
+Exit;
+
+[Rg_AirBrone]
+@Trigger:
+InAir: true;
+return;
+
+@Main:
+InputBuffer: true;
+DefaultWindow;
+AirMoveX: 15000;
+UpdateFlip;
+Gravity: 100000;
+BeginIf: (TransitionCached: 'JumpToFall')
+  BBSprite: 'JumpToFall_1', 4;
+  BBSprite: 'JumpToFall_2', 4;
+  BBSprite: 'JumpToFall_3', 4;
+  BBSprite: 'JumpToFall_4', 4;
+  BBSprite: 'JumpToFall_5', 4;
+  EndIf:
+BeginLoop: (InAir: true)
+  BBSprite: 'Fall_1', 3;
+  BBSprite: 'Fall_2', 3;
+  EndLoop:
+#MiddleLand
+RemoveAirMoveX;
+SetVelocityX: 0;
+TransitionWindow;
+BBSprite: 'Land_3', 3;
+BBSprite: 'Land_4', 3;
+BBSprite: 'Land_5', 3;
+Exit;
+
+[Rg_Jump]
+@Trigger:
+NumericCheck: JumpCount > 0;
+InputType: JumpPressed;
+return;
+
+@Main:
+SetVelocityX: 0;
+BeginIf: (InAir: false)
+  BBSprite: 'PreJump_1', 2;
+  BBSprite: 'PreJump_2', 2;
+  EndIf: 
+AirMoveX: 15000;
+UpdateFlip;
+Gravity: 0;
+NumericAdd: JumpCount, -1;
+SetVelocityY: 20000;
+InputBuffer: true;
+BBSprite: 'Jump_1', 3;
+BBSprite: 'Jump_2', 1;
+GCWindow;
+BBSprite: 'Jump_2', 2;
+BBSprite: 'Jump_1', 3;
+Gravity: 100000;
+BBSprite: 'Jump_2', 3;
+BBSprite: 'Jump_1', 3;
+SetTransition: 'JumpToFall';
 Exit;

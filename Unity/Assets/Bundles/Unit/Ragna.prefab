@@ -322,6 +322,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6028462822895001818}
+  - {fileID: 5795073909200214184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7728331812354445377
@@ -365,7 +366,7 @@ SpriteRenderer:
   m_SortingLayerID: 2016810935
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1055419004, guid: b42d8d83a572c184f8d4a2ce68170e04, type: 3}
+  m_Sprite: {fileID: -1331877821, guid: a714674fa1a745f47809580dd5aa27ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -519,9 +520,9 @@ MonoBehaviour:
       Data: 
   instanceId: 0
   Hertz: 60
-  ApplyRootMotion: 1
+  ApplyRootMotion: 0
   BBPlayable: {fileID: 11400000, guid: 94b58ded95a18bf49958a695850fae83, type: 2}
-  CurrentTimeline: {fileID: 11400000, guid: 3db21ea503a2acf41a86a07c8518ad0d, type: 2}
+  CurrentTimeline: {fileID: 11400000, guid: b458a6d3716ca96489f7794bcc0bb6d9, type: 2}
 --- !u!114 &7237696647212242221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,3 +552,53 @@ MonoBehaviour:
     gameObject: {fileID: 3556958695720729756}
   - key: Other
     gameObject: {fileID: 1278987118862638616}
+--- !u!1 &7892157484707082887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5795073909200214184}
+  - component: {fileID: 1461294529254569060}
+  m_Layer: 0
+  m_Name: GroundCheckBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5795073909200214184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892157484707082887}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7728331812354445378}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461294529254569060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892157484707082887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6899cf270ea44770ac76d099e190c859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsTrigger: 1
+  info:
+    boxName: GroundCheckBox
+    hitboxType: 6
+    center: {x: 0, y: -2.2}
+    size: {x: 2, y: 1}

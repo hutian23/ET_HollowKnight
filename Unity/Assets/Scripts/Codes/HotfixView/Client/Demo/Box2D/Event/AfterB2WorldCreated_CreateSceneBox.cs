@@ -27,7 +27,7 @@ namespace ET.Client
             Body sceneBody = World.CreateBody(new BodyDef() { BodyType = BodyType.StaticBody });
             
             //2. SceneBox作为sceneBody的Fixture
-            foreach (SceneBox sceneBox in _World.GetComponentsInChildren<SceneBox>())
+            foreach (b2Box sceneBox in _World.GetComponentsInChildren<b2Box>())
             {
                 PolygonShape shape = new();
                 shape.SetAsBox(sceneBox.info.size.x / 2, sceneBox.info.size.y / 2, sceneBox.info.center.ToVector2(), 0f);

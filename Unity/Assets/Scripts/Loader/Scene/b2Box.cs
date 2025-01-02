@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET
 {
-    public class SceneBox : CastShapeBase
+    public class b2Box : CastShapeBase
     {
         public bool IsTrigger;
         public BoxInfo info;

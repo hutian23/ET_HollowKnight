@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace ET
 {
-    [EditorTool("Edit SceneBox Shape", typeof(SceneBox))]
-    public class SceneBoxTool : CastShapeTool<SceneBox>
+    [EditorTool("Edit SceneBox Shape", typeof(b2Box))]
+    public class SceneBoxTool : CastShapeTool<b2Box>
     {
         private readonly BoxBoundsHandle m_boundsHandle = new();
 
@@ -25,7 +25,7 @@ namespace ET
         {
             foreach (UnityEngine.Object obj in targets)
             {
-                if (!(obj is SceneBox castShape) || Mathf.Approximately(castShape.transform.lossyScale.sqrMagnitude, 0f))
+                if (!(obj is b2Box castShape) || Mathf.Approximately(castShape.transform.lossyScale.sqrMagnitude, 0f))
                     continue;
 
                 // collider matrix is center multiplied by transform's matrix with custom postmultiplied lossy scale matrix
@@ -77,13 +77,13 @@ namespace ET
             }
         }
         
-        protected override void CopyColliderPropertiesToCollider(SceneBox castShape)
+        protected override void CopyColliderPropertiesToCollider(b2Box castShape)
         {
             m_boundsHandle.center = TransformColliderCenterToHandleSpace(castShape.transform, castShape.info.center);
             m_boundsHandle.size = Vector3.Scale(castShape.info.size, castShape.transform.lossyScale);
         }
 
-        protected override void CopyHandlePropertiesToCollider(SceneBox castShape)
+        protected override void CopyHandlePropertiesToCollider(b2Box castShape)
         {
             castShape.info.center = TransformHandleCenterToColliderSpace(castShape.transform, m_boundsHandle.center);
             Vector3 size = Vector3.Scale(m_boundsHandle.size, InvertScaleVector(castShape.transform.lossyScale));
@@ -92,7 +92,7 @@ namespace ET
         }
     }
 
-    [CustomEditor(typeof(SceneBox))]
+    [CustomEditor(typeof(b2Box))]
     [CanEditMultipleObjects]
     public class SceneBoxEditor: Editor
     {

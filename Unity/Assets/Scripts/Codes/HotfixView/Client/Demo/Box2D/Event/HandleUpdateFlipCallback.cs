@@ -24,30 +24,30 @@ namespace ET.Client
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
             go.transform.localScale = new Vector3( b2Body.GetFlip(), 1, 1);
             
-            //2. Dispose old hitBoxFixtures
-            b2Body.ClearHitbox();
-            
-            //3. FixedUpdate hitBoxFixtures
-            if(b2Unit.keyFrame == null) return;
-            foreach (BoxInfo info in b2Unit.keyFrame.boxInfos)
+            //1. 更新hitbox朝向
+            b2Body.ClearFixtures();
+            if (b2Unit.keyFrame != null)
             {
-                PolygonShape shape = new();
-                shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);
-                FixtureDef fixtureDef = new()
+                foreach (BoxInfo info in b2Unit.keyFrame.boxInfos)
                 {
-                    Shape = shape,
-                    Density = 1.0f,
-                    Friction = 0.0f,
-                    UserData = new FixtureData()
+                    PolygonShape shape = new();
+                    shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);
+                    FixtureDef fixtureDef = new()
                     {
-                        InstanceId = b2Body.InstanceId, 
-                        LayerMask = LayerType.Unit, 
-                        IsTrigger = info.hitboxType is not HitboxType.Squash,
-                        UserData = info,
-                        TriggerStayId = TriggerStayType.CollisionEvent,
-                    },
-                };
-                b2Body.CreateHitbox(fixtureDef);
+                        Shape = shape,
+                        Density = 1.0f,
+                        Friction = 0.0f,
+                        UserData = new FixtureData()
+                        {
+                            InstanceId = b2Body.InstanceId, 
+                            LayerMask = LayerType.Unit, 
+                            IsTrigger = info.hitboxType is not HitboxType.Squash,
+                            UserData = info,
+                            TriggerStayId = TriggerStayType.CollisionEvent,
+                        },
+                    };
+                    b2Body.CreateFixture(fixtureDef);
+                }   
             }
         }
     }
