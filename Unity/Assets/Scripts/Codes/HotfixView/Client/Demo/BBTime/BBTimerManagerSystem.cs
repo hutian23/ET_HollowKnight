@@ -44,7 +44,6 @@ namespace ET.Client
 
         private static void Step(this BBTimerManager self, long Accumulator)
         {
-            //执行顺序
             //1. 场景计时器的定时器和异步任务
             BBTimerComponent sceneTimer = self.SceneTimer();
             long preFrame = sceneTimer.GetNow();
@@ -64,10 +63,7 @@ namespace ET.Client
                     long instanceId = self.instanceIds.Dequeue();
                     // 组件已经销毁
                     BBTimerComponent bbTimer = Root.Instance.Get(instanceId) as BBTimerComponent;
-                    if (bbTimer == null)
-                    {
-                        continue;
-                    }
+                    if (bbTimer == null || bbTimer.InstanceId == 0) continue;
                     bbTimer.TimerUpdate(166666);
                     self.instanceIds.Enqueue(instanceId);
                 }

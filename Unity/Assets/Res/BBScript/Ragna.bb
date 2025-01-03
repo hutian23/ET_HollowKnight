@@ -9,7 +9,7 @@ NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
 # 创建碰撞盒: (Center), (Size)
-AirCheckBox: 0, -2300, 1250, 1000;
+AirCheckBox: 0, -2000, 1250, 1000;
 # 落地回调
 LandCallback:
   NumericSet: DashCount, 2;
@@ -227,7 +227,7 @@ return;
 
 @Main:
 MarkerEvent: (GC_Start)
-  HitStop: 5, 30;
+  HitStop: 5, 20;
   EndMarkerEvent:
 StartTimeline;
 Exit;

@@ -109,7 +109,7 @@ namespace ET.Client
                 bbTimer.Remove(ref timer);
                 loopToken.Cancel();
             });
-
+            
             //4. start loop coroutine
             await LoopCoroutine(parser, startIndex, endIndex, loopToken);
             

@@ -30,7 +30,7 @@ namespace ET.Client
             timelineComponent.Reload(info.behaviorOrder);
 
             await ETTask.CompletedTask;
-            return Status.Success;
+            return Status.Return;
         }
     }
 }

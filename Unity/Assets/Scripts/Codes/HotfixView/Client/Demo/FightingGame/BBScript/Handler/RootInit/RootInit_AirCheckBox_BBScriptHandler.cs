@@ -22,11 +22,15 @@ namespace ET.Client
             int count = infoQueue.Count;
             while (count-- > 0)
             {
+                bool enableAirCheck = self.GetParam<bool>("EnableAirCheck");
+                if (!enableAirCheck) break;
+                
                 CollisionInfo info = infoQueue.Dequeue();
                 infoQueue.Enqueue(info);
 
-                if (info.dataA.Name.Equals("AirCheckBox") &&
-                    info.dataB.LayerMask is LayerType.Ground && !info.dataB.IsTrigger)
+                if (info.dataA.Name.Equals("AirCheckBox") && 
+                    info.dataB.LayerMask is LayerType.Ground && 
+                    !info.dataB.IsTrigger)
                 {
                     //落地回调
                     if (self.GetParam<bool>("InAir"))
@@ -80,6 +84,7 @@ namespace ET.Client
 
             //1. 注册变量
             timelineComponent.RegistParam("InAir", false);
+            timelineComponent.RegistParam("EnableAirCheck", true);
             
             //2. 创建夹具
             PolygonShape shape = new();

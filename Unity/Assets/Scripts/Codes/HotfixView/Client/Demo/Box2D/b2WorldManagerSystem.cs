@@ -53,7 +53,6 @@ namespace ET.Client
                         self.DestroyBody(body.Id);
                         continue;
                     }
-
                     self.BodyQueue.Enqueue(instanceId);
                 }
             }

@@ -15,8 +15,8 @@
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             b2Body b2Body = b2WorldManager.Instance.GetBody(parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
             b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
-            
-            Log.Warning(b2Unit.Velocity.ToString());
+
+            Log.Warning(timelineComponent.GetComponent<BBTimerComponent>().GetNow().ToString());
             
             await ETTask.CompletedTask;
             return Status.Success;
