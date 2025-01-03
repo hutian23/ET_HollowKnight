@@ -24,39 +24,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Layers
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Timeline.BehaviorLayer, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Parameters
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[ET.Client.SharedVariable, Unity.Loader]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: timelineDict
       Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Timeline.BBTimeline,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Timeline.BBTimeline,
         Unity.Loader]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
@@ -106,7 +80,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  BBScript: {fileID: 4900000, guid: 603f41057190d71439afbc9bbe4b77ca, type: 3}
-  rootScript: "@RootInit:\nPoolObject: 'SlashRing', 2;\nRegistMove: (Boss_WallThrow)\n   
-    MoveType: None;\n    EndMove:\nRegistMove: (Boss_Dash)\n    MoveType: None;\n   
-    EndMove:\nRegistMove: (Boss_Dstab)\n    MoveType: None;\n    EndMove:\nreturn;"
+  BBScript: {fileID: 0}

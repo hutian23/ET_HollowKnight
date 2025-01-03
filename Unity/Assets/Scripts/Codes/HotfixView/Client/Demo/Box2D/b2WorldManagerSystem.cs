@@ -1,4 +1,5 @@
-﻿using ET.Event;
+﻿using Box2DSharp.Dynamics;
+using ET.Event;
 using Testbed.Abstractions;
 using Camera = UnityEngine.Camera;
 
@@ -35,21 +36,25 @@ namespace ET.Client
                 self.Reload();
             }
         }
-        
-        // 销毁刚体
+
         public class b2WorldManagerPreStepSystem : PreStepSystem<b2WorldManager>
         {
             protected override void PreStepUpdate(b2WorldManager self)
             {
-                int count = self.DisposeQueue.Count;
+                int count = self.BodyQueue.Count;
                 while (count-- > 0)
                 {
-                    long instanceId = self.DisposeQueue.Dequeue();
-                    if (!self.BodyDict.ContainsKey(instanceId))
+                    long instanceId = self.BodyQueue.Dequeue();
+                    //映射的unit已经销毁,销毁对应刚体
+                    Unit unit = Root.Instance.Get(instanceId) as Unit;
+                    if (unit == null || unit.InstanceId == 0)
                     {
+                        b2Body body = self.GetBody(unit.InstanceId);
+                        self.DestroyBody(body.Id);
                         continue;
                     }
-                    self.DestroyBody(instanceId);
+
+                    self.BodyQueue.Enqueue(instanceId);
                 }
             }
         }
@@ -65,7 +70,7 @@ namespace ET.Client
                 body.Dispose();
             }
             self.BodyDict.Clear();
-            self.DisposeQueue.Clear();
+            self.BodyQueue.Clear();
             
             //reload timer
             BBTimerComponent PreStepTimer = self.GetChild<BBTimerComponent>(self.PreStepTimer);
@@ -86,6 +91,23 @@ namespace ET.Client
         }
 
         #region B2body
+
+        public static b2Body CreateBody(this b2WorldManager self, long unitId, BodyDef bodyDef)
+        {
+            if (self.BodyDict.ContainsKey(unitId))
+            {
+                Log.Error($"already exist b2body with unitId: {unitId}");
+                return null;
+            }
+
+            b2Body b2Body = b2WorldManager.Instance.AddChild<b2Body>();
+            b2Body.body = b2WorldManager.Instance.B2World.World.CreateBody(bodyDef);
+            b2Body.unitId = unitId;
+            self.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
+            self.BodyQueue.Enqueue(b2Body.unitId);
+            return b2Body;
+        }
+        
         /// <summary>
         /// 通过Unit.InstanceId查找对应的b2Body
         /// </summary>
@@ -113,6 +135,7 @@ namespace ET.Client
             }
             self.B2World.World.DestroyBody(b2Body.body);
             b2Body.Dispose();
+            self.BodyDict.Remove(instanceId);
         }
 
         /// <summary>

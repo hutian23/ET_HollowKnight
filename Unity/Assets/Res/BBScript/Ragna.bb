@@ -1,6 +1,6 @@
 [Root]
 @RootInit:
-SetPos: 1100, 10000;
+SetPos: 0, 10000;
 Gravity: 100000;
 NumericType: MaxGravity, 150000;
 NumericType: MaxFall, 45000;
@@ -9,7 +9,7 @@ NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
 # 创建碰撞盒: (Center), (Size)
-AirCheckBox: 0, -2300, 1350, 1000;
+AirCheckBox: 0, -2300, 1250, 1000;
 # 落地回调
 LandCallback:
   NumericSet: DashCount, 2;
@@ -44,6 +44,12 @@ RegistMove: (Rg_AirBrone)
 RegistMove: (Rg_Jump)
   MoveType: Move;
   EndMove:
+RegistMove: (Rg_AirDash)
+  MoveType: Special;
+  EndMove:
+RegistMove: (Rg_IdleAnim)
+  MoveType: Etc;
+  EndMove:
 return;
 
 
@@ -54,7 +60,7 @@ return;
 @Main:
 SetVelocityX: 0;
 UpdateFlip;
-#IdleAnim: Rg_IdleAnim;
+IdleAnim: Rg_IdleAnim;
 InputBuffer: true;
 DefaultWindow;
 SetTransition: 'PreSquit';
@@ -212,3 +218,24 @@ BBSprite: 'Jump_2', 3;
 BBSprite: 'Jump_1', 3;
 SetTransition: 'JumpToFall';
 Exit;
+
+[Rg_AirDash]
+@Trigger:
+InAir: true;
+InputType: DashPressed;
+return;
+
+@Main:
+MarkerEvent: (GC_Start)
+  HitStop: 5, 30;
+  EndMarkerEvent:
+StartTimeline;
+Exit;
+
+[Rg_IdleAnim]
+@Main:
+InputBuffer: true;
+TransitionWindow;
+StartTimeline;
+Exit;
+return;

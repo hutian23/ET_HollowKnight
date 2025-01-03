@@ -23,18 +23,6 @@ namespace ET.Client
                 EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.unitId});
             }
         }
-        
-        [FriendOf(typeof(b2WorldManager))]
-        public class B2UnitDestroySystem : DestroySystem<b2Unit>
-        {
-            protected override void Destroy(b2Unit self)
-            {
-                // Unit销毁时， 物理层对应的刚体在PreStep生命周期中销毁
-                b2WorldManager.Instance.DisposeQueue.Enqueue(self.unitId);
-                // 刚体不再参与碰撞事件
-                b2WorldManager.Instance.EnableBody(self.unitId, false);
-            }
-        }
 
         public static void Init(this b2Unit self)
         {

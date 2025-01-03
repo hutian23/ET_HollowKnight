@@ -11,7 +11,7 @@ namespace ET.Client
         public b2Game Game;
         public b2World B2World;
         public Dictionary<long, long> BodyDict = new(); // Unit和B2Body的映射关系
-        public Queue<long> DisposeQueue = new(); // 刚体的销毁只能在PreStep生命周期中执行
+        public Queue<long> BodyQueue = new(); // 刚体的销毁只能在PreStep生命周期中执行
         
         //物理模拟相关的生命周期函数
         public long PreStepTimer;
