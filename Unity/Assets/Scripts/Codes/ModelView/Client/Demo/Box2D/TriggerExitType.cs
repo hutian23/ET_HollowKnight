@@ -3,7 +3,6 @@
     public static class TriggerExitType
     {
         public const int None = 0;
-        public const int GroundCollision = 1;
-        public const int CollisionEvent = 2;
+        public const int AirCheck = 1;
     }
 }

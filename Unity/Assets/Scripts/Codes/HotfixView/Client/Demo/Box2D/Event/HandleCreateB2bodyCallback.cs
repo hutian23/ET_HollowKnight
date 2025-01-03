@@ -29,6 +29,32 @@ namespace ET.Client
             b2Body.body = body;
             b2Body.unitId = args.instanceId;
             b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
+            
+            //3. 子物体挂载b2Box脚本，生成夹具
+            // Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
+            // GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
+            // foreach (b2Box box in go.GetComponentsInChildren<b2Box>())
+            // {
+            //     PolygonShape shape = new();
+            //     shape.SetAsBox(box.info.size.x / 2, box.info.size.y / 2, box.info.center.ToVector2(), 0f);
+            //     FixtureDef fixtureDef = new()
+            //     {
+            //         Shape = shape,
+            //         Density = 1.0f,
+            //         Friction = 0.0f,
+            //         UserData = new FixtureData()
+            //         {
+            //             InstanceId = b2Body.InstanceId, // 代表SceneBox
+            //             Name = box.info.boxName,
+            //             Type = FixtureType.Default,
+            //             LayerMask = LayerType.Unit,
+            //             IsTrigger = box.IsTrigger,
+            //             UserData = box.info,
+            //             TriggerStayId = TriggerStayType.CollisionEvent
+            //         }
+            //     };
+            //     b2Body.CreateFixture(fixtureDef);
+            // }
         }
     }
 }

@@ -33,7 +33,6 @@ namespace ET.Client
                 FixtureData data = dataQueue.Dequeue();
                 if (data.UserData is not BoxInfo info) continue;
                 //reset param of fixtureDef
-                data.InstanceId = b2Body.InstanceId;
                 PolygonShape shape = new();
                 shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * b2Body.GetFlip(), info.center.y), 0f);
                 FixtureDef fixtureDef = new()

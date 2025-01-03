@@ -50,7 +50,9 @@ namespace ET.Client
                 markerEvent.Dispose();
             }
             self.markerEventDict.Clear();
-
+            
+            self.Token.Cancel();
+            self.Token = new ETCancellationToken();
             self.SetHertz(60);
         }
         

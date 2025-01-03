@@ -28,6 +28,7 @@
         public const int ShakeTimer = 110;
         public const int LoopTimer = 111;
         public const int CallbackCheckTimer = 112;
+        public const int AirCheckTimer = 113;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;

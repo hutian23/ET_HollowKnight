@@ -179,23 +179,25 @@ namespace ET.Client
             return true;
         }
         
-        public static void CreateFixture(this b2Body self,FixtureDef fixtureDef)
+        public static Fixture CreateFixture(this b2Body self,FixtureDef fixtureDef)
         {
             if (b2WorldManager.Instance.IsLocked())
             {
                 Log.Error($"cannot create fixture while b2World is locked!!");
-                return;
+                return null;
             }
             FixtureData data = (FixtureData)fixtureDef.UserData;
             if (self.FixtureDict.ContainsKey(data.Name))
             {
                 Log.Error($"already contain fixture!, name: {data.Name}");
-                return;
+                return null;
             }
             
             Fixture fixture = self.body.CreateFixture(fixtureDef);
             self.Fixtures.Add(fixture);
             self.FixtureDict.Add(data.Name, fixture);
+
+            return fixture;
         }
         #endregion
     }

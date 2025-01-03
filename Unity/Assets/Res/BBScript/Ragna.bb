@@ -8,8 +8,13 @@ NumericType: MaxJump, 2;
 NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
-# 注册落地回调
-RegistAirCheck;
+# 创建碰撞盒: (Center), (Size)
+AirCheckBox: 0, -2300, 1350, 1000;
+# 落地回调
+LandCallback:
+  NumericSet: DashCount, 2;
+  NumericSet: JumpCount, 2;
+  EndCallback:
 # Input
 RegistInput: RunHold;
 RegistInput: SquatHold;
@@ -96,7 +101,7 @@ BeginLoop: (InputType: RunHold)
 CancelMoveX;
 SetVelocityX: 0;
 #Transition
-#TransitionWindow;
+TransitionWindow;
 BBSprite: 'RunToIdle_1', 3;
 BBSprite: 'RunToIdle_2', 3;
 BBSprite: 'RunToIdle_3', 3;
