@@ -22,6 +22,18 @@ namespace ET.Event
     {
         public CollisionInfo info;
     }
+    public struct CollisionEnterCallback
+    {
+        public CollisionInfo info;
+    }
+    public struct CollisionStayCallback
+    {
+        public CollisionInfo info;
+    }
+    public struct CollisionExitCallback
+    {
+        public CollisionInfo info;
+    }
     #endregion
     
     public struct CollisionInfo

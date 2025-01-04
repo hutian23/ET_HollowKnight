@@ -4,18 +4,16 @@ using Timeline;
 
 namespace ET.Client
 {
-    [Invoke]
-    [FriendOf(typeof(TimelineScripProcessor))]
+    [Invoke(ProcessType.TimelineProcess)]
     [FriendOf(typeof(BBParser))]
-    public class HandleTimelineScriptCallback : AInvokeHandler<TimelineScriptCallback>
+    public class HandleTimelineScriptCallback : AInvokeHandler<ProcessBBScriptCallback>
     {
-        public override void Handle(TimelineScriptCallback args)
+        public override void Handle(ProcessBBScriptCallback args)
         {
             //组件
-            TimelineScripProcessor processor = Root.Instance.Get(args.instanceId) as TimelineScripProcessor;
-            TimelineComponent timelineComponent = processor.GetParent<TimelineComponent>();
+            BBParser bbParser = Root.Instance.Get(args.instanceId) as BBParser;
+            TimelineComponent timelineComponent = bbParser.GetParent<TimelineComponent>();
             TimelinePlayer timelinePlayer = timelineComponent.GetTimelinePlayer();
-            BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
             //1. 初始化
             bbParser.Init();

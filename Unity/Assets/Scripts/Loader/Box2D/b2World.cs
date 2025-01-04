@@ -83,13 +83,16 @@ namespace ET
         public override void PreSolve(Contact contact, in Manifold oldManifold)
         {
             base.PreSolve(contact, in oldManifold);
-            if (contact.FixtureA.UserData is FixtureData dataA &&
-                contact.FixtureB.UserData is FixtureData dataB &&
-                (dataA.IsTrigger || dataB.IsTrigger))
+            if (contact.FixtureA.UserData is not FixtureData dataA || contact.FixtureB.UserData is not FixtureData dataB)
+            {
+                return;
+            }
+            //触发器不参与碰撞
+            if (dataA.IsTrigger || dataB.IsTrigger)
             {
                 contact.SetEnabled(false);
-                EventSystem.Instance.Invoke(new PostSolveCallback(){Contact = contact});
             }
+            EventSystem.Instance.Invoke(new PreSolveCallback(){Contact = contact});
         }
         
         #region Render
@@ -392,7 +395,7 @@ namespace ET
         public Contact Contact;
     }
     
-    public struct PostSolveCallback
+    public struct PreSolveCallback
     {
         public Contact Contact;
     }

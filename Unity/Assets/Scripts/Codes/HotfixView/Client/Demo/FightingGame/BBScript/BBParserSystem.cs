@@ -7,14 +7,32 @@ namespace ET.Client
     [FriendOf(typeof (DialogueComponent))]
     public static class BBParserSystem
     {
+        public class BBParserAwakeSystem : AwakeSystem<BBParser,int>
+        {
+            protected override void Awake(BBParser self, int processType)
+            {
+                self.ProcessorType = processType;
+                EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
+            }
+        }
+        
         public class BBParserDestroySystem: DestroySystem<BBParser>
         {
             protected override void Destroy(BBParser self)
             {
                 self.Init();
+                self.ProcessorType = 0;
             }
         }
 
+        public class BBParserLoadSystem : LoadSystem<BBParser>
+        {
+            protected override void Load(BBParser self)
+            {
+                EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
+            }
+        }
+        
         /// <summary>
         /// 取消当前所有子协程
         /// </summary>
@@ -246,6 +264,11 @@ namespace ET.Client
             return true;
         }
 
+        public static bool ContainGroup(this BBParser self, string groupName)
+        {
+            return self.GroupDict.ContainsKey(groupName);
+        }
+
         public static int GetGroupPointer(this BBParser self, string groupName)
         {
             if (!self.GroupDict.TryGetValue(groupName, out DataGroup group))
@@ -256,6 +279,15 @@ namespace ET.Client
             return group.startIndex;
         }
 
+        public static bool ContainFunction(this BBParser self, string groupName, string funcName)
+        {
+            if (!self.GroupDict.TryGetValue(groupName, out DataGroup group))
+            {
+                return false;
+            }
+            return group.funcPointers.ContainsKey(funcName);
+        }
+        
         public static int GetFunctionPointer(this BBParser self, string groupName, string funcName)
         {
             if (!self.GroupDict.TryGetValue(groupName, out DataGroup group))

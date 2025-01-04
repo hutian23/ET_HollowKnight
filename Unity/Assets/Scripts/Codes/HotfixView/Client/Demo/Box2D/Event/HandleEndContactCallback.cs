@@ -12,7 +12,6 @@ namespace ET.Client
             Fixture fixtureA = args.Contact.FixtureA;
             Fixture fixtureB = args.Contact.FixtureB;
             
-            
             if (fixtureA == null || fixtureB == null || 
                 fixtureA.UserData is not FixtureData dataA ||
                 fixtureB.UserData is not FixtureData dataB)
@@ -20,34 +19,69 @@ namespace ET.Client
                 return;
             }
 
-            if (dataA.TriggerExitId != 0)
+            if (dataA.IsTrigger || dataB.IsTrigger)
             {
-                EventSystem.Instance.Invoke(dataA.TriggerExitId,new TriggerExitCallback()
+                if (dataA.TriggerExitId != 0)
                 {
-                    info = new CollisionInfo()
+                    EventSystem.Instance.Invoke(dataA.TriggerExitId,new TriggerExitCallback()
                     {
-                        fixtureA = fixtureA,
-                        fixtureB =  fixtureB,
-                        dataA = dataA,
-                        dataB = dataB,
-                        Contact = args.Contact
-                    }
-                });
-            }
+                        info = new CollisionInfo()
+                        {
+                            fixtureA = fixtureA,
+                            fixtureB =  fixtureB,
+                            dataA = dataA,
+                            dataB = dataB,
+                            Contact = args.Contact
+                        }
+                    });
+                }
 
-            if (dataB.TriggerExitId != 0)
-            {
-                EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback()
+                if (dataB.TriggerExitId != 0)
                 {
-                    info =  new CollisionInfo()
+                    EventSystem.Instance.Invoke(dataB.TriggerExitId,new TriggerExitCallback()
                     {
-                        fixtureA = fixtureB,
-                        fixtureB = fixtureA,
-                        dataA = dataB,
-                        dataB = dataA,
-                        Contact = args.Contact
-                    }
-                });
+                        info =  new CollisionInfo()
+                        {
+                            fixtureA = fixtureB,
+                            fixtureB = fixtureA,
+                            dataA = dataB,
+                            dataB = dataA,
+                            Contact = args.Contact
+                        }
+                    });
+                }   
+            }
+            else
+            {
+                if (dataA.CollisionExitId != 0)
+                {
+                    EventSystem.Instance.Invoke(dataA.CollisionExitId,new CollisionExitCallback()
+                    {
+                        info = new CollisionInfo()
+                        {
+                            fixtureA = fixtureA,
+                            fixtureB =  fixtureB,
+                            dataA = dataA,
+                            dataB = dataB,
+                            Contact = args.Contact
+                        }
+                    });
+                }
+
+                if (dataB.CollisionExitId != 0)
+                {
+                    EventSystem.Instance.Invoke(dataB.CollisionExitId,new CollisionExitCallback()
+                    {
+                        info =  new CollisionInfo()
+                        {
+                            fixtureA = fixtureB,
+                            fixtureB = fixtureA,
+                            dataA = dataB,
+                            dataB = dataA,
+                            Contact = args.Contact
+                        }
+                    });
+                }
             }
         }
     }

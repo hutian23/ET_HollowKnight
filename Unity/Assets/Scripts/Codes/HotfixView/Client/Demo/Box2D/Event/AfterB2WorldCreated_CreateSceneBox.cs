@@ -33,7 +33,7 @@ namespace ET.Client
             b2WorldManager.Instance.BodyDict.TryAdd(b2Body.unitId, b2Body.Id);
             
             //3. SceneBox作为sceneBody的Fixture
-            foreach (b2Box sceneBox in _World.GetComponentsInChildren<b2Box>())
+            foreach (b2BoxCollider2D sceneBox in _World.GetComponentsInChildren<b2BoxCollider2D>())
             {
                 PolygonShape shape = new();
                 shape.SetAsBox(sceneBox.info.size.x / 2, sceneBox.info.size.y / 2, sceneBox.info.center.ToVector2(), 0f);
@@ -44,17 +44,24 @@ namespace ET.Client
                     Friction = 0.0f,
                     UserData = new FixtureData()
                     {
-                        InstanceId = 0, // 代表SceneBox
+                        InstanceId = b2Body.InstanceId, // 代表SceneBox
                         Name = sceneBox.info.boxName,
                         Type = FixtureType.Default,
                         LayerMask = LayerType.Ground,
                         IsTrigger = sceneBox.IsTrigger,
-                        UserData = sceneBox.info
+                        UserData = sceneBox.info,
+                        TriggerEnterId = TriggerEnterType.SceneBoxEvent,
+                        TriggerStayId = TriggerStayType.SceneBoxEvent,
+                        TriggerExitId = TriggerExitType.SceneBoxEvent,
+                        CollisionEnterId = CollisionEnterType.SceneBoxEvent,
+                        CollisionStayId = CollisionStayType.SceneBoxEvent,
+                        CollisionExitId = CollisionExitType.SceneBoxEvent,
                     }
                 };
                 b2Body.CreateFixture(fixtureDef);
             }
-            
+            //4. 处理碰撞事件
+            b2Body.AddComponent<BBParser, int>(ProcessType.SceneBoxProcess).AddComponent<SceneBoxHandler>();
             await ETTask.CompletedTask;
         }
     }

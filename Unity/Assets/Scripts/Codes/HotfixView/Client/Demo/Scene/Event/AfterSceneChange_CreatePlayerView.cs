@@ -29,8 +29,7 @@ namespace ET.Client
             timelineComponent.AddComponent<InputWait>();
             timelineComponent.AddComponent<ObjectWait>();
             timelineComponent.AddComponent<BehaviorBuffer>();
-            timelineComponent.AddComponent<BBParser>();
-            timelineComponent.AddComponent<TimelineScripProcessor>();
+            timelineComponent.AddComponent<BBParser, int>(ProcessType.TimelineProcess);
         }
     }
 }

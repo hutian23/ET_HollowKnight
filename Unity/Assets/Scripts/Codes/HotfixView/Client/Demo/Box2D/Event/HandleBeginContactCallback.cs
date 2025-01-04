@@ -19,34 +19,55 @@ namespace ET.Client
                 return;
             }
 
-            if (dataA.TriggerEnterId != 0)
+            if (dataA.IsTrigger || dataB.IsTrigger)
             {
-                EventSystem.Instance.Invoke(dataA.TriggerEnterId,new TriggerEnterCallback()
+                if (dataA.TriggerEnterId != 0)
                 {
-                    info = new CollisionInfo()
+                    EventSystem.Instance.Invoke(dataA.TriggerEnterId,new TriggerEnterCallback()
                     {
-                        fixtureA = fixtureA,
-                        fixtureB =  fixtureB,
-                        dataA = dataA,
-                        dataB = dataB,
-                        Contact = args.Contact
-                    }
-                });
-            }
+                        info = new CollisionInfo()
+                        {
+                            fixtureA = fixtureA,
+                            fixtureB =  fixtureB,
+                            dataA = dataA,
+                            dataB = dataB,
+                            Contact = args.Contact
+                        }
+                    });
+                }
 
-            if (dataB.TriggerEnterId != 0)
-            {
-                EventSystem.Instance.Invoke(dataB.TriggerEnterId,new TriggerEnterCallback()
+                if (dataB.TriggerEnterId != 0)
                 {
-                    info =  new CollisionInfo()
+                    EventSystem.Instance.Invoke(dataB.TriggerEnterId,new TriggerEnterCallback()
                     {
-                        fixtureA = fixtureB,
-                        fixtureB = fixtureA,
-                        dataA = dataB,
-                        dataB = dataA,
-                        Contact = args.Contact
-                    }
-                });
+                        info =  new CollisionInfo()
+                        {
+                            fixtureA = fixtureB,
+                            fixtureB = fixtureA,
+                            dataA = dataB,
+                            dataB = dataA,
+                            Contact = args.Contact
+                        }
+                    });
+                }   
+            }
+            else
+            {
+                if (dataA.CollisionEnterId != 0)
+                {
+                    EventSystem.Instance.Invoke(dataA.CollisionEnterId, new CollisionEnterCallback() { info = new CollisionInfo() 
+                    {
+                        fixtureA = fixtureA, fixtureB = fixtureB, dataA = dataA, dataB = dataB,Contact = args.Contact
+                    }});
+                }
+
+                if (dataB.CollisionEnterId != 0)
+                {
+                    EventSystem.Instance.Invoke(dataB.CollisionEnterId, new CollisionEnterCallback(){ info = new CollisionInfo()
+                    {
+                        fixtureA = fixtureB, fixtureB = fixtureA, dataA = dataB, dataB = dataA, Contact = args.Contact
+                    }});
+                }
             }
         }
     }

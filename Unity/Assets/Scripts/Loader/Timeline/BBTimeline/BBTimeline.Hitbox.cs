@@ -116,6 +116,10 @@ namespace Timeline
         public int TriggerEnterId;
         public int TriggerStayId;
         public int TriggerExitId;
+
+        public int CollisionEnterId;
+        public int CollisionStayId;
+        public int CollisionExitId;
         
         public long LayerMask;
         public bool IsTrigger;

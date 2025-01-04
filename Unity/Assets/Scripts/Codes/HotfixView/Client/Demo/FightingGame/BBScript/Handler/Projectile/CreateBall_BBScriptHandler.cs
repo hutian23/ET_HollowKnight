@@ -44,12 +44,12 @@ namespace ET.Client
             ballGo.transform.SetParent(GlobalComponent.Instance.Unit);
             ball.AddComponent<GameObjectComponent>().GameObject = ballGo;
 
-            TimelineComponent timelineComponent = ball.AddComponent<TimelineComponent>();
-            timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
-            timelineComponent.AddComponent<b2Unit, long>(ball.InstanceId);
-            timelineComponent.AddComponent<ObjectWait>();
-            timelineComponent.AddComponent<BBParser>();
-            timelineComponent.AddComponent<BehaviorBuffer>();
+            // TimelineComponent timelineComponent = ball.AddComponent<TimelineComponent>();
+            // timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
+            // timelineComponent.AddComponent<b2Unit, long>(ball.InstanceId);
+            // timelineComponent.AddComponent<ObjectWait>();
+            // timelineComponent.AddComponent<BBParser>();
+            // timelineComponent.AddComponent<BehaviorBuffer>();
 
             // 热重载时销毁ball
             EnemyManager.Instance.ReloadQueue.Enqueue(ball.InstanceId);

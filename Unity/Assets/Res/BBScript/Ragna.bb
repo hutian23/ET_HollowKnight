@@ -44,6 +44,9 @@ RegistMove: (Rg_AirBrone)
 RegistMove: (Rg_Jump)
   MoveType: Move;
   EndMove:
+RegistMove: (Rg_5B)
+  MoveType: Normal;
+  EndMove:
 RegistMove: (Rg_AirDash)
   MoveType: Special;
   EndMove:
@@ -232,10 +235,47 @@ MarkerEvent: (GC_Start)
 StartTimeline;
 Exit;
 
+[Rg_5B]
+@Trigger:
+InputType: 5LPPressed;
+InAir: false;
+return;
+
+@Main:
+SetTransition: 'PreSquit';
+MarkerEvent: (Whiff_Start)
+  InputBuffer: true;
+  WhiffWindow;
+  # WhiffOption: 'Rg_GroundDash';
+  EndMarkerEvent:
+MarkerEvent: (Hit_Start)
+  HitStop: 15, 10;
+  # 注册受击回调
+  HurtNotify: Once
+    HitParam: StopFrame, 0;
+    HitParam: ShakeLength, 200;
+    HitParam: ShakeFrame, 15;
+    HitParam: PushBack_V, -13000;
+    HitParam: PushBack_F, 38000;
+    Hit_UpdateFlip;
+    HitStun: 'Hurt2';
+    EndNotify:
+  # 注册攻击回调
+  WaitHit:
+    HitStop: 20, 10;
+    ScreenShake: 30, 70;
+    EndHit:
+  EndMarkerEvent:
+MarkerEvent: (Whiff_End)
+  GCWindow;
+  # GCOption: 'Rg_5C';
+  EndMarkerEvent:
+StartTimeline;
+Exit;
+
 [Rg_IdleAnim]
 @Main:
 InputBuffer: true;
 TransitionWindow;
 StartTimeline;
 Exit;
-return;

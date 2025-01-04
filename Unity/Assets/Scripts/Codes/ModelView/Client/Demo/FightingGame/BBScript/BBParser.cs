@@ -6,8 +6,9 @@ namespace ET.Client
     //运行时解析BBScript然后执行
     [ComponentOf]
     [ChildOf]
-    public class BBParser: Entity, IAwake, IDestroy, ILoad
+    public class BBParser: Entity, IAwake<int>, IDestroy, ILoad
     {
+        public int ProcessorType;
         public Dictionary<int, string> OpDict = new();
         public Dictionary<string, DataGroup> GroupDict = new();
         public HashSet<int> GroupPointerSet = new();
@@ -15,6 +16,11 @@ namespace ET.Client
         public ETCancellationToken CancellationToken; // 热重载时取消所有BBParser子协程
         public Dictionary<long, int> Coroutine_Pointers = new(); // 协程ID --> 协程指针
         public Dictionary<string, SharedVariable> ParamDict = new(); // 在携程内注册变量，携程执行完毕dispose
+    }
+    
+    public struct ProcessBBScriptCallback
+    {
+        public long instanceId;
     }
     
     public class BBScriptData
