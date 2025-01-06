@@ -12,6 +12,9 @@ namespace ET.Client
                 self.TriggerEnterQueue.Clear();
                 self.TriggerStayQueue.Clear();
                 self.TriggerExitQueue.Clear();
+                self.CollisionEnterQueue.Clear();
+                self.CollisionStayQueue.Clear();
+                self.CollisionExitQueue.Clear();
             }
         }
         

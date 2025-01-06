@@ -38,7 +38,7 @@ namespace ET.Client
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
                 {
-                    DialogueHelper.ScripMatchError(opLine);
+                    ScriptHelper.ScripMatchError(opLine);
                     return null;
                 }
 
@@ -88,7 +88,7 @@ namespace ET.Client
                         Match triggerMatch = Regex.Match(op, @"(.*?):");
                         if (!triggerMatch.Success)
                         {
-                            DialogueHelper.ScripMatchError(op);
+                            ScriptHelper.ScripMatchError(op);
                             return Status.Failed;
                         }
 

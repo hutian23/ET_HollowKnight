@@ -15,7 +15,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"Position: (?<XY>\w+) (?<Sign>[><=]+) (?<Position>\d+)");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return false;
             }
 

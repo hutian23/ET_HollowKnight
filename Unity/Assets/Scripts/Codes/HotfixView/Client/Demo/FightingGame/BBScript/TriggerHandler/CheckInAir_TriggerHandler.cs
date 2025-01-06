@@ -16,7 +16,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"InAir: (?<InAir>\w+)");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return false;
             }
 
@@ -32,7 +32,7 @@ namespace ET.Client
                     ret = !timelineComponent.GetParam<bool>("InAir");
                     break;
                 default:
-                    DialogueHelper.ScripMatchError(data.opLine);
+                    ScriptHelper.ScripMatchError(data.opLine);
                     throw new Exception();
             }
             return ret;

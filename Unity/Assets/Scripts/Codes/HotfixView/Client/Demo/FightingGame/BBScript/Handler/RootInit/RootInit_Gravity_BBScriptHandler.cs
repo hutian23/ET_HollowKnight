@@ -41,7 +41,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"Gravity: (?<gravity>\w+);");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 

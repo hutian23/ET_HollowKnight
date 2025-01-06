@@ -23,14 +23,14 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"RegistMove: \((?<behaviorName>\w+)\)");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
             BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetTimeline(match.Groups["behaviorName"].Value);
-
+            
             //2. 注册BehaviorInfo组件到BehaviorBuffer
             BehaviorInfo info = buffer.AddChild<BehaviorInfo>();
             int order = buffer.Children.Count - 1;

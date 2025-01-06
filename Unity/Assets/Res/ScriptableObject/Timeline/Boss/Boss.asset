@@ -80,4 +80,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  BBScript: {fileID: 0}
+  BBScript: {fileID: 1042094116111776886, guid: b311166ccddb2b642b2b7cd0d69be4a4,
+    type: 3}

@@ -278,36 +278,3 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: SlashRing_Idle
-  Script: '@Main:
-
-    BBSprite: ''Slash_1'', 3;
-
-    BBSprite: ''Slash_2'', 5;
-
-    BBSprite:
-    ''Slash_3'', 5;
-
-    BBSprite: ''Slash_2'', 5;
-
-    BBSprite: ''Slash_3'', 5;
-
-    BBSprite:
-    ''Slash_2'', 5;
-
-    BBSprite: ''Slash_3'', 5;
-
-    BBSprite: ''Slash_2'', 5;
-
-    BBSprite:
-    ''Slash_3'', 5;
-
-    BBSprite: ''Slash_2'', 5;
-
-    BBSprite: ''Slash_3'', 5;
-
-    BBSprite:
-    ''Slash_2'', 5;
-
-    BBSprite: ''Slash_3'', 5;
-
-    Dispose;'

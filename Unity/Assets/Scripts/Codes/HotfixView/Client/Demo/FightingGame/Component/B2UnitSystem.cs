@@ -23,6 +23,14 @@ namespace ET.Client
                 EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.unitId});
             }
         }
+        
+        public class B2UnitDestroySystem : DestroySystem<b2Unit>
+        {
+            protected override void Destroy(b2Unit self)
+            {
+                b2WorldManager.Instance.GetBody(self.unitId).SetEnable(false);
+            }
+        }
 
         public static void Init(this b2Unit self)
         {

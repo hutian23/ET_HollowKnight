@@ -16,7 +16,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"Shake: (?<ShakeLength>\w+), (?<ShakeCnt>\w+)");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
             if (!int.TryParse(match.Groups["ShakeCnt"].Value, out int shakeCnt))

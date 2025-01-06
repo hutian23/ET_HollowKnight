@@ -35,7 +35,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"PushBack: (?<StartVelocity>-?\d+), (?<Friction>\w+);");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 

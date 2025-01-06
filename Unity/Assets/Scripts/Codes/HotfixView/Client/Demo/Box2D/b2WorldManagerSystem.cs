@@ -47,10 +47,9 @@ namespace ET.Client
                     long instanceId = self.BodyQueue.Dequeue();
                     //映射的unit已经销毁,销毁对应刚体
                     Unit unit = Root.Instance.Get(instanceId) as Unit;
-                    if (unit == null || unit.InstanceId == 0)
+                    if (unit == null)
                     {
-                        b2Body body = self.GetBody(unit.InstanceId);
-                        self.DestroyBody(body.Id);
+                        self.DestroyBody(instanceId);
                         continue;
                     }
                     self.BodyQueue.Enqueue(instanceId);
@@ -130,6 +129,7 @@ namespace ET.Client
             b2Body b2Body = self.GetBody(instanceId);
             if (b2Body == null)
             {
+                Log.Error($"not found b2Body, unit.InstanceId: {instanceId}");
                 return;
             }
             self.B2World.World.DestroyBody(b2Body.body);

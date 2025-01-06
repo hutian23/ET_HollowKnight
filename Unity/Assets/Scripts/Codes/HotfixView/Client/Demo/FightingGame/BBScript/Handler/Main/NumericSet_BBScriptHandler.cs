@@ -15,7 +15,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"NumericSet: (?<NumericType>.*?), (?<Count>-?\d+);");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
             if (!long.TryParse(match.Groups["Count"].Value, out long count))

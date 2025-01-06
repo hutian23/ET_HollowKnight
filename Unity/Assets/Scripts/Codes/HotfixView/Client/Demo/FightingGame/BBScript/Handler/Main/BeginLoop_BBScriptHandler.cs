@@ -28,7 +28,7 @@ namespace ET.Client
                 //match failed
                 if (!triggerMatch.Success)
                 {
-                    DialogueHelper.ScripMatchError(op);
+                    ScriptHelper.ScripMatchError(op);
                     result = false;
                     break; 
                 }

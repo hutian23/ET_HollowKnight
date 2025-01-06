@@ -18,7 +18,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, @"HitStun: '(?<hitFlag>\w+)';");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
             CollisionInfo info = parser.GetParam<CollisionInfo>("Hurt_CollisionInfo");

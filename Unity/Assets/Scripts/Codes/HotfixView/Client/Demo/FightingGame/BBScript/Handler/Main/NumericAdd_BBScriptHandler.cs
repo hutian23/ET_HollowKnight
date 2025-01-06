@@ -15,7 +15,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine, "NumericAdd: (?<NumericType>.*?), (?<OP>.*?);");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 

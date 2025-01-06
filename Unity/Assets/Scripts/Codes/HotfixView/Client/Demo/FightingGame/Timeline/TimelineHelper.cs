@@ -52,7 +52,7 @@ namespace ET.Client
                 Match match = Regex.Match(opLine, @"^\w+");
                 if (!match.Success)
                 {
-                    DialogueHelper.ScripMatchError(opLine);
+                    ScriptHelper.ScripMatchError(opLine);
                     return false;
                 }
                 

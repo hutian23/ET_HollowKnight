@@ -16,6 +16,9 @@
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
 
+            await TimerComponent.Instance.WaitFrameAsync(token);
+            if (token.IsCancel()) return Status.Failed;
+            
             int targetOrder = 0;
             foreach (var infoId in buffer.DescendInfoList)
             {

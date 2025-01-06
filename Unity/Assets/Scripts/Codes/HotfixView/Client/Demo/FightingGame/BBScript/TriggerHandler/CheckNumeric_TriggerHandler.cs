@@ -14,7 +14,7 @@ namespace ET.Client
             Match match = Regex.Match(data.opLine,@"(\w+)\s*([<> =])\s*(\d+)");
             if (!match.Success)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return false;
             }
 

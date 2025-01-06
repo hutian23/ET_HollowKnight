@@ -47,7 +47,7 @@ namespace ET.Client
             MatchCollection matches = Regex.Matches(data.opLine, @"\((.*?)\)|'([^']*)'");
             if (matches.Count == 0)
             {
-                DialogueHelper.ScripMatchError(data.opLine);
+                ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
@@ -100,7 +100,7 @@ namespace ET.Client
             Match triggerMatch = Regex.Match(trigger, @"(.*?):");
             if (!triggerMatch.Success)
             {
-                DialogueHelper.ScripMatchError(trigger);
+                ScriptHelper.ScripMatchError(trigger);
                 return Status.Failed;
             }
             timelineCallback.triggerType = triggerMatch.Groups[1].Value;

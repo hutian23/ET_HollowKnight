@@ -54,7 +54,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  BBScript: {fileID: 1042094116111776886, guid: 6414006f0b0708f4d8cf3d64f00a91f2,
+  BBScript: {fileID: 1042094116111776886, guid: f5d87dcfc01776440b655fd0ec4e6b46,
     type: 3}
-  rootScript: "@RootInit:\nGravity: 100000;\nNumericType: MaxGravity, 150000;\nNumericType:
-    MaxFall, 45000;\nRegistMove: (SlashRing_Idle)\n    MoveType: None;\n    EndMove:\nreturn;"
