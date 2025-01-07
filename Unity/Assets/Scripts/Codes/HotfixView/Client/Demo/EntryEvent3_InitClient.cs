@@ -15,8 +15,7 @@ namespace ET.Client
             clientScene.AddComponent<Storage>();
             clientScene.AddComponent<OperaComponent>();
             clientScene.AddComponent<ScriptDispatcherComponent>();
-            clientScene.AddComponent<TextAssetLoader>();
-            
+
             Unit player = TODUnitFactory.CreatePlayer(clientScene);
 
             await Storage.Instance.SaveStorage(0, player);

@@ -22,6 +22,13 @@ namespace ET.Client
     {
         public long instanceId;
     }
+
+    public struct ReplaceParamCallback
+    {
+        public long instanceId;
+        public string refName;
+        public string content;
+    }
     
     public class BBScriptData
     {

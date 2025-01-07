@@ -12,7 +12,6 @@ namespace ET.Client
             protected override void Awake(BBParser self, int processType)
             {
                 self.ProcessorType = processType;
-                EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
             }
         }
         
@@ -31,6 +30,11 @@ namespace ET.Client
             {
                 EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
             }
+        }
+
+        public static void Start(this BBParser self)
+        {
+            EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
         }
         
         /// <summary>
@@ -169,23 +173,20 @@ namespace ET.Client
         
         private static string ReplaceParam(this BBParser self, string opLine)
         {
-            MatchCollection matches = Regex.Matches(opLine, @"\[(.*?)\]");
+            MatchCollection matches = Regex.Matches(opLine, @"\{(.*?)\}");
             string result = opLine;
             for (int i = 0; i < matches.Count; i++)
             {
                 string content = matches[i].Groups[1].Value;
-                string replace = string.Empty;
-                //find param
-                foreach (var param in self.ParamDict)
+                string replace = EventSystem.Instance.Invoke<ReplaceParamCallback, string>(new ReplaceParamCallback()
                 {
-                    if (param.Key.Equals(content))
-                    {
-                       replace = param.Value.value.ToString();
-                    }
-                }
-
+                    instanceId = self.InstanceId,
+                    content = content, 
+                    refName = self.GetParam<string>("BBRef_Name")
+                });
                 result = result.Replace(matches[i].Value, replace);
             }
+
             return result;
         }
         

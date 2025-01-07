@@ -1,17 +1,31 @@
 [Root]
 @RootInit:
 PoolObject: 'SlashRing', 4;
-SetPos: 3000, 5000;
-# RegistMove: (Boss_Dash)
-#   MoveType: None;
-#   EndMove:
-# RegistMove: (Boss_Dstab)
-#   MoveType: None;
-#   EndMove:
+RegistMove: (Boss_Idle)
+  MoveType: None;
+  EndMove:
 RegistMove: (Boss_WallThrow)
   MoveType: None;
   EndMove:
+RegistMove: (Boss_Dash)
+  MoveType: None;
+  EndMove:
+RegistMove: (Boss_Dstab)
+  MoveType: None;
+  EndMove:
 return;
+
+[Boss_Idle]
+@Trigger:
+return;
+
+@Main:
+ThroneState: 1, Boss_WallThrow;
+SetVelocityX: 0;
+SetVelocityY: 0;
+SetPos: 0, 100000;
+BBSprite: 'Idle_1', 1000;
+Exit;
 
 [Boss_Dash]
 @Trigger:
@@ -89,6 +103,7 @@ Exit;
 return;
 
 @Main:
+SetPos: 14600, 5000;
 SetVelocityX: 0;
 SetVelocityY: 0;
 BBSprite: 'Arrive_1', 3;
@@ -105,7 +120,8 @@ BBSprite: 'Anticipate_7', 4;
 BBSprite: 'Anticipate_8', 4;
 BBSprite: 'Throw_1', 1;
 CreateBall: SlashRing
-  BallParam: PosX, 10;
+  BallPos: -5000, -1000;
+  BallParam: MaxV, 20000;
   EndCreateBall:
 BBSprite: 'Throw_1', 7;
 BBSprite: 'Throw_2', 4;

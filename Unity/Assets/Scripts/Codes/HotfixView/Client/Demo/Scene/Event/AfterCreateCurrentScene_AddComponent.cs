@@ -7,6 +7,8 @@ namespace ET.Client
         {
             scene.AddComponent<UIComponent>();
             scene.AddComponent<ResourcesLoaderComponent>();
+
+            scene.AddComponent<BallManager>();
             await ETTask.CompletedTask;
         }
     }

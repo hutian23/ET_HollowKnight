@@ -62,6 +62,8 @@ namespace ET.Client
             }
             //4. 处理碰撞事件
             b2Body.AddComponent<BBParser, int>(ProcessType.SceneBoxProcess).AddComponent<SceneBoxHandler>();
+            b2Body.GetComponent<BBParser>().Start();
+            
             await ETTask.CompletedTask;
         }
     }
