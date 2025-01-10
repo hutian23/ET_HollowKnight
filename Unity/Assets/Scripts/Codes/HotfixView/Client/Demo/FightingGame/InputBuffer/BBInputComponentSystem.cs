@@ -14,7 +14,7 @@ namespace ET.Client
                 BBInputComponent.Instance = self;
             }
         }
-
+        
         public static void Reload(this BBInputComponent self)
         {
             self.WasPressedDict.Clear();
@@ -24,11 +24,6 @@ namespace ET.Client
             self.WasPressedDict.Add(BBOperaType.B, false);
             self.WasPressedDict.Add(BBOperaType.RB, false);
             self.WasPressedDict.Add(BBOperaType.RT, false);
-        }
-
-        public static void FixedUpdate(this BBInputComponent self)
-        {
-            self.Ops = self.CheckInput();
         }
 
         public static long CheckInput(this BBInputComponent self)

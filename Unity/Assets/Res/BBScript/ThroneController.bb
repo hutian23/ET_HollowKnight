@@ -4,6 +4,7 @@ Thrones_Init;
 Thrones_Goto: Thrones_Step1_Entry;
 return;
 
+# 一阶段
 [Thrones_Step1_Entry]
 @Main:
 Thrones_Param: 1, PosX, 200;
@@ -21,7 +22,27 @@ Thrones_SubState: 3, Boss_Gesture;
 Thrones_WaitFrame: 100;
 Thrones_SubState: 1, Boss_Entry;
 Thrones_WaitFrame: 150;
-Thrones_Goto: Thrones_Step1_Dstab;
+# 测试
+ThronesTest: A
+  Thrones_Init;
+  Thrones_SubState: 1, Boss_Dead;
+  Thrones_WaitFrame: 60;
+  Thrones_Param: 1, PosX, 200;
+  Thrones_Param: 1, PosY, 11850;
+  Thrones_Param: 1, Flip, Right;
+  Thrones_SubState: 1, Boss_Wounded;
+  EndThronesTest:
+# Exit
+Random: ran, 0, 100;
+BeginIf: (Random: ran < 20)
+  Thrones_Goto: Thrones_Step1_Dstab;
+  EndIf:
+BeginIf: (Random: ran < 40)
+  Thrones_Goto: Thrones_Step1_WallThrow;
+  EndIf:
+BeginIf: (Random: ran <= 100)
+  Thrones_Goto: Thrones_Step1_Dash;
+  EndIf:
 
 [Thrones_Step1_Dstab]
 @Main:
@@ -98,3 +119,5 @@ BeginIf: (Random: ran < 70)
 BeginIf: (Random: ran <= 100)
   Thrones_Goto: Thrones_Step1_Dash;
   EndIf:
+
+# 二阶段

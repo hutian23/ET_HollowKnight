@@ -22,6 +22,9 @@ RegistMove: (Boss_Gesture)
 RegistMove: (Boss_Wounded)
   MoveType: None;
   EndMove:
+RegistMove: (Boss_Dead)
+  MoveType: None;
+  EndMove:
 return;
 
 [Boss_Idle]
@@ -194,4 +197,27 @@ BBSprite: 'Wounded_5', 3;
 BBSprite: 'Wounded_6', 3;
 BBSprite: 'Wounded_7', 3;
 BBSprite: 'Wounded_8', 3000;
+GotoBehavior: 'Boss_Idle';
+
+[Boss_Dead]
+@Trigger:
+return;
+
+@Main:
+SetVelocityX: 0;
+SetVelocityY: 0;
+BBSprite: 'Dead_3', 5;
+BBSprite: 'Dead_4', 4;
+BBSprite: 'Dead_5', 4;
+BBSprite: 'Dead_3', 4;
+BBSprite: 'Dead_4', 4;
+BBSprite: 'Dead_5', 4;
+BBSprite: 'Dead_3', 4;
+BBSprite: 'Dead_4', 4;
+BBSprite: 'Dead_5', 4;
+BBSprite: 'Dead_3', 4;
+BBSprite: 'Dead_4', 4;
+BBSprite: 'Dead_5', 4;
+BBSprite: 'Dead_6', 5;
+BBSprite: 'Dead_7', 5;
 GotoBehavior: 'Boss_Idle';
