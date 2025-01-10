@@ -13,10 +13,19 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             foreach (SceneEtc sceneEtc in _Etc.GetComponentsInChildren<SceneEtc>())
             {
-                sceneEtc.SceneChangeFinish();
+                UnitComponent unitComponent = scene.CurrentScene().GetComponent<UnitComponent>();
+                Unit etc = unitComponent.AddChild<Unit, int>(1001);
+                
+                //渲染层
+                etc.AddComponent<GameObjectComponent>().GameObject = sceneEtc.gameObject;
+                sceneEtc.InstanceId = etc.InstanceId;
+                
+                //逻辑层
+                BBParser parser = etc.AddComponent<BBParser, int>(ProcessType.SceneEtcProcess);
+                parser.Start();
             }
             
             await ETTask.CompletedTask;

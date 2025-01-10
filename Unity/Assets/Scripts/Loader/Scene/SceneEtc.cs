@@ -2,8 +2,11 @@
 
 namespace ET
 {
-    public abstract class SceneEtc : MonoBehaviour
+    public class SceneEtc : MonoBehaviour
     {
-        public abstract void SceneChangeFinish();
+        public TextAsset Script;
+        
+        [HideInInspector]
+        public long InstanceId;
     }
 }

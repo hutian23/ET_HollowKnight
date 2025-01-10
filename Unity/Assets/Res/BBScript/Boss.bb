@@ -13,6 +13,15 @@ RegistMove: (Boss_Dash)
 RegistMove: (Boss_Dstab)
   MoveType: None;
   EndMove:
+RegistMove: (Boss_Entry)
+  MoveType: None;
+  EndMove:
+RegistMove: (Boss_Gesture)
+  MoveType: None;
+  EndMove:
+RegistMove: (Boss_Wounded)
+  MoveType: None;
+  EndMove:
 return;
 
 [Boss_Idle]
@@ -144,4 +153,45 @@ BBSprite: 'Recover_2', 4;
 BBSprite: 'Leave_1', 4;
 BBSprite: 'Leave_2', 4;
 BBSprite: 'Leave_3', 4;
+GotoBehavior: 'Boss_Idle';
+
+[Boss_Entry]
+@Trigger:
+return;
+
+@Main:
+BBSprite: 'Entry_1', 5;
+BBSprite: 'Entry_2', 5;
+BBSprite: 'Entry_3', 70;
+BBSprite: 'Entry_4', 5;
+BBSprite: 'Entry_5', 5;
+BBSprite: 'Entry_6', 5;
+BBSprite: 'Entry_7', 5;
+GotoBehavior: 'Boss_Idle';
+
+[Boss_Gesture]
+@Trigger:
+return;
+
+@Main:
+SetPos: {Self.PosX}, {Self.PosY};
+SetFlip: {Self.Flip};
+BBSprite: 'Gesture_1', 10000;
+GotoBehavior: 'Boss_Idle';
+
+[Boss_Wounded]
+@Trigger:
+return;
+
+@Main:
+SetPos: {Self.PosX}, {Self.PosY};
+SetFlip: {Self.Flip};
+BBSprite: 'Wounded_1', 3;
+BBSprite: 'Wounded_2', 3;
+BBSprite: 'Wounded_3', 3;
+BBSprite: 'Wounded_4', 3;
+BBSprite: 'Wounded_5', 3;
+BBSprite: 'Wounded_6', 3;
+BBSprite: 'Wounded_7', 3;
+BBSprite: 'Wounded_8', 3000;
 GotoBehavior: 'Boss_Idle';

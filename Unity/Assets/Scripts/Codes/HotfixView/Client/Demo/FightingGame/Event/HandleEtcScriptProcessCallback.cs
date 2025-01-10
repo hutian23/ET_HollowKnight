@@ -4,22 +4,22 @@ using Timeline.Editor;
 
 namespace ET.Client
 {
-    [Invoke(ProcessType.ThroneControllerProcess)]
+    [Invoke(ProcessType.SceneEtcProcess)]
     [FriendOf(typeof(BBParser))]
-    public class HandleThronesScriptProcessCallback : AInvokeHandler<ProcessBBScriptCallback>
+    public class HandleEtcScriptProcessCallback : AInvokeHandler<ProcessBBScriptCallback>
     {
         public override void Handle(ProcessBBScriptCallback args)
         {
             BBParser bbParser = Root.Instance.Get(args.instanceId) as BBParser;
             Unit unit = bbParser.GetParent<Unit>();
-            ThronesController controller = unit.GetComponent<GameObjectComponent>().GameObject.GetComponent<ThronesController>();
+            SceneEtc sceneEtc = unit.GetComponent<GameObjectComponent>().GameObject.GetComponent<SceneEtc>();
 
             bbParser.Init();
 
             string script = string.Empty;
             if (Define.IsEditor)
             {
-                script = File.ReadAllText(controller.Script.GetPath());
+                script = File.ReadAllText(sceneEtc.Script.GetPath());
             }
             else
             {

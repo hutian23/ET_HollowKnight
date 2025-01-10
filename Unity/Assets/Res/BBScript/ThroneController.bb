@@ -1,126 +1,100 @@
 [Root]
 @RootInit:
 Thrones_Init;
-Thrones_Goto: Thrones_Dstab;
+Thrones_Goto: Thrones_Step1_Entry;
 return;
 
-[Thrones_Dstab]
+[Thrones_Step1_Entry]
+@Main:
+Thrones_Param: 1, PosX, 200;
+Thrones_Param: 1, PosY, 11850;
+Thrones_Param: 1, Flip, Right;
+Thrones_SubState: 1, Boss_Gesture;
+Thrones_Param: 2, PosX, 7200;
+Thrones_Param: 2, PosY, 10300;
+Thrones_Param: 2, Flip, Right;
+Thrones_SubState: 2, Boss_Gesture;
+Thrones_Param: 3, PosX, -7200;
+Thrones_Param: 3, PosY, 10300;
+Thrones_Param: 3, Flip, Left;
+Thrones_SubState: 3, Boss_Gesture;
+Thrones_WaitFrame: 100;
+Thrones_SubState: 1, Boss_Entry;
+Thrones_WaitFrame: 150;
+Thrones_Goto: Thrones_Step1_Dstab;
+
+[Thrones_Step1_Dstab]
 @Main:
 Thrones_SubState: 1, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_SubState: 2, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_SubState: 3, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_Goto: Thrones_Dash;
-return;
+Thrones_WaitFrame: 120;
+# Exit
+Random: ran, 0, 100;
+BeginIf: (Random: ran < 20)
+  Thrones_Goto: Thrones_Step1_Dstab;
+  EndIf:
+BeginIf: (Random: ran < 40)
+  Thrones_Goto: Thrones_Step1_WallThrow;
+  EndIf:
+BeginIf: (Random: ran <= 100)
+  Thrones_Goto: Thrones_Step1_Dash;
+  EndIf:
 
-[Thrones_Dash]
+[Thrones_Step1_Dash]
 @Main:
-# Throne_1
-Thrones_Param: 1, Flip, Left;
-Thrones_Param: 1, PosX, -10500;
-Thrones_Param: 1, PosY, 3100;
-Thrones_Param: 1, VelX, -100000;
-Thrones_Param: 1, ReachX, 9500;
-Thrones_Param: 1, Direction, Right;
+Random: ran, 0, 1;
+BeginIf: (Random: ran == 0)
+  Thrones_Param: 1, Flip, Left;
+  Thrones_Param: 1, PosX, -10500;
+  Thrones_Param: 1, PosY, 3100;
+  Thrones_Param: 1, VelX, -100000;
+  Thrones_Param: 1, ReachX, 9500;
+  Thrones_Param: 1, Direction, Right;
+  EndIf:
+BeginIf: (Random: ran == 1)
+  Thrones_Param: 1, Flip, Right;
+  Thrones_Param: 1, PosX, 10500;
+  Thrones_Param: 1, PosY, 3100;
+  Thrones_Param: 1, VelX, -100000;
+  Thrones_Param: 1, ReachX, -9500;
+  Thrones_Param: 1, Direction, Left;
+  EndIf:
 Thrones_SubState: 1, Boss_Dash;
-Thrones_WaitFrame: 60;
-#Throne_2
-Thrones_Param: 2, Flip, Right;
-Thrones_Param: 2, PosX, 10500;
-Thrones_Param: 2, PosY, 3100;
-Thrones_Param: 2, VelX, -100000;
-Thrones_Param: 2, ReachX, -9500;
-Thrones_Param: 2, Direction, Left;
-Thrones_SubState: 2, Boss_Dash;
-Thrones_WaitFrame: 60;
-#Throne_3
-Thrones_Param: 3, Flip, Left;
-Thrones_Param: 3, PosX, -10500;
-Thrones_Param: 3, PosY, 3100;
-Thrones_Param: 3, VelX, -100000;
-Thrones_Param: 3, ReachX, 9500;
-Thrones_Param: 3, Direction, Right;
-Thrones_SubState: 3, Boss_Dash;
-Thrones_WaitFrame: 60;
-Thrones_Goto: Thrones_TwoDash;
+Thrones_WaitFrame: 120;
+# Exit
+Random: ran, 0, 100;
+BeginIf: (Random: ran < 20)
+  Thrones_Goto: Thrones_Step1_Dash;
+  EndIf:
+BeginIf: (Random: ran < 75)
+  Thrones_Goto: Thrones_Step1_WallThrow;
+  EndIf:
+BeginIf: (Random: ran <= 100)
+  Thrones_Goto: Thrones_Step1_Dstab;
+  EndIf:
 
-[Thrones_TwoDash]
+[Thrones_Step1_WallThrow]
 @Main:
-# Throne_1
-Thrones_Param: 1, Flip, Left;
-Thrones_Param: 1, PosX, -10500;
-Thrones_Param: 1, PosY, 3100;
-Thrones_Param: 1, VelX, -100000;
-Thrones_Param: 1, ReachX, 9500;
-Thrones_Param: 1, Direction, Right;
-Thrones_SubState: 1, Boss_Dash;
-#Throne_2
-Thrones_Param: 2, Flip, Right;
-Thrones_Param: 2, PosX, 10500;
-Thrones_Param: 2, PosY, 3100;
-Thrones_Param: 2, VelX, -100000;
-Thrones_Param: 2, ReachX, -9500;
-Thrones_Param: 2, Direction, Left;
-Thrones_SubState: 2, Boss_Dash;
-Thrones_WaitFrame: 60;
-Thrones_SubState: 3, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_Goto: Thrones_Dash_Throw_Dstab;
-
-[Thrones_Dash_Throw_Dstab]
-@Main:
-# Throne_1
-Thrones_Param: 1, Flip, Left;
-Thrones_Param: 1, PosX, -10500;
-Thrones_Param: 1, PosY, 3100;
-Thrones_Param: 1, VelX, -100000;
-Thrones_Param: 1, ReachX, 9500;
-Thrones_Param: 1, Direction, Right;
-Thrones_SubState: 1, Boss_Dash;
-Thrones_WaitFrame: 60;
-# Throne_2
-Thrones_Param: 2, Flip, Left;
-Thrones_Param: 2, PosX, 14600;
-Thrones_Param: 2, PosY, 5000;
-Thrones_SubState: 2, Boss_WallThrow;
-Thrones_WaitFrame: 60;
-Thrones_SubState: 3, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_Goto: Thrones_TwoDstab;
-
-[Thrones_TwoDstab]
-@Main:
-Thrones_SubState: 1, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_SubState: 2, Boss_Dstab;
-Thrones_WaitFrame: 55;
-#Throne_3
-Thrones_Param: 3, Flip, Left;
-Thrones_Param: 3, PosX, -10500;
-Thrones_Param: 3, PosY, 3100;
-Thrones_Param: 3, VelX, -100000;
-Thrones_Param: 3, ReachX, 9500;
-Thrones_Param: 3, Direction, Right;
-Thrones_SubState: 3, Boss_Dash;
-Thrones_WaitFrame: 60;
-Thrones_Goto: Thrones_WallThrow;
-
-[Thrones_WallThrow]
-@Main:
-# Throne_1
-Thrones_Param: 1, Flip, Left;
-Thrones_Param: 1, PosX, 14600;
-Thrones_Param: 1, PosY, 5000;
+Random: ran, 0, 1;
+BeginIf: (Random: ran == 0)
+  Thrones_Param: 1, Flip, Left;
+  Thrones_Param: 1, PosX, 14600;
+  Thrones_Param: 1, PosY, 5000;
+  EndIf:
+BeginIf: (Random: ran == 1)
+  Thrones_Param: 1, Flip, Right;
+  Thrones_Param: 1, PosX, -14600;
+  Thrones_Param: 1, PosY, 5000;
+  EndIf:
 Thrones_SubState: 1, Boss_WallThrow;
-# Throne_2
-Thrones_Param: 2, Flip, Right;
-Thrones_Param: 2, PosX, -14600;
-Thrones_Param: 2, PosY, 5000;
-Thrones_SubState: 2, Boss_WallThrow;
-Thrones_WaitFrame: 55;
-# Throne_3
-Thrones_SubState: 3, Boss_Dstab;
-Thrones_WaitFrame: 55;
-Thrones_Goto: Thrones_Dstab;
+Thrones_WaitFrame: 120;
+# Exit
+Random: ran, 0, 100;
+BeginIf: (Random: ran < 10)
+  Thrones_Goto: Thrones_Step1_WallThrow;
+  EndIf:
+BeginIf: (Random: ran < 70)
+  Thrones_Goto: Thrones_Step1_Dstab;
+  EndIf:
+BeginIf: (Random: ran <= 100)
+  Thrones_Goto: Thrones_Step1_Dash;
+  EndIf:

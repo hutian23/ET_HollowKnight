@@ -13,13 +13,18 @@ namespace ET.Client
         
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
+            //1. 添加依赖的组件
             Unit unit = parser.GetParent<Unit>();
+            unit.RemoveComponent<BBTimerComponent>();
+            unit.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
+            
+            //2. 缓存子unit的instanceId
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
             ReferenceCollector refer = go.GetComponent<ReferenceCollector>();
             
             GameObject throne_1 = refer.Get<GameObject>("Throne_1");
             parser.RegistParam("Throne_1", throne_1.GetComponent<TimelinePlayer>().instanceId);
-             
+            
             GameObject throne_2 = refer.Get<GameObject>("Throne_2");
             parser.RegistParam("Throne_2", throne_2.GetComponent<TimelinePlayer>().instanceId);
             

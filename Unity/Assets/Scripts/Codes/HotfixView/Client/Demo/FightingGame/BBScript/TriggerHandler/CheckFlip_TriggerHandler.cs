@@ -25,9 +25,6 @@ namespace ET.Client
             
             b2Body body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             FlipState checkFlip = match.Groups["Flip"].Value.Equals("Left")? FlipState.Left : FlipState.Right;
-
-            Log.Warning(match.Groups["Flip"].Value);
-            
             return body.GetFlip() == (int)checkFlip;
         }
     }
