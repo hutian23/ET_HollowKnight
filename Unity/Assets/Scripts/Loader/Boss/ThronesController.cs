@@ -2,14 +2,14 @@
 
 namespace ET
 {
-    public class ThronesController : MonoBehaviour
+    public class ThronesController : SceneEtc
     {
         public TextAsset Script;
         
         [HideInInspector]
         public long InstanceId;
-        
-        public void Start()
+
+        public override void SceneChangeFinish()
         {
             EventSystem.Instance.Invoke(new ThronesControllerCallback() { controller = this });
         }

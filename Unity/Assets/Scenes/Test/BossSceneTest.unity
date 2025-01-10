@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsTrigger: 1
   info:
-    boxName: Seat1
+    boxName: Seat3_1
     hitboxType: 0
     center: {x: 7, y: 6.7}
     size: {x: 2, y: 1.4}
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsTrigger: 1
   info:
-    boxName: Seat1
+    boxName: Seat2_2
     hitboxType: 0
     center: {x: 0, y: 8.2}
     size: {x: 2, y: 1.4}
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsTrigger: 1
   info:
-    boxName: Seat1
+    boxName: Seat1_1
     hitboxType: 0
     center: {x: -7, y: 6.7}
     size: {x: 2, y: 1.4}
@@ -1232,12 +1232,12 @@ PrefabInstance:
     - target: {fileID: 1588890339249806441, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.1
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 1588890339249806441, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.35
+      value: 11.82
       objectReference: {fileID: 0}
     - target: {fileID: 1588890339249806441, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
@@ -1283,7 +1283,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a84879da7ddebb944a5ff3409cdf9d30, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6765559763211144378, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_Name
@@ -1932,13 +1932,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -582529749, guid: 21f58683489dd8242b4a6c94378e7f86,
+      objectReference: {fileID: -1747862620, guid: 21f58683489dd8242b4a6c94378e7f86,
         type: 3}
     - target: {fileID: 3859023960364640404, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a84879da7ddebb944a5ff3409cdf9d30, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6765559763211144378, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_Name

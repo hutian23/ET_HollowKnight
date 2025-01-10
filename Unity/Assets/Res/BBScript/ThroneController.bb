@@ -1,6 +1,5 @@
 [Root]
 @RootInit:
-LogWarning: 'Hotfix test';
 Thrones_Init;
 Thrones_Goto: Thrones_Dstab;
 return;

@@ -14,10 +14,9 @@ namespace ET.Client
             {
                 return;
             }
-
+            
             //场景内怪物管理单例
             scene.CurrentScene().AddComponent<EnemyManager>();
-
             //生成怪物unit
             UnitComponent unitComponent = scene.CurrentScene().GetComponent<UnitComponent>();
             foreach (SceneEnemy sceneEnemy in _Enemy.GetComponentsInChildren<SceneEnemy>())
@@ -41,7 +40,7 @@ namespace ET.Client
                 //单例管理unit
                 EnemyManager.Instance.InstanceIds.Add(enemy.InstanceId);
             }
-
+            
             await ETTask.CompletedTask;
         }
     }

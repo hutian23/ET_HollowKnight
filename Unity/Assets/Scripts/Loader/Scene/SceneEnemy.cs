@@ -8,9 +8,4 @@ namespace ET
         [HideInInspector]
         public long instanceId;
     }
-
-    public struct EditSceneEnemyCallback
-    {
-        public long instanceId;
-    }
 }
