@@ -171,7 +171,7 @@ namespace ET.Client
             return Status.Success;
         }
         
-        private static string ReplaceParam(this BBParser self, string opLine)
+        public static string ReplaceParam(this BBParser self, string opLine)
         {
             MatchCollection matches = Regex.Matches(opLine, @"\{(.*?)\}");
             string result = opLine;
@@ -182,11 +182,9 @@ namespace ET.Client
                 {
                     instanceId = self.InstanceId,
                     content = content, 
-                    refName = self.GetParam<string>("BBRef_Name")
                 });
                 result = result.Replace(matches[i].Value, replace);
             }
-
             return result;
         }
         

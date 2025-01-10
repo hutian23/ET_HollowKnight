@@ -11,9 +11,9 @@ return;
 
 @Main:
 # 从哪个组件上查询值
-SetVelocityX: 34000;
-SetVelocityY: -3000;
-AccelerationX: -30000, 34000;
+SetVelocityX: {Timeline.VelX};
+SetVelocityY: {Timeline.VelY};
+AccelerationX: {Timeline.Accel}, {Timeline.MaxV};
 BBSprite: 'Slash_1', 3;
 BBSprite: 'Slash_2', 5;
 BBSprite: 'Slash_3', 5;

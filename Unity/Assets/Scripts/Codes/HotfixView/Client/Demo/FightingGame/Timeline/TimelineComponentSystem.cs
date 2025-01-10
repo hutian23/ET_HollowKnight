@@ -11,10 +11,7 @@ namespace ET.Client
         {
             protected override void Awake(TimelineComponent self)
             {
-                //绑定渲染层
-                GameObject go = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
-                TimelinePlayer timelinePlayer = go.GetComponent<TimelinePlayer>();
-                timelinePlayer.instanceId = self.InstanceId;
+                self.Bind();
             }
         }
         
@@ -32,6 +29,21 @@ namespace ET.Client
             {
                 self.Init();
             }
+        }
+
+        /// <summary>
+        /// 渲染层传入组件instanceId，方便渲染层回调事件
+        /// </summary>
+        /// <param name="self"></param>
+        private static void Bind(this TimelineComponent self)
+        {
+            GameObject go = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
+            TimelinePlayer timelinePlayer = go.GetComponent<TimelinePlayer>();
+            if (timelinePlayer == null)
+            {
+                return;
+            }
+            timelinePlayer.instanceId = self.InstanceId;
         }
 
         private static void Init(this TimelineComponent self)

@@ -26,7 +26,6 @@ namespace ET.Client
     public struct ReplaceParamCallback
     {
         public long instanceId;
-        public string refName;
         public string content;
     }
     

@@ -23,7 +23,9 @@ namespace ET.Client
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             Unit unit = timelineComponent.GetParent<Unit>();
             b2Body body = b2WorldManager.Instance.GetBody(unit.InstanceId);
-            body.SetFlip(match.Groups["Flip"].Value.Equals("Left")? FlipState.Left : FlipState.Right, true);
+
+            FlipState flip = match.Groups["Flip"].Value.Equals("Left")? FlipState.Left : FlipState.Right;
+            body.SetFlip(flip, true);
             
             await ETTask.CompletedTask;
             return Status.Success;

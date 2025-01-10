@@ -12,7 +12,7 @@ namespace ET.Client
         //ReachX: 10500, Right
         public override bool Check(BBParser parser, BBScriptData data)
         {
-            Match match = Regex.Match(data.opLine, @"ReachX: (?<Position>\d+), (?<transition>\w+)");
+            Match match = Regex.Match(data.opLine, @"ReachX: (?<Position>.*?), (?<transition>\w+)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

@@ -33,7 +33,7 @@ namespace ET.Client
                     break; 
                 }
                 
-                BBScriptData _data = BBScriptData.Create(op, 0, null);
+                BBScriptData _data = BBScriptData.Create(self.ReplaceParam(op), 0, null);
                 bool ret = ScriptDispatcherComponent.Instance.GetTrigger(triggerMatch.Groups[1].Value).Check(self, _data);
                 if (!ret)
                 {

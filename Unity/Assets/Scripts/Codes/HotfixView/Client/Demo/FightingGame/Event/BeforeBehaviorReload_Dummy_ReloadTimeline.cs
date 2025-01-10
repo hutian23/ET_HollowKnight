@@ -18,9 +18,6 @@
             bbParser.GetParent<TimelineComponent>().GetTimelinePlayer().Init(info.Timeline);
             // 逻辑层，取消当前所有子协程
             bbParser.Cancel();
-            // 默认从parser上获取变量
-            bbParser.RegistParam("BBRef_Id", bbParser.InstanceId);
-            bbParser.RegistParam("BBRef_Name", "Self");
             
             // 记录CurrentOrder, 缓存共享变量
             buffer.SetCurrentOrder(args.behaviorOrder);

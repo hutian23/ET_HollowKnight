@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Text.RegularExpressions;
+
+namespace ET.Client
 {
     [Invoke]
     public class HandleReplaceParamCallback : AInvokeHandler<ReplaceParamCallback,string>
@@ -7,14 +9,19 @@
         {
             BBParser parser = Root.Instance.Get(args.instanceId) as BBParser;
 
-            BBParamHandler handler = ScriptDispatcherComponent.Instance.GetParamHandler(args.refName);
-            if (handler == null)
+            Match match = Regex.Match(args.content, @"(?<Ref>\w+).(?<Param>\w+)");
+            if (!match.Success)
             {
-                Log.Error($"not found handler: {args.refName}");
+                ScriptHelper.ScripMatchError(args.content);
                 return string.Empty;
             }
-
-            return handler.Handle(parser, args.content);
+            BBParamHandler handler = ScriptDispatcherComponent.Instance.GetParamHandler(match.Groups["Ref"].Value);
+            if (handler == null)
+            {
+                Log.Error($"not found handler: {match.Groups["Ref"].Value}");
+                return string.Empty;
+            }
+            return handler.Handle(parser, match.Groups["Param"].Value);
         }
     }
 }
