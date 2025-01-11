@@ -1,52 +1,42 @@
-﻿using System.Text.RegularExpressions;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 
 namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.ThronesTestTimer)]
     [FriendOf(typeof(BBParser))]
-    public class TestTimer : BBTimer<BBParser>
+    public class ThronesTestTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {
             //检测按键输入
-            string keyType = self.GetParam<string>("ThronesTestKeyType");
-            bool ret = false;
-            switch (keyType)
-            {
-                case "A":
-                    ret = Keyboard.current.aKey.isPressed;
-                    break;
-            }
+            Keyboard _key = Keyboard.current;
+            bool ret = _key.aKey.isPressed || _key.sKey.isPressed || _key.dKey.isPressed;
             if (!ret) return;
-
+            
+            //初始化
+            self.CancellationToken.Cancel();
+            self.Coroutine_Pointers.Clear();
+            self.CancellationToken = new();
+            
             //回调
-            int startIndex = self.GetParam<int>("ThronesTest_StartIndex");
-            int endIndex = self.GetParam<int>("ThronesTest_EndIndex");
-            self.Cancel();
+            int startIndex = self.GetParam<int>($"ThronesTest_StartIndex");
+            int endIndex = self.GetParam<int>($"ThronesTest_EndIndex");
             self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
         }
     }
     
     [FriendOf(typeof(BBParser))]
-    public class ThronesTest_BBScriptHandler : BBScriptHandler
+    public class ThronesTest_Timer_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
             return "ThronesTest";
         }
 
-        //ThronesTest: A
+        //ThronesTest:
         //EndThronesTest:
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"ThronesTest: (?<KeyType>\w+)");
-            if (!match.Success)
-            {
-                ScriptHelper.ScripMatchError(data.opLine);
-                return Status.Failed;
-            }
-            
             // 跳过代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
@@ -61,23 +51,22 @@ namespace ET.Client
             }
             parser.Coroutine_Pointers[data.CoroutineID] = index;
             
-            Unit unit = parser.GetParent<Unit>();
-            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
             // 初始化
             parser.TryRemoveParam("ThronesTest_StartIndex");
             parser.TryRemoveParam("ThronesTest_EndIndex");
-            parser.TryRemoveParam("ThronesTestTimer");
-            parser.TryRemoveParam("ThronesTestKeyType");
-            // 注册变量
-            parser.RegistParam("ThronesTest_StartIndex", startIndex);
-            parser.RegistParam("ThronesTest_EndIndex", endIndex);
-            parser.RegistParam("ThronesTestKeyType", match.Groups["KeyType"].Value);
-          
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.ThronesTestTimer, parser);
-            token.Add(() =>
+            BBTimerComponent bbTimer = BBTimerManager.Instance.SceneTimer();
+            if (parser.ContainParam("ThronesTestTimer"))
             {
-                bbTimer.Remove(ref timer);
-            });
+                long preTimer = parser.GetParam<long>("ThronesTestTimer");
+                bbTimer.Remove(ref preTimer);
+            }
+            parser.TryRemoveParam("ThronesTestTimer");
+            
+            // 注册变量
+            parser.RegistParam($"ThronesTest_StartIndex", startIndex);
+            parser.RegistParam($"ThronesTest_EndIndex", endIndex);
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.ThronesTestTimer, parser);
+            parser.RegistParam($"ThronesTestTimer", timer);
 
             await ETTask.CompletedTask;
             return Status.Success;

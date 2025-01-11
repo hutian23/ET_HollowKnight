@@ -18,9 +18,11 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
+            
             long instanceId = parser.GetParam<long>($"Throne_{match.Groups["No"].Value}");
             TimelineComponent timelineComponent = Root.Instance.Get(instanceId) as TimelineComponent;
+
+            if (timelineComponent.ContainParam("DeadFlag")) return Status.Success;
             timelineComponent.Reload(match.Groups["SubState"].Value);
             
             await ETTask.CompletedTask;

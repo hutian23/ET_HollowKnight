@@ -16,7 +16,16 @@ RegistMove: (Boss_Dstab)
 RegistMove: (Boss_Entry)
   MoveType: None;
   EndMove:
+RegistMove: (Boss_TrippleEntry)
+  MoveType: None;
+  EndMove:
+RegistMove: (Boss_TrippleEntry_1)
+  MoveType: None;
+  EndMove:
 RegistMove: (Boss_Gesture)
+  MoveType: None;
+  EndMove:
+RegistMove: (Boss_Bow)
   MoveType: None;
   EndMove:
 RegistMove: (Boss_Wounded)
@@ -35,8 +44,8 @@ return;
 SetVelocityX: 0;
 SetVelocityY: 0;
 SetPos: 0, 100000;
-BBSprite: 'Idle_1', 10000;
-Exit;
+BBSprite: 'Idle_1', 1;
+return;
 
 [Boss_Dash]
 @Trigger:
@@ -166,10 +175,56 @@ return;
 BBSprite: 'Entry_1', 5;
 BBSprite: 'Entry_2', 5;
 BBSprite: 'Entry_3', 70;
+BBSprite: 'Entry_4', 4;
+BBSprite: 'Entry_5', 4;
+BBSprite: 'Entry_6', 4;
+BBSprite: 'Entry_7', 4;
+GotoBehavior: 'Boss_Idle';
+
+[Boss_TrippleEntry]
+@Trigger:
+return;
+
+@Main:
+#Stand
+BBSprite: 'Entry_1', 5;
+BBSprite: 'Entry_2', 5;
+BBSprite: 'Entry_3', 50;
+#Look
 BBSprite: 'Entry_4', 5;
-BBSprite: 'Entry_5', 5;
+BBSprite: 'Entry_5', 105;
+#Gesture
 BBSprite: 'Entry_6', 5;
 BBSprite: 'Entry_7', 5;
+BBSprite: 'Entry_8', 5;
+BBSprite: 'Entry_9', 50;
+BBSprite: 'Entry_10', 5;
+BBSprite: 'Entry_11', 40;
+#Leave
+BBSprite: 'Entry_12', 3;
+BBSprite: 'Entry_13', 3;
+BBSprite: 'Entry_14', 3;
+BBSprite: 'Entry_15', 3;
+GotoBehavior: 'Boss_Idle';
+
+[Boss_TrippleEntry_1]
+@Main:
+#Stand
+BBSprite: 'Entry_1', 5;
+BBSprite: 'Entry_2', 5;
+BBSprite: 'Entry_3', 100;
+#Gesture
+BBSprite: 'Entry_6', 5;
+BBSprite: 'Entry_7', 5;
+BBSprite: 'Entry_8', 5;
+BBSprite: 'Entry_9', 50;
+BBSprite: 'Entry_10', 5;
+BBSprite: 'Entry_11', 40;
+#Leave
+BBSprite: 'Entry_12', 3;
+BBSprite: 'Entry_13', 3;
+BBSprite: 'Entry_14', 3;
+BBSprite: 'Entry_15', 3;
 GotoBehavior: 'Boss_Idle';
 
 [Boss_Gesture]
@@ -196,8 +251,25 @@ BBSprite: 'Wounded_4', 3;
 BBSprite: 'Wounded_5', 3;
 BBSprite: 'Wounded_6', 3;
 BBSprite: 'Wounded_7', 3;
-BBSprite: 'Wounded_8', 3000;
-GotoBehavior: 'Boss_Idle';
+BBSprite: 'Wounded_8', 3;
+return;
+
+[Boss_Bow]
+@Trigger:
+return;
+
+@Main:
+BBSprite: 'Bow_1', 5;
+BBSprite: 'Bow_2', 5;
+BBSprite: 'Bow_3', 5;
+BBSprite: 'Bow_4', 50;
+BBSprite: 'Bow_5', 5;
+BBSprite: 'Bow_6', 5;
+BBSprite: 'Bow_7', 5;
+BBSprite: 'Bow_8', 5;
+BBSprite: 'Bow_9', 5;
+return;
+
 
 [Boss_Dead]
 @Trigger:
