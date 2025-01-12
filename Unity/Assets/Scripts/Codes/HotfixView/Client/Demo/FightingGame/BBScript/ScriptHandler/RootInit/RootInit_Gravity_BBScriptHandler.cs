@@ -24,7 +24,7 @@ namespace ET.Client
             {
                 curY = maxFall;
             }
-            b2Unit.SetVelocityY(curY);
+            b2Unit.SetVelocityY(curY);   
         }
     }
 

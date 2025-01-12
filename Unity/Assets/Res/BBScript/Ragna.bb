@@ -1,6 +1,6 @@
 [Root]
 @RootInit:
-SetPos: 0, 10000;
+SetPos: 2500, 10000;
 Gravity: 100000;
 NumericType: MaxGravity, 150000;
 NumericType: MaxFall, 45000;
@@ -9,11 +9,13 @@ NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
 # 创建碰撞盒: (Center), (Size)
-AirCheckBox: 0, -2000, 1250, 1000;
+AirCheckBox: 0, -1750, 1250, 1000;
 # 落地回调
 LandCallback:
   NumericSet: DashCount, 2;
   NumericSet: JumpCount, 2;
+  Gravity: 0;
+  SetVelocityY: -1000;
   EndCallback:
 # Input
 RegistInput: RunHold;
@@ -249,7 +251,6 @@ MarkerEvent: (Whiff_Start)
   # WhiffOption: 'Rg_GroundDash';
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
-  HitStop: 15, 10;
   # 注册受击回调
   HurtNotify: Once
     HitParam: StopFrame, 0;

@@ -28,9 +28,7 @@ namespace ET.Client
                 CollisionInfo info = infoQueue.Dequeue();
                 infoQueue.Enqueue(info);
 
-                if (info.dataA.Name.Equals("AirCheckBox") && 
-                    info.dataB.LayerMask is LayerType.Ground && 
-                    !info.dataB.IsTrigger)
+                if (info.dataA.Name.Equals("AirCheckBox") && info.dataB.LayerMask is LayerType.Ground && !info.dataB.IsTrigger)
                 {
                     //落地回调
                     if (self.GetParam<bool>("InAir"))

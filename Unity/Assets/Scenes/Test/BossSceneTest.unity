@@ -448,7 +448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &148704745
 Transform:
   m_ObjectHideFlags: 0
@@ -1011,7 +1011,7 @@ PrefabInstance:
     - target: {fileID: 6765559763211144378, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516105488984742731, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
@@ -1052,7 +1052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &878355792
 Transform:
   m_ObjectHideFlags: 0
@@ -1134,8 +1134,8 @@ MonoBehaviour:
   info:
     boxName: Ground_A
     hitboxType: 6
-    center: {x: 0, y: -8}
-    size: {x: 35, y: 10}
+    center: {x: 0, y: -11.658683}
+    size: {x: 35, y: 2.6826344}
 --- !u!1 &986765978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1352,7 @@ PrefabInstance:
     - target: {fileID: 6765559763211144378, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516105488984742731, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
@@ -1360,7 +1360,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8516105488984742731, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5902321739661930749, guid: 2a6ee592a81921c4caacc51be84a2ed2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8914176309104410508, guid: 2a6ee592a81921c4caacc51be84a2ed2,
@@ -1403,7 +1404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1316225359
 Transform:
   m_ObjectHideFlags: 0
@@ -1433,7 +1434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsTrigger: 1
   info:
-    boxName: Trap1
+    boxName: Trap2
     hitboxType: 1
     center: {x: -15, y: -3}
     size: {x: 5.5, y: 1.5}
@@ -2014,6 +2015,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Throne_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6765559763211144378, guid: 2a6ee592a81921c4caacc51be84a2ed2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8516105488984742731, guid: 2a6ee592a81921c4caacc51be84a2ed2,
         type: 3}
       propertyPath: CurrentTimeline
@@ -2036,7 +2042,8 @@ PrefabInstance:
       propertyPath: serializationData.ReferencedUnityObjects.Array.data[3]
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5902321739661930749, guid: 2a6ee592a81921c4caacc51be84a2ed2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
