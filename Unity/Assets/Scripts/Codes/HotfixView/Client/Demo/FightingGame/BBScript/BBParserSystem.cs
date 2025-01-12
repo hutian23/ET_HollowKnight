@@ -82,48 +82,53 @@ namespace ET.Client
         {
             //1. 热重载时销毁子协程
             self.CancellationToken.Add(token.Cancel);
-            
             //2. 当前协程唯一标识符,生成协程ID和调用指针的映射关系
             long funcId = IdGenerater.Instance.GenerateInstanceId();
             self.Coroutine_Pointers.Add(funcId, index);
 
             //3. 逐条执行语句
+            Status ret = Status.Success;
             while (++self.Coroutine_Pointers[funcId] < self.OpDict.Count)
             {
-                //4. 语句(OPType: xxxx;) 根据 OPType 匹配handler
+                // 语句(OPType: xxxx;) 根据 OPType 匹配handler
                 string opLine = self.OpDict[self.Coroutine_Pointers[funcId]];
-                //5. 因为用[GroupName]分割代码块，说明指针超出代码块了
+                // 因为用[GroupName]分割代码块，说明指针超出代码块了
                 if (self.GroupPointerSet.Contains(self.Coroutine_Pointers[funcId]))
                 {
-                    return Status.Failed;
+                    ret = Status.Failed;
+                    break;
                 }
-                //6. 匹配opType
+                // 匹配opType
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
                 {
                     Log.Error($"{opLine}匹配失败! 请检查格式");
-                    return Status.Failed;
+                    ret = Status.Failed;
+                    break;
                 }
                 string opType = match.Value;
                 if (!ScriptDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
                 {
                     Log.Error($"not found script handler； {opType}");
-                    return Status.Failed;
+                    ret = Status.Failed;
+                    break;
                 }
 
-                //7. 执行当前指针的语句
+                // 执行当前指针的语句
                 BBScriptData data = BBScriptData.Create(self.ReplaceParam(opLine), funcId, null); //池化，不然GC很高
-                Status ret = await handler.Handle(self, data, token);
+                ret = await handler.Handle(self, data, token);
                 data.Recycle();
                 
-                //8. 协程中断(热重载、unit被销毁了....)
+                // 协程中断(热重载、unit被销毁了....)
                 if (token.IsCancel() || ret != Status.Success)
                 {
-                    return ret;
+                    break;
                 }
             }
-
-            return Status.Success;
+            
+            //4. 移除协程id
+            self.Coroutine_Pointers.Remove(funcId);
+            return ret;
         }
         
         /// <summary>
@@ -131,45 +136,52 @@ namespace ET.Client
         /// </summary>
         public static async ETTask<Status> RegistSubCoroutine(this BBParser self, int startIndex, int endIndex, ETCancellationToken token)
         {
-            //生成协程Id
+            //1. 热重载时销毁子协程
+            self.CancellationToken.Add(token.Cancel);
+            //2. 生成协程Id
             long funcId = IdGenerater.Instance.GenerateInstanceId();
             self.Coroutine_Pointers.Add(funcId, startIndex);
             
-            //热重载时销毁子协程
-            self.CancellationToken.Add(token.Cancel);
-            
+            //3. 逐条执行语句
+            Status ret = Status.Success;
             while (++self.Coroutine_Pointers[funcId] < endIndex)
             {
-                //1. 根据 opType 匹配 handler
+                //根据 opType 匹配 handler
                 string opLine = self.OpDict[self.Coroutine_Pointers[funcId]];
                 if (self.GroupPointerSet.Contains(self.Coroutine_Pointers[funcId]))
                 {
-                    return Status.Failed;
+                    ret = Status.Failed;
+                    break;
                 }
                 Match match = Regex.Match(opLine, @"^\w+\b(?:\(\))?");
                 if (!match.Success)
                 {
                     Log.Error($"{opLine}匹配失败! 请检查格式");
-                    return Status.Failed;
+                    ret = Status.Failed;
+                    break;
                 }
                 string opType = match.Value;
                 if (!ScriptDispatcherComponent.Instance.BBScriptHandlers.TryGetValue(opType, out BBScriptHandler handler))
                 {
                     Log.Error($"not found script handler: {opType}");
-                    return Status.Failed;
+                    ret = Status.Failed;
+                    break;
                 }
                 
-                //2. 执行语句
+                //执行语句
                 BBScriptData data = BBScriptData.Create(self.ReplaceParam(opLine), funcId, null);
-                Status ret = await handler.Handle(self, data, token);
+                ret = await handler.Handle(self, data, token);
                 data.Recycle();
                 
                 if (token.IsCancel() || ret != Status.Success)
                 {
-                    return ret;
+                    break;
                 }
             }
-            return Status.Success;
+            
+            //4. 移除协程id
+            self.Coroutine_Pointers.Remove(funcId);
+            return ret;
         }
         
         public static string ReplaceParam(this BBParser self, string opLine)
