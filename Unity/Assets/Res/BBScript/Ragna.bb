@@ -49,7 +49,22 @@ RegistMove: (Rg_Jump)
 RegistMove: (Rg_5B)
   MoveType: Normal;
   EndMove:
+RegistMove: (Rg_5C)
+  MoveType: Normal;
+  EndMove:
+RegistMove: (Rg_5D)
+  MoveType: Normal;
+  EndMove:
+RegistMove: (Rg_TC_End)
+  MoveType: Normal;
+  EndMove:
+RegistMove: (Rg_AirDashAttack)
+  MoveType: Normal;
+  EndMove:  
 RegistMove: (Rg_AirDash)
+  MoveType: Special;
+  EndMove:
+RegistMove: (Rg_GroundDash)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_IdleAnim)
@@ -64,6 +79,7 @@ return;
 
 @Main:
 SetVelocityX: 0;
+SetVelocityY: -1000;
 UpdateFlip;
 IdleAnim: Rg_IdleAnim;
 InputBuffer: true;
@@ -224,19 +240,6 @@ BBSprite: 'Jump_1', 3;
 SetTransition: 'JumpToFall';
 Exit;
 
-[Rg_AirDash]
-@Trigger:
-InAir: true;
-InputType: DashPressed;
-return;
-
-@Main:
-MarkerEvent: (GC_Start)
-  HitStop: 5, 20;
-  EndMarkerEvent:
-StartTimeline;
-Exit;
-
 [Rg_5B]
 @Trigger:
 InputType: 5LPPressed;
@@ -248,9 +251,10 @@ SetTransition: 'PreSquit';
 MarkerEvent: (Whiff_Start)
   InputBuffer: true;
   WhiffWindow;
-  # WhiffOption: 'Rg_GroundDash';
+  WhiffOption: 'Rg_GroundDash';
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
+  # HitStop: 15, 8;
   # 注册受击回调
   HurtNotify: Once
     HitParam: StopFrame, 0;
@@ -269,8 +273,117 @@ MarkerEvent: (Hit_Start)
   EndMarkerEvent:
 MarkerEvent: (Whiff_End)
   GCWindow;
-  # GCOption: 'Rg_5C';
+  GCOption: 'Rg_5C';
   EndMarkerEvent:
+StartTimeline;
+Exit;
+
+[Rg_5C]
+@Trigger: 
+InputType: 5LPPressed;
+InAir: false;
+GCOption: 'Rg_5C';
+return;
+
+@Main:
+MarkerEvent: (Whiff_Start)
+  InputBuffer: true;
+  WhiffWindow;
+  WhiffOption: 'Rg_GroundDash';
+  EndMarkerEvent:
+MarkerEvent: (Hit_Start)
+  # HitStop: 5, 12;
+  EndMarkerEvent:
+MarkerEvent: (Whiff_End)
+  GCWindow;
+  GCOption: 'Rg_5D';
+  EndMarkerEvent:
+StartTimeline;
+Exit;
+
+[Rg_5D]
+@Trigger:
+InputType: 5LPPressed;
+InAir: false;
+GCOption: 'Rg_5D';
+return;
+
+@Main:
+MarkerEvent: (Whiff_Start)
+  InputBuffer: true;
+  WhiffWindow;
+  WhiffOption: 'Rg_GroundDash';
+  EndMarkerEvent:
+MarkerEvent: (Whiff_End)
+  GCWindow;
+  GCOption: 'Rg_TC_End';
+  EndMarkerEvent:
+StartTimeline;
+Exit;
+
+[Rg_TC_End]
+@Trigger:
+InputType: 5LPPressed;
+InAir: false;
+GCOption: 'Rg_TC_End';
+return;
+
+@Main:
+StartTimeline;
+Exit;
+
+[Rg_AirDashAttack]
+@Trigger:
+InAir: true;
+InputType: 5LPPressed;
+GCOption: 'Rg_AirDashAttack';
+return;
+
+@Main:
+SetVelocityX: 10000;
+SetVelocityY: 0;
+Gravity: 0;
+BBSprite: 'Attack_1', 3;
+BBSprite: 'Attack_2', 3;
+BBSprite: 'Attack_3', 3;
+InputBuffer: true;
+BBSprite: 'Attack_4', 3;
+BBSprite: 'Attack_5', 3;
+SetVelocityX: 70000;
+BBSprite: 'Attack_6', 3;
+BBSprite: 'Attack_7', 3;
+SetVelocityX: 10000;
+GCWindow;
+GCOption: 'Rg_AirDashAttack';
+BBSprite: 'Attack_8', 3;
+BBSprite: 'Attack_9', 3;
+BBSprite: 'Attack_10', 3;
+BBSprite: 'Attack_11', 3;
+BBSprite: 'Attack_12', 3;
+Exit;
+
+[Rg_AirDash]
+@Trigger:
+InAir: true;
+InputType: DashPressed;
+return;
+
+@Main:
+InputBuffer: true;
+MarkerEvent: (GC_Start)
+  GCWindow;
+  GCOption: 'Rg_AirDashAttack';
+  EndMarkerEvent:
+StartTimeline;
+Exit;
+
+[Rg_GroundDash]
+@Trigger:
+InAir: false;
+InputType: DashPressed;
+return;
+
+@Main:
 StartTimeline;
 Exit;
 

@@ -35,6 +35,7 @@ namespace ET.Client
                     ScriptHelper.ScripMatchError(data.opLine);
                     throw new Exception();
             }
+            
             return ret;
         }
     }

@@ -30,6 +30,7 @@
         public const int CallbackCheckTimer = 112;
         public const int AirCheckTimer = 113;
         public const int AccelerationXTimer = 114;
+        public const int DerivedWindowTimer = 115;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;
