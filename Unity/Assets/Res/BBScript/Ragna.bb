@@ -27,6 +27,7 @@ RegistInput: DashPressed;
 RegistInput: 5LPHold;
 RegistInput: ShouRyuKen;
 RegistInput: JumpPressed;
+RegistInput: QuickFallPressed;
 # Move
 RegistMove: (Rg_Idle)
   MoveType: None;
@@ -68,6 +69,9 @@ RegistMove: (Rg_GroundDash)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_PlungingAttack)
+  MoveType: Special;
+  EndMove:
+RegistMove: (Rg_QuickFall)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_IdleAnim)
@@ -426,6 +430,28 @@ BBSprite: 'Land_5', 4;
 BBSprite: 'Land_6', 4;
 BBSprite: 'Land_7', 4;
 Exit;
+
+[Rg_QuickFall]
+@Trigger:
+InAir: true;
+InputType: QuickFallPressed;
+return;
+
+@Main:
+Gravity: 0;
+SetVelocityX: 0;
+SetVelocityY: -100000;
+BeginLoop: (InAir: true)
+  BBSprite: 'Fall_1', 3;
+  EndLoop:
+BBSprite: 'Land_1', 10;
+BBSprite: 'Land_2', 4;
+BBSprite: 'Land_3', 4;
+BBSprite: 'Land_4', 4;
+BBSprite: 'Land_5', 4;
+BBSprite: 'Land_6', 4;
+Exit;
+
 
 [Rg_IdleAnim]
 @Main:
