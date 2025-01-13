@@ -67,6 +67,9 @@ RegistMove: (Rg_AirDash)
 RegistMove: (Rg_GroundDash)
   MoveType: Special;
   EndMove:
+RegistMove: (Rg_PlungingAttack)
+  MoveType: Special;
+  EndMove:
 RegistMove: (Rg_IdleAnim)
   MoveType: Etc;
   EndMove:
@@ -373,6 +376,7 @@ InputBuffer: true;
 MarkerEvent: (GC_Start)
   GCWindow;
   GCOption: 'Rg_AirDashAttack';
+  GCOption: 'Rg_PlungingAttack';
   EndMarkerEvent:
 StartTimeline;
 Exit;
@@ -385,6 +389,42 @@ return;
 
 @Main:
 StartTimeline;
+Exit;
+
+[Rg_PlungingAttack]
+@Trigger:
+InAir: true;
+InputType: 2LPPressed;
+return;
+
+@Main:
+Gravity: 0;
+SetVelocityX: 8000;
+SetVelocityY: 13000;
+InputBuffer: true;
+BBSprite: 'Pre_2', 3;
+Gravity: 70000;
+WhiffWindow;
+WhiffOption: 'Rg_AirDash';
+BBSprite: 'Pre_2', 5;
+BBSprite: 'Pre_3', 5;
+BBSprite: 'Pre_4', 4;
+DisposeWindow;
+Gravity: 0;
+SetVelocityX: 4000;
+SetVelocityY: -60000;
+BBSprite: 'Attack_1', 2;
+BeginLoop: (InAir: true)
+  BBSprite: 'Attack_2', 3;
+  EndLoop:
+SetVelocityX: 0;
+BBSprite: 'Land_1', 5;
+BBSprite: 'Land_2', 4;
+BBSprite: 'Land_3', 4;
+BBSprite: 'Land_4', 4;
+BBSprite: 'Land_5', 4;
+BBSprite: 'Land_6', 4;
+BBSprite: 'Land_7', 4;
 Exit;
 
 [Rg_IdleAnim]
