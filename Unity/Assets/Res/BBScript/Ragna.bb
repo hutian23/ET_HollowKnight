@@ -9,13 +9,13 @@ NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
 # 创建碰撞盒: (Center), (Size)
-AirCheckBox: 0, -1750, 1250, 1000;
+AirCheckBox: 0, -1850, 1250, 1000;
 # 落地回调
 LandCallback:
   NumericSet: DashCount, 2;
   NumericSet: JumpCount, 2;
   Gravity: 0;
-  SetVelocityY: -1000;
+  SetVelocityY: -2000;
   EndCallback:
 # Input
 RegistInput: RunHold;
@@ -383,6 +383,7 @@ MarkerEvent: (GC_Start)
   GCOption: 'Rg_PlungingAttack';
   EndMarkerEvent:
 StartTimeline;
+SetVelocityX: 10000;
 Exit;
 
 [Rg_GroundDash]

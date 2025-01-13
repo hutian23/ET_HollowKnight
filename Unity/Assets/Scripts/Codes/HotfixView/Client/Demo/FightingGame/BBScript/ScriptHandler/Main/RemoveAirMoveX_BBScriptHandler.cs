@@ -14,7 +14,8 @@
 
             long timer = parser.GetParam<long>("AirMoveXTimer");
             bbTimer.Remove(ref timer);
-            
+
+            parser.TryRemoveParam("InertiaEffect");
             parser.TryRemoveParam("AirMoveXTimer");
             parser.TryRemoveParam("AirMoveX");
             

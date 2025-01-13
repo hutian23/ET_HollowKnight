@@ -11,9 +11,14 @@ namespace ET.Client
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
             b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
             
+            //输入左右相关的指令才会生效水平移动的效果
+            bool direction = inputWait.IsPressing(BBOperaType.MIDDLE) || inputWait.IsPressing(BBOperaType.UP) || inputWait.IsPressing(BBOperaType.DOWN);
+            
             //当前回中，则不会进行移动
-            bool IsMiddle = inputWait.IsPressing(BBOperaType.MIDDLE);
-            b2Unit.SetVelocityX(IsMiddle ? 0 : self.GetParam<long>("AirMoveX") / 1000f);
+            if (self.GetParam<bool>("InertiaEffect") && direction) return;
+            self.UpdateParam("InertiaEffect", false);
+            
+            b2Unit.SetVelocityX(direction ? 0 : self.GetParam<long>("AirMoveX") / 1000f);
         }
     }
 
@@ -24,6 +29,7 @@ namespace ET.Client
             return "AirMoveX";
         }
 
+        //AirMoveX: (水平移动速度。标量)
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             Match match = Regex.Match(data.opLine, @"AirMoveX: ((?<MoveX>\w+))");
@@ -42,11 +48,22 @@ namespace ET.Client
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
             
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.AirMoveTimer, parser);
-            token.Add(() => { bbTimer.Remove(ref timer);});
-
+            //初始化
+            parser.TryRemoveParam("InertiaEffect");
+            parser.TryRemoveParam("AirMoveX");
+            if (parser.ContainParam("AirMoveXTimer"))
+            {
+                long preTimer = parser.GetParam<long>("AirMoveXTimer");
+                bbTimer.Remove(ref preTimer);
+            }
+            parser.TryRemoveParam("AirMoveXTimer");
+            
+            //注册变量
+            parser.RegistParam("InertiaEffect", true);
             parser.RegistParam("AirMoveX", moveX);
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.AirMoveTimer, parser);
             parser.RegistParam("AirMoveXTimer", timer);
+            token.Add(() => { bbTimer.Remove(ref timer);});
             
             await ETTask.CompletedTask;
             return Status.Success;
