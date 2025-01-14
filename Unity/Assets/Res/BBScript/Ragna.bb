@@ -2,12 +2,16 @@
 @RootInit:
 SetPos: 2500, 10000;
 Gravity: 100000;
+# Numeric
 NumericType: MaxGravity, 150000;
 NumericType: MaxFall, 45000;
 NumericType: MaxJump, 2;
 NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
+# NumericCallback: DashCount
+#   LogWarning: 'HelloWorld';
+#   EndNumericCallback:
 # 创建碰撞盒: (Center), (Size)
 AirCheckBox: 0, -1850, 1250, 1000;
 # 落地回调
@@ -220,7 +224,7 @@ Exit;
 
 [Rg_Jump]
 @Trigger:
-NumericCheck: JumpCount > 0;
+Numeric: JumpCount > 0;
 InputType: JumpPressed;
 return;
 
