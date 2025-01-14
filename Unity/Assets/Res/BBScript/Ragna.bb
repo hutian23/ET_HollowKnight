@@ -424,8 +424,8 @@ BeginLoop: (InAir: true)
   EndLoop:
 SetVelocityX: 0;
 BBSprite: 'Land_1', 5;
-BBSprite: 'Land_2', 4;
-BBSprite: 'Land_3', 4;
+BBSprite: 'Land_2', 8;
+BBSprite: 'Land_3', 5;
 BBSprite: 'Land_4', 4;
 BBSprite: 'Land_5', 4;
 BBSprite: 'Land_6', 4;
