@@ -75,7 +75,11 @@
             token.Add(() =>
             {
                 bbTimer.Remove(ref timer);
-                cancelOptions?.Dispose();
+                if (machine.ContainParam("CancelWindow_Options"))
+                {
+                    HashSetComponent<string> options = machine.GetParam<HashSetComponent<string>>("CancelWindow_Options");
+                    options.Dispose();
+                }
             });
             
             await ETTask.CompletedTask;
