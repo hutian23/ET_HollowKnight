@@ -15,10 +15,8 @@
 
             //1. 销毁当前行为协程执行中创建的共享变量
             parser.Cancel();
-
             //2. 清空行为协程中生成的组件
             timelineComponent.Init();
-
             //3. 清空缓存的碰撞信息
             b2Unit.Init();
 
