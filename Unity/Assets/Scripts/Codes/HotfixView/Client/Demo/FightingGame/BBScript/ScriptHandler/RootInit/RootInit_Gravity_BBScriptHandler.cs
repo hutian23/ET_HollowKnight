@@ -10,7 +10,7 @@ namespace ET.Client
             if (self.ContainParam("ApplyRootMotion")) return;
             
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             
             //y轴方向当前帧速度改变量
             float g = - timelineComponent.GetParam<long>("Gravity") / 1000f;

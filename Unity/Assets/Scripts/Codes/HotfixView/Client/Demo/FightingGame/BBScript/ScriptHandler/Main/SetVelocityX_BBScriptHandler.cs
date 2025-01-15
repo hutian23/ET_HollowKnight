@@ -20,7 +20,7 @@ namespace ET.Client
             }
         
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             
             if (!long.TryParse(match.Groups["Velocity"].Value, out long velX))
             {

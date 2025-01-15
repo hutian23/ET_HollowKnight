@@ -8,7 +8,7 @@
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
-            b2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<b2Unit>();
+            B2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<B2Unit>();
             
             //1. 销毁旧hitbox
             b2Body.ClearHitBoxes();

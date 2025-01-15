@@ -9,7 +9,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             
             //输入左右相关的指令才会生效水平移动的效果
             bool direction = inputWait.IsPressing(BBOperaType.MIDDLE) || inputWait.IsPressing(BBOperaType.UP) || inputWait.IsPressing(BBOperaType.DOWN);

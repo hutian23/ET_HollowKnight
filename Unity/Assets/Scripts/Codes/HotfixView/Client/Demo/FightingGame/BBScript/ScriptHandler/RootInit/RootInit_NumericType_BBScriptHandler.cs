@@ -18,20 +18,15 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            if (timelineComponent.ContainParam(match.Groups["NumericType"].Value))
-            {
-                Log.Error($"already exist NumericType:{match.Groups["NumericType"].Value}");
-                return Status.Failed;
-            }
-
+            
             if (!long.TryParse(match.Groups["Value"].Value, out long value))
             {
-                Log.Error($"cannot format {match.Groups["Value"].Value} to long");
+                Log.Error($"cannot format {match.Groups["Value"].Value} to long!!!");
+                return Status.Failed;
             }
             
-            timelineComponent.RegistParam(match.Groups["NumericType"].Value, value);
+            BBNumeric numeric = parser.GetParent<Unit>().GetComponent<BBNumeric>();
+            numeric.Set(match.Groups["NumericType"].Value, value);
             
             await ETTask.CompletedTask;
             return Status.Success;

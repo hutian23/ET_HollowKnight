@@ -12,7 +12,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             BBParser parser = timelineComponent.GetComponent<BBParser>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             
             if (!args.ApplyRootMotion)
             {

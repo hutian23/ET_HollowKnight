@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     [FriendOf(typeof(InputWait))]
     public class Test_BBScriptHandler : BBScriptHandler
     {

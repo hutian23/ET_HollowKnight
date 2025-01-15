@@ -5,14 +5,14 @@ namespace ET.Client
     [Event(SceneType.Client)]
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(InputWait))]
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     public class BeforeBehaviorReload_Player_ReloadB2body : AEvent<BeforeBehaviorReload>
     {
         protected override async ETTask Run(Scene scene, BeforeBehaviorReload args)
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
-            b2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<b2Unit>();
+            B2Unit b2Unit = unit.GetComponent<TimelineComponent>().GetComponent<B2Unit>();
             InputWait inputWait = unit.GetComponent<TimelineComponent>().GetComponent<InputWait>();
             
             //1. 销毁旧hitbox

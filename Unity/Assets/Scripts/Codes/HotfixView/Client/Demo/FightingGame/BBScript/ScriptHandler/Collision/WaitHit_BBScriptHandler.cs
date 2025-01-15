@@ -5,7 +5,7 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.HitCheckTimer)]
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     [FriendOf(typeof(BBParser))]
     public class HitCheckTimer : BBTimer<BBParser>
     {
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
 
             //PostStep生命周期中，取出碰撞缓冲区中碰撞信息
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;

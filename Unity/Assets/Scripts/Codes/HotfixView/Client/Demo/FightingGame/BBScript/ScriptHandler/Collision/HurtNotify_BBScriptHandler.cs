@@ -6,7 +6,7 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.HurtNotifyTimer)]
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(BBParser))]
     //PostStep生命周期执行
@@ -15,7 +15,7 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
 
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;
             int count = infoQueue.Count;

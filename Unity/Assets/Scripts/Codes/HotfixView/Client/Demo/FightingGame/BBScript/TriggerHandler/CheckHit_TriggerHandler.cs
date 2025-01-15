@@ -3,7 +3,7 @@ using Timeline;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     public class CheckHit_TriggerHandler : BBTriggerHandler
     {
         public override string GetTriggerType()
@@ -16,7 +16,7 @@ namespace ET.Client
         public override bool Check(BBParser parser, BBScriptData data)
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
            
             int count = b2Unit.CollisionBuffer.Count;
             while (count-- > 0)

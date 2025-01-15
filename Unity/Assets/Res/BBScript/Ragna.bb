@@ -1,7 +1,12 @@
 [Root]
 @RootInit:
+PlayerInit;
 SetPos: 2500, 10000;
 Gravity: 100000;
+# NumericChange
+NumericChange: Hertz
+  UpdateHertz;
+  EndNumericChange:
 # Numeric
 NumericType: MaxGravity, 150000;
 NumericType: MaxFall, 45000;
@@ -9,9 +14,7 @@ NumericType: MaxJump, 2;
 NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
-# NumericCallback: DashCount
-#   LogWarning: 'HelloWorld';
-#   EndNumericCallback:
+NumericType: Hertz, 60;
 # 创建碰撞盒: (Center), (Size)
 AirCheckBox: 0, -1850, 1250, 1000;
 # 落地回调

@@ -9,7 +9,7 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             
             float ax = self.GetParam<long>("AccelerationX") / 1000f;
             float maxV = self.GetParam<long>("MaxV") / 1000f;

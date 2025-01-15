@@ -9,13 +9,13 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.AirCheckTimer)]
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     [FriendOf(typeof(BBParser))]
     public class AirCheckTimer : BBTimer<TimelineComponent>
     {
         protected override void Run(TimelineComponent self)
         {
-            b2Unit b2Unit = self.GetComponent<b2Unit>();
+            B2Unit b2Unit = self.GetComponent<B2Unit>();
             BBParser parser = self.GetComponent<BBParser>();
 
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;

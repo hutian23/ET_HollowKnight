@@ -23,7 +23,7 @@ namespace Timeline
     public struct UpdateHertzCallback
     {
         public long instanceId;
-        public float Hertz;
+        public int Hertz;
     }
     #endregion
     

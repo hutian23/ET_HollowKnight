@@ -21,8 +21,8 @@ namespace ET.Client
             
             int.TryParse(match.Groups["WaitFrame"].Value, out int frame);
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            await timelineComponent.GetComponent<BBTimerComponent>().WaitAsync(frame, token);
+            BBTimerComponent bbTimer = parser.GetParent<Unit>().GetComponent<BBTimerComponent>();
+            await bbTimer.WaitAsync(frame, token);
             
             return token.IsCancel()? Status.Failed : Status.Success;
         }

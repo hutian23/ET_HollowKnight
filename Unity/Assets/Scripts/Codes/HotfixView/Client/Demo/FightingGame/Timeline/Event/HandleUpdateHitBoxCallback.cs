@@ -6,7 +6,7 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    [FriendOf(typeof(b2Unit))]
+    [FriendOf(typeof(B2Unit))]
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(b2WorldManager))]
     //HitboxTrack的回调
@@ -15,7 +15,7 @@ namespace ET.Client
         public override void Handle(UpdateHitboxCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            b2Unit b2Unit = timelineComponent.GetComponent<b2Unit>();
+            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
 
             if (args.Keyframe == null)

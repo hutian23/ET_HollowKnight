@@ -5,19 +5,19 @@ namespace ET.Client
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(NumericCallback))]
     [FriendOf(typeof(BBNumeric))]
-    public class RootInit_NumericCallback : BBScriptHandler
+    public class RootInit_NumericChange : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "NumericCallback";
+            return "NumericChange";
         }
 
-        //NumericCallback: DashCount
+        //NumericChange: DashCount
         //EndNumericCallback:
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             //1. 匹配
-            Match match = Regex.Match(data.opLine, @"NumericCallback: (?<NumericType>.*?)");
+            Match match = Regex.Match(data.opLine, @"NumericChange: (?<NumericType>.*?)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -30,7 +30,7 @@ namespace ET.Client
             while (++index < parser.OpDict.Count)
             {
                 string opLine = parser.OpDict[index];
-                if (opLine.Equals("EndMove:"))
+                if (opLine.Equals("EndNumericChange:"))
                 {
                     endIndex = index;
                     break;
