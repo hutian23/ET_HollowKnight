@@ -110,7 +110,7 @@ namespace ET.Client
             }
             if (!parser.ContainFunction(groupName, funcName)) return;
             
-            //调用回调
+            //调用回调(同步!!!)
             parser.RegistParam("CollisionInfo", info);
             parser.Invoke(parser.GetFunctionPointer(groupName, funcName), parser.CancellationToken).Coroutine();
             parser.TryRemoveParam("CollisionInfo");

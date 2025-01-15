@@ -8,7 +8,7 @@ namespace ET.Client
         [StaticField]
         public static EnemyManager Instance;
 
-        public List<long> InstanceIds = new();
+        public HashSet<long> InstanceIds = new();
 
         //子弹之类的unit，热重载时销毁
         public Queue<long> ReloadQueue = new();

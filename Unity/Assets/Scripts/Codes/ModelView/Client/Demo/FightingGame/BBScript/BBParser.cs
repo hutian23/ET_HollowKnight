@@ -6,9 +6,8 @@ namespace ET.Client
     //运行时解析BBScript然后执行
     [ComponentOf]
     [ChildOf]
-    public class BBParser: Entity, IAwake<int>, IDestroy, ILoad
+    public class BBParser: Entity, IAwake, IDestroy, ILoad
     {
-        public int ProcessorType;
         public Dictionary<int, string> OpDict = new();
         public Dictionary<string, DataGroup> GroupDict = new();
         public HashSet<int> GroupPointerSet = new();

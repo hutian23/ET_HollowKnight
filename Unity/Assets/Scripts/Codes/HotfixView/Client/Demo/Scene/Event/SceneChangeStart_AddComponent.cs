@@ -23,6 +23,8 @@ namespace ET.Client
             //注册SceneTimer
             currentScene.AddComponent<BBTimerComponent>();
             currentScene.AddComponent<CameraManager>();
+            currentScene.AddComponent<EnemyManager>();
+            currentScene.AddComponent<BallManager>();
         }
     }
 }

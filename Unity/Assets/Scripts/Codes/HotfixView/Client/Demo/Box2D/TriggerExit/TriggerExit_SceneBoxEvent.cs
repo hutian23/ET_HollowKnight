@@ -4,6 +4,7 @@ namespace ET.Client.TriggerExit
 {
     [Invoke(TriggerExitType.SceneBoxEvent)]
     [FriendOf(typeof(SceneBoxHandler))]
+    [FriendOf(typeof(b2Body))]
     public class TriggerExit_SceneBoxEvent : AInvokeHandler<TriggerExitCallback>
     {
         public override void Handle(TriggerExitCallback args)
@@ -11,7 +12,8 @@ namespace ET.Client.TriggerExit
             CollisionInfo info = args.info;
 
             b2Body b2Body = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
-            SceneBoxHandler handler = b2Body.GetComponent<BBParser>().GetComponent<SceneBoxHandler>();
+            Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
+            SceneBoxHandler handler = unit.GetComponent<BBParser>().GetComponent<SceneBoxHandler>();
             handler.TriggerExitQueue.Enqueue(info);
         }
     }

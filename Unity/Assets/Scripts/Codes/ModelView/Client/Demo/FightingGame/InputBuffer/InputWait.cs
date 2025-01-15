@@ -5,7 +5,7 @@ namespace ET.Client
     /// <summary>
     /// 输入模块
     /// </summary>
-    [ComponentOf(typeof (TimelineComponent))]
+    [ComponentOf]
     public class InputWait: Entity, IAwake, IDestroy, IFrameUpdate, ILoad
     {
         public long curOP;

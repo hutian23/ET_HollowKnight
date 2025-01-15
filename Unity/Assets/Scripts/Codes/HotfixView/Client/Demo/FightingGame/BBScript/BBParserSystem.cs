@@ -7,20 +7,12 @@ namespace ET.Client
     [FriendOf(typeof (DialogueComponent))]
     public static class BBParserSystem
     {
-        public class BBParserAwakeSystem : AwakeSystem<BBParser,int>
-        {
-            protected override void Awake(BBParser self, int processType)
-            {
-                self.ProcessorType = processType;
-            }
-        }
-        
         public class BBParserDestroySystem: DestroySystem<BBParser>
         {
             protected override void Destroy(BBParser self)
             {
                 self.Init();
-                self.ProcessorType = 0;
+                EventSystem.Instance.Invoke(new ProcessBBScriptCallback(){ instanceId = self.InstanceId });
             }
         }
 
@@ -28,13 +20,8 @@ namespace ET.Client
         {
             protected override void Load(BBParser self)
             {
-                EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
+                EventSystem.Instance.Invoke(new ProcessBBScriptCallback(){ instanceId = self.InstanceId });
             }
-        }
-
-        public static void Start(this BBParser self)
-        {
-            EventSystem.Instance.Invoke(self.ProcessorType, new ProcessBBScriptCallback(){instanceId = self.InstanceId});
         }
         
         /// <summary>

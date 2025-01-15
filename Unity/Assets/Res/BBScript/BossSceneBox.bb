@@ -1,3 +1,8 @@
+[Root]
+@RootInit:
+SceneBoxInit;
+return;
+
 [A]
 @TriggerStay:
 LogWarning: 'Hello_World';

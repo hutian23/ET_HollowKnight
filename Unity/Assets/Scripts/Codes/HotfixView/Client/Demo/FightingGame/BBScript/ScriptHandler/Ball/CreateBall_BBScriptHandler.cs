@@ -35,39 +35,40 @@ namespace ET.Client
             ball.AddComponent<GameObjectComponent>().GameObject = ballGo;
 
             //3. 添加组件
-            TimelineComponent timelineComponent = ball.AddComponent<TimelineComponent>();
-            timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
-            timelineComponent.AddComponent<b2Unit, long>(ball.InstanceId);
-            timelineComponent.AddComponent<ObjectWait>();
-            timelineComponent.AddComponent<BehaviorBuffer>();
-            timelineComponent.AddComponent<BBParser, int>(ProcessType.TimelineProcess);
-            BallManager.Instance.InstanceIds.Enqueue(ball.InstanceId);
+            // TimelineComponent timelineComponent = ball.AddComponent<TimelineComponent>();
+            // timelineComponent.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
+            // timelineComponent.AddComponent<b2Unit, long>(ball.InstanceId);
+            // timelineComponent.AddComponent<ObjectWait>();
+            // timelineComponent.AddComponent<BehaviorBuffer>();
+            // timelineComponent.AddComponent<BBParser, int>(ProcessType.TimelineProcess);
+            // BallManager.Instance.InstanceIds.Enqueue(ball.InstanceId);
+            //
+            // //4. 跳过代码块
+            // int index = parser.Coroutine_Pointers[data.CoroutineID];
+            // int endIndex = index, startIndex = index;
+            // while (++index < parser.OpDict.Count)
+            // {
+            //     string opLine = parser.OpDict[index];
+            //     if (opLine.Equals("EndCreateBall:"))
+            //     {
+            //         endIndex = index;
+            //         break;
+            //     }
+            // }
+            // parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
+            //
+            // //5. 注册变量
+            // parser.TryRemoveParam("BallId");
+            // parser.RegistParam("BallId", ball.InstanceId);
+            // Status ret = await parser.RegistSubCoroutine(startIndex, endIndex, token);
+            // parser.TryRemoveParam("BallId");
+            //
+            // //6. 启动ball行为机
+            // timelineComponent.RegistParam("SpawnerId", parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            // timelineComponent.GetComponent<BBParser>().Start();
 
-            //4. 跳过代码块
-            int index = parser.Coroutine_Pointers[data.CoroutineID];
-            int endIndex = index, startIndex = index;
-            while (++index < parser.OpDict.Count)
-            {
-                string opLine = parser.OpDict[index];
-                if (opLine.Equals("EndCreateBall:"))
-                {
-                    endIndex = index;
-                    break;
-                }
-            }
-            parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
-
-            //5. 注册变量
-            parser.TryRemoveParam("BallId");
-            parser.RegistParam("BallId", ball.InstanceId);
-            Status ret = await parser.RegistSubCoroutine(startIndex, endIndex, token);
-            parser.TryRemoveParam("BallId");
-
-            //6. 启动ball行为机
-            timelineComponent.RegistParam("SpawnerId", parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
-            timelineComponent.GetComponent<BBParser>().Start();
-
-            return token.IsCancel() || ret != Status.Success ? Status.Failed : Status.Success;
+            // return token.IsCancel() || ret != Status.Success ? Status.Failed : Status.Success;
+            return Status.Success;
         }
     }
 }

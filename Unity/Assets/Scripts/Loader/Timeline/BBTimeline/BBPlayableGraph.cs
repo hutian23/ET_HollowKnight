@@ -9,8 +9,6 @@ namespace Timeline
     [CreateAssetMenu(menuName = "ScriptableObject/BBTimeline/PlayableGraph", fileName = "BBPlayableGraph")]
     public class BBPlayableGraph: SerializedScriptableObject
     {
-        public TextAsset BBScript;
-        
         [OdinSerialize]
         public Dictionary<string, BBTimeline> timelineDict = new();
         

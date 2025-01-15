@@ -6,7 +6,7 @@ using Timeline;
 namespace ET.Client
 {
     // Unit在物理层的映射，负责逻辑层和物理层交互
-    [ComponentOf(typeof (TimelineComponent))]
+    [ComponentOf]
     public class b2Unit: Entity, IAwake<long>, IDestroy, IPostStep, ILoad, IPreStep
     {
         public HitboxKeyframe keyFrame;// 判定框关键帧
