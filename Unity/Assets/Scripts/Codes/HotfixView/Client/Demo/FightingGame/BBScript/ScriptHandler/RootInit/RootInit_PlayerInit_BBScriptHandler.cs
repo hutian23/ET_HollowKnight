@@ -14,7 +14,7 @@
             player.AddComponent<TimelineComponent>();
             player.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
             player.AddComponent<BBNumeric>();
-            player.AddComponent<BehaviorBuffer>();
+            player.AddComponent<BehaviorMachine>();
             player.AddComponent<B2Unit, long>(player.InstanceId);
             player.AddComponent<ObjectWait>();
             player.AddComponent<InputWait>();
@@ -24,7 +24,7 @@
                 player.RemoveComponent<TimelineComponent>();
                 player.RemoveComponent<BBTimerComponent>();
                 player.RemoveComponent<BBNumeric>();
-                player.RemoveComponent<BehaviorBuffer>();
+                player.RemoveComponent<BehaviorMachine>();
                 player.RemoveComponent<B2Unit>();
                 player.RemoveComponent<ObjectWait>();
                 player.RemoveComponent<InputWait>();

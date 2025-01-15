@@ -27,10 +27,10 @@ namespace ET.Client
             b2Body body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
             
             //查询对应的受击行为
-            int order = buffer.GetHitStun(match.Groups["hitFlag"].Value);
+            int order = machine.GetHitStun(match.Groups["hitFlag"].Value);
             timelineComponent.Reload(order);
 
             await ETTask.CompletedTask;

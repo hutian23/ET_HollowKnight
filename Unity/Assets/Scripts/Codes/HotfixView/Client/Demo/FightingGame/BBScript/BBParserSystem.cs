@@ -51,7 +51,6 @@ namespace ET.Client
         public static void Cancel(this BBParser self)
         {
             self.CancellationToken?.Cancel();
-            //TODO 退出协程时需要销毁指针
             self.Coroutine_Pointers.Clear();
             //回收变量
             foreach (var kv in self.ParamDict)

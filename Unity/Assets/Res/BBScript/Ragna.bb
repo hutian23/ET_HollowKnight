@@ -86,6 +86,10 @@ RegistMove: (Rg_IdleAnim)
   EndMove:
 return;
 
+@BeforeReload:
+UpdateFlip: Once;
+return;
+
 
 [Rg_Idle]
 @Trigger:
@@ -94,7 +98,6 @@ return;
 @Main:
 SetVelocityX: 0;
 SetVelocityY: -1000;
-UpdateFlip;
 IdleAnim: Rg_IdleAnim;
 InputBuffer: true;
 DefaultWindow;
@@ -123,7 +126,7 @@ return;
 
 @Main:
 #PreRun
-UpdateFlip;
+UpdateFlip: Repeat;
 SetTransition: 'PreSquit';
 InputBuffer: true;
 DefaultWindow;
@@ -168,7 +171,7 @@ return;
 
 @Main:
 SetVelocityX: 0;
-UpdateFlip;
+UpdateFlip: Repeat;
 InputBuffer: true;
 DefaultWindow;
 BeginIf: (TransitionCached: 'PreSquit')
@@ -203,7 +206,7 @@ return;
 InputBuffer: true;
 DefaultWindow;
 AirMoveX: 15000;
-UpdateFlip;
+UpdateFlip: Repeat;
 Gravity: 100000;
 BeginIf: (TransitionCached: 'JumpToFall')
   BBSprite: 'JumpToFall_1', 4;

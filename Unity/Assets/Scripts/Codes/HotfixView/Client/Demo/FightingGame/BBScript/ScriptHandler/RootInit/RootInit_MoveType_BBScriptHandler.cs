@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace ET.Client
 {
     [FriendOf(typeof (BehaviorInfo))]
-    public class MoveType_BBScriptHandler: BBScriptHandler
+    public class RootInit_MoveType_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()
         {
@@ -28,8 +28,8 @@ namespace ET.Client
             }
             
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorInfo info = machine.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
             info.moveType = moveType;
             
             await ETTask.CompletedTask;

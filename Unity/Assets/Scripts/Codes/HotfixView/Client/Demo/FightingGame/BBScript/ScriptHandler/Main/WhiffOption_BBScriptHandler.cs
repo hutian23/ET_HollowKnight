@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BehaviorInfo))]
     public class WhiffOption_BBScriptHandler : BBScriptHandler
     {
@@ -22,15 +22,15 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetInfoByName(match.Groups["Option"].Value);
-            if (info.behaviorOrder == buffer.currentOrder)
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorInfo info = machine.GetInfoByName(match.Groups["Option"].Value);
+            if (info.behaviorOrder == machine.currentOrder)
             {
                 Log.Error($"can not add same behavior into whiffCancel!");
                 return Status.Failed;
             }
             
-            buffer.WhiffOptions.Add(info.behaviorOrder);
+            machine.WhiffOptions.Add(info.behaviorOrder);
             
             await ETTask.CompletedTask;
             return Status.Success;

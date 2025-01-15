@@ -22,13 +22,13 @@ namespace ET.Client
             string transitionFlag = $"Transition_{match.Groups["transition"].Value}";
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            if (!buffer.ContainParam(transitionFlag))
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            if (!machine.ContainParam(transitionFlag))
             {
                 return false;
             }
 
-            return buffer.GetParam<bool>(transitionFlag);
+            return machine.GetParam<bool>(transitionFlag);
 
         }
     }

@@ -20,9 +20,9 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
             
-            return buffer.ContainGCOption(match.Groups["GCOption"].Value);
+            return machine.ContainGCOption(match.Groups["GCOption"].Value);
         }
     }
 }

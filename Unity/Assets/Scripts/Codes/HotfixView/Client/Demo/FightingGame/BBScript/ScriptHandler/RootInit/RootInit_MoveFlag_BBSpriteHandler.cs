@@ -2,18 +2,18 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(BehaviorBuffer))]
-    public class HitFlag_BBSpriteHandler : BBScriptHandler
+    [FriendOf(typeof(BehaviorMachine))]
+    public class RootInit_MoveFlag_BBSpriteHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "HitFlag";
+            return "MoveFlag";
         }
 
         //HitFlag: Hurt1;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"HitFlag: (?<HitFlag>\w+)");
+            Match match = Regex.Match(data.opLine, @"MoveFlag: (?<HitFlag>\w+)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -21,9 +21,9 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
-            buffer.hitMap.TryAdd(match.Groups["HitFlag"].Value, info.Id);
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorInfo info = machine.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
+            machine.behaviorFlagDict.TryAdd(match.Groups["MoveFlag"].Value, info.Id);
 
             await ETTask.CompletedTask;
             return Status.Success;

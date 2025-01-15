@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Current)]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(TimelineComponent))]
     [FriendOf(typeof(BehaviorInfo))]
     public class BeforeBehaviorReload_Dummy_ReloadTimeline : AEvent<BeforeBehaviorReload>
@@ -10,8 +10,8 @@
         {
             Unit unit = Root.Instance.Get(args.instanceId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetInfoByOrder(args.behaviorOrder);
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorInfo info = machine.GetInfoByOrder(args.behaviorOrder);
             BBParser bbParser = timelineComponent.GetComponent<BBParser>();
 
             // 显示层，更新PlayableGraph
@@ -20,21 +20,15 @@
             bbParser.Cancel();
             
             // 记录CurrentOrder, 缓存共享变量
-            buffer.SetCurrentOrder(args.behaviorOrder);
-            foreach (var kv in buffer.paramDict)
+            machine.SetCurrentOrder(args.behaviorOrder);
+            foreach (var kv in machine.paramDict)
             {
                 SharedVariable variable = kv.Value;
                 bbParser.RegistParam(variable.name, variable.value);
             }
-            buffer.ClearParam();
+            machine.ClearParam();
 
             // 清空行为携程中生成的组件
-            foreach (var kv in timelineComponent.callbackDict)
-            {
-                TimelineCallback callback = timelineComponent.GetChild<TimelineCallback>(kv.Value);
-                callback.Dispose();
-            }
-            timelineComponent.callbackDict.Clear();
             foreach (var kv in timelineComponent.markerEventDict)
             {
                 TimelineMarkerEvent markerEvent = timelineComponent.GetChild<TimelineMarkerEvent>(kv.Value);

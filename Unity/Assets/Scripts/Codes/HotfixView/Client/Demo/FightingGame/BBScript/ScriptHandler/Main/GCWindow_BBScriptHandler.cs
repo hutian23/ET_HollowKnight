@@ -1,26 +1,26 @@
 ﻿namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.GCWindowTimer)]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BehaviorInfo))]
     public class GCWindowTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
 
             int currentOrder = -1;
-            BehaviorInfo curInfo = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
-            foreach (long infoId in buffer.DescendInfoList)
+            BehaviorInfo curInfo = machine.GetInfoByOrder(machine.GetCurrentOrder());
+            foreach (long infoId in machine.DescendInfoList)
             {
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
+                BehaviorInfo info = machine.GetChild<BehaviorInfo>(infoId);
                 if (info.moveType is MoveType.HitStun || info.moveType is MoveType.Etc)
                 {
                     continue;
                 }
                 
-                if ((info.moveType > curInfo.moveType || buffer.ContainGCOption(info.behaviorOrder)) && info.Trigger())
+                if ((info.moveType > curInfo.moveType || machine.ContainGCOption(info.behaviorOrder)) && info.Trigger())
                 {
                     currentOrder = info.behaviorOrder;
                     break;
@@ -33,14 +33,14 @@
             }
             
             //初始化
-            buffer.DisposeWindow();
+            machine.DisposeWindow();
             
             //切换行为
             timelineComponent.Reload(currentOrder);
         }
     }
 
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(BehaviorInfo))]
     [FriendOf(typeof(InputWait))]    //加特林取消窗口，招式之间相互取消

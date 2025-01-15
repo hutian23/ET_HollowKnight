@@ -1,12 +1,11 @@
 ﻿using System.Text.RegularExpressions;
-using Timeline;
 
 namespace ET.Client
 {
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(BehaviorInfo))]
     [FriendOf(typeof(ScriptDispatcherComponent))]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     public class RootInit_RegistMove_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -28,18 +27,16 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BBTimeline timeline = timelineComponent.GetTimelinePlayer().GetTimeline(match.Groups["behaviorName"].Value);
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
             
-            //2. 注册BehaviorInfo组件到BehaviorBuffer
-            BehaviorInfo info = buffer.AddChild<BehaviorInfo>();
-            int order = buffer.Children.Count - 1;
-            info.Timeline = timeline;
+            //2. 注册BehaviorInfo组件到行为机中
+            BehaviorInfo info = machine.AddChild<BehaviorInfo>();
+            int order = machine.Children.Count - 1;
             info.behaviorOrder = order;
             info.behaviorName = match.Groups["behaviorName"].Value;
-            buffer.behaviorNameMap.Add(info.behaviorName,info.Id); //快速访问到组件
-            buffer.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
-            buffer.DescendInfoList.Add(info.Id);
+            machine.behaviorNameMap.Add(info.behaviorName,info.Id); //快速访问到组件
+            machine.behaviorOrderMap.Add(info.behaviorOrder, info.Id);
+            machine.DescendInfoList.Add(info.Id);
             
             //3. 跳过Move代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];

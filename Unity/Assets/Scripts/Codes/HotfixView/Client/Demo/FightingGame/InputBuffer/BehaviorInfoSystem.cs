@@ -10,7 +10,6 @@
                 self.behaviorName = string.Empty;
                 self.behaviorOrder = 0;
                 self.moveType = MoveType.None;
-                self.Timeline = null;
             }
         }
     }

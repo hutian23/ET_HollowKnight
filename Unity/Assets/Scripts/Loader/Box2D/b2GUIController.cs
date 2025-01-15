@@ -204,7 +204,7 @@ namespace ET
                                 }
                                 
                                 ImGui.SliderFloat("Hertz", ref timelinePlayer.Hertz, 0f, 120f, "%.0f hz");
-                                EventSystem.Instance.Invoke(new UpdateHertzCallback() { instanceId = timelinePlayer.instanceId,Hertz = timelinePlayer.Hertz});
+                                EventSystem.Instance.Invoke(new UpdateHertzCallback() { instanceId = timelinePlayer.instanceId,Hertz = (int)timelinePlayer.Hertz});
                                 
                                 ImGui.TreePop();
                             }

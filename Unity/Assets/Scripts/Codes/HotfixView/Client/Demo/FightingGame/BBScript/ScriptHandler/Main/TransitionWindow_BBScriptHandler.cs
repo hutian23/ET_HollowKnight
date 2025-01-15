@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.TransitionWindowTimer)]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BehaviorInfo))]
     public class TransitionCancelWindowTimer : BBTimer<BBParser>
     {
@@ -9,12 +9,12 @@
         {
             //在过度动画取消窗口内，行为机逻辑上已经进入中立状态，可以切换进所有行为
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
 
             int currenOrder = -1;
-            foreach (long infoId in buffer.DescendInfoList)
+            foreach (long infoId in machine.DescendInfoList)
             {
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
+                BehaviorInfo info = machine.GetChild<BehaviorInfo>(infoId);
                 if (info.behaviorOrder == 0 || info.moveType is MoveType.Etc || info.moveType is MoveType.HitStun)
                 {
                     continue;
@@ -33,14 +33,14 @@
             }
             
             //初始化
-            buffer.DisposeWindow();
+            machine.DisposeWindow();
             
             //切换行为
             timelineComponent.Reload(currenOrder);
         }
     }
 
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(InputWait))]
     public class TransitionWindow_BBScriptHandler : BBScriptHandler

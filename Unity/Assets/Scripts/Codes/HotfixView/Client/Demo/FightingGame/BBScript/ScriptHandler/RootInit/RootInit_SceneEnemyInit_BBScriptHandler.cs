@@ -17,11 +17,11 @@
 
             //2. 行为机相关组件
             enemy.AddComponent<TimelineComponent>();
-            enemy.AddComponent<BBTimerComponent>();
+            enemy.AddComponent<BBTimerComponent>().IsFrameUpdateTimer();
             enemy.AddComponent<BBNumeric>();
             enemy.AddComponent<B2Unit, long>(enemy.InstanceId);
             enemy.AddComponent<ObjectWait>();
-            enemy.AddComponent<BehaviorBuffer>();
+            enemy.AddComponent<BehaviorMachine>();
 
             //3. 单例管理enemy
             EnemyManager.Instance.InstanceIds.Add(enemy.InstanceId);
@@ -31,8 +31,10 @@
             {
                 enemy.RemoveComponent<TimelineComponent>();
                 enemy.RemoveComponent<BBTimerComponent>();
+                enemy.RemoveComponent<BBNumeric>();
                 enemy.RemoveComponent<B2Unit>();
-                enemy.RemoveComponent<BehaviorBuffer>();
+                enemy.RemoveComponent<ObjectWait>();
+                enemy.RemoveComponent<BehaviorMachine>();
                 EnemyManager.Instance.InstanceIds.Remove(enemy.InstanceId);
             });
             

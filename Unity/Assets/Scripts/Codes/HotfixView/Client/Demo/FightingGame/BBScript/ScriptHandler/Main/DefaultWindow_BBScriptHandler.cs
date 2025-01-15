@@ -2,19 +2,19 @@
 {
     [Invoke(BBTimerInvokeType.DefaultWindowTimer)]
     [FriendOf(typeof(BehaviorInfo))]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     public class DefaultWindowTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
 
             //找到可以切换的行为
-            int currentOrder = buffer.GetCurrentOrder();
-            foreach (long infoId in buffer.DescendInfoList)
+            int currentOrder = machine.GetCurrentOrder();
+            foreach (long infoId in machine.DescendInfoList)
             {
-                BehaviorInfo info = buffer.GetChild<BehaviorInfo>(infoId);
+                BehaviorInfo info = machine.GetChild<BehaviorInfo>(infoId);
                 if (info.moveType is MoveType.HitStun || info.moveType is MoveType.Etc)
                 {
                     continue;
@@ -29,20 +29,20 @@
                     break;
                 }
             }
-            if (currentOrder == buffer.GetCurrentOrder())
+            if (currentOrder == machine.GetCurrentOrder())
             {
                 return;
             }
 
             //初始化
-            buffer.DisposeWindow();
+            machine.DisposeWindow();
             
             //切换行为
             timelineComponent.Reload(currentOrder);
         }
     }
 
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BehaviorInfo))]
     [FriendOf(typeof(InputWait))]
     public class DefaultWindow_BBScriptHandler : BBScriptHandler

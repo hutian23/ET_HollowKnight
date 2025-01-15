@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using Timeline;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
-    [ChildOf(typeof (BehaviorBuffer))]
+    [ChildOf(typeof (BehaviorMachine))]
     public class BehaviorInfo: Entity, IAwake, IDestroy
     {
-        public BBTimeline Timeline;
         public string behaviorName;
         public int behaviorOrder;
         public MoveType moveType;

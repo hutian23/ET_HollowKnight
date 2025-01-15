@@ -15,15 +15,11 @@ namespace ET.Client
         public override void Handle(UpdateHitboxCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
             b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
-
             if (args.Keyframe == null)
             {
                 return;
             }
-            //更新关键帧
-            b2Unit.keyFrame = args.Keyframe;
             //1. 销毁旧的夹具
             b2Body.ClearHitBoxes();
             //2. 更新hitbox
@@ -45,7 +41,7 @@ namespace ET.Client
                         IsTrigger = info.hitboxType is not HitboxType.Squash,
                         UserData = info,
                         TriggerStayId = TriggerStayType.CollisionEvent,
-                    },
+                    }
                 };
                 b2Body.CreateFixture(fixtureDef);
             }

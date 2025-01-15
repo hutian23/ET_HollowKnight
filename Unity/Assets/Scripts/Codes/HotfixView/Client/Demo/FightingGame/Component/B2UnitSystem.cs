@@ -34,7 +34,6 @@ namespace ET.Client
 
         public static void Init(this B2Unit self)
         {
-            self.keyFrame = null;
             self.CollisionBuffer.Clear();
         }
 

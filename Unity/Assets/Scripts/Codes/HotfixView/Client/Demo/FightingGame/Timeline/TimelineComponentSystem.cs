@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(TimelineComponent))]
     public static class TimelineComponentSystem
     {
@@ -46,7 +46,7 @@ namespace ET.Client
             timelinePlayer.instanceId = self.InstanceId;
         }
 
-        private static void Init(this TimelineComponent self)
+        public static void Init(this TimelineComponent self)
         {
             foreach (var kv in self.markerEventDict)
             {
@@ -54,7 +54,6 @@ namespace ET.Client
                 markerEvent.Dispose();
             }
             self.markerEventDict.Clear();
-            self.SetHertz(60);
         }
         
         #region TimelinePlayer
@@ -80,16 +79,6 @@ namespace ET.Client
             }
 
             return self.GetChild<TimelineMarkerEvent>(id);
-        }
-
-        public static void SetHertz(this TimelineComponent self,int hertz)
-        {
-            EventSystem.Instance.Invoke(new UpdateHertzCallback(){instanceId = self.InstanceId,Hertz = hertz});
-        }
-
-        public static int GetHertz(this TimelineComponent self)
-        {
-            return self.Hertz;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     public class DisposeWindow_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -11,8 +11,8 @@
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            buffer.DisposeWindow();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            machine.DisposeWindow();
             
             await ETTask.CompletedTask;
             return Status.Success;

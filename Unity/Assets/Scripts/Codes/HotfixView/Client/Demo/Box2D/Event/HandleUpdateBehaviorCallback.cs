@@ -8,8 +8,8 @@
         public override void Handle(UpdateBehaviorCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetInfoByName(args.behaviorName);
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorInfo info = machine.GetInfoByName(args.behaviorName);
             timelineComponent.Reload(info.behaviorOrder);
         }
     }

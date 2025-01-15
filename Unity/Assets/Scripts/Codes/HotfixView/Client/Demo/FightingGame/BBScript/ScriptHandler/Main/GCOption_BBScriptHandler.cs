@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (BehaviorBuffer))]
+    [FriendOf(typeof (BehaviorMachine))]
     [FriendOf(typeof (BehaviorInfo))]
     public class GCOption_BBScriptHandler: BBScriptHandler
     {
@@ -23,8 +23,8 @@ namespace ET.Client
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             //string behaviorName ---> BehaviorOrder
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            buffer.AddGCOption(match.Groups["Option"].Value);
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            machine.AddGCOption(match.Groups["Option"].Value);
 
             await ETTask.CompletedTask;
             return Status.Success;

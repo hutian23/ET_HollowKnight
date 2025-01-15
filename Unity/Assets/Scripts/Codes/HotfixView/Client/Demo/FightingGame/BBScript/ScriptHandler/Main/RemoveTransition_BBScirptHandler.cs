@@ -20,7 +20,7 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            timelineComponent.GetComponent<BehaviorBuffer>().TryRemoveParam($"Transition_{match.Groups["transition"].Value}");
+            timelineComponent.GetComponent<BehaviorMachine>().TryRemoveParam($"Transition_{match.Groups["transition"].Value}");
             
             await ETTask.CompletedTask;
             return Status.Success;

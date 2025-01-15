@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [FriendOf(typeof(BehaviorInfo))]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     public class GotoBehavior_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -22,10 +22,10 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
 
             string behavior = match.Groups["behavior"].Value;
-            BehaviorInfo info = buffer.GetInfoByName(behavior);
+            BehaviorInfo info = machine.GetInfoByName(behavior);
 
             timelineComponent.Reload(info.behaviorOrder);
 

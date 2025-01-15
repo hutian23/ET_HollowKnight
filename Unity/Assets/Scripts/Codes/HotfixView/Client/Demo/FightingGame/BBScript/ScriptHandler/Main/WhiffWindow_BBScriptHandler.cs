@@ -1,19 +1,19 @@
 ﻿namespace ET.Client
 {
     [Invoke(BBTimerInvokeType.WhiffWindowTimer)]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(BehaviorInfo))]
     public class WhiffWindowTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {
             TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
             
             int currentOrder = -1;
-            foreach (int order in buffer.WhiffOptions)
+            foreach (int order in machine.WhiffOptions)
             {
-                BehaviorInfo info = buffer.GetInfoByOrder(order);
+                BehaviorInfo info = machine.GetInfoByOrder(order);
                 if (info.Trigger())
                 {
                     currentOrder = info.behaviorOrder;
@@ -27,7 +27,7 @@
             }
             
             //初始化
-            buffer.DisposeWindow();
+            machine.DisposeWindow();
             
             //切换行为
             timelineComponent.Reload(currentOrder);
@@ -35,7 +35,7 @@
     }
 
     [FriendOf(typeof(BBParser))]
-    [FriendOf(typeof(BehaviorBuffer))]
+    [FriendOf(typeof(BehaviorMachine))]
     [FriendOf(typeof(InputWait))]
     public class WhiffWindow_BBScriptHandler : BBScriptHandler
     {

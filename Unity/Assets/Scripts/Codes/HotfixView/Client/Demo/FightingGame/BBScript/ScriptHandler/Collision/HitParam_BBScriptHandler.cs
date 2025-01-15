@@ -27,10 +27,10 @@ namespace ET.Client
             b2Body b2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
             TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
             
             //注册变量
-            buffer.RegistParam(match.Groups["ParamName"].Value, match.Groups["ParamValue"].Value);
+            machine.RegistParam(match.Groups["ParamName"].Value, match.Groups["ParamValue"].Value);
             
             await ETTask.CompletedTask;
             return Status.Success;

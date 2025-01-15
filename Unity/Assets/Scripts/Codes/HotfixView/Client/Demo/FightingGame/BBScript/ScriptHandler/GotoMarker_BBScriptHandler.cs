@@ -22,8 +22,8 @@ namespace ET.Client
             }
 
             TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            BehaviorInfo info = buffer.GetInfoByOrder(buffer.GetCurrentOrder());
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorInfo info = machine.GetInfoByOrder(machine.GetCurrentOrder());
 
             int markerPointer = parser.GetMarkerPointer(info.behaviorName, match.Groups["marker"].Value);
             parser.Coroutine_Pointers[data.CoroutineID] = markerPointer;

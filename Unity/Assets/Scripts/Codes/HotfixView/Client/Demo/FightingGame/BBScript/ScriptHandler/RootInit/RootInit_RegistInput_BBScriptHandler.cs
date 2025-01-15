@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [FriendOf(typeof (InputWait))]
-    public class RegistInput_BBScriptHandler: BBScriptHandler
+    public class RootInit_RegistInput_BBScriptHandler: BBScriptHandler
     {
         public override string GetOPType()
         {

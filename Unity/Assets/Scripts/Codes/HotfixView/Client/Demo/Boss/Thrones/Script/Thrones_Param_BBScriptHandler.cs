@@ -23,9 +23,9 @@ namespace ET.Client
             TimelineComponent timelineComponent = Root.Instance.Get(instanceId) as TimelineComponent;
             if (timelineComponent.ContainParam("DeadFlag")) return Status.Success;
             
-            BehaviorBuffer buffer = timelineComponent.GetComponent<BehaviorBuffer>();
-            buffer.TryRemoveParam(match.Groups["Param"].Value);
-            buffer.RegistParam(match.Groups["Param"].Value, match.Groups["Value"].Value);
+            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            machine.TryRemoveParam(match.Groups["Param"].Value);
+            machine.RegistParam(match.Groups["Param"].Value, match.Groups["Value"].Value);
             
             await ETTask.CompletedTask;
             return Status.Success;
