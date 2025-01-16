@@ -10,9 +10,22 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
-            machine.DisposeWindow();
+            Unit unit = parser.GetParent<Unit>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
+            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+            
+            // 销毁定时器
+            long timer = machine.GetParam<long>("CancelWindow_Timer");
+            bbTimer.Remove(ref timer);
+            machine.TryRemoveParam("CancelWindow_Timer");
+            
+            // 回收集合
+            if (machine.ContainParam("CancelWindow_Options"))
+            {
+                HashSetComponent<string> options = machine.GetParam<HashSetComponent<string>>("CancelWindow_Options");
+                options.Dispose();
+                machine.TryRemoveParam("CancelWindow_Options");
+            }
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -268,7 +268,7 @@ SetTransition: 'PreSquit';
 MarkerEvent: (Whiff_Start)
   InputBuffer: true;
   WhiffWindow;
-  WhiffOption: 'Rg_GroundDash';
+  CancelOption: Rg_GroundDash;
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   # HitStop: 15, 8;

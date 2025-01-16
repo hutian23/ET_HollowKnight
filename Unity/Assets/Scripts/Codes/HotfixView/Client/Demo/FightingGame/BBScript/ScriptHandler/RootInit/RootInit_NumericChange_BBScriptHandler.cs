@@ -5,7 +5,7 @@ namespace ET.Client
     [FriendOf(typeof(BBParser))]
     [FriendOf(typeof(NumericCallback))]
     [FriendOf(typeof(BBNumeric))]
-    public class RootInit_NumericChange : BBScriptHandler
+    public class RootInit_NumericChange_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
