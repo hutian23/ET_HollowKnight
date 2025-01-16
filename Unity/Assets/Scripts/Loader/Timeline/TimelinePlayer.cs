@@ -30,7 +30,7 @@ namespace Timeline
     public sealed class TimelinePlayer: SerializedMonoBehaviour
     {
         [HideInInspector]
-        public long instanceId; // TimelineComponent组件id
+        public long instanceId; // timelineComponent.InstanceId
         [HideInInspector]
         public float Hertz = 60; //TimeScale
         public bool ApplyRootMotion;

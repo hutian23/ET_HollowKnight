@@ -4,9 +4,6 @@ PlayerInit;
 SetPos: 2500, 10000;
 Gravity: 100000;
 # NumericChange
-NumericChange: Hertz
-  UpdateHertz;
-  EndNumericChange:
 # Numeric
 NumericType: MaxGravity, 150000;
 NumericType: MaxFall, 45000;
@@ -90,6 +87,9 @@ return;
 UpdateFlip: Once;
 return;
 
+@UpdateHertz:
+LogWarning: 'Hello';
+return;
 
 [Rg_Idle]
 @Trigger:

@@ -10,6 +10,15 @@ namespace ET.Event
     }
 
     #region 主要是区分回调
+    
+    public enum TriggerType
+    {
+        None = 0,
+        TriggerEnter = 1,
+        TriggerStay = 2,
+        TriggerExit = 3
+    }
+    
     public struct TriggerEnterCallback
     {
         public CollisionInfo info;
@@ -46,5 +55,45 @@ namespace ET.Event
         public FixtureData dataB;
         //接触点
         public Contact Contact;
+    }
+    
+    public static class CollisionEnterType
+    {
+        public const int None = 0;
+        public const int SceneBoxEvent = 1;
+    }
+    
+    public static class CollisionExitType
+    {
+        public const int None = 0;
+        public const int SceneBoxEvent = 1;
+    }
+    
+    public static class CollisionStayType
+    {
+        public const int None = 0;
+        public const int SceneBoxEvent = 1;
+    }
+    
+    public static class TriggerEnterType
+    {
+        public const int None = 0;
+        public const int AirCheck = 1;
+        public const int CollisionEvent = 2;
+        public const int SceneBoxEvent = 3;
+    }
+    
+    public static class TriggerExitType
+    {
+        public const int None = 0;
+        public const int AirCheck = 1;
+        public const int SceneBoxEvent = 2;
+    }
+    
+    public static class TriggerStayType
+    {
+        public const int None = 0;
+        public const int CollisionEvent = 1;
+        public const int SceneBoxEvent = 2;
     }
 }
