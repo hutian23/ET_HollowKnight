@@ -14,16 +14,6 @@ namespace ET.Client
             }
         }
         
-        public class B2UnitLoadSystem : LoadSystem<B2Unit>
-        {
-            protected override void Load(B2Unit self)
-            {
-                self.Init();
-                //b2World创建刚体
-                EventSystem.Instance.Invoke(new CreateB2bodyCallback(){instanceId = self.unitId});
-            }
-        }
-        
         public class B2UnitDestroySystem : DestroySystem<B2Unit>
         {
             protected override void Destroy(B2Unit self)

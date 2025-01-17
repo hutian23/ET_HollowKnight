@@ -26,12 +26,6 @@ namespace ET.Client
         public long instanceId;
     }
 
-    public struct BehaviorUpdateHertzCallback
-    {
-        public long instanceId;
-        public int hertz;
-    }
-
     public struct LandCallback
     {
         public long instanceId;

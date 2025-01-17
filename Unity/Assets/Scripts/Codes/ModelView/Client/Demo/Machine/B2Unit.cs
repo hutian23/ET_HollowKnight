@@ -7,7 +7,7 @@ namespace ET.Client
     // 行为机的物理模块
     // Unit在物理层的映射，负责逻辑层和物理层交互
     [ComponentOf]
-    public class B2Unit: Entity, IAwake<long>, IDestroy, IPostStep, ILoad, IPreStep
+    public class B2Unit: Entity, IAwake<long>, IDestroy, IPostStep, IPreStep
     {
         public bool ApplyRootMotion;
         public Queue<CollisionInfo> CollisionBuffer = new(); // 当前帧收集碰撞信息

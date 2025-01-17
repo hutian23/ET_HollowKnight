@@ -24,14 +24,6 @@ namespace ET.Client
                 self.Init();
             }
         }
-        
-        public class InputWaitLoadSystem : LoadSystem<InputWait>
-        {
-            protected override void Load(InputWait self)
-            {
-                self.Init();
-            }
-        }
 
         private static void Init(this InputWait self)
         {

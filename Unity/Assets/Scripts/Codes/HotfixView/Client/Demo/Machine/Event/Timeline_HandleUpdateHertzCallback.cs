@@ -15,8 +15,8 @@ namespace ET.Client
             }
 
             Unit unit = timelineComponent.GetParent<Unit>();
-            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
-            EventSystem.Instance.Invoke(new BehaviorUpdateHertzCallback(){instanceId = machine.InstanceId,hertz = args.Hertz});
+            BBNumeric numeric = unit.GetComponent<BBNumeric>();
+            numeric.Set("Hertz", args.Hertz);
         }
     }
 }

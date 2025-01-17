@@ -43,12 +43,12 @@ namespace ET.Client
         private async ETTask HitStopCor(BBParser parser, int hertz, int hitStop, ETCancellationToken token)
         {
             Unit unit = parser.GetParent<Unit>();
-            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
+            BBNumeric numeric = unit.GetComponent<BBNumeric>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
-            
-            EventSystem.Instance.Invoke(new BehaviorUpdateHertzCallback(){instanceId = machine.InstanceId, hertz = hertz});
+
+            numeric.Set("Hertz", hertz);
             await sceneTimer.WaitAsync(hitStop, token);
-            EventSystem.Instance.Invoke(new BehaviorUpdateHertzCallback(){instanceId = machine.InstanceId, hertz = 60});
+            numeric.Set("Hertz", hertz);
         }
     }
 }

@@ -13,8 +13,9 @@ namespace ET.Client
 
             b2Body b2Body = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
-            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            
+            //碰撞缓冲区缓冲碰撞信息
+            B2Unit b2Unit = unit.GetComponent<B2Unit>();
             b2Unit.CollisionBuffer.Enqueue(info);
         }
     }

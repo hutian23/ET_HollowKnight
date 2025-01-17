@@ -4,9 +4,13 @@ PlayerInit;
 SetPos: 2500, 10000;
 Gravity: 100000;
 # NumericChange
+NumericChange: Hertz
+  UpdateHertz;
+  EndNumericChange:
 # Numeric
+NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
-NumericType: MaxFall, -45000;
+NumericType: MaxFall, -450000;
 NumericType: MaxJump, 2;
 NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
@@ -29,51 +33,51 @@ RegistInput: QuickFallPressed;
 RegistMove: (Rg_Idle)
   MoveType: None;
   EndMove:
-RegistMove: (Rg_Run)
-  MoveType: Move;
-  EndMove:
-RegistMove: (Rg_SquitToIdle)
-  MoveType: Move;
-  EndMove:
-RegistMove: (Rg_Squit)
-  MoveType: Move;
-  EndMove:
-RegistMove: (Rg_AirBrone)
-  MoveType: Move;
-  EndMove:
-RegistMove: (Rg_Jump)
-  MoveType: Move;
-  EndMove:
-RegistMove: (Rg_5B)
-  MoveType: Normal;
-  EndMove:
-RegistMove: (Rg_5C)
-  MoveType: Normal;
-  EndMove:
-RegistMove: (Rg_5D)
-  MoveType: Normal;
-  EndMove:
-RegistMove: (Rg_TC_End)
-  MoveType: Normal;
-  EndMove:
-RegistMove: (Rg_AirDashAttack)
-  MoveType: Normal;
-  EndMove:  
-RegistMove: (Rg_AirDash)
-  MoveType: Special;
-  EndMove:
-RegistMove: (Rg_GroundDash)
-  MoveType: Special;
-  EndMove:
-RegistMove: (Rg_PlungingAttack)
-  MoveType: Special;
-  EndMove:
-RegistMove: (Rg_QuickFall)
-  MoveType: Special;
-  EndMove:
-RegistMove: (Rg_IdleAnim)
-  MoveType: Etc;
-  EndMove:
+# RegistMove: (Rg_Run)
+#   MoveType: Move;
+#   EndMove:
+# RegistMove: (Rg_SquitToIdle)
+#   MoveType: Move;
+#   EndMove:
+# RegistMove: (Rg_Squit)
+#   MoveType: Move;
+#   EndMove:
+# RegistMove: (Rg_AirBrone)
+#   MoveType: Move;
+#   EndMove:
+# RegistMove: (Rg_Jump)
+#   MoveType: Move;
+#   EndMove:
+# RegistMove: (Rg_5B)
+#   MoveType: Normal;
+#   EndMove:
+# RegistMove: (Rg_5C)
+#   MoveType: Normal;
+#   EndMove:
+# RegistMove: (Rg_5D)
+#   MoveType: Normal;
+#   EndMove:
+# RegistMove: (Rg_TC_End)
+#   MoveType: Normal;
+#   EndMove:
+# RegistMove: (Rg_AirDashAttack)
+#   MoveType: Normal;
+#   EndMove:  
+# RegistMove: (Rg_AirDash)
+#   MoveType: Special;
+#   EndMove:
+# RegistMove: (Rg_GroundDash)
+#   MoveType: Special;
+#   EndMove:
+# RegistMove: (Rg_PlungingAttack)
+#   MoveType: Special;
+#   EndMove:
+# RegistMove: (Rg_QuickFall)
+#   MoveType: Special;
+#   EndMove:
+# RegistMove: (Rg_IdleAnim)
+#   MoveType: Etc;
+#   EndMove:
 return;
 
 @BeforeReload:

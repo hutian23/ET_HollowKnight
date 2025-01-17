@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: e0432bc49ba81ea469ae10436de7eafd
+labels:
+- bb
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
