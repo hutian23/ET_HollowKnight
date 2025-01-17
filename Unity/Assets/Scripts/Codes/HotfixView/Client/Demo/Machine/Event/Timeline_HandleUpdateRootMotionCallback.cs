@@ -12,19 +12,17 @@ namespace ET.Client
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             Unit unit = timelineComponent.GetParent<Unit>();
-            BBParser parser = unit.GetComponent<BBParser>();
             B2Unit b2Unit = unit.GetComponent<B2Unit>();
             
             if (!args.ApplyRootMotion)
             {
-                parser.TryRemoveParam("ApplyRootMotion");
+                b2Unit.SetApplyRootMotion(false);
                 return;
             }
 
-            parser.TryRemoveParam("ApplyRootMotion");
-            parser.RegistParam("ApplyRootMotion", true);
+            b2Unit.SetApplyRootMotion(true);
             //因为资源中默认朝向为左,横向速度需要翻转
-            b2Unit.SetVelocity(args.velocity.ToVector2() * new Vector2(-1,1));
+            b2Unit.SetVelocity(args.velocity.ToVector2() * new Vector2(-1,1), true);
         }
     }
 }

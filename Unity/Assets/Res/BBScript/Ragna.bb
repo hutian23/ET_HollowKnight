@@ -6,7 +6,7 @@ Gravity: 100000;
 # NumericChange
 # Numeric
 NumericType: MaxGravity, 150000;
-NumericType: MaxFall, 45000;
+NumericType: MaxFall, -45000;
 NumericType: MaxJump, 2;
 NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
