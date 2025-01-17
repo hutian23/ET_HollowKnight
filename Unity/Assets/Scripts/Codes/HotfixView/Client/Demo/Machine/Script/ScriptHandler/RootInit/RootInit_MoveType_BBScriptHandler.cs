@@ -27,8 +27,7 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorMachine machine = parser.GetParent<Unit>().GetComponent<BehaviorMachine>();
             BehaviorInfo info = machine.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
             info.moveType = moveType;
             

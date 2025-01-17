@@ -2,7 +2,8 @@
 
 namespace ET.Client
 {
-    public class StartTime_BBScriptHandler : BBScriptHandler
+    [FriendOf(typeof(BehaviorInfo))]
+    public class StartTimeline_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
@@ -12,14 +13,22 @@ namespace ET.Client
         //StartTimeline;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent timer = timelineComponent.GetComponent<BBTimerComponent>();
-            RuntimePlayable playable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
+            Unit unit = parser.GetParent<Unit>();
+            TimelineComponent timelineComponent = unit.GetParent<TimelineComponent>();
+            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+            BehaviorMachine machine = unit.GetParent<BehaviorMachine>();
+            BehaviorInfo behaviorInfo = machine.GetInfoByOrder(machine.GetCurrentOrder());
+
+            //1. 更新PlayableGraph
+            BBTimeline _timeline = timelineComponent.GetTimelinePlayer().GetTimeline(behaviorInfo.behaviorName);
+            timelineComponent.GetTimelinePlayer().Init(_timeline);
             
+            //2. 逐帧执行Timeline
+            RuntimePlayable playable = timelineComponent.GetTimelinePlayer().RuntimePlayable;
             for (int i = 0; i < playable.ClipMaxFrame(); i++)
             {
                 timelineComponent.Evaluate(i);
-                await timer.WaitAsync(1, token);
+                await bbTimer.WaitAsync(1, token);
                 if (token.IsCancel()) break;
             }
 

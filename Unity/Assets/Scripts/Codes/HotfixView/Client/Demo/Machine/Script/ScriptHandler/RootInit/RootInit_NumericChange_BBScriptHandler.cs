@@ -38,7 +38,7 @@ namespace ET.Client
             }
             parser.Coroutine_Pointers[data.CoroutineID] = index;
 
-            //3. 
+            //3. 数值更新回调
             Unit unit = parser.GetParent<Unit>();
             BBNumeric bbNumeric = unit.GetComponent<BBNumeric>();
             NumericCallback callback = bbNumeric.AddChild<NumericCallback>();

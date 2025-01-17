@@ -25,9 +25,8 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            
+            BehaviorMachine machine = parser.GetParent<Unit>().GetComponent<BehaviorMachine>();
             
             //2. 注册BehaviorInfo组件到行为机中
             BehaviorInfo info = machine.AddChild<BehaviorInfo>();
@@ -55,10 +54,7 @@ namespace ET.Client
             //4. RegistMove代码块作为子协程执行
             parser.RegistParam("InfoId", info.Id);
             await parser.RegistSubCoroutine(startIndex, endIndex, token);
-            if (token.IsCancel())
-            {
-                return Status.Failed;
-            }
+            if (token.IsCancel()) return Status.Failed;
             parser.TryRemoveParam("InfoId");
             
             return Status.Success;

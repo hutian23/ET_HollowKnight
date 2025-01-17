@@ -19,9 +19,8 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            
+            BehaviorMachine machine = parser.GetParent<Unit>().GetComponent<BehaviorMachine>();
             BehaviorInfo info = machine.GetChild<BehaviorInfo>(parser.GetParam<long>("InfoId"));
             machine.behaviorFlagDict.TryAdd(match.Groups["MoveFlag"].Value, info.Id);
 

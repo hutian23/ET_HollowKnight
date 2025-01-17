@@ -8,20 +8,15 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            B2Unit b2Unit = self.GetParent<Unit>().GetComponent<B2Unit>();
             
-            float ax = self.GetParam<long>("AccelerationX") / 1000f;
-            float maxV = self.GetParam<long>("MaxV") / 1000f;
+            float ax = self.GetParam<long>("AccelerationX_Accel") / 10000f;
+            float maxV = self.GetParam<long>("AccelerationX_MaxV") / 10000f;
             float dv = (1 / 60f) * ax;
             
             float curV = b2Unit.GetVelocity().X + dv;
             //限制速度大小
-            if (Math.Abs(curV) >= maxV)
-            {
-                curV = Math.Sign(curV) * maxV;
-            }
-            b2Unit.SetVelocityX(curV);
+            b2Unit.SetVelocityX( Math.Abs(curV) >= maxV? curV = Math.Sign(curV) * maxV : curV);
         }
     }
     
@@ -41,30 +36,34 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
             if (!long.TryParse(match.Groups["A"].Value, out long accelerationX) || !long.TryParse(match.Groups["MaxV"].Value, out long maxV))
             {
                 Log.Error($"cannot format {match.Groups["A"].Value} / {match.Groups["MaxV"].Value} to long!!!");
                 return Status.Failed;
             }
+
+            BBTimerComponent bbTimer = parser.GetParent<Unit>().GetComponent<BBTimerComponent>();
             
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            
-            //初始化
-            if (parser.ContainParam("AccelerationXTimer"))
+            //1. 初始化
+            if (parser.ContainParam("AccelerationX_Timer"))
             {
-                long timer = parser.GetParam<long>("AccelerationXTimer");
+                long timer = parser.GetParam<long>("AccelerationX_Timer");
                 bbTimer.Remove(ref timer);
             }
-            parser.TryRemoveParam("AccelerationXTimer");
-            parser.TryRemoveParam("AccelerationX");
-            parser.TryRemoveParam("MaxV");
+            parser.TryRemoveParam("AccelerationX_Timer");
+            parser.TryRemoveParam("AccelerationX_Accel");
+            parser.TryRemoveParam("AccelerationX_MaxV");
             
-            parser.RegistParam("AccelerationX", accelerationX);
-            parser.RegistParam("MaxV", maxV);
+            //2. 注册变量，启动定时器
+            parser.RegistParam("AccelerationX_Accel", accelerationX);
+            parser.RegistParam("AccelerationX_MaxV", maxV);
             long curTimer = bbTimer.NewFrameTimer(BBTimerInvokeType.AccelerationXTimer, parser);
-            parser.RegistParam("AccelerationXTimer", curTimer);
+            parser.RegistParam("AccelerationX_Timer", curTimer);
+            
+            token.Add(() =>
+            {
+                bbTimer.Remove(ref curTimer);
+            });
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -22,8 +22,7 @@ namespace ET.Client
             }
             
             //启动输入检测携程
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
+            InputWait inputWait = parser.GetParent<Unit>().GetComponent<InputWait>();
             inputWait.handleQueue.Enqueue(match.Groups["InputType"].Value);
             
             await ETTask.CompletedTask;

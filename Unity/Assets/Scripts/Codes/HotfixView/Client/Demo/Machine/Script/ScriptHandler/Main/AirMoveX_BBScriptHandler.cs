@@ -2,23 +2,23 @@
 
 namespace ET.Client
 {
-    [Invoke(BBTimerInvokeType.AirMoveTimer)]
-    public class AirMoveTimer: BBTimer<BBParser>
+    [Invoke(BBTimerInvokeType.AirMoveXTimer)]
+    public class AirMoveTimer: BBTimer<Unit>
     {
-        protected override void Run(BBParser self)
+        protected override void Run(Unit self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            InputWait inputWait = timelineComponent.GetComponent<InputWait>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            InputWait inputWait = self.GetComponent<InputWait>();
+            B2Unit b2Unit = self.GetComponent<B2Unit>();
+            BBParser parser = self.GetComponent<BBParser>();
             
             //输入左右相关的指令才会生效水平移动的效果
             bool direction = inputWait.IsPressing(BBOperaType.MIDDLE) || inputWait.IsPressing(BBOperaType.UP) || inputWait.IsPressing(BBOperaType.DOWN);
             
             //当前回中，则不会进行移动
-            if (self.GetParam<bool>("InertiaEffect") && direction) return;
-            self.UpdateParam("InertiaEffect", false);
+            if (parser.GetParam<bool>("AirMoveX_InertiaEffect") && direction) return;
+            parser.UpdateParam("AirMoveX_InertiaEffect", false);
             
-            b2Unit.SetVelocityX(direction ? 0 : self.GetParam<long>("AirMoveX") / 1000f);
+            b2Unit.SetVelocityX(direction ? 0 : parser.GetParam<long>("AirMoveX_Vel") / 10000f);
         }
     }
 
@@ -38,32 +38,34 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
             if (!long.TryParse(match.Groups["MoveX"].Value, out long moveX))
             {
                 Log.Error($"cannot format {match.Groups["MoveX"].Value} to long");
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            Unit unit = parser.GetParent<Unit>();
+            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
             
-            //初始化
-            parser.TryRemoveParam("InertiaEffect");
-            parser.TryRemoveParam("AirMoveX");
-            if (parser.ContainParam("AirMoveXTimer"))
+            //1. 初始化
+            parser.TryRemoveParam("AirMoveX_InertiaEffect");
+            parser.TryRemoveParam("AirMoveX_Vel");
+            if (parser.ContainParam("AirMoveX_Timer"))
             {
-                long preTimer = parser.GetParam<long>("AirMoveXTimer");
+                long preTimer = parser.GetParam<long>("AirMoveX_Timer");
                 bbTimer.Remove(ref preTimer);
             }
-            parser.TryRemoveParam("AirMoveXTimer");
+            parser.TryRemoveParam("AirMoveX_Timer");
             
             //注册变量
-            parser.RegistParam("InertiaEffect", true);
-            parser.RegistParam("AirMoveX", moveX);
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.AirMoveTimer, parser);
-            parser.RegistParam("AirMoveXTimer", timer);
-            token.Add(() => { bbTimer.Remove(ref timer);});
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.AirMoveXTimer, unit);
+            parser.RegistParam("AirMoveX_InertiaEffect", true);
+            parser.RegistParam("AirMoveX_Vel", moveX);
+            parser.RegistParam("AirMoveX_Timer", timer);
+            token.Add(() =>
+            {
+                bbTimer.Remove(ref timer);
+            });
             
             await ETTask.CompletedTask;
             return Status.Success;

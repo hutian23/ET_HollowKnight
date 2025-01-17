@@ -18,7 +18,7 @@
         public const int UpdateFlipTimer = 100;
         public const int MoveXTimer = 101;
         public const int GravityCheckTimer = 102;
-        public const int AirMoveTimer = 103;
+        public const int AirMoveXTimer = 103;
         public const int HitPushBackTimer = 104;
         public const int DefaultWindowTimer = 105;
         public const int WhiffWindowTimer = 106;

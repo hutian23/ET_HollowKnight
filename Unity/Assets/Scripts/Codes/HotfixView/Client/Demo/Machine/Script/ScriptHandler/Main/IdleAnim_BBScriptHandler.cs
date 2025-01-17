@@ -18,20 +18,21 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            string behaviorName = match.Groups["Animation"].Value;
-            IdleAnimCor(timelineComponent, behaviorName, token).Coroutine();
+            
+            IdleAnimCor(parser.GetParent<Unit>(), match.Groups["Animation"].Value, token).Coroutine();
             
             await ETTask.CompletedTask;
             return Status.Success;
         }
 
-        private async ETTask IdleAnimCor(TimelineComponent timelineComponent, string behaviorName, ETCancellationToken token)
+        private async ETTask IdleAnimCor(Unit unit, string behaviorName, ETCancellationToken token)
         {
-            await timelineComponent.GetComponent<BBTimerComponent>().WaitAsync(300, token);
+            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
+            
+            await bbTimer.WaitAsync(300, token);
             if (token.IsCancel()) return;
-            timelineComponent.Reload(behaviorName);
+            machine.Reload(behaviorName);
         }
     }
 }

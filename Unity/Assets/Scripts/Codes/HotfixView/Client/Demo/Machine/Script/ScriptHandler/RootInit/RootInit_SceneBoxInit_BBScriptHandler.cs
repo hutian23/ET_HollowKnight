@@ -1,8 +1,8 @@
 ﻿using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
+using ET.Event;
 using Timeline;
 using UnityEngine;
-using Vector2 = System.Numerics.Vector2;
 
 namespace ET.Client
 {
@@ -26,7 +26,7 @@ namespace ET.Client
             foreach (b2BoxCollider2D box2D in _World.GetComponentsInChildren<b2BoxCollider2D>())
             {
                 PolygonShape shape = new();
-                shape.SetAsBox(box2D.info.size.x / 2, box2D.info.size.y / 2, new Vector2(box2D.info.center.x, box2D.info.center.y), 0f);
+                shape.SetAsBox(box2D.info.size.x / 2, box2D.info.size.y / 2, new System.Numerics.Vector2(box2D.info.center.x, box2D.info.center.y), 0f);
                 FixtureDef fixtureDef = new()
                 {
                     Shape = shape,
