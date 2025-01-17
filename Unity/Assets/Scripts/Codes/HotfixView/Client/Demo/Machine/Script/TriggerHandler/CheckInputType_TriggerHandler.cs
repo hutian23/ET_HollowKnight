@@ -19,9 +19,9 @@ namespace ET.Client
                 return false;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            InputWait wait = timelineComponent.GetComponent<InputWait>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            Unit unit = parser.GetParent<Unit>();
+            InputWait wait = unit.GetComponent<InputWait>();
+            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
             return wait.CheckBuffer(match.Groups["InputType"].Value,bbTimer.GetNow());
         }
     }

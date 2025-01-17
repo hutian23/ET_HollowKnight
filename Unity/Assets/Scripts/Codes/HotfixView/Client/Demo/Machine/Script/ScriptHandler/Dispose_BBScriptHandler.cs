@@ -9,7 +9,7 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            parser.GetParent<TimelineComponent>().GetParent<Unit>().Dispose();
+            parser.GetParent<Unit>().Dispose();
             await ETTask.CompletedTask;
             return Status.Success;
         }

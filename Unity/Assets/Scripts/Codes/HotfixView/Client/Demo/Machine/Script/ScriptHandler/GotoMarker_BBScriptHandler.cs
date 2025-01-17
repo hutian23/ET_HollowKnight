@@ -20,16 +20,14 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorMachine machine = parser.GetParent<Unit>().GetComponent<BehaviorMachine>();
             BehaviorInfo info = machine.GetInfoByOrder(machine.GetCurrentOrder());
 
-            int markerPointer = parser.GetMarkerPointer(info.behaviorName, match.Groups["marker"].Value);
-            parser.Coroutine_Pointers[data.CoroutineID] = markerPointer;
+            int pointer = parser.GetMarkerPointer(info.behaviorName, match.Groups["marker"].Value);
+            parser.Coroutine_Pointers[data.CoroutineID] = pointer;
 
             await TimerComponent.Instance.WaitFrameAsync(token);
-            return token.IsCancel() ? Status.Failed : Status.Success;
+            return token.IsCancel()? Status.Failed : Status.Success;
         }
     }
 }

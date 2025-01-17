@@ -17,10 +17,7 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            timelineComponent.GetComponent<BehaviorMachine>().RegistParam($"Transition_{match.Groups["transition"].Value}", true);
-
+            parser.RegistParam($"Transition_{match.Groups["transition"].Value}", true);
             await ETTask.CompletedTask;
             return Status.Success;
         }

@@ -20,16 +20,17 @@ namespace ET.Client
                 return false;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
+            Unit unit = parser.GetParent<Unit>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             
             bool ret = false;
             switch (match.Groups["InAir"].Value)
             {
                 case "true":
-                    ret = timelineComponent.GetParam<bool>("InAir");
+                    ret = machine.GetParam<bool>("InAir");
                     break;
                 case "false":
-                    ret = !timelineComponent.GetParam<bool>("InAir");
+                    ret = !machine.GetParam<bool>("InAir");
                     break;
                 default:
                     ScriptHelper.ScripMatchError(data.opLine);

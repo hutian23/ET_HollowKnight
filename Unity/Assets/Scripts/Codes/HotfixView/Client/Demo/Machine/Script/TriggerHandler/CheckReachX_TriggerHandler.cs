@@ -25,15 +25,15 @@ namespace ET.Client
                 return false;
             }
 
-            b2Body body = b2WorldManager.Instance.GetBody(parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             float curPosX = body.GetPosition().X;
             
             switch (match.Groups["transition"].Value)
             {
                 case "Right":
-                    return curPosX <= targetX / 1000f;
+                    return curPosX <= targetX / 10000f;
                 case "Left":
-                    return curPosX >= targetX / 1000f;
+                    return curPosX >= targetX / 10000f;
                 default:
                     return false;
             }

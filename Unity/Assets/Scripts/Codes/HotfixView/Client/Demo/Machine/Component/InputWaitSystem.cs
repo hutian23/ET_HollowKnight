@@ -218,12 +218,7 @@ namespace ET.Client
 
         private static void UpdateInput(this InputWait self,long ops)
         {
-            self.infoQueue.Enqueue(new InputInfo()
-                {
-                    op = ops,
-                    Flip = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId).GetFlip(),
-                    frame = BBTimerManager.Instance.SceneTimer().GetNow()
-                });
+            self.infoQueue.Enqueue(new InputInfo() { op = ops, frame = BBTimerManager.Instance.SceneTimer().GetNow() });
             
             //超出容量部分出列
             int count = self.infoQueue.Count;

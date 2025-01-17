@@ -20,9 +20,7 @@ namespace ET.Client
                 return false;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            Unit unit = timelineComponent.GetParent<Unit>();
-            
+            Unit unit = parser.GetParent<Unit>();
             b2Body body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             FlipState checkFlip = match.Groups["Flip"].Value.Equals("Left")? FlipState.Left : FlipState.Right;
             return body.GetFlip() == (int)checkFlip;

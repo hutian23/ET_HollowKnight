@@ -15,9 +15,8 @@ namespace ET.Client
         //RegistCallback: (Hit: xxx), 'HitCheck'
         public override bool Check(BBParser parser, BBScriptData data)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
-           
+            B2Unit b2Unit = parser.GetParent<Unit>().GetComponent<B2Unit>();
+            
             int count = b2Unit.CollisionBuffer.Count;
             while (count-- > 0)
             {

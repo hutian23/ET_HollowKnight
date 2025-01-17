@@ -20,15 +20,7 @@ namespace ET.Client
             }
             
             string transitionFlag = $"Transition_{match.Groups["transition"].Value}";
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
-            if (!machine.ContainParam(transitionFlag))
-            {
-                return false;
-            }
-
-            return machine.GetParam<bool>(transitionFlag);
+            return parser.GetParam<bool>(transitionFlag);
 
         }
     }

@@ -9,7 +9,7 @@ namespace ET.Client
             return "Position";
         }
         
-        //Position: Y >= 1000
+        //Position: Y >= 10000
         public override bool Check(BBParser parser, BBScriptData data)
         {
             Match match = Regex.Match(data.opLine, @"Position: (?<XY>\w+) (?<Sign>[><=]+) (?<Position>\d+)");
@@ -25,12 +25,11 @@ namespace ET.Client
                 return false;
             }
             
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            Unit unit = timelineComponent.GetParent<Unit>();
+            Unit unit = parser.GetParent<Unit>();
             b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
 
             float _targetValue = match.Groups["XY"].Value.Equals("X")? b2Body.GetPosition().X : b2Body.GetPosition().Y;
-            long targetPosition = (long)(_targetValue * 1000);
+            long targetPosition = (long)(_targetValue * 10000);
             
             switch (match.Groups["Sign"].Value)
             {

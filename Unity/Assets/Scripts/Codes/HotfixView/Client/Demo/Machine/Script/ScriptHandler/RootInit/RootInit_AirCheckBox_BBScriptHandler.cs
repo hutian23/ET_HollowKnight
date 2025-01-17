@@ -11,45 +11,37 @@ namespace ET.Client
     [Invoke(BBTimerInvokeType.AirCheckTimer)]
     [FriendOf(typeof(B2Unit))]
     [FriendOf(typeof(BBParser))]
-    public class AirCheckTimer : BBTimer<TimelineComponent>
+    public class AirCheckTimer : BBTimer<Unit>
     {
-        protected override void Run(TimelineComponent self)
+        protected override void Run(Unit self)
         {
-            B2Unit b2Unit = self.GetComponent<B2Unit>();
-            BBParser parser = self.GetComponent<BBParser>();
+            B2Unit b2Unit = self.GetComponent<B2Unit>(); // 碰撞信息缓存组件
+            BehaviorMachine machine = self.GetComponent<BehaviorMachine>(); // 控制器逻辑组件
 
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;
             int count = infoQueue.Count;
             while (count-- > 0)
             {
-                bool enableAirCheck = self.GetParam<bool>("EnableAirCheck");
-                if (!enableAirCheck) break;
-                
                 CollisionInfo info = infoQueue.Dequeue();
                 infoQueue.Enqueue(info);
 
                 if (info.dataA.Name.Equals("AirCheckBox") && info.dataB.LayerMask is LayerType.Ground && !info.dataB.IsTrigger)
                 {
-                    //落地回调
-                    if (self.GetParam<bool>("InAir"))
+                    if (machine.GetParam<bool>("InAir"))
                     {
-                        self.UpdateParam("InAir", false);
-                        if (self.ContainParam("LandCallback_StartIndex"))
-                        {
-                            int startIndex = self.GetParam<int>("LandCallback_StartIndex");
-                            int endIndex = self.GetParam<int>("LandCallback_EndIndex");
-                            parser.RegistSubCoroutine(startIndex, endIndex, parser.CancellationToken).Coroutine();
-                        }
+                        machine.UpdateParam("InAir", false);
+                        //落地回调
+                        EventSystem.Instance.Invoke(new LandCallback() { instanceId = machine.InstanceId });
                     }
                     return;
                 }
             }
 
-            self.UpdateParam("InAir", true);
+            machine.UpdateParam("InAir", true);
         }
     }
-
-    [FriendOf(typeof(TimelineComponent))]
+    
+    [FriendOf(typeof(BehaviorMachine))]
     public class RootInit_AirCheckBox_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -76,14 +68,13 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            Unit unit = timelineComponent.GetParent<Unit>();
+            Unit unit = parser.GetParent<Unit>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             b2Body body = b2WorldManager.Instance.GetBody(unit.InstanceId);
 
             //1. 注册变量
-            timelineComponent.RegistParam("InAir", false);
-            timelineComponent.RegistParam("EnableAirCheck", true);
-            
+            machine.RegistParam("InAir", false);
+
             //2. 创建夹具
             PolygonShape shape = new();
             shape.SetAsBox(sizeX / 2000f, sizeY / 2000f, new Vector2(centerX, centerY) / 1000f, 0f);
@@ -110,16 +101,23 @@ namespace ET.Client
                 }
             };
             Fixture fixture = body.CreateFixture(fixtureDef);
-            timelineComponent.RegistParam("AirCheckBox", fixture);
-            
+            machine.RegistParam("AirCheckBox", fixture);
+
             //3. 创建定时器
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
-            long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.AirCheckTimer, timelineComponent);
-            timelineComponent.Token.Add(() =>
+            long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.AirCheckTimer, unit);
+            machine.RegistParam("AirCheckTimer", timer);
+            //热更新 or 销毁unit时，销毁定时器
+            machine.Token.Add(() =>
             {
-                postStepTimer.Remove(ref timer);
+                if (machine.ContainParam("AirCheckTimer"))
+                {
+                    long _timer = machine.GetParam<long>("AirCheckTimer");
+                    b2WorldManager.Instance.GetPostStepTimer().Remove(ref _timer);
+                    machine.TryRemoveParam("AirCheckTimer");
+                }
             });
-
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

@@ -2,6 +2,7 @@
 {
     [Invoke]
     [FriendOf(typeof(BBParser))]
+    [FriendOf(typeof(BehaviorMachine))]    
     // 行为机模块对所有关联的模块进行初始化
     public class Machine_HandleBeforeBehaviorReloadCallback : AInvokeHandler<BeforeBehaviorReloadCallback>
     {
@@ -15,7 +16,7 @@
             }
 
             #region 切换行为时默认会执行的逻辑
-            
+
             Unit unit = machine.GetParent<Unit>();
             BBParser parser = unit.GetComponent<BBParser>();
             B2Unit b2Unit = unit.GetComponent<B2Unit>();
@@ -27,15 +28,15 @@
             timelineComponent.Init();
             //3. 清空缓存的碰撞信息
             b2Unit.Init();
-            
-            #endregion 
+
+            #endregion
 
             #region 如果有拓展的需要，作为一个函数添加到脚本Root代码块中
-            
+
             //Fin. 执行BeforeReload函数
             if (!parser.ContainFunction("Root", "BeforeReload")) return;
             parser.Invoke(parser.GetFunctionPointer("Root", "BeforeReload"), parser.CancellationToken).Coroutine();
-            
+
             #endregion
         }
     }

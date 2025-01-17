@@ -12,15 +12,34 @@
                 self.Init();
             }
         }
-
-        private static void Init(this BehaviorMachine self)
+        
+        public class BehaviorBufferDestroySystem : DestroySystem<BehaviorMachine>
         {
-            self.ClearParam();
+            protected override void Destroy(BehaviorMachine self)
+            {
+                self.Cancel();
+            }
+        }
+
+        private static void Cancel(this BehaviorMachine self)
+        {
+            self.Token.Cancel();
+            foreach (var kv in self.paramDict)
+            {
+                self.paramDict[kv.Key].Recycle();
+            }
+            self.paramDict.Clear();
             self.currentOrder = -1;
             self.behaviorOrderMap.Clear();
             self.behaviorNameMap.Clear();
             self.DescendInfoList.Clear();
             self.behaviorFlagDict.Clear();
+        }
+
+        public static void Init(this BehaviorMachine self)
+        {
+            self.Cancel();
+            self.Token = new();
         }
 
         public static void SetCurrentOrder(this BehaviorMachine self, int order)
@@ -114,17 +133,23 @@
             self.paramDict.Remove(paramName);
             return true;
         }
-
-        public static void ClearParam(this BehaviorMachine self)
+            
+        public static void UpdateParam<T>(this BehaviorMachine self, string paramName, T value)
         {
-            foreach (var kv in self.paramDict)
+            foreach ((string key, SharedVariable variable) in self.paramDict)
             {
-                self.paramDict[kv.Key].Recycle();
+                if (!key.Equals(paramName))
+                {
+                    continue;
+                }
+
+                variable.value = value;
+                return;
             }
-
-            self.paramDict.Clear();
+            
+            Log.Error($"does not exist param:{paramName}!");
         }
-
+        
         #endregion
     }
 }

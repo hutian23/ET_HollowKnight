@@ -14,13 +14,6 @@ NumericType: JumpCount, 2;
 NumericType: Hertz, 60;
 # 创建碰撞盒: (Center), (Size)
 AirCheckBox: 0, -1850, 1250, 1000;
-# 落地回调
-LandCallback:
-  NumericSet: DashCount, 2;
-  NumericSet: JumpCount, 2;
-  Gravity: 0;
-  SetVelocityY: -2000;
-  EndCallback:
 # Input
 RegistInput: RunHold;
 RegistInput: SquatHold;
@@ -91,6 +84,14 @@ return;
 LogWarning: 'Hello';
 return;
 
+@LandCallback:
+NumericSet: DashCount, 2;
+NumericSet: JumpCount, 2;
+Gravity: 0;
+SetVelocityY: -2000;
+EndCallback:
+return;
+
 [Rg_Idle]
 @Trigger:
 return;
@@ -101,7 +102,6 @@ SetVelocityY: -1000;
 IdleAnim: Rg_IdleAnim;
 InputBuffer: true;
 DefaultWindow;
-SetTransition: 'PreSquit';
 SetMarker: 'Loop';
 BBSprite: 'Idle_1', 4;
 BBSprite: 'Idle_2', 4;
@@ -127,7 +127,6 @@ return;
 @Main:
 #PreRun
 UpdateFlip: Repeat;
-SetTransition: 'PreSquit';
 InputBuffer: true;
 DefaultWindow;
 MoveX:13000;
@@ -174,16 +173,14 @@ SetVelocityX: 0;
 UpdateFlip: Repeat;
 InputBuffer: true;
 DefaultWindow;
-BeginIf: (TransitionCached: 'PreSquit')
-  BBSprite: 'PreSquit_1', 3;
-  BBSprite: 'PreSquit_2', 3;
-  EndIf:
+BBSprite: 'PreSquit_1', 3;
+BBSprite: 'PreSquit_2', 3;
 BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_1', 4;
   BBSprite: 'Squit_2', 4;
   BBSprite: 'Squit_3', 4;
   BBSprite: 'Squit_4', 4;
-  BBSprite: 'Squit_5', 4;
+  BBSprite: 'Squit_5', 4;  
   BBSprite: 'Squit_6', 4;
   BBSprite: 'Squit_7', 4;
   BBSprite: 'Squit_6', 4;
@@ -208,13 +205,12 @@ DefaultWindow;
 AirMoveX: 15000;
 UpdateFlip: Repeat;
 Gravity: 100000;
-BeginIf: (TransitionCached: 'JumpToFall')
-  BBSprite: 'JumpToFall_1', 4;
-  BBSprite: 'JumpToFall_2', 4;
-  BBSprite: 'JumpToFall_3', 4;
-  BBSprite: 'JumpToFall_4', 4;
-  BBSprite: 'JumpToFall_5', 4;
-  EndIf:
+# TODO 以下为Jump行为中关键帧
+BBSprite: 'JumpToFall_1', 4;
+BBSprite: 'JumpToFall_2', 4;
+BBSprite: 'JumpToFall_3', 4;
+BBSprite: 'JumpToFall_4', 4;
+BBSprite: 'JumpToFall_5', 4;
 BeginLoop: (InAir: true)
   BBSprite: 'Fall_1', 3;
   BBSprite: 'Fall_2', 3;
@@ -254,7 +250,6 @@ BBSprite: 'Jump_1', 3;
 Gravity: 100000;
 BBSprite: 'Jump_2', 3;
 BBSprite: 'Jump_1', 3;
-SetTransition: 'JumpToFall';
 Exit;
 
 [Rg_5B]
@@ -264,7 +259,6 @@ InAir: false;
 return;
 
 @Main:
-SetTransition: 'PreSquit';
 MarkerEvent: (Whiff_Start)
   InputBuffer: true;
   WhiffWindow;
