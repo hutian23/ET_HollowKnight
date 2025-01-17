@@ -21,8 +21,6 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
             
             //跳过动画帧事件的代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
@@ -38,6 +36,7 @@ namespace ET.Client
             }
             parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
 
+            TimelineComponent timelineComponent = parser.GetParent<Unit>().GetParent<TimelineComponent>();
             TimelineMarkerEvent markerEvent = timelineComponent.AddChild<TimelineMarkerEvent>();
             timelineComponent.markerEventDict.Add(match.Groups[1].Value, markerEvent.Id);
 

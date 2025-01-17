@@ -20,14 +20,9 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
-
-            string behavior = match.Groups["behavior"].Value;
-            BehaviorInfo info = machine.GetInfoByName(behavior);
-
-            timelineComponent.Reload(info.behaviorOrder);
+            
+            BehaviorMachine machine = parser.GetParent<Unit>().GetComponent<BehaviorMachine>();
+            machine.Reload(match.Groups["behavior"].Value);
 
             await ETTask.CompletedTask;
             return Status.Return;

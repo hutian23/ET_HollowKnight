@@ -12,7 +12,7 @@ namespace ET.Client
         //NumericSet: JumpCount, 2;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"NumericSet: (?<NumericType>.*?), (?<Count>-?\d+);");
+            Match match = Regex.Match(data.opLine, @"NumericSet: (?<NumericType>.*?), (?<Count>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -24,8 +24,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            timelineComponent.UpdateParam(match.Groups["NumericType"].Value, count);
+            BBNumeric numeric = parser.GetParent<Unit>().GetComponent<BBNumeric>();
+            numeric.Set(match.Groups["NumericType"].Value, count);
             
             await ETTask.CompletedTask;
             return Status.Success;

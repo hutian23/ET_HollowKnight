@@ -26,8 +26,7 @@ namespace ET.Client
             //查询组件
             b2Body b2Body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(b2Body.unitId) as Unit;
-            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             
             //注册变量
             machine.RegistParam(match.Groups["ParamName"].Value, match.Groups["ParamValue"].Value);

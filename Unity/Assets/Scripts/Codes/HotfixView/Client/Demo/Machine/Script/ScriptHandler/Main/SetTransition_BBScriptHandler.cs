@@ -17,6 +17,7 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
+            
             parser.RegistParam($"Transition_{match.Groups["transition"].Value}", true);
             await ETTask.CompletedTask;
             return Status.Success;

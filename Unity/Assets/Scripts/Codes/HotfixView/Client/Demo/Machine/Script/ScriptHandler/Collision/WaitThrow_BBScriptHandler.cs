@@ -11,9 +11,8 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            B2Unit b2Unit = self.GetParent<Unit>().GetComponent<B2Unit>();
 
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;
             int count = infoQueue.Count;
@@ -42,7 +41,7 @@ namespace ET.Client
                     self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
 
                     //初始化
-                    long timer = self.GetParam<long>("ThrowCheckTimer");
+                    long timer = self.GetParam<long>("ThrowCheck_Timer");
                     postStepTimer.Remove(ref timer);
                     self.TryRemoveParam("ThrowCheckTimer");
                     self.TryRemoveParam("ThrowCheck_StartIndex");
@@ -65,14 +64,14 @@ namespace ET.Client
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
 
             // 初始化
-            if (parser.ContainParam("ThrowCheckTimer"))
-            {
-                long preTimer = parser.GetParam<long>("ThrowCheckTimer");
-                postStepTimer.Remove(ref preTimer);
-            }
-            parser.TryRemoveParam("ThrowCheckTimer");
             parser.TryRemoveParam("ThrowCheck_StartIndex");
             parser.TryRemoveParam("ThrowCheck_EndIndex");
+            if (parser.ContainParam("ThrowCheck_Timer"))
+            {
+                long preTimer = parser.GetParam<long>("ThrowCheck_Timer");
+                postStepTimer.Remove(ref preTimer);
+            }
+            parser.TryRemoveParam("ThrowCheck_Timer");
             
             //跳过代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
@@ -90,7 +89,7 @@ namespace ET.Client
             
             // 注册定时器
             long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.ThrowCheckTimer, parser);
-            parser.RegistParam("ThrowCheckTimer", timer);
+            parser.RegistParam("ThrowCheck_Timer", timer);
             parser.RegistParam("ThrowCheck_StartIndex", startIndex);
             parser.RegistParam("ThrowCheck_EndIndex", endIndex);
             

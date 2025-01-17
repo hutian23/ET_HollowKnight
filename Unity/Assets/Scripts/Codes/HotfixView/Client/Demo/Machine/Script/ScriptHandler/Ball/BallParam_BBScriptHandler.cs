@@ -22,10 +22,10 @@ namespace ET.Client
             
             long instanceId = parser.GetParam<long>("BallId");
             Unit ball = Root.Instance.Get(instanceId) as Unit;
-            TimelineComponent timelineComponent = ball.GetComponent<TimelineComponent>();
- 
+            BehaviorMachine machine = ball.GetComponent<BehaviorMachine>();
+            
             //注册变量
-            timelineComponent.RegistParam(match.Groups["BallType"].Value, match.Groups["BallParam"].Value);
+            machine.RegistParam(match.Groups["BallType"].Value, match.Groups["BallParam"].Value);
             
             await ETTask.CompletedTask;
             return Status.Success;

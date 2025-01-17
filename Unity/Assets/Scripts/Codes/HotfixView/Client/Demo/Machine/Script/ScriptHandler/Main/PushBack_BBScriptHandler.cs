@@ -45,15 +45,22 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            BBTimerComponent bbTimer = parser.GetParent<Unit>().GetComponent<BBTimerComponent>();
 
             parser.TryRemoveParam("PushBack_V");
             parser.TryRemoveParam("PushBack_F");
-            parser.RegistParam("PushBack_V", vel / 1000f);
-            parser.RegistParam("PushBack_F", friction / 1000f);
+            if (parser.ContainParam("PushBack_Timer"))
+            {
+                long _timer = parser.GetParam<long>("PushBack_Timer");
+                bbTimer.Remove(ref _timer);
+                parser.TryRemoveParam("PushBack_Timer");
+            }            
             
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.HitPushBackTimer, parser);
+            parser.RegistParam("PushBack_V", vel / 10000f);
+            parser.RegistParam("PushBack_F", friction / 10000f);
+            parser.RegistParam("PushBack_Timer", timer);
+            
             token.Add(() =>
             {
                 bbTimer.Remove(ref timer);

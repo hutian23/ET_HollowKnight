@@ -13,14 +13,15 @@
         //Exit;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            Unit unit = parser.GetParent<Unit>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
 
+            // 下一帧执行
             await TimerComponent.Instance.WaitFrameAsync(token);
             if (token.IsCancel()) return Status.Failed;
             
             int targetOrder = 0;
-            foreach (var infoId in machine.DescendInfoList)
+            foreach (long infoId in machine.DescendInfoList)
             {
                 BehaviorInfo info = machine.GetChild<BehaviorInfo>(infoId);
                 if (info.moveType is MoveType.HitStun || info.moveType is MoveType.Etc)
@@ -33,7 +34,8 @@
                     break;
                 }
             }
-            timelineComponent.Reload(targetOrder);
+
+            machine.Reload(targetOrder);
             
             await ETTask.CompletedTask;
             return Status.Return;

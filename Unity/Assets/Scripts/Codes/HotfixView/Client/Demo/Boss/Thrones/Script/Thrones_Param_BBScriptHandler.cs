@@ -20,10 +20,14 @@ namespace ET.Client
             }
 
             long instanceId = parser.GetParam<long>($"Throne_{match.Groups["No"].Value}");
-            TimelineComponent timelineComponent = Root.Instance.Get(instanceId) as TimelineComponent;
-            if (timelineComponent.ContainParam("DeadFlag")) return Status.Success;
             
-            BehaviorMachine machine = timelineComponent.GetComponent<BehaviorMachine>();
+            TimelineComponent timelineComponent = Root.Instance.Get(instanceId) as TimelineComponent;
+            BehaviorMachine machine = timelineComponent.GetParent<Unit>().GetComponent<BehaviorMachine>();
+
+            if (machine.ContainParam("DeadFlag"))
+            {
+                return Status.Success;
+            }
             machine.TryRemoveParam(match.Groups["Param"].Value);
             machine.RegistParam(match.Groups["Param"].Value, match.Groups["Value"].Value);
             

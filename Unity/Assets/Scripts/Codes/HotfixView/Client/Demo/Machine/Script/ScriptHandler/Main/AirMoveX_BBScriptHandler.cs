@@ -29,10 +29,10 @@ namespace ET.Client
             return "AirMoveX";
         }
 
-        //AirMoveX: (水平移动速度。标量)
+        //AirMoveX: (水平移动速度,标量)
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"AirMoveX: ((?<MoveX>\w+))");
+            Match match = Regex.Match(data.opLine, @"AirMoveX: (?<MoveX>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

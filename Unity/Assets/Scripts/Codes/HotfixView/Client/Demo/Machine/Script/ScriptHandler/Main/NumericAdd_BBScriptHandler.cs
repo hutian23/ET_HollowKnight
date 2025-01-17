@@ -12,23 +12,24 @@ namespace ET.Client
         //NumericAdd: DashCount, -1;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "NumericAdd: (?<NumericType>.*?), (?<OP>.*?);");
+            Match match = Regex.Match(data.opLine, "NumericAdd: (?<NumericType>.*?), (?<Count>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            if (!long.TryParse(match.Groups["OP"].Value, out long op))
+            if (!long.TryParse(match.Groups["Count"].Value, out long count))
             {
-                Log.Error($"cannot format {match.Groups["OP"].Value} to long");
+                Log.Error($"cannot format {match.Groups["Count"].Value} to long");
                 return Status.Failed;
             }
 
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            long numeric = timelineComponent.GetParam<long>(match.Groups["NumericType"].Value) + op;
-            timelineComponent.UpdateParam(match.Groups["NumericType"].Value,numeric);
+            Unit unit = parser.GetParent<Unit>();
+            BBNumeric numeric = unit.GetComponent<BBNumeric>();
             
+            long oldValue = numeric.GetAsLong(match.Groups["NumericType"].Value);
+            numeric.Set(match.Groups["NumericType"].Value, oldValue + count);
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

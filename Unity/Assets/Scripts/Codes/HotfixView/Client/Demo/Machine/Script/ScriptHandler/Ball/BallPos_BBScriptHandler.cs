@@ -25,10 +25,9 @@ namespace ET.Client
                 return Status.Failed;
             }
             
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            b2Body b2Body = b2WorldManager.Instance.GetBody(timelineComponent.GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             Vector2 curPos = b2Body.GetPosition();
-            Vector2 offset = new Vector2(posX, posY) / 1000f;
+            Vector2 offset = new Vector2(posX, posY) / 10000f;
 
             long instanceId = parser.GetParam<long>("BallId");
             Unit ball = Root.Instance.Get(instanceId) as Unit;

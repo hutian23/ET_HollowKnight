@@ -28,7 +28,7 @@ namespace ET.Client
             if (!parser.ContainParam("TargetBind_ThrowHurt")) return Status.Failed;
             
             long bodyId = parser.GetParam<long>("TargetBind_ThrowHurt");
-            b2Body bodyA = b2WorldManager.Instance.GetBody(parser.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body bodyA = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             b2Body bodyB = Root.Instance.Get(bodyId) as b2Body;
 
             Vector2 BindPos = bodyA.GetPosition() + new Vector2(bodyA.GetFlip() * (x / 1000f), y / 1000f);

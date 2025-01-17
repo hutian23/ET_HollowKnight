@@ -18,16 +18,14 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-        
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
-            
             if (!long.TryParse(match.Groups["Velocity"].Value, out long velX))
             {
                 Log.Error($"cannot format {match.Groups["Velocity"].Value} to long !!!");
                 return Status.Failed;
             }
-            b2Unit.SetVelocityX(velX / 1000f);
+            
+            B2Unit b2Unit = parser.GetParent<Unit>().GetComponent<B2Unit>();
+            b2Unit.SetVelocityX(velX / 10000f);
             
             await ETTask.CompletedTask;
             return Status.Success;

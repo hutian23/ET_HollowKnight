@@ -11,8 +11,7 @@ namespace ET.Client
         
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            Unit unit = timelineComponent.GetParent<Unit>();
+            Unit unit = parser.GetParent<Unit>();
             b2Body body = b2WorldManager.Instance.GetBody(unit.InstanceId);
 
             int curFlip = body.GetFlip();

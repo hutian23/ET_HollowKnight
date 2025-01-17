@@ -11,9 +11,8 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            B2Unit b2Unit = self.GetParent<Unit>().GetComponent<B2Unit>();
 
             //PostStep生命周期中，取出碰撞缓冲区中碰撞信息
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;

@@ -7,8 +7,8 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            B2Unit b2Unit = self.GetParent<TimelineComponent>().GetComponent<B2Unit>();
-            float v = self.GetParam<float>("MoveX");
+            B2Unit b2Unit = self.GetParent<Unit>().GetComponent<B2Unit>();
+            float v = self.GetParam<float>("MoveX_Vel");
             b2Unit.SetVelocityX(v);
         }
     }
@@ -25,24 +25,38 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             //正则匹配成员变量
-            Match match = Regex.Match(data.opLine, @"MoveX:\s*(-?\d+(\.\d+)?);");
+            Match match = Regex.Match(data.opLine, @"MoveX: (?<MoveX>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
+            if (!long.TryParse(match.Groups["MoveX"].Value, out long moveX))
+            {
+                Log.Error($"cannot format {match.Groups["MoveX"].Value} to long!!!");
+                return Status.Failed;
+            }
 
-            //注册变量
-            long.TryParse(match.Groups[1].Value, out long moveX);
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            parser.RegistParam("MoveX", moveX / 1000f);
-
-            //启动定时器
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.MoveXTimer, parser); 
-            parser.RegistParam("MoveXTimer", timer);
+            BBTimerComponent bbTimer = parser.GetParent<Unit>().GetComponent<BBTimerComponent>();
             
-            token.Add(() => { bbTimer.Remove(ref timer); });
+            //初始化
+            parser.TryRemoveParam("MoveX_Vel");
+            if (parser.ContainParam("MoveX_Timer"))
+            {
+                long _timer = parser.GetParam<long>("MoveX_Timer");
+                bbTimer.Remove(ref _timer);
+            }
+            parser.TryRemoveParam("MoveX_Timer");
+            
+            //注册变量
+            long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.MoveXTimer, parser); 
+            parser.RegistParam("MoveX_Vel", moveX / 10000f);
+            parser.RegistParam("MoveX_Timer", timer);
+            
+            token.Add(() =>
+            {
+                bbTimer.Remove(ref timer);
+            });
 
             await ETTask.CompletedTask;
             return Status.Success;

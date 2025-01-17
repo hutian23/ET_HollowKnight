@@ -9,15 +9,17 @@
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
-
-            long timer = parser.GetParam<long>("AirMoveXTimer");
-            bbTimer.Remove(ref timer);
-
-            parser.TryRemoveParam("InertiaEffect");
-            parser.TryRemoveParam("AirMoveXTimer");
-            parser.TryRemoveParam("AirMoveX");
+            Unit unit = parser.GetParent<Unit>();
+            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+            
+            parser.TryRemoveParam("AirMoveX_InertiaEffect");
+            parser.TryRemoveParam("AirMoveX_Vel");
+            if (parser.ContainParam("AirMoveX_Timer"))
+            {
+                long preTimer = parser.GetParam<long>("AirMoveX_Timer");
+                bbTimer.Remove(ref preTimer);
+            }
+            parser.TryRemoveParam("AirMoveX_Timer");
             
             await ETTask.CompletedTask;
             return Status.Success;

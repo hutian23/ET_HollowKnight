@@ -14,8 +14,7 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            B2Unit b2Unit = self.GetParent<Unit>().GetComponent<B2Unit>();
 
             Queue<CollisionInfo> infoQueue = b2Unit.CollisionBuffer;
             int count = infoQueue.Count;
