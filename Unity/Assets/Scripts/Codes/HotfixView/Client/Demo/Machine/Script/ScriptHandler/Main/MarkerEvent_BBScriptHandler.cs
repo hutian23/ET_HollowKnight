@@ -36,7 +36,7 @@ namespace ET.Client
             }
             parser.Coroutine_Pointers[data.CoroutineID] = endIndex;
 
-            TimelineComponent timelineComponent = parser.GetParent<Unit>().GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = parser.GetParent<Unit>().GetComponent<TimelineComponent>();
             TimelineMarkerEvent markerEvent = timelineComponent.AddChild<TimelineMarkerEvent>();
             timelineComponent.markerEventDict.Add(match.Groups[1].Value, markerEvent.Id);
 

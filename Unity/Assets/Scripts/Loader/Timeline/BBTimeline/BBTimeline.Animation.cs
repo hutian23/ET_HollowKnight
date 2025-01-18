@@ -35,9 +35,7 @@ namespace Timeline
     public class BBAnimationClip: BBClip
     {
         public AnimationClip animationClip;
-
-        public bool ApplyRootMotion;
-
+        
         //rootMotion data
         [OdinSerialize, NonSerialized]
         public Dictionary<string, AnimationCurve> rootMotionDict = new();
@@ -97,14 +95,6 @@ namespace Timeline
         [ShowInInspector]
         public int animationLength => AnimationClip == null? 0 : (int)(AnimationClip.length * TimelineUtility.FrameRate);
 
-        [LabelText("ApplyRootMotion: "), PropertyOrder(5), OnValueChanged("ApplyRootMotionValueChange")]
-        public bool ApplyRootMotion;
-
-        public void ApplyRootMotionValueChange()
-        {
-            FieldView.EditorWindow.ApplyModify(() => { Clip.ApplyRootMotion = ApplyRootMotion; }, "Change ApplyRootMotion", false);
-        }
-
         [Button("提取运动曲线", DirtyOnClick = false), PropertyOrder(6)]
         public void Rebind()
         {
@@ -128,7 +118,6 @@ namespace Timeline
             Clip = target as BBAnimationClip;
             AnimationClip = Clip.animationClip;
             ClipName = Clip.Name;
-            ApplyRootMotion = Clip.ApplyRootMotion;
         }
 
         public override void InspectorAwake(TimelineFieldView fieldView)
@@ -153,7 +142,6 @@ namespace Timeline
     {
         public long instanceId;
         public Vector2 velocity;
-        public bool ApplyRootMotion;
     }
 
     public class RuntimeAnimationTrack: RuntimeTrack
@@ -286,7 +274,7 @@ namespace Timeline
 
                 EventSystem.Instance.Invoke(new UpdateRootMotionCallback()
                 {
-                    instanceId = timelinePlayer.instanceId, velocity = velocity, ApplyRootMotion = animationClip.ApplyRootMotion
+                    instanceId = timelinePlayer.instanceId, velocity = velocity
                 });
             }
         }

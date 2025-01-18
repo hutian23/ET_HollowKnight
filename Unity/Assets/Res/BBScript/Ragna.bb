@@ -2,7 +2,7 @@
 @RootInit:
 PlayerInit;
 SetPos: 2500, 10000;
-Gravity: 0;
+Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
@@ -39,12 +39,12 @@ RegistInput: QuickFallPressed;
 RegistMove: (Rg_Idle)
   MoveType: None;
   EndMove:
+RegistMove: (Rg_Land)
+  MoveType: Move;
+  EndMove:
 RegistMove: (Rg_Run)
   MoveType: Move;
   EndMove:
-# RegistMove: (Rg_SquitToIdle)
-#   MoveType: Move;
-#   EndMove:
 RegistMove: (Rg_Squit)
   MoveType: Move;
   EndMove:
@@ -54,9 +54,9 @@ RegistMove: (Rg_AirBrone)
 RegistMove: (Rg_Jump)
   MoveType: Move;
   EndMove:
-# RegistMove: (Rg_5B)
-#   MoveType: Normal;
-#   EndMove:
+RegistMove: (Rg_5B)
+  MoveType: Normal;
+  EndMove:
 # RegistMove: (Rg_5C)
 #   MoveType: Normal;
 #   EndMove:
@@ -69,9 +69,9 @@ RegistMove: (Rg_Jump)
 # RegistMove: (Rg_AirDashAttack)
 #   MoveType: Normal;
 #   EndMove:  
-# RegistMove: (Rg_AirDash)
-#   MoveType: Special;
-#   EndMove:
+RegistMove: (Rg_AirDash)
+  MoveType: Special;
+  EndMove:
 # RegistMove: (Rg_GroundDash)
 #   MoveType: Special;
 #   EndMove:
@@ -96,7 +96,6 @@ NumericSet: DashCount, 2;
 NumericSet: JumpCount, 2;
 Gravity: 0;
 SetVelocityY: -2000;
-EndCallback:
 return;
 
 [Rg_Idle]
@@ -105,9 +104,8 @@ return;
 
 @Main:
 SetVelocityX: 0;
-# SetVelocityY: -1000;
-SetVelocityY: 0;
-# IdleAnim: Rg_IdleAnim;
+SetVelocityY: -1000;
+IdleAnim: Rg_IdleAnim, 300;
 InputBuffer: true;
 CancelWindow: Default;
 SetMarker: 'Loop';
@@ -126,9 +124,23 @@ BBSprite: 'Idle_12', 4;
 GotoMarker: 'Loop';
 Exit;
 
+[Rg_Land]
+@Trigger:
+Transition: 'AirToLand';
+return;
+
+@Main:
+SetVelocityX: 0;
+BBSprite: 'MiddleLand_1', 3;
+BBSprite: 'MiddleLand_2', 3;
+BBSprite: 'MiddleLand_3', 3;
+BBSprite: 'MiddleLand_4', 3;
+BBSprite: 'MiddleLand_5', 3;
+Exit;
+
 [Rg_Run]
 @Trigger:
-# InAir: false;
+InAir: false;
 InputType: RunHold;
 return;
 
@@ -159,20 +171,10 @@ BBSprite: 'RunToIdle_3', 3;
 BBSprite: 'RunToIdle_4', 3;
 Exit;
 
-[Rg_SquitToIdle]
-@Trigger:
-Transition: 'SquitToIdle';
-return;
-
-@Main:
-DefaultWindow;
-BBSprite: 'SquitToIdle_2', 2;
-BBSprite: 'SquitToIdle_1', 2;
-Exit;
 
 [Rg_Squit]
 @Trigger:
-# InAir: false;
+InAir: false;
 InputType: SquatHold;
 return;
 
@@ -219,12 +221,7 @@ BeginLoop: (InAir: true)
   BBSprite: 'Fall_2', 3;
   EndLoop:
 # Land
-SetVelocityX: 0;
-RemoveAirMoveX;
-CancelWindow: Transition;
-BBSprite: 'Land_3', 3;
-BBSprite: 'Land_4', 3;
-BBSprite: 'Land_5', 3;
+SetTransition: 'AirToLand';
 Exit;
 
 [Rg_Jump]
@@ -263,6 +260,7 @@ BBSprite: 'JumpToFall_3', 3;
 BBSprite: 'JumpToFall_4', 3;
 BBSprite: 'JumpToFall_5', 3;
 BBSprite: 'JumpToFall_6', 3;
+SetTransition: 'AirToLand';
 Exit;
 
 [Rg_5B]
@@ -272,33 +270,33 @@ InAir: false;
 return;
 
 @Main:
-MarkerEvent: (Whiff_Start)
-  InputBuffer: true;
-  WhiffWindow;
-  CancelOption: Rg_GroundDash;
-  EndMarkerEvent:
-MarkerEvent: (Hit_Start)
-  # HitStop: 15, 8;
-  # 注册受击回调
-  HurtNotify: Once
-    HitParam: StopFrame, 0;
-    HitParam: ShakeLength, 200;
-    HitParam: ShakeFrame, 15;
-    HitParam: PushBack_V, -13000;
-    HitParam: PushBack_F, 38000;
-    Hit_UpdateFlip;
-    HitStun: 'Hurt2';
-    EndNotify:
-  # 注册攻击回调
-  WaitHit:
-    HitStop: 20, 10;
-    ScreenShake: 30, 70;
-    EndHit:
-  EndMarkerEvent:
-MarkerEvent: (Whiff_End)
-  GCWindow;
-  GCOption: 'Rg_5C';
-  EndMarkerEvent:
+# MarkerEvent: (Whiff_Start)
+#   InputBuffer: true;
+#   WhiffWindow;
+#   CancelOption: Rg_GroundDash;
+#   EndMarkerEvent:
+# MarkerEvent: (Hit_Start)
+#   # HitStop: 15, 8;
+#   # 注册受击回调
+#   HurtNotify: Once
+#     HitParam: StopFrame, 0;
+#     HitParam: ShakeLength, 200;
+#     HitParam: ShakeFrame, 15;
+#     HitParam: PushBack_V, -13000;
+#     HitParam: PushBack_F, 38000;
+#     Hit_UpdateFlip;
+#     HitStun: 'Hurt2';
+#     EndNotify:
+#   # 注册攻击回调
+#   WaitHit:
+#     HitStop: 20, 10;
+#     ScreenShake: 30, 70;
+#     EndHit:
+#   EndMarkerEvent:
+# MarkerEvent: (Whiff_End)
+#   GCWindow;
+#   GCOption: 'Rg_5C';
+#   EndMarkerEvent:
 StartTimeline;
 Exit;
 
@@ -393,14 +391,21 @@ InputType: DashPressed;
 return;
 
 @Main:
-InputBuffer: true;
-MarkerEvent: (GC_Start)
-  GCWindow;
-  GCOption: 'Rg_AirDashAttack';
-  GCOption: 'Rg_PlungingAttack';
+# InputBuffer: true;
+# MarkerEvent: (GC_Start)
+#   GCWindow;
+#   GCOption: 'Rg_AirDashAttack';
+#   GCOption: 'Rg_PlungingAttack';
+#   EndMarkerEvent:
+MarkerEvent: (RootMotion_Start)
+  ApplyRootMotion: true;
+  EndMarkerEvent:
+MarkerEvent: (RootMotion_End)
+  # Inertia
+  ApplyRootMotion: false;
+  SetVelocityX: 80000;
   EndMarkerEvent:
 StartTimeline;
-SetVelocityX: 10000;
 Exit;
 
 [Rg_GroundDash]

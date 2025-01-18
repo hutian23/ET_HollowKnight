@@ -12,26 +12,34 @@ namespace ET.Client
         //IdleAnim: Rg_IdleAnim;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "IdleAnim: (?<Animation>.*?);");
+            Match match = Regex.Match(data.opLine, "IdleAnim: (?<Animation>.*?), (?<WaitFrame>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
+            if (!int.TryParse(match.Groups["WaitFrame"].Value, out int waitFrame))
+            {
+                Log.Error($"cannot format {match.Groups["WaitFrame"].Value} to int!!");
+                return Status.Failed;
+            }
             
-            IdleAnimCor(parser.GetParent<Unit>(), match.Groups["Animation"].Value, token).Coroutine();
+            IdleAnimCor(parser.GetParent<Unit>(), match.Groups["Animation"].Value, waitFrame, token).Coroutine();
             
             await ETTask.CompletedTask;
             return Status.Success;
         }
 
-        private async ETTask IdleAnimCor(Unit unit, string behaviorName, ETCancellationToken token)
+        private async ETTask IdleAnimCor(Unit unit, string behaviorName, int waitFrame, ETCancellationToken token)
         {
             BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
             BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             
-            await bbTimer.WaitAsync(50, token);
-            if (token.IsCancel()) return;
+            await bbTimer.WaitAsync(waitFrame, token);
+            if (token.IsCancel())
+            {
+                return;
+            }
             machine.Reload(behaviorName);
         }
     }

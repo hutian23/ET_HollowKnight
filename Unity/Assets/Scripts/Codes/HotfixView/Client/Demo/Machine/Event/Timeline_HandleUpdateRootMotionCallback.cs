@@ -5,24 +5,19 @@ using Timeline;
 namespace ET.Client
 {
     [Invoke]
-    [FriendOf(typeof (b2Body))]
-    public class Timeline_HandleUpdateRootMotionCallback: AInvokeHandler<UpdateRootMotionCallback>
+    [FriendOf(typeof(b2Body))]
+    [FriendOf(typeof(B2Unit))]
+    public class Timeline_HandleUpdateRootMotionCallback : AInvokeHandler<UpdateRootMotionCallback>
     {
         public override void Handle(UpdateRootMotionCallback args)
         {
             TimelineComponent timelineComponent = Root.Instance.Get(args.instanceId) as TimelineComponent;
             Unit unit = timelineComponent.GetParent<Unit>();
             B2Unit b2Unit = unit.GetComponent<B2Unit>();
-            
-            if (!args.ApplyRootMotion)
-            {
-                b2Unit.SetApplyRootMotion(false);
-                return;
-            }
 
-            b2Unit.SetApplyRootMotion(true);
+            if (!b2Unit.ApplyRootMotion) return;
             //因为资源中默认朝向为左,横向速度需要翻转
-            b2Unit.SetVelocity(args.velocity.ToVector2() * new Vector2(-1,1), true);
+            b2Unit.SetVelocity(args.velocity.ToVector2() * new Vector2(-1, 1), true);
         }
     }
 }

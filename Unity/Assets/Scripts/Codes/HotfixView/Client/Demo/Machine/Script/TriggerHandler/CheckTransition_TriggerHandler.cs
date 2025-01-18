@@ -20,8 +20,7 @@ namespace ET.Client
             }
             
             string transitionFlag = $"Transition_{match.Groups["transition"].Value}";
-            return parser.GetParam<bool>(transitionFlag);
-
+            return parser.ContainParam(transitionFlag) && parser.GetParam<bool>(transitionFlag);
         }
     }
 }

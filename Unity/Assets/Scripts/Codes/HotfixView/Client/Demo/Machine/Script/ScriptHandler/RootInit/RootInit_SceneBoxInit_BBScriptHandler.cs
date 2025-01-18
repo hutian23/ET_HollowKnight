@@ -11,7 +11,6 @@ namespace ET.Client
         public override string GetOPType()
         {
             return "SceneBoxInit";
-            
         }
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
@@ -21,7 +20,6 @@ namespace ET.Client
          
             //0. 初始化
             parser.RemoveComponent<SceneBoxHandler>();
-            b2WorldManager.Instance.DestroyBody(unit.InstanceId);
             
             //1. 场景内的static刚体当成一个部分
             b2Body sceneBody = b2WorldManager.Instance.CreateBody(unit.InstanceId, new BodyDef() { BodyType = BodyType.StaticBody});
@@ -38,7 +36,7 @@ namespace ET.Client
                     Friction = 0.0f,
                     UserData = new FixtureData()
                     {
-                        InstanceId = sceneBody.InstanceId, // 代表SceneBox
+                        InstanceId = sceneBody.InstanceId, //代表SceneBox
                         Name = box2D.info.boxName,
                         Type = FixtureType.Default,
                         LayerMask = LayerType.Ground,
