@@ -10,6 +10,8 @@ namespace ET.Client
             BehaviorMachine machine = self.GetComponent<BehaviorMachine>();
             B2Unit b2Unit = self.GetComponent<B2Unit>();
             BBNumeric numeric = self.GetComponent<BBNumeric>();
+
+            if (machine.GetParam<long>("Gravity") <= 0f) return;
             
             //y轴方向当前帧速度改变量
             float g = - machine.GetParam<long>("Gravity") / 1000f;

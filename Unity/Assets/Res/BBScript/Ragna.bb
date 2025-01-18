@@ -1,8 +1,6 @@
 [Root]
 @RootInit:
 PlayerInit;
-SetPos: 2500, 10000;
-Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
@@ -70,20 +68,22 @@ RegistMove: (Rg_5B)
 #   MoveType: Normal;
 #   EndMove:  
 RegistMove: (Rg_AirDash)
-  MoveType: Special;
+  MoveType: Normal;
   EndMove:
 RegistMove: (Rg_GroundDash)
-  MoveType: Special;
+  MoveType: Normal;
   EndMove:
 # RegistMove: (Rg_PlungingAttack)
 #   MoveType: Special;
 #   EndMove:
-# RegistMove: (Rg_QuickFall)
-#   MoveType: Special;
-#   EndMove:
+RegistMove: (Rg_QuickFall)
+  MoveType: Special;
+  EndMove:
 RegistMove: (Rg_IdleAnim)
   MoveType: Etc;
   EndMove:
+SetPos: 2500, 10000;
+Gravity: 100000;
 GotoBehavior: 'Rg_Idle';
 return;
 
@@ -402,6 +402,7 @@ return;
 InputBuffer: true;
 MarkerEvent: (GC_Start)
   CancelWindow: Gatling;
+  CancelOption: Rg_Jump;
   # GCOption: 'Rg_AirDashAttack';
   # GCOption: 'Rg_PlungingAttack';
   EndMarkerEvent:
@@ -426,31 +427,30 @@ Numeric: DashCount > 0;
 return;
 
 @Main:
+InputBuffer: true;
 SetVelocityY: 0;
+SetVelocityX: 350000;
 Gravity: 100000;
 NumericAdd: DashCount, -1;
-InputBuffer: true;
-# BBSprite: 'PreDash_1', 3;
-# BBSprite: 'PreDash_2', 3;
-SetVelocityX: 350000;
 BBSprite: 'Dash_1', 3;
 BBSprite: 'Dash_2', 3;
+CancelWindow: Gatling;
+CancelOption: Rg_Jump;
 BBSprite: 'Dash_1', 3;
 BBSprite: 'Dash_2', 3;
+SetVelocityX: 200000;
 BBSprite: 'Dash_1', 3;
 SetVelocityX: 100000;
-CancelWindow: Gatling;
 CancelOption: Rg_GroundDash;
 BBSprite: 'DashEnd_1', 3;
 SetVelocityX: 50000;
 BBSprite: 'DashEnd_1', 3;
-SetVelocityX: 30000;
-BBSprite: 'DashEnd_1', 6;
+BBSprite: 'DashEnd_1', 4;
 BBSprite: 'DashEnd_2', 4;
+SetVelocityX: 0;
 SetTransition: 'NoSquat';
 CancelWindow: Transition;
 BBSprite: 'DashEnd_3', 4;
-SetVelocityX: 0;
 BBSprite: 'DashEnd_4', 3;
 BBSprite: 'DashEnd_5', 3;
 BBSprite: 'DashEnd_6', 3;
@@ -501,13 +501,19 @@ return;
 @Main:
 Gravity: 0;
 SetVelocityX: 0;
-SetVelocityY: -100000;
+SetVelocityY: -3000000;
 BeginLoop: (InAir: true)
   BBSprite: 'Fall_1', 3;
   EndLoop:
+Gravity: 100000;
 BBSprite: 'Land_1', 10;
 BBSprite: 'Land_2', 4;
 BBSprite: 'Land_3', 4;
+#ToSquat
+SetTransition: 'NoSquat';
+InputBuffer: true;
+CancelWindow: Transition;
+BBSprite: 'Land_3', 2;
 BBSprite: 'Land_4', 4;
 BBSprite: 'Land_5', 4;
 BBSprite: 'Land_6', 4;
