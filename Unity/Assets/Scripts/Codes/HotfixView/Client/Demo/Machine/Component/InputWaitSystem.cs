@@ -263,5 +263,12 @@ namespace ET.Client
             }
             return timeOutFrame >= curFrame;
         }
+        
+        public static long GetBuffFrame(this InputWait self, int buffFrame)
+        {
+            // BBTimerComponent bbTimer = self.GetParent<Unit>().GetComponent<BBTimerComponent>();
+            // return bbTimer.GetNow() + buffFrame;
+            return BBTimerManager.Instance.SceneTimer().GetNow() + buffFrame;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace ET.Client
             BBNumeric numeric = self.GetComponent<BBNumeric>();
             
             //y轴方向当前帧速度改变量
-            float g = - machine.GetParam<long>("Gravity") / 10000f;
+            float g = - machine.GetParam<long>("Gravity") / 1000f;
             //定时器对TimeScale更改无感知，正常按照60帧执行逻辑
             float dv = (1 / 60f) * g;
             //约束最大下落速度

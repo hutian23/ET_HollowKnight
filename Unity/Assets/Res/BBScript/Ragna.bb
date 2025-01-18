@@ -2,11 +2,7 @@
 @RootInit:
 PlayerInit;
 SetPos: 2500, 10000;
-Gravity: 100000;
-# NumericChange
-NumericChange: Hertz
-  UpdateHertz;
-  EndNumericChange:
+Gravity: 0;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
@@ -16,6 +12,16 @@ NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
 NumericType: Hertz, 60;
+# NumericChange
+NumericChange: Hertz
+  UpdateHertz;
+  EndNumericChange:
+NumericChange: JumpCount
+  #OnGround---> DashRecharge
+  BeginIf: (Numeric: JumpCount <= 0), (InAir: false)
+    LogWarning: 'DashRecharge';
+    EndIf:
+  EndNumericChange:
 # 创建碰撞盒: (Center), (Size)
 AirCheckBox: 0, -1850, 1250, 1000;
 # Input
@@ -33,21 +39,21 @@ RegistInput: QuickFallPressed;
 RegistMove: (Rg_Idle)
   MoveType: None;
   EndMove:
-# RegistMove: (Rg_Run)
-#   MoveType: Move;
-#   EndMove:
+RegistMove: (Rg_Run)
+  MoveType: Move;
+  EndMove:
 # RegistMove: (Rg_SquitToIdle)
 #   MoveType: Move;
 #   EndMove:
-# RegistMove: (Rg_Squit)
-#   MoveType: Move;
-#   EndMove:
-# RegistMove: (Rg_AirBrone)
-#   MoveType: Move;
-#   EndMove:
-# RegistMove: (Rg_Jump)
-#   MoveType: Move;
-#   EndMove:
+RegistMove: (Rg_Squit)
+  MoveType: Move;
+  EndMove:
+RegistMove: (Rg_AirBrone)
+  MoveType: Move;
+  EndMove:
+RegistMove: (Rg_Jump)
+  MoveType: Move;
+  EndMove:
 # RegistMove: (Rg_5B)
 #   MoveType: Normal;
 #   EndMove:
@@ -75,17 +81,14 @@ RegistMove: (Rg_Idle)
 # RegistMove: (Rg_QuickFall)
 #   MoveType: Special;
 #   EndMove:
-# RegistMove: (Rg_IdleAnim)
-#   MoveType: Etc;
-#   EndMove:
+RegistMove: (Rg_IdleAnim)
+  MoveType: Etc;
+  EndMove:
+GotoBehavior: 'Rg_Idle';
 return;
 
 @BeforeReload:
 UpdateFlip: Once;
-return;
-
-@UpdateHertz:
-LogWarning: 'Hello';
 return;
 
 @LandCallback:
@@ -102,10 +105,11 @@ return;
 
 @Main:
 SetVelocityX: 0;
-SetVelocityY: -1000;
-IdleAnim: Rg_IdleAnim;
+# SetVelocityY: -1000;
+SetVelocityY: 0;
+# IdleAnim: Rg_IdleAnim;
 InputBuffer: true;
-DefaultWindow;
+CancelWindow: Default;
 SetMarker: 'Loop';
 BBSprite: 'Idle_1', 4;
 BBSprite: 'Idle_2', 4;
@@ -124,7 +128,7 @@ Exit;
 
 [Rg_Run]
 @Trigger:
-InAir: false;
+# InAir: false;
 InputType: RunHold;
 return;
 
@@ -132,8 +136,8 @@ return;
 #PreRun
 UpdateFlip: Repeat;
 InputBuffer: true;
-DefaultWindow;
-MoveX:13000;
+CancelWindow: Default;
+MoveX: 130000;
 BBSprite: 'PreRun_1', 1;
 BBSprite: 'PreRun_2', 2;
 #Run
@@ -148,7 +152,7 @@ BeginLoop: (InputType: RunHold)
 CancelMoveX;
 SetVelocityX: 0;
 #Transition
-TransitionWindow;
+CancelWindow: Transition;
 BBSprite: 'RunToIdle_1', 3;
 BBSprite: 'RunToIdle_2', 3;
 BBSprite: 'RunToIdle_3', 3;
@@ -168,7 +172,7 @@ Exit;
 
 [Rg_Squit]
 @Trigger:
-InAir: false;
+# InAir: false;
 InputType: SquatHold;
 return;
 
@@ -176,9 +180,9 @@ return;
 SetVelocityX: 0;
 UpdateFlip: Repeat;
 InputBuffer: true;
-DefaultWindow;
-BBSprite: 'PreSquit_1', 3;
-BBSprite: 'PreSquit_2', 3;
+CancelWindow: Default;
+BBSprite: 'PreSquit_1', 2;
+BBSprite: 'PreSquit_2', 2;
 BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_1', 4;
   BBSprite: 'Squit_2', 4;
@@ -193,7 +197,7 @@ BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_3', 4;
   BBSprite: 'Squit_2', 4;
   EndLoop:
-TransitionWindow;
+CancelWindow: Transition;
 BBSprite: 'PreSquit_2', 2;
 BBSprite: 'PreSquit_1', 2;
 Exit;
@@ -205,24 +209,19 @@ return;
 
 @Main:
 InputBuffer: true;
-DefaultWindow;
-AirMoveX: 15000;
+CancelWindow: Default;
 UpdateFlip: Repeat;
 Gravity: 100000;
-# TODO 以下为Jump行为中关键帧
-BBSprite: 'JumpToFall_1', 4;
-BBSprite: 'JumpToFall_2', 4;
-BBSprite: 'JumpToFall_3', 4;
-BBSprite: 'JumpToFall_4', 4;
-BBSprite: 'JumpToFall_5', 4;
+AirMoveX: 15000;
+# Airbrone
 BeginLoop: (InAir: true)
   BBSprite: 'Fall_1', 3;
   BBSprite: 'Fall_2', 3;
   EndLoop:
-#MiddleLand
-RemoveAirMoveX;
+# Land
 SetVelocityX: 0;
-TransitionWindow;
+RemoveAirMoveX;
+CancelWindow: Transition;
 BBSprite: 'Land_3', 3;
 BBSprite: 'Land_4', 3;
 BBSprite: 'Land_5', 3;
@@ -236,24 +235,34 @@ return;
 
 @Main:
 SetVelocityX: 0;
+# OnGround PreJump
 BeginIf: (InAir: false)
   BBSprite: 'PreJump_1', 2;
   BBSprite: 'PreJump_2', 2;
-  EndIf: 
-AirMoveX: 15000;
-UpdateFlip;
+  EndIf:
+# Jump
+InputBuffer: true; 
+UpdateFlip: Repeat;
 Gravity: 0;
+AirMoveX: 150000;
+SetVelocityY: 200000;
 NumericAdd: JumpCount, -1;
-SetVelocityY: 20000;
-InputBuffer: true;
 BBSprite: 'Jump_1', 3;
-BBSprite: 'Jump_2', 1;
-GCWindow;
-BBSprite: 'Jump_2', 2;
+BBSprite: 'Jump_2', 3;
 BBSprite: 'Jump_1', 3;
+# Jump Cancel
+CancelWindow: Gatling;
+CancelOption: Rg_Jump;
 Gravity: 100000;
 BBSprite: 'Jump_2', 3;
 BBSprite: 'Jump_1', 3;
+# JumpToFall
+BBSprite: 'JumpToFall_1', 3;
+BBSprite: 'JumpToFall_2', 3;
+BBSprite: 'JumpToFall_3', 3;
+BBSprite: 'JumpToFall_4', 3;
+BBSprite: 'JumpToFall_5', 3;
+BBSprite: 'JumpToFall_6', 3;
 Exit;
 
 [Rg_5B]
@@ -464,7 +473,7 @@ Exit;
 
 [Rg_IdleAnim]
 @Main:
-InputBuffer: true;
-TransitionWindow;
+# InputBuffer: true;
+# TransitionWindow;
 StartTimeline;
 Exit;

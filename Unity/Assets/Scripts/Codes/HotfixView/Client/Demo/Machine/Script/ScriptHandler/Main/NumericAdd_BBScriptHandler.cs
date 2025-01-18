@@ -29,7 +29,7 @@ namespace ET.Client
             
             long oldValue = numeric.GetAsLong(match.Groups["NumericType"].Value);
             numeric.Set(match.Groups["NumericType"].Value, oldValue + count);
-
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

@@ -11,7 +11,7 @@ namespace ET.Client
         protected override void Run(InputWait self)
         {
             //更新刚体朝向
-            b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<TimelineComponent>().GetParent<Unit>().InstanceId);
+            b2Body b2Body = b2WorldManager.Instance.GetBody(self.GetParent<Unit>().InstanceId);
             if (self.IsPressing(BBOperaType.LEFT) ||
                 self.IsPressing(BBOperaType.DOWNLEFT) ||
                 self.IsPressing(BBOperaType.UPLEFT))

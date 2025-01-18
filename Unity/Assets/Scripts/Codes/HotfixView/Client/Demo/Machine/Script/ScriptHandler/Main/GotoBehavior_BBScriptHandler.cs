@@ -14,7 +14,7 @@ namespace ET.Client
         //GotoBehavior: 'Mai_LandBounce';
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"GotoBehavior: '(?<behavior>\w+)';");
+            Match match = Regex.Match(data.opLine, @"GotoBehavior: '(?<behavior>.*?)';");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

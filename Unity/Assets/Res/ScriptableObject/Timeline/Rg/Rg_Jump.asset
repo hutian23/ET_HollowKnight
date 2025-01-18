@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 0
     - Name: EndFrame
       Entry: 3
-      Data: 5
+      Data: 9
     - Name: animationClip
       Entry: 10
       Data: 0
@@ -527,7 +527,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 10
     - Name: 
       Entry: 7
       Data: 26|Timeline.EventInfo, Unity.Loader
@@ -577,6 +577,78 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 30|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 4
+    - Name: keyframeName
+      Entry: 1
+      Data: JumpToFall_1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 31|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 5
+    - Name: keyframeName
+      Entry: 1
+      Data: JumpToFall_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 32|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 6
+    - Name: keyframeName
+      Entry: 1
+      Data: JumpToFall_3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 33|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 7
+    - Name: keyframeName
+      Entry: 1
+      Data: JumpToFall_4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 34|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 8
+    - Name: keyframeName
+      Entry: 1
+      Data: JumpToFall_5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 35|Timeline.EventInfo, Unity.Loader
+    - Name: frame
+      Entry: 3
+      Data: 9
+    - Name: keyframeName
+      Entry: 1
+      Data: JumpToFall_6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -592,9 +664,3 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_Jump
-  Script: "@Trigger:\nNumericCheck: JumpCount > 0;\nInputType: JumpPressed;\nreturn;\n\n@Main:\nSetVelocityX:
-    0;\nBeginIf: (InAir: false)\nBBSprite: 'PreJump_1', 2;\nBBSprite: 'PreJump_2',
-    2;\nEndIf: \nAirMoveX: 15000;\nUpdateFlip;\nGravity: 0;\nNumericAdd: JumpCount,
-    -1;\nSetVelocityY: 20000;\nInputBuffer: true;\nBBSprite: 'Jump_1', 3;\nBBSprite:
-    'Jump_2', 1;\nGCWindow;\nBBSprite: 'Jump_2', 2;\nBBSprite: 'Jump_1', 3;\nGravity:
-    100000;\nBBSprite: 'Jump_2', 3;\nBBSprite: 'Jump_1', 3;\nSetTransition: 'JumpToFall';\nExit;"

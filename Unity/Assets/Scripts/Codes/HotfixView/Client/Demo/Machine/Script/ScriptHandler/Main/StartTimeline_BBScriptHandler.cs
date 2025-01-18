@@ -14,9 +14,9 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             Unit unit = parser.GetParent<Unit>();
-            TimelineComponent timelineComponent = unit.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
-            BehaviorMachine machine = unit.GetParent<BehaviorMachine>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             BehaviorInfo behaviorInfo = machine.GetInfoByOrder(machine.GetCurrentOrder());
 
             //1. 更新PlayableGraph

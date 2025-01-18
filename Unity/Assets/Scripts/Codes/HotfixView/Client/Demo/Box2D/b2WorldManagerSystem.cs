@@ -124,14 +124,10 @@ namespace ET.Client
         /// </summary>
         /// <param name="self"></param>
         /// <param name="instanceId">Unit.InstanceId</param>
-        private static void DestroyBody(this b2WorldManager self, long instanceId)
+        public static void DestroyBody(this b2WorldManager self, long instanceId)
         {
             b2Body b2Body = self.GetBody(instanceId);
-            if (b2Body == null)
-            {
-                Log.Error($"not found b2Body, unit.InstanceId: {instanceId}");
-                return;
-            }
+            if (b2Body == null) return;
             self.B2World.World.DestroyBody(b2Body.body);
             b2Body.Dispose();
             self.BodyDict.Remove(instanceId);

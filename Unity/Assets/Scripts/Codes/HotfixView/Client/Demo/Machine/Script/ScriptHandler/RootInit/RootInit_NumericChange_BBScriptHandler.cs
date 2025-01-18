@@ -17,7 +17,7 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             //1. 匹配
-            Match match = Regex.Match(data.opLine, @"NumericChange: (?<NumericType>.*?)");
+            Match match = Regex.Match(data.opLine, @"NumericChange: (?<NumericType>\w+)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

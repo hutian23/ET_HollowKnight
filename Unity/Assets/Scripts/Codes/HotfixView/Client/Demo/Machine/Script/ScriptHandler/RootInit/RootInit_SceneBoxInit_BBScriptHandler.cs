@@ -18,6 +18,10 @@ namespace ET.Client
         {
             Unit unit = parser.GetParent<Unit>();
             GameObject _World = unit.GetComponent<GameObjectComponent>().GameObject;
+         
+            //0. 初始化
+            parser.RemoveComponent<SceneBoxHandler>();
+            b2WorldManager.Instance.DestroyBody(unit.InstanceId);
             
             //1. 场景内的static刚体当成一个部分
             b2Body sceneBody = b2WorldManager.Instance.CreateBody(unit.InstanceId, new BodyDef() { BodyType = BodyType.StaticBody});

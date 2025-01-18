@@ -46,7 +46,7 @@ namespace ET.Client
                
             //EndLoop
             //销毁定时器
-            BBTimerComponent bbTimer = self.GetParent<TimelineComponent>().GetComponent<BBTimerComponent>();
+            BBTimerComponent bbTimer = self.GetParent<Unit>().GetComponent<BBTimerComponent>();
             long loopTimer = self.GetParam<long>("LoopTimer");
             bbTimer.Remove(ref loopTimer);
             //取消loop协程
@@ -79,9 +79,8 @@ namespace ET.Client
                 Log.Error($"Loop_Handler must have at least one triggerHandler!");
                 return Status.Failed;
             }
-
-            TimelineComponent timelineComponent = parser.GetParent<TimelineComponent>();
-            BBTimerComponent bbTimer = timelineComponent.GetComponent<BBTimerComponent>();
+            
+            BBTimerComponent bbTimer = parser.GetParent<Unit>().GetComponent<BBTimerComponent>();
 
             //跳过BeginLoop代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];

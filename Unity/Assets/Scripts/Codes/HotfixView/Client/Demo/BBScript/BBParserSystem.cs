@@ -7,12 +7,20 @@ namespace ET.Client
     [FriendOf(typeof (DialogueComponent))]
     public static class BBParserSystem
     {
+        public class BBParserAwakeSystem : AwakeSystem<BBParser>
+        {
+            protected override void Awake(BBParser self)
+            {
+                self.Init();
+                EventSystem.Instance.Invoke(new ProcessBBScriptCallback(){ instanceId = self.InstanceId });
+            }
+        }
+        
         public class BBParserDestroySystem: DestroySystem<BBParser>
         {
             protected override void Destroy(BBParser self)
             {
                 self.Init();
-                EventSystem.Instance.Invoke(new ProcessBBScriptCallback(){ instanceId = self.InstanceId });
             }
         }
 
@@ -51,6 +59,7 @@ namespace ET.Client
         public static void Cancel(this BBParser self)
         {
             self.CancellationToken?.Cancel();
+            self.CancellationToken = new ETCancellationToken();
             self.Coroutine_Pointers.Clear();
             //回收变量
             foreach (var kv in self.ParamDict)
@@ -58,7 +67,6 @@ namespace ET.Client
                 kv.Value.Recycle();
             }
             self.ParamDict.Clear();
-            self.CancellationToken = new ETCancellationToken();
         }
         
         /// <summary>

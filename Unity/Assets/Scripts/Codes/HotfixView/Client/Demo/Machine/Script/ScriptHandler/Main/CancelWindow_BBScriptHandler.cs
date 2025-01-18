@@ -11,6 +11,7 @@ namespace ET.Client
         {
             //1. 找到能够取消的行为
             BehaviorMachine machine = self.GetComponent<BehaviorMachine>();
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
             
             int currentOrder = -1;
             BehaviorInfo curInfo = machine.GetInfoByOrder(machine.GetCurrentOrder());
@@ -36,8 +37,6 @@ namespace ET.Client
             }
 
             //2. 关闭取消窗口
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            
             long timer = machine.GetParam<long>("CancelWindow_Timer");
             bbTimer.Remove(ref timer);
             machine.TryRemoveParam("CancelWindow_Timer");
@@ -58,7 +57,8 @@ namespace ET.Client
         protected override void Run(Unit self)
         {
             BehaviorMachine machine = self.GetComponent<BehaviorMachine>();
-
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
+            
             int currentOrder = -1;
             HashSetComponent<string> options = machine.GetParam<HashSetComponent<string>>("CancelWindow_Options");
             foreach (long infoId in machine.DescendInfoList)
@@ -74,8 +74,6 @@ namespace ET.Client
             if (currentOrder == -1) return;
             
             //2. 关闭取消窗口
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-            
             long timer = machine.GetParam<long>("CancelWindow_Timer");
             bbTimer.Remove(ref timer);
             machine.TryRemoveParam("CancelWindow_Timer");
@@ -97,7 +95,8 @@ namespace ET.Client
         {
             //在过度动画取消窗口内，行为机逻辑上已经进入中立状态，可以切换进当前行为
             BehaviorMachine machine = self.GetComponent<BehaviorMachine>();
-
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
+            
             //1. 
             int currentOrder = machine.GetCurrentOrder();
             foreach (long infoId in machine.DescendInfoList)
@@ -119,11 +118,9 @@ namespace ET.Client
             }
             
             //2.
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-
-            long timer = machine.GetParam<long>("CancelWidow_Timer");
+            long timer = machine.GetParam<long>("CancelWindow_Timer");
             bbTimer.Remove(ref timer);
-            machine.TryRemoveParam("CancelWidow_Timer");
+            machine.TryRemoveParam("CancelWindow_Timer");
             
             //3. 
             machine.Reload(currentOrder);
@@ -138,7 +135,8 @@ namespace ET.Client
         protected override void Run(Unit self)
         {
             BehaviorMachine machine = self.GetComponent<BehaviorMachine>();
-
+            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
+            
             //1. 
             int currentOrder = machine.GetCurrentOrder();
             foreach (long infoId in machine.DescendInfoList)
@@ -164,14 +162,12 @@ namespace ET.Client
                 return;
             }
             
-            //2.
-            BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
-
-            long timer = machine.GetParam<long>("CancelWidow_Timer");
+            //2.销毁定时器
+            long timer = machine.GetParam<long>("CancelWindow_Timer");
             bbTimer.Remove(ref timer);
             machine.TryRemoveParam("CancelWidow_Timer");
-            
-            //3. 
+           
+            //3. 重载行为
             machine.Reload(currentOrder);
         }
     }
@@ -196,8 +192,22 @@ namespace ET.Client
             Unit unit = parser.GetParent<Unit>();
             BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+
+            //1. 初始化
+            if (machine.ContainParam("CancelWindow_Timer"))
+            {
+                long _timer = machine.GetParam<long>("CancelWindow_Timer");
+                bbTimer.Remove(ref _timer);
+                machine.TryRemoveParam("CancelWindow_Timer");
+            }
+            if (machine.ContainParam("CancelWindow_Options"))
+            {
+                HashSetComponent<string> options = machine.GetParam<HashSetComponent<string>>("CancelWindow_Options");
+                options.Dispose();
+                machine.TryRemoveParam("CancelWindow_Options");
+            }
             
-            
+            //2. 启动取消窗口
             switch (match.Groups["WindowType"].Value)
             {
                 case "Gatling":
@@ -234,6 +244,7 @@ namespace ET.Client
                 }
             }
             
+            //3. 重载行为时初始化
             token.Add(() =>
             {
                 if (machine.ContainParam("CancelWindow_Timer"))

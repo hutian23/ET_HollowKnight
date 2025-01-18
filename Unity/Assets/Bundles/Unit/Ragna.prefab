@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 8035865075596228849}
   - component: {fileID: 8477314744438082376}
   - component: {fileID: 7237696647212242221}
+  - component: {fileID: 8734945035081585315}
   m_Layer: 0
   m_Name: Ragna
   m_TagString: Untagged
@@ -551,3 +552,17 @@ MonoBehaviour:
     gameObject: {fileID: 3556958695720729756}
   - key: Other
     gameObject: {fileID: 1278987118862638616}
+--- !u!114 &8734945035081585315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728331812354445376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85515fbd351c4f0448693853f9165f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceId: 0
+  Script: {fileID: 1042094116111776886, guid: 6414006f0b0708f4d8cf3d64f00a91f2, type: 3}

@@ -30,7 +30,7 @@ namespace ET.Client
             BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
             BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             
-            await bbTimer.WaitAsync(300, token);
+            await bbTimer.WaitAsync(50, token);
             if (token.IsCancel()) return;
             machine.Reload(behaviorName);
         }

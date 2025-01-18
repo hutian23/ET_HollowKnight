@@ -20,9 +20,11 @@ namespace ET.Client
             }
 
             Unit unit = parser.GetParent<Unit>();
-            InputWait wait = unit.GetComponent<InputWait>();
-            BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
-            return wait.CheckBuffer(match.Groups["InputType"].Value,bbTimer.GetNow());
+            InputWait inputWait = unit.GetComponent<InputWait>();
+            
+            // BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+            // return wait.CheckBuffer(match.Groups["InputType"].Value,bbTimer.GetNow());
+            return inputWait.CheckBuffer(match.Groups["InputType"].Value, BBTimerManager.Instance.SceneTimer().GetNow());
         }
     }
 }

@@ -118,7 +118,7 @@ namespace ET
             if (Global.Settings.instanceId == 0) return;
 
             //call update unit profile
-            EventSystem.Instance?.Invoke(new UpdateUnitProfileCallback() { instanceId = Global.Settings.instanceId });
+            // EventSystem.Instance?.Invoke(new UpdateUnitProfileCallback() { instanceId = Global.Settings.instanceId });
 
             DebugDraw.DrawString(5, 50, $"UnitName: {Profile.UnitName}");
             DebugDraw.DrawString(5, 65, $"LinearVelocity:{Profile.LinearVelocity}");

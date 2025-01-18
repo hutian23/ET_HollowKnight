@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [Invoke]
+    [Event(SceneType.Client)]
     public class SceneChangeFinish_ProcessBBScript : AEvent<SceneChangeFinish>
     {
         protected override async ETTask Run(Scene scene, SceneChangeFinish a)

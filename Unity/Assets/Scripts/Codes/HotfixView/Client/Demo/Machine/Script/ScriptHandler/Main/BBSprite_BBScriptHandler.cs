@@ -26,13 +26,14 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["WaitFrame"].Value} to int!!");
                 return Status.Failed;
             }
-
+            
+            
             Unit unit = parser.GetParent<Unit>();
-            TimelineComponent timelineComponent = unit.GetParent<TimelineComponent>();
+            TimelineComponent timelineComponent = unit.GetComponent<TimelineComponent>();
             BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
-            BehaviorMachine machine = unit.GetParent<BehaviorMachine>();
+            BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             BehaviorInfo behaviorInfo = machine.GetInfoByOrder(machine.GetCurrentOrder());
-
+            
             //1. 注意，behaviorName和BBPlayableGraph中的TimelineDict.Key对应
             // 只有在调用和Timeline相关的语句时，才会进行playableGraph的更新
             BBTimeline _timeline = timelineComponent.GetTimelinePlayer().GetTimeline(behaviorInfo.behaviorName);
