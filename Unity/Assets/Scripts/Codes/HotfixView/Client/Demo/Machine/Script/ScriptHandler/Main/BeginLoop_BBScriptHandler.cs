@@ -9,7 +9,7 @@ namespace ET.Client
         protected override void Run(BBParser self)
         {
             //1, match trigger
-            int startIndex = self.GetParam<int>("LoopTriggerIndex");
+            int startIndex = self.GetParam<int>("BeginLoop_TriggerIndex");
             string LoopTrigger = self.OpDict[startIndex];
             bool result = true;
             
@@ -47,15 +47,15 @@ namespace ET.Client
             //EndLoop
             //销毁定时器
             BBTimerComponent bbTimer = self.GetParent<Unit>().GetComponent<BBTimerComponent>();
-            long loopTimer = self.GetParam<long>("LoopTimer");
+            long loopTimer = self.GetParam<long>("BeginLoop_Timer");
             bbTimer.Remove(ref loopTimer);
             //取消loop协程
-            ETCancellationToken loopToken = self.GetParam<ETCancellationToken>("LoopToken");
+            ETCancellationToken loopToken = self.GetParam<ETCancellationToken>("BeginLoop_Token");
             loopToken.Cancel();
 
-            self.TryRemoveParam("LoopTimer");
-            self.TryRemoveParam("LoopTriggerIndex");
-            self.TryRemoveParam("LoopToken");
+            self.TryRemoveParam("BeginLoop_Timer");
+            self.TryRemoveParam("BeginLoop_TriggerIndex");
+            self.TryRemoveParam("BeginLoop_Token");
         }
     }
 
@@ -99,9 +99,9 @@ namespace ET.Client
             //不是执行完代码块之后再判定是否符合条件进入下一次循环，如果条件不符合直接退出Loop协程
             long timer = bbTimer.NewFrameTimer(BBTimerInvokeType.LoopTimer, parser);
             ETCancellationToken loopToken = new();
-            parser.RegistParam("LoopTimer", timer); 
-            parser.RegistParam("LoopToken", loopToken);
-            parser.RegistParam("LoopTriggerIndex", startIndex);
+            parser.RegistParam("BeginLoop_Timer", timer); 
+            parser.RegistParam("BeginLoop_Token", loopToken);
+            parser.RegistParam("BeginLoop_TriggerIndex", startIndex);
             
             token.Add(() =>
             {
@@ -120,7 +120,7 @@ namespace ET.Client
             while (true)
             {
                 Status ret = await self.RegistSubCoroutine(startIndex, endIndex, token);
-                if (ret != Status.Success) return Status.Failed;
+                if (ret != Status.Success || token.IsCancel()) return ret;
                 
                 //避免卡死
                 await TimerComponent.Instance.WaitFrameAsync(token);

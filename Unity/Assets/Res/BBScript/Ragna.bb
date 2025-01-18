@@ -16,10 +16,10 @@ NumericType: Hertz, 60;
 NumericChange: Hertz
   UpdateHertz;
   EndNumericChange:
-NumericChange: JumpCount
+NumericChange: DashCount
   #OnGround---> DashRecharge
-  BeginIf: (Numeric: JumpCount <= 0), (InAir: false)
-    LogWarning: 'DashRecharge';
+  BeginIf: (Numeric: DashCount <= 0), (InAir: false)
+    DashRecharge: 2, 40;
     EndIf:
   EndNumericChange:
 # 创建碰撞盒: (Center), (Size)
@@ -72,9 +72,9 @@ RegistMove: (Rg_5B)
 RegistMove: (Rg_AirDash)
   MoveType: Special;
   EndMove:
-# RegistMove: (Rg_GroundDash)
-#   MoveType: Special;
-#   EndMove:
+RegistMove: (Rg_GroundDash)
+  MoveType: Special;
+  EndMove:
 # RegistMove: (Rg_PlungingAttack)
 #   MoveType: Special;
 #   EndMove:
@@ -92,6 +92,7 @@ UpdateFlip: Once;
 return;
 
 @LandCallback:
+RemoveDashRecharge;
 NumericSet: DashCount, 2;
 NumericSet: JumpCount, 2;
 Gravity: 0;
@@ -126,16 +127,18 @@ Exit;
 
 [Rg_Land]
 @Trigger:
-Transition: 'AirToLand';
+Transition: 'AirToLand', true;
 return;
 
 @Main:
 SetVelocityX: 0;
+InputBuffer: true;
+CancelWindow: Default;
 BBSprite: 'MiddleLand_1', 3;
 BBSprite: 'MiddleLand_2', 3;
-BBSprite: 'MiddleLand_3', 3;
-BBSprite: 'MiddleLand_4', 3;
-BBSprite: 'MiddleLand_5', 3;
+BBSprite: 'MiddleLand_3', 5;
+BBSprite: 'MiddleLand_4', 4;
+BBSprite: 'MiddleLand_5', 4;
 Exit;
 
 [Rg_Run]
@@ -163,7 +166,6 @@ BeginLoop: (InputType: RunHold)
   EndLoop:
 CancelMoveX;
 SetVelocityX: 0;
-#Transition
 CancelWindow: Transition;
 BBSprite: 'RunToIdle_1', 3;
 BBSprite: 'RunToIdle_2', 3;
@@ -183,8 +185,10 @@ SetVelocityX: 0;
 UpdateFlip: Repeat;
 InputBuffer: true;
 CancelWindow: Default;
-BBSprite: 'PreSquit_1', 2;
-BBSprite: 'PreSquit_2', 2;
+BeginIf: (TransitionCached: 'NoSquat', false)
+  BBSprite: 'PreSquit_1', 2;
+  BBSprite: 'PreSquit_2', 2;
+  EndIf:
 BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_1', 4;
   BBSprite: 'Squit_2', 4;
@@ -254,12 +258,15 @@ Gravity: 100000;
 BBSprite: 'Jump_2', 3;
 BBSprite: 'Jump_1', 3;
 # JumpToFall
-BBSprite: 'JumpToFall_1', 3;
-BBSprite: 'JumpToFall_2', 3;
-BBSprite: 'JumpToFall_3', 3;
-BBSprite: 'JumpToFall_4', 3;
-BBSprite: 'JumpToFall_5', 3;
-BBSprite: 'JumpToFall_6', 3;
+BeginLoop: (InAir: true)
+  BBSprite: 'JumpToFall_1', 3;
+  BBSprite: 'JumpToFall_2', 3;
+  BBSprite: 'JumpToFall_3', 3;
+  BBSprite: 'JumpToFall_4', 3;
+  BBSprite: 'JumpToFall_5', 3;
+  Break;
+  EndLoop:
+#Land
 SetTransition: 'AirToLand';
 Exit;
 
@@ -388,15 +395,17 @@ Exit;
 @Trigger:
 InAir: true;
 InputType: DashPressed;
+Numeric: DashCount > 0;
 return;
 
 @Main:
-# InputBuffer: true;
-# MarkerEvent: (GC_Start)
-#   GCWindow;
-#   GCOption: 'Rg_AirDashAttack';
-#   GCOption: 'Rg_PlungingAttack';
-#   EndMarkerEvent:
+InputBuffer: true;
+MarkerEvent: (GC_Start)
+  CancelWindow: Gatling;
+  # GCOption: 'Rg_AirDashAttack';
+  # GCOption: 'Rg_PlungingAttack';
+  EndMarkerEvent:
+NumericAdd: DashCount, -1;
 MarkerEvent: (RootMotion_Start)
   ApplyRootMotion: true;
   EndMarkerEvent:
@@ -404,6 +413,7 @@ MarkerEvent: (RootMotion_End)
   # Inertia
   ApplyRootMotion: false;
   SetVelocityX: 80000;
+  SetTransition: 'AirToLand';
   EndMarkerEvent:
 StartTimeline;
 Exit;
@@ -412,10 +422,38 @@ Exit;
 @Trigger:
 InAir: false;
 InputType: DashPressed;
+Numeric: DashCount > 0;
 return;
 
 @Main:
-StartTimeline;
+SetVelocityY: 0;
+Gravity: 100000;
+NumericAdd: DashCount, -1;
+InputBuffer: true;
+# BBSprite: 'PreDash_1', 3;
+# BBSprite: 'PreDash_2', 3;
+SetVelocityX: 350000;
+BBSprite: 'Dash_1', 3;
+BBSprite: 'Dash_2', 3;
+BBSprite: 'Dash_1', 3;
+BBSprite: 'Dash_2', 3;
+BBSprite: 'Dash_1', 3;
+SetVelocityX: 100000;
+CancelWindow: Gatling;
+CancelOption: Rg_GroundDash;
+BBSprite: 'DashEnd_1', 3;
+SetVelocityX: 50000;
+BBSprite: 'DashEnd_1', 3;
+SetVelocityX: 30000;
+BBSprite: 'DashEnd_1', 6;
+BBSprite: 'DashEnd_2', 4;
+SetTransition: 'NoSquat';
+CancelWindow: Transition;
+BBSprite: 'DashEnd_3', 4;
+SetVelocityX: 0;
+BBSprite: 'DashEnd_4', 3;
+BBSprite: 'DashEnd_5', 3;
+BBSprite: 'DashEnd_6', 3;
 Exit;
 
 [Rg_PlungingAttack]

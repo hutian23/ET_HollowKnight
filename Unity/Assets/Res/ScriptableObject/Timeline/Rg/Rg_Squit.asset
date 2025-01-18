@@ -63,9 +63,6 @@ MonoBehaviour:
     - Name: animationClip
       Entry: 10
       Data: 0
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
     - Name: rootMotionDict
       Entry: 7
       Data: 4|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.AnimationCurve,
@@ -616,73 +613,3 @@ MonoBehaviour:
       Entry: 8
       Data: 
   timelineName: Rg_Squit
-  Script: '@Trigger:
-
-    InAir: false;
-
-    InputType: SquatHold;
-
-    return;
-
-
-    @Main:
-
-    SetVelocityX:
-    0;
-
-    UpdateFlip;
-
-    InputBuffer: true;
-
-    DefaultWindow;
-
-    BeginIf:
-    (TransitionCached: ''PreSquit'')
-
-    BBSprite: ''PreSquit_1'', 3;
-
-    BBSprite:
-    ''PreSquit_2'', 3;
-
-    EndIf:
-
-    BeginLoop: (InputType: SquatHold)
-
-    BBSprite:
-    ''Squit_1'', 4;
-
-    BBSprite: ''Squit_2'', 4;
-
-    BBSprite: ''Squit_3'', 4;
-
-    BBSprite:
-    ''Squit_4'', 4;
-
-    BBSprite: ''Squit_5'', 4;
-
-    BBSprite: ''Squit_6'', 4;
-
-    BBSprite:
-    ''Squit_7'', 4;
-
-    BBSprite: ''Squit_6'', 4;
-
-    BBSprite: ''Squit_5'', 4;
-
-    BBSprite:
-    ''Squit_4'', 4;
-
-    BBSprite: ''Squit_3'', 4;
-
-    BBSprite: ''Squit_2'', 4;
-
-    EndLoop:
-
-    TransitionWindow;
-
-    BBSprite:
-    ''PreSquit_2'', 2;
-
-    BBSprite: ''PreSquit_1'', 2;
-
-    Exit;'

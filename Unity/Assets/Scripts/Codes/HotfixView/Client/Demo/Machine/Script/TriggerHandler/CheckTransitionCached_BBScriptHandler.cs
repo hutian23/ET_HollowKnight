@@ -2,17 +2,16 @@
 
 namespace ET.Client
 {
-    public class CheckTransition_TriggerHandler: BBTriggerHandler
+    public class CheckTransitionCached_BBScriptHandler : BBTriggerHandler
     {
         public override string GetTriggerType()
         {
-            return "Transition";
+            return "TransitionCached";
         }
 
-        //Transition: 'RunToIdle', true;
         public override bool Check(BBParser parser, BBScriptData data)
         {
-            Match match = Regex.Match(data.opLine, @"Transition: '(?<transition>\w+)', (?<exist>\w+)");
+            Match match = Regex.Match(data.opLine, @"TransitionCached: '(?<transition>\w+)', (?<exist>\w+)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -24,9 +23,9 @@ namespace ET.Client
             switch (match.Groups["exist"].Value)
             {
                 case "true":
-                    return parser.GetParent<Unit>().GetComponent<BehaviorMachine>().ContainTmpParam(transitionFlag);
+                    return parser.ContainParam(transitionFlag);
                 case "false":
-                    return !parser.GetParent<Unit>().GetComponent<BehaviorMachine>().ContainTmpParam(transitionFlag);
+                    return !parser.ContainParam(transitionFlag);
                 default:
                     Log.Error($"cannot match flag exist state");
                     return false;

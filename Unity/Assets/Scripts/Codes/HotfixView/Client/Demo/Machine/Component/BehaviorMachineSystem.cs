@@ -29,6 +29,11 @@
                 self.paramDict[kv.Key].Recycle();
             }
             self.paramDict.Clear();
+            foreach (var kv in self.tmpParamDict)
+            {
+                self.tmpParamDict[kv.Key].Recycle();
+            }
+            self.tmpParamDict.Clear();
             self.currentOrder = -1;
             self.behaviorOrderMap.Clear();
             self.behaviorNameMap.Clear();
@@ -87,6 +92,19 @@
             return value;
         }
 
+        public static T RegistTmpParam<T>(this BehaviorMachine self, string paramName, T value)
+        {
+            if (self.tmpParamDict.ContainsKey(paramName))
+            {
+                Log.Error($"already contain params:{paramName}");
+                return default;
+            }
+
+            SharedVariable variable = SharedVariable.Create(paramName, value);
+            self.tmpParamDict.Add(paramName, variable);
+            return value;
+        }
+        
         public static T GetParam<T>(this BehaviorMachine self, string paramName)
         {
             if (!self.paramDict.TryGetValue(paramName, out SharedVariable variable))
@@ -109,6 +127,11 @@
             return self.paramDict.ContainsKey(paramName);
         }
 
+        public static bool ContainTmpParam(this BehaviorMachine self, string paramName)
+        {
+            return self.tmpParamDict.ContainsKey(paramName);
+        }
+        
         public static bool RemoveParam(this BehaviorMachine self, string paramName)
         {
             if (!self.paramDict.ContainsKey(paramName))

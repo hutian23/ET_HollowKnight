@@ -63,9 +63,6 @@ MonoBehaviour:
     - Name: animationClip
       Entry: 10
       Data: 0
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
     - Name: rootMotionDict
       Entry: 7
       Data: 4|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.AnimationCurve,
@@ -265,7 +262,7 @@ MonoBehaviour:
       Data: 14|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 7
+      Data: 9
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -293,7 +290,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -0.5
+      Data: -0.62
     - Name: 
       Entry: 8
       Data: 
@@ -305,7 +302,7 @@ MonoBehaviour:
       Data: 1.75
     - Name: 
       Entry: 4
-      Data: 2.7
+      Data: 3.14
     - Name: 
       Entry: 8
       Data: 
@@ -329,7 +326,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: 1.23
+      Data: 1.275
     - Name: 
       Entry: 8
       Data: 
@@ -338,10 +335,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1.7
+      Data: 1.5
     - Name: 
       Entry: 4
-      Data: 0.76
+      Data: 0.65
     - Name: 
       Entry: 8
       Data: 
@@ -365,7 +362,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: -0.4
+      Data: -0.62
     - Name: 
       Entry: 8
       Data: 
@@ -377,7 +374,7 @@ MonoBehaviour:
       Data: 1.35
     - Name: 
       Entry: 4
-      Data: 2.5
+      Data: 3.14
     - Name: 
       Entry: 8
       Data: 
@@ -398,7 +395,7 @@ MonoBehaviour:
       Data: 19|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 9
+      Data: 11
     - Name: keyframeName
       Entry: 1
       Data: 
@@ -531,7 +528,7 @@ MonoBehaviour:
       Data: 24|Timeline.HitboxKeyframe, Unity.Loader
     - Name: frame
       Entry: 3
-      Data: 11
+      Data: 7
     - Name: keyframeName
       Entry: 1
       Data: 
