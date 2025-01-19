@@ -92,11 +92,12 @@ UpdateFlip: Once;
 return;
 
 @LandCallback:
+RecordLandVelocity;
 RemoveDashRecharge;
 NumericSet: DashCount, 2;
 NumericSet: JumpCount, 2;
-Gravity: 0;
 SetVelocityY: -2000;
+Gravity: 0;
 return;
 
 [Rg_Idle]
@@ -134,8 +135,10 @@ return;
 SetVelocityX: 0;
 InputBuffer: true;
 CancelWindow: Default;
-BBSprite: 'MiddleLand_1', 3;
-BBSprite: 'MiddleLand_2', 3;
+BeginIf: (LandVelocity: 400000)
+  BBSprite: 'MiddleLand_1', 3;
+  BBSprite: 'MiddleLand_2', 3;
+  EndIf:
 BBSprite: 'MiddleLand_3', 5;
 BBSprite: 'MiddleLand_4', 4;
 BBSprite: 'MiddleLand_5', 4;
@@ -189,6 +192,7 @@ BeginIf: (TransitionCached: 'NoSquat', false)
   BBSprite: 'PreSquit_1', 2;
   BBSprite: 'PreSquit_2', 2;
   EndIf:
+SetTransition: 'Squat';
 BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_1', 4;
   BBSprite: 'Squit_2', 4;
@@ -237,6 +241,10 @@ return;
 @Main:
 SetVelocityX: 0;
 # OnGround PreJump
+BeginIf: (TransitionCached: 'Squat', true)
+  BBSprite: 'SquatToJump_1', 2;
+  BBSprite: 'SquatToJump_2', 2;
+  EndIf:
 BeginIf: (InAir: false)
   BBSprite: 'PreJump_1', 2;
   BBSprite: 'PreJump_2', 2;
@@ -505,7 +513,6 @@ SetVelocityY: -3000000;
 BeginLoop: (InAir: true)
   BBSprite: 'Fall_1', 3;
   EndLoop:
-Gravity: 100000;
 BBSprite: 'Land_1', 10;
 BBSprite: 'Land_2', 4;
 BBSprite: 'Land_3', 4;
