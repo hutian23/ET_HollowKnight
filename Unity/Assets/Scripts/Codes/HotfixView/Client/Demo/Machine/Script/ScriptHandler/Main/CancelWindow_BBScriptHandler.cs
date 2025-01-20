@@ -98,7 +98,7 @@ namespace ET.Client
             BBTimerComponent bbTimer = self.GetComponent<BBTimerComponent>();
             
             //1. 
-            int currentOrder = machine.GetCurrentOrder();
+            int currentOrder = -1;
             foreach (long infoId in machine.DescendInfoList)
             {
                 BehaviorInfo info = machine.GetChild<BehaviorInfo>(infoId);
@@ -112,7 +112,7 @@ namespace ET.Client
                     break;
                 }
             }
-            if (currentOrder == machine.GetCurrentOrder())
+            if (currentOrder ==  -1)
             {
                 return;
             }

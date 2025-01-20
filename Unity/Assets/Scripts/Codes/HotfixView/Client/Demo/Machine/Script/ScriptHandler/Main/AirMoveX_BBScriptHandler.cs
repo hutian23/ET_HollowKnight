@@ -17,7 +17,6 @@ namespace ET.Client
             //当前回中，则不会进行移动
             if (parser.GetParam<bool>("AirMoveX_InertiaEffect") && direction) return;
             parser.UpdateParam("AirMoveX_InertiaEffect", false);
-            
             b2Unit.SetVelocityX(direction ? 0 : parser.GetParam<long>("AirMoveX_Vel") / 10000f);
         }
     }

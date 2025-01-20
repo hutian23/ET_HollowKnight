@@ -1,11 +1,13 @@
 [Root]
 @RootInit:
 PlayerInit;
+SetPos: 2500, 10000;
+Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
 NumericType: MaxFall, -450000;
-NumericType: MaxJump, 2;
+NumericType: MaxJump, 5;
 NumericType: MaxDash, 2;
 NumericType: DashCount, 2;
 NumericType: JumpCount, 2;
@@ -55,35 +57,18 @@ RegistMove: (Rg_Jump)
 RegistMove: (Rg_5B)
   MoveType: Normal;
   EndMove:
-# RegistMove: (Rg_5C)
-#   MoveType: Normal;
-#   EndMove:
-# RegistMove: (Rg_5D)
-#   MoveType: Normal;
-#   EndMove:
-# RegistMove: (Rg_TC_End)
-#   MoveType: Normal;
-#   EndMove:
-# RegistMove: (Rg_AirDashAttack)
-#   MoveType: Normal;
-#   EndMove:  
 RegistMove: (Rg_AirDash)
   MoveType: Normal;
   EndMove:
 RegistMove: (Rg_GroundDash)
   MoveType: Normal;
   EndMove:
-# RegistMove: (Rg_PlungingAttack)
-#   MoveType: Special;
-#   EndMove:
 RegistMove: (Rg_QuickFall)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_IdleAnim)
   MoveType: Etc;
   EndMove:
-SetPos: 2500, 10000;
-Gravity: 100000;
 GotoBehavior: 'Rg_Idle';
 return;
 
@@ -96,7 +81,7 @@ RecordLandVelocity;
 RemoveDashRecharge;
 NumericSet: DashCount, 2;
 NumericSet: JumpCount, 2;
-SetVelocityY: -2000;
+SetVelocityY: -20000;
 Gravity: 0;
 return;
 
@@ -156,7 +141,7 @@ UpdateFlip: Repeat;
 InputBuffer: true;
 CancelWindow: Default;
 MoveX: 130000;
-BBSprite: 'PreRun_1', 1;
+BBSprite: 'PreRun_1', 2;
 BBSprite: 'PreRun_2', 2;
 #Run
 BeginLoop: (InputType: RunHold)
@@ -168,11 +153,12 @@ BeginLoop: (InputType: RunHold)
   BBSprite: 'Run_6', 4;
   EndLoop:
 CancelMoveX;
-SetVelocityX: 0;
-CancelWindow: Transition;
+SetVelocityX: 50000;
 BBSprite: 'RunToIdle_1', 3;
 BBSprite: 'RunToIdle_2', 3;
+SetVelocityX: 0;
 BBSprite: 'RunToIdle_3', 3;
+CancelWindow: Transition;
 BBSprite: 'RunToIdle_4', 3;
 Exit;
 
@@ -188,11 +174,11 @@ SetVelocityX: 0;
 UpdateFlip: Repeat;
 InputBuffer: true;
 CancelWindow: Default;
-BeginIf: (TransitionCached: 'NoSquat', false)
+BeginIf: (TransitionCached: 'NoPreSquat', false)
   BBSprite: 'PreSquit_1', 2;
   BBSprite: 'PreSquit_2', 2;
   EndIf:
-SetTransition: 'Squat';
+SetTransition: 'SquatToJump';
 BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_1', 4;
   BBSprite: 'Squit_2', 4;
@@ -208,6 +194,7 @@ BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_2', 4;
   EndLoop:
 CancelWindow: Transition;
+RemoveTransition: 'SquatToJump';
 BBSprite: 'PreSquit_2', 2;
 BBSprite: 'PreSquit_1', 2;
 Exit;
@@ -222,7 +209,7 @@ InputBuffer: true;
 CancelWindow: Default;
 UpdateFlip: Repeat;
 Gravity: 100000;
-AirMoveX: 15000;
+AirMoveX: 150000;
 # Airbrone
 BeginLoop: (InAir: true)
   BBSprite: 'Fall_1', 3;
@@ -241,7 +228,7 @@ return;
 @Main:
 SetVelocityX: 0;
 # OnGround PreJump
-BeginIf: (TransitionCached: 'Squat', true)
+BeginIf: (TransitionCached: 'SquatToJump', true)
   BBSprite: 'SquatToJump_1', 2;
   BBSprite: 'SquatToJump_2', 2;
   EndIf:
@@ -420,6 +407,7 @@ MarkerEvent: (RootMotion_Start)
   EndMarkerEvent:
 MarkerEvent: (RootMotion_End)
   # Inertia
+  CancelWindow: Transition;
   ApplyRootMotion: false;
   SetVelocityX: 80000;
   SetTransition: 'AirToLand';
@@ -456,9 +444,10 @@ BBSprite: 'DashEnd_1', 3;
 BBSprite: 'DashEnd_1', 4;
 BBSprite: 'DashEnd_2', 4;
 SetVelocityX: 0;
-SetTransition: 'NoSquat';
+BBSprite: 'DashEnd_3', 2;
+SetTransition: 'NoPreSquat';
 CancelWindow: Transition;
-BBSprite: 'DashEnd_3', 4;
+BBSprite: 'DashEnd_3', 2;
 BBSprite: 'DashEnd_4', 3;
 BBSprite: 'DashEnd_5', 3;
 BBSprite: 'DashEnd_6', 3;
@@ -517,7 +506,7 @@ BBSprite: 'Land_1', 10;
 BBSprite: 'Land_2', 4;
 BBSprite: 'Land_3', 4;
 #ToSquat
-SetTransition: 'NoSquat';
+SetTransition: 'NoPreSquat';
 InputBuffer: true;
 CancelWindow: Transition;
 BBSprite: 'Land_3', 2;
@@ -529,7 +518,7 @@ Exit;
 
 [Rg_IdleAnim]
 @Main:
-# InputBuffer: true;
-# TransitionWindow;
+InputBuffer: true;
+CancelWindow: Transition;
 StartTimeline;
 Exit;

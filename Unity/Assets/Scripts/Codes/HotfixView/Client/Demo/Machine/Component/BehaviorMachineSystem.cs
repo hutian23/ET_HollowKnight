@@ -156,6 +156,18 @@
             self.paramDict.Remove(paramName);
             return true;
         }
+
+        public static bool TryRemoveTmpParam(this BehaviorMachine self, string paramName)
+        {
+            if (!self.tmpParamDict.ContainsKey(paramName))
+            {
+                return false;
+            }
+
+            self.tmpParamDict[paramName].Recycle();
+            self.tmpParamDict.Remove(paramName);
+            return true;
+        }
             
         public static void UpdateParam<T>(this BehaviorMachine self, string paramName, T value)
         {
