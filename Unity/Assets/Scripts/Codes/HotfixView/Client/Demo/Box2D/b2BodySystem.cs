@@ -187,6 +187,11 @@ namespace ET.Client
                 return null;
             }
             FixtureData data = (FixtureData)fixtureDef.UserData;
+            if (string.IsNullOrEmpty(data.Name))
+            {
+                Log.Error($"fixture name should not be null or empty!!");
+                return null;
+            }
             if (self.FixtureDict.ContainsKey(data.Name))
             {
                 Log.Error($"already contain fixture!, name: {data.Name}");

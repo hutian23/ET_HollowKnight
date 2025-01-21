@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using ET.Event;
+using MongoDB.Bson;
 using Timeline;
 
 namespace ET.Client
@@ -102,7 +103,7 @@ namespace ET.Client
             };
             Fixture fixture = body.CreateFixture(fixtureDef);
             machine.RegistParam("AirCheckBox", fixture);
-
+            
             //3. 创建定时器
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
             long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.AirCheckTimer, unit);

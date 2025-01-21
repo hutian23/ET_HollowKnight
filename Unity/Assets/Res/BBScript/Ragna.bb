@@ -193,8 +193,8 @@ BeginLoop: (InputType: SquatHold)
   BBSprite: 'Squit_3', 4;
   BBSprite: 'Squit_2', 4;
   EndLoop:
-CancelWindow: Transition;
 RemoveTransition: 'SquatToJump';
+CancelWindow: Transition;
 BBSprite: 'PreSquit_2', 2;
 BBSprite: 'PreSquit_1', 2;
 Exit;
@@ -440,11 +440,10 @@ SetVelocityX: 100000;
 CancelOption: Rg_GroundDash;
 BBSprite: 'DashEnd_1', 3;
 SetVelocityX: 50000;
-BBSprite: 'DashEnd_1', 3;
-BBSprite: 'DashEnd_1', 4;
-BBSprite: 'DashEnd_2', 4;
+BBSprite: 'DashEnd_1', 6;
+BBSprite: 'DashEnd_2', 3;
 SetVelocityX: 0;
-BBSprite: 'DashEnd_3', 2;
+BBSprite: 'DashEnd_3', 1;
 SetTransition: 'NoPreSquat';
 CancelWindow: Transition;
 BBSprite: 'DashEnd_3', 2;
