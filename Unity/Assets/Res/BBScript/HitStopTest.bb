@@ -1,5 +1,6 @@
 [Root]
 @RootInit:
+B2bodyInit;
 # 创建碰撞盒: (Center), (Size)
 CreateBox:
   BoxName: HitStop;

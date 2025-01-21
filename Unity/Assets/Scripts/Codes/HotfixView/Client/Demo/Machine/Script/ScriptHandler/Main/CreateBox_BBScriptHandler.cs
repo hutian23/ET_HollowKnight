@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
+using ET.Event;
 using Timeline;
 
 namespace ET.Client
@@ -17,13 +18,8 @@ namespace ET.Client
         //CreateBox: HitStop_1, 0, 0, 1000, 1000;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            //1. 不存在刚体，创建
             Unit unit = parser.GetParent<Unit>();
-            if (!b2WorldManager.Instance.BodyDict.TryGetValue(unit.InstanceId, out long _))
-            {
-                b2WorldManager.Instance.CreateBody(unit.InstanceId, new BodyDef() { BodyType = BodyType.StaticBody, Position = Vector2.Zero});
-            }
-
+            
             //2. 跳过代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
             int endIndex = index, startIndex = index;
@@ -49,12 +45,12 @@ namespace ET.Client
                 IsTrigger = true,
                 UserData = default,
                 //事件
-                // TriggerEnterId = TriggerEnterType.SceneBoxEvent,
-                // TriggerStayId = TriggerStayType.SceneBoxEvent,
-                // TriggerExitId = TriggerExitType.SceneBoxEvent,
-                // CollisionEnterId = CollisionEnterType.SceneBoxEvent,
-                // CollisionStayId = CollisionStayType.SceneBoxEvent,
-                // CollisionExitId = CollisionExitType.SceneBoxEvent,
+                TriggerEnterId = TriggerEnterType.SceneBoxEvent,
+                TriggerStayId = TriggerStayType.SceneBoxEvent,
+                TriggerExitId = TriggerExitType.SceneBoxEvent,
+                CollisionEnterId = CollisionEnterType.SceneBoxEvent,
+                CollisionStayId = CollisionStayType.SceneBoxEvent,
+                CollisionExitId = CollisionExitType.SceneBoxEvent,
             };
             parser.RegistParam("FixtureData", fixtureData);
             parser.RegistParam("BoxInfo", new BoxInfo());

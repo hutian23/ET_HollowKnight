@@ -272,33 +272,34 @@ InAir: false;
 return;
 
 @Main:
-# MarkerEvent: (Whiff_Start)
-#   InputBuffer: true;
-#   WhiffWindow;
-#   CancelOption: Rg_GroundDash;
-#   EndMarkerEvent:
-# MarkerEvent: (Hit_Start)
-#   # HitStop: 15, 8;
-#   # 注册受击回调
-#   HurtNotify: Once
-#     HitParam: StopFrame, 0;
-#     HitParam: ShakeLength, 200;
-#     HitParam: ShakeFrame, 15;
-#     HitParam: PushBack_V, -13000;
-#     HitParam: PushBack_F, 38000;
-#     Hit_UpdateFlip;
-#     HitStun: 'Hurt2';
-#     EndNotify:
-#   # 注册攻击回调
-#   WaitHit:
-#     HitStop: 20, 10;
-#     ScreenShake: 30, 70;
-#     EndHit:
-#   EndMarkerEvent:
-# MarkerEvent: (Whiff_End)
-#   GCWindow;
-#   GCOption: 'Rg_5C';
-#   EndMarkerEvent:
+ApplyRootMotion: true;
+MarkerEvent: (Whiff_Start)
+  InputBuffer: true;
+  CancelWindow: Whiff;
+  CancelOption: Rg_GroundDash;
+  EndMarkerEvent:
+MarkerEvent: (Hit_Start)
+  # HitStop: 15, 8;
+  # 注册受击回调
+  # HurtNotify: Once
+  #   HitParam: StopFrame, 0;
+  #   HitParam: ShakeLength, 200;
+  #   HitParam: ShakeFrame, 15;
+  #   HitParam: PushBack_V, -13000;
+  #   HitParam: PushBack_F, 38000;
+  #   Hit_UpdateFlip;
+  #   HitStun: 'Hurt2';
+  #   EndNotify:
+  # # 注册攻击回调
+  # WaitHit:
+  #   HitStop: 20, 10;
+  #   ScreenShake: 30, 70;
+  #   EndHit:
+  EndMarkerEvent:
+MarkerEvent: (Whiff_End)
+  # GCWindow;
+  # GCOption: 'Rg_5C';
+  EndMarkerEvent:
 StartTimeline;
 Exit;
 
