@@ -42,7 +42,7 @@ namespace ET.Client
             foreach (var kv in self.markerEventDict)
             {
                 TimelineMarkerEvent markerEvent = self.GetChild<TimelineMarkerEvent>(kv.Value);
-                markerEvent.Dispose();
+                markerEvent?.Dispose();
             }
             self.markerEventDict.Clear();
         }

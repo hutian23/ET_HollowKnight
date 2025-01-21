@@ -2,13 +2,14 @@
 
 namespace ET.Client
 {
-    public class HitStop_BBScriptHandler: BBScriptHandler
+    [FriendOf(typeof(BBParser))]
+    public class HitStop_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
             return "HitStop";
         }
-        
+
         //HitStop: 6, 8;(Hertz, hitStopFrame)
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
@@ -33,22 +34,25 @@ namespace ET.Client
             {
                 return Status.Success;
             }
-            
-            HitStopCor(parser, hertz, hitStop, token).Coroutine();
-            
+
+            HitStopCor(parser, hertz, hitStop).Coroutine();
+
             await ETTask.CompletedTask;
             return Status.Success;
         }
 
-        private async ETTask HitStopCor(BBParser parser, int hertz, int hitStop, ETCancellationToken token)
+        private async ETTask HitStopCor(BBParser parser, int hertz, int hitStop)
         {
             Unit unit = parser.GetParent<Unit>();
             BBNumeric numeric = unit.GetComponent<BBNumeric>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
 
             numeric.Set("Hertz", hertz);
-            await sceneTimer.WaitAsync(hitStop, token);
-            numeric.Set("Hertz", hertz);
+            
+            await sceneTimer.WaitAsync(hitStop, parser.CancellationToken);
+            if (parser.CancellationToken.IsCancel()) return;
+
+            numeric.Set("Hertz", 60);
         }
     }
 }
