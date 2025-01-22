@@ -20,9 +20,8 @@ namespace ET.Client
             int totalFrame = self.GetParam<int>("ShakeX_TotalFrame");
             long timer = self.GetParam<long>("ShakeX_Timer");
             
-            
             //1. 振幅
-            Vector2 shakePos = shakeLength * new Vector2(Mathf.Cos(curFrame * frequency) * (curFrame / (float)totalFrame), 0);
+            Vector2 shakePos = shakeLength * new Vector2(Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame), 0);
             b2Body.UpdateFlag = true;
             b2Body.offset = shakePos;
             

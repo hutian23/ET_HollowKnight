@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 PlayerInit;
-SetPos: 2500, 10000;
+SetPos: 5500, 10000;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
@@ -280,8 +280,9 @@ MarkerEvent: (Whiff_Start)
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   HurtNotify: Once
-    ShakeX: 1200, 29500, 10;
-    HitStop: 5, 10;
+    ShakeX: 1500, 40000, 10;
+    ScreenShakeX: 200, 10000, 10;
+    HitStop: 15, 10;
     EndNotify:
   # HitStop: 15, 8;
   # 注册受击回调

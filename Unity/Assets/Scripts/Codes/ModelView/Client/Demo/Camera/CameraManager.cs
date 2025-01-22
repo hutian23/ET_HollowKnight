@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using Random = System.Random;
 
 namespace ET.Client
 {
     [ComponentOf(typeof(Scene))]
-    public class CameraManager : Entity,IAwake,IDestroy, ILoad, IUpdate, ILateUpdate
+    public class CameraManager : Entity,IAwake,IDestroy, ILoad, IUpdate, IPostStep
     {
         [StaticField]
         public static CameraManager instance;
@@ -23,10 +22,11 @@ namespace ET.Client
         //Zoom
         public Vector2 Scroll;
         
-        //Shake
-        public int shakeLength;
-        public int shakeCnt;
-        public int shakeTotalCnt;
-        public Random Random = new();
+        //Shake(同时只能有一个相机振动效果生效)
+        public float shakeLength;
+        public float frequency;
+        public int totalFrame;
+        public int curFrame;
+        public long timer;
     }
 }
