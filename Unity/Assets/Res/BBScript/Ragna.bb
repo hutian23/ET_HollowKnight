@@ -279,9 +279,9 @@ MarkerEvent: (Whiff_Start)
   CancelOption: Rg_GroundDash;
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
-  ShakeX: 4000, 15;
   HurtNotify: Once
-    HitStop: 12, 20;
+    ShakeX: 1200, 29500, 10;
+    HitStop: 5, 10;
     EndNotify:
   # HitStop: 15, 8;
   # 注册受击回调
