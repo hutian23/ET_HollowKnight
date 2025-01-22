@@ -1,7 +1,6 @@
-﻿using Box2DSharp.Dynamics;
-using Box2DSharp.Testbed.Unity.Inspection;
+﻿using System.Numerics;
+using Box2DSharp.Dynamics;
 using Timeline;
-using UnityEngine;
 using Transform = Box2DSharp.Common.Transform;
 
 namespace ET.Client
@@ -18,6 +17,7 @@ namespace ET.Client
                 self.Fixtures.Clear();
                 self.FixtureDict.Clear();
                 self.trans = default;
+                self.offset = Vector2.Zero;
                 self.Flip = FlipState.Left;
                 self.UpdateFlag = false;
             }
@@ -44,22 +44,23 @@ namespace ET.Client
                 //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
                 self.trans = curTrans;
                 Unit unit = Root.Instance.Get(self.unitId) as Unit;
-                GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
-                Vector3 position = curTrans.Position.ToUnityVector3();
-                Vector3 axis = new(0, 0, curTrans.Rotation.Angle * Mathf.Rad2Deg);
-
-                go.transform.position = position;
-                go.transform.eulerAngles = axis;
-                go.transform.localScale = new Vector3(self.GetFlip(), 1, 1);
+                UnityEngine.GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
+                
+                Vector2 position = curTrans.Position + self.offset;
+                go.transform.position = new UnityEngine.Vector3(position.X, position.Y);
+                go.transform.eulerAngles = new UnityEngine.Vector3(0, 0, curTrans.Rotation.Angle * UnityEngine.Mathf.Rad2Deg);
+                go.transform.localScale = new UnityEngine.Vector3(self.GetFlip(), 1, 1);
+                
+                self.offset = Vector2.Zero;
             }
         }
 
-        public static System.Numerics.Vector2 GetVelocity(this b2Body self)
+        public static Vector2 GetVelocity(this b2Body self)
         {
             return self.body.LinearVelocity;
         }
 
-        public static void SetVelocity(this b2Body self, System.Numerics.Vector2 value)
+        public static void SetVelocity(this b2Body self, Vector2 value)
         {
             self.body.SetLinearVelocity(value);
         }
@@ -95,12 +96,12 @@ namespace ET.Client
             return (int)self.Flip;
         }
 
-        public static void SetPosition(this b2Body self, System.Numerics.Vector2 position)
+        public static void SetPosition(this b2Body self, Vector2 position)
         {
             self.body.SetTransform(position, 0f);
         }
 
-        public static System.Numerics.Vector2 GetPosition(this b2Body self)
+        public static Vector2 GetPosition(this b2Body self)
         {
             return self.body.GetPosition();
         }

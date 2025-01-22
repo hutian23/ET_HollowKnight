@@ -25,12 +25,11 @@
         public const int GCWindowTimer = 107;
         public const int CancelWindowTimer = 108;
         public const int TransitionWindowTimer = 109;
-        public const int ShakeTimer = 110;
         public const int LoopTimer = 111;
         public const int CallbackCheckTimer = 112;
         public const int AirCheckTimer = 113;
         public const int AccelerationXTimer = 114;
-        public const int DerivedWindowTimer = 115;
+        public const int ShakeXTimer = 116;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;
