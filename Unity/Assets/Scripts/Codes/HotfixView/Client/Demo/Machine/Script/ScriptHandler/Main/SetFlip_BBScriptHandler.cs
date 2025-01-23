@@ -22,7 +22,7 @@ namespace ET.Client
 
             b2Body body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             FlipState flip = match.Groups["Flip"].Value.Equals("Left")? FlipState.Left : FlipState.Right;
-            body.SetFlip(flip, true);
+            body.SetFlip(flip);
             
             await ETTask.CompletedTask;
             return Status.Success;

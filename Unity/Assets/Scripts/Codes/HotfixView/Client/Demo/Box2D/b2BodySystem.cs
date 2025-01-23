@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using Timeline;
 using Transform = Box2DSharp.Common.Transform;
@@ -28,33 +29,33 @@ namespace ET.Client
             protected override void PosStepUpdate(b2Body self)
             {
                 //static body
-                if (self.unitId == 0)
-                {
-                    return;
-                }
+                if (self.unitId == 0) return;
                 
                 //未发生更新，渲染层无需刷新
                 Transform curTrans = self.body.GetTransform();
-                if (self.trans.Equals(curTrans) && !self.UpdateFlag)
-                {
-                    return;
-                }
+                if (self.trans.Equals(curTrans) && !self.UpdateFlag) return;
                 self.UpdateFlag = false;
-
-                //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
-                self.trans = curTrans;
-                Unit unit = Root.Instance.Get(self.unitId) as Unit;
-                UnityEngine.GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
                 
-                Vector2 position = curTrans.Position + self.offset;
-                go.transform.position = new UnityEngine.Vector3(position.X, position.Y);
-                go.transform.eulerAngles = new UnityEngine.Vector3(0, 0, curTrans.Rotation.Angle * UnityEngine.Mathf.Rad2Deg);
-                go.transform.localScale = new UnityEngine.Vector3(self.GetFlip(), 1, 1);
-                
-                self.offset = Vector2.Zero;
+                // 渲染层同步逻辑层刚体的位置
+                self.SyncTrans();
             }
         }
 
+        private static void SyncTrans(this b2Body self)
+        {
+            //同步渲染层GameObject和逻辑层b2World中刚体的位置旋转信息
+            self.trans = self.body.GetTransform();
+            Unit unit = Root.Instance.Get(self.unitId) as Unit;
+            UnityEngine.GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
+            
+            Vector2 position = self.trans.Position + self.offset;
+            go.transform.position = new UnityEngine.Vector3(position.X, position.Y);
+            go.transform.eulerAngles = new UnityEngine.Vector3(0, 0, self.trans.Rotation.Angle * UnityEngine.Mathf.Rad2Deg);
+            go.transform.localScale = new UnityEngine.Vector3(self.GetFlip(), 1, 1);
+                
+            self.offset = Vector2.Zero;
+        }
+        
         public static Vector2 GetVelocity(this b2Body self)
         {
             return self.body.LinearVelocity;
@@ -76,19 +77,44 @@ namespace ET.Client
         }
         
         /// <summary>
-        /// 刚体朝向
+        /// 设置刚体朝向，渲染层同步朝向
         /// </summary>
-        /// <param name="self"></param>
-        /// <param name="flipState"></param>
-        /// <param name="refresh">需要翻转hitbox</param>
-        public static void SetFlip(this b2Body self, FlipState flipState, bool refresh = false)
+        public static void SetFlip(this b2Body self, FlipState flipState)
         {
-            if (self.Flip != flipState && refresh)
-            {
-                EventSystem.Instance.Invoke(new UpdateFlipCallback(){instanceId = self.unitId,curFlip = flipState});
-            }
+            if ((int)flipState == self.GetFlip()) return;
             self.Flip = flipState;
-            self.UpdateFlag = true;
+            
+            //1. 逻辑层 ---> 翻转夹具
+            // 逻辑上不能实现翻转夹具的操作，只能销毁夹具生成新的
+            QueueComponent<FixtureData> dataQueue = new QueueComponent<FixtureData>();
+            foreach (Fixture fixture in self.Fixtures)
+            {
+                dataQueue.Enqueue((FixtureData)fixture.UserData);
+            }
+            self.ClearFixtures();
+            
+            int count = dataQueue.Count;
+            while (count-- > 0)
+            {
+                FixtureData data = dataQueue.Dequeue();
+                if (data.UserData is not BoxInfo info) continue;
+                //reset param of fixtureDef
+                PolygonShape shape = new();
+                shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * self.GetFlip(), info.center.y), 0f);
+                FixtureDef fixtureDef = new()
+                {
+                    Shape = shape,
+                    Density = 1.0f,
+                    Friction = 0.0f,
+                    UserData = data
+                };
+                self.CreateFixture(fixtureDef);
+            }
+            
+            //2. 渲染层同步朝向
+            Unit unit = Root.Instance.Get(self.unitId) as Unit;
+            UnityEngine.GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
+            go.transform.localScale = new UnityEngine.Vector3(self.GetFlip(), 1, 1);
         }
 
         public static int GetFlip(this b2Body self)
@@ -137,7 +163,7 @@ namespace ET.Client
         /// 热重载时调用，销毁所有夹具
         /// </summary>
         /// <param name="self"></param>
-        public static void ClearFixtures(this b2Body self)
+        private static void ClearFixtures(this b2Body self)
         {
             if (b2WorldManager.Instance.IsLocked())
             {
@@ -153,31 +179,29 @@ namespace ET.Client
             self.FixtureDict.Clear();
         }
 
-        public static bool DestroyFixture(this b2Body self, string fixtureName)
+        private static void DestroyFixture(this b2Body self, string fixtureName)
         {
             if (b2WorldManager.Instance.IsLocked())
             {
                 Log.Error($"cannot destroy fixture while b2World is locked!!");
-                return false;
+                return;
             }
 
             if (!self.FixtureDict.TryGetValue(fixtureName, out Fixture fixture))
             {
                 Log.Error($"not found fixture: {fixtureName}");
-                return false;
+                return;
             }
 
             self.Fixtures.Remove(fixture);
             self.FixtureDict.Remove(fixtureName);
             self.body.DestroyFixture(fixture);
-            return true;
         }
 
-        public static bool DestroyFixture(this b2Body self, Fixture fixture)
+        private static void DestroyFixture(this b2Body self, Fixture fixture)
         {
             FixtureData data = (FixtureData)fixture.UserData;
             self.DestroyFixture(data.Name);
-            return true;
         }
         
         public static Fixture CreateFixture(this b2Body self,FixtureDef fixtureDef)

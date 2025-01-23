@@ -20,11 +20,4 @@ namespace ET.Client
         public FlipState Flip = FlipState.Left;
         public bool UpdateFlag; // 手动刷新渲染层
     }
-    
-    //转向后，更新夹具
-    public struct UpdateFlipCallback
-    {
-        public long instanceId;
-        public FlipState curFlip;
-    }
 }

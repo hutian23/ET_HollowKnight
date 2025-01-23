@@ -865,16 +865,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c0cd7836fc6803b4f89e9d0e576a4510, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_Name
-      value: Ragna
+      value: Dummy
       objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -882,6 +882,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b856848a7fd79d34e82b748a266d4027,
         type: 3}
+    - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -934,6 +959,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
+      propertyPath: BBPlayable
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f67fb43bb788f5478a54fd60e06dfd6,
+        type: 2}
+    - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
       propertyPath: CurrentTimeline
       value: 
       objectReference: {fileID: 11400000, guid: b458a6d3716ca96489f7794bcc0bb6d9,
@@ -942,7 +973,12 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734945035081585315, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
+      propertyPath: Script
+      value: 
+      objectReference: {fileID: 1042094116111776886, guid: 2727484a9f4bb7945b7d498143709585,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1901,7 +1937,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c0cd7836fc6803b4f89e9d0e576a4510, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_Name

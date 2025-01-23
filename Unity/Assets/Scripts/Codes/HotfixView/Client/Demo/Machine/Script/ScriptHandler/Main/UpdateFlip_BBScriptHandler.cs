@@ -16,13 +16,13 @@ namespace ET.Client
                 self.IsPressing(BBOperaType.DOWNLEFT) ||
                 self.IsPressing(BBOperaType.UPLEFT))
             {
-                b2Body.SetFlip(FlipState.Left, true);
+                b2Body.SetFlip(FlipState.Left);
             }
             else if(self.IsPressing(BBOperaType.RIGHT) || 
                     self.IsPressing(BBOperaType.DOWNRIGHT) ||
                     self.IsPressing(BBOperaType.UPRIGHT))
             {
-                b2Body.SetFlip(FlipState.Right, true);
+                b2Body.SetFlip(FlipState.Right);
             }
         }
     }
@@ -37,6 +37,8 @@ namespace ET.Client
         //UpdateFlip: Once;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
+            await ETTask.CompletedTask;
+            
             Match match = Regex.Match(data.opLine, @"UpdateFlip: (?<Flip>\w+);");
             if (!match.Success)
             {
@@ -65,6 +67,7 @@ namespace ET.Client
                     {
                         b2Body.SetFlip(FlipState.Right);
                     }
+                    
                     return Status.Success;
                 }
                 case "Repeat":
@@ -76,10 +79,11 @@ namespace ET.Client
                     });
                     return Status.Success;
                 }
+                default:
+                {
+                    return Status.Failed;
+                }
             }
-            
-            await ETTask.CompletedTask;
-            return Status.Failed;
         }
     }
 }
