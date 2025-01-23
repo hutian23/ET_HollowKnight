@@ -57,6 +57,9 @@ RegistMove: (Rg_Jump)
 RegistMove: (Rg_5B)
   MoveType: Normal;
   EndMove:
+RegistMove: (Rg_5C)
+  MoveType: Normal;
+  EndMove:
 RegistMove: (Rg_AirDash)
   MoveType: Normal;
   EndMove:
@@ -74,6 +77,7 @@ return;
 
 @BeforeReload:
 UpdateFlip: Once;
+NumericSet: Hertz, 60;
 return;
 
 @LandCallback:
@@ -280,30 +284,14 @@ MarkerEvent: (Whiff_Start)
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   HurtNotify: Once
-    ShakeX: 1500, 40000, 10;
-    ScreenShakeX: 200, 10000, 10;
+    ShakeX: 1000, 30000, 10;
+    ScreenShakeX: 100, 20000, 10;
     HitStop: 15, 10;
     EndNotify:
-  # HitStop: 15, 8;
-  # 注册受击回调
-  # HurtNotify: Once
-  #   HitParam: StopFrame, 0;
-  #   HitParam: ShakeLength, 200;
-  #   HitParam: ShakeFrame, 15;
-  #   HitParam: PushBack_V, -13000;
-  #   HitParam: PushBack_F, 38000;
-  #   Hit_UpdateFlip;
-  #   HitStun: 'Hurt2';
-  #   EndNotify:
-  # # 注册攻击回调
-  # WaitHit:
-  #   HitStop: 20, 10;
-  #   ScreenShake: 30, 70;
-  #   EndHit:
   EndMarkerEvent:
 MarkerEvent: (Whiff_End)
-  # GCWindow;
-  # GCOption: 'Rg_5C';
+  CancelWindow: Gatling;
+  CancelOption: Rg_5C;
   EndMarkerEvent:
 StartTimeline;
 Exit;
@@ -312,21 +300,26 @@ Exit;
 @Trigger: 
 InputType: 5LPPressed;
 InAir: false;
-GCOption: 'Rg_5C';
+CancelOption: 'Rg_5C';
 return;
 
 @Main:
+ApplyRootMotion: true;
 MarkerEvent: (Whiff_Start)
   InputBuffer: true;
-  WhiffWindow;
-  WhiffOption: 'Rg_GroundDash';
+  CancelWindow: Whiff;
+  CancelOption: Rg_GroundDash;
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
-  # HitStop: 5, 12;
+  HurtNotify: Once
+    ShakeX: 2000, 40000, 15;
+    ScreenShakeX: 500, 20000, 15;
+    HitStop: 8, 10;
+    EndNotify:
   EndMarkerEvent:
 MarkerEvent: (Whiff_End)
-  GCWindow;
-  GCOption: 'Rg_5D';
+  # GCWindow;
+  # GCOption: 'Rg_5D';
   EndMarkerEvent:
 StartTimeline;
 Exit;

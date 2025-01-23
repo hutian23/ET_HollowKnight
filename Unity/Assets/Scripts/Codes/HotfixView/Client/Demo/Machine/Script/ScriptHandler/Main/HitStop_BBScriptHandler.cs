@@ -36,7 +36,7 @@ namespace ET.Client
             }
 
             HitStopCor(parser, hertz, hitStop).Coroutine();
-
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }
@@ -46,12 +46,10 @@ namespace ET.Client
             Unit unit = parser.GetParent<Unit>();
             BBNumeric numeric = unit.GetComponent<BBNumeric>();
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
-
-            numeric.Set("Hertz", hertz);
             
+            numeric.Set("Hertz", hertz);
             await sceneTimer.WaitAsync(hitStop, parser.CancellationToken);
             if (parser.CancellationToken.IsCancel()) return;
-
             numeric.Set("Hertz", 60);
         }
     }
