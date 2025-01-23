@@ -8,8 +8,7 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            TimelineComponent timelineComponent = self.GetParent<TimelineComponent>();
-            B2Unit b2Unit = timelineComponent.GetComponent<B2Unit>();
+            B2Unit b2Unit = self.GetParent<Unit>().GetComponent<B2Unit>();
             
             float startV = self.GetParam<float>("PushBack_V");
             float friction = self.GetParam<float>("PushBack_F");
@@ -32,7 +31,7 @@ namespace ET.Client
         //HitPushBack: 2000, 8;(StartVelocity, Friction)
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"PushBack: (?<StartVelocity>-?\d+), (?<Friction>\w+);");
+            Match match = Regex.Match(data.opLine, @"PushBack: (?<StartVelocity>.*?), (?<Friction>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

@@ -10,10 +10,10 @@ namespace ET.Client
             return "MoveFlag";
         }
 
-        //HitFlag: Hurt1;
+        //MoveFlag: Hurt1;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"MoveFlag: (?<HitFlag>\w+)");
+            Match match = Regex.Match(data.opLine, @"MoveFlag: (?<MoveFlag>\w+)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

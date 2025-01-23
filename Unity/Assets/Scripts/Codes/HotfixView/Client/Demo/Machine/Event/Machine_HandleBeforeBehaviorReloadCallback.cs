@@ -26,7 +26,7 @@
             parser.Cancel();
             foreach (var kv in machine.tmpParamDict)
             {
-                parser.RegistParam(kv.Key, kv.Value);
+                parser.RegistParam(kv.Key, kv.Value.value);
             }
             machine.tmpParamDict.Clear();
             //2. 清空行为协程中生成的组件

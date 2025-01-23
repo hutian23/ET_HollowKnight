@@ -43,10 +43,11 @@ namespace ET.Client
                 //调用受击回调
                 int startIndex = self.GetParam<int>("HurtNotify_StartIndex");
                 int endIndex = self.GetParam<int>("HurtNotify_EndIndex");
+                
                 //注册变量供代码块使用
-                self.RegistParam("Hurt_CollisionInfo", info);
+                self.RegistParam("HurtNotify_CollisionInfo", info);
                 self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
-                self.TryRemoveParam("Hurt_CollisionInfo");
+                self.TryRemoveParam("HurtNotify_CollisionInfo");
             }
         }
     }

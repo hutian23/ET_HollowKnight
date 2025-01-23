@@ -41,7 +41,7 @@
             self.behaviorFlagDict.Clear();
         }
 
-        public static void Init(this BehaviorMachine self)
+        private static void Init(this BehaviorMachine self)
         {
             self.Cancel();
             self.Token = new();
@@ -77,6 +77,17 @@
             return self.GetChild<BehaviorInfo>(infoId);
         }
 
+        public static BehaviorInfo GetInfoByFlag(this BehaviorMachine self, string behaviorFlag)
+        {
+            if (!self.behaviorFlagDict.TryGetValue(behaviorFlag, out long infoId))
+            {
+                Log.Error($"does not exist behavior, flag: {behaviorFlag}");
+                return null;
+            }
+
+            return self.GetChild<BehaviorInfo>(infoId);
+        }
+        
         #region Param
 
         public static T RegistParam<T>(this BehaviorMachine self, string paramName, T value)
@@ -118,7 +129,6 @@
                 Log.Error($"cannot format {variable.name} to {typeof(T)}");
                 return default;
             }
-
             return value;
         }
 

@@ -4,34 +4,31 @@ using ET.Event;
 namespace ET.Client
 {
     [FriendOf(typeof(b2Body))]
-    public class HitStun_BBScriptHandler : BBScriptHandler
+    public class HurtNotify_HitParam_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "HitStun";
+            return "HitParam";
         }
 
         //代码块中可执行，需要注册Hurt_CollisionInfo变量
-        //Hit_GotoState: 'KnockBack';
+        //HitParam: StopFrame, 10;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"HitStun: '(?<hitFlag>\w+)';");
+            Match match = Regex.Match(data.opLine, "HitParam: (?<ParamName>.*?), (?<ParamValue>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-            CollisionInfo info = parser.GetParam<CollisionInfo>("Hurt_CollisionInfo");
-
-            //查询组件
+            CollisionInfo info = parser.GetParam<CollisionInfo>("HurtNotify_CollisionInfo");
             b2Body body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(body.unitId) as Unit;
             BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
-            
-            //查询对应的受击行为
-            // int order = machine.GetHitStun(match.Groups["hitFlag"].Value);
-            // timelineComponent.Reload(order);
 
+            machine.TryRemoveTmpParam(match.Groups["ParamName"].Value);
+            machine.RegistTmpParam(match.Groups["ParamName"].Value, match.Groups["ParamValue"].Value);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

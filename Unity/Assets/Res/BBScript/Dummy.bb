@@ -17,6 +17,11 @@ AirCheckBox: 0, -1850, 1250, 1000;
 RegistMove: (Dummy_Idle)
   MoveType: None;
   EndMove:
+RegistMove: (Dummy_Hurt2)
+  MoveType: HitStun;
+  MoveFlag: Hurt2;
+  EndMove:
+SetFlip: Right;
 GotoBehavior: 'Dummy_Idle';
 return;
 
@@ -49,4 +54,19 @@ BBSprite: 'Idle_10', 4;
 BBSprite: 'Idle_11', 4;
 BBSprite: 'Idle_12', 4;
 GotoMarker: 'Loop';
+Exit;
+
+# 地面受击行为
+[Dummy_Hurt2]
+@Main:
+ShakeX: {Self.ShakeX_Length}, {Self.ShakeX_Frequency}, {Self.ShakeX_Frame};
+BBSprite: 'hurt_1', 2;
+BBSprite: 'hurt_3', 2;
+BBSprite: 'hurt_5', {Self.HitStopFrame};
+PushBack: -155000, 650000;
+BBSprite: 'hurt_5', 6;
+BBSprite: 'hurt_4', 3;
+BBSprite: 'hurt_3', 3;
+BBSprite: 'hurt_2', 3;
+BBSprite: 'hurt_1', 3;
 Exit;
