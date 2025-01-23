@@ -177,7 +177,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2016810935
   m_SortingLayer: 1
-  m_SortingOrder: 1000
+  m_SortingOrder: 2000
   m_Sprite: {fileID: 1055419004, guid: b42d8d83a572c184f8d4a2ce68170e04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -287,9 +287,6 @@ MonoBehaviour:
     - Name: animationClip
       Entry: 10
       Data: 2
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
     - Name: rootMotionDict
       Entry: 7
       Data: 6|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.AnimationCurve,

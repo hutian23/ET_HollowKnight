@@ -284,14 +284,16 @@ MarkerEvent: (Whiff_Start)
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   HurtNotify: Once
-    ShakeX: 1200, 30000, 10;
+    ShakeX: 400, 30000, 10;
     ScreenShakeX: 100, 20000, 10;
     Hit_UpdateFlip;
-    HitStop: 20, 10;
-    HitParam: ShakeX_Length, 1400;
-    HitParam: ShakeX_Frequency, 32000;
+    HitStop: 15, 10;
+    HitParam: ShakeX_Length, 1200;
+    HitParam: ShakeX_Frequency, 22000;
     HitParam: ShakeX_Frame, 15;
-    HitParam: HitStopFrame, 9;
+    HitParam: HitStopFrame, 10;
+    HitParam: Push_V, -80000;
+    HitParam: Push_F, 450000;
     HitStun: Hurt2;
     EndNotify:
   EndMarkerEvent:
@@ -318,14 +320,16 @@ MarkerEvent: (Whiff_Start)
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   HurtNotify: Once
-    ShakeX: 1500, 40000, 15;
-    ScreenShakeX: 500, 20000, 15;
-    HitStop: 5, 10;
+    ShakeX: 800, 30000, 15;
+    ScreenShakeX: 1000, 35000, 15;
+    HitStop: 5, 8;
     Hit_UpdateFlip;
-    HitParam: ShakeX_Length, 1400;
-    HitParam: ShakeX_Frequency, 32000;
+    HitParam: ShakeX_Length, 1500;
+    HitParam: ShakeX_Frequency, 25000;
     HitParam: ShakeX_Frame, 15;
-    HitParam: HitStopFrame, 9;
+    HitParam: HitStopFrame, 6;
+    HitParam: Push_V, -200000;
+    HitParam: Push_F, 950000;
     HitStun: Hurt2;
     EndNotify:
   EndMarkerEvent:

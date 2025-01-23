@@ -63,7 +63,7 @@ ShakeX: {Self.ShakeX_Length}, {Self.ShakeX_Frequency}, {Self.ShakeX_Frame};
 BBSprite: 'hurt_1', 2;
 BBSprite: 'hurt_3', 2;
 BBSprite: 'hurt_5', {Self.HitStopFrame};
-PushBack: -155000, 650000;
+PushBack: {Self.Push_V}, {Self.Push_F};
 BBSprite: 'hurt_5', 6;
 BBSprite: 'hurt_4', 3;
 BBSprite: 'hurt_3', 3;
