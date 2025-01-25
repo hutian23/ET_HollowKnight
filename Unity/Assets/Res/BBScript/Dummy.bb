@@ -2,7 +2,7 @@
 @RootInit:
 DummyInit;
 SetPos: 0, 1100;
-# Gravity: 100000;
+Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
@@ -21,12 +21,15 @@ RegistMove: (Dummy_Hurt2)
   MoveType: HitStun;
   MoveFlag: Hurt2;
   EndMove:
+RegistMove: (Dummy_Hurt3)
+  MoveType: HitStun;
+  MoveFlag: Hurt3;
+  EndMove:
 SetFlip: Right;
 GotoBehavior: 'Dummy_Idle';
 return;
 
 @BeforeReload:
-# UpdateFlip: Once;
 NumericSet: Hertz, 60;
 return;
 
@@ -69,4 +72,50 @@ BBSprite: 'hurt_4', 3;
 BBSprite: 'hurt_3', 3;
 BBSprite: 'hurt_2', 3;
 BBSprite: 'hurt_1', 3;
+Exit;
+
+[Dummy_Hurt3]
+@Main:
+Shake: {Self.Shake_Length}, {Self.Shake_Frequency}, {Self.Shake_Frame};
+SetVelocityX: 0;
+SetVelocityY: 0;
+Gravity: 60000;
+BBSprite: 'Frame_1', {Self.HitStopFrame};
+SetVelocityY: {Self.StartV_X};
+SetVelocityX: {Self.StartV_Y};
+BBSprite: 'Frame_2', 3;
+BBSprite: 'Frame_3', 3;
+Gravity: 120000;
+BeginLoop: (Velocity: Y > 100000)
+  BBSprite: 'Frame_2', 3;
+  BBSprite: 'Frame_3', 3;
+  EndLoop:
+BBSprite: 'Frame_4', 3;
+BBSprite: 'Frame_5', 3;
+BBSprite: 'Frame_6', 3;
+BBSprite: 'Frame_7', 3;
+BeginLoop: (InAir: true)
+  BBSprite: 'Frame_8', 3;
+  BBSprite: 'Frame_9', 3;
+  EndLoop:
+SetVelocityX: 0;
+BBSprite: 'Frame_10', 3;
+ScreenShakeX: 950, 950, 38000, 10;
+BBSprite: 'Frame_11', 3;
+BBSprite: 'Frame_12', 3;
+BBSprite: 'Frame_13', 3;
+BBSprite: 'Frame_14', 3;
+BBSprite: 'Frame_15', 3;
+BBSprite: 'Frame_16', 3;
+BBSprite: 'Frame_17', 25;
+BBSprite: 'Frame_18', 3;
+BBSprite: 'Frame_19', 3;
+BBSprite: 'Frame_20', 3;
+BBSprite: 'Frame_21', 3;
+BBSprite: 'Frame_22', 3;
+BBSprite: 'Frame_23', 3;
+BBSprite: 'Frame_24', 3;
+BBSprite: 'Frame_25', 3;
+BBSprite: 'Frame_26', 3;
+BBSprite: 'Frame_27', 3;
 Exit;

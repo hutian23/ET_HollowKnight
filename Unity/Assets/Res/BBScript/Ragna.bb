@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 PlayerInit;
-SetPos: 5500, 10000;
+SetPos: 3000, 10000;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
@@ -60,11 +60,17 @@ RegistMove: (Rg_5B)
 RegistMove: (Rg_5C)
   MoveType: Normal;
   EndMove:
+RegistMove: (Rg_6P)
+  MoveType: Normal;
+  EndMove:
 RegistMove: (Rg_AirDash)
   MoveType: Normal;
   EndMove:
 RegistMove: (Rg_GroundDash)
   MoveType: Normal;
+  EndMove:
+RegistMove: (Rg_PlungingAttack)
+  MoveType: Special;
   EndMove:
 RegistMove: (Rg_QuickFall)
   MoveType: Special;
@@ -284,16 +290,14 @@ MarkerEvent: (Whiff_Start)
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   HurtNotify: Once
-    ShakeX: 400, 30000, 10;
-    ScreenShakeX: 100, 20000, 10;
+    ShakeX: 1000, 40000, 10;
+    ScreenShakeX: 800, 20000, 10;
     Hit_UpdateFlip;
     HitStop: 15, 10;
-    HitParam: ShakeX_Length, 1200;
-    HitParam: ShakeX_Frequency, 22000;
-    HitParam: ShakeX_Frame, 15;
-    HitParam: HitStopFrame, 10;
-    HitParam: Push_V, -80000;
-    HitParam: Push_F, 450000;
+    HitParam: ShakeX_Length, 5000;
+    HitParam: ShakeX_Frequency, 50000;
+    HitParam: ShakeX_Frame, 12;
+    HitParam: HitStopFrame, 12;
     HitStun: Hurt2;
     EndNotify:
   EndMarkerEvent:
@@ -320,17 +324,17 @@ MarkerEvent: (Whiff_Start)
   EndMarkerEvent:
 MarkerEvent: (Hit_Start)
   HurtNotify: Once
-    ShakeX: 800, 30000, 15;
-    ScreenShakeX: 1000, 35000, 15;
-    HitStop: 5, 8;
+    ShakeX: 2000, 40000, 15;
+    # ScreenShakeX: 1500, 35000, 15;
+    HitStop: 5, 15;
     Hit_UpdateFlip;
-    HitParam: ShakeX_Length, 1500;
-    HitParam: ShakeX_Frequency, 25000;
-    HitParam: ShakeX_Frame, 15;
-    HitParam: HitStopFrame, 6;
+    HitParam: ShakeX_Length, 8500;
+    HitParam: ShakeX_Frequency, 60000;
+    HitParam: ShakeX_Frame, 18;
+    HitParam: HitStopFrame, 9;
     HitParam: Push_V, -200000;
     HitParam: Push_F, 950000;
-    HitStun: Hurt2;
+    HitStun: Hurt3;
     EndNotify:
   EndMarkerEvent:
 MarkerEvent: (Whiff_End)
@@ -399,6 +403,41 @@ BBSprite: 'Attack_9', 3;
 BBSprite: 'Attack_10', 3;
 BBSprite: 'Attack_11', 3;
 BBSprite: 'Attack_12', 3;
+Exit;
+
+[Rg_6P]
+@Trigger:
+InAir: false;
+InputType: 5LPPressed;
+return;
+
+@Main:
+SetVelocityX: 0;
+BBSprite: 'Start_1', 3;
+BBSprite: 'Start_2', 3;
+BBSprite: 'Start_3', 3;
+BBSprite: 'Start_4', 3;
+BBSprite: 'Start_5', 3;
+HurtNotify: Once
+  ShakeX: 300, 40000, 15;
+  HitStop: 10, 15;
+  HitParam: Shake_Length, 1000;
+  HitParam: Shake_Frequency, 30000;
+  HitParam: Shake_Frame, 15;
+  HitParam: HitStopFrame, 15;
+  HitParam: StartV_X, 280000;
+  HitParam: StartV_Y, -35000;
+  Hit_UpdateFlip;
+  HitStun: Hurt3;
+  EndNotify:
+BBSprite: 'Active_1', 4;
+BBSprite: 'Recovery_1', 3;
+BBSprite: 'Recovery_2', 3;
+BBSprite: 'Recovery_3', 3;
+BBSprite: 'Recovery_4', 3;
+BBSprite: 'Recovery_5', 3;
+BBSprite: 'Recovery_6', 3;
+BBSprite: 'Recovery_7', 3;
 Exit;
 
 [Rg_AirDash]
@@ -475,21 +514,33 @@ return;
 
 @Main:
 Gravity: 0;
-SetVelocityX: 8000;
-SetVelocityY: 13000;
+SetVelocityX: 100000;
+SetVelocityY: 10000;
 InputBuffer: true;
+BBSprite: 'Pre_1', 3;
 BBSprite: 'Pre_2', 3;
-Gravity: 70000;
-WhiffWindow;
-WhiffOption: 'Rg_AirDash';
-BBSprite: 'Pre_2', 5;
-BBSprite: 'Pre_3', 5;
-BBSprite: 'Pre_4', 4;
-DisposeWindow;
-Gravity: 0;
-SetVelocityX: 4000;
-SetVelocityY: -60000;
+Gravity: 60000;
+BBSprite: 'Pre_3', 3;
+# WhiffWindow;
+# WhiffOption: 'Rg_AirDash';
+BBSprite: 'Pre_4', 3;
 BBSprite: 'Attack_1', 2;
+# DisposeWindow;
+Gravity: 0;
+SetVelocityX: 50000;
+SetVelocityY: -700000;
+HurtNotify: Once
+  ShakeX: 500, 35000, 13;
+  HitStop: 0, 13;
+  Hit_UpdateFlip;
+  HitParam: ShakeX_Length, 2000;
+  HitParam: ShakeX_Frequency, 40000;
+  HitParam: ShakeX_Frame, 13;
+  HitParam: HitStopFrame, 8;
+  HitParam: Push_V, -200000;
+  HitParam: Push_F, 950000;
+  HitStun: Hurt2;
+  EndNotify:
 BeginLoop: (InAir: true)
   BBSprite: 'Attack_2', 3;
   EndLoop:
@@ -497,10 +548,10 @@ SetVelocityX: 0;
 BBSprite: 'Land_1', 5;
 BBSprite: 'Land_2', 8;
 BBSprite: 'Land_3', 5;
-BBSprite: 'Land_4', 4;
-BBSprite: 'Land_5', 4;
-BBSprite: 'Land_6', 4;
-BBSprite: 'Land_7', 4;
+BBSprite: 'Land_4', 3;
+BBSprite: 'Land_5', 3;
+BBSprite: 'Land_6', 3;
+BBSprite: 'Land_7', 3;
 Exit;
 
 [Rg_QuickFall]

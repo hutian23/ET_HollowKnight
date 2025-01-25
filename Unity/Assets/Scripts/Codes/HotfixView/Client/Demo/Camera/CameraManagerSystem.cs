@@ -6,6 +6,38 @@ using Camera = UnityEngine.Camera;
 namespace ET.Client
 {
     [FriendOf(typeof(CameraManager))]
+    [Invoke(BBTimerInvokeType.ScreenShakeTimer)]
+    public class ScreenShakeXTimer : BBTimer<BBParser>
+    {
+        protected override void Run(BBParser self)
+        {
+            BBTimerComponent bbTimer = BBTimerManager.Instance.SceneTimer();
+            float shakeLength_X = CameraManager.instance.shakeLength_X;
+            float shakeLength_Y = CameraManager.instance.shakeLength_Y;
+            float frequency = CameraManager.instance.frequency;
+            int totalFrame = CameraManager.instance.totalFrame;
+            int curFrame = CameraManager.instance.curFrame;
+            long timer = CameraManager.instance.timer;
+            CameraManager.instance.MainCamera.transform.position = CameraManager.instance.Position + new Vector3(shakeLength_X, shakeLength_Y, 0) * (Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame));
+            
+            curFrame--;
+            if (curFrame <= 0)
+            {
+                bbTimer.Remove(ref timer);
+                CameraManager.instance.shakeLength_X = 0;
+                CameraManager.instance.shakeLength_Y = 0;
+                CameraManager.instance.frequency = 0;
+                CameraManager.instance.totalFrame = 0;
+                CameraManager.instance.curFrame = 0;
+                CameraManager.instance.timer = 0;
+                CameraManager.instance.MainCamera.transform.position = CameraManager.instance.Position;
+                return;
+            }
+            CameraManager.instance.curFrame = curFrame;
+        }
+    }
+    
+    [FriendOf(typeof(CameraManager))]
     public static class CameraManagerSystem
     {
         public class CameraManagerAwakeSystem : AwakeSystem<CameraManager>
@@ -47,12 +79,14 @@ namespace ET.Client
             self._screenWidth = 0;
             self._screenHeight = 0;
             self.Scroll = Vector3.zero;
-            
-            self.shakeLength = 0;
+
+            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+            sceneTimer.Remove(ref self.timer);
+            self.shakeLength_X = 0;
+            self.shakeLength_Y = 0;
             self.frequency = 0;
             self.totalFrame = 0;
             self.curFrame = 0;
-            self.timer = 0;
             
             self.MainCamera = Camera.main;
             self.MainCamera.transform.position = self.Position;

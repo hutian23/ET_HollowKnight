@@ -23,7 +23,8 @@ namespace ET.Client
         public Vector2 Scroll;
         
         //Shake(同时只能有一个相机振动效果生效)
-        public float shakeLength;
+        public float shakeLength_X;
+        public float shakeLength_Y;
         public float frequency;
         public int totalFrame;
         public int curFrame;

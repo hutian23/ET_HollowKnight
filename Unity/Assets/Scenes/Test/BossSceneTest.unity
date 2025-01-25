@@ -662,7 +662,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6b09e8856437b524b8aa3375f453f5ca,
+      objectReference: {fileID: -1331877821, guid: a714674fa1a745f47809580dd5aa27ef,
         type: 3}
     - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -682,7 +682,7 @@ PrefabInstance:
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.9957
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -697,7 +697,7 @@ PrefabInstance:
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.4213653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -880,7 +880,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d009fb59ec8e40049925365c83d2abc7,
+      objectReference: {fileID: 21300000, guid: 3fd9ae9f252823b46a76e5bc8a1cd711,
         type: 3}
     - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -967,13 +967,14 @@ PrefabInstance:
         type: 3}
       propertyPath: CurrentTimeline
       value: 
-      objectReference: {fileID: 11400000, guid: 3571aca473c333a42944903707775516,
+      objectReference: {fileID: 11400000, guid: b458a6d3716ca96489f7794bcc0bb6d9,
         type: 2}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
+        type: 3}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: serializationData.ReferencedUnityObjects.Array.size
@@ -1975,7 +1976,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: c0cd7836fc6803b4f89e9d0e576a4510, type: 2}
     - target: {fileID: 7728331812354445376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_Name
@@ -1990,7 +1991,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1331877821, guid: a714674fa1a745f47809580dd5aa27ef,
+      objectReference: {fileID: 21300000, guid: 4f66817dc7ef1a744a379996e671d041,
         type: 3}
     - target: {fileID: 7728331812354445377, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -2015,7 +2016,7 @@ PrefabInstance:
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.4213653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7728331812354445378, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
@@ -2062,7 +2063,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CurrentTimeline
       value: 
-      objectReference: {fileID: 11400000, guid: bce5e219af3f78c4f9e71977152c7ba9,
+      objectReference: {fileID: 11400000, guid: b458a6d3716ca96489f7794bcc0bb6d9,
         type: 2}
     - target: {fileID: 8477314744438082376, guid: cb941c738eff80e48a47613d914c2780,
         type: 3}
