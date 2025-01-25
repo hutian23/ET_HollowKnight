@@ -29,5 +29,8 @@ namespace ET.Client
         public int totalFrame;
         public int curFrame;
         public long timer;
+        
+        //相机跟随
+        public long targetTimer;
     }
 }

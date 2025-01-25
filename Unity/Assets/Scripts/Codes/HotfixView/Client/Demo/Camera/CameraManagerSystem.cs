@@ -82,6 +82,7 @@ namespace ET.Client
 
             BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
             sceneTimer.Remove(ref self.timer);
+            sceneTimer.Remove(ref self.targetTimer);
             self.shakeLength_X = 0;
             self.shakeLength_Y = 0;
             self.frequency = 0;
