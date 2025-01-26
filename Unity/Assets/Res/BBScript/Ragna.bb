@@ -421,11 +421,11 @@ BBSprite: 'Start_3', 3;
 BBSprite: 'Start_4', 3;
 BBSprite: 'Start_5', 3;
 HurtNotify: Once
-  Shake: 300, 0, 40000, 15;
+  Shake: 300, 0, 10000, 15;
   HitStop: 10, 15;
   HitParam: Shake_LengthX, 1000;
   HitParam: Shake_LengthY, 1000;
-  HitParam: Shake_Frequency, 30000;
+  HitParam: Shake_Frequency, 10000;
   HitParam: Shake_Frame, 15;
   HitParam: HitStopFrame, 15;
   HitParam: StartV_X, 280000;

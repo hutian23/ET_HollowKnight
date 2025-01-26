@@ -25,8 +25,8 @@ namespace ET.Client
             //1. 振幅
             Vector2 shakePos = new Vector2(shakeLength_X, shakeLength_Y) * 
                     new Vector2(_ran.Next(60, 120), _ran.Next(60, 120)) / 100f * // 噪声 
-                    new Vector2(Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame), 
-                                Mathf.Sin(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame));
+                    new Vector2(Mathf.Cos(curFrame * frequency ) * (curFrame / (float)totalFrame), 
+                                Mathf.Sin(curFrame * frequency ) * (curFrame / (float)totalFrame));
             b2Body.UpdateFlag = true;
             b2Body.offset = shakePos;
             

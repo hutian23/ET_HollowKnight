@@ -11,7 +11,7 @@ namespace ET.Client
         public long startFrame;
         public object Object;
         public long Frame; // 持续的帧数
-        public int Type; //战斗中的事件 具体见TODTimeInvokeType
+        public int Type; //战斗中的事件 具体见BBTimeInvokeType
 
         public static BBTimerAction Create(long id, TimerClass timerClass, long startFrame, long frame, int type, object obj)
         {

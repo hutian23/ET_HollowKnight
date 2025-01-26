@@ -100,7 +100,7 @@ BeginLoop: (InAir: true)
   EndLoop:
 SetVelocityX: 0;
 BBSprite: 'Frame_10', 3;
-ScreenShakeX: 950, 950, 38000, 10;
+ScreenShakeX: 950, 950, 18000, 10;
 BBSprite: 'Frame_11', 3;
 BBSprite: 'Frame_12', 3;
 BBSprite: 'Frame_13', 3;

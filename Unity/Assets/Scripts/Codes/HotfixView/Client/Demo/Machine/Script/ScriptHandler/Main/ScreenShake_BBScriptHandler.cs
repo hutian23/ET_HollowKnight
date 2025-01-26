@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [FriendOf(typeof(CameraManager))]
-    public class ScreenShakeX_BBScriptHandler : BBScriptHandler
+    public class ScreenShake_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {

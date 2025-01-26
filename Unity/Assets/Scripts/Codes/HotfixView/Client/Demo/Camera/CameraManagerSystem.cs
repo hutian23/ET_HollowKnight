@@ -19,8 +19,8 @@ namespace ET.Client
             int curFrame = CameraManager.instance.curFrame;
             long timer = CameraManager.instance.timer;
             CameraManager.instance.MainCamera.transform.position = CameraManager.instance.Position + 
-                    new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame), 
-                                shakeLength_Y * Mathf.Sin(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame), 0);
+                    new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency) * (curFrame / (float)totalFrame), 
+                                shakeLength_Y * Mathf.Sin(curFrame * frequency) * (curFrame / (float)totalFrame), 0);
             
             curFrame--;
             if (curFrame <= 0)
