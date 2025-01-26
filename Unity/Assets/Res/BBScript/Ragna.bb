@@ -132,6 +132,7 @@ SetVelocityX: 0;
 InputBuffer: true;
 CancelWindow: Default;
 BeginIf: (LandVelocity: 400000)
+  ScreenShakeX: 0, 120, 30000, 15;
   BBSprite: 'MiddleLand_1', 3;
   BBSprite: 'MiddleLand_2', 3;
   EndIf:
@@ -420,9 +421,10 @@ BBSprite: 'Start_3', 3;
 BBSprite: 'Start_4', 3;
 BBSprite: 'Start_5', 3;
 HurtNotify: Once
-  ShakeX: 300, 40000, 15;
+  Shake: 300, 0, 40000, 15;
   HitStop: 10, 15;
-  HitParam: Shake_Length, 1000;
+  HitParam: Shake_LengthX, 1000;
+  HitParam: Shake_LengthY, 1000;
   HitParam: Shake_Frequency, 30000;
   HitParam: Shake_Frame, 15;
   HitParam: HitStopFrame, 15;

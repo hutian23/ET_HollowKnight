@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 DummyInit;
-SetPos: 0, 1100;
+SetPos: 0, 2100;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
@@ -76,7 +76,7 @@ Exit;
 
 [Dummy_Hurt3]
 @Main:
-Shake: {Self.Shake_Length}, {Self.Shake_Frequency}, {Self.Shake_Frame};
+Shake: {Self.Shake_LengthX}, {Self.Shake_LengthY}, {Self.Shake_Frequency}, {Self.Shake_Frame};
 SetVelocityX: 0;
 SetVelocityY: 0;
 Gravity: 60000;

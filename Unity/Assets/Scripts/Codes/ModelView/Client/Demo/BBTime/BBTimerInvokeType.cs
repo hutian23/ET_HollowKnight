@@ -29,10 +29,9 @@
         public const int CallbackCheckTimer = 112;
         public const int AirCheckTimer = 113;
         public const int AccelerationXTimer = 114;
-        public const int ShakeXTimer = 116;
-        public const int ShakeTimer = 117;
-        public const int ScreenShakeTimer = 118;
-        public const int CameraTargetTimer = 119;
+        public const int ShakeTimer = 115;
+        public const int ScreenShakeTimer = 116;
+        public const int CameraTargetTimer = 117;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;

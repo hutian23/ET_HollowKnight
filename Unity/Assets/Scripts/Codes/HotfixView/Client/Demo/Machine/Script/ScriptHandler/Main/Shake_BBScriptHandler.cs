@@ -14,14 +14,19 @@ namespace ET.Client
             b2Body b2Body = b2WorldManager.Instance.GetBody(unit.InstanceId);
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
 
-            float shakeLength = self.GetParam<float>("Shake_Length");
+            float shakeLength_X = self.GetParam<float>("Shake_LengthX");
+            float shakeLength_Y = self.GetParam<float>("Shake_LengthY");
             float frequency = self.GetParam<float>("Shake_Frequency");
             int curFrame = self.GetParam<int>("Shake_Frame");
             int totalFrame = self.GetParam<int>("Shake_TotalFrame");
             long timer = self.GetParam<long>("Shake_Timer");
+            System.Random _ran = new();
 
             //1. 振幅
-            Vector2 shakePos = shakeLength * new Vector2(Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame), Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame));
+            Vector2 shakePos = new Vector2(shakeLength_X, shakeLength_Y) * 
+                    new Vector2(_ran.Next(60, 120), _ran.Next(60, 120)) / 100f * // 噪声 
+                    new Vector2(Mathf.Cos(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame), 
+                                Mathf.Sin(curFrame * frequency / Mathf.PI) * (curFrame / (float)totalFrame));
             b2Body.UpdateFlag = true;
             b2Body.offset = shakePos;
             
@@ -35,7 +40,8 @@ namespace ET.Client
                 self.TryRemoveParam("Shake_Frame");
                 self.TryRemoveParam("Shake_TotalFrame");
                 self.TryRemoveParam("Shake_Frequency");
-                self.TryRemoveParam("Shake_Length");
+                self.TryRemoveParam("Shake_LengthX");
+                self.TryRemoveParam("Shake_LengthY");
                 return;
             }
             
@@ -54,17 +60,18 @@ namespace ET.Client
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"Shake: (?<ShakeLength>.*?), (?<Frequency>.*?), (?<ShakeFrame>.*?);");
+            Match match = Regex.Match(data.opLine, @"Shake: (?<ShakeLength_X>.*?), (?<ShakeLength_Y>.*?), (?<Frequency>.*?), (?<ShakeFrame>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-            if (!long.TryParse(match.Groups["ShakeLength"].Value, out long shakeLength) ||
+            if (!long.TryParse(match.Groups["ShakeLength_X"].Value, out long shakeLength_X) ||
+                !long.TryParse(match.Groups["ShakeLength_Y"].Value, out long shakeLength_Y) ||
                 !int.TryParse(match.Groups["ShakeFrame"].Value, out int shakeFrame) ||
                 !long.TryParse(match.Groups["Frequency"].Value, out long frequency))
             {
-                Log.Error($"cannot format {match.Groups["ShakeFrame"].Value} / {match.Groups["ShakeLength"].Value} / {match.Groups["Frequency"].Value} to long!!");
+                Log.Error($"cannot format {match.Groups["ShakeFrame"].Value} / {match.Groups["ShakeLength_X"].Value} / {match.Groups["ShakeLength_Y"].Value} / {match.Groups["Frequency"].Value} to long!!");
                 return Status.Failed;
             }
 
@@ -72,7 +79,8 @@ namespace ET.Client
             b2Body b2Body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
 
             //1. 初始化
-            parser.TryRemoveParam("Shake_Length");
+            parser.TryRemoveParam("Shake_LengthX");
+            parser.TryRemoveParam("Shake_LengthY");
             parser.TryRemoveParam("Shake_Frame");
             parser.TryRemoveParam("Shake_TotalFrame");
             parser.TryRemoveParam("Shake_Frequency");
@@ -85,7 +93,8 @@ namespace ET.Client
 
             //2. 注册变量
             long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.ShakeTimer, parser);
-            parser.RegistParam("Shake_Length", shakeLength / 10000f);
+            parser.RegistParam("Shake_LengthX", shakeLength_X / 10000f);
+            parser.RegistParam("Shake_LengthY", shakeLength_Y / 10000f);
             parser.RegistParam("Shake_Frequency", frequency / 10000f);
             parser.RegistParam("Shake_Frame", shakeFrame);
             parser.RegistParam("Shake_TotalFrame", shakeFrame);
