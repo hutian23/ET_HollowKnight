@@ -352,6 +352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 677145727}
   - {fileID: 47243163}
   - {fileID: 1843085391}
   - {fileID: 603205786}
@@ -432,7 +433,7 @@ GameObject:
   - component: {fileID: 677145727}
   - component: {fileID: 677145728}
   m_Layer: 0
-  m_Name: _VirtualCamera
+  m_Name: _Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,13 +447,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677145726}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7663811, y: -9.027507, z: 0.037935942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1393275157}
-  m_Father: {fileID: 1843085391}
+  m_Children: []
+  m_Father: {fileID: 374000357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &677145728
 MonoBehaviour:
@@ -518,56 +518,6 @@ MonoBehaviour:
     hitboxType: 6
     center: {x: 0, y: -18}
     size: {x: 115, y: 10}
---- !u!1 &1393275156
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1393275157}
-  - component: {fileID: 1393275158}
-  m_Layer: 0
-  m_Name: _Confiner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1393275157
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393275156}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.05102569, y: -6.8610296, z: 0.3323346}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 677145727}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1393275158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393275156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6899cf270ea44770ac76d099e190c859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsTrigger: 1
-  info:
-    boxName: Confiner
-    hitboxType: 7
-    center: {x: 0, y: 10}
-    size: {x: 95, y: 55}
 --- !u!1 &1843085390
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,8 +546,7 @@ Transform:
   m_LocalPosition: {x: 0.7663811, y: -9.027507, z: 0.037935942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 677145727}
+  m_Children: []
   m_Father: {fileID: 374000357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934795119
