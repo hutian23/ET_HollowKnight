@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(BehaviorInfo))]
-    public class HurtNotify_HitStun_BBScriptHandler : BBScriptHandler
+    public class HitNotify_HitStun_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
@@ -22,7 +22,7 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-            CollisionInfo info = parser.GetParam<CollisionInfo>("HurtNotify_CollisionInfo");
+            CollisionInfo info = parser.GetParam<CollisionInfo>("HitNotify_CollisionInfo");
             b2Body body = Root.Instance.Get(info.dataB.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(body.unitId) as Unit;
             BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();

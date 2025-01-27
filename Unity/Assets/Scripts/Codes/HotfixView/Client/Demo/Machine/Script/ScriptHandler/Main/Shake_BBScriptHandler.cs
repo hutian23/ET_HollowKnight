@@ -21,12 +21,13 @@ namespace ET.Client
             int totalFrame = self.GetParam<int>("Shake_TotalFrame");
             long timer = self.GetParam<long>("Shake_Timer");
             System.Random _ran = new();
-
-            //1. 振幅
-            Vector2 shakePos = new Vector2(shakeLength_X, shakeLength_Y) * 
+            
+            Vector2 shakePos = new Vector2(shakeLength_X, shakeLength_Y) *  // 振幅
                     new Vector2(_ran.Next(60, 120), _ran.Next(60, 120)) / 100f * // 噪声 
-                    new Vector2(Mathf.Cos(curFrame * frequency ) * (curFrame / (float)totalFrame), 
-                                Mathf.Sin(curFrame * frequency ) * (curFrame / (float)totalFrame));
+                    new Vector2(Mathf.Cos(curFrame * frequency ) * (curFrame / (float)totalFrame), // 频率
+                                Mathf.Sin(curFrame * frequency ) * (curFrame / (float)totalFrame)); 
+            
+            //通知逻辑层更新渲染层
             b2Body.UpdateFlag = true;
             b2Body.offset = shakePos;
             

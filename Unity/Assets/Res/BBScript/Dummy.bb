@@ -80,27 +80,34 @@ Shake: {Self.Shake_LengthX}, {Self.Shake_LengthY}, {Self.Shake_Frequency}, {Self
 SetVelocityX: 0;
 SetVelocityY: 0;
 Gravity: 60000;
-BBSprite: 'Frame_1', {Self.HitStopFrame};
+# 帧冻结
+HitStop: 0, {Self.HitStopFrame};
+BBSprite: 'Frame_1', 1;
+# 击飞效果
 SetVelocityY: {Self.StartV_X};
 SetVelocityX: {Self.StartV_Y};
 BBSprite: 'Frame_2', 3;
 BBSprite: 'Frame_3', 3;
 Gravity: 120000;
+# 上升
 BeginLoop: (Velocity: Y > 100000)
   BBSprite: 'Frame_2', 3;
   BBSprite: 'Frame_3', 3;
   EndLoop:
+# 开始下落
 BBSprite: 'Frame_4', 3;
 BBSprite: 'Frame_5', 3;
 BBSprite: 'Frame_6', 3;
 BBSprite: 'Frame_7', 3;
+# 下落
 BeginLoop: (InAir: true)
   BBSprite: 'Frame_8', 3;
   BBSprite: 'Frame_9', 3;
   EndLoop:
 SetVelocityX: 0;
-BBSprite: 'Frame_10', 3;
-ScreenShakeX: 950, 950, 18000, 10;
+BBSprite: 'Frame_10', 2;
+ScreenShake: 750, 750, 18000, 10; # 落地之后模拟弹地效果
+BBSprite: 'Frame_10', 1;
 BBSprite: 'Frame_11', 3;
 BBSprite: 'Frame_12', 3;
 BBSprite: 'Frame_13', 3;

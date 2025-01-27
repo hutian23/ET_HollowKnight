@@ -20,8 +20,8 @@ namespace ET.Client
             int count = infoQueue.Count;
 
             //缓冲已经调用过受击回调的unit
-            HashSetComponent<long> buffSet = self.GetParam<HashSetComponent<long>>("HurtNotify_BuffSet");
-            string checkType = self.GetParam<string>("HurtNotify_CheckType");
+            HashSetComponent<long> buffSet = self.GetParam<HashSetComponent<long>>("HitNotify_BuffSet");
+            string checkType = self.GetParam<string>("HitNotify_CheckType");
 
             while (count-- > 0)
             {
@@ -41,23 +41,23 @@ namespace ET.Client
                 buffSet.Add(unit.InstanceId);
 
                 //调用受击回调
-                int startIndex = self.GetParam<int>("HurtNotify_StartIndex");
-                int endIndex = self.GetParam<int>("HurtNotify_EndIndex");
+                int startIndex = self.GetParam<int>("HitNotify_StartIndex");
+                int endIndex = self.GetParam<int>("HitNotify_EndIndex");
                 
                 //注册变量供代码块使用
-                self.RegistParam("HurtNotify_CollisionInfo", info);
+                self.RegistParam("HitNotify_CollisionInfo", info);
                 self.RegistSubCoroutine(startIndex, endIndex, self.CancellationToken).Coroutine();
-                self.TryRemoveParam("HurtNotify_CollisionInfo");
+                self.TryRemoveParam("HitNotify_CollisionInfo");
             }
         }
     }
 
     [FriendOf(typeof(BBParser))]
-    public class HurtNotify_BBScriptHandler : BBScriptHandler
+    public class HitNotify_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "HurtNotify";
+            return "HitNotify";
         }
 
         //Once: 在判定框持续持续窗口内，对于同一unit只会产生1hit
@@ -65,7 +65,7 @@ namespace ET.Client
         //HurtNotify: Once;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"HurtNotify: (?<CheckType>\w+)");
+            Match match = Regex.Match(data.opLine, @"HitNotify: (?<CheckType>\w+)");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -74,22 +74,22 @@ namespace ET.Client
             
             //1. 初始化
             BBTimerComponent postStepTimer = b2WorldManager.Instance.GetPostStepTimer();
-            if (parser.ContainParam("HurtNotifyCheckTimer"))
+            if (parser.ContainParam("HitNotifyCheckTimer"))
             {
-                long preTimer = parser.GetParam<long>("HurtNotifyCheckTimer");
+                long preTimer = parser.GetParam<long>("HitNotifyCheckTimer");
                 postStepTimer.Remove(ref preTimer);
             }
-            if (parser.ContainParam("HurtNotify_BuffSet"))
+            if (parser.ContainParam("HitNotify_BuffSet"))
             {
                 //对象池回收
-                HashSetComponent<long> buffSet = parser.GetParam<HashSetComponent<long>>("HurtNotify_BuffSet");
+                HashSetComponent<long> buffSet = parser.GetParam<HashSetComponent<long>>("HitNotify_BuffSet");
                 buffSet.Dispose();
             }
-            parser.TryRemoveParam("HurtNotifyCheckTimer");
-            parser.TryRemoveParam("HurtNotify_StartIndex");
-            parser.TryRemoveParam("HurtNotify_EndIndex");
-            parser.TryRemoveParam("HurtNotify_CheckType");
-            parser.TryRemoveParam("HurtNotify_BuffSet");
+            parser.TryRemoveParam("HitNotifyCheckTimer");
+            parser.TryRemoveParam("HitNotify_StartIndex");
+            parser.TryRemoveParam("HitNotify_EndIndex");
+            parser.TryRemoveParam("HitNotify_CheckType");
+            parser.TryRemoveParam("HitNotify_BuffSet");
             
             //2. 跳过代码块
             int index = parser.Coroutine_Pointers[data.CoroutineID];
@@ -108,11 +108,11 @@ namespace ET.Client
             //3. 
             long timer = postStepTimer.NewFrameTimer(BBTimerInvokeType.HurtNotifyTimer, parser);
             HashSetComponent<long> _buffSet = HashSetComponent<long>.Create();
-            parser.RegistParam("HurtNotifyCheckTimer", timer);
-            parser.RegistParam("HurtNotify_StartIndex", startIndex);
-            parser.RegistParam("HurtNotify_EndIndex", endIndex);
-            parser.RegistParam("HurtNotify_CheckType", match.Groups["CheckType"].Value);
-            parser.RegistParam("HurtNotify_BuffSet", _buffSet);
+            parser.RegistParam("HitNotifyCheckTimer", timer);
+            parser.RegistParam("HitNotify_StartIndex", startIndex);
+            parser.RegistParam("HitNotify_EndIndex", endIndex);
+            parser.RegistParam("HitNotify_CheckType", match.Groups["CheckType"].Value);
+            parser.RegistParam("HitNotify_BuffSet", _buffSet);
             
             //4. 退出行为协程，初始化
             token.Add(() =>

@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 PlayerInit;
-CameraTarget;
+# CameraTarget;
 SetPos: 3000, 10000;
 Gravity: 100000;
 # Numeric
@@ -58,10 +58,10 @@ RegistMove: (Rg_Jump)
 RegistMove: (Rg_5B)
   MoveType: Normal;
   EndMove:
-RegistMove: (Rg_5C)
+RegistMove: (Rg_6P)
   MoveType: Normal;
   EndMove:
-RegistMove: (Rg_6P)
+RegistMove: (Rg_5C)
   MoveType: Normal;
   EndMove:
 RegistMove: (Rg_AirDash)
@@ -132,7 +132,7 @@ SetVelocityX: 0;
 InputBuffer: true;
 CancelWindow: Default;
 BeginIf: (LandVelocity: 400000)
-  ScreenShakeX: 0, 120, 30000, 15;
+  # ScreenShakeX: 0, 120, 30000, 15;
   BBSprite: 'MiddleLand_1', 3;
   BBSprite: 'MiddleLand_2', 3;
   EndIf:
@@ -312,9 +312,9 @@ Exit;
 
 [Rg_5C]
 @Trigger: 
-InputType: 5LPPressed;
+InputType: 2LPPressed;
 InAir: false;
-CancelOption: 'Rg_5C';
+# CancelOption: 'Rg_5C';
 return;
 
 @Main:
@@ -407,6 +407,7 @@ BBSprite: 'Attack_11', 3;
 BBSprite: 'Attack_12', 3;
 Exit;
 
+
 [Rg_6P]
 @Trigger:
 InAir: false;
@@ -420,19 +421,26 @@ BBSprite: 'Start_2', 3;
 BBSprite: 'Start_3', 3;
 BBSprite: 'Start_4', 3;
 BBSprite: 'Start_5', 3;
-HurtNotify: Once
-  Shake: 300, 0, 10000, 15;
-  HitStop: 10, 15;
-  HitParam: Shake_LengthX, 1000;
-  HitParam: Shake_LengthY, 1000;
+# 这里开始，受击回调
+HitNotify: Once # 对于同一对象，在持续帧内仅造成一次攻击(Repeat则为持续帧内，只要发生碰撞，每帧都会回调受击回调)
+  Shake: 500, 0, 8000, 15; # 振动
+  HitStop: 0, 10; # 打击停顿
+  # 受击行为协程需要使用的变量
+  HitParam: Shake_LengthX, 1200;
+  HitParam: Shake_LengthY, 1200;
   HitParam: Shake_Frequency, 10000;
   HitParam: Shake_Frame, 15;
-  HitParam: HitStopFrame, 15;
+  # 受击者帧冻结(HitStop)的总帧长
+  HitParam: HitStopFrame, 10;
+  # HitStop结束后抛出的速度
   HitParam: StartV_X, 280000;
   HitParam: StartV_Y, -35000;
+  # 受击时调整转向
   Hit_UpdateFlip;
+  # 受击者进入哪个硬直状态
   HitStun: Hurt3;
   EndNotify:
+# 攻击判定的持续帧
 BBSprite: 'Active_1', 4;
 BBSprite: 'Recovery_1', 3;
 BBSprite: 'Recovery_2', 3;
