@@ -55,11 +55,12 @@ namespace ET.Client
         {
             protected override void Update(CameraManager self)
             {
-                self.CheckZoom();
+                // self.CheckZoom();
                 self.CheckResize();
                 // self.CheckMouseDown();
                 // self.CheckMouseMove();
                 self.CheckKeyDown();
+                // self.MainCamera.transform.position = self.Position;
             }
         }
         
@@ -177,42 +178,42 @@ namespace ET.Client
 
         #region MouseControl
 
-        // private static void CheckMouseDown(this CameraManager self)
-        // {
-        //     var mouse = Mouse.current;
-        //     var mousePosition = Mouse.current.position.ReadValue();
-        //
-        //     //Drag
-        //     if (mouse.rightButton.isPressed)
-        //     {
-        //         self.Difference = self.MainCamera.ScreenToWorldPoint(mousePosition) - self.Position;
-        //         if (!self.Drag)
-        //         {
-        //             self.Drag = true;
-        //             self.Origin = self.MainCamera.ScreenToWorldPoint(mousePosition);
-        //         }
-        //     }
-        //     else
-        //     {
-        //         self.Drag = false;
-        //     }
-        // }
-        //
-        // private static void CheckMouseMove(this CameraManager self)
-        // {
-        //     if (Mouse.current.rightButton.isPressed)
-        //     {
-        //         var delta = Mouse.current.delta.ReadValue();
-        //         Global.Camera.Center.X -= delta.x * 0.05f * Global.Camera.Zoom;
-        //         Global.Camera.Center.Y += delta.y * 0.05f * Global.Camera.Zoom;
-        //     }
-        //
-        //     if (self.Drag)
-        //     {
-        //         self.Position = self.Origin - self.Difference;
-        //     }
-        // }
-        //
+        private static void CheckMouseDown(this CameraManager self)
+        {
+            var mouse = Mouse.current;
+            var mousePosition = Mouse.current.position.ReadValue();
+        
+            //Drag
+            if (mouse.rightButton.isPressed)
+            {
+                self.Difference = self.MainCamera.ScreenToWorldPoint(mousePosition) - self.Position;
+                if (!self.Drag)
+                {
+                    self.Drag = true;
+                    self.Origin = self.MainCamera.ScreenToWorldPoint(mousePosition);
+                }
+            }
+            else
+            {
+                self.Drag = false;
+            }
+        }
+        
+        private static void CheckMouseMove(this CameraManager self)
+        {
+            if (Mouse.current.rightButton.isPressed)
+            {
+                var delta = Mouse.current.delta.ReadValue();
+                Global.Camera.Center.X -= delta.x * 0.05f * Global.Camera.Zoom;
+                Global.Camera.Center.Y += delta.y * 0.05f * Global.Camera.Zoom;
+            }
+        
+            if (self.Drag)
+            {
+                self.Position = self.Origin - self.Difference;
+            }
+        }
+        
         #endregion
 
         #region KeyControl

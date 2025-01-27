@@ -1,8 +1,7 @@
 [Root]
 @RootInit:
 PlayerInit;
-# CameraTarget;
-SetPos: 3000, 10000;
+SetPos: 0, 10000;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;

@@ -1,8 +1,9 @@
-﻿using System.Numerics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using Timeline;
+using UnityEngine;
+using Vector2 = System.Numerics.Vector2;
 
 namespace ET.Client
 {
@@ -29,11 +30,11 @@ namespace ET.Client
                 Log.Error($"cannot format to long!");
                 return Status.Failed;
             }
-            
-            parser.TryRemoveParam("VC_Confiner_Center");
-            parser.TryRemoveParam("VC_Confiner_Size");
-            parser.RegistParam("VC_Confiner_Center", new Vector2(centerX, centerY) / 10000f);
-            parser.RegistParam("VC_Confiner_Size", new Vector2(sizeX, sizeY) / 10000f);
+
+            parser.TryRemoveParam("VC_Confiner_Rect");
+            parser.RegistParam("VC_Confiner_Rect", 
+                new Rect(new UnityEngine.Vector2(centerX - sizeX / 2f, centerY - sizeY / 2f) / 10000f,
+                            new UnityEngine.Vector2(sizeX,sizeY) / 10000f));
             
             //1. Gizmos
             b2Body body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
@@ -58,7 +59,6 @@ namespace ET.Client
                 }
             };
             body.CreateFixture(def);
-            
             
             await ETTask.CompletedTask;
             return Status.Success;
