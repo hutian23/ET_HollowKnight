@@ -1,4 +1,7 @@
-﻿using Box2DSharp.Dynamics;
+﻿using System.Numerics;
+using Box2DSharp.Collision.Shapes;
+using Box2DSharp.Common;
+using Box2DSharp.Dynamics;
 using ET.Event;
 using Testbed.Abstractions;
 using Camera = UnityEngine.Camera;
@@ -165,6 +168,11 @@ namespace ET.Client
         public static bool IsLocked(this b2WorldManager self)
         {
             return self.B2World.IsLocked;
+        }
+
+        public static void DrawShape(this b2WorldManager self, Shape shape, Vector2 position, float angle, Color color)
+        {
+            self.B2World.DrawShape(shape, Vector2.Zero, 0f, color);
         }
     }
 }

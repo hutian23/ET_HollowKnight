@@ -102,6 +102,7 @@ namespace ET
                         ImGui.Checkbox("Contact Impulses", ref Global.Settings.DrawContactImpulse);
                         ImGui.Checkbox("Friction Impulses", ref Global.Settings.DrawFrictionImpulse);
                         ImGui.Checkbox("Center of Masses", ref Global.Settings.DrawCOMs);
+                        ImGui.Checkbox("Draw GizmosUpdate", ref Global.Settings.DrawGizmos);
                         ImGui.Checkbox("Statistics", ref Global.Settings.DrawStats);
                         ImGui.Checkbox("Profile", ref Global.Settings.DrawProfile);
 
@@ -144,7 +145,7 @@ namespace ET
                             ImGui.Checkbox("ThrowBox", ref Global.Settings.ShowThrowBox);
                             ImGui.Checkbox("ProximityBox", ref Global.Settings.ShowProximityBox);
                             ImGui.Checkbox("OtherBox", ref Global.Settings.ShowOtherBox);
-                            ImGui.Checkbox("Gizmos", ref Global.Settings.ShowGizmos);
+                            ImGui.Checkbox("GizmosUpdate", ref Global.Settings.ShowGizmos);
                             ImGui.EndTabItem();
                         }
                     }

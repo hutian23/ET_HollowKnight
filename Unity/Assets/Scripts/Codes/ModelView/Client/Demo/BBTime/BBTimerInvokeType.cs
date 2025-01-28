@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [UniqueId(0, 1000)]
+    [UniqueId(0, 10000)]
     public static class BBTimerInvokeType
     {
         public const int None = 0;
@@ -32,6 +32,7 @@
         public const int ShakeTimer = 115;
         public const int ScreenShakeTimer = 116;
         public const int CameraFollowTimer = 117;
+        public const int CameraDeadZoneTimer = 118;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;
@@ -40,5 +41,6 @@
 
         public const int ThronesTestTimer = 700;
 
+        public const int CameraGizmosTimer = 2001;
     }
 }

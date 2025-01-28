@@ -11,6 +11,7 @@
         PreStep,
         PostStep,
         FrameUpdate,
+        GizmosUpdate,
 #endif
         Max,
     }

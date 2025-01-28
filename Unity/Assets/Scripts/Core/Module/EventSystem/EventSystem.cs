@@ -544,6 +544,46 @@ namespace ET
         }
 
 #if !DOTNET
+        public void GizmosUpdate()
+        {
+            Queue<long> queue = queues[(int)InstanceQueueIndex.GizmosUpdate];
+            int count = queue.Count;
+            
+            while (count-- > 0)
+            {
+                long instanceId = queue.Dequeue();
+                Entity component = Root.Instance.Get(instanceId);
+                if (component == null)
+                {
+                    continue;
+                }
+
+                if (component.IsDisposed)
+                {
+                    continue;
+                }
+
+                List<object> iGizmosUpdateSystems = typeSystems.GetSystems(component.GetType(), typeof (IGizmosUpdateSystem));
+                if (iGizmosUpdateSystems == null)
+                {
+                    continue;
+                }
+                queue.Enqueue(instanceId);
+
+                foreach (IGizmosUpdateSystem iGizmosUpdateSystem in iGizmosUpdateSystems)
+                {
+                    try
+                    {
+                        iGizmosUpdateSystem.Run(component);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
+                }
+            }
+        }
+        
         public void FixedUpdate()
         {
             Queue<long> queue = this.queues[(int)InstanceQueueIndex.FixedUpdate];

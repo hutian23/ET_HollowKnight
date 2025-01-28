@@ -33,6 +33,8 @@ namespace Box2DSharp.Common
         /// <summary>
         /// draw body contact point
         /// </summary>
-        DrawContactPoint = 1 << 5
+        DrawContactPoint = 1 << 5,
+        
+        DraGizmos = 1 << 6
     }
 }

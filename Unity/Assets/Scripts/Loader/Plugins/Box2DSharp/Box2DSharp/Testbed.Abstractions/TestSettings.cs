@@ -102,6 +102,9 @@ namespace Testbed.Abstractions
         public bool DrawFrictionImpulse;
 
         [DataMember]
+        public bool DrawGizmos;
+
+        [DataMember]
         public bool DrawCOMs;
 
         [DataMember]

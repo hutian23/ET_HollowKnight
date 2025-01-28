@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
@@ -16,7 +17,8 @@ namespace ET
     public class b2World: TestBase
     {
         private b2Game Game;
-
+        private readonly Queue<GizmosInfo> GizmosInfoQueue = new();
+        
         //限制执行碰撞事件期间不能增删夹具
         public bool IsLocked;
         
@@ -37,6 +39,7 @@ namespace ET
         {
             Game.PreRenderCallback -= DrawB2World;
             Game = null;
+            GizmosInfoQueue.Clear();
         }
 
         public new void Step()
@@ -66,6 +69,8 @@ namespace ET
             
             IsLocked = false;
             EventSystem.Instance.Invoke(new PostStepCallback());
+            
+            //FrameUpdate期间添加绘制曲线， PostStep中清空绘制的曲线(否则会出现曲线闪烁的问题)
         }
         
         public override void BeginContact(Contact contact)
@@ -125,9 +130,14 @@ namespace ET
                 flags |= DrawFlag.DrawContactPoint;
             }
 
+            if (TestSettings.DrawGizmos)
+            {
+                flags |= DrawFlag.DraGizmos;
+            }
+
             Draw.Flags = flags;
-            // World.DebugDraw();
             DebugDraw();
+            
             if (TestSettings.DrawContactPoints)
             {
                 const float ImpulseScale = 0.1f;
@@ -295,6 +305,18 @@ namespace ET
                     World.Draw.DrawTransform(xf);
                 }
             }
+
+            if (flags.IsSet(DrawFlag.DraGizmos))
+            {
+                EventSystem.Instance.GizmosUpdate();
+                int count = GizmosInfoQueue.Count;
+                while (count -- > 0)
+                {
+                    GizmosInfo info = GizmosInfoQueue.Dequeue();
+                    DrawShape(info);
+                }
+                GizmosInfoQueue.Clear();
+            }
         }
 
         private void DrawShape(Fixture fixture, in Transform xf)
@@ -373,6 +395,76 @@ namespace ET
             }
         }
 
+        private void DrawShape(GizmosInfo _info)
+        {
+            Shape shape = _info.Shape;
+            Transform xf = _info.Transform;
+            Color color = _info.Color;
+            
+            switch (shape)
+            {
+                case CircleShape circle:
+                {
+                    Vector2 center = MathUtils.Mul(xf, circle.Position);
+                    float radius = circle.Radius;
+                    //Calculate rotation
+                    Vector2 axis = MathUtils.Mul(xf.Rotation, new Vector2(1.0f, 0.0f));
+                    World.Draw.DrawSolidCircle(center, radius, axis, color);
+                    break;
+                }
+                case EdgeShape edge:
+                {
+                    Vector2 v1 = MathUtils.Mul(xf, edge.Vertex1);
+                    Vector2 v2 = MathUtils.Mul(xf, edge.Vertex2);
+                    World.Draw.DrawSegment(v1, v2, color);
+
+                    if (!edge.OneSided)
+                    {
+                        World.Draw.DrawPoint(v1, 4.0f, color);
+                        World.Draw.DrawPoint(v2, 4.0f, color);
+                    }
+
+                    break;
+                }
+                case ChainShape chain:
+                {
+                    int count = chain.Count;
+                    Vector2[] vertices = chain.Vertices;
+
+                    Vector2 v1 = MathUtils.Mul(xf, vertices[0]);
+                    for (int i = 0; i < count; i++)
+                    {
+                        Vector2 v2 = MathUtils.Mul(xf, vertices[i]);
+                        World.Draw.DrawSegment(v1, v2, color);
+                        v1 = v2;
+                    }
+
+                    break;
+                }
+                case PolygonShape poly:
+                {
+                    int vertexCount = poly.Count;
+                    Debug.Assert(vertexCount <= Settings.MaxPolygonVertices);
+                    Span<Vector2> vertices = stackalloc Vector2[vertexCount];
+
+                    for (int i = 0; i < vertexCount; i++)
+                    {
+                        vertices[i] = MathUtils.Mul(xf, poly.Vertices[i]);
+                    }
+                    
+                    World.Draw.DrawSolidPolygon(vertices, vertexCount, color);
+                    break;
+                }
+            }
+        }
+
+        public void DrawShape(Shape shape, Vector2 position, float angle, Color color = default)
+        {
+            Transform _trans = new (position, angle * Mathf.Deg2Rad);
+            GizmosInfo _info = new (){ Shape = shape, Transform = _trans, Color = color};
+            GizmosInfoQueue.Enqueue(_info);
+        }
+        
         #endregion
     }
 
@@ -398,5 +490,12 @@ namespace ET
     public struct PreSolveCallback
     {
         public Contact Contact;
+    }
+
+    public struct GizmosInfo
+    {
+        public Shape Shape;
+        public Transform Transform;
+        public Color Color;
     }
 }

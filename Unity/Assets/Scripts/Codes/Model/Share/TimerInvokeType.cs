@@ -23,5 +23,7 @@
 
         public const int BehaviorBufferTimer = 305;
         public const int SingleTimer = 306;
+
+        public const int CameraGizmosTimer = 1001;
     }
 }

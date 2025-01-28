@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [ComponentOf(typeof(Scene))]
-    public class CameraManager : Entity,IAwake,IDestroy, ILoad, IUpdate, IPostStep
+    public class CameraManager : Entity,IAwake,IDestroy, ILoad, IUpdate, IPostStep, IGizmosUpdate
     {
         [StaticField]
         public static CameraManager instance;
