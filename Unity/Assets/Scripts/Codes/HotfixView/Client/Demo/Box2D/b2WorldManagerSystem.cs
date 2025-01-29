@@ -174,5 +174,10 @@ namespace ET.Client
         {
             self.B2World.DrawShape(shape, position, angle, color);
         }
+
+        public static void DrawPoint(this b2WorldManager self, Vector2 point, float size, Color color)
+        {
+            self.B2World.Draw.DrawPoint(point, size, color);
+        }
     }
 }

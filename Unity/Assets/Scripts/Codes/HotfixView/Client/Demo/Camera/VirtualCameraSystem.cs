@@ -1,5 +1,4 @@
 ﻿using Box2DSharp.Collision.Shapes;
-using MongoDB.Bson;
 using UnityEngine;
 using Color = Box2DSharp.Common.Color;
 using Vector2 = System.Numerics.Vector2;
@@ -27,13 +26,18 @@ namespace ET.Client
                 Rect DZ_rect = parser.GetParam<Rect>("VC_DeadZone_Rect");
                 PolygonShape shape = new();
                 shape.SetAsBox(DZ_rect.size.x / 2, DZ_rect.size.y / 2, new Vector2(DZ_rect.center.x, DZ_rect.center.y), 0f);
-                b2WorldManager.Instance.DrawShape(shape, Vector2.Zero, 0f, Color.Cyan);
+                b2WorldManager.Instance.DrawShape(shape, Vector2.Zero, 0f, Color.Red);
                 
-                // //SoftZone
-                // Rect SZ_Rect = parser.GetParam<Rect>("VC_SoftZone_Rect");
-                // PolygonShape shape2 = new();
-                // shape.SetAsBox(SZ_Rect.size.x / 2f, SZ_Rect.size.y / 2f, new Vector2(SZ_Rect.center.x, SZ_Rect.center.y), 0f);
-                // b2WorldManager.Instance.DrawShape(shape2, Vector2.Zero, 0f, Color.Cyan);
+                //center point
+                Unit unit = Root.Instance.Get(parser.GetParam<long>("VC_Follow_Id")) as Unit;
+                Vector3 center = unit.GetComponent<GameObjectComponent>().GameObject.transform.position;
+                b2WorldManager.Instance.DrawPoint(new Vector2(center.x, center.y),8f, Color.Yellow);
+                
+                //SoftZone
+                Rect SZ_Rect = parser.GetParam<Rect>("VC_SoftZone_Rect");
+                PolygonShape shape2 = new();
+                shape2.SetAsBox(SZ_Rect.size.x / 2f, SZ_Rect.size.y / 2f, new Vector2(SZ_Rect.center.x, SZ_Rect.center.y), 0f);
+                b2WorldManager.Instance.DrawShape(shape2, Vector2.Zero, 0f, Color.Cyan);
             }
         }
     }
