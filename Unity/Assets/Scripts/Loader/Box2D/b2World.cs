@@ -458,7 +458,7 @@ namespace ET
             }
         }
 
-        public void DrawShape(Shape shape, Vector2 position, float angle, Color color = default)
+        public void DrawShape(Shape shape, Vector2 position, float angle, Color color)
         {
             Transform _trans = new (position, angle * Mathf.Deg2Rad);
             GizmosInfo _info = new (){ Shape = shape, Transform = _trans, Color = color};

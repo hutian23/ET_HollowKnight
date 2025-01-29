@@ -8,11 +8,8 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
-            long unitId = self.GetParam<long>("VC_Follow_Id");
-            Unit unit = Root.Instance.Get(unitId) as Unit;
-            GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
-
-            Camera.main.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, -10);
+            Rect deadZoneRect = self.GetParam<Rect>("VC_DeadZone_Rect");
+            Camera.main.transform.position = new Vector3(deadZoneRect.center.x, deadZoneRect.center.y, -10);
             
             //1. 设置了相机边界
             if (self.ContainParam("VC_Confiner_Rect"))

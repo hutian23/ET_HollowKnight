@@ -127,7 +127,7 @@ namespace ET.Client
         /// </summary>
         /// <param name="self"></param>
         /// <param name="instanceId">Unit.InstanceId</param>
-        public static void DestroyBody(this b2WorldManager self, long instanceId)
+        private static void DestroyBody(this b2WorldManager self, long instanceId)
         {
             b2Body b2Body = self.GetBody(instanceId);
             if (b2Body == null) return;
@@ -172,7 +172,7 @@ namespace ET.Client
 
         public static void DrawShape(this b2WorldManager self, Shape shape, Vector2 position, float angle, Color color)
         {
-            self.B2World.DrawShape(shape, Vector2.Zero, 0f, color);
+            self.B2World.DrawShape(shape, position, angle, color);
         }
     }
 }
