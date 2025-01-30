@@ -2,17 +2,16 @@
 
 namespace ET.Client
 {
-    public class VC_Damping_BBScriptHandler : BBScriptHandler
+    public class VC_EdgeSpeed_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "VC_Damping";
+            return "VC_EdgeSpeed";
         }
 
-        //VC_Damping: 40000, 10000;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "VC_Damping: (?<CenterX>.*?), (?<CenterY>.*?);");
+            Match match = Regex.Match(data.opLine, "VC_EdgeSpeed: (?<CenterX>.*?), (?<CenterY>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -25,12 +24,12 @@ namespace ET.Client
                 return Status.Failed;
             }
             //1. 初始化
-            parser.TryRemoveParam("VC_Damping_X");
-            parser.TryRemoveParam("VC_Damping_Y");
+            parser.TryRemoveParam("VC_EdgeSpeed_X");
+            parser.TryRemoveParam("VC_EdgeSpeed_Y");
             //2. 注册变量
-            parser.RegistParam("VC_Damping_X", centerX / 10000f);
-            parser.RegistParam("VC_Damping_Y", centerY / 10000f);
-           
+            parser.RegistParam("VC_EdgeSpeed_X", centerX / 10000f);
+            parser.RegistParam("VC_EdgeSpeed_Y", centerY / 10000f);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

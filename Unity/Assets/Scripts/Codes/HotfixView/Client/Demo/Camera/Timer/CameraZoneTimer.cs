@@ -31,34 +31,82 @@ namespace ET.Client
             self.UpdateParam("VC_DeadZone_Rect", deadZone);
             self.UpdateParam("VC_SoftZone_Rect", softZone);
 
-            if (deadZone.Contains(center))
+            // 更新锚点
+            if (deadZone.xMin >= center.x && deadZone.xMax <= center.x && deadZone.yMin >= center.y && deadZone.yMax <= center.y) return;
+            
+            Vector2 prePos = deadZone.position, curPos = prePos;
+            //1. X
             {
-                return;
+                float dampingX = self.GetParam<float>("VC_Damping_X");
+                // 在softZone区间
+                if ((center.x < deadZone.xMin && center.x >= softZone.xMin) ||
+                    (center.x > deadZone.xMax && center.x <= softZone.xMax))
+                {
+                    float targetX = prePos.x;
+                    if (center.x <= deadZone.xMin)
+                    {
+                        targetX = center.x;
+                    }
+                    else if (center.x >= deadZone.xMax)
+                    {
+                        targetX = center.x - deadZone.size.x;
+                    }
+
+                    curPos.x = Mathf.Lerp(prePos.x, targetX, dampingX * 1 / 60f);
+                }
+                //超出softZone区间
+                else
+                {
+                    float softX = softZone.xMin;
+                    if (center.x <= softZone.xMin)
+                    {
+                        softX = center.x;
+                    }
+                    else if (center.x >= softZone.xMax)
+                    {
+                        softX = center.x - softZone.size.x;
+                    }
+                    
+                    curPos.x = prePos.x + (softX - softZone.xMin);
+                }
+            }
+            //2. Y
+            {
+                float dampingY = self.GetParam<float>("VC_Damping_Y");
+                // 在softZone区间
+                if ((center.y < deadZone.yMin && center.y >= softZone.yMin) ||
+                    (center.y > deadZone.yMax && center.y <= softZone.yMax))
+                {
+                    float targetY = prePos.y;
+                    if (center.y <= deadZone.yMin)
+                    {
+                        targetY = center.y;
+                    }
+                    else if (center.y >= deadZone.yMax)
+                    {
+                        targetY = center.y - deadZone.size.y;
+                    }
+
+                    curPos.y = Mathf.Lerp(prePos.y, targetY, dampingY * 1 / 60f);
+                }
+                //超出softZone区间
+                else
+                {
+                    float softY = softZone.yMin;
+                    if (center.y <= softZone.yMin)
+                    {
+                        softY = center.y;
+                    }
+                    else if (center.y >= softZone.yMax)
+                    {
+                        softY = center.y - softZone.size.y;
+                    }
+                    
+                    curPos.y = prePos.y + (softY - softZone.yMin);
+                }
             }
             
-            //2. 目标脱出deadZone，调整deadZone锚点
-            Vector2 position = deadZone.position;
-                
-            // x
-            if (center.x < deadZone.xMin)
-            {
-                position.x = center.x;
-            }
-            else if (center.x > deadZone.xMax)
-            {
-                position.x = center.x - deadZone.size.x;
-            }
-                
-            // y
-            if(center.y < deadZone.yMin)
-            {
-                position.y = center.y;
-            }
-            else if (center.y > deadZone.yMax)
-            { 
-                position.y = center.y - deadZone.size.y;
-            }
-            deadZone = new Rect(position, new Vector2(halfSizeX, halfSizeY) * 2);
+            deadZone = new Rect(curPos, new Vector2(halfSizeX, halfSizeY) * 2);
             softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY), new Vector2(_halfSizeX, _halfSizeY) * 2);
             self.UpdateParam("VC_DeadZone_Rect", deadZone);
             self.UpdateParam("VC_SoftZone_Rect", softZone);

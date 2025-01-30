@@ -29,10 +29,10 @@ namespace ET.Client
             }
         }
         
-        public class BBTimerManagerLateUpdateSystem : LateUpdateSystem<BBTimerManager>
+        public class BBTimerManagerFrameLateUpdateSystem : FrameLateUpdateSystem<BBTimerManager>
         {
-            protected override void LateUpdate(BBTimerManager self)
-            {
+            protected override void FrameLateUpdate(BBTimerManager self)
+            { 
                 self.LateUpdateTimer().Step();
             }
         }
@@ -79,7 +79,7 @@ namespace ET.Client
                 //4. 物理层 PreStep PostStep生命周期事件
                 b2WorldManager.Instance.Step();
                 //5. LateUpdate生命周期事件
-                EventSystem.Instance.LateUpdate();
+                EventSystem.Instance.FrameLateUpdate();
             }
         }
 

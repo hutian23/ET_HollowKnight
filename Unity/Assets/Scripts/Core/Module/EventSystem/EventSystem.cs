@@ -743,6 +743,45 @@ namespace ET
                 }
             }
         }
+
+        public void FrameLateUpdate()
+        {
+            Queue<long> queue = queues[(int)InstanceQueueIndex.FrameLateUpdate];
+            int count = queue.Count;
+            while (count-- > 0)
+            {
+                long instanceId = queue.Dequeue();
+                Entity component = Root.Instance.Get(instanceId);
+                if (component == null)
+                {
+                    continue;
+                }
+
+                if (component.IsDisposed)
+                {
+                    continue;
+                }
+
+                List<object> iFrameLateUpdateSystems = typeSystems.GetSystems(component.GetType(), typeof (IFrameLateUpdateSystem));
+                if (iFrameLateUpdateSystems == null)
+                {
+                    continue;
+                }
+                queue.Enqueue(instanceId);
+
+                foreach (IFrameLateUpdateSystem iFrameLateUpdateSystem in iFrameLateUpdateSystems)
+                {
+                    try
+                    {
+                        iFrameLateUpdateSystem.Run(component);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
+                }
+            }
+        }
 #endif  
         
         public void LateUpdate()

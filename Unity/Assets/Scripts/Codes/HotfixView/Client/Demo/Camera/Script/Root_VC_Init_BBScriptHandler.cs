@@ -20,6 +20,8 @@ namespace ET.Client
             parser.RegistParam("VC_DeadZone_Y", 0f);
             parser.RegistParam("VC_SoftZone_X", 1f);
             parser.RegistParam("VC_SoftZone_Y", 1f);
+            parser.RegistParam("VC_EdgeSpeed_X", 8f);
+            parser.RegistParam("VC_EdgeSpeed_Y", 8f);
             parser.RegistParam("VC_Bias_X", 0f);
             parser.RegistParam("VC_Bias_Y", 0f);
             parser.RegistParam("VC_SoftZone_Rect", new Rect());
