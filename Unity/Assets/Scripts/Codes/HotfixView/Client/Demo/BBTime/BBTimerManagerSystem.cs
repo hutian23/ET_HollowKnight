@@ -10,6 +10,7 @@ namespace ET.Client
             protected override void Awake(BBTimerManager self)
             {
                 BBTimerManager.Instance = self;
+                self.LateUpdateTimer = self.AddChild<BBTimerComponent>().Id;
                 self.Reload();
             }
         }
@@ -25,6 +26,14 @@ namespace ET.Client
 
                 self.SceneTimer().SetHertz((int)(Global.Settings.TimeScale * 60));
                 self.Step(Accumulator);
+            }
+        }
+        
+        public class BBTimerManagerLateUpdateSystem : LateUpdateSystem<BBTimerManager>
+        {
+            protected override void LateUpdate(BBTimerManager self)
+            {
+                self.LateUpdateTimer().Step();
             }
         }
         
@@ -69,6 +78,8 @@ namespace ET.Client
                 }
                 //4. 物理层 PreStep PostStep生命周期事件
                 b2WorldManager.Instance.Step();
+                //5. LateUpdate生命周期事件
+                EventSystem.Instance.LateUpdate();
             }
         }
 
@@ -77,12 +88,18 @@ namespace ET.Client
             self._gameTimer.Restart();
             self.LastTime = self._gameTimer.ElapsedTicks;
             self.instanceIds.Clear();
+            self.LateUpdateTimer().Reload();
         }
         
         public static BBTimerComponent SceneTimer(this BBTimerManager self)
         {
             BBTimerComponent sceneTimer = self.GetParent<Scene>().GetComponent<BBTimerComponent>();
             return sceneTimer;
+        }
+
+        public static BBTimerComponent LateUpdateTimer(this BBTimerManager self)
+        {
+            return self.GetChild<BBTimerComponent>(self.LateUpdateTimer);
         }
         
         //管理timer

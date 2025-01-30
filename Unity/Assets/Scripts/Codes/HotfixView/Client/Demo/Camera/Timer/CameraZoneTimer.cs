@@ -28,34 +28,38 @@ namespace ET.Client
             float _halfSizeY = self.GetParam<float>("VC_SoftZone_Y") * halfHeight;
             softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY), new Vector2(_halfSizeX, _halfSizeY) * 2);
             
+            self.UpdateParam("VC_DeadZone_Rect", deadZone);
+            self.UpdateParam("VC_SoftZone_Rect", softZone);
+
+            if (deadZone.Contains(center))
+            {
+                return;
+            }
             
             //2. 目标脱出deadZone，调整deadZone锚点
-            if (!deadZone.Contains(center))
-            { 
-                Vector2 position = deadZone.position;
+            Vector2 position = deadZone.position;
                 
-                // x
-                if (center.x < deadZone.xMin)
-                {
-                    position.x = center.x;
-                }
-                else if (center.x > deadZone.xMax)
-                {
-                    position.x = center.x - deadZone.size.x;
-                }
-                
-                // y
-                if (center.y < deadZone.yMin)
-                {
-                    position.y = center.y;
-                }
-                else if (center.y > deadZone.yMax)
-                {
-                    position.y = center.y - deadZone.size.y;
-                }
-                
-                deadZone = new Rect(position, new Vector2(halfSizeX, halfSizeY) * 2);
+            // x
+            if (center.x < deadZone.xMin)
+            {
+                position.x = center.x;
             }
+            else if (center.x > deadZone.xMax)
+            {
+                position.x = center.x - deadZone.size.x;
+            }
+                
+            // y
+            if(center.y < deadZone.yMin)
+            {
+                position.y = center.y;
+            }
+            else if (center.y > deadZone.yMax)
+            { 
+                position.y = center.y - deadZone.size.y;
+            }
+            deadZone = new Rect(position, new Vector2(halfSizeX, halfSizeY) * 2);
+            softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY), new Vector2(_halfSizeX, _halfSizeY) * 2);
             self.UpdateParam("VC_DeadZone_Rect", deadZone);
             self.UpdateParam("VC_SoftZone_Rect", softZone);
         }

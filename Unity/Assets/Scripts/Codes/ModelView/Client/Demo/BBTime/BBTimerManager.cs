@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace ET.Client
 {
     [ComponentOf(typeof(Scene))]
-    public class BBTimerManager : Entity,IAwake,IDestroy, IUpdate, IFrameUpdate, ILoad
+    public class BBTimerManager : Entity,IAwake,IDestroy, IUpdate, IFrameUpdate, ILoad, ILateUpdate
     {
         [StaticField]
         public static BBTimerManager Instance;
@@ -12,5 +12,7 @@ namespace ET.Client
         public Queue<long> instanceIds = new(); //管理当前场景下的帧计时器
         public Stopwatch _gameTimer = new();
         public long LastTime;
+        
+        public long LateUpdateTimer; // LateUpdate生命周期事件，相机移动等逻辑
     }
 }
