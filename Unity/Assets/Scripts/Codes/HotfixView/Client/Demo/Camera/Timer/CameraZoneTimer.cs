@@ -53,13 +53,12 @@ namespace ET.Client
                         float softX = softZone.xMin;
                         if (center.x <= softZone.xMin)
                         {
-                            softX = center.x - 0.01f;
+                            softX = center.x - 0.1f;
                         }
-                        else if (center.x > softZone.xMax)
+                        else if (center.x >= softZone.xMax)
                         {
-                            softX = center.x - softZone.size.x + 0.01f;
+                            softX = center.x - softZone.size.x + 0.1f;
                         }
-
                         curPos.x = prePos.x + (softX - softZone.xMin);
                     }
                 }
@@ -77,7 +76,7 @@ namespace ET.Client
                         }
                         else if (center.y > deadZone.yMax)
                         {
-                            targetY = center.y - deadZone.size.y + 0.01f;
+                            targetY = center.y - deadZone.size.y + 0.1f;
                         }
 
                         curPos.y = Mathf.Lerp(prePos.y, targetY, dampingY * 1 / 60f);
@@ -92,7 +91,7 @@ namespace ET.Client
                         }
                         else if (center.y >= softZone.yMax)
                         {
-                            softY = center.y - softZone.size.y + 0.01f;
+                            softY = center.y - softZone.size.y + 0.1f;
                         }
 
                         curPos.y = prePos.y + (softY - softZone.yMin);

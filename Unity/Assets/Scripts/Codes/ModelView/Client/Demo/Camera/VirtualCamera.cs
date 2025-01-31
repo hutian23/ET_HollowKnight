@@ -6,8 +6,9 @@
         
     }
 
-    public struct CameraTargetInfo
+    public struct UpdateFollowOffsetCallback
     {
-        public long instanceId;
+        public long instanceId; // bbParser.instanceId
+        public int flip; // 朝向
     }
 }

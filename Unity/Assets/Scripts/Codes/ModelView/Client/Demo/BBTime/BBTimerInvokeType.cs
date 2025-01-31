@@ -33,6 +33,7 @@
         public const int ScreenShakeTimer = 116;
         public const int CameraFollowTimer = 117;
         public const int CameraZoneTimer = 118;
+        public const int CameraOffsetMoveTimer = 119;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;

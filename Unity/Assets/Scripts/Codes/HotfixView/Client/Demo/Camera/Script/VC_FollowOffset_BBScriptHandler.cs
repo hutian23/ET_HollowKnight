@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using UnityEngine;
 
 namespace ET.Client
 {
@@ -13,21 +12,23 @@ namespace ET.Client
         //VC_
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "VC_FollowOffset: (?<OffsetX>.*?), (?<OffsetY>.*?);");
+            Match match = Regex.Match(data.opLine, "VC_FollowOffset: (?<OffsetX>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
-            if (!long.TryParse(match.Groups["OffsetX"].Value, out long offsetX) || !long.TryParse(match.Groups["OffsetY"].Value, out long offsetY))
+            if (!long.TryParse(match.Groups["OffsetX"].Value, out long offsetX))
             {
-                Log.Error($"cannot format {match.Groups["OffsetX"]} / {match.Groups["OffsetY"].Value} to long!");
+                Log.Error($"cannot format {match.Groups["OffsetX"]} to long!");
                 return Status.Failed;
             }
 
             parser.TryRemoveParam("VC_Follow_Offset");
-            parser.RegistParam("VC_Follow_Offset", new Vector2(offsetX / 100f, offsetY / 100f));
+            parser.TryRemoveParam("VC_Follow_CurrentOffset");
+            parser.RegistParam("VC_Follow_Offset", offsetX / 100f);
+            parser.RegistParam("VC_Follow_CurrentOffset", offsetX / 100f);
             
             await ETTask.CompletedTask;
             return Status.Success;
