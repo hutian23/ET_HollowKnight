@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
@@ -17,7 +16,6 @@ namespace ET
     public class b2World: TestBase
     {
         private b2Game Game;
-        private readonly Queue<GizmosInfo> GizmosInfoQueue = new();
         
         //限制执行碰撞事件期间不能增删夹具
         public bool IsLocked;
@@ -39,7 +37,6 @@ namespace ET
         {
             Game.PreRenderCallback -= DrawB2World;
             Game = null;
-            GizmosInfoQueue.Clear();
         }
 
         public new void Step()
@@ -309,13 +306,6 @@ namespace ET
             if (flags.IsSet(DrawFlag.DraGizmos))
             {
                 EventSystem.Instance.GizmosUpdate();
-                int count = GizmosInfoQueue.Count;
-                while (count -- > 0)
-                {
-                    GizmosInfo info = GizmosInfoQueue.Dequeue();
-                    DrawShape(info);
-                }
-                GizmosInfoQueue.Clear();
             }
         }
 
@@ -395,12 +385,9 @@ namespace ET
             }
         }
 
-        private void DrawShape(GizmosInfo _info)
+        public void DrawShape(Shape shape, Vector2 position, float angle, Color color)
         {
-            Shape shape = _info.Shape;
-            Transform xf = _info.Transform;
-            Color color = _info.Color;
-            
+            Transform xf = new (position, angle * Mathf.Deg2Rad);
             switch (shape)
             {
                 case CircleShape circle:
@@ -457,13 +444,6 @@ namespace ET
                 }
             }
         }
-
-        public void DrawShape(Shape shape, Vector2 position, float angle, Color color)
-        {
-            Transform _trans = new (position, angle * Mathf.Deg2Rad);
-            GizmosInfo _info = new (){ Shape = shape, Transform = _trans, Color = color};
-            GizmosInfoQueue.Enqueue(_info);
-        }
         
         #endregion
     }
@@ -490,12 +470,5 @@ namespace ET
     public struct PreSolveCallback
     {
         public Contact Contact;
-    }
-
-    public struct GizmosInfo
-    {
-        public Shape Shape;
-        public Transform Transform;
-        public Color Color;
     }
 }

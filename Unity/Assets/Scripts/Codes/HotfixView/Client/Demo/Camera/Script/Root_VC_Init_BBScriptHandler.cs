@@ -15,6 +15,19 @@ namespace ET.Client
             parser.RemoveComponent<VirtualCamera>();
             parser.AddComponent<VirtualCamera>();
             
+            //2. CameraTarget
+            parser.RegistParam("VC_Follow_Id", 0);
+            parser.RegistParam("VC_Follow_TargetPosition", Vector2.zero);
+            parser.RegistParam("VC_Follow_Center", Vector2.zero);
+            parser.RegistParam("VC_Follow_Offset", Vector2.zero);
+            parser.RegistParam("VC_Follow_OffsetPoint", Vector2.zero);
+            long followTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFollowTimer, parser);
+            parser.RegistParam("VC_Follow_Timer", followTimer);
+            token.Add(() =>
+            {
+                lateUpdateTimer.Remove(ref followTimer);
+            });
+            
             //1. Zone
             parser.RegistParam("VC_DeadZone_X", 0f);
             parser.RegistParam("VC_DeadZone_Y", 0f);
@@ -26,7 +39,7 @@ namespace ET.Client
             parser.RegistParam("VC_Bias_Y", 0f);
             parser.RegistParam("VC_SoftZone_Rect", new Rect());
             parser.RegistParam("VC_DeadZone_Rect", new Rect());
-            long zoneTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraDeadZoneTimer, parser);
+            long zoneTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraZoneTimer, parser);
             token.Add(() =>
             {
                 lateUpdateTimer.Remove(ref zoneTimer);

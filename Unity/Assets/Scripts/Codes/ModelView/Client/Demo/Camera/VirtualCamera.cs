@@ -5,4 +5,9 @@
     {
         
     }
+
+    public struct CameraTargetInfo
+    {
+        public long instanceId;
+    }
 }

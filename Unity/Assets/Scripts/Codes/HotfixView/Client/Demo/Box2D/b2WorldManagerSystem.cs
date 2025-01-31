@@ -179,5 +179,10 @@ namespace ET.Client
         {
             self.B2World.Draw.DrawPoint(point, size, color);
         }
+
+        public static void DrawSegment(this b2WorldManager self, Vector2 start, Vector2 end, Color color)
+        {
+            self.B2World.Draw.DrawSegment(start, end, color);
+        }
     }
 }
