@@ -34,12 +34,13 @@
         public const int CameraFollowTimer = 117;
         public const int CameraZoneTimer = 118;
         public const int CameraOffsetMoveTimer = 119;
+        public const int CameraFOVTimer = 120;
+        public const int CameraFollowTargetTimer = 121;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;
         public const int HurtNotifyTimer = 314;
         public const int ThrowCheckTimer = 315;
-
         public const int ThronesTestTimer = 700;
 
         public const int CameraGizmosTimer = 2001;

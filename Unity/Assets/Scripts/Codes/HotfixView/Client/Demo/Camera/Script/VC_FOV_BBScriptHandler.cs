@@ -3,17 +3,17 @@
 namespace ET.Client
 {
     [FriendOf(typeof(CameraManager))]
-    public class VC_Zoom_BBScriptHandler : BBScriptHandler
+    public class VC_FOV_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "VC_Zoom";
+            return "VC_FOV";
         }
 
-        //VC_Zoom: 10000;
+        //VC_Zoom: 80000;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "VC_Zoom: (?<Size>.*?);");
+            Match match = Regex.Match(data.opLine, "VC_FOV: (?<Size>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -24,8 +24,18 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["Size"].Value} to long!");
                 return Status.Failed;
             }
+            
+            float minFov = parser.GetParam<float>("VC_MinFOV");
+            float maxFov = parser.GetParam<float>("VC_MaxFOV");
+            float curFov = size / 10000f;
+            if (curFov < minFov || curFov > maxFov)
+            {
+                Log.Error($"fov must be between {minFov} and {maxFov}, {curFov}");
+                return Status.Failed;
+            }
 
-            CameraManager.instance.MainCamera.orthographicSize = size / 10000f;
+            parser.TryRemoveParam("VC_CurrentFOV");
+            parser.RegistParam("VC_CurrentFOV", size / 10000f);
 
             await ETTask.CompletedTask;
             return Status.Success;

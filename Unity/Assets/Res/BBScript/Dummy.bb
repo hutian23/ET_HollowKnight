@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 DummyInit;
-SetPos: 0, 2100;
+SetPos: 0, 8000;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
@@ -26,6 +26,7 @@ RegistMove: (Dummy_Hurt3)
   MoveFlag: Hurt3;
   EndMove:
 SetFlip: Right;
+VC_Target;
 GotoBehavior: 'Dummy_Idle';
 return;
 

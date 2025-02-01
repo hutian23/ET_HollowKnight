@@ -1,4 +1,7 @@
-﻿using ET.Event;
+﻿using Box2DSharp.Collision.Shapes;
+using ET.Event;
+using UnityEngine;
+using Color = Box2DSharp.Common.Color;
 
 namespace ET.Client
 {
@@ -15,6 +18,21 @@ namespace ET.Client
                 self.CollisionEnterQueue.Clear();
                 self.CollisionStayQueue.Clear();
                 self.CollisionExitQueue.Clear();
+            }
+        }
+        
+        public class SceneBoxHandlerGizmosUpdateSystem : GizmosUpdateSystem<SceneBoxHandler>
+        {
+            protected override void GizmosUpdate(SceneBoxHandler self)
+            {
+                GameObject go = self.GetParent<BBParser>().GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
+
+                foreach (b2BoxCollider2D box in go.GetComponentsInChildren<b2BoxCollider2D>())
+                {
+                    PolygonShape shape = new();
+                    shape.SetAsBox(box.info.size.x / 2, box.info.size.y / 2, box.info.center.ToVector2(), 0f);
+                    b2WorldManager.Instance.DrawShape(shape, System.Numerics.Vector2.Zero, 0f, Color.White);
+                }
             }
         }
         

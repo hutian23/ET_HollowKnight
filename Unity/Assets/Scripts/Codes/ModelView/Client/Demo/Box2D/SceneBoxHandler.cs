@@ -4,7 +4,7 @@ using ET.Event;
 namespace ET.Client
 {
     [ComponentOf(typeof(BBParser))]
-    public class SceneBoxHandler : Entity, IAwake, IDestroy, IPostStep
+    public class SceneBoxHandler : Entity, IAwake, IDestroy, IPostStep, IGizmosUpdate
     {
         public Queue<CollisionInfo> TriggerEnterQueue = new();
         public Queue<CollisionInfo> TriggerStayQueue = new();

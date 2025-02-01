@@ -93,6 +93,8 @@ namespace ET.Client
             
             self.MainCamera = Camera.main;
             self.MainCamera.transform.position = self.Position;
+
+            self.vc_InstanceId = 0;
         }
 
         // #region Zoom

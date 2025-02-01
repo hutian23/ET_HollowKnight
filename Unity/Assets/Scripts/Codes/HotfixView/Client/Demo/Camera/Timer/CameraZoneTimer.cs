@@ -22,7 +22,9 @@ namespace ET.Client
             Rect softZone = self.GetParam<Rect>("VC_SoftZone_Rect");
             float _halfSizeX = self.GetParam<float>("VC_SoftZone_X") * halfWidth;
             float _halfSizeY = self.GetParam<float>("VC_SoftZone_Y") * halfHeight;
-            softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY), new Vector2(_halfSizeX, _halfSizeY) * 2);
+            float biasX = self.GetParam<float>("VC_Bias_X") * halfWidth;
+            float biasY = self.GetParam<float>("VC_Bias_Y") * halfHeight;
+            softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY) - new Vector2(biasX, biasY), new Vector2(_halfSizeX, _halfSizeY) * 2);
             
             // 更新锚点
             if (!deadZone.Contains(center))
@@ -99,7 +101,7 @@ namespace ET.Client
                 }
 
                 deadZone = new Rect(curPos, new Vector2(halfSizeX, halfSizeY) * 2);
-                softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY), new Vector2(_halfSizeX, _halfSizeY) * 2);
+                softZone = new Rect(deadZone.center - new Vector2(_halfSizeX, _halfSizeY) - new Vector2(biasX, biasY), new Vector2(_halfSizeX, _halfSizeY) * 2);
             }
             self.UpdateParam("VC_DeadZone_Rect", deadZone);
             self.UpdateParam("VC_SoftZone_Rect", softZone);

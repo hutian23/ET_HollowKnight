@@ -432,7 +432,7 @@ HitNotify: Once # 对于同一对象，在持续帧内仅造成一次攻击(Repe
   # 受击者帧冻结(HitStop)的总帧长
   HitParam: HitStopFrame, 10;
   # HitStop结束后抛出的速度
-  HitParam: StartV_X, 280000;
+  HitParam: StartV_X, 350000;
   HitParam: StartV_Y, -35000;
   # 受击时调整转向
   Hit_UpdateFlip;

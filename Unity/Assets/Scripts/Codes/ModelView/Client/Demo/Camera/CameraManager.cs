@@ -32,5 +32,7 @@ namespace ET.Client
         
         //相机跟随
         public long targetTimer;
+
+        public long vc_InstanceId;
     }
 }
