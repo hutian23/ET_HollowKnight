@@ -23,14 +23,6 @@ namespace ET.Client
             Vector2 center = targetPosition + new Vector2(halfWidth * 2 * offset, 0);
             self.UpdateParam("VC_Follow_TargetPosition", targetPosition);
             self.UpdateParam("VC_Follow_Center", center);
-
-            //3. 更新朝向
-            b2Body body = b2WorldManager.Instance.GetBody(unit.InstanceId);
-            if (body.GetFlip() != self.GetParam<int>("VC_Follow_Flip"))
-            {
-                self.UpdateParam("VC_Follow_Flip", body.GetFlip());
-                EventSystem.Instance.Invoke(new UpdateFollowOffsetCallback(){instanceId = self.InstanceId, flip = -body.GetFlip()});
-            }
         }
     }
 }

@@ -2,31 +2,30 @@
 
 namespace ET.Client
 {
-    public class VC_FollowDelay_BBScriptHandler : BBScriptHandler
+    public class VC_FollowTransition_MaxVel_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "VC_FollowDelay";
+            return "VC_FollowTransition_MaxVel";
         }
 
-        //VC_FollowDelay: 30;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "VC_FollowDelay: (?<Delay>.*?);");
+            Match match = Regex.Match(data.opLine, "VC_FollowTransition_MaxVel: (?<MaxVel>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
-            if (!int.TryParse(match.Groups["Delay"].Value, out int delay))
+            if (!long.TryParse(match.Groups["MaxVel"].Value, out long maxVel))
             {
-                Log.Error($"cannot format {match.Groups["Delay"].Value} to int");
+                Log.Error($"cannot format {match.Groups["MaxVel"].Value} to long!!");
                 return Status.Failed;
             }
 
-            parser.TryRemoveParam("VC_Follow_Delay");
-            parser.RegistParam("VC_Follow_Delay", delay);
+            parser.TryRemoveParam("VC_FollowTransition_MaxVel");
+            parser.RegistParam("VC_FollowTransition_MaxVel", maxVel / 10000f);
             
             await ETTask.CompletedTask;
             return Status.Success;

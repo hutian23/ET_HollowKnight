@@ -22,11 +22,8 @@ namespace ET.Client
             parser.RegistParam("VC_Follow_Id", 0);
             parser.RegistParam("VC_Follow_TargetPosition", Vector2.zero);
             parser.RegistParam("VC_Follow_Center", Vector2.zero);
-            parser.RegistParam("VC_Follow_Flip", -1);
-            parser.RegistParam("VC_Follow_Delay", 5);
             parser.RegistParam("VC_Follow_Offset", 0f);
             parser.RegistParam("VC_Follow_CurrentOffset", 0f);
-            parser.RegistParam("VC_Follow_Damping", 10f);
             parser.RegistParam("VC_Follow_Timer", followTimer);
             token.Add(() =>
             {

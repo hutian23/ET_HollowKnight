@@ -20,7 +20,7 @@
             parser.TryRemoveParam("VC_Follow_OffsetDampingTimer");
 
             //2. 注册定时器
-            long timer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraOffsetMoveTimer, parser);
+            long timer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraOffsetTransitionTimer, parser);
             parser.RegistParam("VC_Follow_TargetFlip", args.flip);
             parser.RegistParam("VC_Follow_WaitMove", parser.GetParam<int>("VC_Follow_Delay"));
             parser.RegistParam("VC_Follow_OffsetDampingTimer", timer);

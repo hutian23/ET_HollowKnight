@@ -26,7 +26,6 @@ RegistMove: (Dummy_Hurt3)
   MoveFlag: Hurt3;
   EndMove:
 SetFlip: Right;
-VC_Target;
 GotoBehavior: 'Dummy_Idle';
 return;
 
