@@ -84,6 +84,7 @@ namespace ET.Client
             if ((int)flipState == self.GetFlip()) return;
             self.Flip = flipState;
             
+            //TODO 这里是个bug， 在更新朝向时，仅翻转hitbox，其他夹具不会进行翻转
             //1. 逻辑层 ---> 翻转夹具
             // 逻辑上不能实现翻转夹具的操作，只能销毁夹具生成新的
             QueueComponent<FixtureData> dataQueue = new QueueComponent<FixtureData>();

@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [FriendOf(typeof(CameraManager))]
-    public class Root_VC_Init_BBScriptHandler : BBScriptHandler
+    public class RootInit_VC_Init_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
@@ -14,9 +14,7 @@ namespace ET.Client
         {
             BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
             BBTimerComponent GizmosTimer = b2WorldManager.Instance.GetGizmosTimer();
-            parser.RemoveComponent<VirtualCamera>();
-            parser.AddComponent<VirtualCamera>();
-
+            
             //1. Camera Follow
             long followTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFollowTimer, parser);
             parser.RegistParam("VC_Follow_Id", long.MinValue);
@@ -60,6 +58,7 @@ namespace ET.Client
             {
                 GizmosTimer.Remove(ref _GizmosTimer);
             });
+            
             
             await ETTask.CompletedTask;
             return Status.Success;

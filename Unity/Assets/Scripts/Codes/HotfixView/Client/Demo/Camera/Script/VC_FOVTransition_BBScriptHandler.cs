@@ -28,7 +28,7 @@ namespace ET.Client
             }
 
             BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
-            BBParser parser = VirtualCamera.Instance.GetParent<BBParser>();
+            BBParser parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
 
             //1. 初始化
             if (parser.ContainParam("VC_FOV_TransitionTimer"))

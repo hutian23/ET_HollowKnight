@@ -15,7 +15,7 @@ namespace ET.Client
             self.UpdateParam("VC_CurrentFOV", currentFOV);
 
             // 销毁定时器
-            if (Mathf.Abs(targetFOV - currentFOV) < 0.01f)
+            if (Mathf.Abs(targetFOV - currentFOV) < 0.05f)
             {
                 self.TryRemoveParam("VC_FOV_Damping");
                 self.TryRemoveParam("VC_FOV_TargetFOV");

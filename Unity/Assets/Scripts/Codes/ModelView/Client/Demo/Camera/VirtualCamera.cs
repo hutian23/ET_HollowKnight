@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [ComponentOf(typeof(BBParser))]
+    [ComponentOf(typeof(Unit))]
     public class VirtualCamera: Entity, IAwake, IDestroy, IGizmosUpdate, ILoad
     {
         [StaticField]

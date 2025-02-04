@@ -35,6 +35,7 @@
         public const int CameraZoneTimer = 118;
         public const int CameraOffsetTransitionTimer = 119;
         public const int CameraFOVTransitionTimer = 120;
+        public const int CameraSensorTimer = 121;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;

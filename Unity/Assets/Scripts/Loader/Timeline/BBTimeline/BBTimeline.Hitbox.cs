@@ -132,6 +132,7 @@ namespace Timeline
         public const int None = 0;
         public const int Ground = 2 << 0;
         public const int Unit = 2 << 1;
+        public const int Camera = 2 << 2;
     }
     
     public static class FixtureType
