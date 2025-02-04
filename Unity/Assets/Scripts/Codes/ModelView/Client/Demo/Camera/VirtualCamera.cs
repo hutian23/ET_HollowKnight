@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [ComponentOf(typeof(BBParser))]
     public class VirtualCamera: Entity, IAwake, IDestroy, IGizmosUpdate, ILoad
     {
-        public Dictionary<string, long> targetIds = new();
+        [StaticField]
+        public static VirtualCamera Instance;
     }
 
     public struct UpdateFollowOffsetCallback

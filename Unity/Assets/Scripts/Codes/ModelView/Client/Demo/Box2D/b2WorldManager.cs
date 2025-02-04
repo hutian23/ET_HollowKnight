@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
-    public class b2WorldManager: Entity, IAwake, IDestroy, IFixedUpdate, IPostStep, ILoad, IPreStep
+    public class b2WorldManager: Entity, IAwake, IDestroy, IFixedUpdate, IPostStep, ILoad, IPreStep, IGizmosUpdate
     {
         [StaticField]
         public static b2WorldManager Instance;
@@ -16,5 +16,6 @@ namespace ET.Client
         //物理模拟相关的生命周期函数
         public long PreStepTimer;
         public long PostStepTimer;
+        public long GizmosTimer;
     }
 }

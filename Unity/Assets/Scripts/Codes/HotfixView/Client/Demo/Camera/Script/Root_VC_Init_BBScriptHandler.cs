@@ -13,14 +13,13 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
-            
+            BBTimerComponent GizmosTimer = b2WorldManager.Instance.GetGizmosTimer();
             parser.RemoveComponent<VirtualCamera>();
-            VirtualCamera vc = parser.AddComponent<VirtualCamera>();
-            CameraManager.instance.vc_InstanceId = vc.InstanceId;
+            parser.AddComponent<VirtualCamera>();
 
             //1. Camera Follow
             long followTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFollowTimer, parser);
-            parser.RegistParam("VC_Follow_Id", 0);
+            parser.RegistParam("VC_Follow_Id", long.MinValue);
             parser.RegistParam("VC_Follow_TargetPosition", Vector2.zero);
             parser.RegistParam("VC_Follow_Center", Vector2.zero);
             parser.RegistParam("VC_Follow_Offset", 0f);
@@ -42,6 +41,8 @@ namespace ET.Client
             parser.RegistParam("VC_Bias_X", 0.01f);
             parser.RegistParam("VC_Bias_Y", 0.01f);
             parser.RegistParam("VC_ZoneTimer", zoneTimer);
+            parser.RegistParam("VC_Damping_X", 5f);
+            parser.RegistParam("VC_Damping_Y", 5f);
             token.Add(() =>
             {
                 lateUpdateTimer.Remove(ref zoneTimer);
@@ -52,6 +53,14 @@ namespace ET.Client
             parser.RegistParam("VC_MinFOV", 8f);
             parser.RegistParam("VC_MaxFOV", 8f);
 
+            //4. Draw Gizmos
+            long _GizmosTimer = GizmosTimer.NewFrameTimer(BBTimerInvokeType.CameraGizmosTimer, parser);
+            parser.RegistParam("VC_GizmosTimer", GizmosTimer);
+            token.Add(() =>
+            {
+                GizmosTimer.Remove(ref _GizmosTimer);
+            });
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

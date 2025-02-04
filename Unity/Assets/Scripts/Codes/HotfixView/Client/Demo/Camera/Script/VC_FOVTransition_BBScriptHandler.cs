@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [FriendOf(typeof(CameraManager))]
-    [FriendOfAttribute(typeof(ET.Client.BBParser))]
+    [FriendOf(typeof(BBParser))]
     public class VC_FOVTransition_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -28,8 +28,7 @@ namespace ET.Client
             }
 
             BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
-            VirtualCamera vc = Root.Instance.Get(CameraManager.instance.vc_InstanceId) as VirtualCamera;
-            BBParser parser = vc.GetParent<BBParser>();
+            BBParser parser = VirtualCamera.Instance.GetParent<BBParser>();
 
             //1. 初始化
             if (parser.ContainParam("VC_FOV_TransitionTimer"))
@@ -41,7 +40,7 @@ namespace ET.Client
             parser.TryRemoveParam("VC_FOV_Damping");
             parser.TryRemoveParam("VC_FOV_TargetFOV");
 
-            //2. 
+            //2. 注册相关变量
             long timer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFOVTransitionTimer, parser);
             parser.RegistParam("VC_FOV_TransitionTimer", timer);
             parser.RegistParam("VC_FOV_Damping", damping / 10000f);

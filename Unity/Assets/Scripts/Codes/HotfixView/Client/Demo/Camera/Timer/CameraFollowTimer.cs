@@ -24,6 +24,9 @@ namespace ET.Client
             
             //2. 更新跟随点
             Unit unit = Root.Instance.Get(self.GetParam<long>("VC_Follow_Id")) as Unit;
+            // 不存在跟随对象
+            if (unit == null || unit.InstanceId == 0) return;
+            
             GameObject go = unit.GetComponent<GameObjectComponent>().GameObject;
 
             Vector2 targetPosition = go.transform.position;

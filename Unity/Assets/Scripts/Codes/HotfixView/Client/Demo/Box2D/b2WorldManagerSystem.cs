@@ -19,6 +19,7 @@ namespace ET.Client
                 b2WorldManager.Instance = self;
                 self.PreStepTimer = self.AddChild<BBTimerComponent>().Id;
                 self.PostStepTimer = self.AddChild<BBTimerComponent>().Id;
+                self.GizmosTimer = self.AddChild<BBTimerComponent>().Id;
                 self.Reload();
             }
         }
@@ -59,6 +60,14 @@ namespace ET.Client
                 }
             }
         }
+        
+        public class b2WorldManagerGizmosUpdateSystem : GizmosUpdateSystem<b2WorldManager>
+        {
+            protected override void GizmosUpdate(b2WorldManager self)
+            {
+                self.GetGizmosTimer().Step();
+            }
+        }
 
         private static void Init(this b2WorldManager self)
         {
@@ -76,8 +85,10 @@ namespace ET.Client
             //reload timer
             BBTimerComponent PreStepTimer = self.GetChild<BBTimerComponent>(self.PreStepTimer);
             BBTimerComponent PostStepTimer = self.GetChild<BBTimerComponent>(self.PostStepTimer);
+            BBTimerComponent GizmosTimer = self.GetChild<BBTimerComponent>(self.GizmosTimer);
             PreStepTimer.Reload();
             PostStepTimer.Reload();
+            GizmosTimer.Reload();
             
             Global.Settings.Pause = false;
             Global.Settings.SingleStep = false;
@@ -165,6 +176,11 @@ namespace ET.Client
             return self.GetChild<BBTimerComponent>(self.PostStepTimer);
         }
 
+        public static BBTimerComponent GetGizmosTimer(this b2WorldManager self)
+        {
+            return self.GetChild<BBTimerComponent>(self.GizmosTimer);
+        }
+        
         public static bool IsLocked(this b2WorldManager self)
         {
             return self.B2World.IsLocked;
