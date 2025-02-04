@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -36,6 +37,8 @@ namespace ET.Client
 
             parser.TryRemoveParam("VC_CurrentFOV");
             parser.RegistParam("VC_CurrentFOV", size / 10000f);
+
+            Camera.main.orthographicSize = size / 10000f;
 
             await ETTask.CompletedTask;
             return Status.Success;

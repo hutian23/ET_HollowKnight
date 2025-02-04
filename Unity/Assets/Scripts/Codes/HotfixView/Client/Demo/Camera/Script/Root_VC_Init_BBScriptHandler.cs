@@ -13,6 +13,7 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
+            
             parser.RemoveComponent<VirtualCamera>();
             VirtualCamera vc = parser.AddComponent<VirtualCamera>();
             CameraManager.instance.vc_InstanceId = vc.InstanceId;
@@ -47,15 +48,9 @@ namespace ET.Client
             });
 
             //3. FOV
-            long fovTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFOVTimer, parser);
             parser.RegistParam("VC_CurrentFOV", 8f);
             parser.RegistParam("VC_MinFOV", 8f);
             parser.RegistParam("VC_MaxFOV", 8f);
-            parser.RegistParam("VC_FOVTimer", fovTimer);
-            token.Add(() =>
-            {
-                lateUpdateTimer.Remove(ref fovTimer);
-            });
 
             await ETTask.CompletedTask;
             return Status.Success;

@@ -8,6 +8,14 @@ namespace ET.Client
     {
         protected override void Run(BBParser self)
         {
+            //1. 更新 Field of View
+            float preFOV = self.GetParam<float>("VC_CurrentFOV");
+            float minFOV = self.GetParam<float>("VC_MinFOV");
+            float maxFOV = self.GetParam<float>("VC_MaxFOV");
+            float currentFOV = Mathf.Clamp(preFOV, minFOV, maxFOV);
+            Camera.main.orthographicSize = currentFOV;
+            self.UpdateParam("VC_CurrentFOV", currentFOV);
+            
             // 获取摄像机的视口大小和屏幕宽高
             // 正交距离表示摄像机在世界坐标系中能看到的垂直方向一半的长度
             // 正交距离 = 屏幕高度 / 2

@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 PlayerInit;
-SetPos: 0, 1000;
+SetPos: 0, -10000;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
