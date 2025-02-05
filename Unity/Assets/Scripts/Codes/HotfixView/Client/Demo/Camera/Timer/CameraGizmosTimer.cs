@@ -45,6 +45,13 @@ namespace ET.Client
              //6. Follow Target
              UnityEngine.Vector2 target = parser.GetParam<UnityEngine.Vector2>("VC_Follow_TargetPosition");
              b2WorldManager.Instance.DrawPoint(target.ToVector2(), 8f, Color.Yellow);
+             
+             //7. 
+             ListComponent<UnityEngine.Vector2> points = parser.GetParam<ListComponent<UnityEngine.Vector2>>("VC_Points");
+             foreach (UnityEngine.Vector2 point in points)
+             {
+                 b2WorldManager.Instance.DrawPoint(point.ToVector2(), 8f, Color.Blue);
+             }
         }
     }
 }

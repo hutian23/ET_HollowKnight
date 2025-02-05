@@ -27,8 +27,9 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            parser.TryRemoveParam("VC_Confiner_Rect");
-            parser.RegistParam("VC_Confiner_Rect", 
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            _parser.TryRemoveParam("VC_Confiner_Rect");
+            _parser.RegistParam("VC_Confiner_Rect", 
                 new Rect(new Vector2(centerX - sizeX / 2f, centerY - sizeY / 2f) / 10000f,
                             new Vector2(sizeX,sizeY) / 10000f));
             

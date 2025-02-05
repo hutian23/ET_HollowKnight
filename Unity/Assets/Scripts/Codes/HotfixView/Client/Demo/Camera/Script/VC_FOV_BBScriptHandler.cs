@@ -35,9 +35,10 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            parser.TryRemoveParam("VC_CurrentFOV");
-            parser.RegistParam("VC_CurrentFOV", size / 10000f);
-
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            _parser.TryRemoveParam("VC_CurrentFOV");
+            _parser.RegistParam("VC_CurrentFOV", size / 10000f);
+            
             Camera.main.orthographicSize = size / 10000f;
 
             await ETTask.CompletedTask;

@@ -25,10 +25,11 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            parser.TryRemoveParam("VC_Bias_X");
-            parser.TryRemoveParam("VC_Bias_Y");
-            parser.RegistParam("VC_Bias_X", centerX / 100f);
-            parser.RegistParam("VC_Bias_Y", centerY / 100f);
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            _parser.TryRemoveParam("VC_Bias_X");
+            _parser.TryRemoveParam("VC_Bias_Y");
+            _parser.RegistParam("VC_Bias_X", centerX / 100f);
+            _parser.RegistParam("VC_Bias_Y", centerY / 100f);
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -24,11 +24,12 @@ namespace ET.Client
                 return Status.Failed;
             }
             //1. 初始化
-            parser.TryRemoveParam("VC_SoftZone_X");
-            parser.TryRemoveParam("VC_SoftZone_Y");
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            _parser.TryRemoveParam("VC_SoftZone_X");
+            _parser.TryRemoveParam("VC_SoftZone_Y");
             //2. 注册变量
-            parser.RegistParam("VC_SoftZone_X", centerX / 100f);
-            parser.RegistParam("VC_SoftZone_Y", centerY / 100f);
+            _parser.RegistParam("VC_SoftZone_X", centerX / 100f);
+            _parser.RegistParam("VC_SoftZone_Y", centerY / 100f);
 
             await ETTask.CompletedTask;
             return Status.Success;

@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(BBParser))]
     public class VC_Camera_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
@@ -18,9 +19,11 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-            
-            parser.Invoke(parser.GetFunctionPointer(match.Groups["Name"].Value, "Main"), token).Coroutine();
-            
+
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            _parser.Cancel();
+            _parser.Invoke(_parser.GetFunctionPointer(match.Groups["Name"].Value, "Main"), _parser.CancellationToken).Coroutine();
+
             await ETTask.CompletedTask;
             return Status.Success;
         }

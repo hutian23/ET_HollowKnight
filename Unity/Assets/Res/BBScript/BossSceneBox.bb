@@ -2,7 +2,7 @@
 @RootInit:
 SceneBoxInit;
 # 摄像机相关触发器
-VC_Trigger: Trigger_1, 0, -50000, 120000, 100000;
+VC_Trigger: CameraTrigger_1, 150000, -100000, 120000, 100000;
 return;
 
 [A]
@@ -17,7 +17,12 @@ return;
 return;
 
 # 摄像机事件
-[Trigger_1]
+[CameraTrigger_1]
 @TriggerEnter:
-LogWarning: 'Hello World';
+# VC_FOVTransition: 60000, 25000;
+VC_Camera: CombatCamera;
+return;
+
+@TriggerExit:
+VC_Camera: DefaultCamera;
 return;

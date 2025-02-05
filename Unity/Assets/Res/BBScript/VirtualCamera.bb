@@ -17,7 +17,6 @@ VC_Damping: 50000, 50000;
 # Follow
 VC_FollowPlayer;
 VC_FollowOffset: 0;
-VC_Sensor: 0, 0, 50000, 40000;
 # FOV
 VC_MinFOV: 20000;
 VC_MaxFOV: 150000;
@@ -27,18 +26,5 @@ return;
 # 战斗时摄像头
 [CombatCamera]
 @Main:
-VC_Init;
-VC_Confiner: 0, 100000, 450000, 950000;
-# Zone
-VC_DeadZone: 8, 5;
-VC_SoftZone: 13, 15;
-VC_Bias: 0, 10;
-VC_Damping: 60000, 50000;
-# Follow
-VC_FollowPlayer;
-VC_FollowOffset: 0;
-# FOV
-VC_MinFOV: 20000;
-VC_MaxFOV: 150000;
-VC_FOV: 105000;
+VC_MoveTo: 150000, -100000, 20000;
 return;

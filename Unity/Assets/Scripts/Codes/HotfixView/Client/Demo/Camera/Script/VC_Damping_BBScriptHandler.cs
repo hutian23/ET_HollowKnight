@@ -24,12 +24,14 @@ namespace ET.Client
                 Log.Error($"cannot format to long!");
                 return Status.Failed;
             }
+
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
             //1. 初始化
-            parser.TryRemoveParam("VC_Damping_X");
-            parser.TryRemoveParam("VC_Damping_Y");
+            _parser.TryRemoveParam("VC_Damping_X");
+            _parser.TryRemoveParam("VC_Damping_Y");
             //2. 注册变量
-            parser.RegistParam("VC_Damping_X", centerX / 10000f);
-            parser.RegistParam("VC_Damping_Y", centerY / 10000f);
+            _parser.RegistParam("VC_Damping_X", centerX / 10000f);
+            _parser.RegistParam("VC_Damping_Y", centerY / 10000f);
            
             await ETTask.CompletedTask;
             return Status.Success;

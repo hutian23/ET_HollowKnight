@@ -30,8 +30,7 @@ namespace ET.Client
             }
 
             // 跟随对象的实体的刚体创建夹具
-            long followId = parser.GetParam<long>("VC_Follow_Id");
-            b2Body body = b2WorldManager.Instance.GetBody(followId);
+            b2Body body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             PolygonShape shape = new();
             shape.SetAsBox(sizeX / 20000f, sizeY / 20000f, new System.Numerics.Vector2(centerX, centerY) / 10000f, 0f);
             FixtureDef fixtureDef = new()

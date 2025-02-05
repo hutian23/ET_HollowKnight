@@ -3,18 +3,16 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(CameraManager))]
-    public class VC_Position_BBScriptHandler : BBScriptHandler
+    public class VC_Target_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "VC_Position";
+            return "VC_Target";
         }
 
-        //VC_Position: 0, 10000;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "VC_Position: (?<posX>.*?), (?<posY>.*?);");
+            Match match = Regex.Match(data.opLine, "VC_Target: (?<posX>.*?), (?<posY>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -23,12 +21,14 @@ namespace ET.Client
 
             if (!long.TryParse(match.Groups["posX"].Value, out long posX) || !long.TryParse(match.Groups["posY"].Value, out long posY))
             {
-                Log.Error($"cannot format posX / posY to long");
+                Log.Error($"cannot format {match.Groups["posX"].Value} / {match.Groups["posY"].Value} to long!");
                 return Status.Failed;
             }
-
-            Camera.main.transform.position = new Vector3(posX / 10000f, posY / 10000f, -10);
-
+            
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            ListComponent<Vector2> points = _parser.GetParam<ListComponent<Vector2>>("VC_Points");
+            points.Add(new Vector2(posX, posY) / 10000f);
+            
             await ETTask.CompletedTask;
             return Status.Success;
         }

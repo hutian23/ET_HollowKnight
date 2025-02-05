@@ -206,7 +206,7 @@ namespace ET.Client
             self.body.DestroyFixture(fixture);
         }
 
-        private static void DestroyFixture(this b2Body self, Fixture fixture)
+        public static void DestroyFixture(this b2Body self, Fixture fixture)
         {
             FixtureData data = (FixtureData)fixture.UserData;
             self.DestroyFixture(data.Name);
