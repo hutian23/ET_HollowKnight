@@ -19,7 +19,7 @@ namespace ET.Client
             b2Body body = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(body.unitId) as Unit;
             SceneBoxHandler handler = unit.GetComponent<BBParser>().GetComponent<SceneBoxHandler>();
-            handler.TriggerEnterQueue.Enqueue(info);
+            handler.TriggerStayQueue.Enqueue(info);
         }
     }
 }

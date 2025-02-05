@@ -15,7 +15,6 @@ namespace ET.Client
             {
                 return;
             }
-            Log.Warning("Trigger Enter");
             
             b2Body body = Root.Instance.Get(info.dataA.InstanceId) as b2Body;
             Unit unit = Root.Instance.Get(body.unitId) as Unit;

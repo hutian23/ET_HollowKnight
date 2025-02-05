@@ -84,21 +84,27 @@ namespace ET.Client
             if ((int)flipState == self.GetFlip()) return;
             self.Flip = flipState;
             
-            //TODO 这里是个bug， 在更新朝向时，仅翻转hitbox，其他夹具不会进行翻转
-            //1. 逻辑层 ---> 翻转夹具
-            // 逻辑上不能实现翻转夹具的操作，只能销毁夹具生成新的
+            //1. 翻转类型为hitbox的夹具
             QueueComponent<FixtureData> dataQueue = new QueueComponent<FixtureData>();
             foreach (Fixture fixture in self.Fixtures)
             {
-                dataQueue.Enqueue((FixtureData)fixture.UserData);
+                FixtureData data = (FixtureData)fixture.UserData;
+                if (data.Type is not FixtureType.Hitbox)
+                {
+                    continue;
+                }
+                dataQueue.Enqueue(data);
             }
-            self.ClearFixtures();
-            
+            self.ClearHitBoxes();
+
             int count = dataQueue.Count;
-            while (count-- > 0)
+            while (count -- > 0)
             {
                 FixtureData data = dataQueue.Dequeue();
-                if (data.UserData is not BoxInfo info) continue;
+                if (data.UserData is not BoxInfo info)
+                {
+                    continue;
+                }
                 //reset param of fixtureDef
                 PolygonShape shape = new();
                 shape.SetAsBox(info.size.x / 2, info.size.y / 2, new Vector2(info.center.x * self.GetFlip(), info.center.y), 0f);
@@ -111,6 +117,7 @@ namespace ET.Client
                 };
                 self.CreateFixture(fixtureDef);
             }
+            dataQueue.Dispose();
             
             //2. 渲染层同步朝向
             Unit unit = Root.Instance.Get(self.unitId) as Unit;
