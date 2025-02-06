@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using Timeline.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -80,8 +79,6 @@ namespace Timeline
 
 #if UNITY_EDITOR
         protected virtual Type ClipType => typeof (BBClip);
-        public virtual Type ClipViewType => typeof (TimelineClipView);
-        public virtual Type TrackViewType => typeof (TimelineTrackView);
 
         public BBClip AddClip(int frame)
         {

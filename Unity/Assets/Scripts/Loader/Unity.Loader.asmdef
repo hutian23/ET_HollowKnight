@@ -5,7 +5,6 @@
         "Unity.ThirdParty",
         "Unity.Core",
         "HybridCLR.Runtime",
-        "Unity.EditorCoroutines.Editor",
         "Unity.InputSystem",
         "RG.ImGui",
         "RG.ImGui.Unity"

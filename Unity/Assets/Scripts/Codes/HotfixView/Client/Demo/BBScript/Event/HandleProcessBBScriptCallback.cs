@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
-using Timeline.Editor;
+using Timeline;
 
 namespace ET.Client
 {

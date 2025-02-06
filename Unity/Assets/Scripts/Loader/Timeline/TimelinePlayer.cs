@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Timeline.Editor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -62,23 +61,7 @@ namespace Timeline
         }
         
 #if UNITY_EDITOR
-        [Button("技能编辑器"), ShowIf("HasNotBindUnit")]
-        public void OpenWindow()
-        {
-            foreach (BBTimeline timeline in BBPlayable.timelineDict.Values)
-            {
-                OpenWindow(timeline);
-                return;
-            }
-        }
-
-        public void OpenWindow(BBTimeline timeline)
-        {
-            ClearTimelineGenerate();
-            TimelineEditorWindow.OpenWindow(this, timeline);
-        }
-
-        [Button("清除运行时组件"), ShowIf("HasNotBindUnit")]
+        
         public void ClearTimelineGenerate()
         {
             var goSet = new HashSet<GameObject>();

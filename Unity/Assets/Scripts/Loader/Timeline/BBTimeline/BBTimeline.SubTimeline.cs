@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using ET;
 using Sirenix.OdinInspector;
-using Timeline.Editor;
 using UnityEngine;
 
 namespace Timeline
@@ -44,7 +43,6 @@ namespace Timeline
         public override Type RuntimeTrackType => typeof (RuntimeSubTimelineTrack);
         
 #if UNITY_EDITOR
-        public override Type TrackViewType => typeof (SubTimelineTrackView);  
         public string referName;
         public BBTimeline subTimeline;
 #endif

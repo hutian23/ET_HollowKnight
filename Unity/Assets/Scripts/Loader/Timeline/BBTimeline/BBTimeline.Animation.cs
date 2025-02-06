@@ -16,22 +16,17 @@ namespace Timeline
 {
     [Serializable]
     [BBTrack("Animation")]
-#if UNITY_EDITOR
     [Color(127, 253, 228)]
     [IconGuid("46d1be470ea7f7945b52ec8511f9a419")]
-#endif
     public class BBAnimationTrack: BBTrack
     {
         public override Type RuntimeTrackType => typeof (RuntimeAnimationTrack);
 #if UNITY_EDITOR
         protected override Type ClipType => typeof (BBAnimationClip);
-        public override Type ClipViewType => typeof (AnimationClipView);
 #endif
     }
-
-#if UNITY_EDITOR
+    
     [Color(127, 253, 228)]
-#endif
     public class BBAnimationClip: BBClip
     {
         public AnimationClip animationClip;
@@ -93,7 +88,7 @@ namespace Timeline
 
         [LabelText("AnimationLength: "), PropertyOrder(4)]
         [ShowInInspector]
-        public int animationLength => AnimationClip == null? 0 : (int)(AnimationClip.length * TimelineUtility.FrameRate);
+        public int animationLength => AnimationClip == null? 0 : (int)(AnimationClip.length * 60f);
 
         [Button("提取运动曲线", DirtyOnClick = false), PropertyOrder(6)]
         public void Rebind()
@@ -250,7 +245,7 @@ namespace Timeline
         {
             //Evaluate Clip
             int clipInFrame = targetFrame - Clip.StartFrame;
-            ClipPlayable.SetTime((float)clipInFrame / TimelineUtility.FrameRate);
+            ClipPlayable.SetTime(clipInFrame / 60f);
             PrepareFrame(default, default);
 
             //Edit mode ---> play animation curve

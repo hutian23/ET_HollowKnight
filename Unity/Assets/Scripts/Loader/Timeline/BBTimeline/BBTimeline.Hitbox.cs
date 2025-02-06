@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using ET;
+#if UNITY_EDITOR
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using Timeline.Editor;
+#endif
 using UnityEngine;
 
 namespace Timeline
@@ -43,20 +44,21 @@ namespace Timeline
                     closestFrame = keyFrame.frame;
                     break;
                 }
+
                 if (keyFrame.frame < targetFrame && targetFrame - keyFrame.frame < targetFrame - closestFrame)
                 {
                     closestFrame = keyFrame.frame;
                 }
             }
-            return closestFrame == -1 ? null : GetKeyframe(closestFrame);
+
+            return closestFrame == -1? null : GetKeyframe(closestFrame);
         }
-        
+
 #if UNITY_EDITOR
-        public override Type TrackViewType => typeof (HitboxTrackView);
         public override int GetMaxFrame()
         {
-            var max = 1;
-            foreach (var keyframe in Keyframes)
+            int max = 1;
+            foreach (HitboxKeyframe keyframe in Keyframes)
             {
                 if (keyframe.frame >= max)
                 {
@@ -103,7 +105,7 @@ namespace Timeline
         [LabelText("大小: ")]
         public Vector2 size = Vector2.one;
     }
-    
+
     //有点套娃 --- > Fixture.UserData ---> FixtureData ---> UserData
     public struct FixtureData
     {
@@ -111,7 +113,7 @@ namespace Timeline
         public long InstanceId;
         public string Name;
         public int Type;
-        
+
         //碰撞事件
         public int TriggerEnterId;
         public int TriggerStayId;
@@ -120,11 +122,11 @@ namespace Timeline
         public int CollisionEnterId;
         public int CollisionStayId;
         public int CollisionExitId;
-        
+
         public long LayerMask;
         public bool IsTrigger;
-        
-        public object UserData; 
+
+        public object UserData;
     }
 
     public static class LayerType
@@ -134,7 +136,7 @@ namespace Timeline
         public const int Unit = 2 << 1;
         public const int Camera = 2 << 2;
     }
-    
+
     public static class FixtureType
     {
         public const int None = 0;
@@ -146,9 +148,9 @@ namespace Timeline
     [Serializable]
     public class HitboxMarkerInspectorData: ShowInspectorData
     {
-        [LabelText("当前帧: "),ReadOnly]
+        [LabelText("当前帧: "), ReadOnly]
         public int currentFrame;
-        
+
         [LabelText("判定框类型: ")]
         public HitboxType HitboxType;
 
@@ -184,7 +186,7 @@ namespace Timeline
             }, "Create hitbox", false);
         }
 
-        [Button("刷新",DirtyOnClick = false)]
+        [Button("刷新", DirtyOnClick = false)]
         private void Refresh()
         {
             RuntimeHitboxTrack.GenerateHitbox(fieldView.EditorWindow.TimelinePlayer, Keyframe);
@@ -225,8 +227,6 @@ namespace Timeline
     }
 #endif
 
-    #region Runtime
-
     public struct UpdateHitboxCallback
     {
         public long instanceId;
@@ -263,24 +263,23 @@ namespace Timeline
                 {
                     return;
                 }
+
                 EventSystem.Instance.Invoke(new UpdateHitboxCallback() { instanceId = timelinePlayer.instanceId, Keyframe = _keyFrame });
             }
             else
             {
-#if UNITY_EDITOR
                 HitboxKeyframe _keyFrame = hitboxTrack.GetClosestKeyframe(targetFrame);
                 if (_keyFrame == null)
                 {
                     return;
                 }
                 GenerateHitbox(timelinePlayer, _keyFrame);
-#endif   
             }
         }
 
-#if UNITY_EDITOR
         private static void ClearHitbox(TimelinePlayer timelinePlayer)
         {
+#if UNITY_EDITOR
             //1. 销毁HitboxTrack运行时产生的组件
             var goSet = new HashSet<GameObject>();
             foreach (Component component in timelinePlayer.GetComponentsInChildren<Component>())
@@ -290,17 +289,20 @@ namespace Timeline
                     goSet.Add(component.gameObject);
                 }
             }
+
             foreach (GameObject go in goSet)
             {
                 UnityEngine.Object.DestroyImmediate(go);
             }
+#endif
         }
-        
+
         public static void GenerateHitbox(TimelinePlayer timelinePlayer, HitboxKeyframe keyframe)
         {
+#if UNITY_EDITOR
             //1. 销毁HitboxTrack运行时产生的组件
             ClearHitbox(timelinePlayer);
-            
+
             //2. 根据keyframe生成新的CastBox
             foreach (BoxInfo boxInfo in keyframe.boxInfos)
             {
@@ -320,9 +322,7 @@ namespace Timeline
                 CastBox castBox = child.AddComponent<CastBox>();
                 castBox.info = MongoHelper.Clone(boxInfo);
             }
+#endif
         }
     }
-#endif
-
-    #endregion
 }

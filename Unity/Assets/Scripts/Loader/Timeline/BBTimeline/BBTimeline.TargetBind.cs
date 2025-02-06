@@ -4,7 +4,6 @@ using System.Linq;
 using ET;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using Timeline.Editor;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -49,7 +48,6 @@ namespace Timeline
         }
         
 #if UNITY_EDITOR
-        public override Type TrackViewType => typeof (TargetBindTrackView);
         public string referName;
         
         public override int GetMaxFrame()

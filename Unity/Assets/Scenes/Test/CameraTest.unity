@@ -472,6 +472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 495028255}
+  - component: {fileID: 495028256}
   m_Layer: 0
   m_Name: _Enemy
   m_TagString: Untagged
@@ -495,6 +496,35 @@ Transform:
   - {fileID: 1440236560}
   m_Father: {fileID: 374000357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &495028256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495028254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd2cdf17bd9f32449b016861d3df3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: RuntimePlayable
+      Entry: 6
+      Data: 
+  instanceId: 0
+  Hertz: 60
+  ApplyRootMotion: 0
+  BBPlayable: {fileID: 11400000, guid: d936653cf48ca124ba04963004224b1f, type: 2}
+  CurrentTimeline: {fileID: 0}
 --- !u!1 &603205785
 GameObject:
   m_ObjectHideFlags: 0

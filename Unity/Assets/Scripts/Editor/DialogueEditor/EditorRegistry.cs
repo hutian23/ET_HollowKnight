@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Timeline;
+using Timeline.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -11,6 +13,8 @@ namespace ET.Client
     {
         private static readonly Dictionary<Type, Type> NodeClassMap = new();
         public static readonly Dictionary<Type, Type> resolverMap = new();
+        private static readonly Dictionary<Type, Type> TrackViewMap = new();
+        private static readonly Dictionary<Type, Type> ClipViewMap = new();
 
         public static Type LookUpNodeEditor(Type type)
         {
@@ -51,7 +55,7 @@ namespace ET.Client
             //注册NodeView映射
             NodeClassMap.Clear();
             var types = AssemblyHelper.GetAssemblyTypes(typeof (EditorRegistry).Assembly);
-            foreach (var type in types.Values)
+            foreach (Type type in types.Values)
             {
                 if (type.IsGenericType || type.IsAbstract) continue;
                 if (type.IsSubclassOf(typeof (DialogueNodeView)))
@@ -70,6 +74,40 @@ namespace ET.Client
             RegisterResolver(typeof (Vector3), typeof (FieldResolver<Vector3Field, Vector3>));
             RegisterResolver(typeof (AnimationCurve), typeof (FieldResolver<CurveField, AnimationCurve>));
             RegisterResolver(typeof (Gradient), typeof (FieldResolver<GradientField, Gradient>));
+            
+            //注册TrackView映射
+            TrackViewMap.Clear();
+            TrackViewMap.Add(typeof(BBTrack), typeof(TimelineTrackView));
+            TrackViewMap.Add(typeof(BBEventTrack), typeof(EventTrackView));
+            TrackViewMap.Add(typeof(BBHitboxTrack), typeof(HitboxTrackView));
+            TrackViewMap.Add(typeof(SubTimelineTrack), typeof(SubTimelineTrack));
+            TrackViewMap.Add(typeof(BBTargetBindTrack), typeof(TargetBindTrackView));
+            
+            //注册
+            ClipViewMap.Clear();
+            ClipViewMap.Add(typeof(BBTrack), typeof(TimelineClipView));
+            ClipViewMap.Add(typeof(BBAnimationTrack), typeof(AnimationClipView));
+        }
+
+        public static Type GetTrackViewType(Type type)
+        {
+            if (!TrackViewMap.TryGetValue(type, out Type trackViewType))
+            {
+                Debug.LogError($"not found trackViewType of {type}");
+                return null;
+            }
+            return trackViewType;
+        }
+
+        public static Type GetClipViewType(Type type)
+        {
+            if (!ClipViewMap.TryGetValue(type, out Type clipViewType))
+            {
+                Debug.LogError($"not found trackViewType of {type}");
+                return null;
+            }
+
+            return clipViewType;
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using Timeline.Editor;
 using UnityEngine;
 using EventSystem = ET.EventSystem;
 
@@ -42,7 +41,6 @@ namespace Timeline
         }
         
 #if UNITY_EDITOR
-        public override Type TrackViewType => typeof (EventTrackView);
         public override int GetMaxFrame()
         {
             return EventInfos.Count > 0? EventInfos.Max(info => info.frame) : 0;
