@@ -28,20 +28,29 @@ namespace ET.Client
                 return Status.Failed;
             }
 
-            BBTimerComponent sceneTimer = BBTimerManager.Instance.SceneTimer();
+            BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
+            BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
             //1. 初始化
-            if (CameraManager.instance.timer != 0)
+            if (_parser.ContainParam("ScreenShake_Timer"))
             {
-                sceneTimer.Remove(ref CameraManager.instance.timer);
+                long _timer = _parser.GetParam<long>("ScreenShake_Timer");
+                lateUpdateTimer.Remove(ref _timer);
             }
+            _parser.TryRemoveParam("ScreenShake_Timer");
+            _parser.TryRemoveParam("ScreenShake_LengthX");
+            _parser.TryRemoveParam("ScreenShake_LengthY");
+            _parser.TryRemoveParam("ScreeShake_Frequency");
+            _parser.TryRemoveParam("ScreenShake_TotalFrame");
+            _parser.TryRemoveParam("ScreenShake_CurFrame");
+            
             //2. 
-            long timer = sceneTimer.NewFrameTimer(BBTimerInvokeType.ScreenShakeTimer, parser);
-            CameraManager.instance.timer = timer;
-            CameraManager.instance.shakeLength_X = shakeLength_X / 10000f;
-            CameraManager.instance.shakeLength_Y = shakeLength_Y / 10000f;
-            CameraManager.instance.frequency = frequency / 10000f;
-            CameraManager.instance.totalFrame = shakeFrame;
-            CameraManager.instance.curFrame = shakeFrame;
+            long timer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.ScreenShakeTimer, _parser);
+            _parser.RegistParam("ScreenShake_Timer", timer);
+            _parser.RegistParam("ScreenShake_LengthX", shakeLength_X / 10000f);
+            _parser.RegistParam("ScreenShake_LengthY", shakeLength_Y / 10000f);
+            _parser.RegistParam("ScreenShake_Frequency", frequency / 10000f);
+            _parser.RegistParam("ScreenShake_TotalFrame", shakeFrame);
+            _parser.RegistParam("ScreenShake_CurFrame", shakeFrame);
             
             await ETTask.CompletedTask;
             return Status.Success;

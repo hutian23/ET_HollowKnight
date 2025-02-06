@@ -50,14 +50,6 @@ namespace ET.Client
             parser.RegistParam("VC_CurrentFOV", 8f);
             parser.RegistParam("VC_MinFOV", 8f);
             parser.RegistParam("VC_MaxFOV", 8f);
-
-            //4. Camera Target
-            ListComponent<Vector2> pointList = ListComponent<Vector2>.Create();
-            parser.RegistParam("VC_Points", pointList);
-            token.Add(() =>
-            {
-                pointList.Dispose();
-            });
             
             //5. Draw Gizmos
             long _GizmosTimer = GizmosTimer.NewFrameTimer(BBTimerInvokeType.CameraGizmosTimer, parser);
