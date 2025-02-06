@@ -14,8 +14,14 @@
             //1. 初始化
             parser.TryRemoveParam("VC_TargetGroup");
             
-            //2. 
-            // ListComponent<>
+            //2. 注册变量
+            ListComponent<CameraTarget> targetGroup = ListComponent<CameraTarget>.Create();
+            parser.RegistParam("VC_TargetGroup", targetGroup);
+            
+            token.Add(() =>
+            {
+                targetGroup.Dispose();
+            });
             
             await ETTask.CompletedTask;
             return Status.Success;

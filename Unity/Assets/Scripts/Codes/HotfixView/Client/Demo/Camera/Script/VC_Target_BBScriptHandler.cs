@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,22 +11,30 @@ namespace ET.Client
 
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, "VC_Target: (?<posX>.*?), (?<posY>.*?);");
+            Match match = Regex.Match(data.opLine, "VC_Target: (?<Weight>.*?), (?<Radius>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
-            if (!long.TryParse(match.Groups["posX"].Value, out long posX) || !long.TryParse(match.Groups["posY"].Value, out long posY))
+            if (!long.TryParse(match.Groups["Weight"].Value, out long weight) ||
+                !long.TryParse(match.Groups["Radius"].Value, out long radius))
             {
-                Log.Error($"cannot format {match.Groups["posX"].Value} / {match.Groups["posY"].Value} to long!");
+                Log.Error($"cannot format {match.Groups["Weight"].Value} / {match.Groups["Radius"].Value} to long!!");
                 return Status.Failed;
             }
-            
+
             BBParser _parser = VirtualCamera.Instance.GetParent<Unit>().GetComponent<BBParser>();
-            ListComponent<Vector2> points = _parser.GetParam<ListComponent<Vector2>>("VC_Points");
-            points.Add(new Vector2(posX, posY) / 10000f);
+            ListComponent<CameraTarget> targetGroup = _parser.GetParam<ListComponent<CameraTarget>>("VC_TargetGroup");
+            
+            CameraTarget _target = new()
+            {
+                instanceId = parser.GetParent<Unit>().InstanceId,
+                weight = weight / 100f,
+                radius = radius / 100f
+            };
+            
+            targetGroup.Add(_target);
             
             await ETTask.CompletedTask;
             return Status.Success;

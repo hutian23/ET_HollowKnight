@@ -9,7 +9,7 @@ return;
 @Main:
 VC_Init;
 # TargetGroup
-# VCExtension_TargetGroup;
+VCExtension_TargetGroup;
 VC_Confiner: 0, 100000, 950000, 950000;
 # Zone
 VC_DeadZone: 8, 5;
@@ -22,11 +22,18 @@ VC_FollowOffset: 0;
 # FOV
 VC_MinFOV: 20000;
 VC_MaxFOV: 150000;
-VC_FOV: 70000;
+VC_FOV: 90000;
 return;
 
 # 战斗时摄像头
 [CombatCamera]
 @Main:
 VC_MoveTo: 150000, -100000, 20000;
+return;
+
+
+# Brain
+[Root]
+@RootInit:
+
 return;

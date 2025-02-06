@@ -1,8 +1,9 @@
 [Root]
 @RootInit:
 PlayerInit;
-# 摄像头触发器相关
+# Virtual Camera
 VC_Sensor: 0, 0, 120000, 80000;
+VC_Target: 100, 200;
 SetPos: 0, -10000;
 Gravity: 100000;
 # Numeric

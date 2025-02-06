@@ -9,7 +9,7 @@ namespace ET.Client
         {
             float halfWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
             float halfHeight = Camera.main.orthographicSize;
-            Vector2 center = self.GetParam<Vector2>("VC_Follow_Center");
+            Vector2 center = self.GetParam<Vector2>("VC_Center");
             
             // DeadZone
             //1. 根据正交距离调整deadZone范围
@@ -111,17 +111,17 @@ namespace ET.Client
             Camera.main.transform.position = new Vector3(deadZoneRect.center.x, deadZoneRect.center.y, -10);
             
             // 限制相机不能超出边界
-            if (self.ContainParam("VC_Confiner_Rect"))
-            {
-                Rect _Rect = new(Camera.main.transform.position - new Vector3(halfWidth, halfHeight), new Vector3(halfWidth, halfHeight) * 2);
-                Rect confinerRect = self.GetParam<Rect>("VC_Confiner_Rect");
-
-                float xMin = Mathf.Clamp(_Rect.xMin, confinerRect.xMin, confinerRect.xMax - _Rect.width);
-                float yMin = Mathf.Clamp(_Rect.yMin, confinerRect.yMin, confinerRect.yMax - _Rect.height);
-                Rect curRect = new(new Vector2(xMin, yMin), _Rect.size);
-
-                Camera.main.transform.position = new Vector3(curRect.center.x, curRect.center.y, -10);
-            }
+            // if (self.ContainParam("VC_Confiner_Rect"))
+            // {
+            //     Rect _Rect = new(Camera.main.transform.position - new Vector3(halfWidth, halfHeight), new Vector3(halfWidth, halfHeight) * 2);
+            //     Rect confinerRect = self.GetParam<Rect>("VC_Confiner_Rect");
+            //
+            //     float xMin = Mathf.Clamp(_Rect.xMin, confinerRect.xMin, confinerRect.xMax - _Rect.width);
+            //     float yMin = Mathf.Clamp(_Rect.yMin, confinerRect.yMin, confinerRect.yMax - _Rect.height);
+            //     Rect curRect = new(new Vector2(xMin, yMin), _Rect.size);
+            //
+            //     Camera.main.transform.position = new Vector3(curRect.center.x, curRect.center.y, -10);
+            // }
         }
     }
 }

@@ -16,20 +16,21 @@ namespace ET.Client
             BBTimerComponent GizmosTimer = b2WorldManager.Instance.GetGizmosTimer();
             
             //1. Camera Follow
-            long followTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFollowTimer, parser);
-            parser.RegistParam("VC_Follow_Id", long.MinValue);
-            parser.RegistParam("VC_Follow_TargetPosition", Vector2.zero);
-            parser.RegistParam("VC_Follow_Center", Vector2.zero);
-            parser.RegistParam("VC_Follow_Offset", 0f);
-            parser.RegistParam("VC_Follow_CurrentOffset", 0f);
-            parser.RegistParam("VC_Follow_Timer", followTimer);
-            token.Add(() =>
-            {
-                lateUpdateTimer.Remove(ref followTimer);
-            });
+            // long followTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraFollowTimer, parser);
+            // parser.RegistParam("VC_Follow_Id", long.MinValue);
+            // parser.RegistParam("VC_Follow_TargetPosition", Vector2.zero);
+            // parser.RegistParam("VC_Follow_Center", Vector2.zero);
+            // parser.RegistParam("VC_Follow_Offset", 0f);
+            // parser.RegistParam("VC_Follow_CurrentOffset", 0f);
+            // parser.RegistParam("VC_Follow_Timer", followTimer);
+            // token.Add(() =>
+            // {
+            //     lateUpdateTimer.Remove(ref followTimer);
+            // });
 
-            //2. Zone
+            //1. Zone
             long zoneTimer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.CameraZoneTimer, parser);
+            parser.RegistParam("VC_Center", Vector2.zero);
             parser.RegistParam("VC_DeadZone_X", 0f);
             parser.RegistParam("VC_DeadZone_Y", 0f);
             parser.RegistParam("VC_SoftZone_X", 1f);
@@ -46,12 +47,12 @@ namespace ET.Client
                 lateUpdateTimer.Remove(ref zoneTimer);
             });
 
-            //3. FOV
+            //2. FOV
             parser.RegistParam("VC_CurrentFOV", 8f);
             parser.RegistParam("VC_MinFOV", 8f);
             parser.RegistParam("VC_MaxFOV", 8f);
             
-            //5. Draw Gizmos
+            //3. Draw Gizmos
             long _GizmosTimer = GizmosTimer.NewFrameTimer(BBTimerInvokeType.CameraGizmosTimer, parser);
             parser.RegistParam("VC_GizmosTimer", GizmosTimer);
             token.Add(() =>
