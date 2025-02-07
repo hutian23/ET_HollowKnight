@@ -1,7 +1,6 @@
 [Root]
 @RootInit:
 DummyInit;
-VC_Target: 100, 100;
 SetPos: 0, 8000;
 Gravity: 100000;
 # Numeric
