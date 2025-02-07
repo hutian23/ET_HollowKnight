@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Timeline
@@ -23,14 +25,14 @@ namespace Timeline
         {
             SerializedTimeline = new SerializedObject(this);
         }
-
+#endif
+        
         public BBTrack AddTrack(Type type)
         {
             BBTrack track = Activator.CreateInstance(type) as BBTrack;
 
             string trackName = Guid.NewGuid().ToString();
             track.Name = trackName;
-            // track.Name = type.Name.Replace("Track", string.Empty);
             Tracks.Add(track);
             return track;
         }
@@ -64,7 +66,6 @@ namespace Timeline
         {
             track.RemoveClip(clip);
         }
-#endif
     }
 
     public abstract class BBTrack
@@ -76,8 +77,7 @@ namespace Timeline
         public List<BBClip> Clips = new();
 
         public virtual Type RuntimeTrackType => typeof (RuntimeTrack);
-
-#if UNITY_EDITOR
+        
         protected virtual Type ClipType => typeof (BBClip);
 
         public BBClip AddClip(int frame)
@@ -105,7 +105,6 @@ namespace Timeline
 
             return maxFrame;
         }
-#endif
     }
 
     public abstract class BBClip
@@ -128,7 +127,7 @@ namespace Timeline
             StartFrame = frame;
             EndFrame = StartFrame + 3;
         }
-#if UNITY_EDITOR
+
         public bool Contain(float halfFrame)
         {
             return StartFrame < halfFrame && halfFrame < EndFrame;
@@ -148,9 +147,6 @@ namespace Timeline
 
             return false;
         }
-
-        public virtual Type ShowInInSpectorType => typeof (ShowInspectorData);
-#endif
     }
 
     //Track中的marker基类

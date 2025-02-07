@@ -4,7 +4,6 @@ namespace ET.Client
 {
     [FriendOf(typeof (BBParser))]
     [FriendOf(typeof (ScriptDispatcherComponent))]
-    [FriendOf(typeof (DialogueComponent))]
     public static class BBParserSystem
     {
         public class BBParserAwakeSystem : AwakeSystem<BBParser>

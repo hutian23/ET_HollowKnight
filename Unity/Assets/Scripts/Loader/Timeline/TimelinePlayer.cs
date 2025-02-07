@@ -60,8 +60,6 @@ namespace Timeline
             //禁用AnimationClip对transform的修改
         }
         
-#if UNITY_EDITOR
-        
         public void ClearTimelineGenerate()
         {
             var goSet = new HashSet<GameObject>();
@@ -78,7 +76,7 @@ namespace Timeline
                 DestroyImmediate(go);
             }
         }
-#endif
+        
         public BBTimeline GetTimeline(string timelineName)
         {
             return BBPlayable.GetTimeline(timelineName);

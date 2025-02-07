@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using ET;
-using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,10 +13,8 @@ namespace Timeline
 {
     [Serializable]
     [BBTrack("TargetBind")]
-#if UNITY_EDITOR
     [Color(100, 100, 100)]
     [IconGuid("51d6e4824d3138c4880ca6308fa0e473")]
-#endif
     public class BBTargetBindTrack: BBTrack
     {
         [NonSerialized,OdinSerialize]
@@ -47,14 +46,12 @@ namespace Timeline
             return closestFrame == -1 ? null : GetKeyFrame(closestFrame);
         }
         
-#if UNITY_EDITOR
         public string referName;
         
         public override int GetMaxFrame()
         {
             return KeyFrames.Count > 0 ? KeyFrames.Max(info => info.frame) : 0;
         }
-#endif
     }
 
     [Serializable]
@@ -70,8 +67,6 @@ namespace Timeline
         Left = 1,
         Right = -1
     }
-    
-    #region Runtime
 
     public struct UpdateTargetBindCallback
     {
@@ -152,7 +147,9 @@ namespace Timeline
             // 运行时退出可能并没有销毁委托，导致空引用
             if (TimelinePlayer == null)
             {
-                EditorApplication.update -= SyncPosition;
+#if UNITY_EDITOR
+                EditorApplication.update -= SyncPosition;          
+#endif
             }
             
             //1. Find refer GameObject
@@ -179,85 +176,4 @@ namespace Timeline
         }
         
     }
-
-    #endregion
-
-    #region Editor
-    [Serializable]
-    public class BBTargetBindInspectorData: ShowInspectorData
-    {
-        private TargetBindKeyFrame KeyFrame;
-        private BBTargetBindTrack BindTrack;
-        private TimelineFieldView FieldView;
-        
-        [LabelText("当前帧: "), ReadOnly]
-        public int CurFrame;
-        
-        [LabelText("绑定对象")]
-        public GameObject TargetBindGo;
-        
-        [LabelText("相对位置: "), ReadOnly]
-        public Vector2 LocalPos;
-
-        [LabelText("转向: ")]
-        public FlipState Flip;
-        
-        [Button("保存",DirtyOnClick = false)]
-        private void Save()
-        {
-            FieldView.EditorWindow.ApplyModifyWithoutButtonUndo(() =>
-            {
-                //保存绑定对象
-                ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
-                refer.Remove(TargetBindGo.name);
-                refer.Add(TargetBindGo.name, TargetBindGo);
-                BindTrack.referName = TargetBindGo.name;
-                
-                //保存转向
-                KeyFrame.Flip = Flip;
-                
-                //保存相对位置
-                foreach (TargetBind targetBind in FieldView.EditorWindow.TimelinePlayer.GetComponentsInChildren<TargetBind>())
-                {
-                    if (targetBind.TrackName.Equals(BindTrack.Name))
-                    {
-                        GameObject targetGo = targetBind.gameObject;
-                        KeyFrame.LocalPosition = targetGo.transform.localPosition;
-                        return;
-                    }
-                }
-                Debug.LogError($"Does not exist targetBind GameObject: {BindTrack.Name}");
-                
-            }, "Save TargetBind KeyFrame");
-        }
-        
-        public BBTargetBindInspectorData(object target, BBTargetBindTrack bindTrack): base(target)
-        {
-            TargetBindKeyFrame keyFrame = target as TargetBindKeyFrame; 
-            KeyFrame = keyFrame;
-            BindTrack = bindTrack;
-        }
-
-        public override void InspectorAwake(TimelineFieldView _fieldView)
-        {
-            FieldView = _fieldView;
-            CurFrame = KeyFrame.frame;
-            LocalPos = KeyFrame.LocalPosition;
-            Flip = KeyFrame.Flip;
-
-            if (string.IsNullOrEmpty(BindTrack.referName)) return;
-            ReferenceCollector refer = FieldView.EditorWindow.TimelinePlayer.GetComponent<ReferenceCollector>();
-            TargetBindGo = refer.Get<GameObject>(BindTrack.referName);
-        }
-
-        public override void InspectorUpdate(TimelineFieldView _fieldView)
-        {
-        }
-
-        public override void InspectorDestroy(TimelineFieldView _fieldView)
-        {
-        }
-    }
-
-    #endregion
 }

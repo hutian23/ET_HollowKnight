@@ -5,12 +5,13 @@ namespace Timeline
     public class CastBox: CastShapeBase, ITimelineGenerate
     {
         public BoxInfo info;
-        
+
+#if UNITY_EDITOR
         protected override void OnDrawGizmos()
         {
             Matrix4x4 gizmosMatrixRecord = Gizmos.matrix;
             Color gizmosColorRecord = Gizmos.color;
-
+        
             switch (info.hitboxType)
             {
                 case HitboxType.Hit:
@@ -40,6 +41,7 @@ namespace Timeline
             Gizmos.DrawWireCube(info.center, info.size);
             Gizmos.color = gizmosColorRecord;
             Gizmos.matrix = gizmosMatrixRecord;
-        }
+        }  
+#endif
     }
 }

@@ -2,7 +2,6 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(DialogueComponent))]
     [FriendOf(typeof(ScriptDispatcherComponent))]
     [FriendOf(typeof(BehaviorInfo))]
     [FriendOf(typeof(BBParser))]

@@ -74,8 +74,7 @@ namespace Timeline
             //3. mute playable 
             PlayableGraph.Evaluate();
         }
-
-#if UNITY_EDITOR
+        
         public BBTrack AddTrack(Type type)
         {
             BBTrack track = Timeline.AddTrack(type);
@@ -86,7 +85,6 @@ namespace Timeline
         {
             Timeline.RemoveTrack(track);
         }
-#endif
 
         //TODO Rebind -- 对应Undo Redo
         public Action RebindCallback;

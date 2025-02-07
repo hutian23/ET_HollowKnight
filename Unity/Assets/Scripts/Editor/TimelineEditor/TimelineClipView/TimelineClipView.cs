@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,13 +14,13 @@ namespace Timeline.Editor
         private bool Hoverd { get; set; }
         public ISelection SelectionContainer { get; set; }
 
-        private TimelineTrackView TrackView { get; set; }
+        protected TimelineTrackView TrackView { get; set; }
         protected TimelineFieldView FieldView => SelectionContainer as TimelineFieldView;
-        protected TimelineEditorWindow EditorWindow => FieldView.EditorWindow;
+        private TimelineEditorWindow EditorWindow => FieldView.EditorWindow;
         public BBClip BBClip;
         public BBTrack BBTrack => TrackView.Track;
 
-        protected Dictionary<int, float> FramePosMap => FieldView.FramePosMap;
+        private Dictionary<int, float> FramePosMap => FieldView.FramePosMap;
         public int StartFrame => BBClip.StartFrame;
         public int EndFrame => BBClip.EndFrame;
 
@@ -31,13 +30,13 @@ namespace Timeline.Editor
         protected DragLineManipulator m_SelfEaseOutDragLine;
         private readonly DropdownMenuHandler m_MenuHandle;
 
-        protected readonly VisualElement m_Content;
+        private readonly VisualElement m_Content;
         private readonly VisualElement m_Title;
         private readonly Label m_ClipName;
         private readonly VisualElement m_BottomLine;
         private readonly VisualElement m_DrawBox;
 
-        private ShowInspectorData inspectorData;
+        protected ShowInspectorData inspectorData;
 
         public TimelineClipView()
         {
@@ -247,22 +246,22 @@ namespace Timeline.Editor
             }
         }
 
-        public void InspectorAwake()
+        public virtual void InspectorAwake()
         {
-            inspectorData = Activator.CreateInstance(BBClip.ShowInInSpectorType, BBClip) as ShowInspectorData;
-            inspectorData.InspectorAwake(FieldView);
-            TimelineInspectorData.CreateView(FieldView.ClipInspector, inspectorData);
+            // inspectorData = Activator.CreateInstance(BBClip.ShowInInSpectorType, BBClip) as ShowInspectorData;
+            // inspectorData.InspectorAwake(FieldView);
+            // TimelineInspectorData.CreateView(FieldView.ClipInspector, inspectorData);
         }
 
-        public void InsepctorUpdate()
+        public virtual void InsepctorUpdate()
         {
-            inspectorData.InspectorUpdate(FieldView);
+            // inspectorData.InspectorUpdate(FieldView);
         }
 
-        public void InspectorDestroy()
+        public virtual void InspectorDestroy()
         {
-            inspectorData.InspectorDestroy(FieldView);
-            FieldView.ClipInspector.Clear();
+            // inspectorData.InspectorDestroy(FieldView);
+            // FieldView.ClipInspector.Clear();
         }
     }
 }

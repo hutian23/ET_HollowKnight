@@ -9,6 +9,6 @@ namespace ET.Client
 
 		public Dictionary<int, Scroll_Item_Choice> ScrollItemChoices = new();
 
-		public List<VN_ChoiceNode> choiceNodes = new();
+		// public List<VN_ChoiceNode> choiceNodes = new();
 	}
 }

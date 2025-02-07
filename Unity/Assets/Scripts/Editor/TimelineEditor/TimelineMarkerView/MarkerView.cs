@@ -16,7 +16,7 @@ namespace Timeline.Editor
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>($"VisualTree/TimelineMarkerView");
             visualTree.CloneTree(this);
 
-            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Scripts/Loader/Timeline/Editor/Resources/Style/TimelineMarkerView.uss");
+            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Scripts/Editor/TimelineEditor/Resources/Style/TimelineMarkerView.uss");
             styleSheets.Add(styleSheet);
 
             markerView = this.Q<VisualElement>("marker-view");
