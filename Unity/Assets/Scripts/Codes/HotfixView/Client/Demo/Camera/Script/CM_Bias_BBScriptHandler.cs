@@ -32,10 +32,10 @@ namespace ET.Client
 
             //2. 
             CinemachineVirtualCamera cm = camera.GetComponent<CinemachineVirtualCamera>();
-            CinemachineComposer composer = cm.GetCinemachineComponent<CinemachineComposer>();
+            CinemachineFramingTransposer composer = cm.GetCinemachineComponent<CinemachineFramingTransposer>();
             if (composer == null)
             {
-                Log.Error($"virtual camera: {match.Groups["Camera"].Value} must set aim to composer!!!");
+                Log.Error($"virtual camera: {match.Groups["Camera"].Value} must set follow to framecomposer!!!");
                 return Status.Failed;
             }
             composer.m_BiasX = centerX / 100f;

@@ -13,6 +13,9 @@ namespace ET.Client
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
             Unit unit = parser.GetParent<Unit>();
+            BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
+            BBTimerComponent gizmosTimer = b2WorldManager.Instance.GetGizmosTimer();
+            
             unit.RemoveComponent<VirtualCamera>();
             unit.AddComponent<VirtualCamera>();
             GameObject _camera = unit.GetComponent<GameObjectComponent>().GameObject;
@@ -33,6 +36,13 @@ namespace ET.Client
             //3. 管理生成的虚拟相机
             Dictionary<string, GameObject> cameraDict = new();
             parser.RegistParam("CM_CameraDict", cameraDict);
+            
+            //?. 编辑器内
+            long timer = gizmosTimer.NewFrameTimer(BBTimerInvokeType.CameraGizmosTimer, parser);
+            token.Add(() =>
+            {
+                gizmosTimer.Remove(ref timer);
+            });
             
             await ETTask.CompletedTask;
             return Status.Success;

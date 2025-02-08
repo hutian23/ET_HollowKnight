@@ -1005,6 +1005,10 @@
       <Project>{c109842f-01da-64d4-dbf2-00c6449e459e}</Project>
       <Name>Unity.ModelView</Name>
     </ProjectReference>
+    <ProjectReference Include="AimingRig.csproj">
+      <Project>{478838b1-30b3-fb1c-08cf-8d05ddc57628}</Project>
+      <Name>AimingRig</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.HotfixView.csproj">
       <Project>{de4513d3-889b-5c52-8e9c-744c99ae7509}</Project>
       <Name>Unity.HotfixView</Name>
