@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -16,7 +17,7 @@ namespace ET.Client
             unit.AddComponent<VirtualCamera>();
             GameObject _camera = unit.GetComponent<GameObjectComponent>().GameObject;
 
-            // 清空运行时生成的相机go
+            //1. 清空运行时生成的相机go
             for (int i = 0; i < _camera.transform.childCount; i++)
             {
                 Transform child = _camera.transform.GetChild(i);
@@ -28,6 +29,10 @@ namespace ET.Client
             target.transform.SetParent(_camera.transform);
             target.transform.localPosition = new Vector3(0, 0, -10);
             parser.RegistParam("CM_CameraTarget", target);
+
+            //3. 管理生成的虚拟相机
+            Dictionary<string, GameObject> cameraDict = new();
+            parser.RegistParam("CM_CameraDict", cameraDict);
             
             await ETTask.CompletedTask;
             return Status.Success;

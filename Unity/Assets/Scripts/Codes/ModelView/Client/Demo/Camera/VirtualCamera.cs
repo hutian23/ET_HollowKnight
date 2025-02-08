@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [ComponentOf(typeof(Unit))]
-    public class VirtualCamera: Entity, IAwake, IDestroy, IGizmosUpdate, ILoad, ILateUpdate
+    public class VirtualCamera: Entity, IAwake, IDestroy, ILoad, IFrameLateUpdate
     {
         [StaticField]
         public static VirtualCamera Instance;

@@ -21,9 +21,9 @@ namespace ET.Client
             }
         }
         
-        public class VirtualCameraLateUpdateSystem : LateUpdateSystem<VirtualCamera>
+        public class VirtualCameraLateUpdateSystem : FrameLateUpdateSystem<VirtualCamera>
         {
-            protected override void LateUpdate(VirtualCamera self)
+            protected override void FrameLateUpdate(VirtualCamera self)
             {
                 CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
                 brain.ManualUpdate();
