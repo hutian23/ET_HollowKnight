@@ -1,4 +1,7 @@
-﻿namespace ET.Client
+﻿using Cinemachine;
+using UnityEngine;
+
+namespace ET.Client
 {
     public static class VirtualCameraSystem
     {
@@ -15,6 +18,15 @@
             protected override void Destroy(VirtualCamera self)
             {
                 VirtualCamera.Instance = null;
+            }
+        }
+        
+        public class VirtualCameraLateUpdateSystem : LateUpdateSystem<VirtualCamera>
+        {
+            protected override void LateUpdate(VirtualCamera self)
+            {
+                CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+                brain.ManualUpdate();
             }
         }
     }

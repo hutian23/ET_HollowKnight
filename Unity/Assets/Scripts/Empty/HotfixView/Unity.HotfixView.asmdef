@@ -9,7 +9,8 @@
         "Unity.Core",
         "Unity.Mathematics",
         "Unity.Loader",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Cinemachine"
     ],
     "includePlatforms": [
         "Editor"

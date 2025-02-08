@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "410bb9b542664e9288588b5c23d3300e01e5936e"
+      "hash": "8e571d594d20d86a68753b54a71959c252b55577"
     },
     "com.realgames.dear-imgui": {
       "version": "https://github.com/Zonciu/dear-imgui-unity.git",

@@ -359,10 +359,13 @@
       <HintPath>C:\Users\25046\Desktop\TOD\ET_HollowKnight\Unity\Assets\Plugins\MongoDB\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="dnlib">
-      <HintPath>C:\Users\25046\Desktop\TOD\ET_HollowKnight\Unity\Library\PackageCache\com.code-philosophy.hybridclr@410bb9b542\Plugins\dnlib.dll</HintPath>
+      <HintPath>C:\Users\25046\Desktop\TOD\ET_HollowKnight\Unity\Library\PackageCache\com.code-philosophy.hybridclr@8e571d594d\Plugins\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="CommandLine">
       <HintPath>C:\Users\25046\Desktop\TOD\ET_HollowKnight\Unity\Assets\Plugins\CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="LZ4">
+      <HintPath>C:\Users\25046\Desktop\TOD\ET_HollowKnight\Unity\Library\PackageCache\com.code-philosophy.hybridclr@8e571d594d\Plugins\LZ4.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>C:\Users\25046\Desktop\TOD\ET_HollowKnight\Unity\Assets\Plugins\MongoDB\System.Runtime.CompilerServices.Unsafe.dll</HintPath>

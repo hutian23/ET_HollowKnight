@@ -18,7 +18,7 @@ namespace ET.Client
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
-
+            
             Log.Warning(match.Groups["Info"].Value);
             await ETTask.CompletedTask;
             return Status.Success;
