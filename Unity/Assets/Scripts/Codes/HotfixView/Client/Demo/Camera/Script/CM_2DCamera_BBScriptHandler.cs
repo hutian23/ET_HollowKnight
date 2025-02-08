@@ -22,6 +22,8 @@ namespace ET.Client
                 return Status.Failed;
             }
 
+            BBTimerComponent lateUpdateTimer = BBTimerManager.Instance.LateUpdateTimer();
+            BBTimerComponent gizmosTimer = b2WorldManager.Instance.GetGizmosTimer();
             Unit unit = parser.GetParent<Unit>();
             GameObject _camera = unit.GetComponent<GameObjectComponent>().GameObject;
             
@@ -39,9 +41,20 @@ namespace ET.Client
             
             //2. 初始化
             vc.AddCinemachineComponent<CinemachineTransposer>().enabled = true;
+            vc.AddCinemachineComponent<CinemachineComposer>().enabled = true;
             // 设置跟随对象
             Transform cameraTarget = parser.GetParam<GameObject>("CM_CameraTarget").transform;
             vc.Follow = cameraTarget;
+            vc.LookAt = cameraTarget;
+            
+            
+            //?. 编辑器内
+            long timer = gizmosTimer.NewFrameTimer(BBTimerInvokeType.CameraGizmosTimer, parser);
+            token.Add(() =>
+            {
+                gizmosTimer.Remove(ref timer);
+            });
+            
             
             await ETTask.CompletedTask;
             return Status.Success;
