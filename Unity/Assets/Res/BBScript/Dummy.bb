@@ -3,6 +3,8 @@
 DummyInit;
 SetPos: 0, 8000;
 Gravity: 100000;
+# Cinemachine
+CM_TargetGroup_Member: TG_Camera, 100, 300;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;
@@ -79,18 +81,23 @@ Exit;
 Shake: {Self.Shake_LengthX}, {Self.Shake_LengthY}, {Self.Shake_Frequency}, {Self.Shake_Frame};
 SetVelocityX: 0;
 SetVelocityY: 0;
-Gravity: 60000;
+Gravity: 0;
 # 帧冻结
 HitStop: 0, {Self.HitStopFrame};
 BBSprite: 'Frame_1', 1;
 # 击飞效果
-SetVelocityY: {Self.StartV_X};
-SetVelocityX: {Self.StartV_Y};
+SetVelocityX: {Self.StartV_X};
+SetVelocityY: {Self.StartV_Y};
+BBSprite: 'Frame_2', 3;
+BBSprite: 'Frame_3', 3;
+Gravity: 30000;
+BBSprite: 'Frame_2', 3;
+BBSprite: 'Frame_3', 3;
 BBSprite: 'Frame_2', 3;
 BBSprite: 'Frame_3', 3;
 Gravity: 120000;
 # 上升
-BeginLoop: (Velocity: Y > 100000)
+BeginLoop: (Velocity: Y > 150000)
   BBSprite: 'Frame_2', 3;
   BBSprite: 'Frame_3', 3;
   EndLoop:

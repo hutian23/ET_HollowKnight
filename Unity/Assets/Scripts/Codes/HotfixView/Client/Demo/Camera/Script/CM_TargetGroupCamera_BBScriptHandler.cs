@@ -30,7 +30,8 @@ namespace ET.Client
             _targetGroup.transform.SetParent(_camera.transform);
             
             CinemachineTargetGroup targetGroup = _targetGroup.AddComponent<CinemachineTargetGroup>();
-            targetGroup.AddMember(cameraTarget.transform, 1, 1);
+            targetGroup.AddMember(cameraTarget.transform, 1, 3);
+            targetGroup.m_PositionMode = CinemachineTargetGroup.PositionMode.GroupAverage;
             
             //2. 添加相机
             GameObject _virtualCamera = new(match.Groups["Name"].Value);

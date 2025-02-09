@@ -5,24 +5,24 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    public class CM_TargetGroup_MinFOV_BBScriptHandler : BBScriptHandler
+    public class CM_TargetGroup_FOV_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "CM_TargetGroup_MinFOV";
+            return "CM_TargetGroup_FOV";
         }
 
         //CM_TargetGroup_MinFOV: TG_Camera, 10000;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"CM_TargetGroup_MinFOV: (?<Camera>\w+), (?<Fov>.*?);");
+            Match match = Regex.Match(data.opLine, @"CM_TargetGroup_FOV: (?<Camera>\w+), (?<MinFov>.*?), (?<MaxFov>.*?);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
                 return Status.Failed;
             }
 
-            if (!long.TryParse(match.Groups["Fov"].Value, out long fov))
+            if (!long.TryParse(match.Groups["MinFov"].Value, out long fov) || !long.TryParse(match.Groups["MaxFov"].Value, out long fov2))
             {
                 Log.Error($"cannot format {match.Groups["Fov"].Value} to long!");
                 return Status.Failed;
@@ -39,6 +39,7 @@ namespace ET.Client
             //2. 
             CinemachineVirtualCamera cm = camera.GetComponent<CinemachineVirtualCamera>();
             cm.GetCinemachineComponent<CinemachineFramingTransposer>().m_MinimumOrthoSize = fov / 10000f;
+            cm.GetCinemachineComponent<CinemachineFramingTransposer>().m_MaximumOrthoSize = fov2 / 10000f;
             
             await ETTask.CompletedTask;
             return Status.Success;

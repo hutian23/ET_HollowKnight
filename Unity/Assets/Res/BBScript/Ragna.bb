@@ -422,18 +422,18 @@ BBSprite: 'Start_4', 3;
 BBSprite: 'Start_5', 3;
 # 这里开始，受击回调
 HitNotify: Once # 对于同一对象，在持续帧内仅造成一次攻击(Repeat则为持续帧内，只要发生碰撞，每帧都会回调受击回调)
-  Shake: 500, 0, 8000, 15; # 振动
+  Shake: 500, 0, 8000, 10; # 振动
   HitStop: 0, 10; # 打击停顿
   # 受击行为协程需要使用的变量
   HitParam: Shake_LengthX, 1200;
-  HitParam: Shake_LengthY, 1200;
+  HitParam: Shake_LengthY, 1000;
   HitParam: Shake_Frequency, 10000;
-  HitParam: Shake_Frame, 15;
+  HitParam: Shake_Frame, 10;
   # 受击者帧冻结(HitStop)的总帧长
   HitParam: HitStopFrame, 10;
   # HitStop结束后抛出的速度
-  HitParam: StartV_X, 350000;
-  HitParam: StartV_Y, -35000;
+  HitParam: StartV_X, -3000;
+  HitParam: StartV_Y, 300000;
   # 受击时调整转向
   Hit_UpdateFlip;
   # 受击者进入哪个硬直状态
