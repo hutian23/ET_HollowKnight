@@ -12,7 +12,7 @@ namespace ET.Client
         //CancelOption: 'DashDrive';
         public override bool Check(BBParser parser, BBScriptData data)
         {
-            Match match = Regex.Match(data.opLine, "CancelOption: '(?<Option>.*?)';");
+            Match match = Regex.Match(data.opLine, @"CancelOption: (?<Option>\w+);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);

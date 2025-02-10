@@ -47,6 +47,11 @@ namespace ET.Client
 
             //3. 相机设置
             vc.AddCinemachineComponent<CinemachineFramingTransposer>();
+            
+            // Extension
+            _virtualCamera.AddComponent<CinemachineCameraOffset>();
+            _virtualCamera.AddComponent<CinemachineConfiner2D>();
+            
             vc.Follow = _targetGroup.transform;
             
             await ETTask.CompletedTask;

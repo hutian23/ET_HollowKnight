@@ -14,9 +14,11 @@ namespace ET.Client
             float totalFrame = self.GetParam<int>("ScreenShake_TotalFrame");
             float curFrame = self.GetParam<int>("ScreenShake_CurFrame");
             long timer = self.GetParam<long>("ScreenShake_Timer");
+            GameObject go = self.GetParam<GameObject>("ScreenShake_ActiveCamera");
+            CinemachineCameraOffset cameraOffset = go.GetComponent<CinemachineCameraOffset>();
+                    
+            cameraOffset.m_Offset = new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency) * (curFrame / totalFrame), shakeLength_Y * Mathf.Sin(curFrame * frequency) * (curFrame / totalFrame), 0);
             
-            Camera.main.transform.position += new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency) * (curFrame / totalFrame), shakeLength_Y * Mathf.Sin(curFrame * frequency) * (curFrame / totalFrame), 0);
-
             curFrame--;
             if (curFrame <= 0)
             {
@@ -28,6 +30,9 @@ namespace ET.Client
                 self.TryRemoveParam("ScreenShake_TotalFrame");
                 self.TryRemoveParam("ScreenShake_CurFrame");
                 self.TryRemoveParam("ScreenShake_Timer");
+                
+                cameraOffset.m_Offset = Vector3.zero;
+                self.TryRemoveParam("ScreenShake_ActiveCamera");
                 return;
             }
             

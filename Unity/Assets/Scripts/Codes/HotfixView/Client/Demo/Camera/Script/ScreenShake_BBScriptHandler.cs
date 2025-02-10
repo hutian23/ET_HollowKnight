@@ -1,4 +1,6 @@
 ﻿using System.Text.RegularExpressions;
+using Cinemachine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -42,6 +44,7 @@ namespace ET.Client
             _parser.TryRemoveParam("ScreeShake_Frequency");
             _parser.TryRemoveParam("ScreenShake_TotalFrame");
             _parser.TryRemoveParam("ScreenShake_CurFrame");
+            _parser.TryRemoveParam("ScreenShake_ActiveCamera");
             
             //2. 
             long timer = lateUpdateTimer.NewFrameTimer(BBTimerInvokeType.ScreenShakeTimer, _parser);
@@ -51,6 +54,7 @@ namespace ET.Client
             _parser.RegistParam("ScreenShake_Frequency", frequency / 10000f);
             _parser.RegistParam("ScreenShake_TotalFrame", shakeFrame);
             _parser.RegistParam("ScreenShake_CurFrame", shakeFrame);
+            _parser.RegistParam("ScreenShake_ActiveCamera", Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject);
             
             await ETTask.CompletedTask;
             return Status.Success;

@@ -39,6 +39,11 @@ namespace ET.Client
             
             //2. 初始化
             vc.AddCinemachineComponent<CinemachineFramingTransposer>().enabled = true;
+            
+            // Extension
+            _virtualCamera.AddComponent<CinemachineCameraOffset>();
+            _virtualCamera.AddComponent<CinemachineConfiner2D>();
+            
             // 设置跟随对象
             Transform cameraTarget = parser.GetParam<GameObject>("CM_CameraTarget").transform;
             vc.Follow = cameraTarget;

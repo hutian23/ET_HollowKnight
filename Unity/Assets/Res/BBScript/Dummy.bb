@@ -4,7 +4,7 @@ DummyInit;
 SetPos: 0, 8000;
 Gravity: 100000;
 # Cinemachine
-CM_TargetGroup_Member: TG_Camera, 100, 300;
+CM_TargetGroup_Member: TG_Camera, 110, 250;
 # Numeric
 NumericType: Hertz, 60;
 NumericType: MaxGravity, 150000;

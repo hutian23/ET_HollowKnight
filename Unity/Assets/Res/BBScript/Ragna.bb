@@ -35,6 +35,7 @@ RegistInput: 5LPHold;
 RegistInput: ShouRyuKen;
 RegistInput: JumpPressed;
 RegistInput: QuickFallPressed;
+RegistInput: JumpCancel;
 # Move
 RegistMove: (Rg_Idle)
   MoveType: None;
@@ -54,15 +55,18 @@ RegistMove: (Rg_AirBrone)
 RegistMove: (Rg_Jump)
   MoveType: Move;
   EndMove:
-RegistMove: (Rg_5B)
-  MoveType: Normal;
+RegistMove: (Rg_JumpCancel)
+  MoveType: Move;
   EndMove:
+# RegistMove: (Rg_5B)
+#   MoveType: Normal;
+#   EndMove:
 RegistMove: (Rg_6P)
   MoveType: Normal;
   EndMove:
-RegistMove: (Rg_5C)
-  MoveType: Normal;
-  EndMove:
+# RegistMove: (Rg_5C)
+#   MoveType: Normal;
+#   EndMove:
 RegistMove: (Rg_AirDash)
   MoveType: Normal;
   EndMove:
@@ -276,6 +280,50 @@ BeginLoop: (InAir: true)
 SetTransition: 'AirToLand';
 Exit;
 
+[Rg_JumpCancel]
+@Trigger: 
+CancelOption: Rg_JumpCancel;
+Numeric: JumpCount > 0;
+InputType: JumpCancel;
+return;
+
+@Main:
+SetVelocityX: 0;
+# OnGround PreJump
+BeginIf: (TransitionCached: 'SquatToJump', true)
+  BBSprite: 'SquatToJump_1', 2;
+  BBSprite: 'SquatToJump_2', 2;
+  EndIf:
+BeginIf: (InAir: false)
+  BBSprite: 'PreJump_1', 2;
+  BBSprite: 'PreJump_2', 2;
+  EndIf:
+# Jump
+InputBuffer: true; 
+Gravity: 0;
+SetVelocityX: 50000;
+SetVelocityY: 300000;
+NumericAdd: JumpCount, -1;
+BBSprite: 'Jump_1', 3;
+BBSprite: 'Jump_2', 3;
+BBSprite: 'Jump_1', 3;
+# Jump Cancel
+Gravity: 100000;
+BBSprite: 'Jump_2', 3;
+BBSprite: 'Jump_1', 3;
+# JumpToFall
+BeginLoop: (InAir: true)
+  BBSprite: 'JumpToFall_1', 3;
+  BBSprite: 'JumpToFall_2', 3;
+  BBSprite: 'JumpToFall_3', 3;
+  BBSprite: 'JumpToFall_4', 3;
+  BBSprite: 'JumpToFall_5', 3;
+  Break;
+  EndLoop:
+#Land
+SetTransition: 'AirToLand';
+Exit;
+
 [Rg_5B]
 @Trigger:
 InputType: 5LPPressed;
@@ -289,19 +337,19 @@ MarkerEvent: (Whiff_Start)
   CancelWindow: Whiff;
   CancelOption: Rg_GroundDash;
   EndMarkerEvent:
-MarkerEvent: (Hit_Start)
-  HurtNotify: Once
-    ShakeX: 1000, 40000, 10;
-    ScreenShakeX: 800, 20000, 10;
-    Hit_UpdateFlip;
-    HitStop: 15, 10;
-    HitParam: ShakeX_Length, 5000;
-    HitParam: ShakeX_Frequency, 50000;
-    HitParam: ShakeX_Frame, 12;
-    HitParam: HitStopFrame, 12;
-    HitStun: Hurt2;
-    EndNotify:
-  EndMarkerEvent:
+# MarkerEvent: (Hit_Start)
+#   HurtNotify: Once
+#     ShakeX: 1000, 40000, 10;
+#     ScreenShakeX: 800, 20000, 10;
+#     Hit_UpdateFlip;
+#     HitStop: 15, 10;
+#     HitParam: ShakeX_Length, 5000;
+#     HitParam: ShakeX_Frequency, 50000;
+#     HitParam: ShakeX_Frame, 12;
+#     HitParam: HitStopFrame, 12;
+#     HitStun: Hurt2;
+#     EndNotify:
+#   EndMarkerEvent:
 MarkerEvent: (Whiff_End)
   CancelWindow: Gatling;
   CancelOption: Rg_5C;
@@ -414,6 +462,7 @@ InputType: 5LPPressed;
 return;
 
 @Main:
+InputBuffer: true;
 SetVelocityX: 0;
 BBSprite: 'Start_1', 3;
 BBSprite: 'Start_2', 3;
@@ -422,18 +471,20 @@ BBSprite: 'Start_4', 3;
 BBSprite: 'Start_5', 3;
 # 这里开始，受击回调
 HitNotify: Once # 对于同一对象，在持续帧内仅造成一次攻击(Repeat则为持续帧内，只要发生碰撞，每帧都会回调受击回调)
-  Shake: 500, 0, 8000, 10; # 振动
-  HitStop: 0, 10; # 打击停顿
+  CancelWindow: Gatling;
+  CancelOption: Rg_JumpCancel;
+  Shake: 500, 0, 8000, 18; # 振动
+  HitStop: 0, 18; # 打击停顿
   # 受击行为协程需要使用的变量
   HitParam: Shake_LengthX, 1200;
   HitParam: Shake_LengthY, 1000;
   HitParam: Shake_Frequency, 10000;
-  HitParam: Shake_Frame, 10;
+  HitParam: Shake_Frame, 18;
   # 受击者帧冻结(HitStop)的总帧长
-  HitParam: HitStopFrame, 10;
+  HitParam: HitStopFrame, 18;
   # HitStop结束后抛出的速度
   HitParam: StartV_X, -3000;
-  HitParam: StartV_Y, 300000;
+  HitParam: StartV_Y, 250000;
   # 受击时调整转向
   Hit_UpdateFlip;
   # 受击者进入哪个硬直状态
@@ -441,6 +492,7 @@ HitNotify: Once # 对于同一对象，在持续帧内仅造成一次攻击(Repe
   EndNotify:
 # 攻击判定的持续帧
 BBSprite: 'Active_1', 4;
+DisposeWindow;
 BBSprite: 'Recovery_1', 3;
 BBSprite: 'Recovery_2', 3;
 BBSprite: 'Recovery_3', 3;
