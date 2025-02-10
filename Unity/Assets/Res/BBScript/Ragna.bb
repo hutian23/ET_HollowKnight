@@ -73,18 +73,21 @@ RegistMove: (Rg_AirDash)
 RegistMove: (Rg_GroundDash)
   MoveType: Normal;
   EndMove:
+RegistMove: (Rg_24D)
+  MoveType: Special;
+  EndMove:
+RegistMove: (Rg_24D_Derive)
+  MoveType: Special;
+  EndMove:
 RegistMove: (Rg_PlungingAttack)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_QuickFall)
   MoveType: Special;
   EndMove:
-RegistMove: (Rg_24D)
-  MoveType: Special;
-  EndMove:
-RegistMove: (Rg_26C)
-  MoveType: Special;
-  EndMove:
+# RegistMove: (Rg_26C)
+#   MoveType: Special;
+#   EndMove:
 RegistMove: (Rg_IdleAnim)
   MoveType: Etc;
   EndMove:
@@ -654,29 +657,66 @@ InputType: 5MPPressed;
 return;
 
 @Main:
+InputBuffer: true;
 BeginIf: (InAir: false)
   SetVelocityX: 0;
   BBSprite: 'Start_1', 2;
   BBSprite: 'Start_2', 2;
   BBSprite: 'Start_3', 2;
   EndIf:
-SetVelocityX: 120000;
-SetVelocityY: 200000;
+SetVelocityX: 180000;
+SetVelocityY: 150000;
 Gravity: 0;
-BBSprite: 'Start_5', 8;
-Gravity: 120000;
+BBSprite: 'Start_5', 4;
+Gravity: 100000;
+BBSprite: 'Start_5', 4;
+CancelWindow: Gatling;
+CancelOption: Rg_AirDash;
 BBSprite: 'Active_1', 3;
 BBSprite: 'Active_2', 3;
-BBSprite: 'Active_3', 3;
-BBSprite: 'Recover_1', 4;
-BBSprite: 'Recover_2', 4;
-BBSprite: 'Recover_3', 4;
-BBSprite: 'Recover_4', 4;
+BBSprite: 'Active_3', 1;
+BBSprite: 'Active_3', 2;
+BBSprite: 'Recover_1', 3;
+CancelOption: Rg_24D_Derive;
+BBSprite: 'Recover_2', 3;
+BBSprite: 'Recover_3', 3;
+BBSprite: 'Recover_4', 3;
 BeginLoop: (InAir: true)
-  BBSprite: 'Recover_5', 4;
+  BBSprite: 'Recover_5', 1;
+  EndLoop:
+DisposeWindow;
+SetVelocityX: 0;
+BBSprite: 'Recover_6', 3;
+BBSprite: 'Recover_7', 3;
+BBSprite: 'Recover_8', 3;
+BBSprite: 'Recover_9', 3;
+Exit;
+
+[Rg_24D_Derive]
+@Trigger:
+CancelOption: Rg_24D_Derive;
+InputType: 5MPPressed;
+return;
+
+@Main:
+# Derive_Start
+SetVelocityX: 80000;
+SetVelocityY: 100000;
+Gravity: 0;
+BBSprite: 'Start2_1', 2;
+# Derive_Active
+BBSprite: 'Active2_1', 3;
+Gravity: 100000;
+BBSprite: 'Active2_1', 4;
+BBSprite: 'Active2_2', 3;
+# Derive_Recover
+BBSprite: 'Recover2_1', 3;
+BBSprite: 'Recover_4', 3;
+BeginLoop: (InAir: true)
+  BBSprite: 'Recover_5', 1;
   EndLoop:
 SetVelocityX: 0;
-BBSprite: 'Recover_6', 4;
+BBSprite: 'Recover_6', 3;
 BBSprite: 'Recover_7', 3;
 BBSprite: 'Recover_8', 3;
 BBSprite: 'Recover_9', 3;
@@ -695,10 +735,10 @@ Gravity: 0;
 BBSprite: 'Start_1', 2;
 BBSprite: 'Start_2', 2;
 BBSprite: 'Start_3', 2;
-BBSprite: 'Start_4', 3;
-BBSprite: 'Start_5', 3;
-BBSprite: 'Active_1', 3;
-BBSprite: 'Active_2', 3;
+BBSprite: 'Start_4', 2;
+BBSprite: 'Start_5', 2;
+BBSprite: 'Active_1', 4;
+BBSprite: 'Active_2', 4;
 BBSprite: 'Recover_1', 3;
 BBSprite: 'Recover_2', 3;
 BBSprite: 'Recover_3', 3;
