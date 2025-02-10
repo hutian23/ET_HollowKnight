@@ -13,6 +13,11 @@
             Unit unit = parser.GetParent<Unit>();
             BehaviorMachine machine = unit.GetComponent<BehaviorMachine>();
             BBTimerComponent bbTimer = unit.GetComponent<BBTimerComponent>();
+
+            if (!machine.ContainParam("CancelWindow_Timer"))
+            {
+                return Status.Success;
+            }
             
             // 销毁定时器
             long timer = machine.GetParam<long>("CancelWindow_Timer");

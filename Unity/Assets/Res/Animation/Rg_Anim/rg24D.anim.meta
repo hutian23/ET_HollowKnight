@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 46836c768bfc3c04ab2f29ada0211e5a
+guid: f8791a7cb00b3d84f9f032476e22bef8
 labels:
 - bb
-folderAsset: yes
-DefaultImporter:
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 7400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
