@@ -79,6 +79,12 @@ RegistMove: (Rg_PlungingAttack)
 RegistMove: (Rg_QuickFall)
   MoveType: Special;
   EndMove:
+RegistMove: (Rg_24D)
+  MoveType: Special;
+  EndMove:
+RegistMove: (Rg_26C)
+  MoveType: Special;
+  EndMove:
 RegistMove: (Rg_IdleAnim)
   MoveType: Etc;
   EndMove:
@@ -642,6 +648,62 @@ BBSprite: 'Land_5', 4;
 BBSprite: 'Land_6', 4;
 Exit;
 
+[Rg_24D]
+@Trigger:
+InputType: 5MPPressed; 
+return;
+
+@Main:
+BeginIf: (InAir: false)
+  SetVelocityX: 0;
+  BBSprite: 'Start_1', 2;
+  BBSprite: 'Start_2', 2;
+  BBSprite: 'Start_3', 2;
+  EndIf:
+SetVelocityX: 120000;
+SetVelocityY: 200000;
+Gravity: 0;
+BBSprite: 'Start_5', 8;
+Gravity: 120000;
+BBSprite: 'Active_1', 3;
+BBSprite: 'Active_2', 3;
+BBSprite: 'Active_3', 3;
+BBSprite: 'Recover_1', 4;
+BBSprite: 'Recover_2', 4;
+BBSprite: 'Recover_3', 4;
+BBSprite: 'Recover_4', 4;
+BeginLoop: (InAir: true)
+  BBSprite: 'Recover_5', 4;
+  EndLoop:
+SetVelocityX: 0;
+BBSprite: 'Recover_6', 4;
+BBSprite: 'Recover_7', 3;
+BBSprite: 'Recover_8', 3;
+BBSprite: 'Recover_9', 3;
+Exit;
+
+[Rg_26C]
+@Trigger:
+InputType: 5MPPressed;
+InAir: true;
+return;
+
+@Main:
+SetVelocityX: 0;
+SetVelocityY: 0;
+Gravity: 0;
+BBSprite: 'Start_1', 2;
+BBSprite: 'Start_2', 2;
+BBSprite: 'Start_3', 2;
+BBSprite: 'Start_4', 3;
+BBSprite: 'Start_5', 3;
+BBSprite: 'Active_1', 3;
+BBSprite: 'Active_2', 3;
+BBSprite: 'Recover_1', 3;
+BBSprite: 'Recover_2', 3;
+BBSprite: 'Recover_3', 3;
+BBSprite: 'Recover_4', 3;
+Exit;
 
 [Rg_IdleAnim]
 @Main:

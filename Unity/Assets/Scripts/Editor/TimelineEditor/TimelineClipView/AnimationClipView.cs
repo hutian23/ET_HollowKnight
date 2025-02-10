@@ -24,6 +24,7 @@ namespace Timeline.Editor
         {
             inspectorData = Activator.CreateInstance(typeof (AnimationClipInspectorData), (BBAnimationClip)BBClip) as AnimationClipInspectorData;
             inspectorData.InspectorAwake(FieldView);
+            TimelineInspectorData.CreateView(FieldView.ClipInspector, inspectorData);
         }
 
         public override void InsepctorUpdate()
