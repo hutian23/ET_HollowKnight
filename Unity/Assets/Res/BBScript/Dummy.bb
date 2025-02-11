@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 DummyInit;
-SetPos: 0, 8000;
+SetPos: 0, -8000;
 Gravity: 100000;
 # Cinemachine
 CM_TargetGroup_Member: TG_Camera, 110, 250;
@@ -26,6 +26,10 @@ RegistMove: (Dummy_Hurt2)
 RegistMove: (Dummy_Hurt3)
   MoveType: HitStun;
   MoveFlag: Hurt3;
+  EndMove:
+RegistMove: (Dummy_Hurt4)
+  MoveType: HitStun;
+  MoveFlag: Hurt4;
   EndMove:
 SetFlip: Right;
 GotoBehavior: 'Dummy_Idle';
@@ -64,11 +68,11 @@ Exit;
 # 地面受击行为
 [Dummy_Hurt2]
 @Main:
-ShakeX: {Self.ShakeX_Length}, {Self.ShakeX_Frequency}, {Self.ShakeX_Frame};
+Shake: {Self.Shake_LengthX}, {Self.Shake_LengthY}, {Self.Shake_Frequency}, {Self.Shake_Frame};
 BBSprite: 'hurt_1', 2;
 BBSprite: 'hurt_3', 2;
 BBSprite: 'hurt_5', {Self.HitStopFrame};
-PushBack: {Self.Push_V}, {Self.Push_F};
+# PushBack: {Self.Push_V}, {Self.Push_F};
 BBSprite: 'hurt_5', 6;
 BBSprite: 'hurt_4', 3;
 BBSprite: 'hurt_3', 3;
@@ -90,7 +94,7 @@ SetVelocityX: {Self.StartV_X};
 SetVelocityY: {Self.StartV_Y};
 BBSprite: 'Frame_2', 3;
 BBSprite: 'Frame_3', 3;
-Gravity: 30000;
+Gravity: 60000;
 BBSprite: 'Frame_2', 3;
 BBSprite: 'Frame_3', 3;
 BBSprite: 'Frame_2', 3;
@@ -132,4 +136,21 @@ BBSprite: 'Frame_24', 3;
 BBSprite: 'Frame_25', 3;
 BBSprite: 'Frame_26', 3;
 BBSprite: 'Frame_27', 3;
+Exit;
+
+[Dummy_Hurt4]
+@Main:
+Shake: {Self.Shake_LengthX}, 0, {Self.Shake_Frequency}, {Self.Shake_Frame};
+HitStop: 0, {Self.HitStopFrame};
+BBSprite: 'Hurt_1', 1;
+PushBack: {Self.Push_V}, {Self.Push_F};
+BBSprite: 'Hurt_2', 2;
+BBSprite: 'Hurt_3', 2;
+BBSprite: 'Hurt_4', 2;
+BBSprite: 'Hurt_5', 3;
+BBSprite: 'Hurt_6', 3;
+BBSprite: 'Hurt_7', 30;
+BBSprite: 'Recover_1', 3;
+BBSprite: 'Recover_2', 3;
+BBSprite: 'Recover_3', 3;
 Exit;

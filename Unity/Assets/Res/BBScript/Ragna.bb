@@ -79,15 +79,15 @@ RegistMove: (Rg_24D)
 RegistMove: (Rg_24D_Derive)
   MoveType: Special;
   EndMove:
+RegistMove: (Rg_26C)
+  MoveType: Special;
+  EndMove:
 RegistMove: (Rg_PlungingAttack)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_QuickFall)
   MoveType: Special;
   EndMove:
-# RegistMove: (Rg_26C)
-#   MoveType: Special;
-#   EndMove:
 RegistMove: (Rg_IdleAnim)
   MoveType: Etc;
   EndMove:
@@ -658,6 +658,7 @@ return;
 
 @Main:
 InputBuffer: true;
+# Start
 BeginIf: (InAir: false)
   SetVelocityX: 0;
   BBSprite: 'Start_1', 2;
@@ -668,17 +669,39 @@ SetVelocityX: 180000;
 SetVelocityY: 150000;
 Gravity: 0;
 BBSprite: 'Start_5', 4;
-Gravity: 100000;
+SetVelocityX: 100000;
+Gravity: 90000;
 BBSprite: 'Start_5', 4;
+# Active
 CancelWindow: Gatling;
 CancelOption: Rg_AirDash;
+CancelOption: Rg_Jump;
+HitNotify: Once
+  HitStop: 0, 8; # 打击停顿
+  Shake: 500, 0, 8000, 8; # 振动
+  # 受击行为协程需要使用的变量
+  HitParam: Shake_LengthX, 1200;
+  HitParam: Shake_LengthY, 1000;
+  HitParam: Shake_Frequency, 10000;
+  HitParam: Shake_Frame, 15;
+  # 受击者帧冻结(HitStop)的总帧长
+  HitParam: HitStopFrame, 15;
+  # HitStop结束后抛出的速度
+  HitParam: Push_V, -200000;
+  HitParam: Push_F, 800000;
+  # 受击时调整转向
+  Hit_UpdateFlip;
+  # 受击者进入哪个硬直状态
+  HitStun: Hurt4;
+  EndNotify:
 BBSprite: 'Active_1', 3;
 BBSprite: 'Active_2', 3;
-BBSprite: 'Active_3', 1;
-BBSprite: 'Active_3', 2;
-BBSprite: 'Recover_1', 3;
-CancelOption: Rg_24D_Derive;
+BBSprite: 'Active_3', 3;
+BBSprite: 'Recover_1', 4;
+# Recover
 BBSprite: 'Recover_2', 3;
+CancelOption: Rg_26C;
+CancelOption: Rg_24D_Derive;
 BBSprite: 'Recover_3', 3;
 BBSprite: 'Recover_4', 3;
 BeginLoop: (InAir: true)
@@ -686,10 +709,10 @@ BeginLoop: (InAir: true)
   EndLoop:
 DisposeWindow;
 SetVelocityX: 0;
-BBSprite: 'Recover_6', 3;
-BBSprite: 'Recover_7', 3;
-BBSprite: 'Recover_8', 3;
-BBSprite: 'Recover_9', 3;
+BBSprite: 'Recover_6', 4;
+BBSprite: 'Recover_7', 4;
+BBSprite: 'Recover_8', 4;
+BBSprite: 'Recover_9', 4;
 Exit;
 
 [Rg_24D_Derive]
@@ -701,10 +724,28 @@ return;
 @Main:
 # Derive_Start
 SetVelocityX: 80000;
-SetVelocityY: 100000;
+SetVelocityY: 120000;
 Gravity: 0;
 BBSprite: 'Start2_1', 2;
 # Derive_Active
+HitNotify: Once
+  HitStop: 5, 15; # 打击停顿
+  Shake: 500, 0, 8000, 15; # 振动
+  # 受击行为协程需要使用的变量
+  HitParam: Shake_LengthX, 1200;
+  HitParam: Shake_LengthY, 1000;
+  HitParam: Shake_Frequency, 10000;
+  HitParam: Shake_Frame, 15;
+  # 受击者帧冻结(HitStop)的总帧长
+  HitParam: HitStopFrame, 15;
+  # HitStop结束后抛出的速度
+  HitParam: StartV_X, -18000;
+  HitParam: StartV_Y, 300000;
+  # 受击时调整转向
+  Hit_UpdateFlip;
+  # 受击者进入哪个硬直状态
+  HitStun: Hurt3;
+  EndNotify:
 BBSprite: 'Active2_1', 3;
 Gravity: 100000;
 BBSprite: 'Active2_1', 4;
@@ -716,15 +757,16 @@ BeginLoop: (InAir: true)
   BBSprite: 'Recover_5', 1;
   EndLoop:
 SetVelocityX: 0;
-BBSprite: 'Recover_6', 3;
-BBSprite: 'Recover_7', 3;
-BBSprite: 'Recover_8', 3;
-BBSprite: 'Recover_9', 3;
+BBSprite: 'Recover_6', 4;
+BBSprite: 'Recover_7', 4;
+BBSprite: 'Recover_8', 4;
+BBSprite: 'Recover_9', 4;
 Exit;
 
 [Rg_26C]
 @Trigger:
-InputType: 5MPPressed;
+CancelOption: Rg_26C;
+InputType: 5LPPressed;
 InAir: true;
 return;
 

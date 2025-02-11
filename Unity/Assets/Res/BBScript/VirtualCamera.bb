@@ -7,12 +7,12 @@ CM_Priority: DefaultCamera, 100;
 CM_OrthoSize: DefaultCamera, 65000;
 CM_XDamping: DefaultCamera, 25000;
 CM_YDamping: DefaultCamera, 8000;
-CM_DeadZone: DefaultCamera, 8, 10;
-CM_SoftZone: DefaultCamera, 15, 20;
+CM_DeadZone: DefaultCamera, 60, 20;
+CM_SoftZone: DefaultCamera, 80, 40;
 CM_Bias: DefaultCamera, 0, 50;
 # TargetGroupCamera
 CM_TargetGroupCamera: TG_Camera;
-CM_Priority: TG_Camera, 111;
+CM_Priority: TG_Camera, 11;
 CM_OrthoSize: TG_Camera, 65000;
 CM_XDamping: TG_Camera, 75000;
 CM_YDamping: TG_Camera, 8000;
