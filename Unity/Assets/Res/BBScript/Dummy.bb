@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 DummyInit;
-SetPos: 0, -8000;
+SetPos: 300000, -90000;
 Gravity: 100000;
 # Cinemachine
 CM_TargetGroup_Member: TG_Camera, 110, 250;
@@ -30,6 +30,10 @@ RegistMove: (Dummy_Hurt3)
 RegistMove: (Dummy_Hurt4)
   MoveType: HitStun;
   MoveFlag: Hurt4;
+  EndMove:
+RegistMove: (Dummy_Hurt5)
+  MoveType: HitStun;
+  MoveFlag: Hurt5;
   EndMove:
 SetFlip: Right;
 GotoBehavior: 'Dummy_Idle';
@@ -153,4 +157,70 @@ BBSprite: 'Hurt_7', 30;
 BBSprite: 'Recover_1', 3;
 BBSprite: 'Recover_2', 3;
 BBSprite: 'Recover_3', 3;
+Exit;
+
+[Dummy_Hurt5]
+@Main:
+Shake: {Self.Shake_LengthX}, {Self.Shake_LengthY}, {Self.Shake_Frequency}, {Self.Shake_Frame};
+HitStop: 0, {Self.HitStopFrame};
+SetVelocityX: {Self.StartV_X};
+SetVelocityY: {Self.StartV_Y};
+Gravity: 0;
+BBSprite: 'HitStop_1', 3;
+BBSprite: 'WaitBounce_2', 4;
+Gravity: 120000;
+BounceCheck: true, 10;
+BeginLoop: (InAir: true), (Bounded: false)
+  BBSprite: 'WaitBounce_1', 4;
+  BBSprite: 'WaitBounce_2', 4;
+EndLoop:
+BeginIf: (Bounded: true)
+  GotoMarker: 'Bounce';
+  EndIf:
+SetMarker: 'Bounce';
+BounceCheck: false, 0;
+# 上墙
+SetVelocityX: 0;
+SetVelocityY: 0;
+Gravity: 0;
+ScreenShake: 800, 800, 20000, 15; # 弹墙屏幕振动
+BBSprite: 'Bounce_1', 4;
+BBSprite: 'Bounce_2', 5;
+# 弹墙
+SetVelocityX: 200000;
+SetVelocityY: 70000;
+BBSprite: 'Fall_1', 3;
+Gravity: 80000;
+BBSprite: 'Fall_2', 3;
+BeginLoop: (InAir: true)
+  BBSprite: 'Fall_3', 3;
+  BBSprite: 'Fall_2', 3;
+  EndLoop:
+ScreenShake: 750, 750, 18000, 10; # 落地之后模拟弹地效果
+# 弹地
+SetVelocityX: 50000;
+SetVelocityY: 60000;
+Gravity: 0;
+BBSprite: 'Land_2', 3;
+Gravity: 100000;
+BBSprite: 'Land_3', 3;
+BBSprite: 'Land_4', 3;
+BBSprite: 'Land_5', 3;
+SetVelocityX: 30000;
+BBSprite: 'Land_6', 3;
+BBSprite: 'Land_7', 3;
+SetVelocityX: 0;
+BBSprite: 'Land_8', 50;
+BBSprite: 'Land_9', 3;
+BBSprite: 'Land_10', 3;
+BBSprite: 'Land_11', 3;
+BBSprite: 'Land_12', 3;
+BBSprite: 'Land_13', 3;
+BBSprite: 'Land_14', 3;
+BBSprite: 'Land_15', 3;
+BBSprite: 'Land_16', 3;
+BBSprite: 'Land_17', 3;
+BBSprite: 'Land_18', 3;
+BBSprite: 'Land_19', 3;
+BBSprite: 'Land_20', 3;
 Exit;

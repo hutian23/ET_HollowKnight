@@ -1,7 +1,7 @@
 [Root]
 @RootInit:
 PlayerInit;
-SetPos: 0, -10000;
+SetPos: 280000, -90000;
 Gravity: 100000;
 # Numeric
 NumericType: Hertz, 60;
@@ -80,6 +80,9 @@ RegistMove: (Rg_24D_Derive)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_26C)
+  MoveType: Special;
+  EndMove:
+RegistMove: (Rg_24A)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_PlungingAttack)
@@ -666,11 +669,10 @@ BeginIf: (InAir: false)
   BBSprite: 'Start_3', 2;
   EndIf:
 SetVelocityX: 180000;
-SetVelocityY: 150000;
+SetVelocityY: 170000;
 Gravity: 0;
 BBSprite: 'Start_5', 4;
-SetVelocityX: 100000;
-Gravity: 90000;
+Gravity: 100000;
 BBSprite: 'Start_5', 4;
 # Active
 CancelWindow: Gatling;
@@ -699,6 +701,7 @@ BBSprite: 'Active_2', 3;
 BBSprite: 'Active_3', 3;
 BBSprite: 'Recover_1', 4;
 # Recover
+LogWarning: 'Enable';
 BBSprite: 'Recover_2', 3;
 CancelOption: Rg_26C;
 CancelOption: Rg_24D_Derive;
@@ -746,9 +749,9 @@ HitNotify: Once
   # 受击者进入哪个硬直状态
   HitStun: Hurt3;
   EndNotify:
-BBSprite: 'Active2_1', 3;
+BBSprite: 'Active2_1', 2;
 Gravity: 100000;
-BBSprite: 'Active2_1', 4;
+BBSprite: 'Active2_1', 3;
 BBSprite: 'Active2_2', 3;
 # Derive_Recover
 BBSprite: 'Recover2_1', 3;
@@ -761,6 +764,48 @@ BBSprite: 'Recover_6', 4;
 BBSprite: 'Recover_7', 4;
 BBSprite: 'Recover_8', 4;
 BBSprite: 'Recover_9', 4;
+Exit;
+
+[Rg_24A]
+@Trigger:
+InputType: 5MPPressed;
+InAir: false;
+return;
+
+@Main:
+BBSprite: 'Start_3', 4;
+SetVelocityX: 200000;
+BBSprite: 'Start_4', 3;
+BBSprite: 'Start_5', 3;
+SetVelocityX: 100000;
+HitNotify: Once
+  HitStop: 0, 30; # 打击停顿
+  Shake: 500, 0, 8000, 30; # 振动
+  # 受击行为协程需要使用的变量
+  HitParam: Shake_LengthX, 1100;
+  HitParam: Shake_LengthY, 1100;
+  HitParam: Shake_Frequency, 12000;
+  HitParam: Shake_Frame, 30;
+  # 受击者帧冻结(HitStop)的总帧长
+  HitParam: HitStopFrame, 28;
+  HitParam: StartV_X, -500000;
+  HitParam: StartV_Y, 140000;
+  # 受击时调整转向
+  Hit_UpdateFlip;
+  # 受击者进入哪个硬直状态
+  HitStun: Hurt5;
+  EndNotify:
+BBSprite: 'Active_1', 5;
+SetVelocityX: 50000;
+BBSprite: 'Active_2', 3;
+BBSprite: 'Active_2', 2;
+SetVelocityX: 0;
+BBSprite: 'Active_1', 5;
+BBSprite: 'Recover_1', 4;
+BBSprite: 'Recover_2', 4;
+BBSprite: 'Recover_3', 4;
+BBSprite: 'Recover_4', 4;
+BBSprite: 'Recover_5', 4;
 Exit;
 
 [Rg_26C]
@@ -783,6 +828,7 @@ BBSprite: 'Active_1', 4;
 BBSprite: 'Active_2', 4;
 BBSprite: 'Recover_1', 3;
 BBSprite: 'Recover_2', 3;
+Gravity: 100000;
 BBSprite: 'Recover_3', 3;
 BBSprite: 'Recover_4', 3;
 Exit;

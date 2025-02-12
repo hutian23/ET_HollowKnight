@@ -25,7 +25,7 @@ namespace ET.Client
                 Log.Error($"cannot format posX / posY to long");
                 return Status.Failed;
             }
-            Vector2 pos = new Vector2(posX, posY) / 1000f;
+            Vector2 pos = new Vector2(posX, posY) / 10000f;
             
             b2Body b2Body = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             b2Body.SetPosition(pos);

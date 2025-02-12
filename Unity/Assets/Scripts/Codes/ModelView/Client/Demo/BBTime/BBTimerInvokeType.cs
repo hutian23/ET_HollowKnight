@@ -39,6 +39,7 @@
         public const int CameraMoveToTimer = 122;
         public const int CinemachineTargetTimer = 123;
         public const int JumpCancelTimer = 124;
+        public const int BounceCheckTimer = 125;
         
         //物理模拟相关的生命周期函数
         public const int HitCheckTimer = 313;

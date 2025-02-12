@@ -10,7 +10,7 @@ namespace ET.Client
     [FriendOf(typeof(b2Body))]
     [FriendOf(typeof(BBParser))]
     //PostStep生命周期执行
-    public class HurtNotifyTimer : BBTimer<BBParser>
+    public class HitNotifyTimer : BBTimer<BBParser>
     {
         protected override void Run(BBParser self)
         {

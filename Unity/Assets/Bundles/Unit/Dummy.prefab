@@ -36,6 +36,7 @@ Transform:
   - {fileID: 8173683230465771605}
   - {fileID: 423411075574930088}
   - {fileID: 8591324385084196750}
+  - {fileID: 9129754785216875434}
   m_Father: {fileID: 4287713381951760774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2583209291556621167
@@ -100,6 +101,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8377597998375564245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3660002076185156784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9129754785216875434}
+  m_Layer: 0
+  m_Name: Other
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9129754785216875434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3660002076185156784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8377597998375564245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4287713381951760773
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +145,7 @@ GameObject:
   - component: {fileID: 4287713381951760772}
   - component: {fileID: 1340376429761113669}
   - component: {fileID: 8844023896634408005}
+  - component: {fileID: 7225693857258308420}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -177,12 +210,12 @@ SpriteRenderer:
   m_SortingLayerID: 2016810935
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1055419004, guid: b42d8d83a572c184f8d4a2ce68170e04, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -1331877821, guid: a714674fa1a745f47809580dd5aa27ef, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.98039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.82, y: 5.26}
+  m_Size: {x: 5.08, y: 4.34}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -198,7 +231,7 @@ Animator:
   m_GameObject: {fileID: 4287713381951760773}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0cd7836fc6803b4f89e9d0e576a4510, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -286,9 +319,6 @@ MonoBehaviour:
     - Name: animationClip
       Entry: 10
       Data: 2
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
     - Name: rootMotionDict
       Entry: 7
       Data: 6|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.AnimationCurve,
@@ -625,8 +655,7 @@ MonoBehaviour:
   Hertz: 60
   ApplyRootMotion: 1
   BBPlayable: {fileID: 11400000, guid: 3f67fb43bb788f5478a54fd60e06dfd6, type: 2}
-  CurrentTimeline: {fileID: 11400000, guid: 3db21ea503a2acf41a86a07c8518ad0d, type: 2}
-  initPos: {x: 0, y: 0, z: 0}
+  CurrentTimeline: {fileID: 11400000, guid: 265e0ebce39f5ad46b05ba27b21a7fb2, type: 2}
 --- !u!114 &8844023896634408005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +683,24 @@ MonoBehaviour:
     gameObject: {fileID: 6949136563893000607}
   - key: Push
     gameObject: {fileID: 5021198718494505352}
+  - key: Push
+    gameObject: {fileID: 5021198718494505352}
+  - key: Other
+    gameObject: {fileID: 3660002076185156784}
+--- !u!114 &7225693857258308420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287713381951760773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85515fbd351c4f0448693853f9165f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceId: 0
+  Script: {fileID: 1042094116111776886, guid: 2727484a9f4bb7945b7d498143709585, type: 3}
 --- !u!1 &5021198718494505352
 GameObject:
   m_ObjectHideFlags: 0
