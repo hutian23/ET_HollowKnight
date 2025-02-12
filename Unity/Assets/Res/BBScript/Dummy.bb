@@ -183,8 +183,8 @@ BounceCheck: false, 0;
 SetVelocityX: 0;
 SetVelocityY: 0;
 Gravity: 0;
-ScreenShake: 800, 800, 20000, 15; # 弹墙屏幕振动
-BBSprite: 'Bounce_1', 4;
+ScreenShake: 800, 800, 20000, 10; # 弹墙屏幕振动
+BBSprite: 'Bounce_1', 5;
 BBSprite: 'Bounce_2', 5;
 # 弹墙
 SetVelocityX: 200000;

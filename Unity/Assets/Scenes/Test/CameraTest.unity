@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &380389340
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -542,7 +542,7 @@ Transform:
   m_GameObject: {fileID: 380389339}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.283, y: -2.4931, z: 2.1322978}
+  m_LocalPosition: {x: 1.2826, y: -2.5802, z: 2.1322978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1084,7 +1084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1342651525
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,7 +1094,7 @@ Transform:
   m_GameObject: {fileID: 1342651524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4398, y: -2.7202, z: 2.1322978}
+  m_LocalPosition: {x: 0.428, y: -2.94, z: 2.1322978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1167,6 +1167,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340376429761113669, guid: 6e320dafd0879e541927f3dbb8b97663,
         type: 3}
+    - target: {fileID: 4287713381951760772, guid: 6e320dafd0879e541927f3dbb8b97663,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4287713381951760773, guid: 6e320dafd0879e541927f3dbb8b97663,
         type: 3}
       propertyPath: m_Name
@@ -1226,6 +1231,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287713381951760775, guid: 6e320dafd0879e541927f3dbb8b97663,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287713381951760775, guid: 6e320dafd0879e541927f3dbb8b97663,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.34
       objectReference: {fileID: 0}
     - target: {fileID: 4287713381951760775, guid: 6e320dafd0879e541927f3dbb8b97663,
         type: 3}

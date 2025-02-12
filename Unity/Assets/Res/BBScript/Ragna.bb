@@ -780,12 +780,12 @@ BBSprite: 'Start_5', 3;
 SetVelocityX: 100000;
 HitNotify: Once
   HitStop: 0, 30; # 打击停顿
-  Shake: 500, 0, 8000, 30; # 振动
+  Shake: 500, 0, 8000, 23; # 振动
   # 受击行为协程需要使用的变量
   HitParam: Shake_LengthX, 1100;
   HitParam: Shake_LengthY, 1100;
   HitParam: Shake_Frequency, 12000;
-  HitParam: Shake_Frame, 30;
+  HitParam: Shake_Frame, 23;
   # 受击者帧冻结(HitStop)的总帧长
   HitParam: HitStopFrame, 28;
   HitParam: StartV_X, -500000;
