@@ -846,49 +846,60 @@ return;
 SetVelocityX: 0;
 TimeFrozeCheckBox: 0, 20000, 250000, 100000, 1, 55;
 BBSprite: 'Frame_1', 4;
-RegistCounter: Cnt_1, 50;
+RegistCounter: Cnt_1, 55;
 BeginLoop: (Counter: Cnt_1 > 0)
   BBSprite: 'Frame_2', 4;
   BBSprite: 'Frame_3', 4;
   BBSprite: 'Frame_4', 4;
-  EndLoop:
-BBSprite: 'Frame_5', 4;
+EndLoop:
+HitNotify: Once
+  AddFlag: Hit;
+EndNotify:
+BBSprite: 'Frame_5', 3;
 SetVelocityX: 240000;
-BBSprite: 'Frame_6', 4;
+BBSprite: 'Frame_6', 3;
 SetVelocityX: 120000;
 BBSprite: 'Frame_7', 4;
 SetVelocityX: 40000;
 BBSprite: 'Frame_7', 4;
 SetVelocityX: 0;
-BBSprite: 'Frame_7', 10;
-BBSprite: 'Frame_8', 3;
+BBSprite: 'Frame_7', 8;
+BBSprite: 'Frame_8', 8;
+# 挥空
+BeginIf: (Flag: Hit, false)
+BBSprite: 'Frame_54', 4;
+BBSprite: 'Frame_55', 4;
+BBSprite: 'Frame_52', 4;
+BBSprite: 'Frame_53', 4;
+Exit;
+EndIf:
 BBSprite: 'Frame_9', 3;
 BBSprite: 'Frame_10', 3;
 BBSprite: 'Frame_11', 3;
 BBSprite: 'Frame_12', 3;
 BBSprite: 'Frame_13', 3;
 BBSprite: 'Frame_14', 3;
-BBSprite: 'Frame_15', 4;
-BBSprite: 'Frame_16', 4;
+BBSprite: 'Frame_15', 5;
+BBSprite: 'Frame_16', 6;
 BBSprite: 'Frame_17', 4;
 BBSprite: 'Frame_18', 4;
-BBSprite: 'Frame_19', 4;
-BBSprite: 'Frame_20', 4;
-BBSprite: 'Frame_21', 4;
+BBSprite: 'Frame_19', 5;
+BBSprite: 'Frame_20', 5;
+BBSprite: 'Frame_21', 5;
 BBSprite: 'Frame_22', 3;
-BBSprite: 'Frame_23', 3;
-BBSprite: 'Frame_24', 5;
-BBSprite: 'Frame_25', 3;
-BBSprite: 'Frame_26', 3;
+BBSprite: 'Frame_23', 5;
+BBSprite: 'Frame_24', 4;
+BBSprite: 'Frame_25', 4;
+BBSprite: 'Frame_26', 8;
 BBSprite: 'Frame_27', 4;
-BBSprite: 'Frame_28', 3;
-BBSprite: 'Frame_29', 3;
+BBSprite: 'Frame_28', 4;
+BBSprite: 'Frame_29', 4;
 BBSprite: 'Frame_30', 4;
 BBSprite: 'Frame_31', 4;
 BBSprite: 'Frame_32', 4;
 BBSprite: 'Frame_33', 4;
-BBSprite: 'Frame_34', 5;
-BBSprite: 'Frame_35', 4;
+BBSprite: 'Frame_34', 4;
+BBSprite: 'Frame_35', 8;
 BBSprite: 'Frame_36', 4;
 BBSprite: 'Frame_37', 3;
 BBSprite: 'Frame_38', 3;
