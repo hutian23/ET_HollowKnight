@@ -85,6 +85,9 @@ RegistMove: (Rg_26C)
 RegistMove: (Rg_24A)
   MoveType: Special;
   EndMove:
+RegistMove: (Rg_Super)
+  MoveType: Special;
+  EndMove:
 RegistMove: (Rg_PlungingAttack)
   MoveType: Special;
   EndMove:
@@ -803,9 +806,9 @@ SetVelocityX: 0;
 BBSprite: 'Active_1', 5;
 BBSprite: 'Recover_1', 4;
 BBSprite: 'Recover_2', 4;
-BBSprite: 'Recover_3', 4;
-BBSprite: 'Recover_4', 4;
-BBSprite: 'Recover_5', 4;
+BBSprite: 'Recover_3', 3;
+BBSprite: 'Recover_4', 3;
+BBSprite: 'Recover_5', 3;
 Exit;
 
 [Rg_26C]
@@ -831,6 +834,68 @@ BBSprite: 'Recover_2', 3;
 Gravity: 100000;
 BBSprite: 'Recover_3', 3;
 BBSprite: 'Recover_4', 3;
+Exit;
+
+[Rg_Super]
+@Trigger:
+InputType: 5LPPressed;
+return;
+
+@Main:
+SetVelocityX: 0;
+BBSprite: 'Frame_1', 3;
+BBSprite: 'Frame_2', 3;
+BBSprite: 'Frame_3', 3;
+BBSprite: 'Frame_4', 3;
+BBSprite: 'Frame_5', 3;
+BBSprite: 'Frame_6', 3;
+BBSprite: 'Frame_7', 3;
+BBSprite: 'Frame_8', 3;
+BBSprite: 'Frame_9', 3;
+BBSprite: 'Frame_10', 3;
+BBSprite: 'Frame_11', 3;
+BBSprite: 'Frame_12', 3;
+BBSprite: 'Frame_13', 3;
+BBSprite: 'Frame_14', 3;
+BBSprite: 'Frame_15', 4;
+BBSprite: 'Frame_16', 4;
+BBSprite: 'Frame_17', 4;
+BBSprite: 'Frame_18', 4;
+BBSprite: 'Frame_19', 4;
+BBSprite: 'Frame_20', 4;
+BBSprite: 'Frame_21', 4;
+BBSprite: 'Frame_22', 3;
+BBSprite: 'Frame_23', 3;
+BBSprite: 'Frame_24', 5;
+BBSprite: 'Frame_25', 3;
+BBSprite: 'Frame_26', 3;
+BBSprite: 'Frame_27', 4;
+BBSprite: 'Frame_28', 3;
+BBSprite: 'Frame_29', 3;
+BBSprite: 'Frame_30', 4;
+BBSprite: 'Frame_31', 4;
+BBSprite: 'Frame_32', 4;
+BBSprite: 'Frame_33', 4;
+BBSprite: 'Frame_34', 5;
+BBSprite: 'Frame_35', 4;
+BBSprite: 'Frame_36', 4;
+BBSprite: 'Frame_37', 3;
+BBSprite: 'Frame_38', 3;
+BBSprite: 'Frame_39', 4;
+BBSprite: 'Frame_40', 4;
+BBSprite: 'Frame_41', 4;
+BBSprite: 'Frame_42', 4;
+BBSprite: 'Frame_43', 4;
+BBSprite: 'Frame_44', 4;
+BBSprite: 'Frame_45', 4;
+BBSprite: 'Frame_46', 4;
+BBSprite: 'Frame_47', 5;
+BBSprite: 'Frame_48', 5;
+BBSprite: 'Frame_49', 5;
+BBSprite: 'Frame_50', 15;
+BBSprite: 'Frame_51', 4;
+BBSprite: 'Frame_52', 4;
+BBSprite: 'Frame_53', 4;
 Exit;
 
 [Rg_IdleAnim]
