@@ -776,6 +776,7 @@ InAir: false;
 return;
 
 @Main:
+InputBuffer: true;
 BBSprite: 'Start_3', 4;
 SetVelocityX: 200000;
 BBSprite: 'Start_4', 3;
@@ -843,6 +844,7 @@ return;
 
 @Main:
 SetVelocityX: 0;
+TimeFrozeCheckBox: 0, 20000, 250000, 100000, 1, 55;
 BBSprite: 'Frame_1', 4;
 RegistCounter: Cnt_1, 50;
 BeginLoop: (Counter: Cnt_1 > 0)
@@ -850,9 +852,15 @@ BeginLoop: (Counter: Cnt_1 > 0)
   BBSprite: 'Frame_3', 4;
   BBSprite: 'Frame_4', 4;
   EndLoop:
-BBSprite: 'Frame_5', 3;
-BBSprite: 'Frame_6', 3;
-BBSprite: 'Frame_7', 3;
+BBSprite: 'Frame_5', 4;
+SetVelocityX: 240000;
+BBSprite: 'Frame_6', 4;
+SetVelocityX: 120000;
+BBSprite: 'Frame_7', 4;
+SetVelocityX: 40000;
+BBSprite: 'Frame_7', 4;
+SetVelocityX: 0;
+BBSprite: 'Frame_7', 10;
 BBSprite: 'Frame_8', 3;
 BBSprite: 'Frame_9', 3;
 BBSprite: 'Frame_10', 3;
