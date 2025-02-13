@@ -843,10 +843,13 @@ return;
 
 @Main:
 SetVelocityX: 0;
-BBSprite: 'Frame_1', 3;
-BBSprite: 'Frame_2', 3;
-BBSprite: 'Frame_3', 3;
-BBSprite: 'Frame_4', 3;
+BBSprite: 'Frame_1', 4;
+RegistCounter: Cnt_1, 50;
+BeginLoop: (Counter: Cnt_1 > 0)
+  BBSprite: 'Frame_2', 4;
+  BBSprite: 'Frame_3', 4;
+  BBSprite: 'Frame_4', 4;
+  EndLoop:
 BBSprite: 'Frame_5', 3;
 BBSprite: 'Frame_6', 3;
 BBSprite: 'Frame_7', 3;
@@ -881,10 +884,10 @@ BBSprite: 'Frame_35', 4;
 BBSprite: 'Frame_36', 4;
 BBSprite: 'Frame_37', 3;
 BBSprite: 'Frame_38', 3;
-BBSprite: 'Frame_39', 4;
-BBSprite: 'Frame_40', 4;
-BBSprite: 'Frame_41', 4;
-BBSprite: 'Frame_42', 4;
+BBSprite: 'Frame_39', 3;
+BBSprite: 'Frame_40', 3;
+BBSprite: 'Frame_41', 3;
+BBSprite: 'Frame_42', 3;
 BBSprite: 'Frame_43', 4;
 BBSprite: 'Frame_44', 4;
 BBSprite: 'Frame_45', 4;
