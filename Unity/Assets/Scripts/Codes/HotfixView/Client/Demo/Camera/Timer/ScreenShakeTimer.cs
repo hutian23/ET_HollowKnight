@@ -17,7 +17,8 @@ namespace ET.Client
             GameObject go = self.GetParam<GameObject>("ScreenShake_ActiveCamera");
             CinemachineCameraOffset cameraOffset = go.GetComponent<CinemachineCameraOffset>();
                     
-            cameraOffset.m_Offset = new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency) * (curFrame / totalFrame), shakeLength_Y * Mathf.Sin(curFrame * frequency) * (curFrame / totalFrame), 0);
+            // cameraOffset.m_Offset = new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency) * (curFrame / totalFrame), shakeLength_Y * Mathf.Sin(curFrame * frequency) * (curFrame / totalFrame), 0);
+            cameraOffset.m_Offset = new Vector3(shakeLength_X * Mathf.Cos(curFrame * frequency) * (curFrame / totalFrame), shakeLength_Y * Mathf.Sin(curFrame * frequency) * 1, 0);
             
             curFrame--;
             if (curFrame <= 0)

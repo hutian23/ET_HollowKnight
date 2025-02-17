@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     [ChildOf(typeof (BehaviorMachine))]
     public class BehaviorInfo: Entity, IAwake, IDestroy
@@ -6,6 +8,7 @@
         public string behaviorName;
         public int behaviorOrder;
         public MoveType moveType;
+        public Dictionary<string, SharedVariable> ParamDict = new(); // 共享变量
     }
 
     public enum MoveType

@@ -41,7 +41,7 @@ namespace ET.Client
             _parser.TryRemoveParam("ScreenShake_Timer");
             _parser.TryRemoveParam("ScreenShake_LengthX");
             _parser.TryRemoveParam("ScreenShake_LengthY");
-            _parser.TryRemoveParam("ScreeShake_Frequency");
+            _parser.TryRemoveParam("ScreenShake_Frequency");
             _parser.TryRemoveParam("ScreenShake_TotalFrame");
             _parser.TryRemoveParam("ScreenShake_CurFrame");
             _parser.TryRemoveParam("ScreenShake_ActiveCamera");

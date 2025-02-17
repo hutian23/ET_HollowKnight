@@ -3,17 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace ET.Client
 {
-    public class ThrowPoint_BBScriptHandler : BBScriptHandler
+    public class TargetPoint_BBScriptHandler : BBScriptHandler
     {
         public override string GetOPType()
         {
-            return "ThrowPoint";
+            return "TargetPoint";
         }
 
         //ThrowPoint: -1400, 1000;
         public override async ETTask<Status> Handle(BBParser parser, BBScriptData data, ETCancellationToken token)
         {
-            Match match = Regex.Match(data.opLine, @"ThrowPoint: (?<BindX>-?\d+), (?<BindY>-?\d+);");
+            Match match = Regex.Match(data.opLine, @"TargetPoint: (?<BindX>-?\d+), (?<BindY>-?\d+);");
             if (!match.Success)
             {
                 ScriptHelper.ScripMatchError(data.opLine);
@@ -25,13 +25,14 @@ namespace ET.Client
                 Log.Error($"cannot format {match.Groups["BindX"].Value} or {match.Groups["BindY"].Value} to long!!");
                 return Status.Failed;
             }
-            if (!parser.ContainParam("TargetBind_ThrowHurt")) return Status.Failed;
+
+            if (!parser.ContainParam("TargetBind")) return Status.Failed;
             
-            long bodyId = parser.GetParam<long>("TargetBind_ThrowHurt");
+            long bodyId = parser.GetParam<long>("TargetBind");
             b2Body bodyA = b2WorldManager.Instance.GetBody(parser.GetParent<Unit>().InstanceId);
             b2Body bodyB = Root.Instance.Get(bodyId) as b2Body;
 
-            Vector2 BindPos = bodyA.GetPosition() + new Vector2(bodyA.GetFlip() * (x / 1000f), y / 1000f);
+            Vector2 BindPos = bodyA.GetPosition() + new Vector2(-bodyA.GetFlip() * (x / 10000f), y / 10000f);
             bodyB.SetPosition(BindPos);
             
             await ETTask.CompletedTask;

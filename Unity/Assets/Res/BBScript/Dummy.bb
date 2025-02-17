@@ -35,6 +35,10 @@ RegistMove: (Dummy_Hurt5)
   MoveType: HitStun;
   MoveFlag: Hurt5;
   EndMove:
+RegistMove: (Dummy_ThrowHurt)
+  MoveType: HitStun;
+  MoveFlag: ThrowHurt;
+  EndMove:
 SetFlip: Right;
 GotoBehavior: 'Dummy_Idle';
 return;
@@ -144,6 +148,9 @@ Exit;
 
 [Dummy_Hurt4]
 @Main:
+SetVelocityX: 0;
+SetVelocityY: -1000;
+Gravity: 100000;
 Shake: {Self.Shake_LengthX}, 0, {Self.Shake_Frequency}, {Self.Shake_Frame};
 HitStop: 0, {Self.HitStopFrame};
 BBSprite: 'Hurt_1', 1;
@@ -153,7 +160,7 @@ BBSprite: 'Hurt_3', 2;
 BBSprite: 'Hurt_4', 2;
 BBSprite: 'Hurt_5', 3;
 BBSprite: 'Hurt_6', 3;
-BBSprite: 'Hurt_7', 30;
+BBSprite: 'Hurt_7', {Self.LastFrame};
 BBSprite: 'Recover_1', 3;
 BBSprite: 'Recover_2', 3;
 BBSprite: 'Recover_3', 3;
@@ -223,4 +230,13 @@ BBSprite: 'Land_17', 3;
 BBSprite: 'Land_18', 3;
 BBSprite: 'Land_19', 3;
 BBSprite: 'Land_20', 3;
+Exit;
+
+[Dummy_ThrowHurt]
+@Main:
+SetVelocityX: 0;
+SetVelocityY: 0;
+Gravity: 0;
+Shake: {Self.Shake_LengthX}, {Self.Shake_LengthY}, {Self.Shake_Frequency}, {Self.Shake_Frame};
+BBSprite: 'Throw_1', 10000;
 Exit;

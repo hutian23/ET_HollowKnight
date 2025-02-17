@@ -85,7 +85,10 @@ RegistMove: (Rg_26C)
 RegistMove: (Rg_24A)
   MoveType: Special;
   EndMove:
-RegistMove: (Rg_Super)
+# RegistMove: (Rg_Super)
+#   MoveType: Special;
+#   EndMove:
+RegistMove: (Rg_Super2)
   MoveType: Special;
   EndMove:
 RegistMove: (Rg_PlungingAttack)
@@ -846,78 +849,206 @@ return;
 SetVelocityX: 0;
 TimeFrozeCheckBox: 0, 20000, 250000, 100000, 1, 55;
 BBSprite: 'Frame_1', 4;
-RegistCounter: Cnt_1, 55;
+RegistCounter: Cnt_1, 40;
 BeginLoop: (Counter: Cnt_1 > 0)
   BBSprite: 'Frame_2', 4;
   BBSprite: 'Frame_3', 4;
   BBSprite: 'Frame_4', 4;
 EndLoop:
+# Hit_0
 HitNotify: Once
-  AddFlag: Hit;
+  AddFlag: Hit; 
 EndNotify:
 BBSprite: 'Frame_5', 3;
 SetVelocityX: 240000;
 BBSprite: 'Frame_6', 3;
-SetVelocityX: 120000;
+SetVelocityX: 150000;
 BBSprite: 'Frame_7', 4;
-SetVelocityX: 40000;
+SetVelocityX: 70000;
 BBSprite: 'Frame_7', 4;
 SetVelocityX: 0;
-BBSprite: 'Frame_7', 8;
+BBSprite: 'Frame_7', 5;
 BBSprite: 'Frame_8', 8;
 # 挥空
 BeginIf: (Flag: Hit, false)
-BBSprite: 'Frame_54', 4;
-BBSprite: 'Frame_55', 4;
-BBSprite: 'Frame_52', 4;
-BBSprite: 'Frame_53', 4;
-Exit;
+  BBSprite: 'Frame_54', 4;
+  BBSprite: 'Frame_55', 4;
+  BBSprite: 'Frame_52', 4;
+  BBSprite: 'Frame_53', 4;
+  Exit;
 EndIf:
-BBSprite: 'Frame_9', 3;
-BBSprite: 'Frame_10', 3;
-BBSprite: 'Frame_11', 3;
-BBSprite: 'Frame_12', 3;
-BBSprite: 'Frame_13', 3;
-BBSprite: 'Frame_14', 3;
-BBSprite: 'Frame_15', 5;
-BBSprite: 'Frame_16', 6;
+# 命中
+BBSprite: 'Frame_9', 4;
+BBSprite: 'Frame_10', 4;
+BBSprite: 'Frame_11', 4;
+BBSprite: 'Frame_12', 4;
+BBSprite: 'Frame_13', 4;
+BBSprite: 'Frame_14', 4;
+BBSprite: 'Frame_15', 4;
+BBSprite: 'Frame_16', 4;
 BBSprite: 'Frame_17', 4;
 BBSprite: 'Frame_18', 4;
-BBSprite: 'Frame_19', 5;
-BBSprite: 'Frame_20', 5;
-BBSprite: 'Frame_21', 5;
-BBSprite: 'Frame_22', 3;
-BBSprite: 'Frame_23', 5;
+BBSprite: 'Frame_19', 4;
+BBSprite: 'Frame_20', 4;
+BBSprite: 'Frame_21', 4;
+BBSprite: 'Frame_22', 4;
+# Hit1
+HitNotify: Once
+  HitStop: 0, 6;
+EndNotify:
+BBSprite: 'Frame_23', 4;
 BBSprite: 'Frame_24', 4;
 BBSprite: 'Frame_25', 4;
-BBSprite: 'Frame_26', 8;
+# Hit2
+HitNotify: Once
+  HitStop: 0, 6;
+EndNotify:
+BBSprite: 'Frame_26', 4;
 BBSprite: 'Frame_27', 4;
 BBSprite: 'Frame_28', 4;
 BBSprite: 'Frame_29', 4;
+# Hit_3
+HitNotify: Once
+  HitStop: 0, 6;
+EndNotify:
 BBSprite: 'Frame_30', 4;
 BBSprite: 'Frame_31', 4;
 BBSprite: 'Frame_32', 4;
 BBSprite: 'Frame_33', 4;
 BBSprite: 'Frame_34', 4;
-BBSprite: 'Frame_35', 8;
+# Hit_4
+HitNotify: Once
+  HitStop: 0, 6;
+EndNotify:
+BBSprite: 'Frame_35', 4;
 BBSprite: 'Frame_36', 4;
-BBSprite: 'Frame_37', 3;
-BBSprite: 'Frame_38', 3;
-BBSprite: 'Frame_39', 3;
-BBSprite: 'Frame_40', 3;
-BBSprite: 'Frame_41', 3;
-BBSprite: 'Frame_42', 3;
+BBSprite: 'Frame_37', 4;
+BBSprite: 'Frame_38', 4;
+BBSprite: 'Frame_39', 4;
+BBSprite: 'Frame_40', 4;
+BBSprite: 'Frame_41', 4;
+BBSprite: 'Frame_42', 4;
 BBSprite: 'Frame_43', 4;
 BBSprite: 'Frame_44', 4;
 BBSprite: 'Frame_45', 4;
 BBSprite: 'Frame_46', 4;
-BBSprite: 'Frame_47', 5;
-BBSprite: 'Frame_48', 5;
-BBSprite: 'Frame_49', 5;
-BBSprite: 'Frame_50', 15;
+BBSprite: 'Frame_47', 4;
+# Hit_5
+HitNotify: Once
+  HitStop: 0, 6;
+EndNotify:
+BBSprite: 'Frame_48', 4;
+BBSprite: 'Frame_49', 8;
+BBSprite: 'Frame_50', 5;
 BBSprite: 'Frame_51', 4;
 BBSprite: 'Frame_52', 4;
 BBSprite: 'Frame_53', 4;
+Exit;
+
+[Rg_Super2]
+@Trigger:
+InputType: 5LPPressed;
+return;
+
+@Main:
+SetVelocityX: 0;
+BBSprite: 'Frame_1', 4;
+BBSprite: 'Frame_2', 4;
+TimeFrozeCheckBox: 0, 20000, 250000, 100000, 0, 70;
+BBSprite: 'Frame_3', 4;
+BBSprite: 'Frame_4', 5;
+ScreenShake: 0, 650, 10000, 60;
+BBSprite: 'Frame_4', 60;
+BBSprite: 'Frame_5', 4;
+HitNotify: Once
+  HitStop: 0, 5; # 打击停顿
+  Shake: 500, 0, 8000, 8; # 振动
+  # 受击行为协程需要使用的变量
+  HitParam: Shake_LengthX, 1200;
+  HitParam: Shake_LengthY, 1000;
+  HitParam: Shake_Frequency, 10000;
+  HitParam: Shake_Frame, 5;
+  # 受击者帧冻结(HitStop)的总帧长
+  HitParam: HitStopFrame, 5;
+  HitParam: LastFrame, 60;
+  # HitStop结束后抛出的速度
+  HitParam: Push_V, 0;
+  HitParam: Push_F, 0;
+  # 受击时调整转向
+  Hit_UpdateFlip;
+  # 受击者进入哪个硬直状态
+  HitStun: Hurt4;
+  AddFlag: Hit;
+  TargetBind;
+  TargetPoint: 29000, 0;
+EndNotify:
+BBSprite: 'Frame_6', 6;
+# 挥空
+BeginIf: (Flag: Hit, false)
+  BBSprite: 'Frame_33', 5;
+  BBSprite: 'Frame_34', 4;
+  BBSprite: 'Frame_35', 4;
+  BBSprite: 'Frame_36', 3;
+  BBSprite: 'Frame_37', 3;
+  BBSprite: 'Frame_38', 3;
+  BBSprite: 'Frame_39', 3;
+  BBSprite: 'Frame_40', 3;
+  BBSprite: 'Frame_41', 3;
+  BBSprite: 'Frame_42', 3;
+  Exit;
+EndIf:
+BBSprite: 'Frame_7', 4;
+BBSprite: 'Frame_8', 4;
+BBSprite: 'Frame_9', 4;
+BBSprite: 'Frame_10', 4;
+BBSprite: 'Frame_12', 4;
+HitNotify: Once
+  HitParam: Shake_LengthX, 0;
+  HitParam: Shake_LengthY, 0;
+  HitParam: Shake_Frequency, 1;
+  HitParam: Shake_Frame, 1;
+  HitStun: ThrowHurt;
+  TargetBind;
+  TargetPoint: 27000, 2000;
+EndNotify:
+BBSprite: 'Frame_13', 5;
+TargetPoint: 16000, 11000;
+BBSprite: 'Frame_14', 3;
+BBSprite: 'Frame_15', 3;
+BBSprite: 'Frame_16', 3;
+BBSprite: 'Frame_17', 3;
+BBSprite: 'Frame_18', 3;
+BBSprite: 'Frame_19', 3;
+BBSprite: 'Frame_20', 3;
+HitNotify: Once
+  Shake: 500, 0, 8000, 18; # 振动
+  HitStop: 0, 18; # 打击停顿
+  # 受击行为协程需要使用的变量
+  HitParam: Shake_LengthX, 2500;
+  HitParam: Shake_LengthY, 2500;
+  HitParam: Shake_Frequency, 10000;
+  HitParam: Shake_Frame, 18;
+  # 受击者帧冻结(HitStop)的总帧长
+  HitParam: HitStopFrame, 18;
+  # HitStop结束后抛出的速度
+  HitParam: StartV_X, -80000;
+  HitParam: StartV_Y, 250000;
+  # 受击时调整转向
+  Hit_UpdateFlip;
+  # 受击者进入哪个硬直状态
+  HitStun: Hurt3;
+EndNotify:
+BBSprite: 'Frame_21', 4;
+BBSprite: 'Frame_22', 3;
+BBSprite: 'Frame_23', 3;
+BBSprite: 'Frame_24', 3;
+BBSprite: 'Frame_25', 3;
+BBSprite: 'Frame_26', 3;
+BBSprite: 'Frame_27', 3;
+BBSprite: 'Frame_28', 3;
+BBSprite: 'Frame_29', 3;
+BBSprite: 'Frame_30', 3;
+BBSprite: 'Frame_31', 3;
 Exit;
 
 [Rg_IdleAnim]
